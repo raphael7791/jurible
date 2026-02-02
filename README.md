@@ -116,16 +116,23 @@ git push
 # Se connecter
 ssh aideauxtd@dogfish.o2switch.net
 
-# Récupérer les modifications
+# Récupérer les modifications depuis GitHub
 cd ~/jurible-repo
 git pull
 
-# Copier vers les sites
+# IMPORTANT : Supprimer les anciens dossiers AVANT de copier
+# (sinon les fichiers supprimés dans Git restent sur le serveur)
+rm -rf ~/jurible.com/wp-content/themes/jurible
+rm -rf ~/ecole.jurible.com/wp-content/themes/jurible
+rm -rf ~/ecole.jurible.com/wp-content/themes/ecole.jurible
+
+# Copier les nouvelles versions
 cp -r themes/jurible ~/jurible.com/wp-content/themes/
 cp -r themes/jurible ~/ecole.jurible.com/wp-content/themes/
 cp -r themes/ecole.jurible ~/ecole.jurible.com/wp-content/themes/
 
 # Si tu as modifié des plugins aussi :
+rm -rf ~/ecole.jurible.com/wp-content/plugins/jurible-blocks-react
 cp -r plugins/jurible-blocks-react ~/ecole.jurible.com/wp-content/plugins/
 # etc.
 ```
@@ -272,4 +279,4 @@ rm ~/Local\ Sites/jurible-local/app/public/wp-content/themes/jurible
 - [Documentation theme.json](https://developer.wordpress.org/themes/global-settings-and-styles/)
 - [Block Editor Handbook](https://developer.wordpress.org/block-editor/)
 - [Full Site Editing](https://fullsiteediting.com/)
-- [Capitaine WP - Formation FSE](https://capitainewp.io/formations/wordpress-full-site-editing/)# jurible
+- [Capitaine WP - Formation FSE](https://capitainewp.io/formations/wordpress-full-site-editing/)
