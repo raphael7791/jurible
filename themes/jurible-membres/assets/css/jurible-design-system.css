@@ -1,0 +1,523 @@
+/*
+ * Jurible Design System pour Fluent Community
+ * Réplique les variables du theme.json
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+html {
+    scroll-behavior: smooth !important;
+}
+
+:root {
+    /* === COULEURS === */
+    --jurible-primary: #B0001D;
+    --jurible-primary-hover: #DC2626;
+    --jurible-secondary: #7C3AED;
+    --jurible-secondary-hover: #6D28D9;
+    
+    --jurible-background: #FFFFFF;
+    --jurible-muted: #F3F4F6;
+    --jurible-border: #E5E7EB;
+    --jurible-border-muted: #D1D5DB;
+    
+    --jurible-text-dark: #1A1A1A;
+    --jurible-text-gray: #4A4A4A;
+    --jurible-text-muted: #9CA3AF;
+    
+    --jurible-success: #10B981;
+    --jurible-warning: #F59E0B;
+    --jurible-error: #EF4444;
+    --jurible-info: #3B82F6;
+    
+    /* === TYPOGRAPHIE === */
+    --jurible-font-family: 'Poppins', sans-serif;
+    
+    --jurible-font-size-small: 0.875rem;
+    --jurible-font-size-medium: 1rem;
+    --jurible-font-size-body: 1rem;
+    --jurible-font-size-large: 1.25rem;
+    --jurible-font-size-xlarge: 1.5rem;
+    --jurible-font-size-xxlarge: 1.75rem;
+    --jurible-font-size-h4: 1rem;
+    --jurible-font-size-h3: 1.125rem;
+    --jurible-font-size-h2: 1.375rem;
+    --jurible-font-size-h1: 1.75rem;
+    
+    --jurible-line-height-tight: 1.2;
+    --jurible-line-height-normal: 1.5;
+    --jurible-line-height-relaxed: 1.6;
+    --jurible-line-height-h2: 1.4;
+    --jurible-line-height-p: 1.575;
+    
+    /* === ESPACEMENTS === */
+    --jurible-spacing-xs: 0.5rem;
+    --jurible-spacing-s: 1rem;
+    --jurible-spacing-m: 1.5rem;
+    --jurible-spacing-l: 2rem;
+    --jurible-spacing-xl: 3rem;
+    
+    /* === BORDURES === */
+    --jurible-radius-xs: 4px;
+    --jurible-radius-s: 6px;
+    --jurible-radius-m: 8px;
+    --jurible-radius-l: 12px;
+    --jurible-radius-xl: 16px;
+    
+    /* === OMBRES === */
+    --jurible-shadow-cta: 0 2px 8px rgba(176,0,29,0.25);
+    --jurible-shadow-cta-hover: 0 4px 12px rgba(176,0,29,0.35);
+}
+
+/* ============================================
+   CONTENU DES LEÇONS (FRONT)
+   ============================================ */
+
+.fcom_lesson_details {
+    font-family: var(--jurible-font-family) !important;
+    line-height: var(--jurible-line-height-relaxed);
+    color: var(--jurible-text-gray);
+}
+
+.fcom_lesson_details h1 {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-h1) !important;
+    font-weight: 700 !important;
+    line-height: var(--jurible-line-height-tight) !important;
+    color: var(--jurible-text-dark) !important;
+}
+
+.fcom_lesson_details h2 {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-h2) !important;
+    font-weight: 600 !important;
+    line-height: var(--jurible-line-height-h2) !important;
+    color: var(--jurible-text-dark) !important;
+    margin-top: clamp(18px, 4vw, 26px) !important;
+    margin-bottom: clamp(18px, 4vw, 26px) !important;
+}
+
+.fcom_lesson_details h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #B0001D 0%, #7C3AED 100%);
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+.fcom_lesson_details h3 {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-h3) !important;
+    font-weight: 600 !important;
+    line-height: var(--jurible-line-height-p) !important;
+    color: var(--jurible-text-dark) !important;
+    margin-top: clamp(22px, 5vw, 31px) !important;
+    margin-bottom: 1rem !important;
+}
+
+.fcom_lesson_details h4 {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-h4) !important;
+    font-weight: 600 !important;
+    line-height: var(--jurible-line-height-normal) !important;
+    color: var(--jurible-text-dark) !important;
+    margin-top: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.fcom_lesson_details p {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-body) !important;
+    line-height: var(--jurible-line-height-p) !important;
+    font-weight: 400 !important;
+    margin-bottom: var(--jurible-spacing-m) !important;
+    color: var(--jurible-text-gray) !important;
+}
+
+/* Tailles de texte Fluent Community (DOIT être après .fcom_lesson_details p) */
+.fcom_lesson_details p.has-small-font-size {
+    font-size: var(--jurible-font-size-small) !important;
+}
+
+.fcom_lesson_details p.has-medium-font-size {
+    font-size: var(--jurible-font-size-medium) !important;
+}
+
+.fcom_lesson_details p.has-large-font-size,
+.fcom_lesson_details p.has-larger-font-size {
+    font-size: var(--jurible-font-size-large) !important;
+}
+
+.fcom_lesson_details p.has-xlarge-font-size,
+.fcom_lesson_details p.has-x-large-font-size {
+    font-size: var(--jurible-font-size-xlarge) !important;
+}
+
+.fcom_lesson_details p.has-xxlarge-font-size {
+    font-size: var(--jurible-font-size-xxlarge) !important;
+}
+
+.fcom_lesson_details a {
+    color: var(--jurible-primary) !important;
+}
+
+.fcom_lesson_details a:hover {
+    color: var(--jurible-primary-hover) !important;
+}
+
+.fcom_lesson_details .wp-block-button__link {
+    background-color: var(--jurible-primary) !important;
+    color: #FFFFFF !important;
+    border-radius: var(--jurible-radius-m) !important;
+    font-family: var(--jurible-font-family) !important;
+    font-weight: 500 !important;
+    box-shadow: var(--jurible-shadow-cta) !important;
+}
+
+.fcom_lesson_details .wp-block-button__link:hover {
+    background-color: var(--jurible-primary-hover) !important;
+    box-shadow: var(--jurible-shadow-cta-hover) !important;
+}
+
+.fcom_lesson_details blockquote {
+    border-left: 3px solid var(--jurible-primary) !important;
+    padding-left: var(--jurible-spacing-s) !important;
+    color: var(--jurible-text-gray) !important;
+    font-style: italic !important;
+}
+
+.fcom_lesson_details hr {
+    background-color: var(--jurible-border) !important;
+    border: none !important;
+    height: 1px !important;
+}
+
+/* Force les couleurs du sommaire */
+.fcom_lesson_details .jurible-sommaire-list a {
+    color: #4A4A4A !important;
+}
+
+.fcom_lesson_details .jurible-sommaire-list a:hover {
+    color: #B0001D !important;
+}
+
+.fcom_lesson_details img {
+    border-radius: 12px;
+}
+
+/* ============================================
+   ÉDITEUR (BACK) - Contenu seulement
+   ============================================ */
+
+.editor-styles-wrapper {
+    font-family: var(--jurible-font-family) !important;
+    line-height: var(--jurible-line-height-relaxed);
+    color: var(--jurible-text-dark);
+}
+
+.editor-styles-wrapper h2::after,
+.editor-styles-wrapper [data-type="core/heading"] h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #B0001D 0%, #7C3AED 100%);
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+/* Paragraphes */
+.editor-styles-wrapper .wp-block-paragraph,
+.editor-styles-wrapper p {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-body) !important;
+    line-height: var(--jurible-line-height-p) !important;
+    font-weight: 400 !important;
+    color: var(--jurible-text-gray) !important;
+    margin-bottom: var(--jurible-spacing-m) !important;
+}
+
+/* Tailles de texte dans l'éditeur */
+.editor-styles-wrapper p.has-small-font-size,
+.editor-styles-wrapper .wp-block-paragraph.has-small-font-size {
+    font-size: var(--jurible-font-size-small) !important;
+}
+
+.editor-styles-wrapper p.has-medium-font-size,
+.editor-styles-wrapper .wp-block-paragraph.has-medium-font-size {
+    font-size: var(--jurible-font-size-medium) !important;
+}
+
+.editor-styles-wrapper p.has-large-font-size,
+.editor-styles-wrapper p.has-larger-font-size,
+.editor-styles-wrapper .wp-block-paragraph.has-large-font-size,
+.editor-styles-wrapper .wp-block-paragraph.has-larger-font-size {
+    font-size: var(--jurible-font-size-large) !important;
+}
+
+.editor-styles-wrapper p.has-xlarge-font-size,
+.editor-styles-wrapper p.has-x-large-font-size,
+.editor-styles-wrapper .wp-block-paragraph.has-xlarge-font-size,
+.editor-styles-wrapper .wp-block-paragraph.has-x-large-font-size {
+    font-size: var(--jurible-font-size-xlarge) !important;
+}
+
+.editor-styles-wrapper p.has-xxlarge-font-size,
+.editor-styles-wrapper .wp-block-paragraph.has-xxlarge-font-size {
+    font-size: var(--jurible-font-size-xxlarge) !important;
+}
+
+/* Titres */
+.editor-styles-wrapper h1,
+.editor-styles-wrapper [data-type="core/heading"] h1 {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-h1) !important;
+    font-weight: 700 !important;
+    line-height: var(--jurible-line-height-tight) !important;
+    color: var(--jurible-text-dark) !important;
+}
+
+.editor-styles-wrapper h2,
+.editor-styles-wrapper [data-type="core/heading"] h2 {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-h2) !important;
+    font-weight: 600 !important;
+    line-height: var(--jurible-line-height-tight) !important;
+    color: var(--jurible-text-dark) !important;
+    margin-top: clamp(18px, 4vw, 26px) !important;
+    margin-bottom: clamp(18px, 4vw, 26px) !important;
+}
+
+.editor-styles-wrapper h3,
+.editor-styles-wrapper [data-type="core/heading"] h3 {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-h3) !important;
+    font-weight: 600 !important;
+    line-height: var(--jurible-line-height-p) !important;
+    color: var(--jurible-text-dark) !important;
+    margin-top: clamp(22px, 5vw, 31px) !important;
+    margin-bottom: 1rem !important;
+}
+
+.editor-styles-wrapper h4,
+.editor-styles-wrapper [data-type="core/heading"] h4 {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-h4) !important;
+    font-weight: 600 !important;
+    line-height: var(--jurible-line-height-tight) !important;
+    color: var(--jurible-text-dark) !important;
+    margin-top: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+/* ============================================
+   MODE SOMBRE (Fluent Community)
+   ============================================ */
+
+html.dark {
+    --jurible-background: var(--el-bg-color, #141414);
+    --jurible-muted: var(--el-bg-color-overlay, #1d1e1f);
+    --jurible-border: #2d2d2f;
+    --jurible-border-muted: #3d3d3f;
+    
+    --jurible-text-dark: #F3F4F6;
+    --jurible-text-gray: #E5E7EB;
+    --jurible-text-muted: #9CA3AF;
+}
+
+/* Titres en mode sombre */
+html.dark .fcom_lesson_details h1,
+html.dark .fcom_lesson_details h2,
+html.dark .fcom_lesson_details h3,
+html.dark .fcom_lesson_details h4 {
+    color: var(--jurible-text-dark) !important;
+}
+
+/* Paragraphes en mode sombre */
+html.dark .fcom_lesson_details p {
+    color: var(--jurible-text-gray) !important;
+}
+
+/* Liens en mode sombre (garde la couleur primaire) */
+html.dark .fcom_lesson_details a {
+    color: var(--jurible-primary) !important;
+}
+
+html.dark .fcom_lesson_details a:hover {
+    color: var(--jurible-primary-hover) !important;
+}
+
+/* Blockquotes en mode sombre */
+html.dark .fcom_lesson_details blockquote {
+    color: var(--jurible-text-gray) !important;
+    border-left-color: var(--jurible-primary) !important;
+}
+
+/* HR en mode sombre */
+html.dark .fcom_lesson_details hr {
+    background-color: var(--jurible-border) !important;
+}
+
+/* Sommaire en mode sombre */
+html.dark .fcom_lesson_details .jurible-sommaire-list a {
+    color: var(--jurible-text-gray) !important;
+}
+
+html.dark .fcom_lesson_details .jurible-sommaire-list a:hover {
+    color: var(--jurible-primary) !important;
+}
+
+/* ============================================
+   IMAGES - Marges, bordure et légendes avec icône
+   ============================================ */
+
+/* Front - Image avec marges */
+.fcom_lesson_details .wp-block-image {
+    margin-top: clamp(1rem, 4vw, 3rem) !important;
+    margin-bottom: clamp(1rem, 4vw, 3rem) !important;
+}
+
+/* Front - Image avec bordure arrondie */
+.fcom_lesson_details .wp-block-image img {
+    border: 1px solid var(--jurible-border) !important;
+    border-radius: 12px !important;
+}
+
+/* Front - Légende centrée avec icône */
+.fcom_lesson_details .wp-block-image figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--jurible-text-muted) !important;
+    font-size: var(--jurible-font-size-small) !important;
+    font-style: italic;
+    margin-top: var(--jurible-spacing-xs);
+    text-align: center;
+}
+
+.fcom_lesson_details .wp-block-image figcaption::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239CA3AF'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h12l-4-5z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Éditeur - Image avec marges */
+.editor-styles-wrapper .wp-block-image {
+    margin-top: clamp(1rem, 4vw, 3rem) !important;
+    margin-bottom: clamp(1rem, 4vw, 3rem) !important;
+}
+
+/* Éditeur - Image avec bordure arrondie */
+.editor-styles-wrapper .wp-block-image img {
+    border: 1px solid var(--jurible-border) !important;
+    border-radius: 12px !important;
+}
+
+/* Éditeur - Légende centrée avec icône */
+.editor-styles-wrapper .wp-block-image figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--jurible-text-muted) !important;
+    font-size: var(--jurible-font-size-small) !important;
+    font-style: italic;
+    margin-top: var(--jurible-spacing-xs);
+    text-align: center;
+}
+
+.editor-styles-wrapper .wp-block-image figcaption::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239CA3AF'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h12l-4-5z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+h3.jurible-current-title {
+    margin: 6 !important;
+    margin-block-start: 1 !important;
+    margin-block-end: 1 !important;
+}
+
+/* Mode sombre - Bordure image */
+html.dark .fcom_lesson_details .wp-block-image img {
+    border-color: var(--jurible-border) !important;
+}
+
+p.correct_text {
+    margin-bottom: 0 !important;
+}
+
+.fcom_is_correct,
+.fcom_is_correct.incorrect {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.fcom_question_header {
+    line-height: 1.4 !important;
+}
+
+.fcom_question_header {
+    margin-bottom: 8px !important;
+}
+
+.fcom_question_label p {
+    margin-bottom: 0 !important;
+}
+
+.fcom_is_correct,
+.fcom_is_correct.incorrect {
+    margin: 8px 0 !important;
+}
+
+.fcom_is_correct,
+.fcom_is_correct.incorrect {
+    margin: 22px 0 !important;
+}
+
+.fcom_is_correct,
+.fcom_is_correct.incorrect {
+    margin: 22px 0 !important;
+}
+
+.fcom_is_correct,
+.fcom_is_correct.incorrect {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.fcom_is_correct,
+.fcom_is_correct.incorrect {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.fcom_is_correct,
+.fcom_is_correct.incorrect {
+    margin-top: 8px !important;
+    margin-bottom: 10px !important;
+}
+
+.fcom_is_correct,
+.fcom_is_correct.incorrect {
+    margin-top: 8px !important;
+    margin-bottom: 12px !important;
+}
+
+.dark .fcom_is_correct .correct_text,
+.dark .fcom_is_correct.incorrect .correct_text {
+    color: #1a1a1a !important;
+}

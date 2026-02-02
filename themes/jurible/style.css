@@ -1,0 +1,57 @@
+/*
+Theme Name: Jurible
+Theme URI: https://jurible.com
+Author: Ton nom ou Jurible
+Author URI: https://jurible.com
+Description: Thème FSE pour Jurible
+Requires at least: 6.5
+Tested up to: 6.5
+Requires PHP: 8.0
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: jurible
+*/
+
+:root {
+    color-scheme: light dark;
+}
+
+@media (width < 768px) {
+    .hide-on-mobile {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   JURIBLE DESIGN SYSTEM - Components
+   ========================================================================== */
+
+/* Icon Box */
+.icon-box {
+    width: fit-content;
+}
+
+/* List Bullet Primary */
+.list-bullet-primary {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.list-bullet-primary li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--wp--preset--color--text-gray);
+}
+
+.list-bullet-primary li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 8px;
+    height: 8px;
+    background-color: var(--wp--preset--color--primary);
+    border-radius: 50%;
+}

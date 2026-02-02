@@ -1,0 +1,992 @@
+/**
+ * Générateur Académique - Design System Jurible
+ * Compatible avec theme.json et jurible-design-system.css
+ */
+
+/* ============================================
+   VARIABLES (héritées du design system Jurible)
+   ============================================ */
+
+:root {
+    --aga-primary: var(--jurible-primary, #B0001D);
+    --aga-primary-hover: var(--jurible-primary-hover, #DC2626);
+    --aga-secondary: var(--jurible-secondary, #7C3AED);
+    
+    --aga-bg: var(--jurible-background, #FFFFFF);
+    --aga-bg-muted: var(--jurible-muted, #F3F4F6);
+    --aga-border: var(--jurible-border, #E5E7EB);
+    --aga-border-muted: var(--jurible-border-muted, #D1D5DB);
+    
+    --aga-text: var(--jurible-text-dark, #1A1A1A);
+    --aga-text-secondary: var(--jurible-text-gray, #4A4A4A);
+    --aga-text-muted: var(--jurible-text-muted, #9CA3AF);
+    
+    --aga-success: var(--jurible-success, #10B981);
+    --aga-warning: var(--jurible-warning, #F59E0B);
+    --aga-error: var(--jurible-error, #EF4444);
+    --aga-info: var(--jurible-info, #3B82F6);
+    
+    --aga-radius-xs: var(--jurible-radius-xs, 4px);
+    --aga-radius-s: var(--jurible-radius-s, 6px);
+    --aga-radius-m: var(--jurible-radius-m, 8px);
+    --aga-radius-l: var(--jurible-radius-l, 12px);
+    --aga-radius-xl: var(--jurible-radius-xl, 16px);
+    --aga-radius-full: 9999px;
+    
+    --aga-shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --aga-shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+    --aga-shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+    
+    --aga-font: var(--jurible-font-family, 'Poppins', sans-serif);
+}
+
+/* ============================================
+   BASE / RESET
+   ============================================ */
+
+.aga-page,
+.aga-page * {
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+.aga-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: clamp(1rem, 4vw, 2rem) clamp(1rem, 3vw, 1.5rem);
+    color: var(--aga-text);
+}
+
+/* ============================================
+   BREADCRUMB
+   ============================================ */
+
+.aga-breadcrumb {
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
+
+.aga-breadcrumb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--aga-text);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.aga-breadcrumb-link:hover {
+    color: var(--aga-primary) !important;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.aga-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+}
+
+.aga-header-content {
+    flex: 1;
+}
+
+.aga-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    color: var(--aga-text);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+}
+
+.aga-title-highlight {
+    color: var(--aga-secondary);
+}
+
+.aga-subtitle {
+    font-size: 1rem;
+    color: var(--aga-text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.aga-header-actions {
+    flex-shrink: 0;
+}
+
+/* ============================================
+   BOUTONS
+   ============================================ */
+
+.aga-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    font-family: var(--aga-font);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--aga-radius-full);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1.5px solid transparent;
+}
+
+.aga-btn-primary {
+    background: var(--aga-primary);
+    color: white;
+    border-color: var(--aga-primary);
+}
+
+.aga-btn-primary:hover {
+    background: var(--aga-primary-hover);
+    border-color: var(--aga-primary-hover);
+}
+
+.aga-btn-outline {
+    background: white;
+    color: var(--aga-text);
+    border: 1.5px solid var(--aga-text);
+    border-radius: var(--aga-radius-m);
+    padding: 0.625rem 1.25rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.aga-btn-small {
+    padding: 0.375rem 0.875rem;
+    font-size: 0.8125rem;
+    border-radius: var(--aga-radius-s);
+}
+
+.aga-btn-danger {
+    color: var(--aga-error);
+    border-color: var(--aga-error);
+    background: transparent;
+}
+
+.aga-btn-danger:hover {
+    background: var(--aga-error);
+    color: white;
+}
+
+/* ============================================
+   FORMULAIRE - CARD
+   ============================================ */
+
+.aga-form-wrapper {
+    margin-bottom: 1rem;
+}
+
+.aga-form-card {
+    background: white;
+    border: 1px solid var(--aga-border);
+    border-radius: var(--aga-radius-l);
+    padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 3vw, 1.5rem) 0.5rem;
+}
+
+.aga-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.aga-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* ============================================
+   FORMULAIRE - INPUTS
+   ============================================ */
+
+.aga-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--aga-text);
+}
+
+.aga-required {
+    color: var(--aga-primary);
+}
+
+.aga-input,
+.aga-select,
+.aga-textarea {
+    font-family: var(--aga-font);
+    font-size: 0.9375rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--aga-border);
+    border-radius: var(--aga-radius-m);
+    background: white;
+    color: var(--aga-text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+}
+
+.aga-input:focus,
+.aga-select:focus,
+.aga-textarea:focus {
+    outline: none;
+    border-color: var(--aga-primary);
+    box-shadow: 0 0 0 3px rgba(176, 0, 29, 0.1);
+}
+
+.aga-input::placeholder,
+.aga-textarea::placeholder {
+    color: var(--aga-text-muted);
+}
+
+.aga-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+/* ============================================
+   FORMULAIRE - TEXTAREA + BOUTON
+   ============================================ */
+
+.aga-textarea-wrapper {
+    position: relative;
+}
+
+.aga-textarea {
+    min-height: 200px;
+    resize: vertical;
+    line-height: 1.6;
+    padding-right: 4rem;
+}
+
+.aga-submit-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--aga-primary) 0%, var(--aga-primary-hover) 50%, var(--aga-secondary) 100%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(176, 0, 29, 0.3);
+}
+
+.aga-submit-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+}
+
+.aga-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.aga-submit-btn.loading svg {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   TEXTE D'AIDE / LIEN
+   ============================================ */
+
+.aga-help-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--aga-text-secondary);
+    margin: 1rem 0 0 0;
+    padding: 0.75rem 1rem;
+    background: #EFF6FF;
+    border: none;
+    border-radius: var(--aga-radius-s);
+}
+
+.aga-help-text a {
+    color: #1E40AF !important;
+    font-weight: 500 !important;
+    text-decoration: underline !important;
+}
+
+.aga-help-text a:hover {
+    color: #3B82F6 !important;
+}
+
+/* ============================================
+   FEEDBACK / LOADING
+   ============================================ */
+
+.aga-feedback {
+    display: none;
+    margin-top: 1rem;
+}
+
+.aga-feedback.show {
+    display: block;
+}
+
+.aga-feedback-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: var(--aga-radius-m);
+    color: #1E40AF;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.aga-feedback.error .aga-feedback-content {
+    background: #FEF2F2;
+    border-color: #FECACA;
+    color: var(--aga-error);
+}
+
+.aga-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #BFDBFE;
+    border-top-color: #1E40AF;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.aga-feedback.error .aga-spinner {
+    display: none;
+}
+
+/* ============================================
+   GUIDE D'UTILISATION
+   ============================================ */
+
+.aga-guide {
+    background: white;
+    border: 1px solid var(--aga-border);
+    border-radius: var(--aga-radius-l);
+    overflow: hidden;
+}
+
+.aga-guide-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: white;
+    border: none;
+    cursor: pointer;
+    font-family: var(--aga-font);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--aga-text);
+    text-align: left;
+    transition: background 0.2s;
+}
+
+.aga-guide-header:hover {
+    background: var(--aga-bg-muted);
+}
+
+.aga-guide-icon {
+    font-size: 1.125rem;
+}
+
+.aga-guide-title {
+    flex: 1;
+}
+
+.aga-guide-chevron {
+    transition: transform 0.3s ease;
+    color: var(--aga-text-muted);
+}
+
+.aga-guide-chevron.open {
+    transform: rotate(180deg);
+}
+
+.aga-guide-content {
+    display: none;
+    padding: 0.5rem 1.25rem 1.25rem;
+}
+
+.aga-guide-content.open {
+    display: block;
+}
+
+/* Steps */
+.aga-guide-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.aga-step {
+    display: flex;
+    gap: clamp(0.75rem, 2vw, 1rem);
+}
+
+.aga-step-number {
+    width: clamp(20px, 4vw, 24px);
+    height: clamp(20px, 4vw, 24px);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--aga-primary) 0%, var(--aga-primary-hover) 50%, var(--aga-secondary) 100%);
+    color: white;
+    font-size: clamp(0.75rem, 2vw, 0.8125rem);
+    font-weight: 600;
+    border-radius: 50%;
+}
+
+.aga-step-content h4 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--aga-text);
+    margin: 0 0 0.375rem 0;
+}
+
+.aga-step-content p {
+    font-size: 0.875rem;
+    color: var(--aga-text-muted);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.aga-step-content code {
+    background: var(--aga-bg-muted);
+    border: 1px solid var(--aga-border);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-family: monospace;
+    color: var(--aga-text);
+}
+
+/* ============================================
+   LIMITE ATTEINTE
+   ============================================ */
+
+.aga-limit-card {
+    background: white;
+    border: 1px solid var(--aga-border);
+    border-radius: var(--aga-radius-l);
+    padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2rem);
+    text-align: center;
+    box-shadow: var(--aga-shadow-sm);
+    max-width: 480px;
+    margin: clamp(1rem, 4vw, 2rem) auto;
+}
+
+.aga-limit-icon {
+    width: clamp(48px, 10vw, 64px);
+    height: clamp(48px, 10vw, 64px);
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(176, 0, 29, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+    border-radius: 50%;
+    font-size: clamp(1.5rem, 4vw, 1.75rem);
+}
+
+.aga-limit-card h3 {
+    font-family: var(--aga-font);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 700;
+    color: var(--aga-text);
+    margin: 0 0 0.75rem 0;
+}
+
+.aga-limit-card h3 .highlight {
+    color: var(--aga-secondary);
+}
+
+.aga-limit-card > p {
+    font-family: var(--aga-font);
+    font-size: 1rem;
+    color: var(--aga-text-muted);
+    margin: 0 0 2rem 0;
+}
+
+.aga-limit-cta {
+    background: var(--aga-bg-muted);
+    border-radius: var(--aga-radius-m);
+    padding: clamp(1rem, 3vw, 1.5rem);
+    text-align: left;
+}
+
+.aga-limit-cta p {
+    font-family: var(--aga-font);
+    font-size: 0.9375rem;
+    color: var(--aga-text);
+    margin: 0 0 1rem 0;
+}
+
+.aga-limit-cta p strong {
+    font-weight: 600;
+}
+
+.aga-limit-cta ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.aga-limit-cta li {
+    font-family: var(--aga-font);
+    font-size: 0.875rem;
+    color: var(--aga-text-secondary);
+    margin-bottom: 0.5rem;
+    padding-left: 0;
+}
+
+.aga-limit-cta .aga-btn-primary {
+    width: 100%;
+    justify-content: center;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    border-radius: var(--aga-radius-m);
+    background: linear-gradient(135deg, var(--aga-primary) 0%, var(--aga-primary-hover) 50%, var(--aga-secondary) 100%);
+    border: none;
+    color: white !important;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.aga-limit-cta .aga-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+/* ============================================
+   LISTE (HISTORIQUE)
+   ============================================ */
+
+.aga-section {
+    margin-bottom: 2rem;
+}
+
+.aga-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--aga-text);
+    margin: 0 0 0.75rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--aga-bg-muted);
+}
+
+.aga-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.aga-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
+    background: white;
+    border: 1px solid var(--aga-border);
+    border-radius: var(--aga-radius-m);
+    transition: border-color 0.2s;
+}
+
+.aga-list-item:hover {
+    border-color: var(--aga-border-muted);
+}
+
+.aga-list-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.aga-list-title {
+    display: block;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--aga-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.aga-list-date {
+    font-size: 0.8125rem;
+    color: var(--aga-text-muted);
+}
+
+.aga-list-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.aga-empty-state {
+    text-align: center;
+    padding: clamp(2rem, 5vw, 3rem) 1.5rem;
+    background: var(--aga-bg-muted);
+    border-radius: var(--aga-radius-l);
+}
+
+.aga-empty-state p {
+    color: var(--aga-text-muted);
+    margin: 0 0 1rem 0;
+}
+
+/* ============================================
+   ALERTES
+   ============================================ */
+
+.aga-alert {
+    padding: 1rem 1.25rem;
+    border-radius: var(--aga-radius-m);
+    margin-bottom: 1rem;
+}
+
+.aga-alert-error {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    color: var(--aga-error);
+}
+
+.aga-alert-success {
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    color: #065F46;
+}
+
+/* ============================================
+   MODAL AVIS
+   ============================================ */
+
+.aga-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 1rem;
+}
+
+.aga-modal {
+    background: white;
+    border-radius: var(--aga-radius-l);
+    padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.25rem, 3vw, 2rem);
+    max-width: 420px;
+    width: 100%;
+    position: relative;
+    box-shadow: var(--aga-shadow-lg);
+    text-align: center;
+}
+
+.aga-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--aga-text-muted);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.aga-modal-close:hover {
+    color: var(--aga-text);
+}
+
+.aga-modal-title {
+    font-family: var(--aga-font);
+    font-size: clamp(1.125rem, 3vw, 1.375rem);
+    font-weight: 700;
+    color: var(--aga-text);
+    margin: 0 0 0.5rem 0;
+}
+
+.aga-modal-subtitle {
+    font-family: var(--aga-font);
+    font-size: 0.9375rem;
+    color: var(--aga-text-muted);
+    margin: 0 0 2rem 0;
+}
+
+/* Étoiles */
+.aga-etoiles {
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.5rem, 2vw, 0.75rem);
+    margin-bottom: 1.5rem;
+}
+
+.aga-etoile {
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
+    color: var(--aga-border);
+    cursor: pointer;
+    transition: transform 0.2s;
+    background: linear-gradient(135deg, var(--aga-primary) 0%, var(--aga-primary-hover) 50%, var(--aga-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.3;
+}
+
+.aga-etoile:hover,
+.aga-etoile.hover {
+    transform: scale(1.15);
+    opacity: 0.6;
+}
+
+.aga-etoile.active {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Contenu dynamique */
+.aga-modal-content-hidden {
+    display: none;
+}
+
+.aga-modal-message {
+    font-family: var(--aga-font);
+    font-size: 0.9375rem;
+    color: var(--aga-text-secondary);
+    margin: 0 0 1rem 0;
+}
+
+.aga-modal-success {
+    font-family: var(--aga-font);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--aga-secondary);
+    margin: 0 0 1rem 0;
+}
+
+.aga-modal-reward {
+    font-family: var(--aga-font);
+    font-size: 0.9375rem;
+    color: var(--aga-text);
+    margin: 0 0 0.75rem 0;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(176, 0, 29, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
+    border-radius: var(--aga-radius-m);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.aga-modal-reward strong {
+    color: var(--aga-secondary);
+}
+
+.aga-modal-info {
+    font-family: var(--aga-font);
+    font-size: 0.8125rem;
+    color: var(--aga-text-muted);
+    margin: 0 0 1.5rem 0;
+}
+
+.aga-modal .aga-textarea {
+    margin-bottom: 1rem;
+}
+
+.aga-btn-full {
+    width: 100%;
+    justify-content: center;
+    padding: 0.875rem 1.5rem;
+    background: linear-gradient(135deg, var(--aga-primary) 0%, var(--aga-primary-hover) 50%, var(--aga-secondary) 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: var(--aga-radius-m);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.aga-btn-full:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+/* ============================================
+   RESPONSIVE (Layout uniquement)
+   ============================================ */
+
+@media (max-width: 640px) {
+    .aga-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .aga-header-actions {
+        align-self: flex-start;
+    }
+    
+    .aga-form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .aga-list-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .aga-list-actions {
+        justify-content: flex-end;
+    }
+}
+
+/* ============================================
+   MODE SOMBRE
+   ============================================ */
+
+html.dark {
+    --aga-bg: #141414;
+    --aga-bg-muted: #1d1e1f;
+    --aga-border: #2d2d2f;
+    --aga-border-muted: #3d3d3f;
+    --aga-text: #F3F4F6;
+    --aga-text-secondary: #E5E7EB;
+    --aga-text-muted: #9CA3AF;
+}
+
+html.dark .aga-form-card,
+html.dark .aga-guide,
+html.dark .aga-modal {
+    background: var(--aga-bg-muted);
+    border: 1px solid var(--aga-border);
+}
+
+html.dark .aga-limit-card {
+    background: var(--aga-bg-muted);
+    border: 1px solid var(--aga-border);
+}
+
+html.dark .aga-limit-cta {
+    background: var(--aga-bg);
+}
+
+html.dark .aga-input,
+html.dark .aga-select,
+html.dark .aga-textarea {
+    background: var(--aga-bg);
+    border: 1px solid var(--aga-border);
+    color: var(--aga-text);
+}
+
+html.dark .aga-input::placeholder,
+html.dark .aga-textarea::placeholder {
+    color: var(--aga-text-muted);
+}
+
+html.dark .aga-btn-outline {
+    background: transparent;
+    color: var(--aga-text);
+    border: 1.5px solid var(--aga-text);
+}
+
+.aga-btn-outline:hover,
+a.aga-btn-outline:hover,
+.fcom_lesson_details a.aga-btn-outline:hover {
+    background: var(--aga-text);
+    color: white !important;
+}
+
+html.dark .aga-btn-outline:hover,
+html.dark a.aga-btn-outline:hover,
+html.dark .fcom_lesson_details a.aga-btn-outline:hover {
+    background: var(--aga-text);
+    color: var(--aga-bg) !important;
+}
+
+html.dark .aga-help-text {
+    background: rgba(59, 130, 246, 0.15);
+    color: #93C5FD;
+}
+
+html.dark .aga-help-text a {
+    color: #93C5FD !important;
+}
+
+html.dark .aga-help-text a:hover {
+    color: #BFDBFE !important;
+}
+
+html.dark .aga-guide-header {
+    background: var(--aga-bg-muted);
+}
+
+html.dark .aga-guide-header:hover {
+    background: var(--aga-bg);
+}
+
+html.dark .aga-step-content code {
+    background: var(--aga-bg);
+    border: 1px solid var(--aga-border);
+    color: var(--aga-text);
+}
+
+html.dark .aga-list-item {
+    background: var(--aga-bg-muted);
+    border: 1px solid var(--aga-border);
+}
+
+html.dark .aga-empty-state {
+    background: var(--aga-bg-muted);
+}
+
+html.dark .aga-modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+html.dark .aga-modal-reward {
+    background: rgba(124, 58, 237, 0.15);
+    border: 1px solid rgba(124, 58, 237, 0.3);
+}
+
+html.dark .aga-feedback-content {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #93C5FD;
+}
+
+html.dark .aga-feedback.error .aga-feedback-content {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #FCA5A5;
+}
