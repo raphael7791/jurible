@@ -501,9 +501,12 @@
         "color": {
           "text": "var(--wp--preset--color--primary)"
         },
+        "typography": {
+          "textDecoration": "underline"
+        },
         ":hover": {
           "color": {
-            "text": "var(--wp--preset--color--primary-hover)"
+            "text": "var(--wp--preset--color--secondary)"
           }
         }
       },

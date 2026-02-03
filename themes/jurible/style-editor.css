@@ -1,0 +1,59 @@
+/*
+ * Editor Styles - Jurible Theme
+ * Styles spécifiques pour l'éditeur Gutenberg
+ */
+
+/* ==========================================================================
+   DIVIDERS / SEPARATORS
+   ========================================================================== */
+
+/* Base separator */
+.wp-block-separator {
+    border: none !important;
+    height: 2px !important;
+    background: var(--wp--preset--color--border) !important;
+}
+
+/* Gradient divider */
+.wp-block-separator.is-style-gradient {
+    background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%) !important;
+    border-radius: 1px;
+}
+
+/* ==========================================================================
+   TABLES
+   ========================================================================== */
+
+.wp-block-table table {
+    border-radius: var(--wp--custom--border-radius--lg);
+    overflow: hidden;
+    box-shadow: var(--wp--preset--shadow--xs);
+}
+
+.wp-block-table table th {
+    background: var(--wp--preset--color--muted);
+    padding: 16px 24px;
+    border: none;
+}
+
+.wp-block-table table td {
+    padding: 16px 24px;
+    border: none;
+    border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-block-table table td:first-child {
+    color: var(--wp--preset--color--text-muted);
+}
+
+.wp-block-table table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ==========================================================================
+   LINKS
+   ========================================================================== */
+
+.editor-styles-wrapper a:where(:not(.wp-element-button)) {
+    text-underline-offset: 3px;
+}

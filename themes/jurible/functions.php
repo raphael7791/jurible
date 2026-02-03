@@ -413,3 +413,18 @@ function jurible_enqueue_inputs_styles()
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_inputs_styles");
 add_action("enqueue_block_editor_assets", "jurible_enqueue_inputs_styles");
+
+
+# Enregistrer les Block Styles pour core/separator (Dividers)
+function jurible_register_separator_block_styles()
+{
+    register_block_style("core/separator", [
+        "name"  => "gradient",
+        "label" => __("Gradient", "jurible"),
+    ]);
+}
+add_action("init", "jurible_register_separator_block_styles");
+
+
+
+

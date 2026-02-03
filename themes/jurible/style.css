@@ -32,7 +32,33 @@ Text Domain: jurible
     width: fit-content;
 }
 
-/* List Bullet Primary */
+/* ==========================================================================
+   LISTS
+   ========================================================================== */
+
+/* Default lists in content */
+.entry-content ul,
+.entry-content ol,
+.wp-block-post-content ul,
+.wp-block-post-content ol {
+    padding-left: 1.5em;
+    margin-bottom: var(--wp--preset--spacing--sm);
+}
+
+.entry-content ul li::marker,
+.entry-content ol li::marker,
+.wp-block-post-content ul li::marker,
+.wp-block-post-content ol li::marker {
+    color: var(--wp--preset--color--text-dark);
+}
+
+.entry-content li,
+.wp-block-post-content li {
+    margin-bottom: 6px;
+    padding-left: 4px;
+}
+
+/* List Bullet Primary - custom style with red bullets */
 .list-bullet-primary {
     list-style: none;
     padding-left: 0;
@@ -54,6 +80,106 @@ Text Domain: jurible
     height: 8px;
     background-color: var(--wp--preset--color--primary);
     border-radius: 50%;
+}
+
+/* ==========================================================================
+   DIVIDERS / SEPARATORS
+   ========================================================================== */
+
+/* Base divider - override WordPress default */
+hr,
+.wp-block-separator {
+    border: none;
+    height: 2px;
+    background: var(--wp--preset--color--border);
+    margin: var(--wp--preset--spacing--md) 0;
+}
+
+/* Gradient divider */
+.wp-block-separator.is-style-gradient,
+.divider--gradient {
+    background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+    border-radius: 1px;
+}
+
+/* Divider with text */
+.divider-text {
+    display: flex;
+    align-items: center;
+    gap: var(--wp--preset--spacing--sm);
+    margin: var(--wp--preset--spacing--md) 0;
+}
+
+.divider-text::before,
+.divider-text::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: var(--wp--preset--color--border);
+}
+
+.divider-text span {
+    font-size: 13px;
+    color: var(--wp--preset--color--text-muted);
+    white-space: nowrap;
+}
+
+/* Divider with text - gradient variant */
+.divider-text--gradient::before,
+.divider-text--gradient::after {
+    background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+}
+
+/* ==========================================================================
+   TABLES
+   ========================================================================== */
+
+/* Default table style */
+.wp-block-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--wp--preset--color--white);
+    border-radius: var(--wp--custom--border-radius--lg);
+    overflow: hidden;
+    box-shadow: var(--wp--preset--shadow--xs);
+}
+
+/* Header */
+.wp-block-table table th {
+    background: var(--wp--preset--color--muted);
+    font-weight: 600;
+    text-align: left;
+    padding: 16px 24px;
+    color: var(--wp--preset--color--text-dark);
+    border: none;
+}
+
+/* Cells */
+.wp-block-table table td {
+    padding: 16px 24px;
+    color: var(--wp--preset--color--text-dark);
+    border: none;
+    border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+/* Première colonne (label) */
+.wp-block-table table td:first-child {
+    color: var(--wp--preset--color--text-muted);
+}
+
+/* Dernière ligne sans bordure */
+.wp-block-table table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ==========================================================================
+   LINKS
+   ========================================================================== */
+
+a:where(:not(.wp-element-button)) {
+    text-underline-offset: 3px;
+    transition: color var(--wp--custom--transition--default);
 }
 
 /* ==========================================================================
