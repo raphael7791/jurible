@@ -212,3 +212,56 @@ function jurible_remove_heading_levels($args, $block_type)
     return $args;
 }
 add_action("register_block_type_args", "jurible_remove_heading_levels", 10, 2);
+
+
+# Enregistrer les Block Styles pour core/image
+function jurible_register_image_block_styles()
+{
+    // Style Card - ratio 16:9, arrondi, ombre
+    register_block_style("core/image", [
+        "name"  => "card",
+        "label" => __("Card", "jurible"),
+    ]);
+
+    // Styles Avatar
+    register_block_style("core/image", [
+        "name"  => "avatar-sm",
+        "label" => __("Avatar SM (32px)", "jurible"),
+    ]);
+
+    register_block_style("core/image", [
+        "name"  => "avatar-md",
+        "label" => __("Avatar MD (48px)", "jurible"),
+    ]);
+
+    register_block_style("core/image", [
+        "name"  => "avatar-lg",
+        "label" => __("Avatar LG (64px)", "jurible"),
+    ]);
+
+    register_block_style("core/image", [
+        "name"  => "avatar-xl",
+        "label" => __("Avatar XL (96px)", "jurible"),
+    ]);
+
+    // Style Hero - pleine largeur, ratio 21:9
+    register_block_style("core/image", [
+        "name"  => "hero",
+        "label" => __("Hero (21:9)", "jurible"),
+    ]);
+}
+add_action("init", "jurible_register_image_block_styles");
+
+
+# Charger le CSS media
+function jurible_enqueue_media_styles()
+{
+    wp_enqueue_style(
+        "jurible-media",
+        get_template_directory_uri() . "/assets/css/media.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/media.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_media_styles");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_media_styles");

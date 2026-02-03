@@ -1,0 +1,338 @@
+/* ==========================================================================
+   JURIBLE DESIGN SYSTEM - Media Styles
+   ========================================================================== */
+
+/* ==========================================================================
+   BLOCK STYLES - core/image
+   ========================================================================== */
+
+/* Card Style - ratio 16:9, arrondi, ombre */
+.wp-block-image.is-style-card img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--wp--custom--border-radius--lg);
+    box-shadow: var(--wp--preset--shadow--sm);
+}
+
+/* Hero Style - pleine largeur, ratio 21:9 */
+.wp-block-image.is-style-hero {
+    width: 100%;
+}
+
+.wp-block-image.is-style-hero img {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    border-radius: var(--wp--custom--border-radius--lg);
+}
+
+/* Avatar Styles - rond */
+.wp-block-image.is-style-avatar-sm img,
+.wp-block-image.is-style-avatar-md img,
+.wp-block-image.is-style-avatar-lg img,
+.wp-block-image.is-style-avatar-xl img {
+    border-radius: var(--wp--custom--border-radius--full);
+    object-fit: cover;
+    border: none;
+}
+
+.wp-block-image.is-style-avatar-sm img {
+    width: var(--wp--custom--avatar--sm);
+    height: var(--wp--custom--avatar--sm);
+}
+
+.wp-block-image.is-style-avatar-md img {
+    width: var(--wp--custom--avatar--md);
+    height: var(--wp--custom--avatar--md);
+}
+
+.wp-block-image.is-style-avatar-lg img {
+    width: var(--wp--custom--avatar--lg);
+    height: var(--wp--custom--avatar--lg);
+}
+
+.wp-block-image.is-style-avatar-xl img {
+    width: var(--wp--custom--avatar--xl);
+    height: var(--wp--custom--avatar--xl);
+}
+
+/* ==========================================================================
+   UTILITY CLASSES - Ratios
+   ========================================================================== */
+
+.img--ratio-16-9 {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.img--ratio-4-3 {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.img--ratio-3-2 {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+}
+
+.img--ratio-1-1 {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.img--ratio-21-9 {
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   UTILITY CLASSES - Image Sizes
+   ========================================================================== */
+
+.img--hero {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+}
+
+.img--card {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.img--thumbnail {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   UTILITY CLASSES - Avatars
+   ========================================================================== */
+
+.avatar-sm {
+    width: var(--wp--custom--avatar--sm);
+    height: var(--wp--custom--avatar--sm);
+    border-radius: var(--wp--custom--border-radius--full);
+    object-fit: cover;
+}
+
+.avatar-md {
+    width: var(--wp--custom--avatar--md);
+    height: var(--wp--custom--avatar--md);
+    border-radius: var(--wp--custom--border-radius--full);
+    object-fit: cover;
+}
+
+.avatar-lg {
+    width: var(--wp--custom--avatar--lg);
+    height: var(--wp--custom--avatar--lg);
+    border-radius: var(--wp--custom--border-radius--full);
+    object-fit: cover;
+}
+
+.avatar-xl {
+    width: var(--wp--custom--avatar--xl);
+    height: var(--wp--custom--avatar--xl);
+    border-radius: var(--wp--custom--border-radius--full);
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   UTILITY CLASSES - Logos
+   ========================================================================== */
+
+.logo-img {
+    width: var(--wp--custom--logo--md);
+    height: var(--wp--custom--logo--height);
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all var(--wp--custom--transition--default);
+}
+
+.logo-img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.logo--sm {
+    width: var(--wp--custom--logo--sm);
+    height: 32px;
+}
+
+.logo--md {
+    width: var(--wp--custom--logo--md);
+    height: var(--wp--custom--logo--height);
+}
+
+.logo--lg {
+    width: var(--wp--custom--logo--lg);
+    height: 48px;
+}
+
+/* Logos container */
+.logos-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--wp--preset--spacing--xl);
+    flex-wrap: wrap;
+}
+
+.logos-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--wp--preset--spacing--md);
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .logos-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ==========================================================================
+   UTILITY CLASSES - Galleries
+   ========================================================================== */
+
+.gallery--2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--wp--preset--spacing--sm);
+}
+
+.gallery--3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--wp--preset--spacing--sm);
+}
+
+.gallery--4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--sm);
+}
+
+@media (max-width: 768px) {
+    .gallery--3,
+    .gallery--4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.gallery__item {
+    overflow: hidden;
+    border-radius: var(--wp--custom--border-radius--md);
+}
+
+.gallery__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--wp--custom--transition--slow);
+}
+
+.gallery__item:hover img {
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   UTILITY CLASSES - Video
+   ========================================================================== */
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: var(--wp--custom--border-radius--lg);
+    overflow: hidden;
+}
+
+.video-wrapper video,
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+    border-radius: var(--wp--custom--border-radius--lg);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.video-placeholder__play {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--wp--custom--border-radius--full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--wp--custom--transition--default), box-shadow var(--wp--custom--transition--default);
+}
+
+.video-placeholder__play::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 14px 0 14px 24px;
+    border-color: transparent transparent transparent var(--wp--preset--color--primary);
+    margin-left: 6px;
+}
+
+.video-placeholder:hover .video-placeholder__play {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.video-placeholder__duration {
+    position: absolute;
+    bottom: var(--wp--preset--spacing--sm);
+    right: var(--wp--preset--spacing--sm);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.video-placeholder__title {
+    position: absolute;
+    bottom: var(--wp--preset--spacing--sm);
+    left: var(--wp--preset--spacing--sm);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   UTILITY CLASSES - Figure with caption
+   ========================================================================== */
+
+.figure {
+    margin: 0;
+}
+
+.figure__caption {
+    font-size: 13px;
+    color: var(--wp--preset--color--text-muted);
+    margin-top: var(--wp--preset--spacing--xs);
+    text-align: center;
+}

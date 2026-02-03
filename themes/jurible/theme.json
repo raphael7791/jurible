@@ -18,6 +18,16 @@
       "defaultDuotone": false,
       "palette": [
         {
+          "slug": "black",
+          "name": "Black",
+          "color": "#000000"
+        },
+        {
+          "slug": "white",
+          "name": "White",
+          "color": "#FFFFFF"
+        },
+        {
           "slug": "primary",
           "name": "Primary",
           "color": "#B0001D"
@@ -40,7 +50,7 @@
         {
           "slug": "background",
           "name": "Background",
-          "color": "#FFFFFF"
+          "color": "#F9FAFB"
         },
         {
           "slug": "muted",
@@ -73,14 +83,19 @@
           "color": "#9CA3AF"
         },
         {
-          "slug": "black",
-          "name": "Black",
-          "color": "#000000"
+          "slug": "info",
+          "name": "Info",
+          "color": "#3B82F6"
         },
         {
-          "slug": "white",
-          "name": "White",
-          "color": "#FFFFFF"
+          "slug": "info-bg",
+          "name": "Info Background",
+          "color": "#EFF6FF"
+        },
+        {
+          "slug": "info-text",
+          "name": "Info Text",
+          "color": "#1E40AF"
         },
         {
           "slug": "success",
@@ -88,9 +103,29 @@
           "color": "#10B981"
         },
         {
+          "slug": "success-bg",
+          "name": "Success Background",
+          "color": "#ECFDF5"
+        },
+        {
+          "slug": "success-text",
+          "name": "Success Text",
+          "color": "#065F46"
+        },
+        {
           "slug": "warning",
           "name": "Warning",
           "color": "#F59E0B"
+        },
+        {
+          "slug": "warning-bg",
+          "name": "Warning Background",
+          "color": "#FFFBEB"
+        },
+        {
+          "slug": "warning-text",
+          "name": "Warning Text",
+          "color": "#92400E"
         },
         {
           "slug": "error",
@@ -98,9 +133,29 @@
           "color": "#EF4444"
         },
         {
-          "slug": "info",
-          "name": "Info",
-          "color": "#3B82F6"
+          "slug": "error-bg",
+          "name": "Error Background",
+          "color": "#FEF2F2"
+        },
+        {
+          "slug": "error-text",
+          "name": "Error Text",
+          "color": "#991B1B"
+        },
+        {
+          "slug": "accent",
+          "name": "Accent",
+          "color": "#7C3AED"
+        },
+        {
+          "slug": "accent-bg",
+          "name": "Accent Background",
+          "color": "#F5F3FF"
+        },
+        {
+          "slug": "accent-text",
+          "name": "Accent Text",
+          "color": "#5B21B6"
         }
       ],
       "gradients": [
@@ -113,6 +168,8 @@
     },
     "spacing": {
       "customSpacingSize": false,
+      "defaultSpacingSizes": false,
+      "margin": false,
       "spacingScale": {
         "steps": 0
       },
@@ -123,34 +180,24 @@
           "size": "0.5rem"
         },
         {
-          "slug": "s",
-          "name": "S",
+          "slug": "sm",
+          "name": "SM",
           "size": "1rem"
         },
         {
-          "slug": "m",
-          "name": "M",
+          "slug": "md",
+          "name": "MD",
           "size": "1.5rem"
         },
         {
-          "slug": "l",
-          "name": "L",
+          "slug": "lg",
+          "name": "LG",
           "size": "2rem"
         },
         {
           "slug": "xl",
           "name": "XL",
           "size": "3rem"
-        },
-        {
-          "slug": "2xl",
-          "name": "2XL",
-          "size": "4rem"
-        },
-        {
-          "slug": "3xl",
-          "name": "3XL",
-          "size": "5rem"
         }
       ],
       "units": ["px", "rem", "%"]
@@ -169,36 +216,42 @@
               "fontFamily": "Poppins",
               "fontWeight": "400",
               "fontStyle": "normal",
-              "src": ["https://fonts.gstatic.com/s/poppins/v21/pxiEyp8kv8JHgFVrFJA.ttf"]
+              "src": ["file:./assets/fonts/poppins-400.woff2"]
             },
             {
               "fontFamily": "Poppins",
               "fontWeight": "400",
               "fontStyle": "italic",
-              "src": ["https://fonts.gstatic.com/s/poppins/v21/pxiGyp8kv8JHgFVrJJLedw.ttf"]
+              "src": ["file:./assets/fonts/poppins-400-italic.woff2"]
             },
             {
               "fontFamily": "Poppins",
               "fontWeight": "500",
               "fontStyle": "normal",
-              "src": ["https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLGT9V1s.ttf"]
+              "src": ["file:./assets/fonts/poppins-500.woff2"]
             },
             {
               "fontFamily": "Poppins",
               "fontWeight": "600",
               "fontStyle": "normal",
-              "src": ["https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLEj6V1s.ttf"]
+              "src": ["file:./assets/fonts/poppins-600.woff2"]
             },
             {
               "fontFamily": "Poppins",
               "fontWeight": "700",
               "fontStyle": "normal",
-              "src": ["https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLCz7V1s.ttf"]
+              "src": ["file:./assets/fonts/poppins-700.woff2"]
             }
           ]
         }
       ],
       "fontSizes": [
+        {
+          "slug": "caption",
+          "size": "0.75rem",
+          "name": "Caption",
+          "fluid": false
+        },
         {
           "slug": "small",
           "size": "0.875rem",
@@ -213,7 +266,7 @@
         },
         {
           "slug": "body",
-          "size": "1.125rem",
+          "size": "1rem",
           "name": "Body",
           "fluid": false
         },
@@ -224,27 +277,33 @@
           "fluid": false
         },
         {
-          "slug": "h4",
+          "slug": "heading-4",
           "size": "1.25rem",
           "name": "H4",
           "fluid": false
         },
         {
-          "slug": "h3",
-          "size": "clamp(1.25rem, 1.1rem + 0.75vw, 1.875rem)",
+          "slug": "heading-3",
+          "size": "clamp(1.25rem, 1rem + 1.25vw, 1.875rem)",
           "name": "H3",
           "fluid": false
         },
         {
-          "slug": "h2",
-          "size": "clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem)",
+          "slug": "heading-2",
+          "size": "clamp(1.75rem, 1.5rem + 1.5vw, 2.5rem)",
           "name": "H2",
           "fluid": false
         },
         {
-          "slug": "h1",
-          "size": "clamp(2rem, 1.5rem + 2.5vw, 3rem)",
+          "slug": "heading-1",
+          "size": "clamp(2rem, 1.5rem + 2vw, 3rem)",
           "name": "H1",
+          "fluid": false
+        },
+        {
+          "slug": "key-numbers",
+          "size": "clamp(2rem, 1.5rem + 2vw, 3rem)",
+          "name": "Key Numbers",
           "fluid": false
         }
       ]
@@ -255,47 +314,57 @@
         {
           "slug": "xs",
           "name": "XS",
-          "shadow": "0 1px 2px rgba(0,0,0,0.05)"
+          "shadow": "0 1px 2px rgba(0, 0, 0, 0.05)"
         },
         {
           "slug": "sm",
           "name": "SM",
-          "shadow": "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)"
+          "shadow": "0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)"
         },
         {
           "slug": "md",
           "name": "MD",
-          "shadow": "0 4px 6px rgba(0,0,0,0.07)"
+          "shadow": "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)"
         },
         {
           "slug": "lg",
           "name": "LG",
-          "shadow": "0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)"
+          "shadow": "0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)"
         },
         {
           "slug": "xl",
           "name": "XL",
-          "shadow": "0 20px 25px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.04)"
+          "shadow": "0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04)"
         },
         {
           "slug": "cta",
           "name": "CTA",
-          "shadow": "0 2px 8px rgba(176,0,29,0.25)"
+          "shadow": "0 4px 14px rgba(176, 0, 29, 0.25)"
         },
         {
           "slug": "cta-hover",
           "name": "CTA Hover",
-          "shadow": "0 4px 12px rgba(176,0,29,0.35)"
+          "shadow": "0 6px 20px rgba(176, 0, 29, 0.35)"
         },
         {
           "slug": "accent",
           "name": "Accent",
-          "shadow": "0 2px 8px rgba(124,58,237,0.25)"
+          "shadow": "0 4px 14px rgba(124, 58, 237, 0.25)"
         },
         {
           "slug": "accent-hover",
           "name": "Accent Hover",
-          "shadow": "0 4px 12px rgba(124,58,237,0.35)"
+          "shadow": "0 6px 20px rgba(124, 58, 237, 0.35)"
+        },
+        {
+          "slug": "destructive",
+          "name": "Destructive",
+          "shadow": "0 4px 14px rgba(239, 68, 68, 0.25)"
+        },
+        {
+          "slug": "destructive-hover",
+          "name": "Destructive Hover",
+          "shadow": "0 6px 20px rgba(239, 68, 68, 0.35)"
         }
       ]
     },
@@ -304,41 +373,93 @@
       "radius": true,
       "style": true,
       "width": true,
+      "defaultRadiusSizes": false,
       "radiusSizes": [
-        { "name": "XS", "slug": "xs", "size": "4px" },
-        { "name": "S", "slug": "s", "size": "6px" },
-        { "name": "M", "slug": "m", "size": "8px" },
-        { "name": "L", "slug": "l", "size": "12px" },
-        { "name": "XL", "slug": "xl", "size": "16px" },
-        { "name": "Full", "slug": "full", "size": "9999px" }
+        {
+          "name": "XS",
+          "slug": "xs",
+          "size": "4px"
+        },
+        {
+          "name": "SM",
+          "slug": "sm",
+          "size": "6px"
+        },
+        {
+          "name": "MD",
+          "slug": "md",
+          "size": "8px"
+        },
+        {
+          "name": "LG",
+          "slug": "lg",
+          "size": "12px"
+        },
+        {
+          "name": "Full",
+          "slug": "full",
+          "size": "9999px"
+        }
       ]
     },
     "custom": {
       "lineHeight": {
-        "tight": "1.2",
-        "normal": "1.5",
-        "relaxed": "1.6"
+        "heading": "1.2",
+        "subheading": "1.4",
+        "body": "1.6"
+      },
+      "borderRadius": {
+        "xs": "4px",
+        "sm": "6px",
+        "md": "8px",
+        "lg": "12px",
+        "full": "9999px"
+      },
+      "transition": {
+        "fast": "0.1s ease",
+        "default": "0.15s ease",
+        "slow": "0.3s ease"
+      },
+      "zIndex": {
+        "dropdown": "100",
+        "sticky": "200",
+        "modalBackdrop": "300",
+        "modal": "400",
+        "toast": "500",
+        "tooltip": "600"
+      },
+      "avatar": {
+        "sm": "32px",
+        "md": "48px",
+        "lg": "64px",
+        "xl": "96px"
+      },
+      "logo": {
+        "sm": "80px",
+        "md": "120px",
+        "lg": "160px",
+        "height": "40px"
       }
     },
     "blocks": {}
   },
   "styles": {
     "color": {
-      "background": "var(--wp--preset--color--background)",
+      "background": "var(--wp--preset--color--white)",
       "text": "var(--wp--preset--color--text-dark)"
     },
     "spacing": {
       "padding": {
         "top": "0",
-        "right": "var(--wp--preset--spacing--m)",
+        "right": "var(--wp--preset--spacing--md)",
         "bottom": "0",
-        "left": "var(--wp--preset--spacing--m)"
+        "left": "var(--wp--preset--spacing--md)"
       }
     },
     "typography": {
       "fontFamily": "var(--wp--preset--font-family--poppins)",
-      "fontSize": "var(--wp--preset--font-size--medium)",
-      "lineHeight": "1.6"
+      "fontSize": "var(--wp--preset--font-size--body)",
+      "lineHeight": "var(--wp--custom--line-height--body)"
     },
     "elements": {
       "heading": {
@@ -348,29 +469,32 @@
         "typography": {
           "fontFamily": "var(--wp--preset--font-family--poppins)",
           "fontWeight": "700",
-          "lineHeight": "1.2"
+          "lineHeight": "var(--wp--custom--line-height--heading)"
         }
       },
       "h1": {
         "typography": {
-          "fontSize": "var(--wp--preset--font-size--h1)"
+          "fontSize": "var(--wp--preset--font-size--heading-1)"
         }
       },
       "h2": {
         "typography": {
-          "fontSize": "var(--wp--preset--font-size--h2)"
+          "fontSize": "var(--wp--preset--font-size--heading-2)",
+          "lineHeight": "1.3"
         }
       },
       "h3": {
         "typography": {
-          "fontSize": "var(--wp--preset--font-size--h3)",
-          "fontWeight": "600"
+          "fontSize": "var(--wp--preset--font-size--heading-3)",
+          "fontWeight": "600",
+          "lineHeight": "var(--wp--custom--line-height--subheading)"
         }
       },
       "h4": {
         "typography": {
-          "fontSize": "var(--wp--preset--font-size--h4)",
-          "fontWeight": "600"
+          "fontSize": "var(--wp--preset--font-size--heading-4)",
+          "fontWeight": "600",
+          "lineHeight": "var(--wp--custom--line-height--subheading)"
         }
       },
       "link": {
@@ -389,12 +513,13 @@
           "text": "var(--wp--preset--color--white)"
         },
         "border": {
-          "radius": "8px"
+          "radius": "var(--wp--custom--border-radius--md)"
         },
         "typography": {
           "fontFamily": "var(--wp--preset--font-family--poppins)",
           "fontSize": "0.875rem",
-          "fontWeight": "500"
+          "fontWeight": "500",
+          "letterSpacing": "0.5px"
         },
         ":hover": {
           "color": {
@@ -404,9 +529,19 @@
       }
     },
     "blocks": {
+      "core/heading": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--poppins)",
+          "fontWeight": "700",
+          "lineHeight": "var(--wp--custom--line-height--heading)"
+        },
+        "color": {
+          "text": "var(--wp--preset--color--text-dark)"
+        }
+      },
       "core/button": {
         "border": {
-          "radius": "8px"
+          "radius": "var(--wp--custom--border-radius--md)"
         },
         "shadow": "var(--wp--preset--shadow--cta)",
         "typography": {
@@ -422,7 +557,7 @@
         },
         "spacing": {
           "padding": {
-            "left": "var(--wp--preset--spacing--s)"
+            "left": "var(--wp--preset--spacing--sm)"
           }
         },
         "color": {
@@ -439,24 +574,27 @@
         "border": {
           "width": "0"
         }
+      },
+      "core/image": {
+        "border": {
+          "radius": "var(--wp--custom--border-radius--md)",
+          "color": "var(--wp--preset--color--border)",
+          "style": "solid",
+          "width": "1px"
+        }
       }
     }
   },
   "templateParts": [
-  {
-    "name": "header",
-    "title": "En-tête",
-    "area": "header"
-  },
-  {
-    "name": "header-marketing",
-    "title": "En-tête Marketing",
-    "area": "header"
-  },
-  {
-    "name": "footer",
-    "title": "Pied de page",
-    "area": "footer"
-  }
-]
+    {
+      "name": "header",
+      "title": "En-tete",
+      "area": "header"
+    },
+    {
+      "name": "footer",
+      "title": "Pied de page",
+      "area": "footer"
+    }
+  ]
 }

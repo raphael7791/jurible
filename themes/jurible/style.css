@@ -55,3 +55,69 @@ Text Domain: jurible
     background-color: var(--wp--preset--color--primary);
     border-radius: 50%;
 }
+
+/* ==========================================================================
+   UTILITY CLASSES - Transitions
+   ========================================================================== */
+
+.transition-fast {
+    transition: all var(--wp--custom--transition--fast);
+}
+
+.transition-default {
+    transition: all var(--wp--custom--transition--default);
+}
+
+.transition-slow {
+    transition: all var(--wp--custom--transition--slow);
+}
+
+/* ==========================================================================
+   UTILITY CLASSES - Z-Index
+   ========================================================================== */
+
+.z-dropdown {
+    position: relative;
+    z-index: var(--wp--custom--z-index--dropdown);
+}
+
+.z-sticky {
+    position: relative;
+    z-index: var(--wp--custom--z-index--sticky);
+}
+
+.z-modal-backdrop {
+    position: relative;
+    z-index: var(--wp--custom--z-index--modal-backdrop);
+}
+
+.z-modal {
+    position: relative;
+    z-index: var(--wp--custom--z-index--modal);
+}
+
+.z-toast {
+    position: relative;
+    z-index: var(--wp--custom--z-index--toast);
+}
+
+.z-tooltip {
+    position: relative;
+    z-index: var(--wp--custom--z-index--tooltip);
+}
+
+/* ==========================================================================
+   UTILITY CLASSES - Visibility
+   ========================================================================== */
+
+@media (min-width: 768px) {
+    .hide-on-desktop {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .hide-on-tablet {
+        display: none;
+    }
+}
