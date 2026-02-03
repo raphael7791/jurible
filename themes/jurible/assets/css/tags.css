@@ -1,0 +1,101 @@
+/* ==========================================================================
+   JURIBLE DESIGN SYSTEM - Tags
+   ========================================================================== */
+
+/* ==========================================================================
+   BASE TAG STYLES
+   ========================================================================== */
+
+p.is-style-tag-primary,
+p.is-style-tag-secondary,
+p.is-style-tag-gray,
+p.is-style-tag-success,
+p.is-style-tag-warning,
+p.is-style-tag-error,
+p.is-style-tag-info,
+p.is-style-tag-dark {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    font-family: var(--wp--preset--font-family--poppins);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    border-radius: var(--wp--custom--border-radius--sm);
+    margin: 0;
+    width: fit-content;
+}
+
+/* ==========================================================================
+   BLOCK STYLES - Tag Types
+   ========================================================================== */
+
+/* TAG PRIMARY */
+p.is-style-tag-primary {
+    background: #FEF2F2;
+    color: var(--wp--preset--color--primary);
+}
+
+/* TAG SECONDARY */
+p.is-style-tag-secondary {
+    background: #F5F3FF;
+    color: var(--wp--preset--color--secondary);
+}
+
+/* TAG GRAY */
+p.is-style-tag-gray {
+    background: var(--wp--preset--color--muted);
+    color: var(--wp--preset--color--text-gray);
+}
+
+/* TAG SUCCESS */
+p.is-style-tag-success {
+    background: var(--wp--preset--color--success-bg);
+    color: var(--wp--preset--color--success-text);
+}
+
+/* TAG WARNING */
+p.is-style-tag-warning {
+    background: var(--wp--preset--color--warning-bg);
+    color: var(--wp--preset--color--warning-text);
+}
+
+/* TAG ERROR */
+p.is-style-tag-error {
+    background: var(--wp--preset--color--error-bg);
+    color: var(--wp--preset--color--error-text);
+}
+
+/* TAG INFO */
+p.is-style-tag-info {
+    background: var(--wp--preset--color--info-bg);
+    color: var(--wp--preset--color--info-text);
+}
+
+/* TAG DARK */
+p.is-style-tag-dark {
+    background: var(--wp--preset--color--text-dark);
+    color: var(--wp--preset--color--white);
+}
+
+/* ==========================================================================
+   TAG WITH DOT INDICATOR
+   Ajouter la classe "tag-dot" pour afficher un point indicateur
+   ========================================================================== */
+
+p.is-style-tag-primary.tag-dot::before,
+p.is-style-tag-secondary.tag-dot::before,
+p.is-style-tag-gray.tag-dot::before,
+p.is-style-tag-success.tag-dot::before,
+p.is-style-tag-warning.tag-dot::before,
+p.is-style-tag-error.tag-dot::before,
+p.is-style-tag-info.tag-dot::before,
+p.is-style-tag-dark.tag-dot::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+}

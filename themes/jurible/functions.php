@@ -326,3 +326,90 @@ function jurible_enqueue_buttons_styles()
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_buttons_styles");
 add_action("enqueue_block_editor_assets", "jurible_enqueue_buttons_styles");
+
+
+# Enregistrer les Block Styles pour core/paragraph (Tags)
+function jurible_register_tag_block_styles()
+{
+    register_block_style("core/paragraph", [
+        "name"  => "tag-primary",
+        "label" => __("Tag Primary", "jurible"),
+    ]);
+
+    register_block_style("core/paragraph", [
+        "name"  => "tag-secondary",
+        "label" => __("Tag Secondary", "jurible"),
+    ]);
+
+    register_block_style("core/paragraph", [
+        "name"  => "tag-gray",
+        "label" => __("Tag Gray", "jurible"),
+    ]);
+
+    register_block_style("core/paragraph", [
+        "name"  => "tag-success",
+        "label" => __("Tag Success", "jurible"),
+    ]);
+
+    register_block_style("core/paragraph", [
+        "name"  => "tag-warning",
+        "label" => __("Tag Warning", "jurible"),
+    ]);
+
+    register_block_style("core/paragraph", [
+        "name"  => "tag-error",
+        "label" => __("Tag Error", "jurible"),
+    ]);
+
+    register_block_style("core/paragraph", [
+        "name"  => "tag-info",
+        "label" => __("Tag Info", "jurible"),
+    ]);
+
+    register_block_style("core/paragraph", [
+        "name"  => "tag-dark",
+        "label" => __("Tag Dark", "jurible"),
+    ]);
+}
+add_action("init", "jurible_register_tag_block_styles");
+
+
+# Charger le CSS tags
+function jurible_enqueue_tags_styles()
+{
+    wp_enqueue_style(
+        "jurible-tags",
+        get_template_directory_uri() . "/assets/css/tags.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/tags.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_tags_styles");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_tags_styles");
+
+
+# Charger le CSS pagination
+function jurible_enqueue_pagination_styles()
+{
+    wp_enqueue_style(
+        "jurible-pagination",
+        get_template_directory_uri() . "/assets/css/pagination.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/pagination.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_pagination_styles");
+
+
+# Charger le CSS inputs (formulaires)
+function jurible_enqueue_inputs_styles()
+{
+    wp_enqueue_style(
+        "jurible-inputs",
+        get_template_directory_uri() . "/assets/css/inputs.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/inputs.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_inputs_styles");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_inputs_styles");

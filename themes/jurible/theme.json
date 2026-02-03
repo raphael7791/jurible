@@ -5,8 +5,8 @@
     "useRootPaddingAwareAlignments": true,
     "appearanceTools": true,
     "layout": {
-      "contentSize": "768px",
-      "wideSize": "1280px",
+      "contentSize": "1280px",
+      "wideSize": "1440px",
       "allowCustomContentAndWideSize": false
     },
     "color": {
@@ -581,6 +581,13 @@
           "color": "var(--wp--preset--color--border)",
           "style": "solid",
           "width": "1px"
+        }
+      },
+      "core/group": {
+        "spacing": {
+          "margin": {
+            "top": "0 !important"
+          }
         }
       }
     }

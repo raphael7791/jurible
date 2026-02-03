@@ -1,0 +1,175 @@
+/* ==========================================================================
+   JURIBLE DESIGN SYSTEM - Pagination (WordPress Native)
+   ========================================================================== */
+
+/* ==========================================================================
+   QUERY PAGINATION CONTAINER
+   ========================================================================== */
+
+.wp-block-query-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--wp--preset--spacing--xs);
+    margin-top: var(--wp--preset--spacing--xl);
+}
+
+/* ==========================================================================
+   PAGINATION NUMBERS
+   ========================================================================== */
+
+.wp-block-query-pagination-numbers {
+    display: flex;
+    align-items: center;
+    gap: var(--wp--preset--spacing--xs);
+}
+
+.wp-block-query-pagination-numbers .page-numbers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-family: var(--wp--preset--font-family--poppins);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--wp--preset--color--text-gray);
+    background: transparent;
+    border: 1px solid var(--wp--preset--color--border);
+    border-radius: var(--wp--custom--border-radius--md);
+    text-decoration: none;
+    transition: all var(--wp--custom--transition--default);
+}
+
+.wp-block-query-pagination-numbers .page-numbers:hover {
+    border-color: var(--wp--preset--color--border-muted);
+    background: var(--wp--preset--color--muted);
+}
+
+.wp-block-query-pagination-numbers .page-numbers.current {
+    background: var(--wp--preset--color--primary);
+    color: var(--wp--preset--color--white);
+    border-color: var(--wp--preset--color--primary);
+}
+
+.wp-block-query-pagination-numbers .page-numbers.dots {
+    border: none;
+    background: transparent;
+    color: var(--wp--preset--color--text-muted);
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   PREVIOUS / NEXT LINKS
+   ========================================================================== */
+
+.wp-block-query-pagination-previous,
+.wp-block-query-pagination-next {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--wp--preset--color--text-muted);
+    text-decoration: none;
+    transition: color var(--wp--custom--transition--default);
+}
+
+.wp-block-query-pagination-previous:hover,
+.wp-block-query-pagination-next:hover {
+    color: var(--wp--preset--color--primary);
+}
+
+/* ==========================================================================
+   NAVIGATION DOTS (for carousels/sliders)
+   ========================================================================== */
+
+.nav-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--wp--preset--spacing--xs);
+}
+
+.nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--wp--preset--color--border);
+    transition: all var(--wp--custom--transition--default);
+    cursor: pointer;
+}
+
+.nav-dot:hover {
+    background: var(--wp--preset--color--border-muted);
+}
+
+.nav-dot.active {
+    width: 24px;
+    border-radius: 4px;
+    background: var(--wp--preset--color--primary);
+}
+
+/* ==========================================================================
+   SURECART PAGINATION
+   SureCart uses Web Components with Shadow DOM, so we style via CSS custom
+   properties defined on the component or its parent.
+   ========================================================================== */
+
+/* Map SureCart design tokens to Jurible theme tokens */
+sc-product-item-list,
+.wp-block-surecart-product-list {
+    /* Colors */
+    --sc-color-primary-500: var(--wp--preset--color--primary);
+    --sc-color-primary-400: var(--wp--preset--color--primary);
+    --sc-color-primary-text: var(--wp--preset--color--white);
+    --primary-background: var(--wp--preset--color--primary);
+    --primary-color: var(--wp--preset--color--white);
+
+    /* Grays */
+    --sc-color-gray-300: var(--wp--preset--color--border);
+    --sc-color-gray-600: var(--wp--preset--color--text-muted);
+    --sc-color-gray-700: var(--wp--preset--color--text-gray);
+    --sc-color-white: var(--wp--preset--color--white);
+
+    /* Focus ring */
+    --sc-focus-ring-width: 3px;
+    --sc-focus-ring-color-primary: rgba(124, 58, 237, 0.4);
+    --sc-focus-ring-alpha: 0.4;
+
+    /* Typography */
+    --sc-font-sans: var(--wp--preset--font-family--poppins);
+    --sc-font-weight-semibold: 600;
+    --sc-font-size-small: 14px;
+    --sc-font-size-medium: 16px;
+
+    /* Spacing */
+    --sc-spacing-x-small: var(--wp--preset--spacing--xs);
+    --sc-spacing-small: var(--wp--preset--spacing--sm);
+    --sc-spacing-medium: var(--wp--preset--spacing--md);
+
+    /* Border radius */
+    --sc-border-radius-small: var(--wp--custom--border-radius--sm);
+    --sc-border-radius-medium: var(--wp--custom--border-radius--md);
+    --sc-input-border-radius-small: var(--wp--custom--border-radius--sm);
+    --sc-input-border-radius-medium: var(--wp--custom--border-radius--md);
+
+    /* Transitions */
+    --sc-transition-fast: 150ms;
+    --sc-transition-medium: var(--wp--custom--transition--default);
+
+    /* Shadows */
+    --sc-shadow-small: var(--wp--preset--shadow--sm);
+
+    /* Pagination specific */
+    --sc-pagination-font-size: 14px;
+}
+
+/* Product list pagination container */
+.product-item-list__pagination {
+    padding-top: var(--wp--preset--spacing--lg);
+}
+
+/* Style the pagination display text */
+sc-pagination .pagination-display {
+    color: var(--wp--preset--color--text-muted);
+    font-size: 14px;
+}
