@@ -265,3 +265,64 @@ function jurible_enqueue_media_styles()
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_media_styles");
 add_action("enqueue_block_editor_assets", "jurible_enqueue_media_styles");
+
+
+# Enregistrer les Block Styles pour core/button
+function jurible_register_button_block_styles()
+{
+    register_block_style("core/button", [
+        "name"  => "primary",
+        "label" => __("Primary", "jurible"),
+        "is_default" => true,
+    ]);
+
+    register_block_style("core/button", [
+        "name"  => "secondary",
+        "label" => __("Secondary", "jurible"),
+    ]);
+
+    register_block_style("core/button", [
+        "name"  => "outline",
+        "label" => __("Outline", "jurible"),
+    ]);
+
+    register_block_style("core/button", [
+        "name"  => "ghost",
+        "label" => __("Ghost", "jurible"),
+    ]);
+
+    register_block_style("core/button", [
+        "name"  => "link",
+        "label" => __("Link", "jurible"),
+    ]);
+
+    register_block_style("core/button", [
+        "name"  => "gray",
+        "label" => __("Gray", "jurible"),
+    ]);
+
+    register_block_style("core/button", [
+        "name"  => "destructive",
+        "label" => __("Destructive", "jurible"),
+    ]);
+
+    register_block_style("core/button", [
+        "name"  => "accent",
+        "label" => __("Accent", "jurible"),
+    ]);
+}
+add_action("init", "jurible_register_button_block_styles");
+
+
+# Charger le CSS buttons
+function jurible_enqueue_buttons_styles()
+{
+    wp_enqueue_style(
+        "jurible-buttons",
+        get_template_directory_uri() . "/assets/css/buttons.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/buttons.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_buttons_styles");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_buttons_styles");

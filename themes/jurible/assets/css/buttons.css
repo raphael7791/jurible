@@ -1,0 +1,192 @@
+/* ==========================================================================
+   JURIBLE DESIGN SYSTEM - Buttons
+   ========================================================================== */
+
+/* ==========================================================================
+   BASE BUTTON STYLES
+   ========================================================================== */
+
+.wp-block-button__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-family: var(--wp--preset--font-family--poppins);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--wp--custom--border-radius--md);
+    border: none;
+    cursor: pointer;
+    transition: all var(--wp--custom--transition--default);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* Reset outline par défaut */
+.wp-block-button__link:focus {
+    outline: none;
+}
+
+/* Focus visible (navigation clavier uniquement) - plus doux */
+.wp-block-button.is-style-primary .wp-block-button__link:focus-visible,
+.wp-block-button.is-style-secondary .wp-block-button__link:focus-visible,
+.wp-block-button.is-style-outline .wp-block-button__link:focus-visible,
+.wp-block-button.is-style-ghost .wp-block-button__link:focus-visible,
+.wp-block-button.is-style-link .wp-block-button__link:focus-visible,
+.wp-block-button.is-style-gray .wp-block-button__link:focus-visible,
+.wp-block-button.is-style-destructive .wp-block-button__link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+}
+
+/* Exception : Accent utilise bordeaux (car bouton déjà violet) */
+.wp-block-button.is-style-accent .wp-block-button__link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(176, 0, 29, 0.4);
+}
+
+/* Active state - all buttons (when clicked) */
+.wp-block-button__link:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+/* Disabled state - all buttons */
+.wp-block-button__link:disabled,
+.wp-block-button__link[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   BLOCK STYLES - Button Types
+   ========================================================================== */
+
+/* PRIMARY - Gradient + shadow (default) */
+.wp-block-button.is-style-primary .wp-block-button__link {
+    background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    color: var(--wp--preset--color--white);
+    box-shadow: var(--wp--preset--shadow--cta);
+}
+
+.wp-block-button.is-style-primary .wp-block-button__link:hover {
+    box-shadow: var(--wp--preset--shadow--cta-hover);
+    transform: translateY(-1px);
+}
+
+/* SECONDARY - Dark background */
+.wp-block-button.is-style-secondary .wp-block-button__link {
+    background: var(--wp--preset--color--text-dark);
+    color: var(--wp--preset--color--white);
+    box-shadow: none;
+}
+
+.wp-block-button.is-style-secondary .wp-block-button__link:hover {
+    background: #000000;
+    box-shadow: var(--wp--preset--shadow--lg);
+    transform: translateY(-1px);
+}
+
+/* OUTLINE - Transparent + border */
+.wp-block-button.is-style-outline .wp-block-button__link {
+    background: transparent;
+    color: var(--wp--preset--color--primary);
+    border: 1px solid var(--wp--preset--color--primary);
+    box-shadow: none;
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link:hover {
+    background: var(--wp--preset--color--primary);
+    color: var(--wp--preset--color--white);
+}
+
+/* GHOST - Transparent */
+.wp-block-button.is-style-ghost .wp-block-button__link {
+    background: transparent;
+    color: var(--wp--preset--color--text-dark);
+    box-shadow: none;
+}
+
+.wp-block-button.is-style-ghost .wp-block-button__link:hover {
+    background: var(--wp--preset--color--muted);
+}
+
+/* LINK - Transparent + underline */
+.wp-block-button.is-style-link .wp-block-button__link {
+    background: transparent;
+    color: var(--wp--preset--color--primary);
+    padding: 0;
+    text-decoration: underline;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.wp-block-button.is-style-link .wp-block-button__link:hover {
+    color: var(--wp--preset--color--primary-hover);
+}
+
+/* GRAY - Light background + border */
+.wp-block-button.is-style-gray .wp-block-button__link {
+    background: var(--wp--preset--color--muted);
+    color: var(--wp--preset--color--text-gray);
+    border: 1px solid var(--wp--preset--color--border);
+    box-shadow: none;
+}
+
+.wp-block-button.is-style-gray .wp-block-button__link:hover {
+    background: var(--wp--preset--color--border);
+    border-color: var(--wp--preset--color--border-muted);
+}
+
+/* DESTRUCTIVE - Red + shadow */
+.wp-block-button.is-style-destructive .wp-block-button__link {
+    background: var(--wp--preset--color--error);
+    color: var(--wp--preset--color--white);
+    box-shadow: var(--wp--preset--shadow--destructive);
+}
+
+.wp-block-button.is-style-destructive .wp-block-button__link:hover {
+    box-shadow: var(--wp--preset--shadow--destructive-hover);
+    transform: translateY(-1px);
+}
+
+/* ACCENT - Purple + shadow */
+.wp-block-button.is-style-accent .wp-block-button__link {
+    background: var(--wp--preset--color--secondary);
+    color: var(--wp--preset--color--white);
+    box-shadow: var(--wp--preset--shadow--accent);
+}
+
+.wp-block-button.is-style-accent .wp-block-button__link:hover {
+    background: var(--wp--preset--color--secondary-hover);
+    box-shadow: var(--wp--preset--shadow--accent-hover);
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   UTILITY CLASSES - Sizes
+   ========================================================================== */
+
+/* Small */
+.wp-block-button.btn--sm .wp-block-button__link,
+.wp-block-button__link.btn--sm {
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+/* Large */
+.wp-block-button.btn--lg .wp-block-button__link,
+.wp-block-button__link.btn--lg {
+    padding: 16px 32px;
+    font-size: 16px;
+}
+
+/* ==========================================================================
+   BUTTONS GROUP (wp-block-buttons)
+   ========================================================================== */
+
+.wp-block-buttons {
+    gap: var(--wp--preset--spacing--sm);
+}
