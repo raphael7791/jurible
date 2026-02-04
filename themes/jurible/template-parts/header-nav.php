@@ -3,20 +3,12 @@
  * Header Navigation Template
  * Compatible avec Max Mega Menu
  */
-
-// Logo personnalise (definir dans Personnaliser > Identite du site > Logo)
-$custom_logo_id = get_theme_mod('custom_logo');
-$logo_url = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : '';
 ?>
 <header class="site-header" id="site-header">
     <div class="site-header__inner">
         <!-- Logo -->
         <a href="<?php echo esc_url(home_url('/')); ?>" class="site-header__logo">
-            <?php if ($logo_url) : ?>
-                <img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="site-header__logo-img">
-            <?php else : ?>
-                <?php echo esc_html(get_bloginfo('name')); ?>
-            <?php endif; ?>
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.svg'); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="site-header__logo-img">
         </a>
 
         <!-- Navigation Desktop -->
