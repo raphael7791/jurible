@@ -464,9 +464,16 @@ function jurible_register_menus()
 add_action("after_setup_theme", "jurible_register_menus");
 
 
-# Charger le JS du header (glassmorphism)
-function jurible_enqueue_header_scripts()
+# Charger le CSS et JS du header (mega menu, mobile menu, glassmorphism)
+function jurible_enqueue_header_assets()
 {
+    wp_enqueue_style(
+        "jurible-header",
+        get_template_directory_uri() . "/assets/css/header.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/header.css")
+    );
+
     wp_enqueue_script(
         "jurible-header",
         get_template_directory_uri() . "/assets/js/header.js",
@@ -475,15 +482,18 @@ function jurible_enqueue_header_scripts()
         true
     );
 }
-add_action("wp_enqueue_scripts", "jurible_enqueue_header_scripts");
+add_action("wp_enqueue_scripts", "jurible_enqueue_header_assets");
 
 
 # Shortcode pour afficher le header avec navigation
 function jurible_header_shortcode()
 {
+    remove_filter('the_content', 'wpautop');
     ob_start();
     get_template_part('template-parts/header-nav');
-    return ob_get_clean();
+    $output = ob_get_clean();
+    add_filter('the_content', 'wpautop');
+    return $output;
 }
 add_shortcode('jurible_header', 'jurible_header_shortcode');
 

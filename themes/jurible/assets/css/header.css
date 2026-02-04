@@ -1,0 +1,761 @@
+/* ==========================================================================
+   HEADER - Mega Menu Desktop & Mobile Menu
+   ========================================================================== */
+
+/* ==========================================================================
+   CRITICAL - Force grid layout (highest priority)
+   ========================================================================== */
+div.megamenu__grid--3cols {
+    display: grid !important;
+    grid-template-columns: 1.6fr 1fr 1fr !important;
+    gap: 48px !important;
+}
+
+div.megamenu__links--2cols {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4px 24px !important;
+}
+
+/* ==========================================================================
+   FIX - SureCart slide-out cart white space
+   ========================================================================== */
+.wp-block-surecart-slide-out-cart-is-layout-flow,
+[class*="surecart-slide-out-cart"],
+[class*="wp-container-surecart-slide-out-cart"],
+div[class*="surecart"][class*="slide-out"],
+div.is-layout-flow[class*="surecart"] {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
+    height: auto !important;
+    pointer-events: none !important;
+}
+
+[class*="wp-container-surecart-slide-out-cart"] > * {
+    pointer-events: auto !important;
+}
+
+/* ==========================================================================
+   RESET - Override existing header menu styles
+   ========================================================================== */
+
+/* Remove ::after chevrons from old styles */
+.site-header__menu .menu-item-has-megamenu > a::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* ==========================================================================
+   MEGA MENU - Desktop
+   ========================================================================== */
+
+#site-header .site-header__menu {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 40px !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#site-header .site-header__menu > li {
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Seulement les petits mega menus (Ressources, À propos) restent relatifs au li */
+#site-header .site-header__menu > li:has(.megamenu--ressources),
+#site-header .site-header__menu > li:has(.megamenu--apropos) {
+    position: relative !important;
+}
+
+#site-header .site-header__nav-item {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--wp--preset--color--text-gray) !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: color 0.15s ease !important;
+    padding: 0 !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    height: 28px !important;
+}
+
+#site-header .site-header__nav-item:hover {
+    color: var(--wp--preset--color--primary) !important;
+}
+
+#site-header .site-header__nav-chevron {
+    width: 10px !important;
+    height: 10px !important;
+    opacity: 0.5 !important;
+    transition: transform 0.2s ease !important;
+    flex-shrink: 0 !important;
+}
+
+#site-header .menu-item-has-megamenu:hover .site-header__nav-chevron {
+    transform: rotate(180deg) !important;
+}
+
+/* ==========================================================================
+   MEGA MENU - Dropdown Container
+   ========================================================================== */
+
+#site-header .megamenu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background: #FFFFFF !important;
+    border-radius: 16px !important;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid var(--wp--preset--color--border) !important;
+    padding: 32px !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.2s ease !important;
+    z-index: 1000 !important;
+    margin-top: 10px !important;
+    pointer-events: none !important;
+}
+
+#site-header .menu-item-has-megamenu:hover > .megamenu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin-top: 0 !important;
+    pointer-events: auto !important;
+}
+
+/* Mega Menu - Cours (3 colonnes) */
+#site-header .megamenu--cours {
+    min-width: 850px !important;
+    width: 850px !important;
+}
+
+#site-header .megamenu__grid,
+#site-header .megamenu__grid--3cols,
+.megamenu__grid--3cols {
+    display: grid !important;
+    grid-template-columns: 1.6fr 1fr 1fr !important;
+    gap: 48px !important;
+    width: 100% !important;
+}
+
+#site-header .megamenu__col,
+.megamenu__col {
+    min-width: 0 !important;
+}
+
+/* Mega Menu - Ressources (avec articles) */
+#site-header .megamenu--ressources {
+    width: 450px !important;
+    min-width: 450px !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+/* Cacher les balises parasites */
+#site-header .megamenu--ressources p:empty,
+#site-header .megamenu--ressources br {
+    display: none !important;
+}
+
+/* Aperçus d'articles */
+#site-header .megamenu__article {
+    display: flex !important;
+    gap: 12px !important;
+    padding: 8px !important;
+    margin: 0 -8px !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+}
+
+#site-header .megamenu__article:hover {
+    background: #F3F4F6 !important;
+}
+
+#site-header .megamenu__article-img {
+    display: block !important;
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 6px !important;
+    flex-shrink: 0 !important;
+}
+
+#site-header .megamenu__article-content {
+    display: block !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+#site-header .megamenu__article-title {
+    display: block !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1A1A1A !important;
+    margin: 0 0 4px 0 !important;
+    line-height: 1.3 !important;
+    text-transform: none !important;
+}
+
+#site-header .megamenu__article-desc {
+    display: block !important;
+    font-size: 12px !important;
+    color: #9CA3AF !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    text-transform: none !important;
+}
+
+#site-header .megamenu__article-date {
+    display: block !important;
+    font-size: 11px !important;
+    color: #9CA3AF !important;
+    margin-top: 4px !important;
+    text-transform: none !important;
+}
+
+#site-header .megamenu__see-all {
+    display: inline-block !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #B0001D !important;
+    text-decoration: none !important;
+    margin-top: 12px !important;
+    text-transform: none !important;
+}
+
+#site-header .megamenu__see-all:hover {
+    text-decoration: underline !important;
+}
+
+#site-header .megamenu__separator {
+    border: none !important;
+    border-top: 1px solid #E5E7EB !important;
+    margin: 16px 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+}
+
+/* Mega Menu - À propos (compact) */
+#site-header .megamenu--apropos {
+    width: 260px !important;
+    min-width: 260px !important;
+}
+
+/* Section Title */
+#site-header .megamenu__title {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: var(--wp--preset--color--text-muted) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 16px !important;
+    margin-top: 0 !important;
+}
+
+/* Par matière - Links grid */
+#site-header .megamenu__links--2cols,
+.megamenu__links--2cols {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4px 24px !important;
+    width: 100% !important;
+}
+
+#site-header .megamenu__link {
+    font-size: 14px !important;
+    color: var(--wp--preset--color--text-gray) !important;
+    text-decoration: none !important;
+    padding: 6px 0 !important;
+    transition: color 0.15s ease !important;
+    display: block !important;
+}
+
+#site-header .megamenu__link:hover {
+    color: var(--wp--preset--color--primary) !important;
+}
+
+/* Par niveau - Badges */
+#site-header .megamenu__niveaux {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+}
+
+#site-header .megamenu__niveau {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 10px 16px !important;
+    background: var(--wp--preset--color--muted) !important;
+    border-radius: 9999px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--wp--preset--color--text-dark) !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+    text-decoration: none !important;
+}
+
+#site-header .megamenu__niveau:hover {
+    background: #E8E8E8 !important;
+}
+
+#site-header .megamenu__niveau-dot {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 9999px !important;
+    flex-shrink: 0 !important;
+}
+
+#site-header .megamenu__niveau-dot--l1 { background: var(--wp--preset--color--primary) !important; }
+#site-header .megamenu__niveau-dot--l2 { background: #F59E0B !important; }
+#site-header .megamenu__niveau-dot--l3 { background: var(--wp--preset--color--secondary) !important; }
+#site-header .megamenu__niveau-dot--capa { background: #3B82F6 !important; }
+
+/* Par outil - Liste avec icônes */
+#site-header .megamenu__outils {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+}
+
+#site-header .megamenu__outil {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 8px 12px !important;
+    margin-left: -12px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    color: var(--wp--preset--color--text-gray) !important;
+    text-decoration: none !important;
+    transition: all 0.15s ease !important;
+}
+
+#site-header .megamenu__outil:hover {
+    background: var(--wp--preset--color--muted) !important;
+    color: var(--wp--preset--color--text-dark) !important;
+}
+
+#site-header .megamenu__outil-icon {
+    font-size: 16px !important;
+}
+
+/* Footer CTA */
+#site-header .megamenu__footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 24px 32px !important;
+    margin: 32px -32px -32px !important;
+    background: linear-gradient(135deg, rgba(176, 0, 29, 0.06) 0%, rgba(124, 58, 237, 0.06) 100%) !important;
+    border-top: 1px solid rgba(176, 0, 29, 0.1) !important;
+    border-radius: 0 0 16px 16px !important;
+}
+
+#site-header .megamenu__footer-text {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: var(--wp--preset--color--text-dark) !important;
+    margin: 0 !important;
+}
+
+#site-header .megamenu__footer-text span {
+    color: var(--wp--preset--color--primary) !important;
+    font-weight: 700 !important;
+}
+
+/* Contact CTA box */
+#site-header .megamenu__contact-cta {
+    background: var(--wp--preset--color--muted) !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    margin-top: 20px !important;
+    text-align: center !important;
+}
+
+#site-header .megamenu__contact-cta p {
+    font-size: 13px !important;
+    color: var(--wp--preset--color--text-muted) !important;
+    margin-bottom: 10px !important;
+}
+
+/* ==========================================================================
+   MOBILE MENU
+   ========================================================================== */
+
+.mobile-menu {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background: #FFFFFF !important;
+    z-index: 2000 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transform: translateX(100%) !important;
+    transition: transform 0.3s ease !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+.mobile-menu.is-open {
+    transform: translateX(0) !important;
+}
+
+.mobile-menu__overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    z-index: 1999 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.3s ease !important;
+}
+
+.mobile-menu__overlay.is-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Mobile Menu Header */
+.mobile-menu__header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 16px !important;
+    border-bottom: 1px solid var(--wp--preset--color--border, #E5E7EB) !important;
+    flex-shrink: 0 !important;
+    background: #FFFFFF !important;
+    box-sizing: border-box !important;
+}
+
+.mobile-menu__logo img {
+    height: 28px !important;
+    width: auto !important;
+}
+
+.mobile-menu__close {
+    width: 44px !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 24px !important;
+    color: var(--wp--preset--color--text-gray) !important;
+    cursor: pointer !important;
+    border: none !important;
+    background: none !important;
+    border-radius: 8px !important;
+    transition: background 0.15s ease !important;
+}
+
+.mobile-menu__close:hover {
+    background: var(--wp--preset--color--muted) !important;
+}
+
+/* Mobile Menu Body */
+.mobile-menu__body {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+}
+
+/* Premier item - pas de bordure en haut */
+.mobile-menu__body > .mobile-menu__item:first-child,
+.mobile-menu__body > a.mobile-menu__item--link:first-child {
+    border-top: none !important;
+}
+
+/* Cacher les mega menus du header desktop sur mobile */
+@media (max-width: 1100px) {
+    .site-header__nav .megamenu {
+        display: none !important;
+    }
+}
+
+/* Mobile Menu Item */
+.mobile-menu__item {
+    border-bottom: 1px solid var(--wp--preset--color--border, #E5E7EB) !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Cacher les éléments parasites vides dans le menu mobile */
+.mobile-menu__body > p:empty,
+.mobile-menu__body > br,
+.mobile-menu__item > p:empty,
+.mobile-menu__submenu > p:empty {
+    display: none !important;
+}
+
+/* Afficher les éléments enveloppés par wpautop */
+.mobile-menu__body > p {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.mobile-menu__body > p > a.mobile-menu__item--link {
+    display: flex !important;
+}
+
+.mobile-menu__item-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 16px 24px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: var(--wp--preset--color--text-dark) !important;
+    cursor: pointer !important;
+    transition: background 0.15s ease !important;
+}
+
+.mobile-menu__item-header:hover {
+    background: var(--wp--preset--color--muted) !important;
+}
+
+.mobile-menu__item--link {
+    display: flex !important;
+    align-items: center !important;
+    padding: 16px 24px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: var(--wp--preset--color--text-dark, #1A1A1A) !important;
+    text-decoration: none !important;
+    transition: background 0.15s ease !important;
+    border-bottom: 1px solid var(--wp--preset--color--border, #E5E7EB) !important;
+    box-sizing: border-box !important;
+}
+
+.mobile-menu__item--link:hover {
+    background: var(--wp--preset--color--muted, #F3F4F6) !important;
+}
+
+.mobile-menu__item--link span {
+    display: block !important;
+}
+
+.mobile-menu__chevron {
+    font-size: 12px !important;
+    color: var(--wp--preset--color--text-muted) !important;
+    transition: transform 0.2s ease !important;
+}
+
+.mobile-menu__item.is-open .mobile-menu__chevron {
+    transform: rotate(180deg) !important;
+}
+
+/* Mobile Submenu */
+.mobile-menu__submenu {
+    display: none !important;
+    background: var(--wp--preset--color--muted) !important;
+    padding: 16px 24px !important;
+}
+
+.mobile-menu__item.is-open .mobile-menu__submenu {
+    display: block !important;
+}
+
+.mobile-menu__subtitle {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: var(--wp--preset--color--text-muted) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 12px !important;
+    margin-top: 16px !important;
+}
+
+.mobile-menu__subtitle:first-child {
+    margin-top: 0 !important;
+}
+
+/* Mobile Niveaux (badges) */
+.mobile-menu__niveaux {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.mobile-menu__niveau {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 10px 14px !important;
+    background: #FFFFFF !important;
+    border-radius: 9999px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--wp--preset--color--text-dark) !important;
+    text-decoration: none !important;
+    transition: all 0.15s ease !important;
+}
+
+.mobile-menu__niveau:hover {
+    background: #E8E8E8 !important;
+}
+
+.mobile-menu__niveau-dot {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 9999px !important;
+    flex-shrink: 0 !important;
+}
+
+.mobile-menu__niveau-dot--l1 { background: var(--wp--preset--color--primary) !important; }
+.mobile-menu__niveau-dot--l2 { background: #F59E0B !important; }
+.mobile-menu__niveau-dot--l3 { background: var(--wp--preset--color--secondary) !important; }
+.mobile-menu__niveau-dot--capa { background: #3B82F6 !important; }
+
+/* Mobile Outils */
+.mobile-menu__outils {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+}
+
+.mobile-menu__outil {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 10px 14px !important;
+    background: #FFFFFF !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    color: var(--wp--preset--color--text-gray) !important;
+    text-decoration: none !important;
+    transition: all 0.15s ease !important;
+}
+
+.mobile-menu__outil:hover {
+    background: #E8E8E8 !important;
+    color: var(--wp--preset--color--text-dark) !important;
+}
+
+/* Mobile Menu Footer */
+.mobile-menu__footer {
+    padding: 16px !important;
+    border-top: 1px solid var(--wp--preset--color--border, #E5E7EB) !important;
+    background: #FFFFFF !important;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.mobile-menu__user {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 14px !important;
+    color: var(--wp--preset--color--text-muted, #9CA3AF) !important;
+    margin-bottom: 16px !important;
+}
+
+.mobile-menu__user p {
+    margin: 0 !important;
+}
+
+.mobile-menu__user a {
+    color: var(--wp--preset--color--primary, #B0001D) !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+}
+
+/* Bouton CTA du menu mobile */
+.mobile-menu__footer .btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 14px 24px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    box-sizing: border-box !important;
+    text-decoration: none !important;
+}
+
+.mobile-menu__footer .btn--primary {
+    background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(176, 0, 29, 0.25) !important;
+    border: none !important;
+    text-decoration: none !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE - Hide/Show elements
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    #site-header .megamenu--cours {
+        min-width: 700px !important;
+    }
+
+    #site-header .megamenu__grid--3cols {
+        gap: 32px !important;
+    }
+
+    #site-header .megamenu__links--2cols {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 1100px) {
+    #site-header .site-header__inner {
+        padding: 6px 12px !important;
+    }
+
+    #site-header .site-header__logo-img {
+        height: 20px !important;
+    }
+
+    /* Hide desktop nav */
+    #site-header .site-header__nav,
+    #site-header .site-header__actions {
+        display: none !important;
+    }
+
+    /* Show burger */
+    #site-header .site-header__burger {
+        display: flex !important;
+        width: 32px !important;
+        height: 32px !important;
+        padding: 6px !important;
+        gap: 4px !important;
+    }
+
+    #site-header .site-header__burger span {
+        height: 2.5px !important;
+        border-radius: 2px !important;
+    }
+}
+
+@media (min-width: 1101px) {
+    /* Hide mobile menu on desktop */
+    .mobile-menu,
+    .mobile-menu__overlay {
+        display: none !important;
+        visibility: hidden !important;
+    }
+}
