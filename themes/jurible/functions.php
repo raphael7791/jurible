@@ -485,6 +485,19 @@ function jurible_enqueue_header_assets()
 add_action("wp_enqueue_scripts", "jurible_enqueue_header_assets");
 
 
+# Charger le CSS du footer
+function jurible_enqueue_footer_assets()
+{
+    wp_enqueue_style(
+        "jurible-footer",
+        get_template_directory_uri() . "/assets/css/footer.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/footer.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_footer_assets");
+
+
 # Shortcode pour afficher le header avec navigation
 function jurible_header_shortcode()
 {
