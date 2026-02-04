@@ -38,7 +38,7 @@ jurible/
 
 | Site | URL | Thème actif | Plugins custom |
 |------|-----|-------------|----------------|
-| Site principal | jurible.com | `jurible` | Aucun |
+| Site principal | jurible.com | `jurible` | `jurible-blocks-react` |
 | Espace membre | ecole.jurible.com | `ecole.jurible` | Tous |
 
 ### Principe du thème parent/enfant
@@ -47,6 +47,25 @@ jurible/
 - **Thème enfant `ecole.jurible`** : Hérite du parent + code spécifique Fluent Community
 
 Le thème enfant charge automatiquement le `functions.php` du parent, puis ajoute le sien par-dessus.
+
+### 🔄 Override Header/Footer pour l'espace membre
+
+Par défaut, `ecole.jurible.com` utilise le header/footer du thème parent. Pour avoir un header/footer **différent** sur l'espace membre :
+
+1. Créer le dossier `parts/` dans le thème enfant :
+   ```
+   themes/ecole.jurible/parts/
+   ```
+
+2. Créer les fichiers :
+   ```
+   themes/ecole.jurible/parts/header.html  ← Override le header parent
+   themes/ecole.jurible/parts/footer.html  ← Override le footer parent
+   ```
+
+WordPress utilisera automatiquement ces fichiers pour `ecole.jurible.com` au lieu de ceux du parent.
+
+> **TODO** : Créer un header/footer spécifique pour l'espace membre ecole.jurible.com
 
 ---
 
@@ -65,9 +84,12 @@ Le thème enfant charge automatiquement le `functions.php` du parent, puis ajout
 Les sites Local by Flywheel pointent vers `~/Code/jurible/` via des liens symboliques. Toute modification dans le repo est visible instantanément sur les sites locaux.
 
 ```bash
-# Vérifier les liens
+# Vérifier les liens (thèmes)
 ls -la ~/Local\ Sites/jurible-local/app/public/wp-content/themes/
 ls -la ~/Local\ Sites/ecole-jurible-local/app/public/wp-content/themes/
+
+# Vérifier les liens (plugins)
+ls -la ~/Local\ Sites/jurible-local/app/public/wp-content/plugins/
 ls -la ~/Local\ Sites/ecole-jurible-local/app/public/wp-content/plugins/
 ```
 
@@ -131,9 +153,15 @@ cp -r themes/jurible ~/jurible.com/wp-content/themes/
 cp -r themes/jurible ~/ecole.jurible.com/wp-content/themes/
 cp -r themes/ecole.jurible ~/ecole.jurible.com/wp-content/themes/
 
-# Si tu as modifié des plugins aussi :
+# Copier le plugin jurible-blocks-react (design system, utilisé sur les 2 sites)
+rm -rf ~/jurible.com/wp-content/plugins/jurible-blocks-react
 rm -rf ~/ecole.jurible.com/wp-content/plugins/jurible-blocks-react
+cp -r plugins/jurible-blocks-react ~/jurible.com/wp-content/plugins/
 cp -r plugins/jurible-blocks-react ~/ecole.jurible.com/wp-content/plugins/
+
+# Si tu as modifié d'autres plugins (ecole uniquement) :
+# rm -rf ~/ecole.jurible.com/wp-content/plugins/jurible-flashcards
+# cp -r plugins/jurible-flashcards ~/ecole.jurible.com/wp-content/plugins/
 # etc.
 ```
 

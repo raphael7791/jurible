@@ -6,6 +6,19 @@
 # Retirer les accents des noms de fichiers
 add_filter("sanitize_file_name", "remove_accents");
 
+# Shortcode pour l'année dynamique [jurible_year]
+function jurible_year_shortcode() {
+    return date('Y');
+}
+add_shortcode('jurible_year', 'jurible_year_shortcode');
+
+# Shortcode pour le copyright complet [jurible_copyright]
+function jurible_copyright_shortcode() {
+    $year = date('Y');
+    return '<p class="footer-copyright" style="font-size:13px;margin:0;">© ' . $year . ' Jurible.com - Tous droits réservés</p>';
+}
+add_shortcode('jurible_copyright', 'jurible_copyright_shortcode');
+
 # Retirer le pattern directory et la suggestion de blocs
 remove_action("enqueue_block_editor_assets", "wp_enqueue_editor_block_directory_assets");
 remove_theme_support("core-block-patterns");
@@ -13,6 +26,12 @@ remove_theme_support("core-block-patterns");
 # Ajouter des fonctionnalités
 add_theme_support("editor-styles");
 add_editor_style("style-editor.css");
+add_theme_support("custom-logo", [
+    "height"      => 32,
+    "width"       => 120,
+    "flex-height" => true,
+    "flex-width"  => true,
+]);
 
 
 # Déclarer les scripts et les styles
@@ -20,6 +39,15 @@ function jurible_register_assets()
 {
     # Intégrer des feuilles de style sur le site
     wp_enqueue_style("main", get_stylesheet_uri(), [], wp_get_theme()->get('Version'));
+
+    # Footer accordion script (mobile)
+    wp_enqueue_script(
+        "jurible-footer-accordion",
+        get_theme_file_uri('assets/js/footer-accordion.js'),
+        [],
+        wp_get_theme()->get('Version'),
+        true
+    );
 
     # Désactiver le CSS de certains blocs
     wp_dequeue_style("wp-block-columns");
@@ -424,6 +452,40 @@ function jurible_register_separator_block_styles()
     ]);
 }
 add_action("init", "jurible_register_separator_block_styles");
+
+
+# Enregistrer les emplacements de menu
+function jurible_register_menus()
+{
+    register_nav_menus([
+        "header" => __("Menu Header", "jurible"),
+    ]);
+}
+add_action("after_setup_theme", "jurible_register_menus");
+
+
+# Charger le JS du header (glassmorphism)
+function jurible_enqueue_header_scripts()
+{
+    wp_enqueue_script(
+        "jurible-header",
+        get_template_directory_uri() . "/assets/js/header.js",
+        [],
+        filemtime(get_template_directory() . "/assets/js/header.js"),
+        true
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_header_scripts");
+
+
+# Shortcode pour afficher le header avec navigation
+function jurible_header_shortcode()
+{
+    ob_start();
+    get_template_part('template-parts/header-nav');
+    return ob_get_clean();
+}
+add_shortcode('jurible_header', 'jurible_header_shortcode');
 
 
 
