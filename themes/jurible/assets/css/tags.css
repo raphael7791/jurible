@@ -33,13 +33,13 @@ p.is-style-tag-dark {
 
 /* TAG PRIMARY */
 p.is-style-tag-primary {
-    background: #FEF2F2;
+    background: var(--wp--preset--color--error-bg);
     color: var(--wp--preset--color--primary);
 }
 
 /* TAG SECONDARY */
 p.is-style-tag-secondary {
-    background: #F5F3FF;
+    background: var(--wp--preset--color--secondary-bg);
     color: var(--wp--preset--color--secondary);
 }
 

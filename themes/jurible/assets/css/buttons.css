@@ -84,7 +84,7 @@
 }
 
 .wp-block-button.is-style-secondary .wp-block-button__link:hover {
-    background: #000000;
+    background: var(--wp--preset--color--black);
     box-shadow: var(--wp--preset--shadow--lg);
     transform: translateY(-1px);
 }

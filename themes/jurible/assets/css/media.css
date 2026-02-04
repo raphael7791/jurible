@@ -305,7 +305,7 @@
     bottom: var(--wp--preset--spacing--sm);
     right: var(--wp--preset--spacing--sm);
     background: rgba(0, 0, 0, 0.8);
-    color: white;
+    color: var(--wp--preset--color--white);
     font-size: 12px;
     font-weight: 500;
     padding: 4px 8px;
@@ -316,7 +316,7 @@
     position: absolute;
     bottom: var(--wp--preset--spacing--sm);
     left: var(--wp--preset--spacing--sm);
-    color: white;
+    color: var(--wp--preset--color--white);
     font-size: 14px;
     font-weight: 500;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
