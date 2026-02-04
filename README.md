@@ -13,7 +13,11 @@ jurible/
 │   │   ├── theme.json        ← Design tokens (couleurs, typos, espacements)
 │   │   ├── style.css         ← Métadonnées du thème
 │   │   ├── functions.php     ← Code PHP commun
-│   │   ├── assets/css/       ← CSS custom (hover, animations)
+│   │   ├── assets/
+│   │   │   ├── css/          ← CSS custom (hover, animations)
+│   │   │   └── images/
+│   │   │       ├── logos/    ← Logos SVG (color, white, gradient, square)
+│   │   │       └── favicon/  ← Favicons (ico, png, svg, webmanifest)
 │   │   ├── templates/        ← Structure des pages (home, single, archive...)
 │   │   ├── parts/            ← Morceaux réutilisables (header, footer)
 │   │   └── patterns/         ← Assemblages de blocs
@@ -240,9 +244,35 @@ Les blocs standards sont rendus compatibles Fluent via le `functions.php` du th�
 | Templates | ✅ Oui | Fichier |
 | Template Parts | ✅ Oui | Fichier |
 | Custom Blocks | ✅ Oui | Fichier |
+| **Logos et favicons** | ✅ Oui | `assets/images/` |
 | **Contenu des pages/articles** | ❌ Non | Base de données |
 | **Médias uploadés** | ❌ Non | `wp-content/uploads/` |
 | **Modifications via l'éditeur de site** | ❌ Non | Base de données |
+
+### 🖼️ Pourquoi les logos sont dans le thème ?
+
+Les logos et favicons sont stockés dans `themes/jurible/assets/images/` et non dans `wp-content/uploads/` car :
+
+- **Versionnés avec Git** : Les logos se déploient automatiquement avec le thème
+- **Pas besoin de les uploader manuellement** sur chaque environnement (local, staging, prod)
+- **Utilisés dans le header/footer** : Référencés avec un chemin fixe `/wp-content/themes/jurible/assets/images/logos/logo-white.svg`
+
+```
+assets/images/
+├── logos/
+│   ├── logo-color.svg      ← Logo couleur principal
+│   ├── logo-white.svg      ← Logo blanc (footer)
+│   ├── logo-gradient.svg   ← Logo dégradé
+│   └── logo-square.svg     ← Logo carré (réseaux sociaux)
+└── favicon/
+    ├── favicon.svg         ← Favicon vectoriel
+    ├── favicon.ico         ← Favicon classique
+    ├── favicon-96x96.png
+    ├── apple-touch-icon.png
+    ├── web-app-manifest-192x192.png
+    ├── web-app-manifest-512x512.png
+    └── site.webmanifest
+```
 
 ### ⚠️ Attention aux modifications dans l'éditeur de site
 
