@@ -85,34 +85,6 @@ body {
     position: relative;
 }
 
-.site-header__menu {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.site-header__menu li {
-    margin: 0;
-    padding: 0;
-}
-
-.site-header__menu a {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--wp--preset--color--text-gray);
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: color 0.15s ease;
-}
-
-.site-header__menu a:hover,
-.site-header__menu .current-menu-item > a {
-    color: var(--wp--preset--color--primary);
-}
-
 /* Actions */
 .site-header__actions {
     display: flex;
@@ -208,35 +180,9 @@ body {
     background: rgba(255, 255, 255, 0.9);
 }
 
-/* Header responsive - tablet */
-@media (max-width: 1024px) {
-    .site-header__inner {
-        padding: 12px 24px;
-    }
-
-    .site-header__menu {
-        gap: 24px;
-    }
-}
-
 /* Body menu open - prevent scroll */
 body.menu-open {
     overflow: hidden;
-}
-
-/* ==========================================================================
-   CRITICAL - Force grid layout (highest priority)
-   ========================================================================== */
-div.megamenu__grid--3cols {
-    display: grid !important;
-    grid-template-columns: 1.6fr 1fr 1fr !important;
-    gap: 48px !important;
-}
-
-div.megamenu__links--2cols {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 4px 24px !important;
 }
 
 /* ==========================================================================
