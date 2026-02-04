@@ -343,7 +343,11 @@ a:where(:not(.wp-element-button)) {
     box-shadow: 0 6px 20px rgba(176, 0, 29, 0.35);
 }
 
-/* Footer responsive */
+/* ==========================================================================
+   FOOTER STYLES
+   ========================================================================== */
+
+/* Footer responsive - tablet */
 @media (max-width: 1024px) {
     .site-footer .footer-columns {
         flex-wrap: wrap;
@@ -353,41 +357,6 @@ a:where(:not(.wp-element-button)) {
         flex-basis: calc(50% - var(--wp--preset--spacing--md));
     }
 }
-
-@media (max-width: 768px) {
-    .site-footer .footer-top {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .site-footer .footer-brand,
-    .site-footer .footer-newsletter {
-        max-width: 100%;
-        width: 100%;
-    }
-
-    .site-footer .footer-social {
-        justify-content: center;
-    }
-
-    .site-footer .footer-columns .wp-block-column {
-        flex-basis: 100%;
-    }
-
-    .site-footer .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--wp--preset--spacing--sm);
-    }
-
-    .site-footer .footer-legal {
-        justify-content: center;
-    }
-}
-
-/* ==========================================================================
-   FOOTER STYLES
-   ========================================================================== */
 
 /* Footer columns - Desktop */
 .site-footer .footer-columns {
