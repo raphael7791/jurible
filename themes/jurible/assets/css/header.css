@@ -625,6 +625,17 @@ div.is-layout-flow[class*="surecart"] {
     box-sizing: border-box;
 }
 
+/* Ajustement pour la barre admin WordPress sur mobile */
+.admin-bar .mobile-menu__header {
+    padding-top: 44px; /* 32px admin bar + 12px padding */
+}
+
+@media (max-width: 782px) {
+    .admin-bar .mobile-menu__header {
+        padding-top: 58px; /* 46px admin bar mobile + 12px padding */
+    }
+}
+
 .mobile-menu__logo img {
     height: 28px;
     width: auto;
