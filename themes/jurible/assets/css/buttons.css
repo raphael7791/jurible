@@ -183,6 +183,18 @@
     font-size: 16px;
 }
 
+/* CTA WHITE - White background for dark/gradient backgrounds */
+.wp-block-button.is-style-cta-white .wp-block-button__link {
+    background: var(--wp--preset--color--white);
+    color: var(--wp--preset--color--primary);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.wp-block-button.is-style-cta-white .wp-block-button__link:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
 /* ==========================================================================
    BUTTONS GROUP (wp-block-buttons)
    ========================================================================== */

@@ -167,6 +167,11 @@ register_block_pattern_category(
         "jurible-components",
         ["label" => __("Composants Jurible", "jurible")]
     );
+
+    register_block_pattern_category(
+        "cta",
+        ["label" => __("CTA", "jurible")]
+    );
 }
 add_filter("init", "jurible_register_patterns_categories");
 
@@ -337,6 +342,11 @@ function jurible_register_button_block_styles()
     register_block_style("core/button", [
         "name"  => "accent",
         "label" => __("Accent", "jurible"),
+    ]);
+
+    register_block_style("core/button", [
+        "name"  => "cta-white",
+        "label" => __("CTA White", "jurible"),
     ]);
 }
 add_action("init", "jurible_register_button_block_styles");
@@ -509,6 +519,8 @@ function jurible_header_shortcode()
     return $output;
 }
 add_shortcode('jurible_header', 'jurible_header_shortcode');
+
+
 
 
 
