@@ -332,6 +332,48 @@ rm ~/Local\ Sites/jurible-local/app/public/wp-content/themes/jurible
 
 ---
 
+## 📢 Composants CTA
+
+### Sticky Bar (Thème + Customizer)
+
+Barre promotionnelle fixée en haut (desktop) ou en bas (mobile) du site. Configurable via **Apparence > Personnaliser > Sticky Bar**.
+
+| Fichier | Description |
+|---------|-------------|
+| `themes/jurible/functions.php` | Réglages Customizer (toggle, texte, bouton, URL, variante) |
+| `themes/jurible/template-parts/sticky-bar.php` | Template PHP |
+| `themes/jurible/assets/css/sticky-bar.css` | Styles + positionnement responsive |
+| `themes/jurible/assets/js/sticky-bar.js` | Fermeture avec sessionStorage |
+
+**Options Customizer :**
+- Activer/désactiver
+- Variante (Gradient, Blanc, Noir)
+- Texte de la barre
+- Texte et URL du bouton
+- Permettre de fermer (croix)
+
+**Comportement :**
+- Desktop : sticky bar en haut, header décalé en dessous
+- Mobile : sticky bar en bas de l'écran
+- Fermeture : reste cachée pendant la session (sessionStorage)
+
+**Déploiement :** Après déploiement du code, configurer les réglages dans le Customizer du site live.
+
+---
+
+### 🚧 CTA à créer (Design System)
+
+Composants du design system pas encore implémentés :
+
+| Composant | Description | Priorité |
+|-----------|-------------|----------|
+| **Section CTA Final** | Grande section CTA en fin de page (type hero) | Moyenne |
+| **Slide-in Corner** | Popup qui apparaît dans un coin après scroll | Basse |
+| **Toast Notification** | Notification temporaire en bas de l'écran | Basse |
+| **Lead Magnet Popup** | Popup pour capture d'email avec lead magnet | Basse |
+
+---
+
 ## 📚 Ressources
 
 - [Documentation theme.json](https://developer.wordpress.org/themes/global-settings-and-styles/)

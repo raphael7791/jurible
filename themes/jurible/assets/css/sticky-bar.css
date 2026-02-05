@@ -1,0 +1,261 @@
+/* ==========================================================================
+   STICKY BAR - Barre promotionnelle
+   ========================================================================== */
+
+.sticky-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001; /* Au-dessus du header */
+    background: var(--wp--preset--gradient--cta-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 48px 6px 16px;
+    height: 40px; /* Hauteur fixe */
+    box-sizing: border-box;
+}
+
+.sticky-bar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.sticky-bar__text {
+    color: var(--wp--preset--color--white);
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+    font-family: var(--wp--preset--font-family--poppins);
+}
+
+.sticky-bar__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    background: var(--wp--preset--color--white);
+    color: var(--wp--preset--color--primary);
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: var(--wp--custom--border-radius--sm);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    font-family: var(--wp--preset--font-family--poppins);
+}
+
+.sticky-bar__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--wp--preset--shadow--sm);
+    color: var(--wp--preset--color--primary);
+}
+
+.sticky-bar__close {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: var(--wp--preset--color--white);
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.sticky-bar__close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   VARIANTES
+   ========================================================================== */
+
+/* Gradient (default) - utilise les styles de base */
+
+/* Blanc */
+.sticky-bar--white {
+    background: var(--wp--preset--color--white);
+    border-bottom: 1px solid var(--wp--preset--color--border);
+    box-shadow: var(--wp--preset--shadow--sm);
+}
+
+.sticky-bar--white .sticky-bar__text {
+    color: var(--wp--preset--color--text-dark);
+}
+
+.sticky-bar--white .sticky-bar__close {
+    background: var(--wp--preset--color--muted);
+    color: var(--wp--preset--color--text-muted);
+}
+
+.sticky-bar--white .sticky-bar__close:hover {
+    background: var(--wp--preset--color--border);
+    color: var(--wp--preset--color--text-dark);
+}
+
+/* Noir */
+.sticky-bar--dark {
+    background: var(--wp--preset--color--text-dark);
+}
+
+.sticky-bar--dark .sticky-bar__close {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.sticky-bar--dark .sticky-bar__close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Bouton CTA pour variantes blanc et noir (meme style) */
+.sticky-bar--white .sticky-bar__btn,
+.sticky-bar--dark .sticky-bar__btn {
+    background: var(--wp--preset--gradient--cta-gradient);
+    color: var(--wp--preset--color--white);
+    box-shadow: var(--wp--preset--shadow--cta);
+}
+
+.sticky-bar--white .sticky-bar__btn:hover,
+.sticky-bar--dark .sticky-bar__btn:hover {
+    box-shadow: var(--wp--preset--shadow--cta-hover);
+    color: var(--wp--preset--color--white);
+}
+
+/* ==========================================================================
+   POSITIONNEMENT - Header et Body quand sticky bar active
+   ========================================================================== */
+
+/* Hauteur sticky bar: 40px */
+
+/* Quand la sticky bar est presente */
+body:has(.sticky-bar:not(.is-hidden)) {
+    padding-top: 112px; /* 72px header + 40px sticky bar */
+}
+
+body:has(.sticky-bar:not(.is-hidden)) .site-header {
+    top: 40px; /* Juste sous la sticky bar */
+}
+
+/* Admin bar + Sticky bar */
+body.admin-bar:has(.sticky-bar:not(.is-hidden)) {
+    padding-top: 144px; /* 112px + 32px admin bar */
+}
+
+body.admin-bar:has(.sticky-bar:not(.is-hidden)) .site-header {
+    top: 72px; /* 40px sticky bar + 32px admin bar */
+}
+
+body.admin-bar:has(.sticky-bar:not(.is-hidden)) .sticky-bar {
+    top: 32px;
+}
+
+/* Mobile admin bar - sticky bar en bas donc pas d'ajustement top */
+@media (max-width: 782px) {
+    body.admin-bar:has(.sticky-bar:not(.is-hidden)) {
+        padding-top: 134px; /* Header normal avec admin bar */
+        padding-bottom: 48px;
+    }
+
+    body.admin-bar:has(.sticky-bar:not(.is-hidden)) .site-header {
+        top: 62px; /* Position normale avec admin bar */
+    }
+
+    body.admin-bar:has(.sticky-bar:not(.is-hidden)) .sticky-bar {
+        top: auto;
+        bottom: 0;
+    }
+}
+
+/* ==========================================================================
+   STICKY BAR CACHEE (fermee par l'utilisateur)
+   ========================================================================== */
+
+.sticky-bar.is-hidden {
+    display: none;
+}
+
+/* ==========================================================================
+   RESPONSIVE MOBILE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .sticky-bar {
+        top: auto;
+        bottom: 0;
+        padding: 10px 32px 0 12px;
+        height: auto;
+        min-height: 32px;
+        border-radius: 0;
+    }
+
+    .sticky-bar__inner {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .sticky-bar__text {
+        font-size: 11px;
+        line-height: 1.3;
+    }
+
+    .sticky-bar__btn {
+        padding: 6px 16px;
+        font-size: 12px;
+        margin-bottom: -4px;
+    }
+
+    .sticky-bar__close {
+        right: 8px;
+        top: 8px;
+        transform: none;
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+
+    /* Mobile: sticky bar en bas, header normal */
+    body:has(.sticky-bar:not(.is-hidden)) {
+        padding-top: 88px; /* Header normal */
+        padding-bottom: 48px; /* Espace pour sticky bar en bas */
+    }
+
+    body:has(.sticky-bar:not(.is-hidden)) .site-header {
+        top: 16px; /* Position normale du header */
+    }
+}
+
+/* ==========================================================================
+   DARK MODE
+   ========================================================================== */
+
+/* Gradient en dark mode - couleurs plus sombres */
+html.dark .sticky-bar:not(.sticky-bar--white):not(.sticky-bar--dark) {
+    background: linear-gradient(135deg, #8B0015 0%, #B91C1C 50%, #6D28D9 100%);
+}
+
+/* Blanc en dark mode */
+html.dark .sticky-bar--white {
+    background: var(--el-bg-color-overlay, #1d1e1f);
+    border-color: var(--el-border-color, #414243);
+}
+
+html.dark .sticky-bar--white .sticky-bar__text {
+    color: var(--el-text-color-primary, #E5EAF3);
+}
+
+html.dark .sticky-bar--white .sticky-bar__close {
+    background: var(--el-bg-color, #141414);
+    color: var(--el-text-color-secondary, #A3A6AD);
+}

@@ -521,6 +521,132 @@ function jurible_header_shortcode()
 add_shortcode('jurible_header', 'jurible_header_shortcode');
 
 
+# ==========================================================================
+# STICKY BAR - Customizer Settings
+# ==========================================================================
+
+function jurible_sticky_bar_customizer($wp_customize)
+{
+    // Section Sticky Bar
+    $wp_customize->add_section('jurible_sticky_bar', [
+        'title'    => __('Sticky Bar', 'jurible'),
+        'priority' => 30,
+    ]);
+
+    // Toggle activer/désactiver
+    $wp_customize->add_setting('sticky_bar_enabled', [
+        'default'           => false,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ]);
+    $wp_customize->add_control('sticky_bar_enabled', [
+        'label'   => __('Activer la Sticky Bar', 'jurible'),
+        'section' => 'jurible_sticky_bar',
+        'type'    => 'checkbox',
+    ]);
+
+    // Variante
+    $wp_customize->add_setting('sticky_bar_variant', [
+        'default'           => 'gradient',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('sticky_bar_variant', [
+        'label'   => __('Variante', 'jurible'),
+        'section' => 'jurible_sticky_bar',
+        'type'    => 'select',
+        'choices' => [
+            'gradient' => __('Gradient (Primary)', 'jurible'),
+            'white'    => __('Blanc', 'jurible'),
+            'dark'     => __('Noir', 'jurible'),
+        ],
+    ]);
+
+    // Texte
+    $wp_customize->add_setting('sticky_bar_text', [
+        'default'           => '🎓 Profite de -20% sur l\'Académie avec le code JURIBLE20',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('sticky_bar_text', [
+        'label'   => __('Texte', 'jurible'),
+        'section' => 'jurible_sticky_bar',
+        'type'    => 'text',
+    ]);
+
+    // Texte du bouton
+    $wp_customize->add_setting('sticky_bar_button_text', [
+        'default'           => 'J\'en profite →',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('sticky_bar_button_text', [
+        'label'   => __('Texte du bouton', 'jurible'),
+        'section' => 'jurible_sticky_bar',
+        'type'    => 'text',
+    ]);
+
+    // URL du bouton
+    $wp_customize->add_setting('sticky_bar_button_url', [
+        'default'           => '/tarifs',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('sticky_bar_button_url', [
+        'label'   => __('URL du bouton', 'jurible'),
+        'section' => 'jurible_sticky_bar',
+        'type'    => 'url',
+    ]);
+
+    // Option pour permettre de fermer
+    $wp_customize->add_setting('sticky_bar_dismissible', [
+        'default'           => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ]);
+    $wp_customize->add_control('sticky_bar_dismissible', [
+        'label'   => __('Permettre de fermer (croix)', 'jurible'),
+        'section' => 'jurible_sticky_bar',
+        'type'    => 'checkbox',
+    ]);
+}
+add_action('customize_register', 'jurible_sticky_bar_customizer');
+
+
+# Helper pour récupérer les options de la sticky bar
+function jurible_get_sticky_bar_options()
+{
+    return [
+        'enabled'     => get_theme_mod('sticky_bar_enabled', false),
+        'variant'     => get_theme_mod('sticky_bar_variant', 'gradient'),
+        'text'        => get_theme_mod('sticky_bar_text', '🎓 Profite de -20% sur l\'Académie avec le code JURIBLE20'),
+        'button_text' => get_theme_mod('sticky_bar_button_text', 'J\'en profite →'),
+        'button_url'  => get_theme_mod('sticky_bar_button_url', '/tarifs'),
+        'dismissible' => get_theme_mod('sticky_bar_dismissible', true),
+    ];
+}
+
+
+# Charger le CSS et JS de la sticky bar
+function jurible_enqueue_sticky_bar_assets()
+{
+    // Toujours charger le CSS (pour les transitions)
+    wp_enqueue_style(
+        "jurible-sticky-bar",
+        get_template_directory_uri() . "/assets/css/sticky-bar.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/sticky-bar.css")
+    );
+
+    // Charger le JS seulement si la sticky bar est active et dismissible
+    $options = jurible_get_sticky_bar_options();
+    if ($options['enabled'] && $options['dismissible']) {
+        wp_enqueue_script(
+            "jurible-sticky-bar",
+            get_template_directory_uri() . "/assets/js/sticky-bar.js",
+            [],
+            filemtime(get_template_directory() . "/assets/js/sticky-bar.js"),
+            true
+        );
+    }
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_sticky_bar_assets");
+
+
 
 
 

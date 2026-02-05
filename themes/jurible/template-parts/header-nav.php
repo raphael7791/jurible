@@ -9,6 +9,9 @@
  */
 
 ob_start();
+
+// Sticky Bar (si activée dans Customizer)
+get_template_part('template-parts/sticky-bar');
 ?>
 <header class="site-header" id="site-header">
     <div class="site-header__inner">
