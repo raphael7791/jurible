@@ -710,6 +710,20 @@ add_action("wp_enqueue_scripts", "jurible_enqueue_enseignants_assets");
 add_action("enqueue_block_editor_assets", "jurible_enqueue_enseignants_assets");
 
 
+# Charger le CSS des patterns réassurance (frontend + éditeur)
+function jurible_enqueue_reassurance_assets()
+{
+    wp_enqueue_style(
+        "jurible-reassurance",
+        get_template_directory_uri() . "/assets/css/reassurance.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/reassurance.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_reassurance_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_reassurance_assets");
+
+
 
 
 

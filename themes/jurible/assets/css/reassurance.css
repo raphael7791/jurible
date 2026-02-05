@@ -1,0 +1,102 @@
+/**
+ * Reassurance Patterns CSS
+ */
+
+/* ==========================================================================
+   VERSION COMPLÈTE
+   ========================================================================== */
+
+.reassurance-full {
+	box-shadow: none !important;
+	border: none !important;
+	border-radius: 16px !important;
+}
+
+.reassurance-full__row {
+	align-items: center !important;
+}
+
+.reassurance-full__row p {
+	margin: 0 !important;
+}
+
+/* Séparateurs verticaux */
+.reassurance-full__col {
+	position: relative;
+	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md) !important;
+}
+
+.reassurance-full__col:not(:last-child)::after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 1px;
+	height: 50px;
+	background: var(--wp--preset--color--border, #E5E7EB);
+}
+
+.reassurance-full__stars {
+	color: #F59E0B;
+	letter-spacing: 2px;
+}
+
+.reassurance-full__divider {
+	margin: var(--wp--preset--spacing--md) 0 !important;
+	background: var(--wp--preset--color--border, #E5E7EB) !important;
+}
+
+.reassurance-full__partners {
+	justify-content: center !important;
+	max-width: 400px;
+	margin: 0 auto !important;
+}
+
+.reassurance-full__partners p {
+	margin-bottom: 4px !important;
+}
+
+.reassurance-full__partner-logo img {
+	height: 28px !important;
+	width: auto !important;
+}
+
+/* ==========================================================================
+   VERSION MINIMALISTE
+   ========================================================================== */
+
+.reassurance-minimal p {
+	margin: 0 !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 900px) {
+	.reassurance-full__col::after {
+		display: none;
+	}
+}
+
+@media (max-width: 600px) {
+	.reassurance-full {
+		padding: var(--wp--preset--spacing--md) !important;
+	}
+
+	.reassurance-full__row,
+	.reassurance-full__partners {
+		flex-direction: column !important;
+	}
+
+	.reassurance-full__col {
+		flex-basis: 100% !important;
+		padding: var(--wp--preset--spacing--sm) 0 !important;
+	}
+
+	.reassurance-minimal {
+		flex-direction: column !important;
+		align-items: center !important;
+	}
+}
