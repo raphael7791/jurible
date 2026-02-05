@@ -66,17 +66,16 @@
 }
 
 /* ==========================================================================
-   ÉQUIPE VIDÉO - Grille et cartes
+   ÉQUIPE VIDÉO - Cartes
    ========================================================================== */
 
-.equipe-video__grid {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: var(--wp--preset--spacing--md);
+.equipe-video__card {
+	transition: box-shadow 200ms ease, transform 200ms ease;
 }
 
-.equipe-video__card {
-	justify-content: space-between !important;
+.equipe-video__card:hover {
+	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+	transform: translateY(-4px);
 }
 
 .equipe-video__card a {
@@ -99,12 +98,112 @@
 }
 
 /* ==========================================================================
+   ÉQUIPE GRILLE - Page Nos enseignants
+   ========================================================================== */
+
+.equipe-grille__card {
+	border: 1px solid var(--wp--preset--color--border);
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+	transition: box-shadow 200ms ease, transform 200ms ease;
+}
+
+.equipe-grille__card:hover {
+	box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+	transform: translateY(-3px);
+}
+
+.equipe-grille__header {
+	padding: var(--wp--preset--spacing--md);
+	padding-bottom: var(--wp--preset--spacing--sm);
+	text-align: center;
+}
+
+.equipe-grille__header--fondateur {
+	background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+}
+
+.equipe-grille__header--intervenant {
+	background: var(--wp--preset--color--muted);
+}
+
+.equipe-grille__badge {
+	color: #ffffff;
+	margin: 0 !important;
+}
+
+.equipe-grille__header--intervenant .equipe-grille__badge {
+	color: var(--wp--preset--color--text-muted);
+}
+
+.equipe-grille__avatar {
+	margin: var(--wp--preset--spacing--sm) auto 0 !important;
+}
+
+.equipe-grille__avatar img {
+	width: 80px !important;
+	height: 80px !important;
+	border-radius: 9999px;
+	border: 3px solid rgba(255,255,255,0.3);
+	object-fit: cover;
+}
+
+.equipe-grille__header--intervenant .equipe-grille__avatar img {
+	border-color: var(--wp--preset--color--border);
+}
+
+.equipe-grille__body > * {
+	margin-top: 0;
+	margin-bottom: 8px;
+}
+
+.equipe-grille__body > *:last-child {
+	margin-bottom: 0;
+}
+
+.equipe-grille__tags {
+	margin-top: 4px !important;
+	margin-bottom: 8px !important;
+}
+
+.equipe-grille__tags .is-style-tag-secondary {
+	margin: 0 !important;
+}
+
+.equipe-grille__linkedin a {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: var(--wp--preset--color--secondary);
+	text-decoration: none;
+}
+
+.equipe-grille__linkedin a::before {
+	content: '';
+	width: 16px;
+	height: 16px;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='%237C3AED' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z'/%3E%3C/svg%3E");
+	background-size: contain;
+	background-repeat: no-repeat;
+	flex-shrink: 0;
+}
+
+.equipe-grille__linkedin a:hover {
+	color: var(--wp--preset--color--primary);
+}
+
+.equipe-grille__linkedin a:hover::before {
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='%23B0001D' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
    COMMUN - Gradient text H2
    ========================================================================== */
 
 .enseignant-section h2 mark,
 .equipe-teaser-section h2 mark,
-.equipe-video-section h2 mark {
+.equipe-video-section h2 mark,
+.equipe-grille-section h2 mark {
 	background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -116,18 +215,6 @@
    ========================================================================== */
 
 @media (max-width: 1024px) {
-	.equipe-video__grid {
-		grid-template-columns: 1fr;
-		max-width: 600px;
-		margin-inline: auto;
-	}
-
-	.equipe-video__card {
-		flex-direction: row !important;
-		align-items: center !important;
-		width: 100% !important;
-	}
-
 	.equipe-video__img img {
 		width: 100px !important;
 		height: 100px !important;
@@ -137,16 +224,13 @@
 @media (max-width: 900px) {
 	.enseignant-section h2,
 	.equipe-teaser-section h2,
-	.equipe-video-section h2 {
+	.equipe-video-section h2,
+	.equipe-grille-section h2 {
 		font-size: 28px !important;
 	}
 }
 
 @media (max-width: 600px) {
-	.equipe-video__grid {
-		max-width: 100%;
-	}
-
 	.equipe-video__card {
 		flex-direction: column !important;
 		align-items: center !important;
