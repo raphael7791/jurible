@@ -48,6 +48,11 @@
           "color": "#6D28D9"
         },
         {
+          "slug": "secondary-bg",
+          "name": "Secondary Background",
+          "color": "#EDE9FE"
+        },
+        {
           "slug": "background",
           "name": "Background",
           "color": "#F9FAFB"

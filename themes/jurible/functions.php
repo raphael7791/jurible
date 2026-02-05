@@ -176,6 +176,55 @@ register_block_pattern_category(
 add_filter("init", "jurible_register_patterns_categories");
 
 
+# Enregistrer les patterns du thème manuellement
+function jurible_register_theme_patterns() {
+    $patterns_dir = get_template_directory() . '/patterns/';
+
+    if (!is_dir($patterns_dir)) {
+        return;
+    }
+
+    $pattern_files = glob($patterns_dir . '*.php');
+
+    foreach ($pattern_files as $pattern_file) {
+        $pattern_data = get_file_data($pattern_file, array(
+            'title'       => 'Title',
+            'slug'        => 'Slug',
+            'description' => 'Description',
+            'categories'  => 'Categories',
+        ));
+
+        if (empty($pattern_data['title']) || empty($pattern_data['slug'])) {
+            continue;
+        }
+
+        // Skip if already registered
+        if (WP_Block_Patterns_Registry::get_instance()->is_registered($pattern_data['slug'])) {
+            continue;
+        }
+
+        ob_start();
+        include $pattern_file;
+        $content = ob_get_clean();
+
+        $categories = !empty($pattern_data['categories'])
+            ? array_map('trim', explode(',', $pattern_data['categories']))
+            : array('jurible-components');
+
+        register_block_pattern(
+            $pattern_data['slug'],
+            array(
+                'title'       => $pattern_data['title'],
+                'description' => $pattern_data['description'],
+                'content'     => $content,
+                'categories'  => $categories,
+            )
+        );
+    }
+}
+add_action('init', 'jurible_register_theme_patterns');
+
+
 # Retirer certains blocs de l'éditeur
 # Dans https://capitainewp.io/formations/wordpress-full-site-editing/desactiver-blocs-gutenberg/#exclusionnbsp-retirer-seulement-certains-blocs
 function jurible_deregister_blocks($allowed_block_types, $editor_context)
@@ -645,6 +694,20 @@ function jurible_enqueue_sticky_bar_assets()
     }
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_sticky_bar_assets");
+
+
+# Charger le CSS des patterns enseignants (frontend + éditeur)
+function jurible_enqueue_enseignants_assets()
+{
+    wp_enqueue_style(
+        "jurible-enseignants",
+        get_template_directory_uri() . "/assets/css/enseignants.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/enseignants.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_enseignants_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_enseignants_assets");
 
 
 

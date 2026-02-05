@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Fond gris -->
+  <rect width="200" height="200" rx="12" fill="#E5E7EB"/>
+  <!-- Texte "Photo" -->
+  <text x="100" y="90" text-anchor="middle" fill="#9CA3AF" font-family="system-ui, sans-serif" font-size="16" font-weight="500">Photo</text>
+  <!-- Bouton play - cercle rouge semi-transparent -->
+  <circle cx="100" cy="120" r="24" fill="#B0001D" opacity="0.85"/>
+  <!-- Bouton play - triangle blanc -->
+  <polygon points="93,108 93,132 113,120" fill="white"/>
+</svg>

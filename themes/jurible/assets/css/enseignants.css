@@ -1,0 +1,165 @@
+/**
+ * Enseignants Patterns CSS
+ * Styles pour les effets impossibles avec les blocs natifs WordPress
+ */
+
+/* ==========================================================================
+   ÉQUIPE TEASER - Avatars empilés
+   ========================================================================== */
+
+.equipe-teaser__avatars {
+	gap: 0 !important;
+}
+
+.equipe-teaser__avatars .wp-block-image {
+	margin-left: -12px;
+}
+
+.equipe-teaser__avatars .wp-block-image:first-child {
+	margin-left: 0;
+}
+
+.equipe-teaser__avatar img {
+	width: 48px !important;
+	height: 48px !important;
+	border: 3px solid #ffffff;
+	border-radius: 9999px;
+	object-fit: cover;
+}
+
+.equipe-teaser__avatar-more {
+	margin-left: -12px;
+	width: 48px;
+	height: 48px;
+	border: 3px solid #ffffff;
+	border-radius: 9999px;
+}
+
+/* ==========================================================================
+   ENSEIGNANT SPÉCIFIQUE - Avatar et liste
+   ========================================================================== */
+
+.enseignant-avatar img {
+	width: 96px !important;
+	height: 96px !important;
+	border-radius: 9999px;
+	object-fit: cover;
+}
+
+.enseignant-credentials {
+	list-style: none;
+	padding-left: 0 !important;
+}
+
+.enseignant-credentials li {
+	position: relative;
+	padding-left: 20px;
+	margin-bottom: 4px;
+}
+
+.enseignant-credentials li::before {
+	content: '✓';
+	position: absolute;
+	left: 0;
+	color: var(--wp--preset--color--success);
+	font-weight: 600;
+}
+
+/* ==========================================================================
+   ÉQUIPE VIDÉO - Grille et cartes
+   ========================================================================== */
+
+.equipe-video__grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--wp--preset--spacing--md);
+}
+
+.equipe-video__card {
+	justify-content: space-between !important;
+}
+
+.equipe-video__card a {
+	text-decoration: none;
+}
+
+.equipe-video__card a:hover {
+	text-decoration: underline;
+}
+
+.equipe-video__img {
+	flex-shrink: 0;
+}
+
+.equipe-video__img img {
+	width: 140px !important;
+	height: 140px !important;
+	border-radius: 12px;
+	object-fit: cover;
+}
+
+/* ==========================================================================
+   COMMUN - Gradient text H2
+   ========================================================================== */
+
+.enseignant-section h2 mark,
+.equipe-teaser-section h2 mark,
+.equipe-video-section h2 mark {
+	background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+	.equipe-video__grid {
+		grid-template-columns: 1fr;
+		max-width: 600px;
+		margin-inline: auto;
+	}
+
+	.equipe-video__card {
+		flex-direction: row !important;
+		align-items: center !important;
+		width: 100% !important;
+	}
+
+	.equipe-video__img img {
+		width: 100px !important;
+		height: 100px !important;
+	}
+}
+
+@media (max-width: 900px) {
+	.enseignant-section h2,
+	.equipe-teaser-section h2,
+	.equipe-video-section h2 {
+		font-size: 28px !important;
+	}
+}
+
+@media (max-width: 600px) {
+	.equipe-video__grid {
+		max-width: 100%;
+	}
+
+	.equipe-video__card {
+		flex-direction: column !important;
+		align-items: center !important;
+		text-align: center;
+	}
+
+	.equipe-video__img {
+		order: -1;
+		margin-bottom: var(--wp--preset--spacing--sm) !important;
+	}
+
+	.equipe-video__img img {
+		width: 80px !important;
+		height: 80px !important;
+	}
+}
