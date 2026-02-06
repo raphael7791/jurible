@@ -1,0 +1,146 @@
+/**
+ * Fonctionnalités Pattern CSS
+ * Pattern A : Grille de cards avec emoji
+ */
+
+/* Titre gradient */
+.fonctionnalites-section h2 mark {
+	background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ==========================================================================
+   CARDS
+   ========================================================================== */
+
+/* Equal height columns (Pattern A & B) */
+.fonctionnalites-grid .wp-block-column,
+.fonctionnalites-detailed .wp-block-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.fonctionnalites-card {
+	flex: 1;
+	transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.fonctionnalites-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Icon container */
+.fonctionnalites-card__icon {
+	width: 48px;
+	height: 48px;
+	border-radius: 8px;
+}
+
+.fonctionnalites-card__icon p {
+	margin: 0 !important;
+	line-height: 1;
+}
+
+/* Title */
+.fonctionnalites-card__title {
+	margin-top: 0 !important;
+}
+
+/* Description */
+.fonctionnalites-card__desc {
+	margin: 0 !important;
+	line-height: 1.5;
+}
+
+/* ==========================================================================
+   PATTERN B - DETAILED CARDS
+   ========================================================================== */
+
+.fonctionnalites-detailed-card {
+	position: relative;
+	flex: 1;
+	transition: border-color 150ms ease;
+}
+
+.fonctionnalites-detailed-card:hover {
+	border-color: var(--wp--preset--color--secondary) !important;
+}
+
+/* Number badge */
+.fonctionnalites-detailed-card__number {
+	position: absolute;
+	top: var(--wp--preset--spacing--md);
+	right: var(--wp--preset--spacing--md);
+	width: 28px;
+	height: 28px;
+	background: var(--wp--preset--color--muted);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 !important;
+}
+
+/* List with checkmarks */
+.fonctionnalites-detailed-card__list {
+	list-style: none !important;
+	margin: 0 !important;
+}
+
+.fonctionnalites-detailed-card__list li {
+	position: relative;
+	padding-left: var(--wp--preset--spacing--sm);
+	padding-top: 4px;
+	padding-bottom: 4px;
+	line-height: 1.4;
+}
+
+.fonctionnalites-detailed-card__list li::before {
+	content: '✓';
+	position: absolute;
+	left: 0;
+	color: var(--wp--preset--color--success);
+	font-weight: 600;
+}
+
+/* Link */
+.fonctionnalites-detailed-card__link a {
+	color: var(--wp--preset--color--primary);
+	text-decoration: none;
+}
+
+.fonctionnalites-detailed-card__link a:hover {
+	text-decoration: underline;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1000px) {
+	.fonctionnalites-grid.wp-block-columns {
+		flex-wrap: wrap !important;
+	}
+
+	.fonctionnalites-grid .wp-block-column {
+		flex-basis: calc(50% - var(--wp--preset--spacing--sm)) !important;
+	}
+
+	/* Pattern B: 1 column on tablet */
+	.fonctionnalites-detailed .wp-block-column {
+		flex-basis: 100% !important;
+	}
+}
+
+@media (max-width: 600px) {
+	.fonctionnalites-section {
+		padding: var(--wp--preset--spacing--md) !important;
+	}
+
+	.fonctionnalites-grid .wp-block-column {
+		flex-basis: 100% !important;
+	}
+}

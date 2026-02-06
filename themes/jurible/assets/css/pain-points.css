@@ -1,0 +1,112 @@
+/**
+ * Pain Points Cards CSS
+ * Variantes 6 et 4 pain points
+ */
+
+/* Titre gradient (commun) */
+.pain-section h2 mark {
+	background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ==========================================================================
+   CARDS PAIN POINTS (COMMUN)
+   ========================================================================== */
+
+/* Equal height columns */
+.pain-grid-6 .wp-block-column,
+.pain-grid-4 .wp-block-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.pain-card {
+	flex: 1;
+	transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.pain-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Icône 48×48 */
+.pain-card__icon {
+	width: 48px;
+	height: 48px;
+	min-width: 48px;
+	border-radius: 8px;
+	margin-bottom: var(--wp--preset--spacing--sm);
+}
+
+.pain-card__icon p {
+	margin: 0 !important;
+	line-height: 1;
+}
+
+.pain-card__title {
+	margin: 0 !important;
+}
+
+.pain-card__description {
+	margin: 0 !important;
+	line-height: 1.5;
+}
+
+/* ==========================================================================
+   BANDEAU PRÉ-SOLUTION
+   ========================================================================== */
+
+.pain-banner,
+.editor-styles-wrapper .pain-banner {
+	margin-top: var(--wp--preset--spacing--lg) !important;
+}
+
+.pain-banner__title {
+	margin: 0 !important;
+}
+
+.pain-banner__text {
+	margin: 0 !important;
+	opacity: 0.9;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1000px) {
+	.pain-grid-6 .wp-block-columns {
+		flex-wrap: wrap !important;
+	}
+
+	.pain-grid-6 .wp-block-column {
+		flex-basis: calc(50% - var(--wp--preset--spacing--md) / 2) !important;
+	}
+
+	.pain-grid-4.wp-block-columns {
+		flex-wrap: wrap !important;
+	}
+
+	.pain-grid-4 > .wp-block-column {
+		flex-basis: calc(50% - var(--wp--preset--spacing--md) / 2) !important;
+	}
+}
+
+@media (max-width: 600px) {
+	.pain-section {
+		padding: var(--wp--preset--spacing--md) !important;
+	}
+
+	.pain-grid-6 .wp-block-column,
+	.pain-grid-4 > .wp-block-column {
+		flex-basis: 100% !important;
+	}
+
+	.pain-banner {
+		padding-left: var(--wp--preset--spacing--md) !important;
+		padding-right: var(--wp--preset--spacing--md) !important;
+	}
+}

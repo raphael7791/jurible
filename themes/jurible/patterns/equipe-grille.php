@@ -15,8 +15,8 @@
 		<p class="has-text-align-center is-style-tag-secondary">👨‍🏫 L'équipe</p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:heading {"textAlign":"center","style":{"typography":{"fontSize":"40px","fontWeight":"700"}},"textColor":"text-dark"} -->
-		<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color" style="font-size:40px;font-weight:700">Une équipe de <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">juristes passionnés</mark></h2>
+		<!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->
+		<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Une équipe de <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">juristes passionnés</mark></h2>
 		<!-- /wp:heading -->
 
 		<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"15px","lineHeight":"1.6"}},"textColor":"text-gray"} -->

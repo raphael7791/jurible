@@ -1,0 +1,259 @@
+/**
+ * Contenu Patterns CSS
+ * Patterns B, C, D, E, F
+ */
+
+/* Titre gradient (commun) */
+.contenu-section h2 mark {
+	background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ==========================================================================
+   PATTERN B - CONTENU CHIFFRÉ (fond noir)
+   ========================================================================== */
+
+/* Equal height columns */
+.contenu-chiffre .wp-block-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.contenu-chiffre__card {
+	flex: 1;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	transition: transform 150ms ease, background 150ms ease;
+}
+
+.contenu-chiffre__card:hover {
+	transform: translateY(-4px);
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.contenu-chiffre__icon {
+	width: 48px;
+	height: 48px;
+	background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+	border-radius: 8px;
+	margin-bottom: var(--wp--preset--spacing--sm);
+}
+
+.contenu-chiffre__icon p {
+	margin: 0 !important;
+	line-height: 1;
+}
+
+.contenu-chiffre__number {
+	margin: 0 0 4px 0 !important;
+	line-height: 1;
+}
+
+.contenu-chiffre__label {
+	margin: 0 0 var(--wp--preset--spacing--xs) 0 !important;
+}
+
+.contenu-chiffre__desc {
+	margin: 0 !important;
+	line-height: 1.5;
+}
+
+.contenu-chiffre__tag {
+	display: inline-block;
+	margin-top: var(--wp--preset--spacing--xs) !important;
+	margin-bottom: 0 !important;
+	padding: 4px 10px;
+	background: var(--wp--preset--color--success);
+	color: #fff;
+	font-size: 10px;
+	font-weight: 600;
+	text-transform: uppercase;
+	border-radius: 6px;
+}
+
+/* ==========================================================================
+   PATTERN C - LISTE MATIÈRES
+   ========================================================================== */
+
+/* Equal height columns and cards */
+.contenu-matieres-grid .wp-block-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.contenu-matieres__item {
+	flex: 1;
+	gap: var(--wp--preset--spacing--sm) !important;
+	transition: border-color 150ms ease, background 150ms ease;
+}
+
+.contenu-matieres__item:hover {
+	border-color: var(--wp--preset--color--secondary) !important;
+	background: var(--wp--preset--color--secondary-light) !important;
+}
+
+.contenu-matieres__icon {
+	width: 36px;
+	height: 36px;
+	min-width: 36px;
+	border-radius: 6px;
+}
+
+.contenu-matieres__icon p {
+	margin: 0 !important;
+	line-height: 1;
+}
+
+.contenu-matieres__name {
+	margin: 0 !important;
+}
+
+.contenu-matieres__footer strong {
+	color: var(--wp--preset--color--primary) !important;
+}
+
+/* ==========================================================================
+   PATTERN D - STATS + SOMMAIRE
+   ========================================================================== */
+
+.contenu-fiche__stat p {
+	margin: 0 !important;
+}
+
+.contenu-fiche__stat-number + p {
+	margin-top: 4px !important;
+}
+
+.contenu-fiche__theme-title {
+	margin: 0 0 var(--wp--preset--spacing--xs) 0 !important;
+}
+
+.contenu-fiche__theme-items {
+	list-style: none !important;
+	margin: 0 !important;
+}
+
+.contenu-fiche__theme-items li {
+	position: relative;
+	padding-left: var(--wp--preset--spacing--sm);
+	padding-top: 4px;
+	padding-bottom: 4px;
+	line-height: 1.4;
+}
+
+.contenu-fiche__theme-items li::before {
+	content: '•';
+	position: absolute;
+	left: 0;
+	color: var(--wp--preset--color--text-muted);
+}
+
+/* ==========================================================================
+   PATTERN E - SOMMAIRE SIMPLE
+   ========================================================================== */
+
+.contenu-sommaire__item {
+	transition: border-color 150ms ease, background 150ms ease;
+}
+
+.contenu-sommaire__item:hover {
+	border-color: var(--wp--preset--color--secondary) !important;
+	background: var(--wp--preset--color--secondary-light) !important;
+}
+
+.contenu-sommaire__item p {
+	margin: 0 !important;
+}
+
+/* ==========================================================================
+   PATTERN F - PROGRAMME MODULES
+   ========================================================================== */
+
+.contenu-programme__module-number {
+	width: 36px;
+	height: 36px;
+	min-width: 36px;
+	background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+	border-radius: 50%;
+}
+
+.contenu-programme__module-number p {
+	margin: 0 !important;
+	line-height: 1;
+}
+
+.contenu-programme__module-items {
+	list-style: none !important;
+	margin: 0 !important;
+}
+
+.contenu-programme__module-items li {
+	position: relative;
+	padding-left: var(--wp--preset--spacing--sm);
+	padding-top: 6px;
+	padding-bottom: 6px;
+	line-height: 1.4;
+}
+
+.contenu-programme__module-items li::before {
+	content: '•';
+	position: absolute;
+	left: 0;
+	color: var(--wp--preset--color--primary);
+	font-weight: bold;
+}
+
+.contenu-programme__bonus-items {
+	list-style: none !important;
+	margin: 0 !important;
+}
+
+.contenu-programme__bonus-items li {
+	position: relative;
+	padding-left: var(--wp--preset--spacing--sm);
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+.contenu-programme__bonus-items li::before {
+	content: '✓';
+	position: absolute;
+	left: 0;
+	color: var(--wp--preset--color--success);
+	font-weight: 600;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1000px) {
+	.contenu-chiffre .wp-block-column {
+		flex-basis: calc(50% - var(--wp--preset--spacing--sm)) !important;
+	}
+
+	.contenu-fiche.wp-block-columns {
+		flex-direction: column !important;
+	}
+
+	.contenu-fiche .wp-block-column {
+		flex-basis: 100% !important;
+	}
+}
+
+@media (max-width: 600px) {
+	.contenu-section {
+		padding: var(--wp--preset--spacing--md) !important;
+	}
+
+	.contenu-chiffre .wp-block-column {
+		flex-basis: 100% !important;
+	}
+
+	.contenu-programme__module-items {
+		padding-left: 0 !important;
+		margin-top: var(--wp--preset--spacing--sm) !important;
+	}
+}

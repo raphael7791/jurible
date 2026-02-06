@@ -724,7 +724,57 @@ add_action("wp_enqueue_scripts", "jurible_enqueue_reassurance_assets");
 add_action("enqueue_block_editor_assets", "jurible_enqueue_reassurance_assets");
 
 
+# Charger le CSS du pattern FAQ (frontend + éditeur)
+function jurible_enqueue_faq_assets()
+{
+    wp_enqueue_style(
+        "jurible-faq",
+        get_template_directory_uri() . "/assets/css/faq.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/faq.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_faq_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_faq_assets");
 
 
+# Charger le CSS du pattern Fonctionnalités (frontend + éditeur)
+function jurible_enqueue_fonctionnalites_assets()
+{
+    wp_enqueue_style(
+        "jurible-fonctionnalites",
+        get_template_directory_uri() . "/assets/css/fonctionnalites.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/fonctionnalites.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_fonctionnalites_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_fonctionnalites_assets");
 
+
+# Charger le CSS du pattern Contenu (frontend + éditeur)
+function jurible_enqueue_contenu_assets()
+{
+    wp_enqueue_style(
+        "jurible-contenu",
+        get_template_directory_uri() . "/assets/css/contenu.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/contenu.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_contenu_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_contenu_assets");
+
+# Charger le CSS du pattern Pain Points (frontend + éditeur)
+function jurible_enqueue_pain_points_assets()
+{
+    wp_enqueue_style(
+        "jurible-pain-points",
+        get_template_directory_uri() . "/assets/css/pain-points.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/pain-points.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_pain_points_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_pain_points_assets");
 

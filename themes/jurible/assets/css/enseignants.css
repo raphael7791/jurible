@@ -53,8 +53,8 @@
 
 .enseignant-credentials li {
 	position: relative;
-	padding-left: 20px;
-	margin-bottom: 4px;
+	padding-left: var(--wp--preset--spacing--md);
+	margin-bottom: calc(var(--wp--preset--spacing--xs) / 2);
 }
 
 .enseignant-credentials li::before {
@@ -154,7 +154,7 @@
 
 .equipe-grille__body > * {
 	margin-top: 0;
-	margin-bottom: 8px;
+	margin-bottom: var(--wp--preset--spacing--xs);
 }
 
 .equipe-grille__body > *:last-child {
@@ -162,8 +162,8 @@
 }
 
 .equipe-grille__tags {
-	margin-top: 4px !important;
-	margin-bottom: 8px !important;
+	margin-top: calc(var(--wp--preset--spacing--xs) / 2) !important;
+	margin-bottom: var(--wp--preset--spacing--xs) !important;
 }
 
 .equipe-grille__tags .is-style-tag-secondary {
@@ -173,7 +173,7 @@
 .equipe-grille__linkedin a {
 	display: inline-flex;
 	align-items: center;
-	gap: 6px;
+	gap: var(--wp--preset--spacing--xs);
 	color: var(--wp--preset--color--secondary);
 	text-decoration: none;
 }
@@ -221,14 +221,6 @@
 	}
 }
 
-@media (max-width: 900px) {
-	.enseignant-section h2,
-	.equipe-teaser-section h2,
-	.equipe-video-section h2,
-	.equipe-grille-section h2 {
-		font-size: 28px !important;
-	}
-}
 
 @media (max-width: 600px) {
 	.equipe-video__card {

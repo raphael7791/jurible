@@ -1,0 +1,146 @@
+/**
+ * FAQ Pattern CSS
+ */
+
+/* ==========================================================================
+   FAQ SECTION
+   ========================================================================== */
+
+.faq-section {
+	border-radius: 16px;
+}
+
+/* Titre gradient */
+.faq-section h2 mark {
+	background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ==========================================================================
+   FAQ ITEMS (Details block)
+   ========================================================================== */
+
+.faq-list {
+	margin-bottom: var(--wp--preset--spacing--lg) !important;
+}
+
+.faq-item {
+	border: 1px solid var(--wp--preset--color--border, #E5E7EB);
+	border-radius: 12px;
+	margin-bottom: calc(var(--wp--preset--spacing--xs) / 2);
+	overflow: hidden;
+	transition: border-color 150ms ease;
+}
+
+.faq-item:hover {
+	border-color: var(--wp--preset--color--secondary);
+}
+
+.faq-item[open] {
+	border-color: var(--wp--preset--color--secondary);
+}
+
+/* Question (summary) */
+.faq-item summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--wp--preset--spacing--md);
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--wp--preset--color--text-dark, #1A1A1A);
+	cursor: pointer;
+	transition: background-color 150ms ease;
+	list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+	display: none;
+}
+
+.faq-item summary::after {
+	content: '▼';
+	font-size: 12px;
+	color: var(--wp--preset--color--text-muted, #9CA3AF);
+	background: var(--wp--preset--color--muted, #F3F4F6);
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	transition: all 150ms ease;
+}
+
+.faq-item summary:hover {
+	background: var(--wp--preset--color--muted, #F9FAFB);
+}
+
+.faq-item[open] summary {
+	background: #EDE9FE;
+}
+
+.faq-item[open] summary::after {
+	background: var(--wp--preset--color--secondary);
+	color: #fff;
+	transform: rotate(180deg);
+}
+
+/* Answer */
+.faq-item > *:not(summary) {
+	padding: 0 var(--wp--preset--spacing--md) var(--wp--preset--spacing--md);
+}
+
+.faq-item p {
+	margin: 0 !important;
+	line-height: 1.7;
+}
+
+/* ==========================================================================
+   FAQ FOOTER
+   ========================================================================== */
+
+.faq-footer {
+	border-radius: 12px;
+	text-align: center;
+}
+
+.faq-footer p {
+	margin: 0 !important;
+}
+
+.faq-footer p:first-child {
+	margin-bottom: var(--wp--preset--spacing--xs) !important;
+}
+
+.faq-footer a {
+	color: var(--wp--preset--color--primary);
+	text-decoration: none;
+}
+
+.faq-footer a:hover {
+	color: var(--wp--preset--color--secondary);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 600px) {
+	.faq-section {
+		padding: var(--wp--preset--spacing--md) !important;
+	}
+
+	.faq-item summary {
+		padding: var(--wp--preset--spacing--sm);
+		font-size: 14px;
+	}
+
+	.faq-item > *:not(summary) {
+		padding: 0 var(--wp--preset--spacing--sm) var(--wp--preset--spacing--sm);
+		font-size: 13px;
+	}
+}

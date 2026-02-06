@@ -54,7 +54,7 @@
 }
 
 .reassurance-full__partners p {
-	margin-bottom: 4px !important;
+	margin-bottom: calc(var(--wp--preset--spacing--xs) / 2) !important;
 }
 
 .reassurance-full__partner-logo img {
