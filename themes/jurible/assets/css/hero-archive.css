@@ -1,0 +1,254 @@
+/**
+ * Hero Archive (Type C) CSS
+ * Variantes: Blog, Cours, Fiches, Search
+ * Uses theme.json design tokens for consistency
+ */
+
+/* ==========================================================================
+   BASE HERO ARCHIVE
+   ========================================================================== */
+
+.hero-archive {
+	position: relative;
+	overflow: hidden;
+	background: linear-gradient(180deg, #FFFFFF 0%, #FAF5FF 50%, #F3E8FF 100%);
+	text-align: center;
+}
+
+
+/* ==========================================================================
+   BADGE
+   ========================================================================== */
+
+.hero-archive__badge {
+	display: inline-flex !important;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	background: rgba(124, 58, 237, 0.1) !important;
+	border: 1px solid rgba(124, 58, 237, 0.2);
+	color: var(--wp--preset--color--secondary) !important;
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 600 !important;
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm) !important;
+	border-radius: var(--wp--custom--border-radius--full) !important;
+	margin-bottom: var(--wp--preset--spacing--sm) !important;
+}
+
+/* ==========================================================================
+   TITLE
+   ========================================================================== */
+
+.hero-archive__title {
+	font-size: clamp(1.75rem, 1.25rem + 2vw, 2.5rem) !important;
+	font-weight: 800 !important;
+	line-height: 1.2 !important;
+	margin-bottom: var(--wp--preset--spacing--sm) !important;
+}
+
+.hero-archive__title mark {
+	background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ==========================================================================
+   SUBTITLE
+   ========================================================================== */
+
+.hero-archive__subtitle {
+	font-size: var(--wp--preset--font-size--body-large) !important;
+	color: var(--wp--preset--color--text-gray) !important;
+	line-height: 1.6 !important;
+	margin-bottom: var(--wp--preset--spacing--lg) !important;
+	max-width: 600px;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+/* ==========================================================================
+   SEARCH BAR
+   ========================================================================== */
+
+.hero-archive__search {
+	max-width: 560px;
+	margin: 0 auto var(--wp--preset--spacing--md) !important;
+}
+
+.hero-archive__search .wp-block-search__inside-wrapper {
+	background: white;
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--wp--custom--border-radius--lg);
+	padding: var(--wp--preset--spacing--xs);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-archive__search .wp-block-search__inside-wrapper:focus-within {
+	border-color: var(--wp--preset--color--secondary);
+	box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
+}
+
+.hero-archive__search .wp-block-search__input {
+	border: none !important;
+	background: transparent !important;
+	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md) !important;
+	font-size: var(--wp--preset--font-size--small) !important;
+	color: var(--wp--preset--color--text-dark);
+}
+
+.hero-archive__search .wp-block-search__input::placeholder {
+	color: var(--wp--preset--color--text-muted);
+}
+
+.hero-archive__search .wp-block-search__input:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+.hero-archive__search .wp-block-search__button {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%) !important;
+	color: white !important;
+	border: none !important;
+	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md) !important;
+	border-radius: var(--wp--custom--border-radius--md) !important;
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 500 !important;
+	cursor: pointer;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hero-archive__search .wp-block-search__button:hover {
+	opacity: 0.9;
+	transform: translateY(-1px);
+}
+
+/* Icon-only button variant */
+.hero-archive__search .wp-block-search__button.has-icon {
+	padding: var(--wp--preset--spacing--sm) !important;
+}
+
+.hero-archive__search .wp-block-search__button svg {
+	fill: white;
+	width: 20px;
+	height: 20px;
+}
+
+/* ==========================================================================
+   STATS ROW
+   ========================================================================== */
+
+.hero-archive__stats {
+	display: flex;
+	justify-content: center;
+	gap: var(--wp--preset--spacing--lg);
+	flex-wrap: wrap;
+}
+
+.hero-archive__stat {
+	display: flex !important;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	font-size: var(--wp--preset--font-size--small) !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	margin: 0 !important;
+}
+
+.hero-archive__stat strong {
+	color: var(--wp--preset--color--text-dark);
+	font-weight: 600;
+}
+
+/* ==========================================================================
+   CATEGORY TAGS
+   ========================================================================== */
+
+.hero-archive__categories {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--xs);
+	margin-top: var(--wp--preset--spacing--md) !important;
+}
+
+.hero-archive__category {
+	display: inline-flex !important;
+	align-items: center;
+	background: white !important;
+	border: 1px solid var(--wp--preset--color--border);
+	color: var(--wp--preset--color--text-gray) !important;
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 500 !important;
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm) !important;
+	border-radius: var(--wp--custom--border-radius--full) !important;
+	margin: 0 !important;
+	cursor: pointer;
+	transition: all 0.15s ease;
+}
+
+.hero-archive__category:hover {
+	border-color: var(--wp--preset--color--secondary);
+	color: var(--wp--preset--color--secondary) !important;
+	background: rgba(124, 58, 237, 0.05) !important;
+}
+
+.hero-archive__category--active {
+	background: var(--wp--preset--color--secondary) !important;
+	border-color: var(--wp--preset--color--secondary) !important;
+	color: white !important;
+}
+
+/* ==========================================================================
+   SEARCH RESULTS VARIANT
+   ========================================================================== */
+
+.hero-archive--search .hero-archive__query {
+	color: var(--wp--preset--color--secondary);
+	font-weight: 600;
+}
+
+.hero-archive--search .hero-archive__count {
+	font-size: var(--wp--preset--font-size--body-large) !important;
+	color: var(--wp--preset--color--text-gray) !important;
+	margin-bottom: var(--wp--preset--spacing--md) !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 600px) {
+	.hero-archive {
+		padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md) !important;
+	}
+
+	.hero-archive__title {
+		font-size: 1.5rem !important;
+	}
+
+	.hero-archive__subtitle {
+		font-size: var(--wp--preset--font-size--medium) !important;
+	}
+
+	.hero-archive__search .wp-block-search__inside-wrapper {
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--xs);
+	}
+
+	.hero-archive__search .wp-block-search__button {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.hero-archive__stats {
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--sm);
+	}
+
+	.hero-archive__categories {
+		justify-content: flex-start;
+	}
+}
