@@ -778,3 +778,16 @@ function jurible_enqueue_pain_points_assets()
 add_action("wp_enqueue_scripts", "jurible_enqueue_pain_points_assets");
 add_action("enqueue_block_editor_assets", "jurible_enqueue_pain_points_assets");
 
+# Charger le CSS des Hero Conversion (frontend + éditeur)
+function jurible_enqueue_hero_conversion_assets()
+{
+    wp_enqueue_style(
+        "jurible-hero-conversion",
+        get_template_directory_uri() . "/assets/css/hero-conversion.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/hero-conversion.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_hero_conversion_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_hero_conversion_assets");
+

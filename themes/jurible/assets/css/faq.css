@@ -1,5 +1,6 @@
 /**
  * FAQ Pattern CSS
+ * Uses theme.json design tokens for consistency
  */
 
 /* ==========================================================================
@@ -7,7 +8,7 @@
    ========================================================================== */
 
 .faq-section {
-	border-radius: 16px;
+	border-radius: var(--wp--custom--border-radius--lg);
 }
 
 /* Titre gradient */
@@ -28,7 +29,7 @@
 
 .faq-item {
 	border: 1px solid var(--wp--preset--color--border, #E5E7EB);
-	border-radius: 12px;
+	border-radius: var(--wp--custom--border-radius--lg);
 	margin-bottom: calc(var(--wp--preset--spacing--xs) / 2);
 	overflow: hidden;
 	transition: border-color 150ms ease;
@@ -48,7 +49,7 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: var(--wp--preset--spacing--md);
-	font-size: 15px;
+	font-size: var(--wp--preset--font-size--medium);
 	font-weight: 600;
 	color: var(--wp--preset--color--text-dark, #1A1A1A);
 	cursor: pointer;
@@ -62,7 +63,7 @@
 
 .faq-item summary::after {
 	content: '▼';
-	font-size: 12px;
+	font-size: var(--wp--preset--font-size--caption);
 	color: var(--wp--preset--color--text-muted, #9CA3AF);
 	background: var(--wp--preset--color--muted, #F3F4F6);
 	width: 28px;
@@ -104,7 +105,7 @@
    ========================================================================== */
 
 .faq-footer {
-	border-radius: 12px;
+	border-radius: var(--wp--custom--border-radius--lg);
 	text-align: center;
 }
 
@@ -136,11 +137,11 @@
 
 	.faq-item summary {
 		padding: var(--wp--preset--spacing--sm);
-		font-size: 14px;
+		font-size: var(--wp--preset--font-size--small);
 	}
 
 	.faq-item > *:not(summary) {
 		padding: 0 var(--wp--preset--spacing--sm) var(--wp--preset--spacing--sm);
-		font-size: 13px;
+		font-size: var(--wp--preset--font-size--small);
 	}
 }

@@ -23,7 +23,7 @@
 	width: 48px !important;
 	height: 48px !important;
 	border: 3px solid #ffffff;
-	border-radius: 9999px;
+	border-radius: var(--wp--custom--border-radius--full);
 	object-fit: cover;
 }
 
@@ -32,7 +32,7 @@
 	width: 48px;
 	height: 48px;
 	border: 3px solid #ffffff;
-	border-radius: 9999px;
+	border-radius: var(--wp--custom--border-radius--full);
 }
 
 /* ==========================================================================
@@ -42,7 +42,7 @@
 .enseignant-avatar img {
 	width: 96px !important;
 	height: 96px !important;
-	border-radius: 9999px;
+	border-radius: var(--wp--custom--border-radius--full);
 	object-fit: cover;
 }
 
@@ -93,7 +93,7 @@
 .equipe-video__img img {
 	width: 140px !important;
 	height: 140px !important;
-	border-radius: 12px;
+	border-radius: var(--wp--custom--border-radius--lg);
 	object-fit: cover;
 }
 
@@ -143,7 +143,7 @@
 .equipe-grille__avatar img {
 	width: 80px !important;
 	height: 80px !important;
-	border-radius: 9999px;
+	border-radius: var(--wp--custom--border-radius--full);
 	border: 3px solid rgba(255,255,255,0.3);
 	object-fit: cover;
 }

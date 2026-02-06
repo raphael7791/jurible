@@ -1,0 +1,110 @@
+<?php
+/**
+ * Title: Hero Suite IA
+ * Slug: jurible/hero-suite-ia
+ * Categories: hero
+ * Description: Hero conversion A4 - Suite IA avec badge tech, mockup 3D et particules
+ */
+?>
+<!-- wp:group {"align":"full","className":"hero-conversion hero-conversion--tech","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<div class="wp-block-group alignfull hero-conversion hero-conversion--tech" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
+
+
+<!-- wp:columns {"className":"hero-conversion__grid","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|xl","left":"var:preset|spacing|xl"}}}} -->
+<div class="wp-block-columns hero-conversion__grid">
+
+<!-- wp:column {"className":"hero-conversion__content"} -->
+<div class="wp-block-column hero-conversion__content">
+
+<!-- wp:paragraph {"className":"hero-conversion__badge"} -->
+<p class="hero-conversion__badge">🤖 Suite IA Minos</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1,"className":"hero-conversion__title","textColor":"text-dark"} -->
+<h1 class="wp-block-heading hero-conversion__title has-text-dark-color has-text-color">L'intelligence artificielle au service de votre <mark style="background:linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">réussite</mark></h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"hero-conversion__subtitle","textColor":"text-gray"} -->
+<p class="hero-conversion__subtitle has-text-gray-color has-text-color">Génère des fiches d'arrêt en 30 secondes, crée des plans de dissertation et révise avec un assistant IA entraîné sur le droit français.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"hero-conversion__features hero-conversion__features--inline","layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group hero-conversion__features hero-conversion__features--inline">
+<!-- wp:paragraph {"className":"hero-conversion__feature"} -->
+<p class="hero-conversion__feature"><span class="hero-conversion__feature-icon">✓</span> Générateur de fiches d'arrêt</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"hero-conversion__feature"} -->
+<p class="hero-conversion__feature"><span class="hero-conversion__feature-icon">✓</span> Assistant IA juridique</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"hero-conversion__feature"} -->
+<p class="hero-conversion__feature"><span class="hero-conversion__feature-icon">✓</span> Plans de dissertation</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"hero-conversion__feature"} -->
+<p class="hero-conversion__feature"><span class="hero-conversion__feature-icon">✓</span> Résumés intelligents</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"hero-conversion__proof","layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group hero-conversion__proof">
+<!-- wp:paragraph {"className":"hero-conversion__stars"} -->
+<p class="hero-conversion__stars">★★★★★</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"hero-conversion__rating"} -->
+<p class="hero-conversion__rating">4.9/5</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"hero-conversion__students"} -->
+<p class="hero-conversion__students">· 8 000+ utilisateurs</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:buttons {"className":"hero-conversion__cta"} -->
+<div class="wp-block-buttons hero-conversion__cta">
+<!-- wp:button {"className":"is-style-fill"} -->
+<div class="wp-block-button is-style-fill"><a class="wp-block-button__link wp-element-button">Essayer gratuitement →</a></div>
+<!-- /wp:button -->
+</div>
+<!-- /wp:buttons -->
+
+<!-- wp:group {"className":"hero-conversion__mentions","layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group hero-conversion__mentions">
+<!-- wp:paragraph {"className":"hero-conversion__mention"} -->
+<p class="hero-conversion__mention"><span class="hero-conversion__mention-check">✓</span> 3 générations gratuites</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"hero-conversion__mention"} -->
+<p class="hero-conversion__mention"><span class="hero-conversion__mention-check">✓</span> Sans carte bancaire</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
+
+</div>
+<!-- /wp:column -->
+
+<!-- wp:column {"className":"hero-conversion__visual"} -->
+<div class="wp-block-column hero-conversion__visual">
+
+<!-- wp:group {"className":"hero-conversion__video","layout":{"type":"default"}} -->
+<div class="wp-block-group hero-conversion__video">
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=aimb4qOL71o","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=aimb4qOL71o
+</div></figure>
+<!-- /wp:embed -->
+</div>
+<!-- /wp:group -->
+
+</div>
+<!-- /wp:column -->
+
+</div>
+<!-- /wp:columns -->
+
+</div>
+<!-- /wp:group -->

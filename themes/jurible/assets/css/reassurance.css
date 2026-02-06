@@ -9,7 +9,7 @@
 .reassurance-full {
 	box-shadow: none !important;
 	border: none !important;
-	border-radius: 16px !important;
+	border-radius: var(--wp--custom--border-radius--lg) !important;
 }
 
 .reassurance-full__row {
