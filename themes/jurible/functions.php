@@ -903,3 +903,16 @@ function jurible_enqueue_pricing_academie_assets()
 add_action("wp_enqueue_scripts", "jurible_enqueue_pricing_academie_assets");
 add_action("enqueue_block_editor_assets", "jurible_enqueue_pricing_academie_assets");
 
+# Charger le CSS de Comparaison (frontend + éditeur)
+function jurible_enqueue_comparaison_assets()
+{
+    wp_enqueue_style(
+        "jurible-comparaison",
+        get_template_directory_uri() . "/assets/css/P11-comparaison.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/P11-comparaison.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_comparaison_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_comparaison_assets");
+

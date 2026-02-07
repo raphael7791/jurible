@@ -1,0 +1,369 @@
+/**
+ * P11 - Comparaison (all variants)
+ */
+
+/* =====================================================
+   GRADIENT TEXT
+   ===================================================== */
+.gradient-text {
+    background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* =====================================================
+   V1: COMPARISON CARDS
+   ===================================================== */
+.comparison-card {
+    transition: all 0.3s ease;
+}
+
+.comparison-card:hover {
+    transform: translateY(-4px);
+}
+
+.comparison-card--negative:hover {
+    box-shadow: 0 8px 30px rgba(239, 68, 68, 0.1);
+}
+
+.comparison-card--positive:hover {
+    box-shadow: 0 8px 30px rgba(16, 185, 129, 0.2);
+}
+
+.comparison-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin: 0 !important;
+}
+
+.comparison-card--negative .comparison-card__icon {
+    background: var(--wp--preset--color--muted);
+}
+
+.comparison-card--positive .comparison-card__icon {
+    background: rgba(16, 185, 129, 0.15);
+}
+
+.comparison-card:hover .comparison-card__icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.comparison-card--positive:hover .comparison-card__icon {
+    background: rgba(16, 185, 129, 0.25);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Comparison lists */
+.comparison-list {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: var(--wp--preset--spacing--sm);
+}
+
+.comparison-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--wp--preset--color--text-gray);
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.comparison-list li:hover {
+    transform: translateX(4px);
+}
+
+.comparison-list--negative li:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.comparison-list--positive li:hover {
+    background: rgba(16, 185, 129, 0.08);
+}
+
+.comparison-list li::before {
+    min-width: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 2px;
+    transition: all 0.2s ease;
+}
+
+.comparison-list--negative li::before {
+    content: '✕';
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--wp--preset--color--error);
+}
+
+.comparison-list--negative li:hover::before {
+    background: var(--wp--preset--color--error);
+    color: white;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+    transform: scale(1.15);
+}
+
+.comparison-list--positive li::before {
+    content: '✓';
+    background: var(--wp--preset--color--success);
+    color: white;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.comparison-list--positive li:hover::before {
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    transform: scale(1.15);
+}
+
+/* =====================================================
+   TABLE WRAPPER (shared)
+   ===================================================== */
+.comparison-table-wrapper {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.comparison-table-wrapper:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.comparison-table-wrapper .wp-block-table {
+    margin: 0;
+}
+
+.comparison-table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.comparison-table-wrapper th,
+.comparison-table-wrapper td {
+    padding: 16px 24px;
+    text-align: left;
+    border-bottom: 1px solid var(--wp--preset--color--border);
+    transition: all 0.2s ease;
+}
+
+.comparison-table-wrapper tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.comparison-table-wrapper tbody tr:hover {
+    background: var(--wp--preset--color--background);
+}
+
+/* =====================================================
+   V2: AVANT/APRÈS TABLE
+   ===================================================== */
+.comparison-table-avant-apres thead th {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.comparison-table-avant-apres thead th:first-child {
+    background: var(--wp--preset--color--muted);
+    color: var(--wp--preset--color--text-dark);
+}
+
+.comparison-table-avant-apres thead th:nth-child(2) {
+    background: var(--wp--preset--color--error-bg);
+    color: var(--wp--preset--color--error);
+}
+
+.comparison-table-avant-apres thead th:nth-child(3) {
+    background: var(--wp--preset--color--success-bg);
+    color: var(--wp--preset--color--success);
+}
+
+.comparison-table-avant-apres tbody td {
+    font-size: 15px;
+}
+
+.comparison-table-avant-apres tbody td:first-child {
+    font-weight: 600;
+    color: var(--wp--preset--color--text-dark);
+    background: var(--wp--preset--color--background);
+}
+
+.comparison-table-avant-apres tbody tr:hover td:first-child {
+    background: var(--wp--preset--color--muted);
+}
+
+.comparison-table-avant-apres td:nth-child(2) {
+    color: var(--wp--preset--color--error);
+}
+
+.comparison-table-avant-apres td:nth-child(3) {
+    color: var(--wp--preset--color--success);
+    font-weight: 500;
+}
+
+/* =====================================================
+   V3: MULTI-COLUMN TABLE
+   ===================================================== */
+.comparison-table-multi thead th {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.comparison-table-multi thead th:first-child {
+    text-align: left;
+    background: var(--wp--preset--color--muted);
+    color: var(--wp--preset--color--text-dark);
+}
+
+.comparison-table-multi thead th:nth-child(2) {
+    background: var(--wp--preset--color--primary);
+    color: white;
+    box-shadow: 0 4px 20px rgba(176, 0, 29, 0.3);
+}
+
+.comparison-table-multi thead th:nth-child(3),
+.comparison-table-multi thead th:nth-child(4) {
+    background: var(--wp--preset--color--muted);
+    color: var(--wp--preset--color--text-dark);
+}
+
+.comparison-table-multi tbody td {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.comparison-table-multi tbody td:first-child {
+    text-align: left;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--wp--preset--color--text-dark);
+    background: var(--wp--preset--color--background);
+}
+
+.comparison-table-multi tbody tr:hover td:first-child {
+    background: var(--wp--preset--color--muted);
+}
+
+.comparison-table-multi tbody td:nth-child(2) {
+    color: var(--wp--preset--color--success);
+    background: rgba(176, 0, 29, 0.03);
+}
+
+.comparison-table-multi tbody tr:hover td:nth-child(2) {
+    background: rgba(176, 0, 29, 0.08);
+}
+
+.comparison-table-multi tbody td:nth-child(3),
+.comparison-table-multi tbody td:nth-child(4) {
+    color: var(--wp--preset--color--text-muted);
+}
+
+/* Price row */
+.comparison-table-multi tbody tr:last-child td:nth-child(2) {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* =====================================================
+   V4: DARK HEADER TABLE
+   ===================================================== */
+
+/* Spacing before CTA button */
+.comparison-table-wrapper + .wp-block-group {
+    margin-top: var(--wp--preset--spacing--xl) !important;
+}
+
+.comparison-table-dark thead th {
+    background: #1A1A1A !important;
+    color: white !important;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.comparison-table-dark thead th:first-child {
+    text-align: left;
+}
+
+.comparison-table-dark thead th:nth-child(2) {
+    background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%) !important;
+    box-shadow: 0 4px 20px rgba(176, 0, 29, 0.4);
+}
+
+.comparison-table-dark tbody td {
+    text-align: center;
+    font-size: 14px;
+    color: var(--wp--preset--color--text-gray);
+}
+
+.comparison-table-dark tbody td:first-child {
+    text-align: left;
+    font-weight: 600;
+    color: var(--wp--preset--color--text-dark);
+    background: var(--wp--preset--color--background);
+}
+
+.comparison-table-dark tbody tr:hover td:first-child {
+    background: var(--wp--preset--color--muted);
+}
+
+.comparison-table-dark tbody td:nth-child(2) {
+    background: rgba(176, 0, 29, 0.03);
+    font-weight: 500;
+    color: var(--wp--preset--color--text-dark);
+}
+
+.comparison-table-dark tbody tr:hover td:nth-child(2) {
+    background: rgba(176, 0, 29, 0.08);
+}
+
+/* Price row */
+.comparison-table-dark tbody tr:last-child td:nth-child(2) {
+    font-weight: 700;
+    color: var(--wp--preset--color--primary);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 781px) {
+    .comparaison-cards .wp-block-columns {
+        flex-direction: column !important;
+    }
+
+    .comparison-table-wrapper th,
+    .comparison-table-wrapper td {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+
+    .comparison-list li {
+        font-size: 14px;
+    }
+
+    .comparison-table-multi tbody td {
+        font-size: 16px;
+    }
+}
