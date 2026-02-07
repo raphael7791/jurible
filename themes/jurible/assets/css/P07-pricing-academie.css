@@ -1,0 +1,35 @@
+/**
+ * P07 - Pricing Académie
+ */
+
+/* Divider */
+.pricing-academie__divider {
+    width: calc(100% - 96px);
+    margin: var(--wp--preset--spacing--md) auto;
+}
+
+/* Responsive - 2 colonnes par ligne sur mobile */
+@media (max-width: 781px) {
+    .pricing-academie__features {
+        padding-left: var(--wp--preset--spacing--md) !important;
+        padding-right: var(--wp--preset--spacing--md) !important;
+    }
+
+    .pricing-academie__features .wp-block-columns {
+        flex-wrap: wrap !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+    }
+
+    .pricing-academie__features .wp-block-columns > .wp-block-column {
+        flex-basis: calc(50% - var(--wp--preset--spacing--sm)) !important;
+        flex-grow: 0 !important;
+    }
+}
+
+@media (max-width: 540px) {
+    .pricing-academie__features {
+        padding-left: var(--wp--preset--spacing--sm) !important;
+        padding-right: var(--wp--preset--spacing--sm) !important;
+    }
+}

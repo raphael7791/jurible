@@ -877,3 +877,29 @@ function jurible_enqueue_quelle_offre_assets()
 add_action("wp_enqueue_scripts", "jurible_enqueue_quelle_offre_assets");
 add_action("enqueue_block_editor_assets", "jurible_enqueue_quelle_offre_assets");
 
+# Charger le CSS de Produits Complémentaires (frontend + éditeur)
+function jurible_enqueue_produits_complementaires_assets()
+{
+    wp_enqueue_style(
+        "jurible-produits-complementaires",
+        get_template_directory_uri() . "/assets/css/P06-produits-complementaires.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/P06-produits-complementaires.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_produits_complementaires_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_produits_complementaires_assets");
+
+# Charger le CSS de Pricing Académie (frontend + éditeur)
+function jurible_enqueue_pricing_academie_assets()
+{
+    wp_enqueue_style(
+        "jurible-pricing-academie",
+        get_template_directory_uri() . "/assets/css/P07-pricing-academie.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/P07-pricing-academie.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_pricing_academie_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_pricing_academie_assets");
+
