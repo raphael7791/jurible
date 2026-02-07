@@ -1,0 +1,97 @@
+/**
+ * P09 - Trust Bar Logos
+ * Bandeau de confiance avec logos universités
+ */
+
+/* Container */
+.trust-bar {
+	background: var(--wp--preset--color--accent-bg);
+	text-align: center;
+}
+
+/* Title */
+.trust-bar__title {
+	margin-bottom: 0;
+}
+
+/* Logos container */
+.trust-bar__logos {
+	gap: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--xl);
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+/* Individual logo wrapper */
+.trust-bar__logo {
+	transition: transform var(--wp--custom--transition--slow);
+}
+
+.trust-bar__logo:hover {
+	transform: translateY(-2px);
+}
+
+/* Placeholder style (bordure dashed) */
+.trust-bar__placeholder {
+	height: var(--wp--custom--logo--height);
+	padding: 0 var(--wp--preset--spacing--sm);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1.5px dashed var(--wp--preset--color--border-muted);
+	border-radius: var(--wp--custom--border-radius--md);
+	font-size: var(--wp--preset--font-size--caption);
+	font-weight: 500;
+	color: var(--wp--preset--color--border-muted);
+	margin-bottom: 0;
+	transition: all var(--wp--custom--transition--slow);
+}
+
+.trust-bar__logo:hover .trust-bar__placeholder {
+	border-color: var(--wp--preset--color--secondary);
+	color: var(--wp--preset--color--secondary);
+}
+
+/* When using actual images */
+.trust-bar__logo img,
+.trust-bar__logo .wp-block-image img {
+	height: var(--wp--custom--logo--height);
+	width: auto;
+	max-width: 150px;
+	object-fit: contain;
+	filter: grayscale(100%);
+	opacity: 0.45;
+	transition: all var(--wp--custom--transition--slow);
+}
+
+.trust-bar__logo:hover img,
+.trust-bar__logo:hover .wp-block-image img {
+	filter: grayscale(0%);
+	opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+	.trust-bar {
+		padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--sm);
+	}
+
+	.trust-bar__title {
+		font-size: var(--wp--preset--font-size--caption) !important;
+		margin-bottom: var(--wp--preset--spacing--md) !important;
+	}
+
+	.trust-bar__logos {
+		gap: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--md);
+	}
+
+	.trust-bar__placeholder {
+		height: var(--wp--custom--avatar--sm);
+		padding: 0 var(--wp--preset--spacing--xs);
+		font-size: 9px;
+	}
+
+	.trust-bar__logo img,
+	.trust-bar__logo .wp-block-image img {
+		height: var(--wp--custom--avatar--sm);
+	}
+}

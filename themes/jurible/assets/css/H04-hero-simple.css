@@ -1,0 +1,109 @@
+/**
+ * Hero Simple (Type D) CSS
+ * Template unique centré: Badge + Titre + Sous-titre + Séparateur gradient
+ * Uses theme.json design tokens for consistency
+ */
+
+/* ==========================================================================
+   BASE HERO SIMPLE
+   ========================================================================== */
+
+.hero-simple {
+	position: relative;
+	background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFE 50%, #F5F3FF 100%);
+	text-align: center;
+	padding-top: var(--wp--preset--spacing--xl);
+	padding-bottom: var(--wp--preset--spacing--xl);
+}
+
+.hero-simple__container {
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+/* ==========================================================================
+   BADGE
+   ========================================================================== */
+
+.hero-simple__badge {
+	display: inline-flex !important;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	background: rgba(124, 58, 237, 0.1) !important;
+	border: 1px solid rgba(124, 58, 237, 0.2);
+	color: var(--wp--preset--color--secondary) !important;
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 600 !important;
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm) !important;
+	border-radius: var(--wp--custom--border-radius--full) !important;
+	margin-bottom: var(--wp--preset--spacing--sm) !important;
+}
+
+/* ==========================================================================
+   TITLE
+   ========================================================================== */
+
+.hero-simple__title {
+	font-size: clamp(1.625rem, 1.25rem + 1.5vw, 2.25rem) !important;
+	font-weight: 800 !important;
+	line-height: 1.15 !important;
+	color: var(--wp--preset--color--text-dark) !important;
+	margin-bottom: var(--wp--preset--spacing--sm) !important;
+}
+
+/* ==========================================================================
+   SUBTITLE
+   ========================================================================== */
+
+.hero-simple__subtitle {
+	font-size: var(--wp--preset--font-size--medium) !important;
+	color: var(--wp--preset--color--text-gray) !important;
+	line-height: 1.7 !important;
+	max-width: 520px;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	margin-bottom: 0 !important;
+}
+
+/* ==========================================================================
+   SEPARATOR (gradient line)
+   ========================================================================== */
+
+.hero-simple__separator {
+	width: 48px;
+	height: 3px;
+	background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+	border-radius: var(--wp--custom--border-radius--full);
+	margin: var(--wp--preset--spacing--md) auto 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 600px) {
+	.hero-simple {
+		padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+	}
+
+	.hero-simple__badge {
+		font-size: var(--wp--preset--font-size--caption) !important;
+	}
+
+	.hero-simple__title {
+		font-size: 1.625rem !important;
+	}
+
+	.hero-simple__subtitle {
+		font-size: var(--wp--preset--font-size--small) !important;
+	}
+}
+
+/* ==========================================================================
+   EDITOR FIXES
+   ========================================================================== */
+
+.editor-styles-wrapper .hero-simple__container p {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}

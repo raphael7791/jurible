@@ -1,0 +1,32 @@
+/**
+ * P02 - Bloc Texte + Média
+ * Section 2 colonnes avec texte et image/vidéo
+ */
+
+/* ═══════════════════════════════════════
+   IMAGE HOVER EFFECT
+   ═══════════════════════════════════════ */
+
+.bloc-texte-media__image img {
+	transition: box-shadow 200ms ease, transform 200ms ease;
+	box-shadow: var(--wp--preset--shadow--sm);
+}
+
+.bloc-texte-media__image img:hover {
+	box-shadow: var(--wp--preset--shadow--lg);
+	transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════ */
+
+@media (max-width: 782px) {
+	.bloc-texte-media .wp-block-columns {
+		flex-direction: column;
+	}
+
+	.bloc-texte-media .wp-block-column {
+		flex-basis: 100% !important;
+	}
+}

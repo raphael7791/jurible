@@ -6,6 +6,6 @@
     )
     .wp-block-button.is-style-transparent
     .wp-element-button {
-    color: var(--wp--preset--color--base);
-    border-color: var(--wp--preset--color--base);
+    color: var(--wp--preset--color--white);
+    border-color: var(--wp--preset--color--white);
 }

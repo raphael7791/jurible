@@ -1,0 +1,254 @@
+/**
+ * Hero Article (Type E) CSS
+ * E1 - Fond lilas avec badge, titre, meta, auteur et image
+ */
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+.hero-article {
+	position: relative;
+	background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFE 50%, #F5F3FF 100%);
+	text-align: center;
+	padding: var(--wp--preset--spacing--xl);
+}
+
+.hero-article__container {
+	max-width: 720px;
+	margin: 0 auto;
+}
+
+/* ==========================================================================
+   BADGE
+   ========================================================================== */
+
+.hero-article__badge {
+	display: inline-flex !important;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	background: rgba(124, 58, 237, 0.1) !important;
+	border: 1px solid rgba(124, 58, 237, 0.2);
+	color: var(--wp--preset--color--secondary) !important;
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 600 !important;
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm) !important;
+	border-radius: var(--wp--custom--border-radius--full) !important;
+	margin-bottom: var(--wp--preset--spacing--xs) !important;
+}
+
+/* ==========================================================================
+   TITLE
+   ========================================================================== */
+
+.hero-article__title {
+	font-size: var(--wp--preset--font-size--heading-1) !important;
+	font-weight: 800 !important;
+	line-height: 1.2 !important;
+	color: var(--wp--preset--color--text-dark) !important;
+	margin-bottom: 0 !important;
+	max-width: 640px;
+	margin-inline: auto;
+}
+
+/* ==========================================================================
+   AUTHOR BLOCK (wrapper date + auteur)
+   ========================================================================== */
+
+.hero-article__author-block {
+	display: inline-flex !important;
+	flex-direction: column;
+	align-items: flex-start !important;
+	gap: var(--wp--preset--spacing--md) !important;
+	margin-bottom: 0 !important;
+}
+
+/* ==========================================================================
+   META (date + temps de lecture)
+   ========================================================================== */
+
+.hero-article__meta-row {
+	display: flex !important;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs) !important;
+}
+
+.hero-article__meta-spacer {
+	width: 40px !important;
+	min-width: 40px !important;
+	height: 1px !important;
+	margin: 0 !important;
+	visibility: hidden;
+}
+
+.hero-article__meta {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+}
+
+.hero-article__meta,
+.hero-article__meta p {
+	font-size: var(--wp--preset--font-size--small) !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	margin: 0 !important;
+}
+
+.hero-article__meta-separator {
+	color: var(--wp--preset--color--border) !important;
+}
+
+/* ==========================================================================
+   AUTHOR
+   ========================================================================== */
+
+.hero-article__author {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+}
+
+.hero-article__author-avatar,
+.hero-article__author-initials {
+	width: 40px;
+	min-width: 40px;
+	height: 40px;
+	border-radius: var(--wp--custom--border-radius--full);
+}
+
+.hero-article__author-avatar {
+	overflow: hidden;
+}
+
+.hero-article__author-avatar img {
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: cover;
+}
+
+.hero-article__author-initials {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--wp--preset--color--secondary);
+	color: white !important;
+	font-weight: 700 !important;
+	font-size: var(--wp--preset--font-size--small) !important;
+	margin: 0 !important;
+}
+
+.hero-article__author-info {
+	text-align: left;
+	gap: 2px !important;
+}
+
+.hero-article__author-name {
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 600 !important;
+	color: var(--wp--preset--color--text-dark) !important;
+	margin: 0 !important;
+}
+
+.hero-article__author-role {
+	font-size: var(--wp--preset--font-size--caption) !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	margin: 0 !important;
+}
+
+/* ==========================================================================
+   IMAGE
+   ========================================================================== */
+
+.hero-article__image {
+	width: 100%;
+	margin-bottom: var(--wp--preset--spacing--sm) !important;
+}
+
+.hero-article__image img {
+	width: 100%;
+	aspect-ratio: 16/9;
+	object-fit: cover;
+	border-radius: 16px;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================================================
+   CTA BAR
+   ========================================================================== */
+
+.hero-article__cta {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	background: rgba(124, 58, 237, 0.05) !important;
+	border: 1px solid rgba(124, 58, 237, 0.12);
+	border-radius: var(--wp--custom--border-radius--full);
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm) !important;
+}
+
+.hero-article__cta,
+.hero-article__cta p {
+	font-size: var(--wp--preset--font-size--small) !important;
+	margin: 0 !important;
+}
+
+.hero-article__cta a {
+	color: var(--wp--preset--color--secondary) !important;
+	font-weight: 600 !important;
+	text-decoration: none;
+}
+
+.hero-article__cta a:hover {
+	text-decoration: underline;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 600px) {
+	.hero-article {
+		padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--sm);
+	}
+
+	.hero-article__badge,
+	.hero-article__meta,
+	.hero-article__meta p,
+	.hero-article__cta,
+	.hero-article__cta p {
+		font-size: var(--wp--preset--font-size--caption) !important;
+	}
+
+	.hero-article__meta-spacer,
+	.hero-article__author-avatar,
+	.hero-article__author-initials {
+		width: 36px !important;
+		min-width: 36px !important;
+		height: 36px !important;
+	}
+
+	.hero-article__author-initials {
+		font-size: var(--wp--preset--font-size--caption) !important;
+	}
+
+	.hero-article__image img {
+		border-radius: 12px;
+	}
+
+	.hero-article__cta {
+		flex-direction: column;
+		text-align: center;
+		padding: var(--wp--preset--spacing--sm) !important;
+	}
+}
+
+/* ==========================================================================
+   EDITOR FIXES
+   ========================================================================== */
+
+.editor-styles-wrapper .hero-article__meta p,
+.editor-styles-wrapper .hero-article__author p,
+.editor-styles-wrapper .hero-article__cta p {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}

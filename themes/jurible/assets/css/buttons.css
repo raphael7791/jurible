@@ -195,6 +195,33 @@
     transform: translateY(-2px);
 }
 
+/* PRIMARY WHITE - Solid white button for gradient backgrounds */
+.wp-block-button.is-style-primary-white .wp-block-button__link {
+    background: var(--wp--preset--color--white);
+    color: var(--wp--preset--color--primary);
+    font-weight: 600;
+    box-shadow: var(--wp--preset--shadow--md);
+}
+
+.wp-block-button.is-style-primary-white .wp-block-button__link:hover {
+    background: var(--wp--preset--color--muted);
+    box-shadow: var(--wp--preset--shadow--lg);
+    transform: translateY(-2px);
+}
+
+/* GHOST WHITE - Semi-transparent for gradient backgrounds */
+.wp-block-button.is-style-ghost-white .wp-block-button__link {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--wp--preset--color--white);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 500;
+}
+
+.wp-block-button.is-style-ghost-white .wp-block-button__link:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
 /* ==========================================================================
    BUTTONS GROUP (wp-block-buttons)
    ========================================================================== */

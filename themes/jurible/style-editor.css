@@ -57,3 +57,127 @@
 .editor-styles-wrapper a:where(:not(.wp-element-button)) {
     text-underline-offset: 3px;
 }
+
+/* ==========================================================================
+   HERO PRODUIT - Editor spacing fixes
+   ========================================================================== */
+
+/* Card features list - remove editor paragraph margins */
+.editor-styles-wrapper .hero-produit__card-features p,
+.editor-styles-wrapper .hero-produit__card-feature {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Features list - remove editor paragraph margins */
+.editor-styles-wrapper .hero-produit__features p,
+.editor-styles-wrapper .hero-produit__feature {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Tags - remove editor paragraph margins */
+.editor-styles-wrapper .hero-produit__tags p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Proof row - remove editor paragraph margins */
+.editor-styles-wrapper .hero-produit__proof p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* CTA mentions - remove editor paragraph margins */
+.editor-styles-wrapper .hero-produit__cta-mentions p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* ==========================================================================
+   HERO CONVERSION - Editor spacing fixes
+   ========================================================================== */
+
+.editor-styles-wrapper .hero-conversion__features p,
+.editor-styles-wrapper .hero-conversion__feature {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.editor-styles-wrapper .hero-conversion__proof p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.editor-styles-wrapper .hero-conversion__mentions p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* ==========================================================================
+   HERO ARCHIVE - Editor spacing fixes
+   ========================================================================== */
+
+.editor-styles-wrapper .hero-archive__stats p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.editor-styles-wrapper .hero-archive__categories p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* ==========================================================================
+   P05 FLIP CARDS - Editor view (show both sides stacked)
+   ========================================================================== */
+
+/* In editor: disable 3D transforms, show cards stacked */
+.editor-styles-wrapper .flip-card {
+    perspective: none;
+    height: auto;
+}
+
+.editor-styles-wrapper .flip-card__inner {
+    transform-style: flat;
+    display: flex;
+    flex-direction: column;
+    gap: var(--wp--preset--spacing--sm);
+}
+
+.editor-styles-wrapper .flip-card__front,
+.editor-styles-wrapper .flip-card__back {
+    position: relative;
+    transform: none;
+    backface-visibility: visible;
+    min-height: 280px;
+}
+
+/* Label to identify front/back in editor */
+.editor-styles-wrapper .flip-card__front::before {
+    content: "FRONT";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--wp--preset--color--text-muted);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+.editor-styles-wrapper .flip-card__back::before {
+    content: "BACK";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--wp--preset--color--primary);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    z-index: 10;
+}

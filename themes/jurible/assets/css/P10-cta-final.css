@@ -1,0 +1,145 @@
+/**
+ * P10 - CTA Final
+ * Section CTA final avec gradient, prix et boutons
+ */
+
+/* Container */
+.cta-final {
+	text-align: center;
+}
+
+/* Content */
+.cta-final__content {
+	gap: var(--wp--preset--spacing--sm);
+}
+
+/* Title */
+.cta-final__title {
+	margin-bottom: 0;
+}
+
+/* Subtitle */
+.cta-final__subtitle {
+	opacity: 0.9;
+	margin-bottom: 0;
+}
+
+/* Price block */
+.cta-final__price-block {
+	gap: var(--wp--preset--spacing--xs);
+	align-items: baseline;
+}
+
+.cta-final__price-old {
+	opacity: 0.7;
+	margin-bottom: 0;
+}
+
+.cta-final__price {
+	margin-bottom: 0;
+}
+
+.cta-final__price-period {
+	opacity: 0.8;
+	margin-bottom: 0;
+}
+
+/* Promo badge */
+.cta-final__promo {
+	display: inline-flex;
+	margin-top: var(--wp--preset--spacing--sm);
+}
+
+.cta-final__promo p {
+	margin-bottom: 0;
+}
+
+/* Alert urgence */
+.cta-final__alert {
+	display: inline-flex;
+	animation: pulse 2s infinite;
+}
+
+.cta-final__alert p {
+	margin-bottom: 0;
+}
+
+@keyframes pulse {
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.8;
+	}
+}
+
+/* Buttons */
+.cta-final__buttons {
+	flex-wrap: wrap;
+}
+
+/* Button primary white (sur gradient) */
+.cta-final .is-style-primary-white .wp-block-button__link {
+	background-color: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--primary);
+	font-weight: 600;
+	transition: all var(--wp--custom--transition--default);
+	box-shadow: var(--wp--preset--shadow--md);
+}
+
+.cta-final .is-style-primary-white .wp-block-button__link:hover {
+	background-color: var(--wp--preset--color--muted);
+	transform: translateY(-2px);
+	box-shadow: var(--wp--preset--shadow--lg);
+}
+
+/* Button ghost white (sur gradient) */
+.cta-final .is-style-ghost-white .wp-block-button__link {
+	background-color: rgba(255, 255, 255, 0.15);
+	color: var(--wp--preset--color--white);
+	font-weight: 500;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	transition: all var(--wp--custom--transition--default);
+}
+
+.cta-final .is-style-ghost-white .wp-block-button__link:hover {
+	background-color: rgba(255, 255, 255, 0.25);
+	border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Mentions */
+.cta-final__mentions {
+	gap: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+}
+
+.cta-final__mention {
+	margin-bottom: 0;
+	opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+	.cta-final__price-block {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.cta-final__buttons {
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.cta-final__buttons .wp-block-button {
+		width: 100%;
+	}
+
+	.cta-final__buttons .wp-block-button__link {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.cta-final__mentions {
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--xs);
+	}
+}

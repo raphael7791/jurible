@@ -176,55 +176,6 @@ register_block_pattern_category(
 add_filter("init", "jurible_register_patterns_categories");
 
 
-# Enregistrer les patterns du thème manuellement
-function jurible_register_theme_patterns() {
-    $patterns_dir = get_template_directory() . '/patterns/';
-
-    if (!is_dir($patterns_dir)) {
-        return;
-    }
-
-    $pattern_files = glob($patterns_dir . '*.php');
-
-    foreach ($pattern_files as $pattern_file) {
-        $pattern_data = get_file_data($pattern_file, array(
-            'title'       => 'Title',
-            'slug'        => 'Slug',
-            'description' => 'Description',
-            'categories'  => 'Categories',
-        ));
-
-        if (empty($pattern_data['title']) || empty($pattern_data['slug'])) {
-            continue;
-        }
-
-        // Skip if already registered
-        if (WP_Block_Patterns_Registry::get_instance()->is_registered($pattern_data['slug'])) {
-            continue;
-        }
-
-        ob_start();
-        include $pattern_file;
-        $content = ob_get_clean();
-
-        $categories = !empty($pattern_data['categories'])
-            ? array_map('trim', explode(',', $pattern_data['categories']))
-            : array('jurible-components');
-
-        register_block_pattern(
-            $pattern_data['slug'],
-            array(
-                'title'       => $pattern_data['title'],
-                'description' => $pattern_data['description'],
-                'content'     => $content,
-                'categories'  => $categories,
-            )
-        );
-    }
-}
-add_action('init', 'jurible_register_theme_patterns');
-
-
 # Retirer certains blocs de l'éditeur
 # Dans https://capitainewp.io/formations/wordpress-full-site-editing/desactiver-blocs-gutenberg/#exclusionnbsp-retirer-seulement-certains-blocs
 function jurible_deregister_blocks($allowed_block_types, $editor_context)
@@ -396,6 +347,16 @@ function jurible_register_button_block_styles()
     register_block_style("core/button", [
         "name"  => "cta-white",
         "label" => __("CTA White", "jurible"),
+    ]);
+
+    register_block_style("core/button", [
+        "name"  => "primary-white",
+        "label" => __("Primary White", "jurible"),
+    ]);
+
+    register_block_style("core/button", [
+        "name"  => "ghost-white",
+        "label" => __("Ghost White", "jurible"),
     ]);
 }
 add_action("init", "jurible_register_button_block_styles");
@@ -701,9 +662,9 @@ function jurible_enqueue_enseignants_assets()
 {
     wp_enqueue_style(
         "jurible-enseignants",
-        get_template_directory_uri() . "/assets/css/enseignants.css",
+        get_template_directory_uri() . "/assets/css/C05-enseignants.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/enseignants.css")
+        filemtime(get_template_directory() . "/assets/css/C05-enseignants.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_enseignants_assets");
@@ -715,9 +676,9 @@ function jurible_enqueue_reassurance_assets()
 {
     wp_enqueue_style(
         "jurible-reassurance",
-        get_template_directory_uri() . "/assets/css/reassurance.css",
+        get_template_directory_uri() . "/assets/css/C06-reassurance.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/reassurance.css")
+        filemtime(get_template_directory() . "/assets/css/C06-reassurance.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_reassurance_assets");
@@ -729,9 +690,9 @@ function jurible_enqueue_faq_assets()
 {
     wp_enqueue_style(
         "jurible-faq",
-        get_template_directory_uri() . "/assets/css/faq.css",
+        get_template_directory_uri() . "/assets/css/C07-faq-accordeon.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/faq.css")
+        filemtime(get_template_directory() . "/assets/css/C07-faq-accordeon.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_faq_assets");
@@ -743,9 +704,9 @@ function jurible_enqueue_fonctionnalites_assets()
 {
     wp_enqueue_style(
         "jurible-fonctionnalites",
-        get_template_directory_uri() . "/assets/css/fonctionnalites.css",
+        get_template_directory_uri() . "/assets/css/C08-fonctionnalite.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/fonctionnalites.css")
+        filemtime(get_template_directory() . "/assets/css/C08-fonctionnalite.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_fonctionnalites_assets");
@@ -757,9 +718,9 @@ function jurible_enqueue_contenu_assets()
 {
     wp_enqueue_style(
         "jurible-contenu",
-        get_template_directory_uri() . "/assets/css/contenu.css",
+        get_template_directory_uri() . "/assets/css/C09-contenu.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/contenu.css")
+        filemtime(get_template_directory() . "/assets/css/C09-contenu.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_contenu_assets");
@@ -770,9 +731,9 @@ function jurible_enqueue_pain_points_assets()
 {
     wp_enqueue_style(
         "jurible-pain-points",
-        get_template_directory_uri() . "/assets/css/pain-points.css",
+        get_template_directory_uri() . "/assets/css/C11-pain-points.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/pain-points.css")
+        filemtime(get_template_directory() . "/assets/css/C11-pain-points.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_pain_points_assets");
@@ -783,9 +744,9 @@ function jurible_enqueue_hero_conversion_assets()
 {
     wp_enqueue_style(
         "jurible-hero-conversion",
-        get_template_directory_uri() . "/assets/css/hero-conversion.css",
+        get_template_directory_uri() . "/assets/css/H01-hero-conversion.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/hero-conversion.css")
+        filemtime(get_template_directory() . "/assets/css/H01-hero-conversion.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_hero_conversion_assets");
@@ -796,11 +757,123 @@ function jurible_enqueue_hero_archive_assets()
 {
     wp_enqueue_style(
         "jurible-hero-archive",
-        get_template_directory_uri() . "/assets/css/hero-archive.css",
+        get_template_directory_uri() . "/assets/css/H02-hero-archive.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/hero-archive.css")
+        filemtime(get_template_directory() . "/assets/css/H02-hero-archive.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_hero_archive_assets");
 add_action("enqueue_block_editor_assets", "jurible_enqueue_hero_archive_assets");
+
+# Charger le CSS des Hero Produit (frontend + éditeur)
+function jurible_enqueue_hero_produit_assets()
+{
+    wp_enqueue_style(
+        "jurible-hero-produit",
+        get_template_directory_uri() . "/assets/css/H03-hero-produit.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/H03-hero-produit.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_hero_produit_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_hero_produit_assets");
+
+# Charger le CSS des Hero Simple (frontend + éditeur)
+function jurible_enqueue_hero_simple_assets()
+{
+    wp_enqueue_style(
+        "jurible-hero-simple",
+        get_template_directory_uri() . "/assets/css/H04-hero-simple.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/H04-hero-simple.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_hero_simple_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_hero_simple_assets");
+
+# Charger le CSS des Hero Article (frontend + éditeur)
+function jurible_enqueue_hero_article_assets()
+{
+    wp_enqueue_style(
+        "jurible-hero-article",
+        get_template_directory_uri() . "/assets/css/H05-hero-article.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/H05-hero-article.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_hero_article_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_hero_article_assets");
+
+# Charger le CSS du CTA Final (frontend + éditeur)
+function jurible_enqueue_cta_final_assets()
+{
+    wp_enqueue_style(
+        "jurible-cta-final",
+        get_template_directory_uri() . "/assets/css/P10-cta-final.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/P10-cta-final.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_cta_final_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_cta_final_assets");
+
+# Charger le CSS du Trust Bar (frontend + éditeur)
+function jurible_enqueue_trust_bar_assets()
+{
+    wp_enqueue_style(
+        "jurible-trust-bar",
+        get_template_directory_uri() . "/assets/css/P09-trust-bar.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/P09-trust-bar.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_trust_bar_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_trust_bar_assets");
+
+# Charger le CSS des Paragraphes (frontend + éditeur)
+function jurible_enqueue_paragraphe_assets()
+{
+    wp_enqueue_style(
+        "jurible-paragraphe",
+        get_template_directory_uri() . "/assets/css/P01-paragraphe.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/P01-paragraphe.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_paragraphe_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_paragraphe_assets");
+
+# Charger le CSS du Bloc Texte + Média (frontend + éditeur)
+function jurible_enqueue_bloc_texte_media_assets()
+{
+    wp_enqueue_style(
+        "jurible-bloc-texte-media",
+        get_template_directory_uri() . "/assets/css/P02-bloc-texte-media.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/P02-bloc-texte-media.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_bloc_texte_media_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_bloc_texte_media_assets");
+
+# Charger le CSS et JS de Quelle Offre Choisir (frontend + éditeur)
+function jurible_enqueue_quelle_offre_assets()
+{
+    wp_enqueue_style(
+        "jurible-quelle-offre",
+        get_template_directory_uri() . "/assets/css/P05-quelle-offre-choisir.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/P05-quelle-offre-choisir.css")
+    );
+
+    wp_enqueue_script(
+        "jurible-quelle-offre",
+        get_template_directory_uri() . "/assets/js/P05-quelle-offre-choisir.js",
+        [],
+        filemtime(get_template_directory() . "/assets/js/P05-quelle-offre-choisir.js"),
+        true
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_quelle_offre_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_quelle_offre_assets");
 

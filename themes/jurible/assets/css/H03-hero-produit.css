@@ -1,0 +1,529 @@
+/**
+ * Hero Produit (Type B) CSS
+ * Variantes: B1 Cours, B1bis Support, B3 Pack
+ * Uses theme.json design tokens for consistency
+ */
+
+/* ==========================================================================
+   BASE HERO PRODUIT
+   ========================================================================== */
+
+.hero-produit {
+	position: relative;
+	background: linear-gradient(180deg, #FFFFFF 0%, #FAF5FF 50%, #F3E8FF 100%);
+	overflow: hidden;
+}
+
+.hero-produit__container {
+	max-width: 1200px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 2;
+}
+
+.hero-produit__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--wp--preset--spacing--xl);
+	align-items: flex-start;
+}
+
+/* Layout inversé (visuel à gauche) pour B3 Pack */
+.hero-produit__grid--reversed .hero-produit__content {
+	order: 2;
+}
+
+.hero-produit__grid--reversed .hero-produit__visual {
+	order: 1;
+}
+
+/* ==========================================================================
+   BADGE
+   ========================================================================== */
+
+.hero-produit__badge {
+	display: inline-flex !important;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	background: rgba(124, 58, 237, 0.1) !important;
+	border: 1px solid rgba(124, 58, 237, 0.2);
+	color: var(--wp--preset--color--secondary) !important;
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 600 !important;
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm) !important;
+	border-radius: var(--wp--custom--border-radius--full) !important;
+	margin-bottom: var(--wp--preset--spacing--sm) !important;
+	width: fit-content;
+}
+
+/* ==========================================================================
+   TITLE
+   ========================================================================== */
+
+.hero-produit__title {
+	font-size: clamp(1.75rem, 1.25rem + 2vw, 2.5rem) !important;
+	font-weight: 800 !important;
+	line-height: 1.1 !important;
+	margin-bottom: var(--wp--preset--spacing--xs) !important;
+}
+
+.hero-produit__title mark {
+	background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ==========================================================================
+   META (niveau, semestre)
+   ========================================================================== */
+
+.hero-produit__meta {
+	font-size: var(--wp--preset--font-size--medium) !important;
+	font-weight: 600 !important;
+	color: var(--wp--preset--color--text-gray) !important;
+	margin-bottom: var(--wp--preset--spacing--sm) !important;
+}
+
+/* ==========================================================================
+   SUBTITLE
+   ========================================================================== */
+
+.hero-produit__subtitle {
+	font-size: var(--wp--preset--font-size--medium) !important;
+	color: var(--wp--preset--color--text-gray) !important;
+	line-height: 1.7 !important;
+	margin-bottom: var(--wp--preset--spacing--md) !important;
+	max-width: 520px;
+}
+
+/* ==========================================================================
+   TAGS (uses design system is-style-tag-*)
+   ========================================================================== */
+
+.hero-produit__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--xs);
+	margin-bottom: var(--wp--preset--spacing--sm) !important;
+}
+
+/* ==========================================================================
+   PROOF (STARS + RATING)
+   ========================================================================== */
+
+.hero-produit__proof {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	margin-bottom: var(--wp--preset--spacing--md) !important;
+}
+
+.hero-produit__stars {
+	color: #FBBF24;
+	font-size: var(--wp--preset--font-size--medium) !important;
+	letter-spacing: 2px;
+	margin: 0 !important;
+}
+
+.hero-produit__rating {
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 600 !important;
+	color: var(--wp--preset--color--text-dark) !important;
+	margin: 0 !important;
+}
+
+.hero-produit__rating-count {
+	font-size: var(--wp--preset--font-size--small) !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	margin: 0 !important;
+}
+
+/* ==========================================================================
+   FEATURES ✓
+   ========================================================================== */
+
+.hero-produit__features {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--xs);
+	margin-bottom: var(--wp--preset--spacing--md) !important;
+}
+
+.hero-produit__feature {
+	display: flex !important;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	font-size: var(--wp--preset--font-size--small) !important;
+	color: var(--wp--preset--color--text-gray) !important;
+	margin: 0 !important;
+}
+
+.hero-produit__feature-icon {
+	color: var(--wp--preset--color--success);
+	font-size: var(--wp--preset--font-size--medium);
+	flex-shrink: 0;
+}
+
+/* ==========================================================================
+   CARD LATÉRALE (B1 — cours, B1bis — support)
+   ========================================================================== */
+
+.hero-produit__card {
+	background: white;
+	border-radius: var(--wp--custom--border-radius--lg);
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+	overflow: hidden;
+}
+
+.hero-produit__card-visual {
+	aspect-ratio: 16/9;
+	background: linear-gradient(180deg, #1A1A1A 0%, #2D2D2D 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgba(255, 255, 255, 0.35);
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.hero-produit__card-visual--violet {
+	background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%);
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.hero-produit__card-body {
+	padding: var(--wp--preset--spacing--md);
+}
+
+.hero-produit__card-title {
+	font-size: var(--wp--preset--font-size--medium) !important;
+	font-weight: 700 !important;
+	color: var(--wp--preset--color--text-dark) !important;
+	margin-bottom: var(--wp--preset--spacing--sm) !important;
+}
+
+.hero-produit__card-features {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--xs);
+	margin-bottom: var(--wp--preset--spacing--md) !important;
+}
+
+.hero-produit__card-feature {
+	display: flex !important;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	font-size: var(--wp--preset--font-size--small) !important;
+	color: var(--wp--preset--color--text-gray) !important;
+	margin: 0 !important;
+}
+
+.hero-produit__card-feature-icon {
+	color: var(--wp--preset--color--success);
+	font-size: var(--wp--preset--font-size--medium);
+}
+
+/* ==========================================================================
+   PRIX
+   ========================================================================== */
+
+.hero-produit__price-row {
+	display: flex;
+	align-items: baseline;
+	gap: var(--wp--preset--spacing--xs);
+	flex-wrap: wrap;
+	margin-bottom: var(--wp--preset--spacing--sm) !important;
+}
+
+.hero-produit__price {
+	font-size: clamp(1.75rem, 1.5rem + 1vw, 2.25rem) !important;
+	font-weight: 800 !important;
+	color: var(--wp--preset--color--text-dark) !important;
+	line-height: 1.1 !important;
+	margin: 0 !important;
+}
+
+.hero-produit__price-period {
+	font-size: var(--wp--preset--font-size--medium) !important;
+	font-weight: 500 !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	margin: 0 !important;
+}
+
+.hero-produit__price-savings {
+	font-size: var(--wp--preset--font-size--small) !important;
+	color: var(--wp--preset--color--success) !important;
+	font-weight: 500 !important;
+	margin-bottom: var(--wp--preset--spacing--xs) !important;
+}
+
+.hero-produit__price-details {
+	font-size: var(--wp--preset--font-size--small) !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	margin-bottom: var(--wp--preset--spacing--sm) !important;
+}
+
+/* ==========================================================================
+   CTA
+   ========================================================================== */
+
+.hero-produit__cta {
+	margin-bottom: var(--wp--preset--spacing--xs) !important;
+}
+
+.hero-produit__cta .wp-block-button__link {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md) !important;
+	font-size: var(--wp--preset--font-size--medium) !important;
+	font-weight: 600 !important;
+	border-radius: var(--wp--custom--border-radius--md) !important;
+	background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%) !important;
+	box-shadow: 0 4px 14px rgba(176, 0, 29, 0.25);
+	transition: all 0.2s ease;
+}
+
+.hero-produit__cta .wp-block-button__link:hover {
+	box-shadow: 0 6px 20px rgba(176, 0, 29, 0.35);
+	transform: translateY(-2px);
+}
+
+.hero-produit__cta-mentions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--wp--preset--spacing--sm);
+	font-size: var(--wp--preset--font-size--caption) !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	margin-top: var(--wp--preset--spacing--xs) !important;
+}
+
+.hero-produit__cta-mention {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	gap: var(--wp--preset--spacing--xs);
+	font-size: var(--wp--preset--font-size--caption) !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	margin: 0 !important;
+}
+
+/* ==========================================================================
+   MOCKUP PRODUIT (B3 — Pack)
+   ========================================================================== */
+
+.hero-produit__mockup {
+	position: relative;
+	background: white;
+	border-radius: var(--wp--custom--border-radius--lg);
+	overflow: hidden;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+	border: 1px solid rgba(229, 231, 235, 0.5);
+}
+
+.hero-produit__mockup-main {
+	aspect-ratio: 4/3;
+	background: var(--wp--preset--color--muted);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--wp--preset--color--text-muted);
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.hero-produit__mockup-badge {
+	position: absolute;
+	top: var(--wp--preset--spacing--sm);
+	right: var(--wp--preset--spacing--sm);
+	background: var(--wp--preset--color--success);
+	color: white !important;
+	font-size: var(--wp--preset--font-size--caption) !important;
+	font-weight: 600 !important;
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm) !important;
+	border-radius: var(--wp--custom--border-radius--full) !important;
+	margin: 0 !important;
+}
+
+/* Galerie miniatures */
+.hero-produit__thumbnails {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: var(--wp--preset--spacing--xs);
+	margin-top: var(--wp--preset--spacing--sm) !important;
+}
+
+.hero-produit__thumb {
+	height: 80px;
+	background: white;
+	border: 2px solid var(--wp--preset--color--border);
+	border-radius: var(--wp--custom--border-radius--md);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--wp--preset--font-size--caption) !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	cursor: pointer;
+	transition: border-color 0.2s ease;
+	text-align: center;
+	line-height: 1.2;
+	padding: var(--wp--preset--spacing--xs);
+	margin: 0 !important;
+}
+
+.hero-produit__thumb:hover,
+.hero-produit__thumb--active {
+	border-color: var(--wp--preset--color--primary) !important;
+}
+
+/* ==========================================================================
+   SPECS GRID 2×2
+   ========================================================================== */
+
+.hero-produit__specs {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1px;
+	background: var(--wp--preset--color--border);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--wp--custom--border-radius--lg);
+	overflow: hidden;
+	margin-top: var(--wp--preset--spacing--sm) !important;
+}
+
+.hero-produit__spec {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--wp--preset--spacing--xs);
+	padding: var(--wp--preset--spacing--sm);
+	background: white;
+}
+
+.hero-produit__spec-icon {
+	font-size: var(--wp--preset--font-size--body-large) !important;
+	flex-shrink: 0;
+	margin: 0 !important;
+}
+
+.hero-produit__spec-content {
+	display: flex;
+	flex-direction: column;
+}
+
+.hero-produit__spec-title {
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 600 !important;
+	color: var(--wp--preset--color--text-dark) !important;
+	margin: 0 !important;
+}
+
+.hero-produit__spec-desc {
+	font-size: var(--wp--preset--font-size--caption) !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	margin: 0 !important;
+}
+
+/* ==========================================================================
+   GARANTIE
+   ========================================================================== */
+
+.hero-produit__guarantee {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--wp--preset--spacing--sm);
+	background: rgba(16, 185, 129, 0.06);
+	border: 1px solid rgba(16, 185, 129, 0.2);
+	border-radius: var(--wp--custom--border-radius--lg);
+	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+	margin-top: var(--wp--preset--spacing--sm) !important;
+}
+
+.hero-produit__guarantee-icon {
+	width: 36px;
+	height: 36px;
+	min-width: 36px;
+	background: var(--wp--preset--color--success);
+	border-radius: var(--wp--custom--border-radius--full);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--wp--preset--font-size--medium);
+}
+
+.hero-produit__guarantee-title {
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 600 !important;
+	color: var(--wp--preset--color--text-dark) !important;
+	margin: 0 0 2px 0 !important;
+}
+
+.hero-produit__guarantee-desc {
+	font-size: var(--wp--preset--font-size--small) !important;
+	color: var(--wp--preset--color--text-gray) !important;
+	line-height: 1.5 !important;
+	margin: 0 !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1000px) {
+	.hero-produit__grid {
+		grid-template-columns: 1fr;
+		gap: var(--wp--preset--spacing--lg);
+	}
+
+	.hero-produit__grid--reversed .hero-produit__content {
+		order: 1;
+	}
+
+	.hero-produit__grid--reversed .hero-produit__visual {
+		order: 2;
+	}
+}
+
+@media (max-width: 600px) {
+	.hero-produit {
+		padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--sm) !important;
+	}
+
+	.hero-produit__title {
+		font-size: 1.5rem !important;
+	}
+
+	.hero-produit__meta {
+		font-size: var(--wp--preset--font-size--small) !important;
+	}
+
+	.hero-produit__subtitle {
+		font-size: var(--wp--preset--font-size--small) !important;
+	}
+
+	.hero-produit__badge {
+		font-size: var(--wp--preset--font-size--caption) !important;
+		padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--xs) !important;
+	}
+
+	.hero-produit__price {
+		font-size: 1.75rem !important;
+	}
+
+	.hero-produit__thumbnails {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.hero-produit__thumb {
+		height: 64px;
+		font-size: 10px !important;
+	}
+
+	.hero-produit__specs {
+		font-size: var(--wp--preset--font-size--small) !important;
+	}
+
+	.hero-produit__guarantee {
+		padding: var(--wp--preset--spacing--sm);
+	}
+}

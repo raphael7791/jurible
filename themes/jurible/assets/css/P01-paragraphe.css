@@ -1,0 +1,50 @@
+/**
+ * P01 - Section Paragraphe
+ * Sections de contenu texte avec variantes
+ */
+
+/* ═══════════════════════════════════════
+   LISTE EMOJI
+   ═══════════════════════════════════════ */
+
+.section-paragraphe__list {
+	list-style: none;
+	padding-left: 0 !important;
+}
+
+.section-paragraphe__list li {
+	padding: 6px 0;
+}
+
+/* ═══════════════════════════════════════
+   BLOCKQUOTE
+   ═══════════════════════════════════════ */
+
+.section-paragraphe__quote {
+	font-weight: 700;
+	font-style: italic;
+	color: var(--wp--preset--color--text-gray);
+	border-left: 3px solid var(--wp--preset--color--primary);
+	padding-left: var(--wp--preset--spacing--md);
+	margin: var(--wp--preset--spacing--md) 0;
+}
+
+.section-paragraphe__quote p {
+	margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════
+   VARIANTE CARD
+   Note: Bordure 1px arrondie gérée via les attributs du bloc WordPress
+   Pas de shadow sur cette variante
+   ═══════════════════════════════════════ */
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════ */
+
+@media (max-width: 782px) {
+	.section-paragraphe__card {
+		padding: var(--wp--preset--spacing--md) !important;
+	}
+}

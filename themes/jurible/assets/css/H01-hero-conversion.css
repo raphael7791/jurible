@@ -1,0 +1,577 @@
+/**
+ * Hero Conversion (Type A) CSS
+ * Variantes: Homepage, Academie, Prepa, Suite IA
+ * Uses theme.json design tokens for consistency
+ */
+
+/* ==========================================================================
+   BASE HERO
+   ========================================================================== */
+
+.hero-conversion {
+	position: relative;
+	overflow: hidden;
+	background: linear-gradient(180deg, #FFFFFF 0%, #FAF5FF 50%, #F3E8FF 100%);
+}
+
+
+/* Grid layout */
+.hero-conversion__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--wp--preset--spacing--xl);
+	align-items: center;
+}
+
+/* ==========================================================================
+   BADGE
+   ========================================================================== */
+
+.hero-conversion__badge {
+	display: inline-flex !important;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	background: rgba(124, 58, 237, 0.1) !important;
+	border: 1px solid rgba(124, 58, 237, 0.2);
+	color: var(--wp--preset--color--secondary) !important;
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 600 !important;
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm) !important;
+	border-radius: var(--wp--custom--border-radius--full) !important;
+	margin-bottom: var(--wp--preset--spacing--md) !important;
+	width: fit-content;
+}
+
+/* Tech variant badge */
+.hero-conversion--tech .hero-conversion__badge {
+	background: linear-gradient(135deg, rgba(124, 58, 237, 0.12) 0%, rgba(59, 130, 246, 0.12) 100%) !important;
+	border-color: rgba(124, 58, 237, 0.25);
+}
+
+/* ==========================================================================
+   TITLE
+   ========================================================================== */
+
+.hero-conversion__title {
+	font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem) !important;
+	font-weight: 800 !important;
+	line-height: 1.1 !important;
+	margin-bottom: var(--wp--preset--spacing--md) !important;
+}
+
+.hero-conversion__title mark {
+	background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ==========================================================================
+   SUBTITLE
+   ========================================================================== */
+
+.hero-conversion__subtitle {
+	font-size: var(--wp--preset--font-size--body-large) !important;
+	color: var(--wp--preset--color--text-gray) !important;
+	line-height: 1.7 !important;
+	margin-bottom: var(--wp--preset--spacing--lg) !important;
+	max-width: 500px;
+}
+
+/* ==========================================================================
+   FEATURES LIST
+   ========================================================================== */
+
+.hero-conversion__features {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--wp--preset--spacing--xs);
+	margin-bottom: var(--wp--preset--spacing--md) !important;
+}
+
+.hero-conversion__features--inline {
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--md);
+}
+
+.hero-conversion__feature {
+	display: flex !important;
+	align-items: center !important;
+	gap: var(--wp--preset--spacing--xs);
+	font-size: var(--wp--preset--font-size--small) !important;
+	color: var(--wp--preset--color--text-gray) !important;
+	line-height: 1.5 !important;
+	margin: 0 !important;
+}
+
+.hero-conversion__feature-icon {
+	width: 22px;
+	height: 22px;
+	min-width: 22px;
+	background: var(--wp--preset--color--success);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: var(--wp--preset--font-size--caption);
+}
+
+/* ==========================================================================
+   PROOF (STARS + RATING)
+   ========================================================================== */
+
+.hero-conversion__proof {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--sm);
+	margin-bottom: var(--wp--preset--spacing--md) !important;
+}
+
+.hero-conversion__stars {
+	color: #FBBF24;
+	font-size: var(--wp--preset--font-size--medium) !important;
+	letter-spacing: 2px;
+	margin: 0 !important;
+}
+
+.hero-conversion__rating {
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 600 !important;
+	color: var(--wp--preset--color--text-dark) !important;
+	margin: 0 !important;
+}
+
+.hero-conversion__students {
+	font-size: var(--wp--preset--font-size--small) !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	margin: 0 !important;
+}
+
+/* ==========================================================================
+   CTA BUTTONS
+   ========================================================================== */
+
+.hero-conversion__cta {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--sm);
+	margin-bottom: var(--wp--preset--spacing--sm) !important;
+}
+
+.hero-conversion__cta .wp-block-button__link {
+	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md) !important;
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 500 !important;
+	letter-spacing: 0.3px;
+	border-radius: var(--wp--custom--border-radius--md) !important;
+	transition: all 0.2s ease;
+}
+
+/* Primary button with gradient */
+.hero-conversion__cta .is-style-primary .wp-block-button__link {
+	background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%) !important;
+	box-shadow: 0 4px 14px rgba(176, 0, 29, 0.25);
+}
+
+.hero-conversion__cta .is-style-primary .wp-block-button__link:hover {
+	box-shadow: 0 6px 20px rgba(176, 0, 29, 0.35);
+	transform: translateY(-2px);
+}
+
+/* Outline button */
+.hero-conversion__cta .is-style-outline .wp-block-button__link {
+	background: white !important;
+	color: var(--wp--preset--color--text-dark) !important;
+	border: 1.5px solid var(--wp--preset--color--border) !important;
+}
+
+.hero-conversion__cta .is-style-outline .wp-block-button__link:hover {
+	border-color: var(--wp--preset--color--text-dark) !important;
+	transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   MENTIONS (checkmarks)
+   ========================================================================== */
+
+.hero-conversion__mentions {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--md);
+	font-size: var(--wp--preset--font-size--small) !important;
+}
+
+.hero-conversion__mention {
+	display: flex !important;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	color: var(--wp--preset--color--text-muted) !important;
+	margin: 0 !important;
+}
+
+.hero-conversion__mention-check {
+	color: var(--wp--preset--color--text-muted);
+	font-size: var(--wp--preset--font-size--small);
+}
+
+/* ==========================================================================
+   URGENCY BANNER
+   ========================================================================== */
+
+.hero-conversion__urgency {
+	display: flex !important;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	background: rgba(245, 158, 11, 0.08) !important;
+	color: #D97706 !important;
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 500 !important;
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm) !important;
+	border-radius: var(--wp--custom--border-radius--md) !important;
+	margin-bottom: var(--wp--preset--spacing--md) !important;
+}
+
+/* ==========================================================================
+   VISUAL AREA
+   ========================================================================== */
+
+.hero-conversion__visual {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+/* Browser Mockup (dark) */
+.hero-conversion__mockup {
+	position: relative;
+	background: var(--wp--preset--color--text-dark);
+	border-radius: var(--wp--custom--border-radius--lg);
+	overflow: hidden;
+	box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+}
+
+.hero-conversion__mockup-header {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--sm);
+	background: var(--wp--preset--color--text-dark);
+}
+
+.hero-conversion__mockup-dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+}
+
+.hero-conversion__mockup-dot--red {
+	background: #EF4444;
+}
+
+.hero-conversion__mockup-dot--yellow {
+	background: #F59E0B;
+}
+
+.hero-conversion__mockup-dot--green {
+	background: #10B981;
+}
+
+.hero-conversion__mockup-body {
+	aspect-ratio: 16/10;
+	background: linear-gradient(180deg, #1A1A1A 0%, #2D2D2D 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgba(255, 255, 255, 0.35);
+	font-size: var(--wp--preset--font-size--small);
+	padding: var(--wp--preset--spacing--md);
+}
+
+/* Mockup CTA label below */
+.hero-conversion__mockup-cta {
+	display: flex;
+	justify-content: center;
+	margin-top: var(--wp--preset--spacing--sm);
+}
+
+.hero-conversion__mockup-label {
+	background: var(--wp--preset--color--muted) !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	font-size: var(--wp--preset--font-size--small) !important;
+	font-weight: 500 !important;
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm) !important;
+	border-radius: var(--wp--custom--border-radius--full) !important;
+	border: 1px solid var(--wp--preset--color--border) !important;
+	margin: 0 !important;
+}
+
+/* Video container */
+.hero-conversion__video {
+	position: relative;
+	background: var(--wp--preset--color--text-dark);
+	border-radius: var(--wp--custom--border-radius--lg);
+	overflow: hidden;
+	aspect-ratio: 16/9;
+	box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+	transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+	transition: transform 0.4s ease;
+}
+
+.hero-conversion__video:hover {
+	transform: perspective(1000px) rotateY(0) rotateX(0);
+}
+
+.hero-conversion__video iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+/* WordPress embed block inside video container */
+.hero-conversion__video .wp-block-embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+.hero-conversion__video .wp-block-embed__wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.hero-conversion__video figure {
+	margin: 0;
+}
+
+.hero-conversion__video-inner {
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.hero-conversion__video-play {
+	width: 72px;
+	height: 72px;
+	background: rgba(255, 255, 255, 0.95);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-conversion__video-play:hover {
+	transform: scale(1.1);
+}
+
+.hero-conversion__video-play svg {
+	width: 28px;
+	height: 28px;
+	fill: var(--wp--preset--color--primary);
+	margin-left: 4px;
+}
+
+.hero-conversion__video-label {
+	position: absolute;
+	bottom: var(--wp--preset--spacing--sm);
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgba(0, 0, 0, 0.7);
+	color: white !important;
+	font-size: var(--wp--preset--font-size--caption) !important;
+	font-weight: 500 !important;
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm) !important;
+	border-radius: var(--wp--custom--border-radius--full) !important;
+	backdrop-filter: blur(4px);
+	white-space: nowrap;
+	margin: 0 !important;
+}
+
+/* Product Mockup (white) */
+.hero-conversion__product-mockup {
+	position: relative;
+	background: white;
+	border-radius: var(--wp--custom--border-radius--lg);
+	overflow: hidden;
+	box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+	border: 1px solid rgba(229, 231, 235, 0.5);
+	aspect-ratio: 4/3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* ==========================================================================
+   TECH VARIANT (Suite IA)
+   ========================================================================== */
+
+.hero-conversion--tech .hero-conversion__mockup {
+	transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+	transition: transform 0.4s ease;
+}
+
+.hero-conversion--tech .hero-conversion__mockup:hover {
+	transform: perspective(1000px) rotateY(0) rotateX(0);
+}
+
+.hero-conversion--tech .hero-conversion__mockup-body {
+	background: linear-gradient(135deg, #0F0F1A 0%, #1A1A2E 50%, #16213E 100%);
+}
+
+
+/* ==========================================================================
+   STATS (optional, used with Homepage)
+   ========================================================================== */
+
+.hero-conversion__stats {
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	gap: var(--wp--preset--spacing--xl);
+	margin-top: var(--wp--preset--spacing--xl) !important;
+	padding-top: var(--wp--preset--spacing--xl);
+	border-top: 1px solid rgba(124, 58, 237, 0.08);
+}
+
+.hero-conversion__stat-value {
+	font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem) !important;
+	font-weight: 800 !important;
+	color: var(--wp--preset--color--text-dark) !important;
+	margin-bottom: 2px !important;
+	line-height: 1.1 !important;
+}
+
+.hero-conversion__stat-label {
+	font-size: var(--wp--preset--font-size--small) !important;
+	color: var(--wp--preset--color--text-muted) !important;
+	margin: 0 !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1000px) {
+	.hero-conversion__grid {
+		grid-template-columns: 1fr;
+		gap: var(--wp--preset--spacing--lg);
+	}
+
+	.hero-conversion__visual {
+		order: 2;
+	}
+
+	.hero-conversion__content {
+		order: 1;
+	}
+
+	.hero-conversion__features--inline {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--wp--preset--spacing--xs);
+	}
+
+	.hero-conversion__stats {
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--wp--preset--spacing--md);
+		text-align: center;
+	}
+
+	.hero-conversion__stat-value {
+		font-size: 1.5rem !important;
+	}
+
+	.hero-conversion__stat-label {
+		font-size: var(--wp--preset--font-size--caption) !important;
+	}
+}
+
+@media (max-width: 600px) {
+	.hero-conversion__title {
+		font-size: 1.75rem !important;
+		line-height: 1.15 !important;
+	}
+
+	.hero-conversion__subtitle {
+		font-size: var(--wp--preset--font-size--medium) !important;
+		margin-bottom: var(--wp--preset--spacing--md) !important;
+	}
+
+	.hero-conversion__badge {
+		font-size: var(--wp--preset--font-size--caption) !important;
+		padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--xs) !important;
+	}
+
+	.hero-conversion__cta {
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--xs);
+	}
+
+	.hero-conversion__cta .wp-block-button {
+		width: 100%;
+	}
+
+	.hero-conversion__cta .wp-block-button__link {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.hero-conversion__mentions {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--wp--preset--spacing--xs);
+	}
+
+	.hero-conversion__proof {
+		flex-wrap: wrap;
+		gap: var(--wp--preset--spacing--xs);
+	}
+
+	.hero-conversion__video-play {
+		width: 56px;
+		height: 56px;
+	}
+
+	.hero-conversion__video-play svg {
+		width: 22px;
+		height: 22px;
+	}
+
+	.hero-conversion__urgency {
+		font-size: var(--wp--preset--font-size--small) !important;
+		padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm) !important;
+	}
+
+	.hero-conversion--tech .hero-conversion__mockup,
+	.hero-conversion__video {
+		transform: none;
+	}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.hero-conversion__cta .wp-block-button__link,
+	.hero-conversion__video-play,
+	.hero-conversion--tech .hero-conversion__mockup {
+		animation: none !important;
+		transition: none !important;
+	}
+}
