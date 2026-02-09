@@ -185,25 +185,6 @@ body.menu-open {
     overflow: hidden;
 }
 
-/* ==========================================================================
-   FIX - SureCart slide-out cart white space
-   ========================================================================== */
-.wp-block-surecart-slide-out-cart-is-layout-flow,
-[class*="surecart-slide-out-cart"],
-[class*="wp-container-surecart-slide-out-cart"],
-div[class*="surecart"][class*="slide-out"],
-div.is-layout-flow[class*="surecart"] {
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    z-index: 9999 !important;
-    height: auto !important;
-    pointer-events: none !important;
-}
-
-[class*="wp-container-surecart-slide-out-cart"] > * {
-    pointer-events: auto !important;
-}
 
 /* ==========================================================================
    RESET - Override existing header menu styles

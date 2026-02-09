@@ -916,3 +916,42 @@ function jurible_enqueue_comparaison_assets()
 add_action("wp_enqueue_scripts", "jurible_enqueue_comparaison_assets");
 add_action("enqueue_block_editor_assets", "jurible_enqueue_comparaison_assets");
 
+# Charger le CSS de Features Grid (frontend + éditeur)
+function jurible_enqueue_features_assets()
+{
+    wp_enqueue_style(
+        "jurible-features",
+        get_template_directory_uri() . "/assets/css/P12-features.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/P12-features.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_features_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_features_assets");
+
+# Charger le CSS de Stats Section (frontend + éditeur)
+function jurible_enqueue_stats_assets()
+{
+    wp_enqueue_style(
+        "jurible-stats",
+        get_template_directory_uri() . "/assets/css/P13-stats.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/P13-stats.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_stats_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_stats_assets");
+
+// P14 - Steps assets
+function jurible_enqueue_steps_assets()
+{
+    wp_enqueue_style(
+        "jurible-steps",
+        get_template_directory_uri() . "/assets/css/P14-steps.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/P14-steps.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_steps_assets");
+add_action("enqueue_block_editor_assets", "jurible_enqueue_steps_assets");
+

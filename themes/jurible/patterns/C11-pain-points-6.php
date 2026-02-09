@@ -25,11 +25,11 @@
 </div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"pain-grid-6","layout":{"type":"constrained","contentSize":"1100px"}} -->
-<div class="wp-block-group pain-grid-6">
+<!-- wp:group {"align":"wide","className":"pain-grid-6","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignwide pain-grid-6">
 
-<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|md","left":"var:preset|spacing|md"}}}} -->
-<div class="wp-block-columns">
+<!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|md","left":"var:preset|spacing|md"}}}} -->
+<div class="wp-block-columns alignwide">
 <!-- wp:column -->
 <div class="wp-block-column">
 <!-- wp:group {"className":"pain-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"12px","width":"1px"}},"borderColor":"border","backgroundColor":"white","layout":{"type":"default"}} -->
@@ -96,8 +96,8 @@
 </div>
 <!-- /wp:columns -->
 
-<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|md","left":"var:preset|spacing|md"},"margin":{"top":"var:preset|spacing|md"}}}} -->
-<div class="wp-block-columns" style="margin-top:var(--wp--preset--spacing--md)">
+<!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|md","left":"var:preset|spacing|md"},"margin":{"top":"var:preset|spacing|md"}}}} -->
+<div class="wp-block-columns alignwide" style="margin-top:var(--wp--preset--spacing--md)">
 <!-- wp:column -->
 <div class="wp-block-column">
 <!-- wp:group {"className":"pain-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"12px","width":"1px"}},"borderColor":"border","backgroundColor":"white","layout":{"type":"default"}} -->

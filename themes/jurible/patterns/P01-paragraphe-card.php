@@ -6,7 +6,7 @@
  * Description: Section paragraphe style card - Bloc avec bordure 1px arrondie + Titre + Paragraphes + Caption
  */
 ?>
-<!-- wp:group {"align":"full","className":"section-paragraphe","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained","contentSize":"800px"}} -->
+<!-- wp:group {"align":"full","className":"section-paragraphe","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull section-paragraphe has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:group {"className":"section-paragraphe__card","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|lg","right":"var:preset|spacing|lg"},"blockGap":"var:preset|spacing|sm"},"border":{"radius":"12px","width":"1px"}},"borderColor":"border","backgroundColor":"white","layout":{"type":"constrained"}} -->

@@ -137,7 +137,7 @@ get_template_part('template-parts/sticky-bar');
         <div class="site-header__actions">
             <a href="/tarifs" class="btn btn--primary btn--sm">S'ABONNER</a>
             <a href="https://ecole.jurible.com/login" class="btn btn--outline btn--sm">SE CONNECTER</a>
-            <?php echo do_shortcode('[sc_cart_icon]'); ?>
+            <?php echo do_blocks('<!-- wp:surecart/cart-menu-icon --><div class="wp-block-surecart-cart-menu-icon"><!-- wp:surecart/cart-icon /--></div><!-- /wp:surecart/cart-menu-icon -->'); ?>
         </div>
         <button class="site-header__burger" id="header-burger" aria-label="Ouvrir le menu" aria-expanded="false">
             <span></span>

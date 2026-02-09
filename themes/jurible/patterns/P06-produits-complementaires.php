@@ -6,7 +6,7 @@
  * Description: Section 3 cartes produits complémentaires avec card highlight
  */
 ?>
-<!-- wp:group {"align":"full","className":"produits-complementaires","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"},"blockGap":"var:preset|spacing|lg"}},"backgroundColor":"muted","layout":{"type":"constrained","contentSize":"1100px"}} -->
+<!-- wp:group {"align":"full","className":"produits-complementaires","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"},"blockGap":"var:preset|spacing|lg"}},"backgroundColor":"muted","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull produits-complementaires has-muted-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:group {"layout":{"type":"flex","justifyContent":"center"}} -->
@@ -21,8 +21,8 @@
 <h2 class="wp-block-heading has-text-align-center">Outils complémentaires pour cette <mark style="background:linear-gradient(135deg,#B0001D 0%,#DC2626 50%,#7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">matière</mark></h2>
 <!-- /wp:heading -->
 
-<!-- wp:columns {"className":"produits-complementaires__grid","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|md","top":"var:preset|spacing|md"}}}} -->
-<div class="wp-block-columns produits-complementaires__grid">
+<!-- wp:columns {"align":"wide","className":"produits-complementaires__grid","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|md","top":"var:preset|spacing|md"}}}} -->
+<div class="wp-block-columns alignwide produits-complementaires__grid">
 
 <!-- wp:column {"className":"produit-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|lg","right":"var:preset|spacing|lg"},"blockGap":"var:preset|spacing|sm"},"border":{"radius":"16px","width":"1px"}},"borderColor":"border","backgroundColor":"white"} -->
 <div class="wp-block-column produit-card has-border-color has-border-border-color has-white-background-color has-background" style="border-width:1px;border-radius:16px;padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--lg)">

@@ -6,7 +6,7 @@
  * Description: Hero archive C4 - Page de résultats de recherche
  */
 ?>
-<!-- wp:group {"align":"full","className":"hero-archive hero-archive--search","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained","contentSize":"800px"}} -->
+<!-- wp:group {"align":"full","className":"hero-archive hero-archive--search","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull hero-archive hero-archive--search" style="padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:paragraph {"align":"center","className":"hero-archive__badge"} -->

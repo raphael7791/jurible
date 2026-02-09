@@ -6,11 +6,11 @@
  * Description: Hero produit B1bis - Page support (Flashcards, Fiches vidéo, Mindmaps) avec card abonnement
  */
 ?>
-<!-- wp:group {"align":"full","className":"hero-produit","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<!-- wp:group {"align":"full","className":"hero-produit","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull hero-produit" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
-<!-- wp:columns {"className":"hero-produit__grid","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|xl","left":"var:preset|spacing|xl"}}}} -->
-<div class="wp-block-columns hero-produit__grid">
+<!-- wp:columns {"align":"wide","className":"hero-produit__grid","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|xl","left":"var:preset|spacing|xl"}}}} -->
+<div class="wp-block-columns alignwide hero-produit__grid">
 
 <!-- wp:column {"className":"hero-produit__content"} -->
 <div class="wp-block-column hero-produit__content">

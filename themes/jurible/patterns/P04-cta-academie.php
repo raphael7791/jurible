@@ -6,14 +6,14 @@
  * Description: Bloc cross-sell Fiches PDF vers Académie avec comparatif et pricing card
  */
 ?>
-<!-- wp:group {"align":"full","className":"cta-crosssell","style":{"border":{"radius":"12px"}},"backgroundColor":"white","layout":{"type":"constrained","contentSize":"1120px"}} -->
+<!-- wp:group {"align":"full","className":"cta-crosssell","style":{"border":{"radius":"12px"}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull cta-crosssell has-white-background-color has-background" style="border-radius:12px">
 
-<!-- wp:group {"className":"cta-crosssell__body","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|xl","right":"var:preset|spacing|xl"},"blockGap":"var:preset|spacing|lg"}},"layout":{"type":"default"}} -->
-<div class="wp-block-group cta-crosssell__body" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--xl);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--xl)">
+<!-- wp:group {"align":"wide","className":"cta-crosssell__body","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"},"blockGap":"var:preset|spacing|lg"}},"layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide cta-crosssell__body" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
-<!-- wp:columns {"verticalAlignment":"stretch","className":"cta-crosssell__inner","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|lg"}}}} -->
-<div class="wp-block-columns are-vertically-aligned-stretch cta-crosssell__inner">
+<!-- wp:columns {"align":"wide","verticalAlignment":"stretch","className":"cta-crosssell__inner","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|lg"}}}} -->
+<div class="wp-block-columns alignwide are-vertically-aligned-stretch cta-crosssell__inner">
 
 <!-- wp:column {"verticalAlignment":"stretch","width":"60%","className":"cta-crosssell__left"} -->
 <div class="wp-block-column is-vertically-aligned-stretch cta-crosssell__left" style="flex-basis:60%">
@@ -181,7 +181,7 @@
 <div class="wp-block-group cta-crosssell__conseil has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
-<p class="has-text-gray-color has-text-color" style="font-size:14px"><strong style="color:#B0001D">Notre conseil :</strong> Si vous voulez imprimer et réviser hors connexion, optez pour les fiches PDF. Si vous préférez une formation complète avec vidéos + exercices, optez pour l'Académie.</p>
+<p class="has-text-gray-color has-text-color" style="font-size:14px"><strong style="color:var(--wp--preset--color--primary)">Notre conseil :</strong> Si vous voulez imprimer et réviser hors connexion, optez pour les fiches PDF. Si vous préférez une formation complète avec vidéos + exercices, optez pour l'Académie.</p>
 <!-- /wp:paragraph -->
 
 </div>

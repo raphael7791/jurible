@@ -6,12 +6,12 @@
  * Description: Hero conversion A4 - Suite IA avec badge tech, mockup 3D et particules
  */
 ?>
-<!-- wp:group {"align":"full","className":"hero-conversion hero-conversion--tech","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<!-- wp:group {"align":"full","className":"hero-conversion hero-conversion--tech","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull hero-conversion hero-conversion--tech" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 
-<!-- wp:columns {"className":"hero-conversion__grid","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|xl","left":"var:preset|spacing|xl"}}}} -->
-<div class="wp-block-columns hero-conversion__grid">
+<!-- wp:columns {"align":"wide","className":"hero-conversion__grid","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|xl","left":"var:preset|spacing|xl"}}}} -->
+<div class="wp-block-columns alignwide hero-conversion__grid">
 
 <!-- wp:column {"className":"hero-conversion__content"} -->
 <div class="wp-block-column hero-conversion__content">

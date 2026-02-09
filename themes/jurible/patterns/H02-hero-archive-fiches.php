@@ -6,7 +6,7 @@
  * Description: Hero archive C3 - Fiches d'arrêt avec barre de recherche et catégories
  */
 ?>
-<!-- wp:group {"align":"full","className":"hero-archive","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained","contentSize":"800px"}} -->
+<!-- wp:group {"align":"full","className":"hero-archive","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"},"blockGap":"var:preset|spacing|md"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull hero-archive" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:paragraph {"align":"center","className":"hero-archive__badge"} -->
@@ -39,8 +39,8 @@
 </div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"hero-archive__categories","layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"}} -->
-<div class="wp-block-group hero-archive__categories">
+<!-- wp:group {"className":"hero-archive__categories","style":{"spacing":{"margin":{"top":"var:preset|spacing|lg"},"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"}} -->
+<div class="wp-block-group hero-archive__categories" style="margin-top:var(--wp--preset--spacing--lg)">
 <!-- wp:paragraph {"className":"is-style-tag-gray"} -->
 <p class="is-style-tag-gray">Responsabilité civile</p>
 <!-- /wp:paragraph -->

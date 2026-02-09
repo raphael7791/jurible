@@ -6,7 +6,7 @@
  * Description: Bloc pricing complet avec features et sélecteur de durée
  */
 ?>
-<!-- wp:group {"align":"full","className":"pricing-academie","style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"}}},"backgroundColor":"white","layout":{"type":"constrained","contentSize":"1100px"}} -->
+<!-- wp:group {"align":"full","className":"pricing-academie","style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull pricing-academie has-white-background-color has-background" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0">
 
 <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|lg","right":"var:preset|spacing|lg"},"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"default"}} -->
@@ -23,11 +23,11 @@
 </div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"pricing-academie__features","style":{"spacing":{"padding":{"left":"var:preset|spacing|xl","right":"var:preset|spacing|xl","bottom":"var:preset|spacing|lg"}}},"layout":{"type":"constrained","contentSize":"900px"}} -->
-<div class="wp-block-group pricing-academie__features" style="padding-right:var(--wp--preset--spacing--xl);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--xl)">
+<!-- wp:group {"align":"wide","className":"pricing-academie__features","style":{"spacing":{"padding":{"left":"var:preset|spacing|md","right":"var:preset|spacing|md","bottom":"var:preset|spacing|lg"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignwide pricing-academie__features" style="padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--md)">
 
-<!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|md","top":"var:preset|spacing|sm"}}}} -->
-<div class="wp-block-columns">
+<!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|md","top":"var:preset|spacing|sm"}}}} -->
+<div class="wp-block-columns alignwide">
 
 <!-- wp:column -->
 <div class="wp-block-column">
@@ -64,8 +64,8 @@
 </div>
 <!-- /wp:columns -->
 
-<!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|md","top":"var:preset|spacing|sm"}}}} -->
-<div class="wp-block-columns">
+<!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|md","top":"var:preset|spacing|sm"}}}} -->
+<div class="wp-block-columns alignwide">
 
 <!-- wp:column -->
 <div class="wp-block-column">

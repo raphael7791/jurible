@@ -25,7 +25,7 @@
 </div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"faq-list","layout":{"type":"constrained","contentSize":"800px"}} -->
+<!-- wp:group {"className":"faq-list","layout":{"type":"constrained"}} -->
 <div class="wp-block-group faq-list">
 
 <!-- wp:details {"className":"faq-item"} -->
@@ -85,7 +85,7 @@
 </div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"faq-footer","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"},"margin":{"top":"var:preset|spacing|lg"}}},"backgroundColor":"muted","layout":{"type":"constrained","contentSize":"800px"}} -->
+<!-- wp:group {"className":"faq-footer","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"},"margin":{"top":"var:preset|spacing|lg"}}},"backgroundColor":"muted","layout":{"type":"constrained"}} -->
 <div class="wp-block-group faq-footer has-muted-background-color has-background" style="margin-top:var(--wp--preset--spacing--lg);padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)">
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
 <p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:14px">Vous ne trouvez pas la réponse à votre question ?</p>

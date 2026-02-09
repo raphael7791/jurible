@@ -123,6 +123,10 @@
     margin-bottom: 0 !important;
 }
 
+.editor-styles-wrapper .hero-archive__categories {
+    margin-top: var(--wp--preset--spacing--lg) !important;
+}
+
 .editor-styles-wrapper .hero-archive__categories p {
     margin-top: 0 !important;
     margin-bottom: 0 !important;

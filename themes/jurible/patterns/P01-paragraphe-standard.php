@@ -6,7 +6,7 @@
  * Description: Section paragraphe standard - Label + Titre gradient + Sous-titre + Paragraphes + Liste + CTA
  */
 ?>
-<!-- wp:group {"align":"full","className":"section-paragraphe","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained","contentSize":"800px"}} -->
+<!-- wp:group {"align":"full","className":"section-paragraphe","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull section-paragraphe has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:group {"className":"section-paragraphe__content","style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"default"}} -->

@@ -6,7 +6,7 @@
  * Description: Hero article E1 - Fond lilas avec badge, titre, meta, auteur et image
  */
 ?>
-<!-- wp:group {"align":"full","className":"hero-article","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained","contentSize":"720px"}} -->
+<!-- wp:group {"align":"full","className":"hero-article","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull hero-article" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:group {"className":"hero-article__container","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->

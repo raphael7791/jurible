@@ -6,7 +6,7 @@
  * Description: Section paragraphe avec fond gris
  */
 ?>
-<!-- wp:group {"align":"full","className":"section-paragraphe","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"muted","layout":{"type":"constrained","contentSize":"800px"}} -->
+<!-- wp:group {"align":"full","className":"section-paragraphe","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"muted","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull section-paragraphe has-muted-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:group {"className":"section-paragraphe__content","style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"default"}} -->

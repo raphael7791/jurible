@@ -1,0 +1,308 @@
+/**
+ * P14 - Steps Timeline (Comment ça marche)
+ */
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+.section-steps__header {
+    text-align: center;
+}
+
+.section-steps__badge {
+    display: inline-block;
+    background: rgba(124, 58, 237, 0.1) !important;
+    color: var(--wp--preset--color--secondary) !important;
+    font-size: 13px !important;
+    font-weight: 600;
+    padding: 8px 16px !important;
+    border-radius: 9999px !important;
+    border: none !important;
+    margin: 0 auto var(--wp--preset--spacing--sm) !important;
+}
+
+.section-steps__title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: var(--wp--preset--spacing--xs) !important;
+}
+
+.section-steps__title .gradient-text {
+    background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-steps__subtitle {
+    font-size: 16px;
+    max-width: 500px;
+    margin: 0 auto !important;
+}
+
+/* =====================================================
+   DESKTOP: Timeline horizontale
+   ===================================================== */
+.steps-horizontal {
+    position: relative;
+    align-items: flex-start !important;
+}
+
+.steps-horizontal > .wp-block-group,
+.steps-horizontal > .step-item,
+.steps-horizontal .step-item.wp-block-group {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    margin-block-start: 0 !important;
+}
+
+.steps-horizontal .step-item > *:first-child,
+.steps-horizontal .step-item > p:first-child,
+.steps-horizontal .step-item__circle {
+    margin-top: 0 !important;
+    margin-block-start: 0 !important;
+}
+
+/* Force all step items to align circles at same position */
+.steps-horizontal.wp-block-group {
+    align-items: flex-start !important;
+}
+
+.steps-horizontal > * {
+    align-self: flex-start !important;
+}
+
+/* Ligne de connexion gradient */
+.steps-horizontal::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 70px;
+    right: 70px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--wp--preset--color--primary) 0%, var(--wp--preset--color--secondary) 100%);
+    border-radius: 2px;
+    z-index: 0;
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    max-width: 220px;
+    position: relative;
+    z-index: 1;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    gap: 0 !important;
+    --wp--style--block-gap: 0 !important;
+}
+
+.step-item.wp-block-group > * {
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
+}
+
+/* Cercle numéroté - gradient */
+.step-item__circle,
+p.step-item__circle {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    min-height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 20px 0 !important;
+    margin-block: 0 0 !important;
+    margin-block-start: 0 !important;
+    padding: 0 !important;
+    background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    color: white;
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);
+    transition: all 0.3s ease;
+}
+
+.step-item:hover .step-item__circle {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+}
+
+/* Étape finale - Succès (fond vert) */
+.step-item--success .step-item__circle,
+.step-item__circle--check {
+    background: var(--wp--preset--color--success) !important;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4) !important;
+}
+
+.step-item--success:hover .step-item__circle {
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5) !important;
+}
+
+.step-item__title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--wp--preset--color--text-dark);
+    margin: 0 0 8px !important;
+}
+
+.step-item__desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--wp--preset--color--text-muted);
+    line-height: 1.5;
+    margin: 0 0 12px !important;
+}
+
+/* Badge info */
+.step-item__info {
+    display: inline-block !important;
+    background: #F3F4F6 !important;
+    font-size: 12px !important;
+    font-weight: 500;
+    color: var(--wp--preset--color--text-gray) !important;
+    padding: 6px 12px !important;
+    border-radius: 9999px !important;
+    margin: 0 !important;
+    white-space: nowrap;
+}
+
+.step-item__info strong {
+    color: var(--wp--preset--color--secondary) !important;
+}
+
+/* =====================================================
+   MOBILE: Timeline verticale (cachée par défaut)
+   ===================================================== */
+.steps-vertical {
+    display: none;
+    flex-direction: column;
+    position: relative;
+    padding-left: 80px;
+}
+
+/* Ligne verticale gradient */
+.steps-vertical::before {
+    content: '';
+    position: absolute;
+    left: 27px;
+    top: 28px;
+    bottom: 28px;
+    width: 3px;
+    background: linear-gradient(180deg, var(--wp--preset--color--primary) 0%, var(--wp--preset--color--secondary) 100%);
+    border-radius: 2px;
+}
+
+.step-item-vertical {
+    position: relative;
+    padding-bottom: 40px;
+    gap: 24px !important;
+}
+
+.step-item-vertical:last-child {
+    padding-bottom: 0;
+}
+
+/* Cercle vertical */
+.step-item-vertical__circle {
+    position: absolute;
+    left: -80px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);
+    margin: 0 !important;
+}
+
+/* Étape finale vertical - Succès */
+.step-item-vertical--success .step-item-vertical__circle,
+.step-item-vertical__circle--check {
+    background: var(--wp--preset--color--success) !important;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4) !important;
+}
+
+.step-item-vertical__content {
+    padding-top: 8px;
+}
+
+.step-item-vertical__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--wp--preset--color--text-dark);
+    margin: 0 0 8px !important;
+}
+
+.step-item-vertical__desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--wp--preset--color--text-muted);
+    line-height: 1.6;
+    margin: 0 0 12px !important;
+}
+
+.step-item-vertical__info {
+    display: inline-block !important;
+    background: #F3F4F6 !important;
+    font-size: 13px !important;
+    font-weight: 500;
+    color: var(--wp--preset--color--text-gray) !important;
+    padding: 8px 14px !important;
+    border-radius: 9999px !important;
+    margin: 0 !important;
+    white-space: nowrap;
+}
+
+.step-item-vertical__info strong {
+    color: var(--wp--preset--color--secondary) !important;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 900px) {
+    .section-steps__title {
+        font-size: 28px;
+    }
+
+    .steps-horizontal {
+        display: none !important;
+    }
+
+    .steps-vertical {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-steps__title {
+        font-size: 24px;
+    }
+
+    .step-item-vertical__circle {
+        width: 48px;
+        height: 48px;
+        font-size: 16px;
+        left: -68px;
+    }
+
+    .steps-vertical {
+        padding-left: 68px;
+    }
+
+    .steps-vertical::before {
+        left: 23px;
+    }
+}

@@ -6,7 +6,7 @@
  * Description: CTA final avec prix barré et code promo
  */
 ?>
-<!-- wp:group {"align":"full","className":"cta-final","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"gradient":"cta-gradient","layout":{"type":"constrained","contentSize":"720px"}} -->
+<!-- wp:group {"align":"full","className":"cta-final","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"gradient":"cta-gradient","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull cta-final has-cta-gradient-gradient-background has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:group {"className":"cta-final__content","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->

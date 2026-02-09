@@ -19,17 +19,17 @@
 <h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Les études de droit, c'est <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">compliqué</mark></h2>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"align":"center","fontSize":"small","textColor":"text-gray"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color has-small-font-size">Chaque année, des milliers d'étudiants abandonnent faute de méthode et d'accompagnement.</p>
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"15px"}},"textColor":"text-gray"} -->
+<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:15px">Chaque année, des milliers d'étudiants abandonnent faute de méthode et d'accompagnement.</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
 
-<!-- wp:group {"align":"wide","layout":{"type":"constrained","contentSize":"1280px"}} -->
+<!-- wp:group {"align":"wide","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignwide">
 
-<!-- wp:columns {"className":"pain-grid-4","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|md","left":"var:preset|spacing|md"}}}} -->
-<div class="wp-block-columns pain-grid-4">
+<!-- wp:columns {"align":"wide","className":"pain-grid-4","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|md","left":"var:preset|spacing|md"}}}} -->
+<div class="wp-block-columns alignwide pain-grid-4">
 <!-- wp:column -->
 <div class="wp-block-column">
 <!-- wp:group {"className":"pain-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"var(--wp--custom--border-radius--lg)","width":"1px"}},"borderColor":"border","backgroundColor":"white","layout":{"type":"default"}} -->

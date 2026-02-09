@@ -6,7 +6,7 @@
  * Description: Section avec 6 flip cards pour aider l'utilisateur à choisir son offre
  */
 ?>
-<!-- wp:group {"align":"full","className":"quelle-offre","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"},"blockGap":"var:preset|spacing|lg"}},"backgroundColor":"muted","layout":{"type":"constrained","contentSize":"1200px"}} -->
+<!-- wp:group {"align":"full","className":"quelle-offre","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"},"blockGap":"var:preset|spacing|lg"}},"backgroundColor":"muted","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull quelle-offre has-muted-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:group {"layout":{"type":"flex","justifyContent":"center"}} -->
@@ -25,8 +25,8 @@
 <p class="has-text-align-center has-text-gray-color has-text-color">Cliquez sur votre profil pour découvrir la solution idéale.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:columns {"className":"quelle-offre__grid","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|md","top":"var:preset|spacing|md"}}}} -->
-<div class="wp-block-columns quelle-offre__grid">
+<!-- wp:columns {"align":"wide","className":"quelle-offre__grid","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|md","top":"var:preset|spacing|md"}}}} -->
+<div class="wp-block-columns alignwide quelle-offre__grid">
 
 <!-- wp:column -->
 <div class="wp-block-column">
@@ -208,8 +208,8 @@
 </div>
 <!-- /wp:columns -->
 
-<!-- wp:columns {"className":"quelle-offre__grid","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|md","top":"var:preset|spacing|md"}}}} -->
-<div class="wp-block-columns quelle-offre__grid">
+<!-- wp:columns {"align":"wide","className":"quelle-offre__grid","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|md","top":"var:preset|spacing|md"}}}} -->
+<div class="wp-block-columns alignwide quelle-offre__grid">
 
 <!-- wp:column -->
 <div class="wp-block-column">

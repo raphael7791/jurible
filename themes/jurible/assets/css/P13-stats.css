@@ -1,0 +1,62 @@
+/**
+ * P13 - Stats Section
+ */
+
+/* Grid margin reset */
+.section-stats__grid {
+    margin: 0 !important;
+}
+
+/* Separator line between items */
+.section-stats__item {
+    position: relative;
+}
+
+.section-stats__item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 781px) {
+    .section-stats__grid {
+        flex-wrap: wrap !important;
+        gap: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md) !important;
+    }
+
+    .section-stats__grid > .wp-block-column {
+        flex-basis: calc(50% - var(--wp--preset--spacing--sm)) !important;
+        flex-grow: 0 !important;
+    }
+
+    .section-stats__grid h3 {
+        font-size: 32px !important;
+    }
+
+    .section-stats__grid p {
+        font-size: 13px !important;
+    }
+
+    /* Hide all separators on mobile */
+    .section-stats__item::after {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-stats__grid h3 {
+        font-size: 28px !important;
+    }
+
+    .section-stats__grid p {
+        font-size: 12px !important;
+    }
+}
