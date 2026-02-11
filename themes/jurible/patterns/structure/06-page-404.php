@@ -36,8 +36,8 @@
 </div>
 <!-- /wp:buttons -->
 
-<!-- wp:group {"style":{"spacing":{"margin":{"top":"var:preset|spacing|xl"},"blockGap":"var:preset|spacing|md"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
-<div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--xl)">
+<!-- wp:group {"style":{"spacing":{"margin":{"top":"48px"},"blockGap":"var:preset|spacing|md"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
+<div class="wp-block-group" style="margin-top:48px">
 
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"14px","fontStyle":"normal","fontWeight":"500"}},"textColor":"text-muted"} -->
 <p class="has-text-muted-color has-text-color" style="font-size:14px;font-style:normal;font-weight:500"><a href="/academie" style="color:inherit;text-decoration:none;">L'Academie</a></p>
