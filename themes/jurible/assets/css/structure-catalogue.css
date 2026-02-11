@@ -1,0 +1,97 @@
+/* ==================== CATALOGUE MATIERES ==================== */
+
+/* Variante fond gris */
+.section-catalogue--gray {
+    background: var(--wp--preset--color--muted) !important;
+}
+
+/* ==================== TABS NAVIGATION ==================== */
+
+.section-catalogue__tabs {
+    display: flex;
+    justify-content: center;
+    gap: var(--wp--preset--spacing--xs);
+    margin-bottom: var(--wp--preset--spacing--xl);
+    flex-wrap: wrap;
+}
+
+.section-catalogue__tab {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: 0.5px;
+    color: var(--wp--preset--color--text-gray);
+    background: var(--wp--preset--color--muted);
+    border: 1px solid var(--wp--preset--color--border);
+    padding: 10px 20px;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 150ms ease;
+}
+
+.section-catalogue__tab:hover {
+    background: var(--wp--preset--color--white);
+    border-color: var(--wp--preset--color--secondary);
+    color: var(--wp--preset--color--secondary);
+}
+
+.section-catalogue__tab.active {
+    background: var(--wp--preset--color--secondary);
+    color: var(--wp--preset--color--white);
+    border-color: var(--wp--preset--color--secondary);
+    font-weight: 600;
+}
+
+/* ==================== PANELS ==================== */
+
+.section-catalogue__panel {
+    display: none;
+}
+
+.section-catalogue__panel.active {
+    display: block;
+}
+
+/* ==================== GRID ==================== */
+
+.section-catalogue__grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--wp--preset--spacing--md);
+}
+
+/* Override flex layout from WordPress */
+.section-catalogue__grid.is-layout-flex {
+    display: grid !important;
+}
+
+/* Card-cours dans la grille prend toute la largeur */
+.section-catalogue__grid .wp-block-jurible-card-cours {
+    width: 100%;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 1000px) {
+    .section-catalogue__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .section-catalogue__tabs {
+        gap: 6px;
+    }
+
+    .section-catalogue__tab {
+        font-size: 13px;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .section-catalogue__grid {
+        grid-template-columns: 1fr;
+    }
+}
