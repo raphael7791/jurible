@@ -1,0 +1,28 @@
+/* ==================== ARTICLES LIES ==================== */
+
+/* Reset du padding par defaut du ul post-template */
+.articles-lies-query .wp-block-post-template {
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Responsive grille */
+@media (max-width: 1000px) {
+    .articles-lies-query .wp-block-post-template.is-layout-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .articles-lies-query .wp-block-post-template.is-layout-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ==================== CARD ARTICLE SIMPLE ==================== */
+/* Variante simplifiee sans extrait */
+
+.card-article--simple .wp-block-post-title {
+    margin-bottom: 12px;
+}

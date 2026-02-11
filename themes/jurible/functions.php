@@ -1009,3 +1009,16 @@ function jurible_enqueue_articles_grid_assets()
 add_action("wp_enqueue_scripts", "jurible_enqueue_articles_grid_assets");
 add_action("enqueue_block_assets", "jurible_enqueue_articles_grid_assets");
 
+// P18 - Articles Lies assets
+function jurible_enqueue_articles_lies_assets()
+{
+    wp_enqueue_style(
+        "jurible-articles-lies",
+        get_template_directory_uri() . "/assets/css/structure-articles-lies.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/structure-articles-lies.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_articles_lies_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_articles_lies_assets");
+
