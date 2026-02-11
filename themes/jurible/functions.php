@@ -114,7 +114,7 @@ function jurible_deregister_blocks_variations()
         true // Important pour que ça fonctionne dans le FSE et Gut
     );
 }
-add_action("enqueue_block_editor_assets", "jurible_deregister_blocks_variations");
+add_action("enqueue_block_assets", "jurible_deregister_blocks_variations");
 
 
 # Activer toutes les fonctionnalités de l'éditeur de blocks aux administrateurs
@@ -297,7 +297,7 @@ function jurible_enqueue_media_styles()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_media_styles");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_media_styles");
+add_action("enqueue_block_assets", "jurible_enqueue_media_styles");
 
 
 # Enregistrer les Block Styles pour core/button
@@ -373,7 +373,7 @@ function jurible_enqueue_buttons_styles()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_buttons_styles");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_buttons_styles");
+add_action("enqueue_block_assets", "jurible_enqueue_buttons_styles");
 
 
 # Enregistrer les Block Styles pour core/paragraph (Tags)
@@ -433,7 +433,7 @@ function jurible_enqueue_tags_styles()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_tags_styles");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_tags_styles");
+add_action("enqueue_block_assets", "jurible_enqueue_tags_styles");
 
 
 # Charger le CSS pagination
@@ -460,7 +460,7 @@ function jurible_enqueue_inputs_styles()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_inputs_styles");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_inputs_styles");
+add_action("enqueue_block_assets", "jurible_enqueue_inputs_styles");
 
 
 # Enregistrer les Block Styles pour core/separator (Dividers)
@@ -668,7 +668,7 @@ function jurible_enqueue_enseignants_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_enseignants_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_enseignants_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_enseignants_assets");
 
 
 # Charger le CSS des patterns réassurance (frontend + éditeur)
@@ -682,7 +682,7 @@ function jurible_enqueue_reassurance_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_reassurance_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_reassurance_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_reassurance_assets");
 
 
 # Charger le CSS du pattern FAQ (frontend + éditeur)
@@ -696,7 +696,7 @@ function jurible_enqueue_faq_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_faq_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_faq_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_faq_assets");
 
 
 # Charger le CSS du pattern Fonctionnalités (frontend + éditeur)
@@ -710,7 +710,7 @@ function jurible_enqueue_fonctionnalites_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_fonctionnalites_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_fonctionnalites_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_fonctionnalites_assets");
 
 
 # Charger le CSS du pattern Contenu (frontend + éditeur)
@@ -724,7 +724,7 @@ function jurible_enqueue_contenu_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_contenu_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_contenu_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_contenu_assets");
 
 # Charger le CSS du pattern Pain Points (frontend + éditeur)
 function jurible_enqueue_pain_points_assets()
@@ -737,7 +737,7 @@ function jurible_enqueue_pain_points_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_pain_points_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_pain_points_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_pain_points_assets");
 
 # Charger le CSS des Hero Conversion (frontend + éditeur)
 function jurible_enqueue_hero_conversion_assets()
@@ -750,7 +750,7 @@ function jurible_enqueue_hero_conversion_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_hero_conversion_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_hero_conversion_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_hero_conversion_assets");
 
 # Charger le CSS des Hero Archive (frontend + éditeur)
 function jurible_enqueue_hero_archive_assets()
@@ -763,7 +763,7 @@ function jurible_enqueue_hero_archive_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_hero_archive_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_hero_archive_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_hero_archive_assets");
 
 # Charger le CSS des Hero Produit (frontend + éditeur)
 function jurible_enqueue_hero_produit_assets()
@@ -776,7 +776,7 @@ function jurible_enqueue_hero_produit_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_hero_produit_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_hero_produit_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_hero_produit_assets");
 
 # Charger le CSS des Hero Simple (frontend + éditeur)
 function jurible_enqueue_hero_simple_assets()
@@ -789,7 +789,7 @@ function jurible_enqueue_hero_simple_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_hero_simple_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_hero_simple_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_hero_simple_assets");
 
 # Charger le CSS des Hero Article (frontend + éditeur)
 function jurible_enqueue_hero_article_assets()
@@ -802,7 +802,7 @@ function jurible_enqueue_hero_article_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_hero_article_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_hero_article_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_hero_article_assets");
 
 # Charger le CSS du CTA Final (frontend + éditeur)
 function jurible_enqueue_cta_final_assets()
@@ -815,7 +815,7 @@ function jurible_enqueue_cta_final_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_cta_final_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_cta_final_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_cta_final_assets");
 
 # Charger le CSS du Trust Bar (frontend + éditeur)
 function jurible_enqueue_trust_bar_assets()
@@ -828,7 +828,7 @@ function jurible_enqueue_trust_bar_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_trust_bar_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_trust_bar_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_trust_bar_assets");
 
 # Charger le CSS des Paragraphes (frontend + éditeur)
 function jurible_enqueue_paragraphe_assets()
@@ -841,7 +841,7 @@ function jurible_enqueue_paragraphe_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_paragraphe_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_paragraphe_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_paragraphe_assets");
 
 # Charger le CSS du Bloc Texte + Média (frontend + éditeur)
 function jurible_enqueue_bloc_texte_media_assets()
@@ -854,7 +854,7 @@ function jurible_enqueue_bloc_texte_media_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_bloc_texte_media_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_bloc_texte_media_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_bloc_texte_media_assets");
 
 # Charger le CSS et JS de Quelle Offre Choisir (frontend + éditeur)
 function jurible_enqueue_quelle_offre_assets()
@@ -875,7 +875,7 @@ function jurible_enqueue_quelle_offre_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_quelle_offre_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_quelle_offre_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_quelle_offre_assets");
 
 # Charger le CSS de Produits Complémentaires (frontend + éditeur)
 function jurible_enqueue_produits_complementaires_assets()
@@ -888,7 +888,7 @@ function jurible_enqueue_produits_complementaires_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_produits_complementaires_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_produits_complementaires_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_produits_complementaires_assets");
 
 # Charger le CSS de Pricing Académie (frontend + éditeur)
 function jurible_enqueue_pricing_academie_assets()
@@ -901,7 +901,7 @@ function jurible_enqueue_pricing_academie_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_pricing_academie_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_pricing_academie_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_pricing_academie_assets");
 
 # Charger le CSS de Comparaison (frontend + éditeur)
 function jurible_enqueue_comparaison_assets()
@@ -914,7 +914,7 @@ function jurible_enqueue_comparaison_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_comparaison_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_comparaison_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_comparaison_assets");
 
 # Charger le CSS de Features Grid (frontend + éditeur)
 function jurible_enqueue_features_assets()
@@ -927,7 +927,7 @@ function jurible_enqueue_features_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_features_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_features_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_features_assets");
 
 # Charger le CSS de Stats Section (frontend + éditeur)
 function jurible_enqueue_stats_assets()
@@ -940,7 +940,7 @@ function jurible_enqueue_stats_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_stats_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_stats_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_stats_assets");
 
 // P14 - Steps assets
 function jurible_enqueue_steps_assets()
@@ -953,5 +953,5 @@ function jurible_enqueue_steps_assets()
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_steps_assets");
-add_action("enqueue_block_editor_assets", "jurible_enqueue_steps_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_steps_assets");
 
