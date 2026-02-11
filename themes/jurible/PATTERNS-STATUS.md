@@ -40,6 +40,7 @@ Ces variantes ont ete creees en plus du brief initial:
 | `marketing/03-solution-4.php` | Grille 4 cartes solution |
 | `marketing/03-solution-4-gris.php` | Grille 4 cartes solution fond gris |
 | `marketing/03-solution-6.php` | Grille 6 cartes solution |
+| `equipe/06-citation-hero.php` | Citation hero 2 colonnes (photo + quote) |
 
 ---
 
@@ -128,7 +129,7 @@ marketing/11-comparaison-multi.php
 marketing/12-comparaison-dark.php
 ```
 
-### Equipe (6 patterns)
+### Equipe (7 patterns)
 ```
 equipe/01-enseignants-grille.php
 equipe/02-enseignant-matiere.php
@@ -136,6 +137,7 @@ equipe/03-enseignants-teaser.php
 equipe/04-enseignants-video.php
 equipe/05-bio-auteur.php
 equipe/06-citation.php
+equipe/06-citation-hero.php (bonus)
 ```
 
 ### Structure (4 patterns + 2 a faire)
