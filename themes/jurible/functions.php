@@ -970,3 +970,29 @@ function jurible_enqueue_steps_assets()
 add_action("wp_enqueue_scripts", "jurible_enqueue_steps_assets");
 add_action("enqueue_block_assets", "jurible_enqueue_steps_assets");
 
+// P15 - Solution assets
+function jurible_enqueue_solution_assets()
+{
+    wp_enqueue_style(
+        "jurible-solution",
+        get_template_directory_uri() . "/assets/css/marketing-solution.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/marketing-solution.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_solution_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_solution_assets");
+
+// P16 - Article Featured assets
+function jurible_enqueue_article_featured_assets()
+{
+    wp_enqueue_style(
+        "jurible-article-featured",
+        get_template_directory_uri() . "/assets/css/structure-article-featured.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/structure-article-featured.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_article_featured_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_article_featured_assets");
+

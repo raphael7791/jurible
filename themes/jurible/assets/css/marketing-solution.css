@@ -1,0 +1,14 @@
+/* ==================== MARKETING SOLUTION GRID ==================== */
+
+/* Grille 4 colonnes - hauteur égale */
+.solution-grid-4 {
+    align-items: stretch;
+}
+
+.solution-grid-4 > .wp-block-column {
+    display: flex;
+}
+
+.solution-grid-4 .wp-block-jurible-solution-card {
+    height: 100%;
+}
