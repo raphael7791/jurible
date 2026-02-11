@@ -1022,24 +1022,16 @@ function jurible_enqueue_articles_lies_assets()
 add_action("wp_enqueue_scripts", "jurible_enqueue_articles_lies_assets");
 add_action("enqueue_block_assets", "jurible_enqueue_articles_lies_assets");
 
-// P19 - Catalogue Matieres assets
-function jurible_enqueue_catalogue_assets()
+// P19 - Page 404 assets
+function jurible_enqueue_page_404_assets()
 {
     wp_enqueue_style(
-        "jurible-catalogue",
-        get_template_directory_uri() . "/assets/css/structure-catalogue.css",
+        "jurible-page-404",
+        get_template_directory_uri() . "/assets/css/structure-page-404.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/structure-catalogue.css")
-    );
-
-    wp_enqueue_script(
-        "jurible-catalogue",
-        get_template_directory_uri() . "/assets/js/structure-catalogue.js",
-        [],
-        filemtime(get_template_directory() . "/assets/js/structure-catalogue.js"),
-        true
+        filemtime(get_template_directory() . "/assets/css/structure-page-404.css")
     );
 }
-add_action("wp_enqueue_scripts", "jurible_enqueue_catalogue_assets");
-add_action("enqueue_block_assets", "jurible_enqueue_catalogue_assets");
+add_action("wp_enqueue_scripts", "jurible_enqueue_page_404_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_page_404_assets");
 

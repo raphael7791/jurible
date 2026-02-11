@@ -1,0 +1,27 @@
+/* ==================== PAGE 404 ==================== */
+
+/* Responsive */
+@media (max-width: 600px) {
+    .page-404 h1 {
+        font-size: 100px !important;
+        letter-spacing: -2px !important;
+    }
+
+    .page-404 h2 {
+        font-size: 28px !important;
+    }
+
+    .page-404 .wp-block-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .page-404 .wp-block-button {
+        width: 100%;
+    }
+
+    .page-404 .wp-block-button__link {
+        width: 100%;
+        justify-content: center;
+    }
+}
