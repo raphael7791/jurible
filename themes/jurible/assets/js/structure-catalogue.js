@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     p.classList.remove('active');
                 });
 
-                // Activate target panel
-                const panel = section.querySelector('[data-panel="' + targetPanel + '"]');
+                // Activate target panel using class
+                const panel = section.querySelector('.section-catalogue__panel--' + targetPanel);
                 if (panel) {
                     panel.classList.add('active');
                 }

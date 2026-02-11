@@ -30,22 +30,19 @@
 </div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"section-catalogue__tabs","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
-<div class="wp-block-group section-catalogue__tabs">
-
 <!-- wp:html -->
+<div class="section-catalogue__tabs">
 <button class="section-catalogue__tab active" data-tab="l1">L1 Droit</button>
 <button class="section-catalogue__tab" data-tab="l2">L2 Droit</button>
 <button class="section-catalogue__tab" data-tab="l3">L3 Droit</button>
 <button class="section-catalogue__tab" data-tab="capacite">Capacite</button>
 <button class="section-catalogue__tab" data-tab="master">Master</button>
+</div>
 <!-- /wp:html -->
 
-</div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"section-catalogue__panel active","layout":{"type":"default"}} -->
-<div class="wp-block-group section-catalogue__panel active" data-panel="l1">
+<!-- wp:html -->
+<div class="section-catalogue__panel section-catalogue__panel--l1 active">
+<!-- /wp:html -->
 
 <!-- wp:group {"className":"section-catalogue__grid","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left"}} -->
 <div class="wp-block-group section-catalogue__grid">
@@ -59,11 +56,13 @@
 </div>
 <!-- /wp:group -->
 
+<!-- wp:html -->
 </div>
-<!-- /wp:group -->
+<!-- /wp:html -->
 
-<!-- wp:group {"className":"section-catalogue__panel","layout":{"type":"default"}} -->
-<div class="wp-block-group section-catalogue__panel" data-panel="l2">
+<!-- wp:html -->
+<div class="section-catalogue__panel section-catalogue__panel--l2">
+<!-- /wp:html -->
 
 <!-- wp:group {"className":"section-catalogue__grid","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left"}} -->
 <div class="wp-block-group section-catalogue__grid">
@@ -77,11 +76,13 @@
 </div>
 <!-- /wp:group -->
 
+<!-- wp:html -->
 </div>
-<!-- /wp:group -->
+<!-- /wp:html -->
 
-<!-- wp:group {"className":"section-catalogue__panel","layout":{"type":"default"}} -->
-<div class="wp-block-group section-catalogue__panel" data-panel="l3">
+<!-- wp:html -->
+<div class="section-catalogue__panel section-catalogue__panel--l3">
+<!-- /wp:html -->
 
 <!-- wp:group {"className":"section-catalogue__grid","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left"}} -->
 <div class="wp-block-group section-catalogue__grid">
@@ -95,11 +96,13 @@
 </div>
 <!-- /wp:group -->
 
+<!-- wp:html -->
 </div>
-<!-- /wp:group -->
+<!-- /wp:html -->
 
-<!-- wp:group {"className":"section-catalogue__panel","layout":{"type":"default"}} -->
-<div class="wp-block-group section-catalogue__panel" data-panel="capacite">
+<!-- wp:html -->
+<div class="section-catalogue__panel section-catalogue__panel--capacite">
+<!-- /wp:html -->
 
 <!-- wp:group {"className":"section-catalogue__grid","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left"}} -->
 <div class="wp-block-group section-catalogue__grid">
@@ -111,11 +114,13 @@
 </div>
 <!-- /wp:group -->
 
+<!-- wp:html -->
 </div>
-<!-- /wp:group -->
+<!-- /wp:html -->
 
-<!-- wp:group {"className":"section-catalogue__panel","layout":{"type":"default"}} -->
-<div class="wp-block-group section-catalogue__panel" data-panel="master">
+<!-- wp:html -->
+<div class="section-catalogue__panel section-catalogue__panel--master">
+<!-- /wp:html -->
 
 <!-- wp:group {"className":"section-catalogue__grid","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left"}} -->
 <div class="wp-block-group section-catalogue__grid">
@@ -129,8 +134,9 @@
 </div>
 <!-- /wp:group -->
 
+<!-- wp:html -->
 </div>
-<!-- /wp:group -->
+<!-- /wp:html -->
 
 </div>
 <!-- /wp:group -->
