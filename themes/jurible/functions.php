@@ -996,3 +996,16 @@ function jurible_enqueue_article_featured_assets()
 add_action("wp_enqueue_scripts", "jurible_enqueue_article_featured_assets");
 add_action("enqueue_block_assets", "jurible_enqueue_article_featured_assets");
 
+// P17 - Articles Grid assets
+function jurible_enqueue_articles_grid_assets()
+{
+    wp_enqueue_style(
+        "jurible-articles-grid",
+        get_template_directory_uri() . "/assets/css/structure-articles-grid.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/structure-articles-grid.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_articles_grid_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_articles_grid_assets");
+

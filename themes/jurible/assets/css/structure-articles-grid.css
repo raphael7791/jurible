@@ -1,0 +1,169 @@
+/* ==================== ARTICLES GRID ==================== */
+
+/* Reset du padding par défaut du ul post-template */
+.articles-grid-query .wp-block-post-template {
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Responsive grille */
+@media (max-width: 1000px) {
+    .articles-grid-query .wp-block-post-template.is-layout-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .articles-grid-query .wp-block-post-template.is-layout-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Card Article */
+.card-article {
+    box-shadow: var(--wp--preset--shadow--sm);
+    overflow: hidden;
+    transition: var(--wp--custom--transition--default);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-article:hover {
+    box-shadow: var(--wp--preset--shadow--lg);
+    transform: translateY(-4px);
+}
+
+/* Image */
+.card-article .wp-block-post-featured-image {
+    margin: 0;
+    height: 180px;
+    overflow: hidden;
+}
+
+.card-article .wp-block-post-featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Content */
+.card-article > .wp-block-group:last-child {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Title clamp 2 lines */
+.card-article .wp-block-post-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Excerpt clamp 2 lines */
+.card-article .wp-block-post-excerpt__excerpt {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.card-article .wp-block-post-excerpt {
+    margin-bottom: 0;
+}
+
+/* Footer push to bottom */
+.card-article > .wp-block-group:last-child > .wp-block-group:last-child {
+    margin-top: auto !important;
+}
+
+/* Read more link */
+.card-article__link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--wp--preset--color--primary);
+    text-decoration: none;
+    transition: all 150ms ease;
+}
+
+.card-article__link:hover {
+    color: var(--wp--preset--color--primary-hover, #8B0016);
+}
+
+/* ==================== CATEGORY TAGS ==================== */
+/* Styles pour post-terms (catégories) basés sur le design system */
+
+.card-article .wp-block-post-terms {
+    margin: 0;
+}
+
+.card-article .wp-block-post-terms a {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    background: var(--wp--preset--color--secondary); /* Défaut violet */
+    transition: opacity 150ms ease;
+}
+
+.card-article .wp-block-post-terms a:hover {
+    opacity: 0.9;
+}
+
+/* Couleurs par catégorie (basées sur le slug) */
+.card-article .wp-block-post-terms a[href*="methodologie"] {
+    background: #10B981; /* Vert */
+}
+
+.card-article .wp-block-post-terms a[href*="conseils"] {
+    background: #3B82F6; /* Bleu */
+}
+
+.card-article .wp-block-post-terms a[href*="culture"] {
+    background: #F59E0B; /* Ambre */
+}
+
+.card-article .wp-block-post-terms a[href*="orientation"] {
+    background: #EF4444; /* Rouge */
+}
+
+.card-article .wp-block-post-terms a[href*="examens"],
+.card-article .wp-block-post-terms a[href*="concours"] {
+    background: #8B5CF6; /* Violet clair */
+}
+
+.card-article .wp-block-post-terms a[href*="vie-etudiante"] {
+    background: #3B82F6; /* Bleu */
+}
+
+.card-article .wp-block-post-terms a[href*="actualites"] {
+    background: #F59E0B; /* Ambre */
+}
+
+/* Matières juridiques - toutes en violet secondary */
+.card-article .wp-block-post-terms a[href*="droit-"] {
+    background: #7C3AED; /* Violet */
+}
+
+/* ==================== BUTTON OUTLINE DARK ==================== */
+/* Style spécifique pour "Voir tous les articles" */
+
+.wp-block-button.is-style-outline-dark .wp-block-button__link {
+    background: var(--wp--preset--color--white);
+    color: var(--wp--preset--color--text-dark);
+    border: 1px solid var(--wp--preset--color--border);
+    box-shadow: none;
+}
+
+.wp-block-button.is-style-outline-dark .wp-block-button__link:hover {
+    background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+    color: var(--wp--preset--color--white);
+    border-color: transparent;
+}
