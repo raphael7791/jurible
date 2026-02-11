@@ -164,13 +164,28 @@ function jurible_register_patterns_categories()
         ["label" => __("Pages complètes", "jurible")]
     );
 register_block_pattern_category(
-        "jurible-components",
-        ["label" => __("Composants Jurible", "jurible")]
+        "contenu",
+        ["label" => __("Contenu", "jurible")]
     );
 
     register_block_pattern_category(
-        "cta",
-        ["label" => __("CTA", "jurible")]
+        "commerce",
+        ["label" => __("Commerce", "jurible")]
+    );
+
+    register_block_pattern_category(
+        "confiance",
+        ["label" => __("Confiance", "jurible")]
+    );
+
+    register_block_pattern_category(
+        "equipe",
+        ["label" => __("Équipe", "jurible")]
+    );
+
+    register_block_pattern_category(
+        "structure",
+        ["label" => __("Structure", "jurible")]
     );
 }
 add_filter("init", "jurible_register_patterns_categories");
@@ -662,9 +677,9 @@ function jurible_enqueue_enseignants_assets()
 {
     wp_enqueue_style(
         "jurible-enseignants",
-        get_template_directory_uri() . "/assets/css/C05-enseignants.css",
+        get_template_directory_uri() . "/assets/css/equipe-enseignants.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/C05-enseignants.css")
+        filemtime(get_template_directory() . "/assets/css/equipe-enseignants.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_enseignants_assets");
@@ -676,9 +691,9 @@ function jurible_enqueue_reassurance_assets()
 {
     wp_enqueue_style(
         "jurible-reassurance",
-        get_template_directory_uri() . "/assets/css/C06-reassurance.css",
+        get_template_directory_uri() . "/assets/css/confiance-reassurance.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/C06-reassurance.css")
+        filemtime(get_template_directory() . "/assets/css/confiance-reassurance.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_reassurance_assets");
@@ -690,9 +705,9 @@ function jurible_enqueue_faq_assets()
 {
     wp_enqueue_style(
         "jurible-faq",
-        get_template_directory_uri() . "/assets/css/C07-faq-accordeon.css",
+        get_template_directory_uri() . "/assets/css/confiance-faq.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/C07-faq-accordeon.css")
+        filemtime(get_template_directory() . "/assets/css/confiance-faq.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_faq_assets");
@@ -704,9 +719,9 @@ function jurible_enqueue_fonctionnalites_assets()
 {
     wp_enqueue_style(
         "jurible-fonctionnalites",
-        get_template_directory_uri() . "/assets/css/C08-fonctionnalite.css",
+        get_template_directory_uri() . "/assets/css/marketing-features.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/C08-fonctionnalite.css")
+        filemtime(get_template_directory() . "/assets/css/marketing-features.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_fonctionnalites_assets");
@@ -718,9 +733,9 @@ function jurible_enqueue_contenu_assets()
 {
     wp_enqueue_style(
         "jurible-contenu",
-        get_template_directory_uri() . "/assets/css/C09-contenu.css",
+        get_template_directory_uri() . "/assets/css/contenu-chiffres.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/C09-contenu.css")
+        filemtime(get_template_directory() . "/assets/css/contenu-chiffres.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_contenu_assets");
@@ -731,9 +746,9 @@ function jurible_enqueue_pain_points_assets()
 {
     wp_enqueue_style(
         "jurible-pain-points",
-        get_template_directory_uri() . "/assets/css/C11-pain-points.css",
+        get_template_directory_uri() . "/assets/css/marketing-pain-points.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/C11-pain-points.css")
+        filemtime(get_template_directory() . "/assets/css/marketing-pain-points.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_pain_points_assets");
@@ -744,9 +759,9 @@ function jurible_enqueue_hero_conversion_assets()
 {
     wp_enqueue_style(
         "jurible-hero-conversion",
-        get_template_directory_uri() . "/assets/css/H01-hero-conversion.css",
+        get_template_directory_uri() . "/assets/css/hero-conversion.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/H01-hero-conversion.css")
+        filemtime(get_template_directory() . "/assets/css/hero-conversion.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_hero_conversion_assets");
@@ -757,9 +772,9 @@ function jurible_enqueue_hero_archive_assets()
 {
     wp_enqueue_style(
         "jurible-hero-archive",
-        get_template_directory_uri() . "/assets/css/H02-hero-archive.css",
+        get_template_directory_uri() . "/assets/css/hero-archive.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/H02-hero-archive.css")
+        filemtime(get_template_directory() . "/assets/css/hero-archive.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_hero_archive_assets");
@@ -770,9 +785,9 @@ function jurible_enqueue_hero_produit_assets()
 {
     wp_enqueue_style(
         "jurible-hero-produit",
-        get_template_directory_uri() . "/assets/css/H03-hero-produit.css",
+        get_template_directory_uri() . "/assets/css/hero-produit.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/H03-hero-produit.css")
+        filemtime(get_template_directory() . "/assets/css/hero-produit.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_hero_produit_assets");
@@ -783,9 +798,9 @@ function jurible_enqueue_hero_simple_assets()
 {
     wp_enqueue_style(
         "jurible-hero-simple",
-        get_template_directory_uri() . "/assets/css/H04-hero-simple.css",
+        get_template_directory_uri() . "/assets/css/hero-simple.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/H04-hero-simple.css")
+        filemtime(get_template_directory() . "/assets/css/hero-simple.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_hero_simple_assets");
@@ -796,9 +811,9 @@ function jurible_enqueue_hero_article_assets()
 {
     wp_enqueue_style(
         "jurible-hero-article",
-        get_template_directory_uri() . "/assets/css/H05-hero-article.css",
+        get_template_directory_uri() . "/assets/css/hero-article.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/H05-hero-article.css")
+        filemtime(get_template_directory() . "/assets/css/hero-article.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_hero_article_assets");
@@ -809,9 +824,9 @@ function jurible_enqueue_cta_final_assets()
 {
     wp_enqueue_style(
         "jurible-cta-final",
-        get_template_directory_uri() . "/assets/css/P10-cta-final.css",
+        get_template_directory_uri() . "/assets/css/commerce-cta-final.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/P10-cta-final.css")
+        filemtime(get_template_directory() . "/assets/css/commerce-cta-final.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_cta_final_assets");
@@ -822,9 +837,9 @@ function jurible_enqueue_trust_bar_assets()
 {
     wp_enqueue_style(
         "jurible-trust-bar",
-        get_template_directory_uri() . "/assets/css/P09-trust-bar.css",
+        get_template_directory_uri() . "/assets/css/confiance-logos.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/P09-trust-bar.css")
+        filemtime(get_template_directory() . "/assets/css/confiance-logos.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_trust_bar_assets");
@@ -835,9 +850,9 @@ function jurible_enqueue_paragraphe_assets()
 {
     wp_enqueue_style(
         "jurible-paragraphe",
-        get_template_directory_uri() . "/assets/css/P01-paragraphe.css",
+        get_template_directory_uri() . "/assets/css/contenu-paragraphe.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/P01-paragraphe.css")
+        filemtime(get_template_directory() . "/assets/css/contenu-paragraphe.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_paragraphe_assets");
@@ -848,9 +863,9 @@ function jurible_enqueue_bloc_texte_media_assets()
 {
     wp_enqueue_style(
         "jurible-bloc-texte-media",
-        get_template_directory_uri() . "/assets/css/P02-bloc-texte-media.css",
+        get_template_directory_uri() . "/assets/css/contenu-texte-media.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/P02-bloc-texte-media.css")
+        filemtime(get_template_directory() . "/assets/css/contenu-texte-media.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_bloc_texte_media_assets");
@@ -861,16 +876,16 @@ function jurible_enqueue_quelle_offre_assets()
 {
     wp_enqueue_style(
         "jurible-quelle-offre",
-        get_template_directory_uri() . "/assets/css/P05-quelle-offre-choisir.css",
+        get_template_directory_uri() . "/assets/css/commerce-quelle-offre.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/P05-quelle-offre-choisir.css")
+        filemtime(get_template_directory() . "/assets/css/commerce-quelle-offre.css")
     );
 
     wp_enqueue_script(
         "jurible-quelle-offre",
-        get_template_directory_uri() . "/assets/js/P05-quelle-offre-choisir.js",
+        get_template_directory_uri() . "/assets/js/commerce-quelle-offre.js",
         [],
-        filemtime(get_template_directory() . "/assets/js/P05-quelle-offre-choisir.js"),
+        filemtime(get_template_directory() . "/assets/js/commerce-quelle-offre.js"),
         true
     );
 }
@@ -882,9 +897,9 @@ function jurible_enqueue_produits_complementaires_assets()
 {
     wp_enqueue_style(
         "jurible-produits-complementaires",
-        get_template_directory_uri() . "/assets/css/P06-produits-complementaires.css",
+        get_template_directory_uri() . "/assets/css/commerce-produits.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/P06-produits-complementaires.css")
+        filemtime(get_template_directory() . "/assets/css/commerce-produits.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_produits_complementaires_assets");
@@ -895,9 +910,9 @@ function jurible_enqueue_pricing_academie_assets()
 {
     wp_enqueue_style(
         "jurible-pricing-academie",
-        get_template_directory_uri() . "/assets/css/P07-pricing-academie.css",
+        get_template_directory_uri() . "/assets/css/commerce-pricing.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/P07-pricing-academie.css")
+        filemtime(get_template_directory() . "/assets/css/commerce-pricing.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_pricing_academie_assets");
@@ -908,9 +923,9 @@ function jurible_enqueue_comparaison_assets()
 {
     wp_enqueue_style(
         "jurible-comparaison",
-        get_template_directory_uri() . "/assets/css/P11-comparaison.css",
+        get_template_directory_uri() . "/assets/css/marketing-comparaison.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/P11-comparaison.css")
+        filemtime(get_template_directory() . "/assets/css/marketing-comparaison.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_comparaison_assets");
@@ -921,9 +936,9 @@ function jurible_enqueue_features_assets()
 {
     wp_enqueue_style(
         "jurible-features",
-        get_template_directory_uri() . "/assets/css/P12-features.css",
+        get_template_directory_uri() . "/assets/css/marketing-features-incluses.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/P12-features.css")
+        filemtime(get_template_directory() . "/assets/css/marketing-features-incluses.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_features_assets");
@@ -934,9 +949,9 @@ function jurible_enqueue_stats_assets()
 {
     wp_enqueue_style(
         "jurible-stats",
-        get_template_directory_uri() . "/assets/css/P13-stats.css",
+        get_template_directory_uri() . "/assets/css/contenu-stats.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/P13-stats.css")
+        filemtime(get_template_directory() . "/assets/css/contenu-stats.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_stats_assets");
@@ -947,9 +962,9 @@ function jurible_enqueue_steps_assets()
 {
     wp_enqueue_style(
         "jurible-steps",
-        get_template_directory_uri() . "/assets/css/P14-steps.css",
+        get_template_directory_uri() . "/assets/css/marketing-steps.css",
         [],
-        filemtime(get_template_directory() . "/assets/css/P14-steps.css")
+        filemtime(get_template_directory() . "/assets/css/marketing-steps.css")
     );
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_steps_assets");
