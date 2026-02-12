@@ -1041,3 +1041,14 @@ remove_filter('pre_term_description', 'wp_filter_kses');
 remove_filter('term_description', 'wp_kses_data');
 add_filter('term_description', 'wpautop');
 
+
+# Limiter la recherche aux articles uniquement (exclure les pages)
+function jurible_search_filter($query)
+{
+    if ($query->is_search && !is_admin() && $query->is_main_query()) {
+        $query->set('post_type', 'post');
+    }
+    return $query;
+}
+add_filter('pre_get_posts', 'jurible_search_filter');
+
