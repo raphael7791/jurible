@@ -1073,3 +1073,18 @@ function jurible_enqueue_single_assets()
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_single_assets");
 
+
+# Charger le CSS typographique des articles de blog (uniquement sur single posts)
+function jurible_enqueue_single_post_typography()
+{
+    if (is_singular('post')) {
+        wp_enqueue_style(
+            "jurible-single-post-typography",
+            get_template_directory_uri() . "/assets/css/single-post-typography.css",
+            [],
+            filemtime(get_template_directory() . "/assets/css/single-post-typography.css")
+        );
+    }
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_single_post_typography");
+

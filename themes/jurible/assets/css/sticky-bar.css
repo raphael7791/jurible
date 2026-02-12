@@ -141,7 +141,7 @@
 
 /* Quand la sticky bar est presente */
 body:has(.sticky-bar:not(.is-hidden)) {
-    padding-top: 112px; /* 72px header + 40px sticky bar */
+    padding-top: 70px;
 }
 
 body:has(.sticky-bar:not(.is-hidden)) .site-header {
@@ -150,7 +150,7 @@ body:has(.sticky-bar:not(.is-hidden)) .site-header {
 
 /* Admin bar + Sticky bar */
 body.admin-bar:has(.sticky-bar:not(.is-hidden)) {
-    padding-top: 144px; /* 112px + 32px admin bar */
+    padding-top: 102px;
 }
 
 body.admin-bar:has(.sticky-bar:not(.is-hidden)) .site-header {
@@ -161,10 +161,10 @@ body.admin-bar:has(.sticky-bar:not(.is-hidden)) .sticky-bar {
     top: 32px;
 }
 
-/* Mobile admin bar - sticky bar en bas donc pas d'ajustement top */
+/* Mobile admin bar - sticky bar en bas sur mobile, donc padding normal */
 @media (max-width: 782px) {
     body.admin-bar:has(.sticky-bar:not(.is-hidden)) {
-        padding-top: 134px; /* Header normal avec admin bar */
+        padding-top: 102px;
         padding-bottom: 48px;
     }
 

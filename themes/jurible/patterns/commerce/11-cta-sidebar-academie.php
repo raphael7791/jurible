@@ -6,7 +6,7 @@
  * Description: CTA recommandé pour sidebar article - promotion Académie
  */
 ?>
-<!-- wp:group {"className":"widget-cta-recommend","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|lg","right":"var:preset|spacing|lg"},"blockGap":"var:preset|spacing|sm"},"border":{"radius":"16px"}},"gradient":"cta-gradient","layout":{"type":"flex","orientation":"vertical"}} -->
+<!-- wp:group {"className":"widget-cta-recommend","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|lg","right":"var:preset|spacing|lg"},"blockGap":"var:preset|spacing|sm"},"border":{"radius":"16px"}},"gradient":"cta-gradient","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 <div class="wp-block-group widget-cta-recommend has-cta-gradient-gradient-background has-background" style="border-radius:16px;padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--lg)">
 
 <!-- wp:group {"className":"widget-cta-recommend__badge","style":{"spacing":{"padding":{"top":"8px","bottom":"8px","left":"14px","right":"14px"},"blockGap":"6px"},"border":{"radius":"10px"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
@@ -29,10 +29,10 @@
 <p class="has-white-color has-text-color" style="font-size:14px;line-height:1.5">Accède à +500h de cours, fiches et QCM pour réussir ta licence de droit.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|sm"}}}} -->
+<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|sm"}}}} -->
 <div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--sm)">
-<!-- wp:button {"backgroundColor":"white","textColor":"primary","width":100,"style":{"border":{"radius":"8px"}}} -->
-<div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link has-primary-color has-white-background-color has-text-color has-background wp-element-button" href="/academie" style="border-radius:8px">Découvrir l'Académie</a></div>
+<!-- wp:button {"backgroundColor":"white","textColor":"primary","style":{"border":{"radius":"8px"}}} -->
+<div class="wp-block-button"><a class="wp-block-button__link has-primary-color has-white-background-color has-text-color has-background wp-element-button" href="/academie" style="border-radius:8px">Découvrir l'Académie</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->

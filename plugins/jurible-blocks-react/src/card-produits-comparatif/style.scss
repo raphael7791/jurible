@@ -104,7 +104,7 @@
 
 /* ==================== TITRE ==================== */
 .product-card__title {
-	font-size: var(--wp--preset--font-size--medium);
+	font-size: var(--wp--preset--font-size--body);
 	font-weight: 700;
 	color: var(--wp--preset--color--text-dark);
 	margin: 0 0 var(--wp--preset--spacing--xs) 0;
@@ -165,7 +165,7 @@
 }
 
 .product-card__price-suffix {
-	font-size: var(--wp--preset--font-size--medium);
+	font-size: var(--wp--preset--font-size--body);
 	font-weight: 500;
 	color: var(--wp--preset--color--text-muted);
 }
@@ -337,7 +337,7 @@
 	}
 
 	.product-card__title {
-		font-size: var(--wp--preset--font-size--medium);
+		font-size: var(--wp--preset--font-size--body);
 	}
 
 	.product-card__description {

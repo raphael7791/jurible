@@ -73,7 +73,7 @@
 
 /* Durée */
 .duration-card__duration {
-    font-size: var(--wp--preset--font-size--medium);
+    font-size: var(--wp--preset--font-size--body);
     font-weight: 600;
     color: var(--wp--preset--color--text-dark);
     margin: 0 0 var(--wp--preset--spacing--sm) 0;
@@ -248,7 +248,7 @@
     }
 
     .duration-card__price span {
-        font-size: var(--wp--preset--font-size--medium);
+        font-size: var(--wp--preset--font-size--body);
     }
 
     .duration-card__monthly {

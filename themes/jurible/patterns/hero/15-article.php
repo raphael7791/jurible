@@ -7,8 +7,8 @@
  * Block Types: core/post-content
  */
 ?>
-<!-- wp:group {"align":"full","className":"hero-article","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull hero-article" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
+<!-- wp:group {"align":"full","className":"hero-article","style":{"spacing":{"padding":{"top":"var:preset|spacing|sm","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull hero-article" style="padding-top:var(--wp--preset--spacing--sm);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:group {"className":"hero-article__container","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 <div class="wp-block-group hero-article__container">
@@ -70,7 +70,7 @@
 <!-- wp:group {"className":"hero-article__cta","layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-group hero-article__cta">
 <!-- wp:paragraph -->
-<p>Envie d'aller plus loin ? <a href="/academie">Rejoindre l'Académie · 29€/mois</a></p>
+<p>Envie d'aller plus loin ? <a href="/academie">Rejoindre l'Académie</a></p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->

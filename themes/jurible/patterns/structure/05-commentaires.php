@@ -9,8 +9,8 @@
 <!-- wp:group {"align":"full","className":"comments-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull comments-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
-<!-- wp:group {"align":"wide","className":"comments-section__header","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|lg"}}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
-<div class="wp-block-group alignwide comments-section__header" style="margin-bottom:var(--wp--preset--spacing--lg)">
+<!-- wp:group {"className":"comments-section__header","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|lg"}}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
+<div class="wp-block-group comments-section__header" style="margin-bottom:var(--wp--preset--spacing--lg)">
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"20px"}}} -->
 <p style="font-size:20px">💬</p>
 <!-- /wp:paragraph -->
@@ -20,14 +20,14 @@
 </div>
 <!-- /wp:group -->
 
-<!-- wp:group {"align":"wide","layout":{"type":"default"}} -->
-<div class="wp-block-group alignwide">
+<!-- wp:group {"layout":{"type":"default"}} -->
+<div class="wp-block-group">
 <!-- wp:post-comments-form {"className":"comments-form"} /-->
 </div>
 <!-- /wp:group -->
 
-<!-- wp:comments {"align":"wide","className":"comments-list"} -->
-<div class="wp-block-comments alignwide comments-list">
+<!-- wp:comments {"className":"comments-list"} -->
+<div class="wp-block-comments comments-list">
 <!-- wp:comment-template -->
 <!-- wp:group {"className":"comment","style":{"spacing":{"blockGap":"var:preset|spacing|md"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
 <div class="wp-block-group comment">

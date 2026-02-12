@@ -53,7 +53,7 @@
 
 .card-testimonial__star {
     color: var(--wp--preset--color--border);
-    font-size: var(--wp--preset--font-size--medium);
+    font-size: var(--wp--preset--font-size--body);
 }
 
 .card-testimonial--hero .card-testimonial__star {
@@ -152,7 +152,7 @@
 }
 
 .card-testimonial__avatar--initials.card-testimonial__avatar--lg {
-    font-size: var(--wp--preset--font-size--medium);
+    font-size: var(--wp--preset--font-size--body);
 }
 
 /* ==================== AUTHOR INFO ==================== */
@@ -168,7 +168,7 @@
 }
 
 .card-testimonial--hero .card-testimonial__author-name {
-    font-size: var(--wp--preset--font-size--medium);
+    font-size: var(--wp--preset--font-size--body);
     margin-bottom: 4px;
 }
 
@@ -202,6 +202,6 @@
     }
 
     .card-testimonial--hero .card-testimonial__author-name {
-        font-size: var(--wp--preset--font-size--medium);
+        font-size: var(--wp--preset--font-size--body);
     }
 }

@@ -451,7 +451,7 @@ html.dark {
 .fc-error p {
     font-family: var(--wp--preset--font-family--poppins);
     font-weight: 500;
-    font-size: var(--wp--preset--font-size--medium);
+    font-size: var(--wp--preset--font-size--body);
     line-height: 24px;
     color: var(--fc-text-secondary);
     margin: 0;
@@ -466,6 +466,6 @@ html.dark {
     padding: 48px var(--wp--preset--spacing--md);
     font-family: var(--wp--preset--font-family--poppins);
     font-weight: 500;
-    font-size: var(--wp--preset--font-size--medium);
+    font-size: var(--wp--preset--font-size--body);
     color: var(--fc-text-secondary);
 }
