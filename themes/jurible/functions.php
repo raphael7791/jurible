@@ -1035,3 +1035,9 @@ function jurible_enqueue_page_404_assets()
 add_action("wp_enqueue_scripts", "jurible_enqueue_page_404_assets");
 add_action("enqueue_block_assets", "jurible_enqueue_page_404_assets");
 
+
+# Autoriser le HTML dans les descriptions de catégories/taxonomies
+remove_filter('pre_term_description', 'wp_filter_kses');
+remove_filter('term_description', 'wp_kses_data');
+add_filter('term_description', 'wpautop');
+
