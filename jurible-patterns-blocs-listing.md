@@ -1,95 +1,147 @@
 # Jurible - Listing Patterns & Blocs
 
-> Généré le 8 février 2026
+> Mis à jour le 12 février 2026
 
 ---
 
-## PATTERNS (57 patterns)
+## PATTERNS (70 patterns)
 
 Les patterns sont des blocs de contenu réutilisables situés dans `/themes/jurible/patterns/`.
 
-### Heroes (H) - 15 patterns
+### Hero (15 patterns)
 
-| Fichier | Slug | Description |
-|---------|------|-------------|
-| `H01-hero-conversion-homepage.php` | `jurible/h01-hero-conversion-homepage` | Homepage avec 2 CTA et mockup navigateur |
-| `H01-hero-conversion-academie.php` | `jurible/h01-hero-conversion-academie` | Académie avec 1 CTA, features et vidéo |
-| `H01-hero-conversion-prepa.php` | `jurible/h01-hero-conversion-prepa` | Prépa avec 2 CTA, bandeau urgence et mockup blanc |
-| `H01-hero-conversion-suite-ia.php` | `jurible/h01-hero-conversion-suite-ia` | Suite IA avec badge tech, mockup 3D et particules |
-| `H02-hero-archive-blog.php` | `jurible/h02-hero-archive-blog` | Blog avec barre de recherche et stats |
-| `H02-hero-archive-cours.php` | `jurible/h02-hero-archive-cours` | Cours avec barre de recherche et catégories |
-| `H02-hero-archive-fiches.php` | `jurible/h02-hero-archive-fiches` | Fiches d'arrêt avec barre de recherche et catégories |
-| `H02-hero-archive-search.php` | `jurible/h02-hero-archive-search` | Page de résultats de recherche |
-| `H03-hero-produit-cours.php` | `jurible/h03-hero-produit-cours` | Page cours par matière avec card abonnement |
-| `H03-hero-produit-support.php` | `jurible/h03-hero-produit-support` | Page support (Flashcards, Fiches vidéo, Mindmaps) |
-| `H04-hero-simple-about.php` | `jurible/h04-hero-simple-about` | Page À propos / Équipe |
-| `H04-hero-simple-contact.php` | `jurible/h04-hero-simple-contact` | Page Contact |
-| `H04-hero-simple-faq.php` | `jurible/h04-hero-simple-faq` | Page FAQ / Centre d'aide |
-| `H04-hero-simple-legal.php` | `jurible/h04-hero-simple-legal` | Pages légales (CGV, CGU, Mentions) |
-| `H05-hero-article.php` | `jurible/h05-hero-article` | Article avec badge, titre, meta, auteur et image |
-
----
-
-### Paragraphes (P01-P02) - 7 patterns
-
-| Fichier | Slug | Description |
-|---------|------|-------------|
-| `P01-paragraphe-standard.php` | `jurible/p01-paragraphe-standard` | Label + Titre gradient + Sous-titre + Paragraphes + Liste + CTA |
-| `P01-paragraphe-card.php` | `jurible/p01-paragraphe-card` | Bloc avec bordure 1px arrondie + Titre + Paragraphes + Caption |
-| `P01-paragraphe-gris.php` | `jurible/p01-paragraphe-gris` | Section paragraphe avec fond gris |
-| `P01-paragraphe-minimal.php` | `jurible/p01-paragraphe-minimal` | Titre + Paragraphes uniquement (pages légales) |
-| `P02-texte-image.php` | `jurible/p02-texte-image` | Texte à gauche + Image à droite |
-| `P02-image-texte.php` | `jurible/p02-image-texte` | Image à gauche + Texte à droite |
-| `P02-texte-video.php` | `jurible/p02-texte-video` | Texte à gauche + Vidéo YouTube à droite |
+| # | Slug | Description |
+|---|------|-------------|
+| 01 | `jurible/hero-01-conversion-homepage` | Hero conversion A1 - Homepage avec 2 CTA et mockup navigateur |
+| 02 | `jurible/hero-02-conversion-academie` | Hero conversion A2 - Académie avec 1 CTA, features et vidéo |
+| 03 | `jurible/hero-03-conversion-prepa` | Hero conversion A3 - Prépa avec 2 CTA, bandeau urgence et mockup blanc |
+| 04 | `jurible/hero-04-conversion-suite-ia` | Hero conversion A4 - Suite IA avec badge tech, mockup 3D et particules |
+| 05 | `jurible/hero-05-archive-blog` | Hero archive C1 - Blog avec barre de recherche et stats |
+| 06 | `jurible/hero-06-archive-cours` | Hero archive C2 - Cours avec barre de recherche et catégories |
+| 07 | `jurible/hero-07-archive-fiches` | Hero archive C3 - Fiches d'arrêt avec barre de recherche et catégories |
+| 08 | `jurible/hero-08-archive-search` | Hero archive C4 - Page de résultats de recherche |
+| 09 | `jurible/hero-09-produit-cours` | Hero produit B1 - Page cours par matière avec card abonnement |
+| 10 | `jurible/hero-10-produit-support` | Hero produit B1bis - Page support (Flashcards, Fiches vidéo, Mindmaps) avec card abonnement |
+| 11 | `jurible/hero-11-simple-about` | Hero simple D1 - Page À propos / Équipe |
+| 12 | `jurible/hero-12-simple-contact` | Hero simple D2 - Page Contact |
+| 13 | `jurible/hero-13-simple-faq` | Hero simple D3 - Page FAQ / Centre d'aide |
+| 14 | `jurible/hero-14-simple-legal` | Hero simple D4 - Pages légales (CGV, CGU, Mentions, Confidentialité) |
+| 15 | `jurible/hero-15-article` | Hero article E1 - Fond lilas avec badge, titre, meta, auteur et image |
 
 ---
 
-### Sections commerciales (P03-P14) - 17 patterns
+### Contenu (14 patterns)
 
-| Fichier | Slug | Description |
-|---------|------|-------------|
-| `P03-offre-suite-ia.php` | `jurible/p03-offre-suite-ia` | 4 outils IA en grille 2x2 |
-| `P04-cta-academie.php` | `jurible/p04-cta-academie` | Cross-sell Fiches PDF vers Académie avec comparatif |
-| `P05-quelle-offre-choisir.php` | `jurible/p05-quelle-offre-choisir` | 6 flip cards pour aider à choisir son offre |
-| `P06-produits-complementaires.php` | `jurible/p06-produits-complementaires` | 3 cartes produits complémentaires avec card highlight |
-| `P07-pricing-academie.php` | `jurible/p07-pricing-academie` | Pricing complet avec features et sélecteur de durée |
-| `P08-bloc-methode.php` | `jurible/p08-bloc-methode` | Onglets interactifs (vidéos, fiches, QCM, etc.) |
-| `P09-trust-bar.php` | `jurible/p09-trust-bar` | Bandeau logos universités partenaires (10 logos) |
-| `P10-cta-final-basique.php` | `jurible/p10-cta-final-basique` | CTA final basique - 2 boutons + mentions |
-| `P10-cta-final-promo.php` | `jurible/p10-cta-final-promo` | CTA final avec prix barré et code promo |
-| `P10-cta-final-urgence.php` | `jurible/p10-cta-final-urgence` | CTA final avec alerte urgence (places limitées) |
-| `P11a-comparaison-cards.php` | `jurible/p11a-comparaison-cards` | Comparaison Sans/Avec en 2 colonnes cards |
-| `P11b-comparaison-avant-apres.php` | `jurible/p11b-comparaison-avant-apres` | Tableau comparatif Avant/Après avec 3 colonnes |
-| `P11c-comparaison-multi.php` | `jurible/p11c-comparaison-multi` | Multi-colonnes (Jurible vs Manuels vs Cours amphi) |
-| `P11d-comparaison-dark.php` | `jurible/p11d-comparaison-dark` | Header noir et colonne gradient (PASS DROIT) |
-| `P12-features.php` | `jurible/p12-features` | Grille de features incluses avec bonus banner |
-| `P13-stats.php` | `jurible/p13-stats` | Chiffres clés avec fond gradient |
-| `P14-steps.php` | `jurible/p14-steps` | Timeline 4 étapes horizontal/vertical |
+| # | Slug | Description |
+|---|------|-------------|
+| 01 | `jurible/contenu-01-paragraphe-standard` | Section paragraphe standard - Label + Titre gradient + Sous-titre + Paragraphes + Liste + CTA |
+| 02 | `jurible/contenu-02-paragraphe-card` | Section paragraphe style card - Bloc avec bordure 1px arrondie + Titre + Paragraphes + Caption |
+| 03 | `jurible/contenu-03-paragraphe-gris` | Section paragraphe avec fond gris |
+| 04 | `jurible/contenu-04-paragraphe-minimal` | Section paragraphe minimal - Titre + Paragraphes uniquement (pages légales) |
+| 05 | `jurible/contenu-05-texte-image` | Bloc 2 colonnes - Texte à gauche + Image à droite |
+| 06 | `jurible/contenu-06-image-texte` | Bloc 2 colonnes inversé - Image à gauche + Texte à droite |
+| 07 | `jurible/contenu-07-texte-video` | Bloc 2 colonnes - Texte à gauche + Vidéo YouTube à droite |
+| 08 | `jurible/contenu-08-chiffres-cles` | Grille de stats sur fond noir (Pattern B) |
+| 09 | `jurible/contenu-09-grille-matieres` | Grille 4 colonnes des matières incluses (Pattern C) |
+| 10 | `jurible/contenu-10-programme` | Modules détaillés avec durées (Pattern F) |
+| 11 | `jurible/contenu-11-sommaire` | Liste verticale avec nombre de pages (Pattern E) |
+| 12 | `jurible/contenu-12-stats-sommaire` | Stats à gauche et sommaire à droite (Pattern D) |
+| 13 | `jurible/contenu-13-stats` | Section chiffres clés avec fond gradient |
+| 14 | `jurible/contenu-14-methode-onglets` | Section découverte de la méthode avec onglets interactifs (vidéos, fiches, QCM, etc.) |
 
 ---
 
-### Composants (C) - 18 patterns
+### Commerce (11 patterns)
 
-| Fichier | Slug | Description |
-|---------|------|-------------|
-| `C04-bio-auteur.php` | `jurible/c04-bio-auteur` | Affiche les infos de l'auteur du post |
-| `C05-enseignants-grille.php` | `jurible/c05-enseignants-grille` | Grille de cartes enseignants (page équipe) |
-| `C05-enseignants-specifique.php` | `jurible/c05-enseignants-specifique` | Section enseignant pour pages cours/fiches par matière |
-| `C05-enseignants-teaser.php` | `jurible/c05-enseignants-teaser` | Avatars empilés pour pages prépa et secondaires |
-| `C05-enseignants-video.php` | `jurible/c05-enseignants-video` | Colonnes avec citations et vidéos (homepage, académie) |
-| `C06-reassurance-full.php` | `jurible/c06-reassurance-full` | Avis, stats et logos partenaires (Homepage, Prépa) |
-| `C06-reassurance-minimal.php` | `jurible/c06-reassurance-minimal` | Réassurance inline minimaliste (sous pricing, CTA) |
-| `C07-faq-accordeon.php` | `jurible/c07-faq-accordeon` | Section FAQ avec accordéon interactif |
-| `C08-fonctionnalite.php` | `jurible/c08-fonctionnalite` | Grille de 6 fonctionnalités avec icônes emoji |
-| `C08-fonctionnalite-4.php` | `jurible/c08-fonctionnalite-4` | Grille de 4 fonctionnalités (2 colonnes) |
-| `C08-fonctionnalite-detailed.php` | `jurible/c08-fonctionnalite-detailed` | Grille détaillée avec listes à puces (2 colonnes) |
-| `C09-contenu-chiffre.php` | `jurible/c09-contenu-chiffre` | Grille de stats sur fond noir |
-| `C09-contenu-matieres.php` | `jurible/c09-contenu-matieres` | Grille 4 colonnes des matières incluses |
-| `C09-contenu-programme.php` | `jurible/c09-contenu-programme` | Modules détaillés avec durées |
-| `C09-contenu-sommaire.php` | `jurible/c09-contenu-sommaire` | Liste verticale avec nombre de pages |
-| `C09-contenu-stats-sommaire.php` | `jurible/c09-contenu-stats-sommaire` | Stats à gauche et sommaire à droite |
-| `C11-pain-points-4.php` | `jurible/c11-pain-points-4` | 4 pain points en 4 colonnes (Homepage, Minos, Fiches) |
-| `C11-pain-points-6.php` | `jurible/c11-pain-points-6` | 6 pain points en 3 colonnes (Académie, Prépa) |
+| # | Slug | Description |
+|---|------|-------------|
+| 01 | `jurible/commerce-01-pricing-academie` | Bloc pricing complet avec features et sélecteur de durée |
+| 02 | `jurible/commerce-02-offre-suite-ia` | Section présentant les 4 outils IA en grille 2x2 |
+| 03 | `jurible/commerce-03-cta-cross-sell` | Bloc cross-sell Fiches PDF vers Académie avec comparatif et pricing card |
+| 04 | `jurible/commerce-04-quelle-offre` | Section avec 6 flip cards pour aider l'utilisateur à choisir son offre |
+| 05 | `jurible/commerce-05-produits-complementaires` | Section 3 cartes produits complémentaires avec card highlight |
+| 06 | `jurible/commerce-06-cta-final-basique` | CTA final basique - 2 boutons + mentions |
+| 07 | `jurible/commerce-07-cta-final-promo` | CTA final avec prix barré et code promo |
+| 08 | `jurible/commerce-08-cta-final-urgence` | CTA final avec alerte urgence (places limitées, offre expire) |
+| 09 | `jurible/commerce-09-pricing-comparatif` | Section comparatif des 4 produits Jurible avec grille (page Offres) |
+| 09-hp | `jurible/commerce-09-pricing-comparatif-homepage` | Section comparatif avec Académie hero pleine largeur + 3 cards (Homepage) |
+| 10 | `jurible/commerce-10-pricing-suite-ia` | Section pricing Minos (Suite IA) avec 3 offres et bandeau essai gratuit |
+| 11 | `jurible/commerce-11-cta-sidebar-academie` | CTA recommandé pour sidebar article - promotion Académie |
+
+---
+
+### Confiance (6 patterns)
+
+| # | Slug | Description |
+|---|------|-------------|
+| 01 | `jurible/confiance-01-reassurance-full` | Bloc réassurance complet avec avis, stats et logos partenaires (Homepage, Prépa) |
+| 02 | `jurible/confiance-02-reassurance-minimal` | Section réassurance inline minimaliste |
+| 03 | `jurible/confiance-03-logos-partenaires` | Bandeau de confiance avec logos universités partenaires (10 logos) |
+| 04 | `jurible/confiance-04-faq` | Section FAQ avec accordéon interactif |
+| 05 | `jurible/confiance-05-temoignages` | Section témoignages avec grille 3 cards (fond blanc) |
+| 05-gris | `jurible/confiance-05-temoignages-gris` | Section témoignages avec grille 3 cards (fond gris) |
+
+---
+
+### Marketing (12 patterns)
+
+| # | Slug | Description |
+|---|------|-------------|
+| 01 | `jurible/marketing-01-pain-points-4` | Grille 4 pain points en 4 colonnes (Homepage, Minos, Fiches, Cours, Manuel) |
+| 02 | `jurible/marketing-02-pain-points-6` | Grille 6 pain points en 3 colonnes (Académie, Prépa) |
+| 03 | `jurible/marketing-03-solution-4` | Section solution avec grille 4 cards centrées (fond blanc) |
+| 03-gris | `jurible/marketing-03-solution-4-gris` | Section solution avec grille 4 cards centrées (fond gris) |
+| 03-6 | `jurible/marketing-03-solution-6` | Section solution avec grille 2×3 cards horizontales (fond blanc) |
+| 04 | `jurible/marketing-04-features-6` | Grille de 6 fonctionnalités avec icônes emoji (Pattern A) |
+| 05 | `jurible/marketing-05-features-4` | Grille de 4 fonctionnalités avec icônes emoji (Pattern A - 2 colonnes) |
+| 06 | `jurible/marketing-06-features-detailed` | Grille détaillée avec listes à puces (Pattern B - 2 colonnes) |
+| 07 | `jurible/marketing-07-features-incluses` | Grille de features incluses avec bonus banner |
+| 08 | `jurible/marketing-08-steps` | Section timeline 4 étapes horizontal/vertical |
+| 09 | `jurible/marketing-09-comparaison-cards` | Bloc comparaison Sans/Avec en 2 colonnes cards |
+| 10 | `jurible/marketing-10-comparaison-avant-apres` | Tableau comparatif Avant/Après avec 3 colonnes |
+| 11 | `jurible/marketing-11-comparaison-multi` | Tableau comparatif multi-colonnes avec icônes (Jurible vs Manuels vs Cours amphi) |
+| 12 | `jurible/marketing-12-comparaison-dark` | Tableau comparatif avec header noir et colonne gradient (PASS DROIT) |
+
+---
+
+### Equipe (7 patterns)
+
+| # | Slug | Description |
+|---|------|-------------|
+| 01 | `jurible/equipe-01-enseignants-grille` | Grille de cartes enseignants pour page Nos enseignants (colonnes responsive) |
+| 02 | `jurible/equipe-02-enseignant-matiere` | Section enseignant pour pages cours/fiches par matière |
+| 03 | `jurible/equipe-03-enseignants-teaser` | Section équipe avec avatars empilés pour pages prépa et secondaires |
+| 04 | `jurible/equipe-04-enseignants-video` | Section équipe avec colonnes, citations et vidéos pour homepage et académie |
+| 05 | `jurible/equipe-05-bio-auteur` | Section bio auteur pour articles de blog |
+| 06 | `jurible/equipe-06-citation` | Section citation simple avec barre gauche |
+| 06-hero | `jurible/equipe-06-citation-hero` | Section citation hero avec photo et quote (2 colonnes) |
+
+---
+
+### Structure (5 patterns)
+
+| # | Slug | Description |
+|---|------|-------------|
+| 02 | `jurible/structure-02-article-featured` | Section article mis en avant (dynamique - dernier article) |
+| 03 | `jurible/structure-03-articles-grid` | Section grille 3 articles (dynamique - Query Loop) |
+| 04 | `jurible/structure-04-articles-lies` | Section articles similaires (dynamique - Query Loop) - cartes simplifiées |
+| 05 | `jurible/structure-05-commentaires` | Section commentaires pour les articles de blog |
+| 06 | `jurible/structure-06-page-404` | Page erreur 404 avec texte centré et liens utiles |
+
+---
+
+## Résumé Patterns
+
+| Catégorie | Nombre |
+|-----------|--------|
+| Hero | 15 |
+| Contenu | 14 |
+| Commerce | 11 |
+| Confiance | 6 |
+| Marketing | 12 |
+| Equipe | 7 |
+| Structure | 5 |
+| **Total** | **70** |
 
 ---
 
@@ -187,8 +239,15 @@ Ces styles sont définis dans `/themes/jurible/assets/css/` et enregistrés via 
 
 ```
 themes/jurible/
-├── patterns/           # 57 patterns PHP
-├── templates/          # Templates FSE (index.html)
+├── patterns/           # 70 patterns PHP
+│   ├── hero/           # 15 patterns
+│   ├── contenu/        # 14 patterns
+│   ├── commerce/       # 11 patterns
+│   ├── confiance/      # 6 patterns
+│   ├── marketing/      # 12 patterns
+│   ├── equipe/         # 7 patterns
+│   └── structure/      # 5 patterns
+├── templates/          # Templates FSE
 ├── parts/              # Template parts (header, footer)
 ├── assets/css/         # Styles par pattern/composant
 ├── theme.json          # Design tokens et configuration
@@ -240,3 +299,13 @@ plugins/jurible-blocks-react/
 1. Sélectionner le bloc (bouton, paragraphe, image...)
 2. Dans la sidebar droite, section "Styles"
 3. Choisir le style souhaité
+
+---
+
+## USAGE CODE
+
+Pour utiliser un pattern dans une page ou un template :
+
+```html
+<!-- wp:pattern {"slug":"jurible/hero-01-conversion-homepage"} /-->
+```
