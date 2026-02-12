@@ -105,9 +105,9 @@
 
 | # | Fichier | Description | Statut |
 |---|---------|-------------|--------|
-| 01 | `structure/01-article-featured.php` | Article mis en avant | ✅ |
-| 02 | `structure/02-articles-grid.php` | Grille articles | ✅ |
-| 03 | `structure/01-formulaire-contact.php` | Formulaire contact | ❌ A creer |
+| 01 | `structure/01-formulaire-contact.php` | Formulaire contact | ❌ A creer |
+| 02 | `structure/02-article-featured.php` | Article mis en avant | ✅ |
+| 03 | `structure/03-articles-grid.php` | Grille articles | ✅ |
 | 04 | `structure/04-articles-lies.php` | Articles lies | ✅ |
 | 05 | `structure/05-catalogue-matieres.php` | Catalogue matieres | ❌ A creer |
 | 06 | `structure/06-page-404.php` | Page 404 | ✅ |
@@ -128,8 +128,8 @@
 ## Notes techniques
 
 ### Patterns dynamiques (Query Loop)
-- `structure/01-article-featured.php` — Article sticky
-- `structure/02-articles-grid.php` — 3 derniers articles
+- `structure/02-article-featured.php` — Article sticky
+- `structure/03-articles-grid.php` — 3 derniers articles
 - `structure/04-articles-lies.php` — Articles meme categorie
 
 ### CSS dedies

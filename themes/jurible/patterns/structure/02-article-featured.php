@@ -1,7 +1,7 @@
 <?php
 /**
- * Title: Structure 01 - Article Featured
- * Slug: jurible/structure-01-article-featured
+ * Title: Structure 02 - Article Featured
+ * Slug: jurible/structure-02-article-featured
  * Categories: structure
  * Description: Section article mis en avant (dynamique - dernier article)
  */

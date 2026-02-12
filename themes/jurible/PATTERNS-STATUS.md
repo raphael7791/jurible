@@ -142,12 +142,12 @@ equipe/06-citation-hero.php (bonus)
 
 ### Structure (4 patterns + 2 a faire)
 ```
-structure/01-article-featured.php
-structure/02-articles-grid.php
+structure/02-article-featured.php
+structure/03-articles-grid.php
 structure/04-articles-lies.php
 structure/06-page-404.php
 # A FAIRE:
-# structure/01-formulaire-contact.php (renumeroter apres creation)
+# structure/01-formulaire-contact.php
 # structure/05-catalogue-matieres.php
 ```
 
@@ -156,8 +156,8 @@ structure/06-page-404.php
 ## Notes techniques
 
 ### Patterns dynamiques (Query Loop)
-- `structure/01-article-featured.php` — queryId:1, sticky:only
-- `structure/02-articles-grid.php` — queryId:2, sticky:exclude
+- `structure/02-article-featured.php` — queryId:1, sticky:only
+- `structure/03-articles-grid.php` — queryId:2, sticky:exclude
 - `structure/04-articles-lies.php` — queryId:3, filtre par categorie
 
 ### Blocs custom utilises

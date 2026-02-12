@@ -1,7 +1,7 @@
 <?php
 /**
- * Title: Structure 02 - Articles Grid
- * Slug: jurible/structure-02-articles-grid
+ * Title: Structure 03 - Articles Grid
+ * Slug: jurible/structure-03-articles-grid
  * Categories: structure
  * Description: Section grille 3 articles (dynamique - Query Loop)
  */
