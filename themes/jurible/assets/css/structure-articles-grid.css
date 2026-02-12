@@ -1,7 +1,8 @@
 /* ==================== ARTICLES GRID ==================== */
 
 /* Reset du padding par défaut du ul post-template */
-.articles-grid-query .wp-block-post-template {
+.articles-grid-query .wp-block-post-template,
+.archive-query .wp-block-post-template {
     padding-left: 0;
     margin: 0;
     list-style: none;
@@ -9,13 +10,15 @@
 
 /* Responsive grille */
 @media (max-width: 1000px) {
-    .articles-grid-query .wp-block-post-template.is-layout-grid {
+    .articles-grid-query .wp-block-post-template.is-layout-grid,
+    .archive-query .wp-block-post-template.is-layout-grid {
         grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 
 @media (max-width: 600px) {
-    .articles-grid-query .wp-block-post-template.is-layout-grid {
+    .articles-grid-query .wp-block-post-template.is-layout-grid,
+    .archive-query .wp-block-post-template.is-layout-grid {
         grid-template-columns: 1fr !important;
     }
 }
