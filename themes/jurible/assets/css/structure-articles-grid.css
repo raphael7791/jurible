@@ -170,3 +170,9 @@
     color: var(--wp--preset--color--white);
     border-color: transparent;
 }
+
+/* ==================== SEO CONTENT (Archive) ==================== */
+
+.seo-content .wp-block-term-description > *:first-child {
+    margin-top: 0;
+}
