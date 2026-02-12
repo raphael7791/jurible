@@ -59,7 +59,7 @@
 }
 
 /* Réduire le padding des patterns dans la sidebar */
-.article-sidebar .wp-block-group[style*="padding"] {
+.article-sidebar .wp-block-group[style*="padding"]:not(.widget-cta-recommend):not(.widget-cta-recommend__badge) {
     padding: var(--wp--preset--spacing--md) !important;
 }
 
@@ -99,4 +99,52 @@
 
 .article-columns .wp-block-post-terms a:hover {
     text-decoration: underline;
+}
+
+/* ==========================================================================
+   WIDGET CTA SIDEBAR
+   ========================================================================== */
+
+.widget-cta-recommend {
+    width: 100%;
+}
+
+/* Badge styling */
+.widget-cta-recommend__badge {
+    gap: 6px !important;
+    padding: 6px 12px !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px !important;
+}
+
+.widget-cta-recommend__badge p {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+}
+
+/* Override sidebar forced styles for this widget */
+.article-sidebar .widget-cta-recommend {
+    padding: var(--wp--preset--spacing--lg) !important;
+}
+
+.article-sidebar .widget-cta-recommend h3 {
+    font-size: 18px !important;
+}
+
+.article-sidebar .widget-cta-recommend p {
+    font-size: 14px !important;
+}
+
+/* Button hover effect */
+.widget-cta-recommend .wp-block-button__link {
+    transition: all 200ms ease;
+}
+
+.widget-cta-recommend .wp-block-button__link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
 }

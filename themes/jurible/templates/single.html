@@ -6,73 +6,17 @@
 <!-- wp:group {"tagName":"main","style":{"spacing":{"blockGap":"0","padding":{"top":"0","bottom":"0"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"default"}} -->
 <main class="wp-block-group" style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
 
-<!-- wp:group {"align":"full","className":"hero-article","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull hero-article" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
+<!-- wp:pattern {"slug":"jurible/hero-15-article"} /-->
 
-<!-- wp:group {"className":"hero-article__container","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
-<div class="wp-block-group hero-article__container">
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|sm","bottom":"0","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained","contentSize":"1200px"}} -->
+<div class="wp-block-group alignfull has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--sm);padding-right:var(--wp--preset--spacing--md);padding-bottom:0;padding-left:var(--wp--preset--spacing--md)">
 
-<!-- wp:post-terms {"term":"category","textAlign":"center","className":"hero-article__badge"} /-->
-
-<!-- wp:post-title {"textAlign":"center","level":1,"className":"hero-article__title"} /-->
-
-<!-- wp:group {"className":"hero-article__author-block","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
-<div class="wp-block-group hero-article__author-block">
-
-<!-- wp:group {"className":"hero-article__meta-row","layout":{"type":"flex","justifyContent":"center"}} -->
-<div class="wp-block-group hero-article__meta-row">
-
-<!-- wp:group {"className":"hero-article__meta","layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<div class="wp-block-group hero-article__meta">
-
-<!-- wp:post-date {"format":"j F Y"} /-->
-
-<!-- wp:paragraph {"className":"hero-article__meta-separator"} -->
-<p class="hero-article__meta-separator">·</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>8 min de lecture</p>
-<!-- /wp:paragraph -->
+<!-- wp:jurible/breadcrumb /-->
 
 </div>
 <!-- /wp:group -->
 
-</div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"hero-article__author","layout":{"type":"flex","justifyContent":"center"}} -->
-<div class="wp-block-group hero-article__author">
-
-<!-- wp:avatar {"size":48,"className":"hero-article__author-avatar"} /-->
-
-<!-- wp:group {"className":"hero-article__author-info","layout":{"type":"flex","orientation":"vertical"}} -->
-<div class="wp-block-group hero-article__author-info">
-
-<!-- wp:post-author-name {"className":"hero-article__author-name"} /-->
-
-<!-- wp:paragraph {"className":"hero-article__author-role"} -->
-<p class="hero-article__author-role">Rédacteur Jurible</p>
-<!-- /wp:paragraph -->
-
-</div>
-<!-- /wp:group -->
-
-</div>
-<!-- /wp:group -->
-
-</div>
-<!-- /wp:group -->
-
-<!-- wp:post-featured-image {"className":"hero-article__image","sizeSlug":"large"} /-->
-
-</div>
-<!-- /wp:group -->
-
-</div>
-<!-- /wp:group -->
-
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained","contentSize":"1200px"}} -->
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained","contentSize":"1200px"}} -->
 <div class="wp-block-group alignfull has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:columns {"className":"article-columns","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|xl"}}}} -->
@@ -89,6 +33,21 @@
 </div>
 <!-- /wp:group -->
 
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"},"blockGap":"var:preset|spacing|sm","margin":{"top":"var:preset|spacing|lg"}},"border":{"radius":"12px"}},"backgroundColor":"muted","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
+<div class="wp-block-group has-muted-background-color has-background" style="border-radius:12px;margin-top:var(--wp--preset--spacing--lg);padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)">
+<!-- wp:avatar {"size":64,"isLink":false,"style":{"border":{"radius":"9999px"}}} /-->
+<!-- wp:group {"style":{"spacing":{"blockGap":"4px"}},"layout":{"type":"flex","orientation":"vertical"}} -->
+<div class="wp-block-group">
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"11px"}},"textColor":"text-muted"} -->
+<p class="has-text-muted-color has-text-color" style="font-size:11px">Rédigé par</p>
+<!-- /wp:paragraph -->
+<!-- wp:post-author-name {"isLink":false,"style":{"typography":{"fontSize":"16px","fontWeight":"600"}},"textColor":"text-dark"} /-->
+<!-- wp:post-author-biography {"style":{"typography":{"fontSize":"13px","lineHeight":"1.5"}},"textColor":"text-gray"} /-->
+</div>
+<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
 </div>
 <!-- /wp:column -->
 
@@ -98,7 +57,7 @@
 <!-- wp:group {"className":"sidebar-sticky","style":{"spacing":{"blockGap":"var:preset|spacing|lg"}},"layout":{"type":"default"}} -->
 <div class="wp-block-group sidebar-sticky">
 
-<!-- wp:pattern {"slug":"jurible/commerce-03-cta-cross-sell"} /-->
+<!-- wp:pattern {"slug":"jurible/commerce-11-cta-sidebar-academie"} /-->
 
 </div>
 <!-- /wp:group -->
@@ -112,13 +71,11 @@
 </div>
 <!-- /wp:group -->
 
-<!-- wp:separator {"style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"className":"is-style-default"} -->
-<hr class="wp-block-separator has-alpha-channel-opacity is-style-default" style="margin-top:0;margin-bottom:0"/>
-<!-- /wp:separator -->
-
-<!-- wp:pattern {"slug":"jurible/equipe-05-bio-auteur"} /-->
+<!-- wp:pattern {"slug":"jurible/structure-05-commentaires"} /-->
 
 <!-- wp:pattern {"slug":"jurible/structure-04-articles-lies"} /-->
+
+<!-- wp:pattern {"slug":"jurible/commerce-06-cta-final-basique"} /-->
 
 </main>
 <!-- /wp:group -->

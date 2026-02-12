@@ -22,7 +22,7 @@
 
 /* Espace pour compenser le header fixed */
 body {
-    padding-top: 88px; /* 72px header + 16px top margin */
+    padding-top: 70px; /* 52px header + 2px border + 16px top margin */
 }
 
 /* Ajustement pour la barre d'admin WordPress */
@@ -31,7 +31,7 @@ body {
 }
 
 .admin-bar {
-    padding-top: 120px; /* 88px + 32px admin bar */
+    padding-top: 102px; /* 70px + 32px admin bar */
 }
 
 @media (max-width: 782px) {
@@ -40,7 +40,7 @@ body {
     }
 
     .admin-bar {
-        padding-top: 134px; /* 88px + 46px */
+        padding-top: 116px; /* 70px + 46px */
     }
 }
 
@@ -50,7 +50,18 @@ body {
     justify-content: space-between;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 14px 40px;
+    padding: 0 20px;
+    height: 52px;
+}
+
+/* Base button class for header */
+.site-header .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 1;
 }
 
 /* Logo */
@@ -71,7 +82,7 @@ body {
 }
 
 .site-header__logo-img {
-    height: 28px;
+    height: 24px;
     width: auto;
     display: block;
     margin: 0;
@@ -89,18 +100,49 @@ body {
 .site-header__actions {
     display: flex;
     align-items: center;
-    gap: 16px;
+    justify-content: flex-end;
+    gap: 10px;
+    height: 100%;
 }
 
 .site-header__cart {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--wp--preset--color--text-gray);
-    border-radius: 8px;
+    border-radius: 6px;
     transition: all 0.15s ease;
+}
+
+/* SureCart cart icon constraint */
+.site-header__actions .wp-block-surecart-cart-menu-icon-button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 36px;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: relative;
+    top: 1px;
+}
+
+.site-header__actions .sc-cart-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 0 !important;
+}
+
+.site-header__actions .sc-cart-icon svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
+.site-header__actions .sc-cart-count {
+    line-height: 1 !important;
 }
 
 .site-header__cart:hover {
@@ -138,10 +180,16 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
+/* Hide header on scroll down */
+.site-header--hidden {
+    transform: translateX(-50%) translateY(-120%);
+}
+
 /* Header buttons */
 .site-header .btn--sm {
-    padding: 8px 16px;
+    padding: 0 14px;
     font-size: 13px;
+    height: 36px;
 }
 
 .site-header .btn--primary {
@@ -204,7 +252,7 @@ body.menu-open {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 40px;
+    gap: 28px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -229,7 +277,7 @@ body.menu-open {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     color: var(--wp--preset--color--text-gray);
     text-decoration: none;
@@ -238,7 +286,7 @@ body.menu-open {
     padding: 0;
     text-transform: uppercase;
     line-height: 1;
-    height: 28px;
+    height: 20px;
 }
 
 #site-header .site-header__nav-item:hover {
@@ -618,7 +666,7 @@ body.menu-open {
 }
 
 .mobile-menu__logo img {
-    height: 28px;
+    height: 24px;
     width: auto;
 }
 

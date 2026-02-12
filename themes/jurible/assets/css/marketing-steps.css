@@ -100,7 +100,7 @@
     --wp--style--block-gap: 0 !important;
 }
 
-.step-item.wp-block-group > * {
+.step-item.wp-block-group > *:not(.step-item__circle) {
     margin-block-start: 0 !important;
     margin-block-end: 0 !important;
 }
@@ -118,9 +118,9 @@ p.step-item__circle {
     justify-content: center;
     font-size: 18px;
     font-weight: 700;
-    margin: 0 0 20px 0 !important;
-    margin-block: 0 0 !important;
+    margin: 0 0 16px 0 !important;
     margin-block-start: 0 !important;
+    margin-block-end: 16px !important;
     padding: 0 !important;
     background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
     color: white;

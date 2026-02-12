@@ -1,5 +1,16 @@
 /* ==================== PAGE 404 ==================== */
 
+/* Liens utiles */
+.page-404__links a {
+    color: var(--wp--preset--color--text-muted);
+    text-decoration: none;
+    transition: color 150ms ease;
+}
+
+.page-404__links a:hover {
+    color: var(--wp--preset--color--primary);
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     .page-404 h1 {

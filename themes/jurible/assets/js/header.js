@@ -15,18 +15,35 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!header) return;
 
     // ===========================================
-    // Glassmorphism on scroll
+    // Glassmorphism on scroll + Hide on scroll down
     // ===========================================
     let lastScrollY = 0;
     const scrollThreshold = 50;
+    const hideThreshold = 100; // Start hiding after 100px scroll
 
     function handleScroll() {
         const scrollY = window.scrollY;
+        const scrollDelta = scrollY - lastScrollY;
 
+        // Glassmorphism effect
         if (scrollY > scrollThreshold) {
             header.classList.add('site-header--scrolled');
         } else {
             header.classList.remove('site-header--scrolled');
+        }
+
+        // Hide/show on scroll direction
+        if (scrollY > hideThreshold) {
+            if (scrollDelta > 5) {
+                // Scrolling down - hide header
+                header.classList.add('site-header--hidden');
+            } else if (scrollDelta < -5) {
+                // Scrolling up - show header
+                header.classList.remove('site-header--hidden');
+            }
+        } else {
+            // Near top - always show
+            header.classList.remove('site-header--hidden');
         }
 
         lastScrollY = scrollY;

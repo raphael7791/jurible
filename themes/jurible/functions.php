@@ -1063,6 +1063,12 @@ function jurible_enqueue_single_assets()
             [],
             filemtime(get_template_directory() . "/assets/css/template-single.css")
         );
+        wp_enqueue_style(
+            "jurible-comments",
+            get_template_directory_uri() . "/assets/css/comments.css",
+            [],
+            filemtime(get_template_directory() . "/assets/css/comments.css")
+        );
     }
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_single_assets");

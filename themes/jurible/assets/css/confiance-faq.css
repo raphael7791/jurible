@@ -49,7 +49,7 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: var(--wp--preset--spacing--md);
-	font-size: var(--wp--preset--font-size--medium);
+	font-size: 16px;
 	font-weight: 600;
 	color: var(--wp--preset--color--text-dark, #1A1A1A);
 	cursor: pointer;

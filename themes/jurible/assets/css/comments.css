@@ -1,0 +1,413 @@
+/* ==========================================================================
+   SECTION COMMENTAIRES - Design System Jurible
+   ========================================================================== */
+
+/* Header */
+.comments-section__header {
+    display: flex;
+    align-items: center;
+    gap: var(--wp--preset--spacing--xs);
+    margin-bottom: var(--wp--preset--spacing--lg);
+}
+
+.comments-section__header p {
+    font-size: 20px;
+    margin: 0 !important;
+    line-height: 1;
+}
+
+.comments-section__title,
+.comments-section .wp-block-comments-title {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    color: var(--wp--preset--color--text-dark) !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    margin: 0 !important;
+}
+
+/* ==========================================================================
+   FORMULAIRE COMMENTAIRE
+   ========================================================================== */
+
+.comments-form,
+.comments-section .comment-respond {
+    background: var(--wp--preset--color--muted);
+    border-radius: var(--wp--custom--border-radius--lg);
+    padding: var(--wp--preset--spacing--lg);
+    margin-bottom: var(--wp--preset--spacing--xl);
+}
+
+/* Titre du formulaire "Laisser un commentaire" */
+.comments-form .comment-reply-title,
+.comments-section .comment-reply-title {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: var(--wp--preset--color--text-dark) !important;
+    margin: 0 0 var(--wp--preset--spacing--md) 0 !important;
+}
+
+/* Cacher le lien "Annuler" */
+.comments-section .comment-reply-title small {
+    display: none;
+}
+
+/* Champs du formulaire */
+.comments-form .comment-form-author,
+.comments-form .comment-form-email,
+.comments-section .comment-form-author,
+.comments-section .comment-form-email {
+    display: inline-block;
+    width: calc(50% - 8px);
+    margin-bottom: var(--wp--preset--spacing--md);
+}
+
+.comments-form .comment-form-author,
+.comments-section .comment-form-author {
+    margin-right: var(--wp--preset--spacing--md);
+}
+
+.comments-form .comment-form-comment,
+.comments-section .comment-form-comment {
+    margin-bottom: var(--wp--preset--spacing--md);
+}
+
+/* Labels */
+.comments-form label,
+.comments-section .comment-form label {
+    display: block;
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 500;
+    color: var(--wp--preset--color--text-dark);
+    margin-bottom: var(--wp--preset--spacing--xs);
+}
+
+/* Inputs & Textarea */
+.comments-form input[type="text"],
+.comments-form input[type="email"],
+.comments-form input[type="url"],
+.comments-form textarea,
+.comments-section .comment-form input[type="text"],
+.comments-section .comment-form input[type="email"],
+.comments-section .comment-form input[type="url"],
+.comments-section .comment-form textarea {
+    width: 100%;
+    padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+    border: 1px solid var(--wp--preset--color--border);
+    border-radius: var(--wp--custom--border-radius--md);
+    font-family: inherit;
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--text-dark);
+    background: var(--wp--preset--color--white);
+    transition: all 150ms ease;
+}
+
+.comments-form input::placeholder,
+.comments-form textarea::placeholder,
+.comments-section .comment-form input::placeholder,
+.comments-section .comment-form textarea::placeholder {
+    color: var(--wp--preset--color--text-muted);
+}
+
+.comments-form input:focus,
+.comments-form textarea:focus,
+.comments-section .comment-form input:focus,
+.comments-section .comment-form textarea:focus {
+    outline: none;
+    border-color: var(--wp--preset--color--primary);
+    box-shadow: 0 0 0 3px rgba(176, 0, 29, 0.1);
+}
+
+.comments-form textarea,
+.comments-section .comment-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Bouton submit */
+.comments-form input[type="submit"],
+.comments-form .submit,
+.comments-section .comment-form input[type="submit"],
+.comments-section .form-submit input[type="submit"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    color: var(--wp--preset--color--white) !important;
+    font-family: var(--wp--preset--font-family--poppins);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--wp--custom--border-radius--md);
+    cursor: pointer;
+    transition: all 200ms ease;
+    box-shadow: var(--wp--preset--shadow--cta);
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.comments-form input[type="submit"]:hover,
+.comments-form .submit:hover,
+.comments-section .comment-form input[type="submit"]:hover,
+.comments-section .form-submit input[type="submit"]:hover {
+    box-shadow: var(--wp--preset--shadow--cta-hover);
+    transform: translateY(-1px);
+}
+
+/* Cacher les champs inutiles */
+.comments-section .comment-form-url,
+.comments-section .comment-form-cookies-consent {
+    display: none;
+}
+
+/* ==========================================================================
+   LISTE DES COMMENTAIRES
+   ========================================================================== */
+
+.comments-list,
+.comments-section .wp-block-comment-template {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Commentaire individuel */
+.comment,
+.comments-section .wp-block-comment-template > li {
+    display: flex;
+    gap: var(--wp--preset--spacing--md);
+    padding: var(--wp--preset--spacing--lg) 0;
+    border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.comment:last-child,
+.comments-section .wp-block-comment-template > li:last-child {
+    border-bottom: none;
+}
+
+/* Avatar */
+.comment__avatar,
+.comments-section .wp-block-avatar {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px;
+    border-radius: var(--wp--custom--border-radius--full);
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--wp--preset--color--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--wp--preset--color--text-muted);
+}
+
+.comments-section .wp-block-avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    border-radius: var(--wp--custom--border-radius--full);
+}
+
+.comment__avatar--small,
+.comment--reply .wp-block-avatar,
+.comment--replies .wp-block-avatar {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px;
+    font-size: var(--wp--preset--font-size--small);
+}
+
+/* Content */
+.comment__content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Header (author + badge + date) */
+.comment__header {
+    display: flex;
+    align-items: center;
+    gap: var(--wp--preset--spacing--xs);
+    margin-bottom: var(--wp--preset--spacing--xs);
+}
+
+.comment__author,
+.comments-section .wp-block-comment-author-name {
+    font-size: var(--wp--preset--font-size--small) !important;
+    font-weight: 600 !important;
+    color: var(--wp--preset--color--text-dark) !important;
+    margin: 0 !important;
+}
+
+.comment__author a,
+.comments-section .wp-block-comment-author-name a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+/* Badge Équipe */
+.comment__badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wp--preset--color--secondary);
+    background: var(--wp--preset--color--secondary-bg);
+    padding: 2px var(--wp--preset--spacing--xs);
+    border-radius: var(--wp--custom--border-radius--sm);
+}
+
+.comment__date,
+.comments-section .wp-block-comment-date {
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: var(--wp--preset--color--text-muted) !important;
+    margin: 0 !important;
+}
+
+.comment__date a,
+.comments-section .wp-block-comment-date a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+/* Text */
+.comment__text,
+.comments-section .wp-block-comment-content {
+    font-size: var(--wp--preset--font-size--small) !important;
+    font-weight: 400 !important;
+    color: var(--wp--preset--color--text-gray) !important;
+    line-height: 1.6;
+    margin: 0 0 var(--wp--preset--spacing--sm) 0 !important;
+}
+
+.comment__text p,
+.comments-section .wp-block-comment-content p {
+    margin: 0 !important;
+}
+
+/* Reply button */
+.comment__reply-btn,
+.comments-section .wp-block-comment-reply-link,
+.comments-section .wp-block-comment-reply-link a {
+    background: none !important;
+    border: none;
+    font-family: inherit;
+    font-size: var(--wp--preset--font-size--small) !important;
+    font-weight: 500 !important;
+    color: var(--wp--preset--color--primary) !important;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none !important;
+    transition: color 150ms ease;
+}
+
+.comment__reply-btn:hover,
+.comments-section .wp-block-comment-reply-link:hover,
+.comments-section .wp-block-comment-reply-link a:hover {
+    color: var(--wp--preset--color--primary-hover) !important;
+}
+
+/* ==========================================================================
+   RÉPONSES IMBRIQUÉES
+   ========================================================================== */
+
+.comment--replies,
+.comments-section .wp-block-comment-template .wp-block-comment-template {
+    margin-top: var(--wp--preset--spacing--md);
+    padding-left: 0;
+    list-style: none;
+}
+
+.comment--reply,
+.comments-section .wp-block-comment-template .wp-block-comment-template > li {
+    padding: var(--wp--preset--spacing--md) 0 0 0 !important;
+    border-bottom: none !important;
+    border-top: none;
+    margin-top: 0;
+}
+
+/* ==========================================================================
+   PAGINATION
+   ========================================================================== */
+
+.comments-section .wp-block-comments-pagination {
+    margin-top: var(--wp--preset--spacing--lg);
+    display: flex;
+    justify-content: center;
+    gap: var(--wp--preset--spacing--xs);
+}
+
+.comments-section .wp-block-comments-pagination a,
+.comments-section .wp-block-comments-pagination span {
+    padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
+    border-radius: var(--wp--custom--border-radius--sm);
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--text-dark);
+    text-decoration: none;
+    transition: all 150ms ease;
+}
+
+.comments-section .wp-block-comments-pagination a:hover {
+    background: var(--wp--preset--color--muted);
+}
+
+.comments-section .wp-block-comments-pagination .current {
+    background: var(--wp--preset--color--primary);
+    color: var(--wp--preset--color--white);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 600px) {
+    /* Centrer le contenu sur mobile */
+    .comments-section {
+        text-align: left;
+        padding-left: var(--wp--preset--spacing--md) !important;
+        padding-right: var(--wp--preset--spacing--md) !important;
+    }
+
+    .comments-section > * {
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .comments-section__header {
+        justify-content: flex-start;
+    }
+
+    .comments-form .comment-form-author,
+    .comments-form .comment-form-email,
+    .comments-section .comment-form-author,
+    .comments-section .comment-form-email {
+        width: 100%;
+        display: block;
+        margin-right: 0;
+    }
+
+    .comment,
+    .comments-section .wp-block-comment-template > li {
+        gap: var(--wp--preset--spacing--sm);
+    }
+
+    .comment__avatar,
+    .comments-section .wp-block-avatar {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px;
+    }
+
+    /* Fix pour les blocs WordPress natifs */
+    .comments-section .wp-block-comments,
+    .comments-section .wp-block-post-comments-form,
+    .comments-section .comment-respond {
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}

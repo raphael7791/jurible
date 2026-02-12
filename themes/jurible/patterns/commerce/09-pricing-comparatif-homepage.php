@@ -12,8 +12,8 @@
 <!-- wp:group {"align":"wide","style":{"spacing":{"blockGap":"var:preset|spacing|lg","padding":{"left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"default"}} -->
 <div class="wp-block-group alignwide" style="padding-right:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)">
 
-<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
-<div class="wp-block-group">
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|sm","margin":{"bottom":"var:preset|spacing|lg"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
+<div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--lg)">
 
 <!-- wp:paragraph {"align":"center","className":"is-style-tag-secondary"} -->
 <p class="has-text-align-center is-style-tag-secondary">Nos offres</p>
@@ -30,12 +30,16 @@
 </div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"pricing-hero-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|lg","right":"var:preset|spacing|lg"}},"border":{"radius":"12px","width":"2px","style":"dashed"}},"borderColor":"primary","backgroundColor":"white","layout":{"type":"default"}} -->
-<div class="wp-block-group pricing-hero-card has-border-color has-primary-border-color has-white-background-color has-background" style="border-style:dashed;border-width:2px;border-radius:12px;padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--lg)">
+<!-- wp:group {"className":"pricing-hero-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|lg","right":"var:preset|spacing|lg"}},"border":{"radius":"12px"}},"backgroundColor":"white","layout":{"type":"default"}} -->
+<div class="wp-block-group pricing-hero-card has-white-background-color has-background" style="border-radius:12px;padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--lg)">
 
-<!-- wp:paragraph {"style":{"typography":{"fontSize":"12px","fontWeight":"600","letterSpacing":"0.5px","textTransform":"uppercase"},"spacing":{"margin":{"bottom":"var:preset|spacing|sm"}}},"backgroundColor":"primary","textColor":"white"} -->
-<p class="has-white-color has-primary-background-color has-text-color has-background" style="margin-bottom:var(--wp--preset--spacing--sm);font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase">Populaire</p>
+<!-- wp:group {"className":"pricing-hero-card__badge","layout":{"type":"flex","justifyContent":"left"}} -->
+<div class="wp-block-group pricing-hero-card__badge">
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"12px","fontWeight":"600","letterSpacing":"0.5px","textTransform":"uppercase"}},"textColor":"white"} -->
+<p class="has-white-color has-text-color" style="font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase">⭐ Populaire</p>
 <!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
 
 <!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|lg"}}}} -->
 <div class="wp-block-columns">
@@ -172,8 +176,8 @@
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"stretch"}} -->
 <div class="wp-block-buttons">
-<!-- wp:button {"width":100,"className":"is-style-outline"} -->
-<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline"><a class="wp-block-button__link wp-element-button" href="/prepas">Découvrir les Prépas</a></div>
+<!-- wp:button {"width":100,"className":"is-style-outline pricing-cta--secondary"} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline pricing-cta--secondary"><a class="wp-block-button__link wp-element-button" href="/prepas">Découvrir les Prépas</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->
@@ -242,8 +246,8 @@
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"stretch"}} -->
 <div class="wp-block-buttons">
-<!-- wp:button {"width":100,"className":"is-style-outline"} -->
-<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline"><a class="wp-block-button__link wp-element-button" href="/fiches-pdf">Voir les Fiches PDF</a></div>
+<!-- wp:button {"width":100,"className":"is-style-outline pricing-cta--success"} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline pricing-cta--success"><a class="wp-block-button__link wp-element-button" href="/fiches-pdf">Voir les Fiches PDF</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->
@@ -320,8 +324,8 @@
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"stretch"}} -->
 <div class="wp-block-buttons">
-<!-- wp:button {"width":100,"className":"is-style-outline"} -->
-<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline"><a class="wp-block-button__link wp-element-button" href="/minos">Découvrir Minos</a></div>
+<!-- wp:button {"width":100,"className":"is-style-outline pricing-cta--warning"} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline pricing-cta--warning"><a class="wp-block-button__link wp-element-button" href="/minos">Découvrir Minos</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->

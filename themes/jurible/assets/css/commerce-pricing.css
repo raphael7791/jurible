@@ -33,3 +33,185 @@
         padding-right: var(--wp--preset--spacing--sm) !important;
     }
 }
+
+/**
+ * Commerce 09 - Pricing Comparatif Homepage
+ */
+
+/* Hero Card Académie — bordure gradient dashed */
+.pricing-hero-card {
+    position: relative;
+    border: 2px dashed transparent !important;
+    background:
+        linear-gradient(white, white) padding-box,
+        linear-gradient(135deg, #B0001D 0%, #7C3AED 100%) border-box !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.pricing-hero-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Badge Populaire — position absolue top-left */
+.pricing-hero-card__badge {
+    position: absolute !important;
+    top: -14px;
+    left: 24px;
+    background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+    padding: 6px 16px;
+    border-radius: 9999px;
+    z-index: 1;
+}
+
+/* Product cards en bas — hover */
+.section-pricing-comparatif-homepage .product-card {
+    transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.section-pricing-comparatif-homepage .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+}
+
+/* Boutons alignés en bas des cards */
+.section-pricing-comparatif-homepage .product-card > .wp-block-buttons {
+    margin-top: auto !important;
+}
+
+/* Grid 4 colonnes - hauteur égale */
+.pricing-comparatif__grid {
+    align-items: stretch !important;
+}
+
+.pricing-comparatif__grid > .wp-block-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Card de base */
+.pricing-comparatif__card {
+    transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.pricing-comparatif__card:hover {
+    transform: translateY(-4px);
+}
+
+.pricing-comparatif__card .pricing-comparatif__card-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+}
+
+/* Featured card (Académie) */
+.pricing-comparatif__card--featured {
+    position: relative;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #B0001D 0%, #7C3AED 100%) border-box;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    transform: scale(1.02);
+    box-shadow: 0 4px 14px rgba(176, 0, 29, 0.2);
+    overflow: hidden;
+}
+
+.pricing-comparatif__card--featured:hover {
+    transform: scale(1.02) translateY(-4px);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 14px rgba(176, 0, 29, 0.2);
+}
+
+/* Ribbon gradient */
+.pricing-comparatif__ribbon {
+    background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+    margin: -2px -2px 0 -2px;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Cards standards - bordure et hover */
+.pricing-comparatif__card--secondary:hover,
+.pricing-comparatif__card--success:hover,
+.pricing-comparatif__card--warning:hover {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+}
+
+/* CTA Gradient style */
+.is-style-cta-gradient .wp-block-button__link {
+    background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%) !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.is-style-cta-gradient .wp-block-button__link:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/* CTA hover couleurs par produit */
+.pricing-cta--secondary .wp-block-button__link:hover {
+    border-color: #7C3AED !important;
+    color: #7C3AED !important;
+    background: #EDE9FE !important;
+}
+
+.pricing-cta--success .wp-block-button__link:hover {
+    border-color: #10B981 !important;
+    color: #065F46 !important;
+    background: #ECFDF5 !important;
+}
+
+.pricing-cta--warning .wp-block-button__link:hover {
+    border-color: #F59E0B !important;
+    color: #92400E !important;
+    background: #FEF3C7 !important;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .pricing-comparatif__grid {
+        flex-wrap: wrap !important;
+    }
+
+    .pricing-comparatif__grid > .wp-block-column {
+        flex-basis: calc(50% - var(--wp--preset--spacing--md) / 2) !important;
+        flex-grow: 0 !important;
+        margin-bottom: var(--wp--preset--spacing--md);
+    }
+
+    .pricing-comparatif__card--featured {
+        transform: scale(1);
+    }
+
+    .pricing-comparatif__card--featured:hover {
+        transform: translateY(-4px);
+    }
+}
+
+@media (max-width: 600px) {
+    .pricing-comparatif__grid > .wp-block-column {
+        flex-basis: 100% !important;
+    }
+}
+
+/* Responsive Homepage variant */
+@media (max-width: 782px) {
+    .pricing-hero-card .wp-block-columns {
+        flex-direction: column !important;
+    }
+
+    .pricing-hero-card .wp-block-column {
+        flex-basis: 100% !important;
+        width: 100% !important;
+    }
+
+    .section-pricing-comparatif-homepage .wp-block-columns.are-vertically-aligned-stretch {
+        flex-direction: column !important;
+    }
+
+    .section-pricing-comparatif-homepage .wp-block-columns.are-vertically-aligned-stretch > .wp-block-column {
+        flex-basis: 100% !important;
+        margin-bottom: var(--wp--preset--spacing--md);
+    }
+}
