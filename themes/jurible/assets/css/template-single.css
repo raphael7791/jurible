@@ -1,0 +1,40 @@
+/* ==========================================================================
+   TEMPLATE SINGLE - Article de blog
+   ========================================================================== */
+
+/* Sidebar sticky */
+.sidebar-sticky {
+    position: sticky;
+    top: 100px;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 900px) {
+    .article-columns {
+        flex-direction: column !important;
+    }
+
+    .article-columns .article-main,
+    .article-columns .article-sidebar {
+        flex-basis: 100% !important;
+        width: 100% !important;
+    }
+
+    .article-sidebar {
+        margin-top: var(--wp--preset--spacing--xl);
+    }
+
+    .sidebar-sticky {
+        position: static;
+    }
+}
+
+/* Post terms (category link) styling */
+.article-columns .wp-block-post-terms a {
+    color: var(--wp--preset--color--secondary);
+    text-decoration: none;
+}
+
+.article-columns .wp-block-post-terms a:hover {
+    text-decoration: underline;
+}

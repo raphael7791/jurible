@@ -1052,3 +1052,18 @@ function jurible_search_filter($query)
 }
 add_filter('pre_get_posts', 'jurible_search_filter');
 
+
+# Charger le CSS du template single (articles)
+function jurible_enqueue_single_assets()
+{
+    if (is_single()) {
+        wp_enqueue_style(
+            "jurible-template-single",
+            get_template_directory_uri() . "/assets/css/template-single.css",
+            [],
+            filemtime(get_template_directory() . "/assets/css/template-single.css")
+        );
+    }
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_single_assets");
+
