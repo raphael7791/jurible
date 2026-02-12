@@ -37,6 +37,15 @@
 	margin-bottom: var(--wp--preset--spacing--xs) !important;
 }
 
+.hero-article__badge a {
+	color: var(--wp--preset--color--secondary) !important;
+	text-decoration: none !important;
+}
+
+.hero-article__badge a:hover {
+	opacity: 0.8;
+}
+
 /* ==========================================================================
    TITLE
    ========================================================================== */
