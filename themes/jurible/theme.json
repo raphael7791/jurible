@@ -7,7 +7,7 @@
     "layout": {
       "contentSize": "720px",
       "wideSize": "1280px",
-      "allowCustomContentAndWideSize": false
+      "allowCustomContentAndWideSize": true
     },
     "color": {
       "custom": false,
