@@ -1,0 +1,139 @@
+.jurible-infobox {
+	display: flex;
+	flex-direction: column;
+	padding: 20px var(--wp--preset--spacing--md);
+	gap: var(--wp--preset--spacing--xs);
+	border-radius: var(--wp--custom--border-radius--lg);
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.jurible-infobox-header {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+}
+
+.jurible-infobox-icon {
+	font-size: var(--wp--preset--font-size--small);
+	color: initial !important;
+	font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+}
+
+.jurible-infobox-title {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--caption);
+	line-height: 18px;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+}
+
+.jurible-infobox-content {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--medium);
+	line-height: var(--wp--custom--line-height--body);
+	color: var(--wp--preset--color--text-gray);
+}
+
+.jurible-infobox-retenir {
+	background: rgba(245, 158, 11, 0.1);
+}
+.jurible-infobox-retenir .jurible-infobox-title {
+	color: var(--wp--preset--color--warning);
+}
+
+.jurible-infobox-attention {
+	background: rgba(239, 68, 68, 0.1);
+}
+.jurible-infobox-attention .jurible-infobox-title {
+	color: var(--wp--preset--color--error);
+}
+
+.jurible-infobox-exemple {
+	background: linear-gradient(100.94deg, rgba(176, 0, 29, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
+}
+.jurible-infobox-exemple .jurible-infobox-title {
+	color: var(--wp--preset--color--secondary);
+}
+
+.jurible-infobox-important {
+	background: #EFF6FF;
+}
+.jurible-infobox-important .jurible-infobox-title {
+	color: #3B82F6;
+}
+
+.jurible-infobox-astuce {
+	background: var(--wp--preset--color--success-bg);
+}
+.jurible-infobox-astuce .jurible-infobox-title {
+	color: var(--wp--preset--color--success);
+}
+
+.jurible-infobox-definition {
+	background: var(--wp--preset--color--background);
+}
+.jurible-infobox-definition .jurible-infobox-title {
+	color: var(--wp--preset--color--text-gray);
+}
+
+.jurible-infobox .jurible-infobox-content {
+	margin-bottom: 0 !important;
+}
+
+.jurible-infobox-conditions {
+    background: var(--wp--preset--color--background);
+}
+.jurible-infobox-conditions .jurible-infobox-title {
+    color: var(--wp--preset--color--text-gray);
+}
+
+/* Mode sombre */
+html.dark .jurible-infobox-content {
+    color: var(--wp--preset--color--border);
+}
+
+html.dark .jurible-infobox-retenir {
+    background: rgba(245, 158, 11, 0.15);
+}
+
+html.dark .jurible-infobox-attention {
+    background: rgba(239, 68, 68, 0.15);
+}
+
+html.dark .jurible-infobox-exemple {
+    background: linear-gradient(100.94deg, rgba(176, 0, 29, 0.15) 0%, rgba(124, 58, 237, 0.15) 100%);
+}
+
+html.dark .jurible-infobox-important {
+    background: rgba(59, 130, 246, 0.15);
+}
+
+html.dark .jurible-infobox-astuce {
+    background: rgba(16, 185, 129, 0.15);
+}
+
+html.dark .jurible-infobox-definition {
+    background: var(--el-bg-color-overlay, #1d1e1f);
+}
+
+html.dark .jurible-infobox-definition .jurible-infobox-title,
+html.dark .jurible-infobox-conditions .jurible-infobox-title {
+    color: var(--wp--preset--color--border);
+}
+
+html.dark .jurible-infobox-conditions {
+    background: var(--el-bg-color-overlay, #1d1e1f);
+}
+
+html.dark .jurible-infobox-definition .jurible-infobox-title,
+html.dark .jurible-infobox-conditions .jurible-infobox-title {
+    color: var(--wp--preset--color--border);
+}
+
+@media (max-width: 480px) {
+    .jurible-infobox {
+        padding: var(--wp--preset--spacing--sm) 18px;
+    }
+}

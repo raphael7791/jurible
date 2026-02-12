@@ -1,0 +1,111 @@
+/* ==================== BADGE TRUST ==================== */
+
+.wp-block-jurible-badge-trust.badge-trust {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--wp--preset--spacing--sm);
+    background: var(--wp--preset--color--white);
+    border-radius: var(--wp--custom--border-radius--lg);
+    border: 1px solid var(--wp--preset--color--border);
+    box-shadow: var(--wp--preset--shadow--sm);
+    padding: var(--wp--preset--spacing--sm) 20px;
+}
+
+/* ==================== VARIANT: COMPACT ==================== */
+.badge-trust--compact {
+    padding: 12px var(--wp--preset--spacing--sm);
+    gap: 12px;
+}
+
+/* ==================== ICON ==================== */
+.badge-trust__icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, var(--wp--preset--color--secondary) 100%);
+    border-radius: var(--wp--custom--border-radius--md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.badge-trust--compact .badge-trust__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+}
+
+/* ==================== CONTENT ==================== */
+.badge-trust__content {
+    flex-shrink: 0;
+}
+
+.badge-trust__title {
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 600;
+    color: var(--wp--preset--color--text-dark);
+    margin: 0 0 2px 0;
+}
+
+.badge-trust__subtitle {
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--text-muted);
+    margin: 0;
+}
+
+/* ==================== RATING ==================== */
+.badge-trust__rating {
+    display: flex;
+    align-items: center;
+    gap: var(--wp--preset--spacing--xs);
+}
+
+.badge-trust__stars {
+    display: flex;
+    gap: 2px;
+}
+
+.badge-trust__star {
+    color: var(--wp--preset--color--warning);
+    font-size: var(--wp--preset--font-size--medium);
+}
+
+.badge-trust__score {
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 600;
+    color: var(--wp--preset--color--text-dark);
+}
+
+.badge-trust__count {
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--text-muted);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .wp-block-jurible-badge-trust.badge-trust {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .badge-trust__rating {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .wp-block-jurible-badge-trust.badge-trust {
+        padding: 12px var(--wp--preset--spacing--sm);
+    }
+
+    .badge-trust__icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .badge-trust__title {
+        font-size: var(--wp--preset--font-size--small);
+    }
+}

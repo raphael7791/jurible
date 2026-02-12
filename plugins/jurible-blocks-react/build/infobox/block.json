@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/infobox",
+  "version": "1.0.0",
+  "title": "Infobox",
+  "category": "text",
+  "icon": "info-outline",
+  "description": "Bloc d'information avec différents styles.",
+  "keywords": [
+    "infobox",
+    "alerte",
+    "info",
+    "attention",
+    "conseil"
+  ],
+  "attributes": {
+    "type": {
+      "type": "string",
+      "default": "retenir"
+    },
+    "title": {
+      "type": "string",
+      "default": "À retenir"
+    },
+    "content": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

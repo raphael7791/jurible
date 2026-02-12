@@ -1,0 +1,78 @@
+.flashcards-editor {
+	background: #f8f9fa;
+	border: 2px dashed #ddd;
+	border-radius: 12px;
+	padding: 20px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.flashcards-editor-header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 20px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #eee;
+}
+
+.flashcards-icon {
+	font-size: 24px;
+}
+
+.flashcards-title {
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+}
+
+.flashcards-editor-content {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.flashcards-field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+
+	label {
+		font-size: 13px;
+		font-weight: 600;
+		color: #555;
+	}
+
+	select {
+		padding: 10px 12px;
+		border: 1px solid #ddd;
+		border-radius: 6px;
+		font-size: 14px;
+		background: #fff;
+		cursor: pointer;
+
+		&:focus {
+			outline: none;
+			border-color: #007cba;
+			box-shadow: 0 0 0 1px #007cba;
+		}
+	}
+}
+
+.flashcards-info {
+	background: #e8f5e9;
+	color: #2e7d32;
+	padding: 12px 15px;
+	border-radius: 8px;
+	font-size: 14px;
+	text-align: center;
+
+	strong {
+		font-size: 18px;
+	}
+}
+
+.flashcards-editor-placeholder {
+	text-align: center;
+	padding: 40px;
+	color: #888;
+}

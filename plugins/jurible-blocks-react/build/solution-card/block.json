@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/solution-card",
+  "version": "1.0.0",
+  "title": "Solution Card",
+  "category": "jurible",
+  "icon": "lightbulb",
+  "description": "Carte solution/bénéfice avec icône, titre et description",
+  "keywords": [
+    "solution",
+    "bénéfice",
+    "feature",
+    "avantage",
+    "card"
+  ],
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "layout": {
+      "type": "string",
+      "default": "horizontal",
+      "enum": [
+        "horizontal",
+        "centered"
+      ]
+    },
+    "icon": {
+      "type": "string",
+      "default": "📚"
+    },
+    "title": {
+      "type": "string",
+      "default": "Titre de la solution"
+    },
+    "description": {
+      "type": "string",
+      "default": "Description de la solution ou du bénéfice."
+    }
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

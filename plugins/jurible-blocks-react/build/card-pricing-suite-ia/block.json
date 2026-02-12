@@ -1,0 +1,154 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/card-pricing-suite-ia",
+  "version": "1.0.0",
+  "title": "Card Pricing Suite IA",
+  "category": "jurible",
+  "icon": "superhero-alt",
+  "description": "Cards de pricing pour la suite IA Minos avec 3 formules",
+  "keywords": [
+    "pricing",
+    "minos",
+    "ia",
+    "crédits",
+    "suite"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "card1CreditsText": {
+      "type": "string",
+      "default": "30 crédits"
+    },
+    "card1Title": {
+      "type": "string",
+      "default": "Standard"
+    },
+    "card1BadgeText": {
+      "type": "string",
+      "default": "Populaire"
+    },
+    "card1ShowBadge": {
+      "type": "boolean",
+      "default": true
+    },
+    "card1Description": {
+      "type": "string",
+      "default": "Pour une utilisation régulière."
+    },
+    "card1Price": {
+      "type": "string",
+      "default": "5€"
+    },
+    "card1Includes": {
+      "type": "string",
+      "default": "Accès aux 4 générateurs\n~20 devoirs générés\nSauvegarde illimitée\nCrédits sans expiration"
+    },
+    "card1CtaText": {
+      "type": "string",
+      "default": "Acheter 30 crédits"
+    },
+    "card1CtaUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "card2CreditsText": {
+      "type": "string",
+      "default": "100 crédits"
+    },
+    "card2Title": {
+      "type": "string",
+      "default": "Pro"
+    },
+    "card2RibbonText": {
+      "type": "string",
+      "default": "Meilleure valeur"
+    },
+    "card2Description": {
+      "type": "string",
+      "default": "Pour les gros consommateurs."
+    },
+    "card2Price": {
+      "type": "string",
+      "default": "17€"
+    },
+    "card2DiscountText": {
+      "type": "string",
+      "default": "-30%"
+    },
+    "card2ShowDiscount": {
+      "type": "boolean",
+      "default": true
+    },
+    "card2Includes": {
+      "type": "string",
+      "default": "Accès aux 4 générateurs\n~70 devoirs générés\nSauvegarde illimitée\nCrédits sans expiration"
+    },
+    "card2CtaText": {
+      "type": "string",
+      "default": "Acheter 100 crédits"
+    },
+    "card2CtaUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "card3CreditsText": {
+      "type": "string",
+      "default": "Bonus Académie"
+    },
+    "card3Title": {
+      "type": "string",
+      "default": "Abonnés"
+    },
+    "card3Description": {
+      "type": "string",
+      "default": "Avantage réservé aux abonnés."
+    },
+    "card3Price": {
+      "type": "string",
+      "default": "Gratuit"
+    },
+    "card3PriceInfo": {
+      "type": "string",
+      "default": "10 crédits offerts / mois"
+    },
+    "card3Includes": {
+      "type": "string",
+      "default": "10 crédits IA offerts\nRenouvelés chaque mois\nCumulables avec achats"
+    },
+    "card3CtaText": {
+      "type": "string",
+      "default": "S'abonner à l'Académie"
+    },
+    "card3CtaUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "card3NoteText": {
+      "type": "string",
+      "default": "Déjà abonné ?"
+    },
+    "card3NoteLinkText": {
+      "type": "string",
+      "default": "Connectez-vous"
+    },
+    "card3NoteLinkUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "card3ShowNote": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

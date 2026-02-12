@@ -1,0 +1,75 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/card-testimonial",
+  "version": "1.0.0",
+  "title": "Card Testimonial",
+  "category": "jurible",
+  "icon": "format-quote",
+  "description": "Carte de témoignage avec variante Standard ou Hero",
+  "keywords": [
+    "testimonial",
+    "témoignage",
+    "avis",
+    "quote",
+    "review"
+  ],
+  "supports": {
+    "html": false,
+    "align": false,
+    "spacing": {
+      "margin": true,
+      "padding": false
+    }
+  },
+  "attributes": {
+    "variant": {
+      "type": "string",
+      "default": "standard"
+    },
+    "rating": {
+      "type": "number",
+      "default": 5
+    },
+    "quote": {
+      "type": "string",
+      "default": "J'ai validé ma L1 du premier coup grâce à Jurible. Les vidéos sont super claires et les fiches m'ont fait gagner un temps fou."
+    },
+    "showBadge": {
+      "type": "boolean",
+      "default": true
+    },
+    "badgeText": {
+      "type": "string",
+      "default": "L1 validée avec mention"
+    },
+    "avatarType": {
+      "type": "string",
+      "default": "initials"
+    },
+    "avatarUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "avatarId": {
+      "type": "number",
+      "default": 0
+    },
+    "avatarInitials": {
+      "type": "string",
+      "default": "ML"
+    },
+    "authorName": {
+      "type": "string",
+      "default": "Marie L."
+    },
+    "authorSubtitle": {
+      "type": "string",
+      "default": "L1 Droit — Paris 1"
+    }
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

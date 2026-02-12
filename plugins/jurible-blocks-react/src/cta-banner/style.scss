@@ -1,0 +1,229 @@
+/* CTA Bannière - Design System Jurible */
+
+.cta-banner {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	padding: 20px 24px;
+	border-radius: var(--wp--custom--border-radius--lg);
+	transition: all 0.3s ease;
+	font-family: var(--wp--preset--font-family--poppins);
+}
+
+.cta-banner:hover {
+	transform: translateY(-2px);
+}
+
+/* Icon */
+.cta-banner__icon {
+	width: 56px;
+	height: 56px;
+	border-radius: var(--wp--custom--border-radius--md);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 28px;
+	flex-shrink: 0;
+}
+
+/* Content */
+.cta-banner__content {
+	flex: 1;
+	min-width: 0;
+}
+
+.cta-banner__title {
+	font-size: var(--wp--preset--font-size--medium);
+	font-weight: 700;
+	margin: 0 0 4px 0;
+	line-height: 1.3;
+}
+
+.cta-banner__desc {
+	font-size: var(--wp--preset--font-size--small);
+	margin: 0;
+	line-height: 1.5;
+}
+
+/* Action */
+.cta-banner__action {
+	flex-shrink: 0;
+}
+
+/* Boutons */
+.cta-banner__btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	padding: 12px 24px;
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 600;
+	border-radius: var(--wp--custom--border-radius--md);
+	text-decoration: none;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.cta-banner__btn:hover {
+	transform: translateY(-2px);
+}
+
+/* Bouton Blanc (pour variante gradient) */
+.cta-banner__btn--white {
+	background: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--primary);
+	box-shadow: var(--wp--preset--shadow--sm);
+}
+
+.cta-banner__btn--white:hover {
+	box-shadow: var(--wp--preset--shadow--md);
+	color: var(--wp--preset--color--primary);
+}
+
+/* Bouton Primary (pour variantes white et dark) */
+.cta-banner__btn--primary {
+	background: var(--wp--preset--gradient--cta-gradient);
+	color: var(--wp--preset--color--white);
+	box-shadow: var(--wp--preset--shadow--cta);
+}
+
+.cta-banner__btn--primary:hover {
+	box-shadow: var(--wp--preset--shadow--cta-hover);
+	color: var(--wp--preset--color--white);
+}
+
+/* ==========================================================================
+   VARIANTE GRADIENT
+   ========================================================================== */
+
+.cta-banner--gradient {
+	background: var(--wp--preset--gradient--cta-gradient);
+	box-shadow: var(--wp--preset--shadow--cta);
+}
+
+.cta-banner--gradient:hover {
+	box-shadow: var(--wp--preset--shadow--cta-hover);
+}
+
+.cta-banner--gradient .cta-banner__icon {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.cta-banner--gradient .cta-banner__title,
+.cta-banner--gradient .cta-banner__desc {
+	color: var(--wp--preset--color--white);
+}
+
+/* ==========================================================================
+   VARIANTE BLANC
+   ========================================================================== */
+
+.cta-banner--white {
+	background: var(--wp--preset--color--white);
+	border: 1px solid var(--wp--preset--color--border);
+	box-shadow: var(--wp--preset--shadow--sm);
+}
+
+.cta-banner--white:hover {
+	box-shadow: var(--wp--preset--shadow--md);
+	border-color: var(--wp--preset--color--primary);
+}
+
+.cta-banner--white .cta-banner__icon {
+	background: var(--wp--preset--color--background);
+}
+
+.cta-banner--white .cta-banner__title {
+	color: var(--wp--preset--color--text-dark);
+}
+
+.cta-banner--white .cta-banner__desc {
+	color: var(--wp--preset--color--text-muted);
+}
+
+/* ==========================================================================
+   VARIANTE NOIR
+   ========================================================================== */
+
+.cta-banner--dark {
+	background: var(--wp--preset--color--text-dark);
+	box-shadow: var(--wp--preset--shadow--lg);
+}
+
+.cta-banner--dark .cta-banner__icon {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.cta-banner--dark .cta-banner__title {
+	color: var(--wp--preset--color--white);
+}
+
+.cta-banner--dark .cta-banner__desc {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+/* ==========================================================================
+   RESPONSIVE MOBILE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+	.cta-banner {
+		flex-direction: column;
+		text-align: center;
+		padding: 20px 16px;
+		gap: 16px;
+		overflow: hidden;
+	}
+
+	.cta-banner__icon {
+		width: 64px;
+		height: 64px;
+		font-size: 32px;
+	}
+
+	.cta-banner__content {
+		width: 100%;
+	}
+
+	.cta-banner__title,
+	.cta-banner__desc {
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+	}
+
+	.cta-banner__action {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.cta-banner__btn {
+		width: 100%;
+		max-width: 100%;
+		justify-content: center;
+		box-sizing: border-box;
+		white-space: normal;
+		word-wrap: break-word;
+	}
+}
+
+/* ==========================================================================
+   DARK MODE
+   ========================================================================== */
+
+html.dark .cta-banner--white {
+	background: var(--el-bg-color-overlay, #1d1e1f);
+	border-color: var(--el-border-color, #414243);
+}
+
+html.dark .cta-banner--white .cta-banner__icon {
+	background: var(--el-bg-color, #141414);
+}
+
+html.dark .cta-banner--white .cta-banner__title {
+	color: var(--el-text-color-primary, #E5EAF3);
+}
+
+html.dark .cta-banner--white .cta-banner__desc {
+	color: var(--el-text-color-secondary, #A3A6AD);
+}

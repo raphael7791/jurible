@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/footer-accordion",
+  "version": "1.0.0",
+  "title": "Footer Accordion",
+  "category": "widgets",
+  "icon": "list-view",
+  "description": "Section accordéon pour le footer mobile",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Section"
+    },
+    "isOpenByDefault": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

@@ -1,0 +1,39 @@
+.jurible-citation {
+    background: transparent;
+    border-left: 4px solid var(--wp--preset--color--text-muted);
+    padding-left: 20px;
+    margin: var(--wp--preset--spacing--md) 0;
+
+    .jurible-citation-text {
+        color: var(--wp--preset--color--text-gray);
+        font-style: italic;
+        font-size: var(--wp--preset--font-size--medium);
+        line-height: var(--wp--custom--line-height--body);
+        margin-bottom: var(--wp--preset--spacing--xs);
+    }
+
+    .jurible-citation-source {
+        color: var(--wp--preset--color--text-muted);
+        font-style: normal;
+        font-size: var(--wp--preset--font-size--small);
+        display: block;
+        margin-top: var(--wp--preset--spacing--xs);
+
+        &::before {
+            content: "— ";
+        }
+    }
+}
+
+/* Mode sombre */
+html.dark .jurible-citation {
+    border-left-color: #6B7280;
+
+    .jurible-citation-text {
+        color: var(--wp--preset--color--border);
+    }
+
+    .jurible-citation-source {
+        color: var(--wp--preset--color--text-muted);
+    }
+}

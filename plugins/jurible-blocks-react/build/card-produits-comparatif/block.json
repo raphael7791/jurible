@@ -1,0 +1,199 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/card-produits-comparatif",
+  "version": "1.0.0",
+  "title": "Card Produits Comparatif",
+  "category": "jurible",
+  "icon": "grid-view",
+  "description": "Comparatif des 4 produits Jurible : Académie, Prépas, Fiches PDF, Minos",
+  "keywords": [
+    "produits",
+    "comparatif",
+    "académie",
+    "prépas",
+    "fiches",
+    "minos"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "card1RibbonText": {
+      "type": "string",
+      "default": "Offre principale"
+    },
+    "card1TypeText": {
+      "type": "string",
+      "default": "Abonnement"
+    },
+    "card1Title": {
+      "type": "string",
+      "default": "Académie"
+    },
+    "card1Description": {
+      "type": "string",
+      "default": "Cours vidéo, fiches, QCM et flashcards pour toutes les matières."
+    },
+    "card1Features": {
+      "type": "string",
+      "default": "20 matières complètes\n500+ heures de vidéo\nQCM, flashcards, mindmaps"
+    },
+    "card1Price": {
+      "type": "string",
+      "default": "29€"
+    },
+    "card1PriceSuffix": {
+      "type": "string",
+      "default": "/mois"
+    },
+    "card1PriceInfo": {
+      "type": "string",
+      "default": "ou 140€ pour 6 mois (-20%)"
+    },
+    "card1SocialProof": {
+      "type": "string",
+      "default": "25 000+ étudiants inscrits"
+    },
+    "card1ShowSocialProof": {
+      "type": "boolean",
+      "default": true
+    },
+    "card1TargetText": {
+      "type": "string",
+      "default": "Étudiants en L1, L2, L3 ou Capacité"
+    },
+    "card1CtaText": {
+      "type": "string",
+      "default": "S'abonner à l'Académie"
+    },
+    "card1CtaUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "card2TypeText": {
+      "type": "string",
+      "default": "Formation intensive"
+    },
+    "card2Title": {
+      "type": "string",
+      "default": "Prépas"
+    },
+    "card2Description": {
+      "type": "string",
+      "default": "Formation intensive avec accompagnement personnalisé."
+    },
+    "card2Features": {
+      "type": "string",
+      "default": "Coaching individuel\nCorrections personnalisées\nAccès Académie inclus"
+    },
+    "card2Price": {
+      "type": "string",
+      "default": "1 300€"
+    },
+    "card2PriceInfo": {
+      "type": "string",
+      "default": "Formation complète"
+    },
+    "card2TargetText": {
+      "type": "string",
+      "default": "Reconversion, redoublants, concours"
+    },
+    "card2CtaText": {
+      "type": "string",
+      "default": "Découvrir les Prépas"
+    },
+    "card2CtaUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "card3TypeText": {
+      "type": "string",
+      "default": "Achat unique"
+    },
+    "card3Title": {
+      "type": "string",
+      "default": "Fiches PDF"
+    },
+    "card3Description": {
+      "type": "string",
+      "default": "Fiches téléchargeables et imprimables."
+    },
+    "card3Features": {
+      "type": "string",
+      "default": "Format PDF imprimable\nMindmaps incluses\nAccès à vie"
+    },
+    "card3Price": {
+      "type": "string",
+      "default": "19€"
+    },
+    "card3PriceInfo": {
+      "type": "string",
+      "default": "par matière • Accès à vie"
+    },
+    "card3TargetText": {
+      "type": "string",
+      "default": "Ceux qui préfèrent réviser sur papier"
+    },
+    "card3CtaText": {
+      "type": "string",
+      "default": "Voir les Fiches PDF"
+    },
+    "card3CtaUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "card4TypeText": {
+      "type": "string",
+      "default": "Crédits IA"
+    },
+    "card4Title": {
+      "type": "string",
+      "default": "Minos"
+    },
+    "card4Description": {
+      "type": "string",
+      "default": "4 outils IA pour générer vos exercices juridiques."
+    },
+    "card4Features": {
+      "type": "string",
+      "default": "Fiche d'arrêt\nDissertation\nCas pratique\nCommentaire d'arrêt"
+    },
+    "card4Price": {
+      "type": "string",
+      "default": "5€"
+    },
+    "card4PriceInfo": {
+      "type": "string",
+      "default": "à partir de • 30 crédits"
+    },
+    "card4BonusText": {
+      "type": "string",
+      "default": "10 crédits offerts aux abonnés Académie"
+    },
+    "card4ShowBonus": {
+      "type": "boolean",
+      "default": true
+    },
+    "card4TargetText": {
+      "type": "string",
+      "default": "Ceux qui veulent gagner du temps"
+    },
+    "card4CtaText": {
+      "type": "string",
+      "default": "Découvrir Minos"
+    },
+    "card4CtaUrl": {
+      "type": "string",
+      "default": "#"
+    }
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

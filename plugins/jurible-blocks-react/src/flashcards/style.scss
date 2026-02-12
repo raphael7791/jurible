@@ -1,0 +1,471 @@
+/* Flashcards Jurible - Front - Design Figma + Dark Mode */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* CSS Variables for theming */
+:root {
+    --fc-bg-card: var(--wp--preset--color--white);
+    --fc-bg-secondary: var(--wp--preset--color--background);
+    --fc-text-primary: var(--wp--preset--color--text-dark);
+    --fc-text-secondary: var(--wp--preset--color--text-gray);
+    --fc-text-muted: var(--wp--preset--color--text-muted);
+    --fc-border-color: var(--wp--preset--color--border);
+    --fc-shadow: var(--wp--preset--shadow--lg);
+    --fc-shadow-light: var(--wp--preset--shadow--xs);
+}
+
+/* Dark mode overrides */
+html.dark {
+    --fc-bg-card: var(--el-bg-color-overlay, #1d1e1f);
+    --fc-bg-secondary: var(--el-bg-color, #141414);
+    --fc-text-primary: var(--el-text-color-primary, #E5EAF3);
+    --fc-text-secondary: var(--el-text-color-regular, #CFD3DC);
+    --fc-text-muted: var(--el-text-color-secondary, #A3A6AD);
+    --fc-border-color: var(--el-border-color, #414243);
+    --fc-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3), 0px 4px 6px rgba(0, 0, 0, 0.2);
+    --fc-shadow-light: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.jurible-flashcards-container {
+    font-family: var(--wp--preset--font-family--poppins);
+    max-width: 640px;
+    margin: 0 auto;
+    padding: clamp(12px, 4vw, 20px);
+}
+
+.fc-app {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 4vw, 24px);
+}
+
+/* ==================== PROGRESS BAR ==================== */
+.fc-progress-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: var(--wp--preset--spacing--xs);
+    width: 100%;
+}
+
+.fc-progress-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.fc-progress-label {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 500;
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--fc-text-secondary);
+}
+
+.fc-progress-count {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 600;
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--fc-text-primary);
+}
+
+.fc-progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 8px;
+    background: var(--fc-bg-secondary);
+    border-radius: var(--wp--custom--border-radius--xs);
+    overflow: hidden;
+}
+
+.fc-progress-fill {
+    height: 8px;
+    background: linear-gradient(90.72deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    border-radius: var(--wp--custom--border-radius--xs);
+    transition: var(--wp--custom--transition--slow);
+}
+
+/* ==================== CARD BASE ==================== */
+.fc-card {
+    box-sizing: border-box;
+    width: 100%;
+    background: var(--fc-bg-card);
+    border: 1px solid var(--fc-border-color);
+    box-shadow: var(--fc-shadow);
+    border-radius: var(--wp--custom--border-radius--lg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--wp--custom--transition--default);
+}
+
+.fc-card:hover {
+    transform: translateY(-2px);
+}
+
+.fc-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px var(--wp--preset--spacing--md);
+    height: 45px;
+}
+
+/* ==================== CARD QUESTION ==================== */
+.fc-card-question .fc-card-header {
+    background: linear-gradient(94.73deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+}
+
+.fc-card-label {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 700;
+    font-size: var(--wp--preset--font-size--caption);
+    line-height: 18px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--white);
+}
+
+.fc-card-num {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 600;
+    font-size: var(--wp--preset--font-size--small);
+    line-height: 21px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.fc-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(40px, 8vw, 78px) clamp(16px, 4vw, 32px);
+    min-height: clamp(180px, 30vw, 267px);
+    background: var(--fc-bg-card);
+}
+
+.fc-card-body p {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 500;
+    font-size: clamp(16px, 4vw, 18px);
+    line-height: var(--wp--custom--line-height--body);
+    text-align: center;
+    color: var(--fc-text-primary);
+    margin: 0;
+}
+
+.fc-card-hint {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+    background: var(--fc-bg-secondary);
+    border-top: 1px solid var(--fc-border-color);
+}
+
+.fc-card-hint span {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 400;
+    font-size: var(--wp--preset--font-size--caption);
+    line-height: 18px;
+    color: var(--fc-text-muted);
+}
+
+/* ==================== CARD ANSWER ==================== */
+.fc-card-answer {
+    box-sizing: border-box;
+    background: var(--fc-bg-card);
+    border: 1px solid var(--fc-border-color);
+    box-shadow: var(--fc-shadow);
+    border-radius: var(--wp--custom--border-radius--lg);
+}
+
+.fc-card-answer .fc-card-header {
+    background: var(--fc-bg-secondary);
+}
+
+.fc-card-answer .fc-card-label {
+    display: flex;
+    align-items: center;
+    gap: var(--wp--preset--spacing--xs);
+    color: var(--fc-text-secondary);
+}
+
+.fc-card-answer .fc-card-label::before {
+    content: '💡';
+}
+
+.fc-card-answer .fc-card-num {
+    color: var(--fc-text-muted);
+}
+
+.fc-card-answer .fc-card-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(40px, 8vw, 78px) clamp(16px, 4vw, 32px);
+    min-height: clamp(180px, 30vw, 267px);
+    background: var(--fc-bg-card);
+}
+
+.fc-card-answer .fc-card-body p {
+    color: var(--fc-text-primary);
+}
+
+/* ==================== BUTTONS ==================== */
+.fc-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: clamp(8px, 3vw, 16px);
+    flex-wrap: wrap;
+}
+
+.fc-btn {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 32px);
+    min-width: clamp(130px, 30vw, 160px);
+    border-radius: var(--wp--custom--border-radius--md);
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 600;
+    font-size: clamp(12px, 3vw, 14px);
+    line-height: 21px;
+    cursor: pointer;
+    transition: var(--wp--custom--transition--default);
+    border: none;
+}
+
+.fc-btn-no {
+    background: var(--fc-bg-card);
+    border: 2px solid var(--wp--preset--color--error);
+    color: var(--wp--preset--color--error);
+}
+
+.fc-btn-no:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.fc-btn-yes {
+    background: var(--wp--preset--color--success);
+    box-shadow: 0px 2px 8px rgba(16, 185, 129, 0.25);
+    color: var(--wp--preset--color--white);
+}
+
+.fc-btn-yes:hover {
+    background: #059669;
+}
+
+/* ==================== RESULTS SCREEN ==================== */
+.fc-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: var(--wp--preset--spacing--md);
+}
+
+.fc-results-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px var(--wp--preset--spacing--lg);
+    background: linear-gradient(94.73deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    border-radius: var(--wp--custom--border-radius--full);
+}
+
+.fc-results-header span {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 700;
+    font-size: var(--wp--preset--font-size--caption);
+    line-height: 18px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--white);
+}
+
+.fc-results-icon {
+    font-size: clamp(48px, 10vw, 64px);
+    line-height: 1;
+    margin-bottom: -16px;
+}
+
+.fc-results-title {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 700;
+    font-size: clamp(24px, 6vw, 32px);
+    line-height: 1.4;
+    text-align: center;
+    color: var(--fc-text-primary);
+    margin: 0;
+}
+
+.fc-results-sub {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 400;
+    font-size: clamp(14px, 3.5vw, 16px);
+    line-height: 24px;
+    text-align: center;
+    color: var(--fc-text-secondary);
+    margin: 0;
+    margin-top: -25px;
+}
+
+/* Stats Pills */
+.fc-results-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: clamp(8px, 3vw, 16px);
+    flex-wrap: wrap;
+    margin-top: -10px;
+}
+
+.fc-stat {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px);
+    gap: clamp(8px, 2vw, 12px);
+    background: var(--fc-bg-card);
+    border: 1px solid var(--fc-border-color);
+    border-radius: var(--wp--custom--border-radius--lg);
+    box-shadow: var(--fc-shadow-light);
+}
+
+.fc-stat-icon {
+    font-size: clamp(18px, 4vw, 24px);
+}
+
+.fc-stat-num {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 700;
+    font-size: clamp(16px, 4vw, 20px);
+    line-height: 30px;
+}
+
+.fc-stat-green .fc-stat-num {
+    color: var(--wp--preset--color--success);
+}
+
+.fc-stat-orange .fc-stat-num {
+    color: var(--wp--preset--color--warning);
+}
+
+.fc-stat-label {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 500;
+    font-size: clamp(12px, 3vw, 14px);
+    line-height: 21px;
+    color: var(--fc-text-secondary);
+}
+
+/* Streak Result */
+.fc-results-streak {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px);
+    gap: clamp(8px, 2vw, 12px);
+    background: var(--fc-bg-card);
+    border: 1px solid var(--fc-border-color);
+    border-radius: var(--wp--custom--border-radius--lg);
+    box-shadow: var(--fc-shadow-light);
+}
+
+.fc-results-streak span:first-child {
+    font-size: clamp(18px, 4vw, 24px);
+}
+
+.fc-results-streak .fc-stat-num {
+    color: var(--wp--preset--color--warning);
+}
+
+.fc-results-streak .fc-stat-label {
+    color: var(--fc-text-secondary);
+}
+
+/* ==================== RESULT ACTIONS ==================== */
+.fc-results-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.fc-btn-primary {
+    background: linear-gradient(94.73deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    color: var(--wp--preset--color--white);
+    box-shadow: var(--wp--preset--shadow--accent);
+}
+
+.fc-btn-primary:hover {
+    opacity: 0.9;
+    box-shadow: 0px 6px 16px rgba(124, 58, 237, 0.3);
+}
+
+.fc-btn-secondary {
+    background: var(--fc-bg-secondary);
+    color: var(--fc-text-primary);
+    border: 1px solid var(--fc-border-color);
+}
+
+.fc-btn-secondary:hover {
+    background: var(--fc-border-color);
+}
+
+/* ==================== EMPTY & ERROR STATES ==================== */
+.fc-empty,
+.fc-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px var(--wp--preset--spacing--md);
+    background: var(--fc-bg-secondary);
+    border: 1px solid var(--fc-border-color);
+    border-radius: var(--wp--custom--border-radius--lg);
+    text-align: center;
+}
+
+.fc-empty p,
+.fc-error p {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 500;
+    font-size: var(--wp--preset--font-size--medium);
+    line-height: 24px;
+    color: var(--fc-text-secondary);
+    margin: 0;
+}
+
+/* ==================== LOADING STATE ==================== */
+.flashcards-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px var(--wp--preset--spacing--md);
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 500;
+    font-size: var(--wp--preset--font-size--medium);
+    color: var(--fc-text-secondary);
+}

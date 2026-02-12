@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/badge-trust",
+  "version": "1.0.0",
+  "title": "Badge Trust",
+  "category": "jurible",
+  "icon": "awards",
+  "description": "Badge de confiance social proof",
+  "keywords": [
+    "trust",
+    "badge",
+    "social proof",
+    "avis",
+    "rating"
+  ],
+  "supports": {
+    "html": false,
+    "align": false
+  },
+  "attributes": {
+    "variant": {
+      "type": "string",
+      "default": "full"
+    },
+    "icon": {
+      "type": "string",
+      "default": "🎓"
+    },
+    "title": {
+      "type": "string",
+      "default": "École en ligne depuis 2018"
+    },
+    "subtitle": {
+      "type": "string",
+      "default": "25 000+ étudiants formés"
+    },
+    "rating": {
+      "type": "string",
+      "default": "4.8"
+    },
+    "reviewCount": {
+      "type": "string",
+      "default": "+150 avis"
+    }
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

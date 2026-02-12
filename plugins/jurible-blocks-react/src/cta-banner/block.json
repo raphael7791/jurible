@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jurible/cta-banner",
+	"version": "1.0.0",
+	"title": "CTA Bannière",
+	"category": "jurible",
+	"icon": "megaphone",
+	"description": "Bannière d'appel à l'action inline avec 3 variantes (gradient, blanc, noir)",
+	"keywords": ["cta", "call to action", "bannière", "promo", "marketing"],
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"attributes": {
+		"variant": {
+			"type": "string",
+			"default": "gradient",
+			"enum": ["gradient", "white", "dark"]
+		},
+		"icon": {
+			"type": "string",
+			"default": "🎓"
+		},
+		"title": {
+			"type": "string",
+			"default": "Rejoins l'Académie Jurible"
+		},
+		"description": {
+			"type": "string",
+			"default": "Accède à +500h de cours, fiches et QCM pour réussir ta licence de droit."
+		},
+		"buttonText": {
+			"type": "string",
+			"default": "Découvrir →"
+		},
+		"buttonUrl": {
+			"type": "string",
+			"default": "/tarifs"
+		}
+	},
+	"textdomain": "jurible-blocks-react",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".jurible-alert-close").forEach(function(t){t.addEventListener("click",function(){const t=this.closest(".jurible-alert");t&&(t.style.opacity="0",t.style.transform="translateY(-10px)",setTimeout(function(){t.style.display="none"},150))})})});

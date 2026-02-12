@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jurible/step-indicator",
+	"version": "1.0.0",
+	"title": "Step Indicator",
+	"category": "widgets",
+	"icon": "editor-ol",
+	"description": "Indicateur d'étapes pour les parcours.",
+	"keywords": ["step", "etape", "progress", "indicator", "stepper"],
+	"attributes": {
+		"totalSteps": {
+			"type": "number",
+			"default": 5
+		},
+		"currentStep": {
+			"type": "number",
+			"default": 1
+		},
+		"showLabels": {
+			"type": "boolean",
+			"default": false
+		},
+		"labels": {
+			"type": "array",
+			"default": []
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"textdomain": "jurible-blocks-react",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

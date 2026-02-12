@@ -1,0 +1,23 @@
+.wp-block-jurible-citation {
+    .jurible-citation {
+        background: transparent;
+        border-left: 4px solid #9CA3AF;
+        padding-left: 20px;
+        margin: 24px 0;
+
+        .jurible-citation-text {
+            color: #4A4A4A;
+            font-style: italic;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .jurible-citation-source {
+            color: #9CA3AF;
+            font-style: normal;
+            font-size: 14px;
+            display: block;
+            margin-top: 8px;
+        }
+    }
+}

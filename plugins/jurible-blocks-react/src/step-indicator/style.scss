@@ -1,0 +1,91 @@
+/* ==================== STEP INDICATOR ==================== */
+.jurible-steps {
+    display: flex;
+    align-items: flex-start;
+}
+
+.jurible-step {
+    display: flex;
+    align-items: center;
+    gap: var(--wp--preset--spacing--xs);
+}
+
+.jurible-step__circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 600;
+    background: var(--wp--preset--color--background);
+    color: var(--wp--preset--color--text-muted);
+    transition: var(--wp--custom--transition--default);
+    flex-shrink: 0;
+}
+
+.jurible-step__line {
+    width: 60px;
+    height: 2px;
+    background: var(--wp--preset--color--border);
+    flex-shrink: 0;
+}
+
+/* Active step */
+.jurible-step--active .jurible-step__circle {
+    background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    color: var(--wp--preset--color--white);
+}
+
+/* Completed step */
+.jurible-step--completed .jurible-step__circle {
+    background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    color: var(--wp--preset--color--white);
+}
+
+.jurible-step--completed + .jurible-step .jurible-step__line,
+.jurible-step--active .jurible-step__line {
+    background: linear-gradient(90deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+}
+
+/* Labels - wrap step content */
+.jurible-step--with-label {
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.jurible-step--with-label .jurible-step__content {
+    display: flex;
+    align-items: center;
+}
+
+.jurible-step--with-label .jurible-step__circle-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.jurible-step__label {
+    font-size: var(--wp--preset--font-size--caption);
+    color: var(--wp--preset--color--text-muted);
+    font-weight: 500;
+    text-align: center;
+    margin-top: var(--wp--preset--spacing--xs);
+    max-width: 80px;
+}
+
+.jurible-step--active .jurible-step__label {
+    color: var(--wp--preset--color--text-dark);
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .jurible-step__line {
+        width: 40px;
+    }
+
+    .jurible-step__label {
+        font-size: 10px;
+    }
+}

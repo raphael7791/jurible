@@ -1,0 +1,57 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jurible/alert",
+	"version": "1.0.0",
+	"title": "Alert",
+	"category": "text",
+	"icon": "warning",
+	"description": "Bloc d'alerte avec différents types et variantes.",
+	"keywords": ["alert", "alerte", "notification", "info", "warning", "error", "success"],
+	"attributes": {
+		"type": {
+			"type": "string",
+			"default": "info"
+		},
+		"variant": {
+			"type": "string",
+			"default": "full"
+		},
+		"title": {
+			"type": "string",
+			"default": "Information"
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		},
+		"primaryButtonText": {
+			"type": "string",
+			"default": "Découvrir"
+		},
+		"primaryButtonUrl": {
+			"type": "string",
+			"default": "#"
+		},
+		"secondaryButtonText": {
+			"type": "string",
+			"default": "En savoir plus"
+		},
+		"secondaryButtonUrl": {
+			"type": "string",
+			"default": "#"
+		},
+		"showClose": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "jurible-blocks-react",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

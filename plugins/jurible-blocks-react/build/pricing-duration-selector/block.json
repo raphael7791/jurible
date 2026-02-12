@@ -1,0 +1,178 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/pricing-duration-selector",
+  "version": "1.0.0",
+  "title": "Pricing Duration Selector",
+  "category": "jurible",
+  "icon": "money-alt",
+  "description": "Sélecteur de durée d'abonnement avec 4 options de pricing",
+  "keywords": [
+    "pricing",
+    "tarif",
+    "abonnement",
+    "durée",
+    "price"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "option1Duration": {
+      "type": "string",
+      "default": "1 mois"
+    },
+    "option1Price": {
+      "type": "string",
+      "default": "29"
+    },
+    "option1OriginalPrice": {
+      "type": "string",
+      "default": ""
+    },
+    "option1MonthlyPrice": {
+      "type": "string",
+      "default": "29€/mois"
+    },
+    "option1SavingsPercent": {
+      "type": "string",
+      "default": ""
+    },
+    "option1SavingsAmount": {
+      "type": "string",
+      "default": ""
+    },
+    "option1IsPopular": {
+      "type": "boolean",
+      "default": false
+    },
+    "option1CtaText": {
+      "type": "string",
+      "default": "Commencer"
+    },
+    "option1CtaUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "option2Duration": {
+      "type": "string",
+      "default": "3 mois"
+    },
+    "option2Price": {
+      "type": "string",
+      "default": "78"
+    },
+    "option2OriginalPrice": {
+      "type": "string",
+      "default": "87€"
+    },
+    "option2MonthlyPrice": {
+      "type": "string",
+      "default": "26€/mois"
+    },
+    "option2SavingsPercent": {
+      "type": "string",
+      "default": "-10%"
+    },
+    "option2SavingsAmount": {
+      "type": "string",
+      "default": "Économisez 9€"
+    },
+    "option2IsPopular": {
+      "type": "boolean",
+      "default": false
+    },
+    "option2CtaText": {
+      "type": "string",
+      "default": "Commencer"
+    },
+    "option2CtaUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "option3Duration": {
+      "type": "string",
+      "default": "6 mois"
+    },
+    "option3Price": {
+      "type": "string",
+      "default": "140"
+    },
+    "option3OriginalPrice": {
+      "type": "string",
+      "default": "174€"
+    },
+    "option3MonthlyPrice": {
+      "type": "string",
+      "default": "23€/mois"
+    },
+    "option3SavingsPercent": {
+      "type": "string",
+      "default": "-20%"
+    },
+    "option3SavingsAmount": {
+      "type": "string",
+      "default": "Économisez 34€"
+    },
+    "option3IsPopular": {
+      "type": "boolean",
+      "default": true
+    },
+    "option3CtaText": {
+      "type": "string",
+      "default": "Commencer"
+    },
+    "option3CtaUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "option4Duration": {
+      "type": "string",
+      "default": "12 mois"
+    },
+    "option4Price": {
+      "type": "string",
+      "default": "240"
+    },
+    "option4OriginalPrice": {
+      "type": "string",
+      "default": "348€"
+    },
+    "option4MonthlyPrice": {
+      "type": "string",
+      "default": "20€/mois"
+    },
+    "option4SavingsPercent": {
+      "type": "string",
+      "default": "-31%"
+    },
+    "option4SavingsAmount": {
+      "type": "string",
+      "default": "Économisez 108€"
+    },
+    "option4IsPopular": {
+      "type": "boolean",
+      "default": false
+    },
+    "option4CtaText": {
+      "type": "string",
+      "default": "Commencer"
+    },
+    "option4CtaUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "noticeText": {
+      "type": "string",
+      "default": "Tous les abonnements sont renouvelables automatiquement et résiliables en 1 clic"
+    }
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

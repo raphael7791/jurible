@@ -1,0 +1,27 @@
+.wp-block-jurible-bouton {
+    .jurible-bouton {
+        display: inline-block;
+        border-radius: 8px;
+        padding: 12px 24px;
+        font-weight: 600;
+        font-size: 14px;
+        font-family: 'Poppins', sans-serif;
+        cursor: default;
+    }
+
+    .jurible-bouton-primary {
+        background: #B0001D;
+        color: #FFFFFF;
+    }
+
+    .jurible-bouton-gradient {
+        background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+        color: #FFFFFF;
+    }
+
+    .jurible-bouton-secondary {
+        background: #FFFFFF;
+        color: #1A1A1A;
+        border: 1px solid #E5E7EB;
+    }
+}

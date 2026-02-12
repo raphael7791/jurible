@@ -1,0 +1,85 @@
+/* ==================== SOLUTION CARD ==================== */
+
+.wp-block-jurible-solution-card.solution-card {
+	box-sizing: border-box;
+	background: var(--wp--preset--color--white);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--wp--custom--border-radius--lg);
+	padding: var(--wp--preset--spacing--md);
+	transition: var(--wp--custom--transition--default);
+}
+
+.wp-block-jurible-solution-card.solution-card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--wp--preset--shadow--md);
+	border-color: var(--wp--preset--color--border-muted);
+}
+
+/* ==================== LAYOUT HORIZONTAL ==================== */
+.wp-block-jurible-solution-card.solution-card--horizontal {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--wp--preset--spacing--sm);
+}
+
+.solution-card--horizontal .solution-card__icon {
+	font-size: 32px;
+	line-height: 1;
+	flex-shrink: 0;
+}
+
+.solution-card--horizontal .solution-card__content {
+	flex: 1;
+}
+
+/* ==================== LAYOUT CENTERED ==================== */
+.wp-block-jurible-solution-card.solution-card--centered {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.solution-card--centered .solution-card__icon {
+	font-size: 40px;
+	line-height: 1;
+	margin-bottom: var(--wp--preset--spacing--sm);
+}
+
+/* ==================== CONTENT ==================== */
+.solution-card__title {
+	font-size: var(--wp--preset--font-size--heading-4);
+	font-weight: 600;
+	color: var(--wp--preset--color--text-dark);
+	margin: 0 0 var(--wp--preset--spacing--xs) 0;
+}
+
+.solution-card__description {
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--text-gray);
+	margin: 0;
+	line-height: var(--wp--custom--line-height--body);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 600px) {
+	.wp-block-jurible-solution-card.solution-card {
+		padding: var(--wp--preset--spacing--sm);
+	}
+
+	.solution-card--horizontal .solution-card__icon {
+		font-size: 28px;
+	}
+
+	.solution-card--centered .solution-card__icon {
+		font-size: 36px;
+	}
+
+	.solution-card__title {
+		font-size: 1rem;
+	}
+
+	.solution-card__description {
+		font-size: var(--wp--preset--font-size--caption);
+	}
+}

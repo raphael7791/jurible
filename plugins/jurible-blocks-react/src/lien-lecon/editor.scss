@@ -1,0 +1,56 @@
+.jurible-lien-lecon {
+    margin: 24px 0;
+}
+
+.jurible-lien-lecon-card {
+    background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+    border-radius: 16px;
+    padding: 24px;
+    color: white;
+}
+
+.jurible-lien-lecon-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.jurible-lien-lecon-icon {
+    font-size: 16px;
+}
+
+.jurible-lien-lecon-label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.jurible-lien-lecon-info {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    margin: 12px 0;
+    font-size: 14px;
+}
+
+.jurible-lien-lecon-btn {
+    display: inline-block;
+    background: white;
+    color: #B0001D;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.jurible-lien-lecon .components-placeholder {
+    background: #F9FAFB;
+    border: 2px dashed #E5E7EB;
+}

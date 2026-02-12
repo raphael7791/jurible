@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jurible/lien-lecon",
+	"version": "1.0.0",
+	"title": "Lien Leçon",
+	"category": "text",
+	"icon": "welcome-learn-more",
+	"description": "Affiche un lien vers une leçon Fluent Community.",
+	"keywords": ["lien", "lecon", "cours", "fluent"],
+	"attributes": {
+		"courseId": {
+			"type": "integer",
+			"default": 0
+		},
+		"courseName": {
+			"type": "string",
+			"default": ""
+		},
+		"lessonId": {
+			"type": "integer",
+			"default": 0
+		},
+		"lessonTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"lessonUrl": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "jurible-blocks-react",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

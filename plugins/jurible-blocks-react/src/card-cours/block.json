@@ -1,0 +1,81 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jurible/card-cours",
+	"version": "1.0.0",
+	"title": "Card Cours",
+	"category": "jurible",
+	"icon": "welcome-learn-more",
+	"description": "Carte de cours pour le catalogue Jurible",
+	"keywords": ["card", "cours", "catalogue", "formation"],
+	"supports": {
+		"html": false,
+		"align": false
+	},
+	"attributes": {
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageId": {
+			"type": "number",
+			"default": 0
+		},
+		"badgeIcon": {
+			"type": "string",
+			"default": ""
+		},
+		"showBadge": {
+			"type": "boolean",
+			"default": false
+		},
+		"title": {
+			"type": "string",
+			"default": "Titre du cours"
+		},
+		"videosCount": {
+			"type": "number",
+			"default": 0
+		},
+		"fichesCount": {
+			"type": "number",
+			"default": 0
+		},
+		"qcmCount": {
+			"type": "number",
+			"default": 0
+		},
+		"flashcardsCount": {
+			"type": "number",
+			"default": 0
+		},
+		"annalesCount": {
+			"type": "number",
+			"default": 0
+		},
+		"mindmapsCount": {
+			"type": "number",
+			"default": 0
+		},
+		"showIncludedLabel": {
+			"type": "boolean",
+			"default": true
+		},
+		"includedLabelText": {
+			"type": "string",
+			"default": "Inclus dans l'Academie"
+		},
+		"linkText": {
+			"type": "string",
+			"default": "Voir le cours"
+		},
+		"linkUrl": {
+			"type": "string",
+			"default": "#"
+		}
+	},
+	"textdomain": "jurible-blocks-react",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

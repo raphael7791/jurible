@@ -1,0 +1,72 @@
+.jurible-lien-lecon {
+    margin: var(--wp--preset--spacing--md) 0;
+
+    .jurible-lien-lecon-card {
+        background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, var(--wp--preset--color--secondary) 100%);
+        border-radius: var(--wp--custom--border-radius--lg);
+        padding: var(--wp--preset--spacing--lg);
+        color: var(--wp--preset--color--white);
+        display: block;
+        text-decoration: none;
+        cursor: default;
+
+        .jurible-lien-lecon-header {
+            display: flex;
+            align-items: center;
+            gap: var(--wp--preset--spacing--xs);
+            margin-bottom: 12px;
+
+            .jurible-lien-lecon-icon {
+                font-size: var(--wp--preset--font-size--medium);
+            }
+
+            .jurible-lien-lecon-label {
+                font-size: var(--wp--preset--font-size--small);
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: var(--wp--preset--color--white) !important;
+            }
+        }
+
+        .jurible-lien-lecon-description {
+            font-size: var(--wp--preset--font-size--medium);
+            line-height: var(--wp--custom--line-height--body);
+            margin: var(--wp--preset--spacing--sm) 0;
+            color: var(--wp--preset--color--white) !important;
+            font-weight: 400 !important;
+        }
+
+        .jurible-lien-lecon-btn {
+            display: inline-block;
+            background: var(--wp--preset--color--white);
+            color: var(--wp--preset--color--primary) !important;
+            padding: 12px var(--wp--preset--spacing--md);
+            border-radius: var(--wp--custom--border-radius--md);
+            font-weight: 600;
+            transition: var(--wp--custom--transition--slow);
+            cursor: pointer;
+            text-decoration: none;
+
+            &:hover {
+                background: var(--wp--preset--color--background);
+                transform: translateX(4px);
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .jurible-lien-lecon .jurible-lien-lecon-card {
+        padding: var(--wp--preset--spacing--md) 20px;
+
+        .jurible-lien-lecon-description {
+            font-size: var(--wp--preset--font-size--medium);
+        }
+
+        .jurible-lien-lecon-btn {
+            padding: 10px 20px;
+            font-size: var(--wp--preset--font-size--small);
+        }
+    }
+}

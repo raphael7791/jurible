@@ -1,0 +1,158 @@
+/* ==================== CARD COURS ==================== */
+.wp-block-jurible-card-cours.card-cours {
+    display: block;
+    width: 380px;
+    max-width: 100%;
+    background: var(--wp--preset--color--white);
+    border-radius: var(--wp--custom--border-radius--lg);
+    border: 1px solid var(--wp--preset--color--border);
+    box-shadow: var(--wp--preset--shadow--sm);
+    overflow: hidden;
+    transition: var(--wp--custom--transition--default);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-cours:hover {
+    box-shadow: var(--wp--preset--shadow--lg);
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-cours:hover .card-cours__link {
+    color: var(--wp--preset--color--primary);
+}
+
+/* Dans les colonnes, prendre toute la largeur */
+.wp-block-column .wp-block-jurible-card-cours.card-cours {
+    width: 100%;
+}
+
+/* Image */
+.card-cours__image {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: #2D2D2D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--wp--custom--border-radius--lg) var(--wp--custom--border-radius--lg) 0 0;
+}
+
+.card-cours__image-icon {
+    font-size: 48px;
+    opacity: 0.5;
+}
+
+/* Badge */
+.card-cours__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--wp--preset--color--primary);
+    color: var(--wp--preset--color--white);
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--wp--custom--border-radius--md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Content */
+.card-cours__content {
+    padding: var(--wp--preset--spacing--sm);
+}
+
+.card-cours__title {
+    font-size: var(--wp--preset--font-size--medium);
+    font-weight: 600;
+    color: var(--wp--preset--color--text-dark);
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+}
+
+/* Stats */
+.card-cours__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px var(--wp--preset--spacing--sm);
+    margin-bottom: var(--wp--preset--spacing--sm);
+}
+
+.card-cours__stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--text-muted);
+}
+
+.card-cours__stat-icon {
+    font-size: var(--wp--preset--font-size--small);
+}
+
+/* Label inclus */
+.card-cours__included {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--wp--preset--font-size--caption);
+    font-weight: 500;
+    color: var(--wp--preset--color--success);
+    background: var(--wp--preset--color--success-bg);
+    padding: 6px 12px;
+    border-radius: var(--wp--custom--border-radius--full);
+    margin-bottom: var(--wp--preset--spacing--sm);
+}
+
+/* Footer */
+.card-cours__footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.card-cours__link {
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 500;
+    color: var(--wp--preset--color--text-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--wp--custom--transition--default);
+}
+
+.card-cours__link:hover {
+    color: var(--wp--preset--color--primary);
+}
+
+.card-cours__link-arrow {
+    font-size: var(--wp--preset--font-size--small);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-cours__image {
+        height: 160px;
+    }
+
+    .card-cours__title {
+        font-size: var(--wp--preset--font-size--medium);
+    }
+
+    .card-cours__stats {
+        gap: var(--wp--preset--spacing--xs) 12px;
+    }
+
+    .card-cours__stat {
+        font-size: var(--wp--preset--font-size--caption);
+    }
+}

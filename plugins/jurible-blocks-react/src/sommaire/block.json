@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jurible/sommaire",
+	"version": "1.0.0",
+	"title": "Sommaire",
+	"category": "text",
+	"icon": "list-view",
+	"description": "Génère automatiquement un sommaire à partir des titres H2.",
+	"keywords": ["sommaire", "table", "contents", "toc"],
+	"attributes": {
+		"headings": {
+			"type": "array",
+			"default": []
+		}
+	},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "jurible-blocks-react",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

@@ -1,0 +1,97 @@
+/* Footer Accordion - Frontend Styles */
+
+.jurible-footer-accordion {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--wp--preset--spacing--sm) 0;
+        cursor: pointer;
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
+    }
+
+    &__title {
+        font-family: var(--wp--preset--font-family--poppins);
+        font-size: var(--wp--preset--font-size--small);
+        font-weight: 600;
+        color: var(--wp--preset--color--white);
+    }
+
+    &__icon {
+        font-size: var(--wp--preset--font-size--caption);
+        color: rgba(255, 255, 255, 0.5);
+        transition: transform 0.2s ease;
+    }
+
+    &__content {
+        display: none;
+        padding-bottom: var(--wp--preset--spacing--sm);
+
+        /* Reset list styles */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        li {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            font-family: var(--wp--preset--font-family--poppins);
+            font-size: var(--wp--preset--font-size--small);
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.15s ease;
+
+            &:hover {
+                color: var(--wp--preset--color--white);
+            }
+        }
+
+        /* CTA link style */
+        .footer-link-cta,
+        .jurible-footer-accordion__cta {
+            font-size: var(--wp--preset--font-size--caption);
+            font-weight: 600;
+            color: var(--wp--preset--color--white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+    }
+
+    /* Open state */
+    &--open {
+        .jurible-footer-accordion__icon {
+            transform: rotate(180deg);
+        }
+
+        .jurible-footer-accordion__content {
+            display: block;
+        }
+    }
+}
+
+/* Hide accordions on desktop, show on mobile */
+@media (min-width: 769px) {
+    .jurible-footer-accordion {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .jurible-footer-accordion {
+        display: block;
+    }
+}

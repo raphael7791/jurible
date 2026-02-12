@@ -1,0 +1,12 @@
+/* Newsletter Block - Editor Styles */
+
+.jurible-newsletter {
+    &__input {
+        cursor: not-allowed;
+        opacity: 0.8;
+    }
+
+    &__btn {
+        cursor: default;
+    }
+}

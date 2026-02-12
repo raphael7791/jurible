@@ -1,0 +1,303 @@
+/* ==================== PRICING DURATION SELECTOR ==================== */
+
+.wp-block-jurible-pricing-duration-selector.pricing-duration-selector {
+    background: var(--wp--preset--color--white);
+    border-radius: var(--wp--custom--border-radius--lg);
+    padding: var(--wp--preset--spacing--lg);
+    box-shadow: var(--wp--preset--shadow--sm);
+    container-type: inline-size;
+}
+
+/* ==================== GRID ==================== */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--md);
+    align-items: end;
+    padding-top: var(--wp--preset--spacing--sm);
+}
+
+/* ==================== DURATION CARD ==================== */
+.duration-card {
+    position: relative;
+    background: var(--wp--preset--color--white);
+    border: 1px solid var(--wp--preset--color--border);
+    border-radius: var(--wp--custom--border-radius--lg);
+    padding: var(--wp--preset--spacing--md);
+    text-align: center;
+    transition: var(--wp--custom--transition--default);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.duration-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--wp--preset--shadow--md);
+    border-color: var(--wp--preset--color--text-muted);
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Card Populaire */
+.duration-card--popular {
+    border: 2px solid transparent;
+    background:
+        linear-gradient(white, white) padding-box,
+        linear-gradient(135deg, var(--wp--preset--color--primary) 0%, var(--wp--preset--color--secondary) 100%) border-box;
+    box-shadow: var(--wp--preset--shadow--accent);
+}
+
+.duration-card--popular:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--wp--preset--shadow--lg), var(--wp--preset--shadow--accent);
+}
+
+/* Badge Populaire */
+.duration-card__badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, var(--wp--preset--color--secondary) 100%);
+    color: var(--wp--preset--color--white);
+    font-size: var(--wp--preset--font-size--caption);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 14px;
+    border-radius: var(--wp--custom--border-radius--full);
+    white-space: nowrap;
+}
+
+/* Durée */
+.duration-card__duration {
+    font-size: var(--wp--preset--font-size--medium);
+    font-weight: 600;
+    color: var(--wp--preset--color--text-dark);
+    margin: 0 0 var(--wp--preset--spacing--sm) 0;
+    margin-top: var(--wp--preset--spacing--xs);
+}
+
+.duration-card--popular .duration-card__duration {
+    margin-top: var(--wp--preset--spacing--sm);
+}
+
+/* Prix */
+.duration-card__price-wrapper {
+    margin-bottom: var(--wp--preset--spacing--xs);
+}
+
+.duration-card__price-old {
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--text-muted);
+    text-decoration: line-through;
+    margin: 0 0 2px 0;
+}
+
+.duration-card__price {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--wp--preset--color--text-dark);
+    line-height: 1;
+    margin: 0;
+}
+
+.duration-card__price span {
+    font-size: 24px;
+}
+
+/* Prix par mois */
+.duration-card__monthly {
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--text-gray);
+    margin: 0 0 var(--wp--preset--spacing--sm) 0;
+}
+
+/* Badge économie */
+.duration-card__savings {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background: var(--wp--preset--color--success-bg);
+    color: var(--wp--preset--color--success-text);
+    font-size: var(--wp--preset--font-size--caption);
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: var(--wp--custom--border-radius--md);
+    margin-bottom: var(--wp--preset--spacing--sm);
+    min-height: 44px;
+    justify-content: center;
+}
+
+.duration-card__savings-percent {
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 700;
+}
+
+.duration-card__savings-amount {
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Placeholder pour cards sans économie */
+.duration-card__savings-placeholder {
+    height: 44px;
+    margin-bottom: var(--wp--preset--spacing--sm);
+}
+
+/* CTA */
+.duration-card__cta {
+    display: block;
+    width: 100%;
+    padding: 12px var(--wp--preset--spacing--sm);
+    font-family: var(--wp--preset--font-family--poppins);
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 600;
+    border-radius: var(--wp--custom--border-radius--md);
+    cursor: pointer;
+    transition: var(--wp--custom--transition--default);
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+/* CTA Outline */
+.duration-card__cta--outline {
+    background: var(--wp--preset--color--white);
+    color: var(--wp--preset--color--text-dark);
+    border: 1px solid var(--wp--preset--color--border);
+}
+
+.duration-card:hover .duration-card__cta--outline {
+    background: var(--wp--preset--color--background);
+    border-color: var(--wp--preset--color--text-muted);
+}
+
+/* CTA Gradient */
+.duration-card__cta--gradient {
+    background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, var(--wp--preset--color--secondary) 100%);
+    color: var(--wp--preset--color--white);
+    border: none;
+}
+
+.duration-card:hover .duration-card__cta--gradient {
+    filter: brightness(1.1);
+}
+
+/* ==================== NOTICE ==================== */
+.pricing-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--wp--preset--spacing--xs);
+    margin: var(--wp--preset--spacing--md) 0 0 0;
+    padding-top: var(--wp--preset--spacing--md);
+    border-top: 1px solid var(--wp--preset--color--border);
+    font-size: 13px;
+    color: var(--wp--preset--color--text-muted);
+}
+
+.pricing-notice svg {
+    color: var(--wp--preset--color--success);
+    flex-shrink: 0;
+}
+
+/* ==================== CONTAINER QUERY : 4 colonnes → 2 colonnes ==================== */
+@container (max-width: 800px) {
+    .pricing-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding-top: var(--wp--preset--spacing--sm);
+    }
+
+    .duration-card--popular {
+        order: -1;
+    }
+
+    .duration-card {
+        padding: var(--wp--preset--spacing--sm) 12px;
+        border-radius: var(--wp--custom--border-radius--md);
+    }
+
+    .duration-card__badge {
+        font-size: 9px;
+        padding: 4px 10px;
+        top: -10px;
+    }
+
+    .duration-card__duration {
+        font-size: 13px;
+        margin-bottom: var(--wp--preset--spacing--xs);
+        margin-top: 4px;
+    }
+
+    .duration-card--popular .duration-card__duration {
+        margin-top: 10px;
+    }
+
+    .duration-card__price-old {
+        font-size: 11px;
+    }
+
+    .duration-card__price {
+        font-size: 28px;
+    }
+
+    .duration-card__price span {
+        font-size: var(--wp--preset--font-size--medium);
+    }
+
+    .duration-card__monthly {
+        font-size: 11px;
+        margin-bottom: var(--wp--preset--spacing--xs);
+    }
+
+    .duration-card__savings {
+        padding: 4px var(--wp--preset--spacing--xs);
+        min-height: 36px;
+        margin-bottom: var(--wp--preset--spacing--xs);
+    }
+
+    .duration-card__savings-percent {
+        font-size: var(--wp--preset--font-size--caption);
+    }
+
+    .duration-card__savings-amount {
+        font-size: 9px;
+    }
+
+    .duration-card__savings-placeholder {
+        height: 36px;
+        margin-bottom: var(--wp--preset--spacing--xs);
+    }
+
+    .duration-card__cta {
+        padding: 10px var(--wp--preset--spacing--xs);
+        font-size: var(--wp--preset--font-size--caption);
+        border-radius: var(--wp--custom--border-radius--sm);
+    }
+
+    .pricing-notice {
+        font-size: 10px;
+        margin-top: 12px;
+        padding-top: 12px;
+        text-align: center;
+        flex-wrap: wrap;
+    }
+
+    .pricing-notice svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* Fallback mobile pour le padding du conteneur */
+@media (max-width: 500px) {
+    .wp-block-jurible-pricing-duration-selector.pricing-duration-selector {
+        padding: var(--wp--preset--spacing--sm);
+    }
+}

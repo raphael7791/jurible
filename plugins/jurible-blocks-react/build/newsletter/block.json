@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/newsletter",
+  "version": "1.0.0",
+  "title": "Newsletter Jurible",
+  "category": "widgets",
+  "icon": "email",
+  "description": "Formulaire d'inscription newsletter avec input email et bouton",
+  "example": {},
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Newsletter"
+    },
+    "description": {
+      "type": "string",
+      "default": "Recevez nos conseils et actualités pour réussir vos études de droit."
+    },
+    "placeholder": {
+      "type": "string",
+      "default": "Votre email"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "S'inscrire"
+    },
+    "variant": {
+      "type": "string",
+      "default": "dark"
+    },
+    "layout": {
+      "type": "string",
+      "default": "horizontal"
+    }
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

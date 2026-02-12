@@ -1,0 +1,29 @@
+/* Footer Accordion - Editor Styles */
+
+.jurible-footer-accordion {
+    background: #1A1A1A;
+    padding: var(--wp--preset--spacing--sm);
+    border-radius: var(--wp--custom--border-radius--md);
+    margin-bottom: var(--wp--preset--spacing--xs);
+
+    &__header {
+        cursor: default;
+    }
+
+    &__content {
+        display: block !important;
+        margin-top: var(--wp--preset--spacing--xs);
+        padding: var(--wp--preset--spacing--sm);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--wp--custom--border-radius--sm);
+    }
+
+    /* Style InnerBlocks in editor */
+    .block-editor-inner-blocks {
+        .block-editor-block-list__layout {
+            > * {
+                color: rgba(255, 255, 255, 0.7);
+            }
+        }
+    }
+}

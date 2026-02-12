@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/flashcards",
+  "version": "1.0.0",
+  "title": "Flashcards Jurible",
+  "category": "text",
+  "icon": "welcome-learn-more",
+  "description": "Affiche les flashcards d'une leçon pour réviser",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "courseId": {
+      "type": "number",
+      "default": 0
+    },
+    "lessonId": {
+      "type": "number",
+      "default": 0
+    },
+    "courseTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "lessonTitle": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}
