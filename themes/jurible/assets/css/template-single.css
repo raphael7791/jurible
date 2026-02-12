@@ -2,34 +2,96 @@
    TEMPLATE SINGLE - Article de blog
    ========================================================================== */
 
+/* Layout 2 colonnes */
+.article-columns {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--wp--preset--spacing--xl);
+}
+
+.article-main {
+    flex: 1;
+    min-width: 0;
+    max-width: 880px;
+}
+
+.article-sidebar {
+    flex: 0 0 300px;
+    width: 300px;
+    max-width: 300px;
+}
+
 /* Sidebar sticky */
 .sidebar-sticky {
     position: sticky;
     top: 100px;
 }
 
+/* Force les patterns dans la sidebar à respecter la largeur */
+.article-sidebar .wp-block-group.alignfull,
+.article-sidebar .wp-block-group.alignwide {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Stack les colonnes internes des patterns dans la sidebar */
+.article-sidebar .wp-block-columns {
+    flex-direction: column !important;
+}
+
+.article-sidebar .wp-block-column {
+    flex-basis: 100% !important;
+    width: 100% !important;
+}
+
+/* Ajustements typographiques pour la sidebar */
+.article-sidebar h2 {
+    font-size: var(--wp--preset--font-size--heading-4) !important;
+}
+
+.article-sidebar h3 {
+    font-size: var(--wp--preset--font-size--body-large) !important;
+}
+
+.article-sidebar p {
+    font-size: var(--wp--preset--font-size--small) !important;
+}
+
+/* Réduire le padding des patterns dans la sidebar */
+.article-sidebar .wp-block-group[style*="padding"] {
+    padding: var(--wp--preset--spacing--md) !important;
+}
+
 /* Responsive - Mobile */
 @media (max-width: 900px) {
     .article-columns {
         flex-direction: column !important;
+        gap: var(--wp--preset--spacing--lg);
     }
 
-    .article-columns .article-main,
-    .article-columns .article-sidebar {
-        flex-basis: 100% !important;
-        width: 100% !important;
-    }
-
+    .article-main,
     .article-sidebar {
-        margin-top: var(--wp--preset--spacing--xl);
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
     .sidebar-sticky {
         position: static;
     }
+
+    /* Restaurer les tailles sur mobile */
+    .article-sidebar h2 {
+        font-size: var(--wp--preset--font-size--heading-3) !important;
+    }
+
+    .article-sidebar p {
+        font-size: var(--wp--preset--font-size--body) !important;
+    }
 }
 
-/* Post terms (category link) styling */
+/* Post terms (tags) styling */
 .article-columns .wp-block-post-terms a {
     color: var(--wp--preset--color--secondary);
     text-decoration: none;
