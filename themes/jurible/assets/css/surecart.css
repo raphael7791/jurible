@@ -1,0 +1,95 @@
+/* ==========================================================================
+   JURIBLE DESIGN SYSTEM - SureCart Overrides
+   ========================================================================== */
+
+/* ==========================================================================
+   PRODUCT BUY BUTTONS
+   ========================================================================== */
+
+/* Target all possible button elements inside SureCart buy button block */
+.wp-block-surecart-product-buy-button a,
+.wp-block-surecart-product-buy-button button,
+.wp-block-surecart-product-buy-button [class*="button"],
+.wp-block-surecart-product-buy-buttons a,
+.wp-block-surecart-product-buy-buttons button {
+    transition: all var(--wp--custom--transition--default) !important;
+}
+
+/* Primary button hover (gradient) */
+.wp-block-surecart-product-buy-button:not(.is-style-outline) a:hover,
+.wp-block-surecart-product-buy-button:not(.is-style-outline) button:hover,
+.wp-block-surecart-product-buy-button:not(.is-style-outline):hover a,
+.wp-block-surecart-product-buy-button:not(.is-style-outline):hover button {
+    box-shadow: var(--wp--preset--shadow--cta-hover) !important;
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+}
+
+.wp-block-surecart-product-buy-button:not(.is-style-outline) a:active,
+.wp-block-surecart-product-buy-button:not(.is-style-outline) button:active {
+    transform: translateY(0);
+}
+
+/* Outline button hover - same as is-style-outline in buttons.css */
+.wp-block-surecart-product-buy-button.is-style-outline a:hover,
+.wp-block-surecart-product-buy-button.is-style-outline button:hover,
+.wp-block-surecart-product-buy-button.is-style-outline:hover a,
+.wp-block-surecart-product-buy-button.is-style-outline:hover button {
+    background: var(--wp--preset--color--primary) !important;
+    color: var(--wp--preset--color--white) !important;
+    border-color: var(--wp--preset--color--primary) !important;
+}
+
+.wp-block-surecart-product-buy-button.is-style-outline a:active,
+.wp-block-surecart-product-buy-button.is-style-outline button:active {
+    transform: translateY(1px);
+}
+
+/* ==========================================================================
+   PRODUCT BUY BUTTONS CONTAINER
+   ========================================================================== */
+
+.wp-block-surecart-product-buy-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+/* ==========================================================================
+   PRODUCT MEDIA (Gallery)
+   ========================================================================== */
+
+.wp-block-surecart-product-media {
+    border-radius: var(--wp--custom--border-radius--lg);
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+}
+
+.wp-block-surecart-product-media img {
+    border-radius: var(--wp--custom--border-radius--lg);
+    display: block;
+}
+
+/* ==========================================================================
+   PRODUCT COLLECTION TAG (matches design system tag-dark)
+   ========================================================================== */
+
+.wp-block-surecart-product-collection-tag,
+.wp-block-surecart-product-collection-tag a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px !important;
+    font-family: var(--wp--preset--font-family--poppins);
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 1.4;
+    border-radius: var(--wp--custom--border-radius--sm) !important;
+    background: var(--wp--preset--color--text-dark) !important;
+    color: var(--wp--preset--color--white) !important;
+    text-decoration: none;
+    margin: 0;
+    width: fit-content;
+}

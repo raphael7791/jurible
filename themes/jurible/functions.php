@@ -477,6 +477,19 @@ function jurible_enqueue_inputs_styles()
 add_action("wp_enqueue_scripts", "jurible_enqueue_inputs_styles");
 add_action("enqueue_block_assets", "jurible_enqueue_inputs_styles");
 
+# Charger le CSS pour SureCart (boutons, galerie produit)
+function jurible_enqueue_surecart_styles()
+{
+    wp_enqueue_style(
+        "jurible-surecart",
+        get_template_directory_uri() . "/assets/css/surecart.css",
+        [],
+        wp_get_theme()->get("Version")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_surecart_styles");
+add_action("enqueue_block_assets", "jurible_enqueue_surecart_styles");
+
 
 # Enregistrer les Block Styles pour core/separator (Dividers)
 function jurible_register_separator_block_styles()

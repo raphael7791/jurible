@@ -17,16 +17,16 @@
 
 <!-- wp:column {"className":"reassurance-full__col"} -->
 <div class="wp-block-column reassurance-full__col">
-<!-- wp:paragraph {"align":"center","className":"reassurance-full__stars","style":{"typography":{"fontSize":"16px"}}} -->
-<p class="has-text-align-center reassurance-full__stars" style="font-size:16px">★★★★★</p>
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px"}}} -->
+<p class="has-text-align-center" style="font-size:28px">⭐</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px","fontWeight":"600"}},"textColor":"text-dark"} -->
-<p class="has-text-align-center has-text-dark-color has-text-color" style="font-size:13px;font-weight:600">4.8/5</p>
+<p class="has-text-align-center has-text-dark-color has-text-color" style="font-size:13px;font-weight:600">Noté Excellent</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"11px"}},"textColor":"text-muted"} -->
-<p class="has-text-align-center has-text-muted-color has-text-color" style="font-size:11px">+500 avis</p>
+<p class="has-text-align-center has-text-muted-color has-text-color" style="font-size:11px">sur les avis vérifiés</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:column -->
@@ -34,11 +34,15 @@
 <!-- wp:column {"className":"reassurance-full__col"} -->
 <div class="wp-block-column reassurance-full__col">
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px"}}} -->
-<p class="has-text-align-center" style="font-size:28px">👥</p>
+<p class="has-text-align-center" style="font-size:28px">🎓</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px","fontWeight":"600"}},"textColor":"text-dark"} -->
-<p class="has-text-align-center has-text-dark-color has-text-color" style="font-size:13px;font-weight:600">+25 000 étudiants</p>
+<p class="has-text-align-center has-text-dark-color has-text-color" style="font-size:13px;font-weight:600">Cours conformes</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"11px"}},"textColor":"text-muted"} -->
+<p class="has-text-align-center has-text-muted-color has-text-color" style="font-size:11px">aux programmes universitaires</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:column -->
@@ -46,23 +50,15 @@
 <!-- wp:column {"className":"reassurance-full__col"} -->
 <div class="wp-block-column reassurance-full__col">
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px"}}} -->
-<p class="has-text-align-center" style="font-size:28px">🔒</p>
+<p class="has-text-align-center" style="font-size:28px">📚</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px","fontWeight":"600"}},"textColor":"text-dark"} -->
-<p class="has-text-align-center has-text-dark-color has-text-color" style="font-size:13px;font-weight:600">Paiement sécurisé</p>
-<!-- /wp:paragraph -->
-</div>
-<!-- /wp:column -->
-
-<!-- wp:column {"className":"reassurance-full__col"} -->
-<div class="wp-block-column reassurance-full__col">
-<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px"}}} -->
-<p class="has-text-align-center" style="font-size:28px">✅</p>
+<p class="has-text-align-center has-text-dark-color has-text-color" style="font-size:13px;font-weight:600">Plus de 7 ans d'expérience</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px","fontWeight":"600"}},"textColor":"text-dark"} -->
-<p class="has-text-align-center has-text-dark-color has-text-color" style="font-size:13px;font-weight:600">Programme officiel</p>
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"11px"}},"textColor":"text-muted"} -->
+<p class="has-text-align-center has-text-muted-color has-text-color" style="font-size:11px">auprès des étudiants en droit</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:column -->
@@ -83,8 +79,8 @@
 <p class="has-text-align-center has-text-muted-color has-text-color" style="font-size:10px;text-transform:uppercase">Soutenu par</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:image {"align":"center","sizeSlug":"full","className":"reassurance-full__partner-logo"} -->
-<figure class="wp-block-image aligncenter size-full reassurance-full__partner-logo"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo-bpi-france.svg'); ?>" alt="BPI France"/></figure>
+<!-- wp:image {"width":"50px","height":"auto","align":"center","sizeSlug":"full","className":"reassurance-full__partner-logo"} -->
+<figure class="wp-block-image aligncenter size-full is-resized reassurance-full__partner-logo"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/partners/bpi-france.png'); ?>" alt="BPI France" style="width:50px;height:auto"/></figure>
 <!-- /wp:image -->
 </div>
 <!-- /wp:column -->
@@ -96,7 +92,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"align":"center","sizeSlug":"full","className":"reassurance-full__partner-logo"} -->
-<figure class="wp-block-image aligncenter size-full reassurance-full__partner-logo"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo-assas-lab.svg'); ?>" alt="Assas Lab"/></figure>
+<figure class="wp-block-image aligncenter size-full reassurance-full__partner-logo"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/partners/assaslab.png'); ?>" alt="Assas Lab"/></figure>
 <!-- /wp:image -->
 </div>
 <!-- /wp:column -->
