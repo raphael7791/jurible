@@ -590,6 +590,13 @@ body.menu-open {
     padding: 16px;
     margin-top: 20px;
     text-align: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#site-header .megamenu__contact-cta .btn {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #site-header .megamenu__contact-cta p {
