@@ -23,7 +23,7 @@
 /* Séparateurs verticaux */
 .reassurance-full__col {
 	position: relative;
-	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md) !important;
+	padding: 0 var(--wp--preset--spacing--md) !important;
 }
 
 .reassurance-full__col:not(:last-child)::after {

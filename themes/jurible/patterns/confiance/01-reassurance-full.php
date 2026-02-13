@@ -6,19 +6,19 @@
  * Description: Bloc réassurance complet avec avis, stats et logos partenaires (Homepage, Prépa)
  */
 ?>
-<!-- wp:group {"align":"full","className":"reassurance-full-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull reassurance-full-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--md)">
+<!-- wp:group {"align":"full","className":"reassurance-full-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull reassurance-full-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--md)">
 
-<!-- wp:group {"className":"reassurance-full","style":{"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|xl","right":"var:preset|spacing|xl"}}},"backgroundColor":"white","layout":{"type":"default"}} -->
-<div class="wp-block-group reassurance-full has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--xl);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--xl)">
+<!-- wp:group {"className":"reassurance-full","style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"},"blockGap":"0"}},"backgroundColor":"white","layout":{"type":"default"}} -->
+<div class="wp-block-group reassurance-full has-white-background-color has-background" style="padding:0">
 
-<!-- wp:columns {"className":"reassurance-full__row"} -->
-<div class="wp-block-columns reassurance-full__row">
+<!-- wp:columns {"className":"reassurance-full__row","style":{"spacing":{"margin":{"top":"0"}}}} -->
+<div class="wp-block-columns reassurance-full__row" style="margin-top:0">
 
 <!-- wp:column {"className":"reassurance-full__col"} -->
 <div class="wp-block-column reassurance-full__col">
-<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px"}}} -->
-<p class="has-text-align-center" style="font-size:28px">⭐</p>
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px"},"spacing":{"margin":{"top":"0"}}}} -->
+<p class="has-text-align-center" style="margin-top:0;font-size:28px">⭐</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px","fontWeight":"600"}},"textColor":"text-dark"} -->
@@ -33,8 +33,8 @@
 
 <!-- wp:column {"className":"reassurance-full__col"} -->
 <div class="wp-block-column reassurance-full__col">
-<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px"}}} -->
-<p class="has-text-align-center" style="font-size:28px">🎓</p>
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px"},"spacing":{"margin":{"top":"0"}}}} -->
+<p class="has-text-align-center" style="margin-top:0;font-size:28px">🎓</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px","fontWeight":"600"}},"textColor":"text-dark"} -->
@@ -49,8 +49,8 @@
 
 <!-- wp:column {"className":"reassurance-full__col"} -->
 <div class="wp-block-column reassurance-full__col">
-<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px"}}} -->
-<p class="has-text-align-center" style="font-size:28px">📚</p>
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px"},"spacing":{"margin":{"top":"0"}}}} -->
+<p class="has-text-align-center" style="margin-top:0;font-size:28px">📚</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px","fontWeight":"600"}},"textColor":"text-dark"} -->
@@ -66,12 +66,12 @@
 </div>
 <!-- /wp:columns -->
 
-<!-- wp:separator {"className":"reassurance-full__divider"} -->
-<hr class="wp-block-separator has-alpha-channel-opacity reassurance-full__divider"/>
+<!-- wp:separator {"className":"reassurance-full__divider","style":{"spacing":{"margin":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md"}}}} -->
+<hr class="wp-block-separator has-alpha-channel-opacity reassurance-full__divider" style="margin-top:var(--wp--preset--spacing--md);margin-bottom:var(--wp--preset--spacing--md)"/>
 <!-- /wp:separator -->
 
-<!-- wp:columns {"className":"reassurance-full__partners"} -->
-<div class="wp-block-columns reassurance-full__partners">
+<!-- wp:columns {"className":"reassurance-full__partners","style":{"spacing":{"margin":{"bottom":"0"}}}} -->
+<div class="wp-block-columns reassurance-full__partners" style="margin-bottom:0">
 
 <!-- wp:column -->
 <div class="wp-block-column">
@@ -79,8 +79,8 @@
 <p class="has-text-align-center has-text-muted-color has-text-color" style="font-size:10px;text-transform:uppercase">Soutenu par</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:image {"width":"50px","height":"auto","align":"center","sizeSlug":"full","className":"reassurance-full__partner-logo"} -->
-<figure class="wp-block-image aligncenter size-full is-resized reassurance-full__partner-logo"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/partners/bpi-france.png'); ?>" alt="BPI France" style="width:50px;height:auto"/></figure>
+<!-- wp:image {"width":"50px","height":"auto","align":"center","sizeSlug":"full","className":"reassurance-full__partner-logo","style":{"spacing":{"margin":{"bottom":"0"}}}} -->
+<figure class="wp-block-image aligncenter size-full is-resized reassurance-full__partner-logo" style="margin-bottom:0"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/partners/bpi-france.png'); ?>" alt="BPI France" style="width:50px;height:auto"/></figure>
 <!-- /wp:image -->
 </div>
 <!-- /wp:column -->
@@ -91,8 +91,8 @@
 <p class="has-text-align-center has-text-muted-color has-text-color" style="font-size:10px;text-transform:uppercase">Incubé par</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:image {"align":"center","sizeSlug":"full","className":"reassurance-full__partner-logo"} -->
-<figure class="wp-block-image aligncenter size-full reassurance-full__partner-logo"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/partners/assaslab.png'); ?>" alt="Assas Lab"/></figure>
+<!-- wp:image {"align":"center","sizeSlug":"full","className":"reassurance-full__partner-logo","style":{"spacing":{"margin":{"bottom":"0"}}}} -->
+<figure class="wp-block-image aligncenter size-full reassurance-full__partner-logo" style="margin-bottom:0"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/partners/assaslab.png'); ?>" alt="Assas Lab"/></figure>
 <!-- /wp:image -->
 </div>
 <!-- /wp:column -->
