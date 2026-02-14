@@ -12,12 +12,16 @@
 <!-- wp:group {"className":"section-paragraphe__content","style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"default"}} -->
 <div class="wp-block-group section-paragraphe__content">
 
+<!-- wp:group {"layout":{"type":"flex","justifyContent":"center"}} -->
+<div class="wp-block-group">
 <!-- wp:paragraph {"className":"is-style-tag-secondary"} -->
 <p class="is-style-tag-secondary">📚 Méthodologie</p>
 <!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
 
-<!-- wp:heading {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|md"}}}} -->
-<h2 class="wp-block-heading" style="margin-bottom:var(--wp--preset--spacing--md)">Réussir ses <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">examens de droit</mark></h2>
+<!-- wp:heading {"textAlign":"center","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|md"}}}} -->
+<h2 class="wp-block-heading has-text-align-center" style="margin-bottom:var(--wp--preset--spacing--md)">Réussir ses <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">examens de droit</mark></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|md"}}},"fontSize":"body-large","textColor":"text-gray"} -->

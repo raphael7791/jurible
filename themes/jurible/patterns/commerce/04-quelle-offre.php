@@ -12,7 +12,7 @@
 <!-- wp:group {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-group">
 <!-- wp:paragraph {"className":"is-style-tag-secondary"} -->
-<p class="is-style-tag-secondary">Quelle offre pour vous ?</p>
+<p class="is-style-tag-secondary">🤔 Quelle offre ?</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->

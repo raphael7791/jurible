@@ -30,7 +30,7 @@
 <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:50%">
 
 <!-- wp:paragraph {"className":"is-style-tag-secondary"} -->
-<p class="is-style-tag-secondary">Les fondateurs</p>
+<p class="is-style-tag-secondary">👥 Les fondateurs</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->

@@ -19,8 +19,8 @@
 <h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Questions <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">fréquentes</mark></h2>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"15px"}},"textColor":"text-gray"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:15px">Tout ce que vous devez savoir sur nos formations.</p>
+<!-- wp:paragraph {"align":"center","textColor":"text-gray","fontSize":"body-large"} -->
+<p class="has-text-align-center has-text-gray-color has-text-color has-body-large-font-size">Tout ce que vous devez savoir sur nos formations.</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->

@@ -13,34 +13,35 @@
 <div class="wp-block-group cta-final__content">
 
 <!-- wp:heading {"textAlign":"center","className":"cta-final__title","textColor":"white"} -->
-<h2 class="wp-block-heading has-text-align-center cta-final__title has-white-color has-text-color">Prêt à réussir votre Licence de Droit ?</h2>
+<h2 class="wp-block-heading has-text-align-center cta-final__title has-white-color has-text-color">Prêt à réussir votre partiel de Droit Constit ?</h2>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"align":"center","className":"cta-final__subtitle","textColor":"white"} -->
-<p class="has-text-align-center cta-final__subtitle has-white-color has-text-color">Rejoignez les 25 000+ étudiants qui ont transformé leurs résultats avec Jurible.</p>
+<!-- wp:paragraph {"align":"center","className":"cta-final__subtitle","textColor":"white","fontSize":"body-large"} -->
+<p class="has-text-align-center cta-final__subtitle has-white-color has-text-color has-body-large-font-size">Rejoignez les milliers d'étudiants qui ont validé leur année avec nos fiches.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons {"className":"cta-final__buttons","layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|md"},"blockGap":"var:preset|spacing|sm"}}} -->
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontWeight":"700"}},"textColor":"white","fontSize":"heading-3"} -->
+<p class="has-text-align-center has-white-color has-text-color has-heading-3-font-size" style="font-weight:700">19€ <span style="font-weight:400;font-size:0.6em">paiement unique</span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons {"className":"cta-final__buttons","layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|md"}}}} -->
 <div class="wp-block-buttons cta-final__buttons" style="margin-top:var(--wp--preset--spacing--md)">
-<!-- wp:button {"className":"is-style-primary-white","style":{"border":{"radius":"8px"}}} -->
-<div class="wp-block-button is-style-primary-white"><a class="wp-block-button__link wp-element-button" style="border-radius:8px">Commencer maintenant</a></div>
-<!-- /wp:button -->
-<!-- wp:button {"className":"is-style-ghost-white","style":{"border":{"radius":"8px"}}} -->
-<div class="wp-block-button is-style-ghost-white"><a class="wp-block-button__link wp-element-button" style="border-radius:8px">Voir les tarifs</a></div>
+<!-- wp:button {"className":"is-style-primary-white","style":{"border":{"radius":"var:preset|border-radius|md"}}} -->
+<div class="wp-block-button is-style-primary-white"><a class="wp-block-button__link wp-element-button" style="border-radius:var(--wp--preset--border-radius--md)">Télécharger les fiches maintenant</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->
 
 <!-- wp:group {"className":"cta-final__mentions","style":{"spacing":{"margin":{"top":"var:preset|spacing|md"},"blockGap":"var:preset|spacing|md"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
 <div class="wp-block-group cta-final__mentions" style="margin-top:var(--wp--preset--spacing--md)">
-<!-- wp:paragraph {"className":"cta-final__mention","style":{"typography":{"fontSize":"13px"}},"textColor":"white"} -->
-<p class="cta-final__mention has-white-color has-text-color" style="font-size:13px">✓ Sans engagement</p>
+<!-- wp:paragraph {"className":"cta-final__mention","textColor":"white","fontSize":"small"} -->
+<p class="cta-final__mention has-white-color has-text-color has-small-font-size">✓ Téléchargement immédiat</p>
 <!-- /wp:paragraph -->
-<!-- wp:paragraph {"className":"cta-final__mention","style":{"typography":{"fontSize":"13px"}},"textColor":"white"} -->
-<p class="cta-final__mention has-white-color has-text-color" style="font-size:13px">✓ Accès illimité</p>
+<!-- wp:paragraph {"className":"cta-final__mention","textColor":"white","fontSize":"small"} -->
+<p class="cta-final__mention has-white-color has-text-color has-small-font-size">✓ Accès à vie</p>
 <!-- /wp:paragraph -->
-<!-- wp:paragraph {"className":"cta-final__mention","style":{"typography":{"fontSize":"13px"}},"textColor":"white"} -->
-<p class="cta-final__mention has-white-color has-text-color" style="font-size:13px">✓ + de 3200 contenus pédagogiques</p>
+<!-- wp:paragraph {"className":"cta-final__mention","textColor":"white","fontSize":"small"} -->
+<p class="cta-final__mention has-white-color has-text-color has-small-font-size">✓ Satisfait ou remboursé</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->

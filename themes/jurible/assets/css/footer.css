@@ -2,8 +2,13 @@
    FOOTER - Styles for FSE footer template part
    ========================================================================== */
 
+/* Remove default gap before footer template part */
+.wp-block-template-part:has(.site-footer) {
+    margin-top: 0 !important;
+}
+
 .site-footer {
-    margin-top: auto;
+    margin-top: 0;
 }
 
 /* Footer text colors */

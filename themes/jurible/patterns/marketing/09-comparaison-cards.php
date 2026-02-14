@@ -13,7 +13,7 @@
 <div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--lg)">
 
 <!-- wp:paragraph {"align":"center","className":"is-style-tag-secondary"} -->
-<p class="has-text-align-center is-style-tag-secondary">Le changement</p>
+<p class="has-text-align-center is-style-tag-secondary">🔄 Le changement</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"textAlign":"center","level":2} -->

@@ -19,7 +19,7 @@
 <div class="wp-block-column is-vertically-aligned-stretch cta-crosssell__left" style="flex-basis:60%">
 
 <!-- wp:paragraph {"className":"is-style-tag-secondary","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|md"}}}} -->
-<p class="is-style-tag-secondary" style="margin-bottom:var(--wp--preset--spacing--md)">Bon à savoir</p>
+<p class="is-style-tag-secondary" style="margin-bottom:var(--wp--preset--spacing--md)">💡 Bon à savoir</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":2,"textColor":"text-dark"} -->

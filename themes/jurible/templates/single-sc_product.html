@@ -42,7 +42,7 @@
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs","margin":{"bottom":"var:preset|spacing|sm"}}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
 <div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--sm)">
 <!-- wp:image {"width":"44px","height":"44px","scale":"cover","sizeSlug":"full","className":"is-style-rounded"} -->
-<figure class="wp-block-image size-full is-resized is-style-rounded"><img src="/wp-content/themes/jurible/assets/images/team/raphael.jpg" alt="Raphaël Briguet-Lamarre" style="object-fit:cover;width:44px;height:44px"/></figure>
+<figure class="wp-block-image size-full is-resized is-style-rounded"><img src="/wp-content/themes/jurible/assets/images/team/raphael.png" alt="Raphaël Briguet-Lamarre" style="object-fit:cover;width:44px;height:44px"/></figure>
 <!-- /wp:image -->
 <!-- wp:group {"style":{"spacing":{"blockGap":"2px"}},"layout":{"type":"flex","orientation":"vertical"}} -->
 <div class="wp-block-group">
@@ -237,21 +237,59 @@
 <!-- Bandeau réassurance -->
 <!-- wp:pattern {"slug":"jurible/confiance-01-reassurance-full"} /-->
 
+<!-- Solution Grille 4 -->
+<!-- wp:pattern {"slug":"jurible/marketing-03-solution-4-gris"} /-->
+
+<!-- Sommaire / Contenu du produit -->
+<!-- wp:pattern {"slug":"jurible/contenu-12-stats-sommaire"} /-->
+
+<!-- Enseignant -->
+<!-- wp:pattern {"slug":"jurible/equipe-02-enseignant-matiere"} /-->
+
+<!-- Témoignages clients -->
+<!-- wp:pattern {"slug":"jurible/confiance-05-temoignages"} /-->
+
+<!-- Citation auteur -->
+<!-- wp:pattern {"slug":"jurible/equipe-06-citation"} /-->
+
+<!-- FAQ -->
+<!-- wp:pattern {"slug":"jurible/confiance-04-faq"} /-->
+
+<!-- CTA Final -->
+<!-- wp:pattern {"slug":"jurible/commerce-06-cta-final-basique"} /-->
 
 <!-- Produits liés -->
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"muted","layout":{"type":"constrained","contentSize":"1200px"}} -->
-<div class="wp-block-group alignfull has-muted-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
+<!-- wp:group {"align":"full","className":"related-products-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"muted","layout":{"type":"constrained","contentSize":"1200px"}} -->
+<div class="wp-block-group alignfull related-products-section has-muted-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
-<!-- wp:surecart/product-list-related {"limit":null,"query":{"perPage":3,"pages":3,"offset":0,"postType":"sc_product","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"include":[],"sticky":"","related":true,"inherit":true,"taxQuery":null,"parents":[],"taxonomy":"sc_collection","totalPages":3,"fallback":true,"shuffle":true},"metadata":{"categories":["surecart_related_products"],"patternName":"jurible-related-products","name":"Produits liés Jurible"},"align":"wide","layout":{"type":"constrained"}} -->
+<!-- En-tête section -->
+<!-- wp:group {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|lg"}}},"layout":{"type":"constrained","contentSize":"600px"}} -->
+<div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--lg)">
 
-<!-- Titre section -->
-<!-- wp:heading {"textAlign":"center","level":2,"style":{"typography":{"fontWeight":"700"},"spacing":{"margin":{"bottom":"var:preset|spacing|lg"}}},"textColor":"text-dark","fontSize":"heading-2"} -->
-<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color has-heading-2-font-size" style="margin-bottom:var(--wp--preset--spacing--lg);font-weight:700">Vous aimerez aussi</h2>
+<!-- wp:group {"layout":{"type":"flex","justifyContent":"center"}} -->
+<div class="wp-block-group">
+<!-- wp:paragraph {"className":"is-style-tag-secondary"} -->
+<p class="is-style-tag-secondary">Complétez votre formation</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:heading {"textAlign":"center","level":2,"style":{"typography":{"fontWeight":"700"}},"textColor":"text-dark","fontSize":"heading-2"} -->
+<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color has-heading-2-font-size" style="font-weight:700">Vous aimerez <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">aussi</mark></h2>
 <!-- /wp:heading -->
 
-<!-- wp:surecart/product-template {"align":"wide","style":{"spacing":{"blockGap":"var:preset|spacing|md"}},"layout":{"type":"grid","columnCount":3,"minimumColumnWidth":null}} -->
-<!-- wp:group {"style":{"spacing":{"blockGap":"0px","padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"}},"border":{"radius":"var:preset|border-radius|lg","width":"1px"},"dimensions":{"minHeight":"100%"}},"borderColor":"border","backgroundColor":"white","layout":{"type":"default"}} -->
-<div class="wp-block-group has-border-color has-border-border-color has-white-background-color has-background" style="border-width:1px;border-radius:var(--wp--preset--border-radius--lg);min-height:100%;padding:0">
+<!-- wp:paragraph {"align":"center","textColor":"text-gray","fontSize":"body-large"} -->
+<p class="has-text-align-center has-text-gray-color has-text-color has-body-large-font-size">Ressources complémentaires pour approfondir vos connaissances</p>
+<!-- /wp:paragraph -->
+
+</div>
+<!-- /wp:group -->
+
+<!-- wp:surecart/product-list-related {"limit":null,"query":{"perPage":4,"pages":4,"offset":0,"postType":"sc_product","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"include":[],"sticky":"","related":true,"inherit":true,"taxQuery":null,"parents":[],"taxonomy":"sc_collection","totalPages":3,"fallback":true,"shuffle":true},"metadata":{"categories":["surecart_related_products"],"patternName":"jurible-related-products","name":"Produits liés Jurible"},"align":"wide","layout":{"type":"constrained"}} -->
+
+<!-- wp:surecart/product-template {"align":"wide","style":{"spacing":{"blockGap":"var:preset|spacing|md"}},"layout":{"type":"grid","columnCount":4,"minimumColumnWidth":null}} -->
+<!-- wp:group {"className":"card-product","style":{"spacing":{"blockGap":"0","padding":{"top":"0","bottom":"0","left":"0","right":"0"}},"border":{"radius":"var:preset|border-radius|lg","width":"0px"},"dimensions":{"minHeight":"100%"},"shadow":"var:preset|shadow|sm"},"backgroundColor":"white","layout":{"type":"default"}} -->
+<div class="wp-block-group card-product has-white-background-color has-background" style="border-width:0px;border-radius:var(--wp--preset--border-radius--lg);min-height:100%;padding:0;box-shadow:var(--wp--preset--shadow--sm)">
 
 <!-- Image -->
 <!-- wp:cover {"useFeaturedImage":true,"dimRatio":0,"isUserOverlayColor":true,"contentPosition":"top right","isDark":false,"style":{"dimensions":{"aspectRatio":"4/3"},"border":{"radius":{"topLeft":"var:preset|border-radius|lg","topRight":"var:preset|border-radius|lg"}}},"layout":{"type":"default"}} -->
@@ -264,19 +302,24 @@
 <!-- /wp:cover -->
 
 <!-- Infos -->
-<!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|sm","left":"var:preset|spacing|sm","top":"var:preset|spacing|sm","bottom":"var:preset|spacing|sm"},"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"flex","orientation":"vertical"}} -->
-<div class="wp-block-group" style="padding:var(--wp--preset--spacing--sm)">
+<!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|md","left":"var:preset|spacing|md","top":"var:preset|spacing|md","bottom":"var:preset|spacing|md"},"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"flex","orientation":"vertical"}} -->
+<div class="wp-block-group" style="padding:var(--wp--preset--spacing--md)">
 
-<!-- wp:surecart/product-collection-tags {"style":{"spacing":{"margin":{"top":"0px","bottom":"0px"}}}} -->
-<!-- wp:surecart/product-collection-tag {"isLink":false,"style":{"color":{"background":"transparent"},"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"}},"typography":{"fontWeight":"500","letterSpacing":"0.5px","textTransform":"uppercase"}},"textColor":"text-muted","fontSize":"caption"} /-->
+<!-- wp:surecart/product-collection-tags {"style":{"spacing":{"margin":{"top":"0","bottom":"0"}}}} -->
+<!-- wp:surecart/product-collection-tag {"isLink":false,"style":{"color":{"background":"transparent"},"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"},"margin":{"top":"0","bottom":"0"}},"typography":{"fontWeight":"500","letterSpacing":"0.5px","textTransform":"uppercase"}},"textColor":"text-muted","fontSize":"caption"} /-->
 <!-- /wp:surecart/product-collection-tags -->
 
-<!-- wp:surecart/product-title {"level":3,"style":{"typography":{"fontWeight":"600"},"spacing":{"margin":{"top":"0px","bottom":"0px"}}},"textColor":"text-dark","fontSize":"medium"} /-->
+<!-- wp:surecart/product-title {"level":3,"isLink":true,"style":{"typography":{"fontWeight":"600","lineHeight":"1.4"},"spacing":{"margin":{"top":"0","bottom":"0"}}},"textColor":"text-dark","fontSize":"medium"} /-->
 
-<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs","margin":{"top":"0px","bottom":"0px"}}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<div class="wp-block-group" style="margin:0">
-<!-- wp:surecart/product-list-price {"style":{"typography":{"fontWeight":"700"},"spacing":{"margin":{"bottom":"0px","top":"0px"}}},"textColor":"text-dark","fontSize":"medium"} /-->
-<!-- wp:surecart/product-scratch-price {"style":{"typography":{"fontWeight":"400","textDecoration":"line-through"},"spacing":{"margin":{"bottom":"0px","top":"0px"}}},"textColor":"text-muted","fontSize":"small"} /-->
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs","margin":{"top":"var:preset|spacing|xs","bottom":"0"}}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center","justifyContent":"space-between"}} -->
+<div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--xs);margin-bottom:0">
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
+<div class="wp-block-group">
+<!-- wp:surecart/product-list-price {"style":{"typography":{"fontWeight":"700"},"spacing":{"margin":{"bottom":"0","top":"0"}}},"textColor":"primary","fontSize":"body-large"} /-->
+<!-- wp:surecart/product-scratch-price {"style":{"typography":{"fontWeight":"400","textDecoration":"line-through"},"spacing":{"margin":{"bottom":"0","top":"0"}}},"textColor":"text-muted","fontSize":"small"} /-->
+</div>
+<!-- /wp:group -->
+<!-- wp:surecart/product-buy-button {"add_to_cart":true,"text":"🛒","className":"is-style-outline","textColor":"secondary","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"var:preset|spacing|xs","bottom":"var:preset|spacing|xs","left":"var:preset|spacing|xs","right":"var:preset|spacing|xs"}},"border":{"radius":"var:preset|border-radius|md","color":"var:preset|color|secondary"}}} /-->
 </div>
 <!-- /wp:group -->
 
@@ -289,10 +332,16 @@
 
 <!-- /wp:surecart/product-list-related -->
 
+<!-- Bouton voir tous -->
+<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|lg"}}}} -->
+<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--lg)">
+<!-- wp:button {"className":"is-style-outline"} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/boutique">Voir tous les produits →</a></div>
+<!-- /wp:button -->
+</div>
+<!-- /wp:buttons -->
+
 </div>
 <!-- /wp:group -->
-
-<!-- CTA Final -->
-<!-- wp:pattern {"slug":"jurible/commerce-06-cta-final-basique"} /-->
 
 <!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

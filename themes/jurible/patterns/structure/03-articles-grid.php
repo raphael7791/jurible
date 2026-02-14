@@ -16,7 +16,7 @@
 <div class="wp-block-group">
 
 <!-- wp:paragraph {"align":"center","className":"is-style-tag-secondary"} -->
-<p class="has-text-align-center is-style-tag-secondary">Tous les articles</p>
+<p class="has-text-align-center is-style-tag-secondary">📰 Tous les articles</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->

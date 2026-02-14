@@ -16,7 +16,7 @@
 <div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--lg)">
 
 <!-- wp:paragraph {"align":"center","className":"is-style-tag-secondary"} -->
-<p class="has-text-align-center is-style-tag-secondary">Nos offres</p>
+<p class="has-text-align-center is-style-tag-secondary">💰 Nos offres</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->

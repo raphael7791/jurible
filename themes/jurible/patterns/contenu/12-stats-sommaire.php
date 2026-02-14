@@ -9,14 +9,18 @@
 <!-- wp:group {"align":"full","className":"contenu-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull contenu-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
-<!-- wp:group {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|lg"}}},"layout":{"type":"flex","orientation":"vertical"}} -->
+<!-- wp:group {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|lg"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--lg)">
+<!-- wp:group {"layout":{"type":"flex","justifyContent":"center"}} -->
+<div class="wp-block-group">
 <!-- wp:paragraph {"className":"is-style-tag-secondary"} -->
 <p class="is-style-tag-secondary">📦 Contenu</p>
 <!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
 
-<!-- wp:heading {"textColor":"text-dark"} -->
-<h2 class="wp-block-heading has-text-dark-color has-text-color">Tout le programme de <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">Droit Constitutionnel</mark></h2>
+<!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->
+<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Tout le programme de <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">Droit Constitutionnel</mark></h2>
 <!-- /wp:heading -->
 </div>
 <!-- /wp:group -->

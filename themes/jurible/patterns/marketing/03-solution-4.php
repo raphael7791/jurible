@@ -16,7 +16,7 @@
 <div class="wp-block-group">
 
 <!-- wp:paragraph {"align":"center","className":"is-style-tag-secondary"} -->
-<p class="has-text-align-center is-style-tag-secondary">La solution</p>
+<p class="has-text-align-center is-style-tag-secondary">💡 La solution</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->
