@@ -35,6 +35,18 @@
 	border-radius: var(--wp--custom--border-radius--full);
 }
 
+/* Photo de groupe wrapper - border-radius */
+.equipe-teaser__photo-wrapper {
+	border-radius: var(--wp--preset--border-radius--lg);
+	overflow: hidden;
+}
+
+/* Photo de groupe - sans bordure */
+.equipe-teaser__photo img {
+	border: none !important;
+	border-radius: 0 !important;
+}
+
 /* ==========================================================================
    ENSEIGNANT SPÉCIFIQUE - Avatar et liste
    ========================================================================== */
@@ -203,7 +215,8 @@
 .enseignant-section h2 mark,
 .equipe-teaser-section h2 mark,
 .equipe-video-section h2 mark,
-.equipe-grille-section h2 mark {
+.equipe-grille-section h2 mark,
+.related-products-section h2 mark {
 	background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;

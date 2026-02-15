@@ -144,14 +144,14 @@
 <!-- wp:list {"className":"contenu-fiche__theme-items","style":{"typography":{"fontSize":"13px"},"spacing":{"padding":{"left":"0"}}},"textColor":"text-gray"} -->
 <ul class="contenu-fiche__theme-items has-text-gray-color has-text-color" style="padding-left:0;font-size:13px">
 <li>Fiche n°4 - La notion de souveraineté</li>
-<li>Fiche n°5 - Les modes d'exercices du pouvoir</li>
+<li>Fiche n°5 - Les modes d'exercice du pouvoir</li>
 </ul>
 <!-- /wp:list -->
 </div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"contenu-fiche__theme","layout":{"type":"default"}} -->
-<div class="wp-block-group contenu-fiche__theme">
+<!-- wp:group {"className":"contenu-fiche__theme","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|md"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group contenu-fiche__theme" style="margin-bottom:var(--wp--preset--spacing--md)">
 <!-- wp:paragraph {"className":"contenu-fiche__theme-title","style":{"typography":{"fontSize":"13px","fontWeight":"600","textTransform":"uppercase"}},"textColor":"primary"} -->
 <p class="contenu-fiche__theme-title has-primary-color has-text-color" style="font-size:13px;font-weight:600;text-transform:uppercase">Thème 3 — Les fondements du pouvoir</p>
 <!-- /wp:paragraph -->
@@ -164,6 +164,47 @@
 <!-- /wp:list -->
 </div>
 <!-- /wp:group -->
+
+<!-- wp:details {"className":"contenu-fiche__accordion","style":{"spacing":{"margin":{"top":"var:preset|spacing|md"}}}} -->
+<details class="wp-block-details contenu-fiche__accordion" style="margin-top:var(--wp--preset--spacing--md)">
+<summary>Voir le sommaire complet des fiches</summary>
+<!-- wp:group {"className":"contenu-fiche__theme","style":{"spacing":{"margin":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group contenu-fiche__theme" style="margin-top:var(--wp--preset--spacing--md);margin-bottom:var(--wp--preset--spacing--md)">
+<!-- wp:paragraph {"className":"contenu-fiche__theme-title","style":{"typography":{"fontSize":"13px","fontWeight":"600","textTransform":"uppercase"}},"textColor":"primary"} -->
+<p class="contenu-fiche__theme-title has-primary-color has-text-color" style="font-size:13px;font-weight:600;text-transform:uppercase">Thème 4 — L'organisation des pouvoirs</p>
+<!-- /wp:paragraph -->
+<!-- wp:list {"className":"contenu-fiche__theme-items","style":{"typography":{"fontSize":"13px"},"spacing":{"padding":{"left":"0"}}},"textColor":"text-gray"} -->
+<ul class="contenu-fiche__theme-items has-text-gray-color has-text-color" style="padding-left:0;font-size:13px">
+<li>Fiche n°9 - La séparation des pouvoirs</li>
+<li>Fiche n°10 - Le régime présidentiel</li>
+<li>Fiche n°11 - Le régime parlementaire</li>
+<li>Fiche n°12 - Les régimes mixtes</li>
+</ul>
+<!-- /wp:list -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"contenu-fiche__theme","layout":{"type":"default"}} -->
+<div class="wp-block-group contenu-fiche__theme">
+<!-- wp:paragraph {"className":"contenu-fiche__theme-title","style":{"typography":{"fontSize":"13px","fontWeight":"600","textTransform":"uppercase"}},"textColor":"primary"} -->
+<p class="contenu-fiche__theme-title has-primary-color has-text-color" style="font-size:13px;font-weight:600;text-transform:uppercase">Thème 5 — La Ve République</p>
+<!-- /wp:paragraph -->
+<!-- wp:list {"className":"contenu-fiche__theme-items","style":{"typography":{"fontSize":"13px"},"spacing":{"padding":{"left":"0"}}},"textColor":"text-gray"} -->
+<ul class="contenu-fiche__theme-items has-text-gray-color has-text-color" style="padding-left:0;font-size:13px">
+<li>Fiche n°13 - Les origines de la Ve République</li>
+<li>Fiche n°14 - Le Président de la République</li>
+<li>Fiche n°15 - Le Gouvernement</li>
+<li>Fiche n°16 - Le Parlement</li>
+<li>Fiche n°17 - Le Conseil constitutionnel</li>
+<li>Fiche n°18 - Les rapports entre les pouvoirs</li>
+<li>Fiche n°19 - Le bloc de constitutionnalité</li>
+<li>Fiche n°20 - Les droits et libertés fondamentaux</li>
+</ul>
+<!-- /wp:list -->
+</div>
+<!-- /wp:group -->
+</details>
+<!-- /wp:details -->
 
 </div>
 <!-- /wp:group -->

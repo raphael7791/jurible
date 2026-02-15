@@ -191,8 +191,8 @@
    Styles typographiques pour le contenu des articles de blog
    ========================================================================== */
 
-/* H2 */
-.editor-styles-wrapper .wp-block-heading:where(h2) {
+/* H2 - Only for single post content */
+.editor-styles-wrapper .single-post-content .wp-block-heading:where(h2) {
     font-size: 1.375rem;
     font-weight: 600;
     line-height: 1.4;
@@ -200,7 +200,7 @@
     margin-bottom: clamp(18px, 4vw, 26px);
 }
 
-.editor-styles-wrapper .wp-block-heading:where(h2)::after {
+.editor-styles-wrapper .single-post-content .wp-block-heading:where(h2)::after {
     content: '';
     display: block;
     width: 60px;

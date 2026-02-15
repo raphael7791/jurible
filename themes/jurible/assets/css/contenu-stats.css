@@ -60,3 +60,64 @@
         font-size: 12px !important;
     }
 }
+
+/* =====================================================
+   SOMMAIRE ACCORDION (wp:details native block)
+   ===================================================== */
+
+.contenu-fiche__accordion {
+    border: none;
+}
+
+.contenu-fiche__accordion > summary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--wp--preset--spacing--xs);
+    padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
+    background: var(--wp--preset--color--primary);
+    color: var(--wp--preset--color--white);
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 600;
+    border-radius: var(--wp--preset--border-radius--md);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    list-style: none;
+}
+
+.contenu-fiche__accordion > summary::-webkit-details-marker {
+    display: none;
+}
+
+.contenu-fiche__accordion > summary::after {
+    content: " ↓";
+}
+
+.contenu-fiche__accordion[open] > summary::after {
+    content: " ↑";
+}
+
+.contenu-fiche__accordion > summary:hover {
+    background: var(--wp--preset--color--primary-hover);
+    transform: translateY(-1px);
+}
+
+/* Spacing between summary and content */
+.contenu-fiche__accordion > summary + .wp-block-group {
+    margin-top: var(--wp--preset--spacing--md) !important;
+}
+
+/* Animation on open */
+.contenu-fiche__accordion[open] > .wp-block-group {
+    animation: accordionSlide 0.3s ease;
+}
+
+@keyframes accordionSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
