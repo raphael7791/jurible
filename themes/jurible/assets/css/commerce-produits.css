@@ -58,3 +58,82 @@
     text-overflow: ellipsis;
     min-height: 4.2em; /* 3 lines × 1.4 line-height */
 }
+
+/* ==========================================================================
+   Add to Cart Button - Related Products
+   ========================================================================== */
+
+.card-product__add-btn {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.card-product__add-btn sc-product-buy-button,
+.card-product__add-btn sc-button,
+.card-product__add-btn button,
+.card-product__add-btn .wp-block-button__link,
+.card-product__add-btn .wp-element-button,
+.card-product__add-btn a {
+    background: var(--wp--preset--color--white) !important;
+    color: var(--wp--preset--color--text-dark) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: var(--wp--preset--border-radius--full) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.card-product__add-btn:hover sc-button,
+.card-product__add-btn:hover button,
+.card-product__add-btn:hover .wp-block-button__link,
+.card-product__add-btn:hover .wp-element-button,
+.card-product__add-btn:hover a {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ==========================================================================
+   Related Products - Mobile Grid (2 columns)
+   ========================================================================== */
+
+@media (max-width: 781px) {
+    /* Force 2 columns on mobile */
+    .related-products-section .wp-block-surecart-product-template {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: var(--wp--preset--spacing--sm) !important;
+    }
+
+    /* Uniform card height */
+    .related-products-section .card-product {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    /* Let info section grow to push content evenly */
+    .related-products-section .card-product > .wp-block-group:last-child {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Push price to bottom */
+    .related-products-section .card-product > .wp-block-group:last-child > .wp-block-group:last-child {
+        margin-top: auto;
+    }
+
+    /* Smaller image aspect ratio on mobile */
+    .related-products-section .card-product .wp-block-cover {
+        aspect-ratio: 1/1 !important;
+    }
+
+    /* Smaller text on mobile */
+    .related-products-section .card-product h3 {
+        font-size: var(--wp--preset--font-size--small) !important;
+        min-height: 3.6em; /* 3 lines */
+    }
+}

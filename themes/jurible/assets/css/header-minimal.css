@@ -1,0 +1,82 @@
+/**
+ * Header Minimal
+ * Styles spécifiques pour header-minimal (utilise site-header comme base)
+ */
+
+/* ==========================================================================
+   OVERRIDES HEADER MINIMAL
+   ========================================================================== */
+
+/* Toujours afficher les actions sur header minimal (même mobile) */
+.site-header--minimal .site-header__actions {
+	display: flex !important;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	margin-left: auto;
+}
+
+/* Pas de burger sur header minimal */
+.site-header--minimal .site-header__burger {
+	display: none !important;
+}
+
+/* ==========================================================================
+   LIEN BOUTIQUE
+   ========================================================================== */
+
+.header-minimal__back {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	color: var(--wp--preset--color--text-dark);
+	text-decoration: none;
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 500;
+	transition: color 0.15s ease;
+}
+
+.header-minimal__back:hover {
+	color: var(--wp--preset--color--secondary);
+}
+
+.header-minimal__back-arrow {
+	display: inline-block;
+	transition: transform 0.15s ease;
+}
+
+.header-minimal__back:hover .header-minimal__back-arrow {
+	transform: translateX(-3px);
+}
+
+/* ==========================================================================
+   PAIEMENT SÉCURISÉ (Variante Checkout)
+   ========================================================================== */
+
+.header-minimal__secure {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	color: var(--wp--preset--color--text-muted);
+	font-size: var(--wp--preset--font-size--caption);
+	font-weight: 500;
+}
+
+.header-minimal__secure svg {
+	color: var(--wp--preset--color--text-muted);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 782px) {
+	/* Garder les actions visibles sur mobile */
+	.site-header--minimal .site-header__actions {
+		display: flex !important;
+	}
+
+
+	.header-minimal__secure {
+		font-size: var(--wp--preset--font-size--caption);
+	}
+}

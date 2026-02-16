@@ -1,0 +1,101 @@
+/**
+ * Footer Minimal
+ * Version minimaliste pour landing, produits, catalogue
+ */
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+.footer-minimal,
+.wp-block-template-part:has(.footer-minimal) {
+	margin-top: 0 !important;
+}
+
+/* ==========================================================================
+   LOGO
+   ========================================================================== */
+
+.footer-minimal__logo {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.footer-minimal__logo:hover {
+	opacity: 0.8;
+}
+
+.footer-minimal__logo img {
+	height: 24px;
+	width: auto;
+}
+
+/* ==========================================================================
+   LIENS LÉGAUX
+   ========================================================================== */
+
+.footer-minimal__legal {
+	flex: 1;
+	justify-content: center;
+}
+
+.footer-minimal__legal p {
+	margin: 0 !important;
+}
+
+.footer-minimal__legal a {
+	color: rgba(255, 255, 255, 0.5);
+	text-decoration: none;
+	font-size: 13px;
+	transition: color 0.15s ease;
+}
+
+.footer-minimal__legal a:hover {
+	color: #ffffff;
+}
+
+/* Séparateurs dots */
+.footer-minimal__separator {
+	width: 3px;
+	height: 3px;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: var(--wp--preset--border-radius--full);
+	flex-shrink: 0;
+}
+
+/* ==========================================================================
+   COPYRIGHT
+   ========================================================================== */
+
+.footer-minimal__copyright {
+	color: rgba(255, 255, 255, 0.4) !important;
+	font-size: 13px !important;
+	flex-shrink: 0;
+	margin: 0 !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 782px) {
+	.footer-minimal > .wp-block-group {
+		flex-direction: column !important;
+		text-align: center;
+		gap: var(--wp--preset--spacing--sm) !important;
+	}
+
+	.footer-minimal__logo {
+		font-size: 18px;
+	}
+
+	.footer-minimal__legal {
+		gap: var(--wp--preset--spacing--sm) !important;
+	}
+
+	.footer-minimal__legal a,
+	.footer-minimal__copyright {
+		font-size: 12px !important;
+	}
+}

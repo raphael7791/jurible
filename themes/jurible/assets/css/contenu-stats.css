@@ -2,6 +2,22 @@
  * P13 - Stats Section
  */
 
+/* =====================================================
+   SOMMAIRE HEADER ALIGNMENT
+   ===================================================== */
+
+.contenu-fiche__right > h3 {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+}
+
+/* Separate icon from text for better alignment */
+.contenu-fiche__right > h3::before {
+	content: "☰";
+	line-height: 1;
+}
+
 /* Grid margin reset */
 .section-stats__grid {
     margin: 0 !important;

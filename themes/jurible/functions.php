@@ -546,6 +546,79 @@ function jurible_enqueue_footer_assets()
 add_action("wp_enqueue_scripts", "jurible_enqueue_footer_assets");
 
 
+# CSS Footer Minimal
+function jurible_enqueue_footer_minimal_assets()
+{
+    wp_enqueue_style(
+        "jurible-footer-minimal",
+        get_template_directory_uri() . "/assets/css/footer-minimal.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/footer-minimal.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_footer_minimal_assets");
+
+
+# CSS Header Minimal
+function jurible_enqueue_header_minimal_assets()
+{
+    wp_enqueue_style(
+        "jurible-header-minimal",
+        get_template_directory_uri() . "/assets/css/header-minimal.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/header-minimal.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_header_minimal_assets");
+
+
+# Shortcode Header Minimal (avec panier)
+function jurible_header_minimal_shortcode()
+{
+    ob_start();
+    ?>
+    <header class="site-header site-header--minimal">
+        <div class="site-header__inner">
+            <a href="<?php echo esc_url(home_url('/')); ?>" class="site-header__logo">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.svg'); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="site-header__logo-img">
+            </a>
+            <div class="site-header__actions">
+                <a href="/boutique" class="header-minimal__back">
+                    <span class="header-minimal__back-arrow">←</span>
+                    <span class="header-minimal__back-text">Boutique</span>
+                </a>
+                <?php echo do_blocks('<!-- wp:surecart/cart-menu-icon --><div class="wp-block-surecart-cart-menu-icon"><!-- wp:surecart/cart-icon /--></div><!-- /wp:surecart/cart-menu-icon -->'); ?>
+            </div>
+        </div>
+    </header>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('jurible_header_minimal', 'jurible_header_minimal_shortcode');
+
+
+# Shortcode Header Minimal Checkout (paiement sécurisé)
+function jurible_header_minimal_checkout_shortcode()
+{
+    ob_start();
+    ?>
+    <header class="site-header site-header--minimal site-header--checkout">
+        <div class="site-header__inner">
+            <a href="<?php echo esc_url(home_url('/')); ?>" class="site-header__logo">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.svg'); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="site-header__logo-img">
+            </a>
+            <span class="header-minimal__secure">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                Paiement sécurisé
+            </span>
+        </div>
+    </header>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('jurible_header_minimal_checkout', 'jurible_header_minimal_checkout_shortcode');
+
+
 # Shortcode pour afficher le header avec navigation
 function jurible_header_shortcode()
 {

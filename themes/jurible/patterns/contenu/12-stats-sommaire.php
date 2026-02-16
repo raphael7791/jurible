@@ -118,7 +118,7 @@
 <div class="wp-block-group contenu-fiche__right has-muted-background-color has-background" style="border-radius:12px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"15px","fontWeight":"600"},"spacing":{"margin":{"bottom":"var:preset|spacing|md"}}},"textColor":"text-dark"} -->
-<h3 class="wp-block-heading has-text-dark-color has-text-color" style="margin-bottom:var(--wp--preset--spacing--md);font-size:15px;font-weight:600">☰ Sommaire des fiches</h3>
+<h3 class="wp-block-heading has-text-dark-color has-text-color" style="margin-bottom:var(--wp--preset--spacing--md);font-size:15px;font-weight:600">Sommaire des fiches</h3>
 <!-- /wp:heading -->
 
 <!-- wp:group {"className":"contenu-fiche__theme","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|md"}}},"layout":{"type":"default"}} -->
