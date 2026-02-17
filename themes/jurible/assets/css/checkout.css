@@ -1,0 +1,86 @@
+/**
+ * Checkout Page Styles
+ */
+
+/* ==========================================================================
+   STEPS BAR
+   ========================================================================== */
+
+.checkout-step {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.checkout-step__number {
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	border: 2px solid var(--wp--preset--color--border);
+	font-size: 11px;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	margin: 0;
+	color: var(--wp--preset--color--text-muted);
+	background: var(--wp--preset--color--white);
+}
+
+.checkout-step__label {
+	margin: 0;
+	font-weight: 500;
+	color: var(--wp--preset--color--text-muted);
+}
+
+/* Active step */
+.checkout-step.is-active .checkout-step__number {
+	background: var(--wp--preset--color--text-dark);
+	color: var(--wp--preset--color--white);
+	border-color: var(--wp--preset--color--text-dark);
+}
+
+.checkout-step.is-active .checkout-step__label {
+	color: var(--wp--preset--color--text-dark);
+	font-weight: 700;
+}
+
+/* Done step */
+.checkout-step.is-done .checkout-step__number {
+	background: var(--wp--preset--color--success);
+	color: var(--wp--preset--color--white);
+	border-color: var(--wp--preset--color--success);
+}
+
+.checkout-step.is-done .checkout-step__label {
+	color: var(--wp--preset--color--success);
+}
+
+/* Step line separator */
+.checkout-step__line {
+	width: 40px;
+	height: 2px;
+	background: var(--wp--preset--color--border);
+	border: none;
+	margin: 0 8px;
+	flex-shrink: 0;
+}
+
+.checkout-step__line.is-done {
+	background: var(--wp--preset--color--success);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 782px) {
+	.checkout-step__label {
+		display: none;
+	}
+
+	.checkout-step__line {
+		width: 24px;
+	}
+}

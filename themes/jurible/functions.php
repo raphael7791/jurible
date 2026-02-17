@@ -605,10 +605,10 @@ function jurible_header_minimal_checkout_shortcode()
     <header class="site-header site-header--minimal site-header--checkout">
         <div class="site-header__inner">
             <a href="<?php echo esc_url(home_url('/')); ?>" class="site-header__logo">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.svg'); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="site-header__logo-img">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.svg'); ?>" alt="Jurible" class="site-header__logo-img" width="120" height="32">
             </a>
             <span class="header-minimal__secure">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 Paiement sécurisé
             </span>
         </div>
@@ -1173,4 +1173,18 @@ function jurible_enqueue_single_post_typography()
     }
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_single_post_typography");
+
+
+# Charger le CSS de la page checkout
+function jurible_enqueue_checkout_assets()
+{
+    wp_enqueue_style(
+        "jurible-checkout",
+        get_template_directory_uri() . "/assets/css/checkout.css",
+        [],
+        filemtime(get_template_directory() . "/assets/css/checkout.css")
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_checkout_assets");
+add_action("enqueue_block_assets", "jurible_enqueue_checkout_assets");
 
