@@ -8,6 +8,9 @@ Documentation complète du projet WordPress Full Site Editing pour jurible.com e
 
 ```
 jurible/
+├── languages/
+│   └── loco/
+│       └── plugins/          ← Traductions custom (Loco Translate)
 ├── themes/
 │   ├── jurible/              ← Thème parent (utilisé par les 2 sites)
 │   │   ├── theme.json        ← Design tokens (couleurs, typos, espacements)
@@ -163,6 +166,10 @@ rm -rf ~/ecole.jurible.com/wp-content/plugins/jurible-blocks-react
 cp -r plugins/jurible-blocks-react ~/jurible.com/wp-content/plugins/
 cp -r plugins/jurible-blocks-react ~/ecole.jurible.com/wp-content/plugins/
 
+# Copier les traductions
+cp -r languages/loco ~/jurible.com/wp-content/languages/
+cp -r languages/loco ~/ecole.jurible.com/wp-content/languages/
+
 # Si tu as modifié d'autres plugins (ecole uniquement) :
 # rm -rf ~/ecole.jurible.com/wp-content/plugins/jurible-flashcards
 # cp -r plugins/jurible-flashcards ~/ecole.jurible.com/wp-content/plugins/
@@ -245,9 +252,53 @@ Les blocs standards sont rendus compatibles Fluent via le `functions.php` du th�
 | Template Parts | ✅ Oui | Fichier |
 | Custom Blocks | ✅ Oui | Fichier |
 | **Logos et favicons** | ✅ Oui | `assets/images/` |
+| **Traductions (Loco)** | ✅ Oui | `languages/loco/plugins/` |
 | **Contenu des pages/articles** | ❌ Non | Base de données |
 | **Médias uploadés** | ❌ Non | `wp-content/uploads/` |
 | **Modifications via l'éditeur de site** | ❌ Non | Base de données |
+
+---
+
+## 🌐 Traductions (Loco Translate)
+
+Les traductions de plugins (ex: SureCart) sont gérées via **Loco Translate** et stockées dans le dossier `languages/loco/plugins/` du repo.
+
+### Emplacements Loco Translate
+
+| Emplacement | Chemin | Sécurité |
+|---|---|---|
+| **Personnalisé (Custom)** ✅ | `wp-content/languages/loco/plugins/` | Jamais écrasé par les mises à jour |
+| Système ⚠️ | `wp-content/languages/plugins/` | Peut être écrasé par WordPress |
+| Auteur ❌ | `wp-content/plugins/[plugin]/languages/` | Écrasé à chaque mise à jour du plugin |
+
+> **IMPORTANT** : Toujours utiliser l'emplacement **Personnalisé** dans Loco Translate pour que les traductions ne soient jamais écrasées.
+
+### Fichiers versionnés
+
+```
+languages/
+└── loco/
+    └── plugins/
+        ├── surecart-fr_FR.po        ← Fichier source (éditable dans Loco)
+        ├── surecart-fr_FR.mo        ← Fichier compilé (utilisé par WordPress)
+        ├── surecart-fr_FR.json      ← Traductions JS (blocs React)
+        └── surecart-fr_FR.l10n.php  ← Cache PHP
+```
+
+### Workflow pour modifier une traduction
+
+1. Modifier via **Loco Translate** sur le site local (emplacement **Personnalisé**)
+2. Copier les fichiers mis à jour dans `~/Code/jurible/languages/loco/plugins/`
+3. Commit + push
+4. Déployer sur le serveur (git pull + copie)
+
+### Configuration Loco Translate
+
+- Installer Loco Translate sur chaque site (local + live)
+- Dans **Loco Translate → Réglages** : mettre l'emplacement par défaut sur **Personnalisé**
+- Ne jamais éditer les traductions en emplacement "Système" ou "Auteur"
+
+---
 
 ### 🖼️ Pourquoi les logos sont dans le thème ?
 
