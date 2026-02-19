@@ -1,6 +1,6 @@
 /*
  * Jurible Design System pour Fluent Community
- * Réplique les variables du theme.json
+ * Réplique les variables du theme.json (WordPress + Jurible)
  */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
@@ -10,29 +10,127 @@ html {
 }
 
 :root {
+    /* ============================================
+       VARIABLES WORDPRESS (--wp--preset--)
+       Utilisées par jurible-blocks-react
+       ============================================ */
+
+    /* Couleurs WordPress */
+    --wp--preset--color--black: #000000;
+    --wp--preset--color--white: #FFFFFF;
+    --wp--preset--color--primary: #B0001D;
+    --wp--preset--color--primary-hover: #DC2626;
+    --wp--preset--color--secondary: #7C3AED;
+    --wp--preset--color--secondary-hover: #6D28D9;
+    --wp--preset--color--secondary-bg: #EDE9FE;
+    --wp--preset--color--background: #F9FAFB;
+    --wp--preset--color--muted: #F3F4F6;
+    --wp--preset--color--border: #E5E7EB;
+    --wp--preset--color--border-muted: #D1D5DB;
+    --wp--preset--color--text-dark: #1A1A1A;
+    --wp--preset--color--text-gray: #4A4A4A;
+    --wp--preset--color--text-muted: #9CA3AF;
+    --wp--preset--color--info: #3B82F6;
+    --wp--preset--color--info-bg: #EFF6FF;
+    --wp--preset--color--info-text: #1E40AF;
+    --wp--preset--color--success: #10B981;
+    --wp--preset--color--success-bg: #ECFDF5;
+    --wp--preset--color--success-text: #065F46;
+    --wp--preset--color--warning: #F59E0B;
+    --wp--preset--color--warning-bg: #FFFBEB;
+    --wp--preset--color--warning-text: #92400E;
+    --wp--preset--color--error: #EF4444;
+    --wp--preset--color--error-bg: #FEF2F2;
+    --wp--preset--color--error-text: #991B1B;
+    --wp--preset--color--accent: #7C3AED;
+    --wp--preset--color--accent-bg: #F5F3FF;
+    --wp--preset--color--accent-text: #5B21B6;
+
+    /* Espacements WordPress */
+    --wp--preset--spacing--xs: 0.5rem;
+    --wp--preset--spacing--sm: 1rem;
+    --wp--preset--spacing--md: 1.5rem;
+    --wp--preset--spacing--lg: 2rem;
+    --wp--preset--spacing--xl: 3rem;
+
+    /* Typographie WordPress - Font Family */
+    --wp--preset--font-family--poppins: 'Poppins', sans-serif;
+
+    /* Typographie WordPress - Font Sizes */
+    --wp--preset--font-size--caption: 0.75rem;
+    --wp--preset--font-size--small: 0.875rem;
+    --wp--preset--font-size--medium: 1rem;
+    --wp--preset--font-size--body: 1rem;
+    --wp--preset--font-size--body-large: 1.125rem;
+    --wp--preset--font-size--heading-4: 1.25rem;
+    --wp--preset--font-size--heading-3: clamp(1.25rem, 1rem + 1.25vw, 1.875rem);
+    --wp--preset--font-size--heading-2: clamp(1.75rem, 1.5rem + 1.5vw, 2.5rem);
+    --wp--preset--font-size--heading-1: clamp(2rem, 1.5rem + 2vw, 3rem);
+    --wp--preset--font-size--key-numbers: clamp(2rem, 1.5rem + 2vw, 3rem);
+
+    /* Ombres WordPress */
+    --wp--preset--shadow--xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --wp--preset--shadow--sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --wp--preset--shadow--md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    --wp--preset--shadow--lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+    --wp--preset--shadow--xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+    --wp--preset--shadow--cta: 0 4px 14px rgba(176, 0, 29, 0.25);
+    --wp--preset--shadow--cta-hover: 0 6px 20px rgba(176, 0, 29, 0.35);
+    --wp--preset--shadow--accent: 0 4px 14px rgba(124, 58, 237, 0.25);
+    --wp--preset--shadow--accent-hover: 0 6px 20px rgba(124, 58, 237, 0.35);
+
+    /* Gradients WordPress */
+    --wp--preset--gradient--cta-gradient: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+
+    /* ============================================
+       VARIABLES CUSTOM WORDPRESS (--wp--custom--)
+       ============================================ */
+
+    /* Line Heights */
+    --wp--custom--line-height--heading: 1.2;
+    --wp--custom--line-height--subheading: 1.4;
+    --wp--custom--line-height--body: 1.6;
+
+    /* Border Radius */
+    --wp--custom--border-radius--xs: 4px;
+    --wp--custom--border-radius--sm: 6px;
+    --wp--custom--border-radius--md: 8px;
+    --wp--custom--border-radius--lg: 12px;
+    --wp--custom--border-radius--full: 9999px;
+
+    /* Transitions */
+    --wp--custom--transition--fast: 0.1s ease;
+    --wp--custom--transition--default: 0.15s ease;
+    --wp--custom--transition--slow: 0.3s ease;
+
+    /* ============================================
+       VARIABLES JURIBLE LEGACY (--jurible--)
+       Pour compatibilité avec l'ancien code
+       ============================================ */
+
     /* === COULEURS === */
     --jurible-primary: #B0001D;
     --jurible-primary-hover: #DC2626;
     --jurible-secondary: #7C3AED;
     --jurible-secondary-hover: #6D28D9;
-    
+
     --jurible-background: #FFFFFF;
     --jurible-muted: #F3F4F6;
     --jurible-border: #E5E7EB;
     --jurible-border-muted: #D1D5DB;
-    
+
     --jurible-text-dark: #1A1A1A;
     --jurible-text-gray: #4A4A4A;
     --jurible-text-muted: #9CA3AF;
-    
+
     --jurible-success: #10B981;
     --jurible-warning: #F59E0B;
     --jurible-error: #EF4444;
     --jurible-info: #3B82F6;
-    
+
     /* === TYPOGRAPHIE === */
     --jurible-font-family: 'Poppins', sans-serif;
-    
+
     --jurible-font-size-small: 0.875rem;
     --jurible-font-size-medium: 1rem;
     --jurible-font-size-body: 1rem;
@@ -43,27 +141,27 @@ html {
     --jurible-font-size-h3: 1.125rem;
     --jurible-font-size-h2: 1.375rem;
     --jurible-font-size-h1: 1.75rem;
-    
+
     --jurible-line-height-tight: 1.2;
     --jurible-line-height-normal: 1.5;
     --jurible-line-height-relaxed: 1.6;
     --jurible-line-height-h2: 1.4;
     --jurible-line-height-p: 1.575;
-    
+
     /* === ESPACEMENTS === */
     --jurible-spacing-xs: 0.5rem;
     --jurible-spacing-s: 1rem;
     --jurible-spacing-m: 1.5rem;
     --jurible-spacing-l: 2rem;
     --jurible-spacing-xl: 3rem;
-    
+
     /* === BORDURES === */
     --jurible-radius-xs: 4px;
     --jurible-radius-s: 6px;
     --jurible-radius-m: 8px;
     --jurible-radius-l: 12px;
     --jurible-radius-xl: 16px;
-    
+
     /* === OMBRES === */
     --jurible-shadow-cta: 0 2px 8px rgba(176,0,29,0.25);
     --jurible-shadow-cta-hover: 0 4px 12px rgba(176,0,29,0.35);
@@ -317,11 +415,20 @@ html {
    ============================================ */
 
 html.dark {
+    /* Variables WordPress pour le mode sombre */
+    --wp--preset--color--background: var(--el-bg-color, #141414);
+    --wp--preset--color--muted: var(--el-bg-color-overlay, #1d1e1f);
+    --wp--preset--color--border: #2d2d2f;
+    --wp--preset--color--border-muted: #3d3d3f;
+    --wp--preset--color--text-dark: #F3F4F6;
+    --wp--preset--color--text-gray: #E5E7EB;
+
+    /* Variables Jurible legacy pour le mode sombre */
     --jurible-background: var(--el-bg-color, #141414);
     --jurible-muted: var(--el-bg-color-overlay, #1d1e1f);
     --jurible-border: #2d2d2f;
     --jurible-border-muted: #3d3d3f;
-    
+
     --jurible-text-dark: #F3F4F6;
     --jurible-text-gray: #E5E7EB;
     --jurible-text-muted: #9CA3AF;
