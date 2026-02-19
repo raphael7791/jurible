@@ -86,6 +86,11 @@ add_action('fluent_community/portal_head', function() {
             });
         }, true);
 
+        // CSS: checkbox coché en noir
+        const style = document.createElement('style');
+        style.textContent = '.fcom_question_option .el-checkbox.is-checked .el-checkbox__inner { background-color: #1A1A1A !important; border-color: #1A1A1A !important; }';
+        document.head.appendChild(style);
+
         console.log('FC 2.2.0 quiz checkbox fix loaded');
     })();
 
