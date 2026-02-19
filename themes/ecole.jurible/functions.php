@@ -12,6 +12,15 @@
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
 
+/*
+ * ===========================================
+ * TEST FC 2.2.0 : Code workaround commenté
+ * Si FC charge maintenant les blocs nativement via Gutenberg,
+ * ce code n'est plus nécessaire.
+ * ===========================================
+ */
+
+/*
 // Autoriser les blocs dans Fluent Community
 add_filter('fluent_community/allowed_block_types', function($blockTypes) {
     $blockTypes[] = 'jurible/infobox';
@@ -68,17 +77,6 @@ add_action('fluent_community/block_editor_footer', function() {
     <?php
 });
 
-// Passer le nonce REST API au frontend pour les assessments
-add_action('fluent_community/portal_head', function() {
-    ?>
-    <script>
-    var wpApiSettings = {
-        nonce: '<?php echo wp_create_nonce('wp_rest'); ?>'
-    };
-    </script>
-    <?php
-}, 5);
-
 // Charger le CSS des blocs côté front Fluent Community
 add_action('fluent_community/portal_head', function() {
     $styles = [
@@ -104,6 +102,18 @@ add_action('fluent_community/portal_head', function() {
     echo '<script src="' . esc_url($assessment_view) . '" defer></script>';
     echo '<script src="' . esc_url($playlist_view) . '" defer></script>';
 }, 20);
+*/
+
+// Passer le nonce REST API au frontend pour les assessments
+add_action('fluent_community/portal_head', function() {
+    ?>
+    <script>
+    var wpApiSettings = {
+        nonce: '<?php echo wp_create_nonce('wp_rest'); ?>'
+    };
+    </script>
+    <?php
+}, 5);
 
 // Charger le design system Jurible pour Fluent Community
 add_action('fluent_community/portal_head', function() {
