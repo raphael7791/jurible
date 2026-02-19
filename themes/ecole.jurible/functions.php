@@ -99,10 +99,9 @@ add_action('fluent_community/portal_head', function() {
 add_action('fluent_community/portal_head', function() {
     $flashcards_view = plugins_url('jurible-blocks-react/build/flashcards/view.js');
     $assessment_view = plugins_url('jurible-blocks-react/build/assessment/view.js');
-    $playlist_view = plugins_url('jurible-blocks-react/build/playlist/view.js');
+    // Note: jurible-playlist est un plugin séparé, son JS est chargé par le plugin lui-même
     echo '<script src="' . esc_url($flashcards_view) . '" defer></script>';
     echo '<script src="' . esc_url($assessment_view) . '" defer></script>';
-    echo '<script src="' . esc_url($playlist_view) . '" defer></script>';
 }, 20);
 
 // Charger le design system Jurible pour Fluent Community
