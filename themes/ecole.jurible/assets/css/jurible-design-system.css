@@ -635,11 +635,7 @@ p.correct_text {
    écrase le background bleu d'Element UI sur les checkboxes
    ============================================ */
 
-.el-checkbox.is-checked .el-checkbox__inner {
-    background-color: var(--fcom-primary-button, #409EFF) !important;
-    border-color: var(--fcom-primary-button, #409EFF) !important;
-}
-
-.el-checkbox__inner::after {
-    border-color: #ffffff !important;
+.fluent_com .el-checkbox.is-checked .el-checkbox__inner {
+    background-color: #409EFF !important;
+    border-color: #409EFF !important;
 }
