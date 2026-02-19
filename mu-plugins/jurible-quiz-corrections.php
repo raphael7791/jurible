@@ -86,10 +86,17 @@ add_action('fluent_community/portal_head', function() {
             });
         }, true);
 
-        // CSS: checkbox coché en noir
+        // CSS: checkbox coché en noir (injecté à la fin du body pour max priorité)
         const style = document.createElement('style');
-        style.textContent = '.fcom_question_option .el-checkbox.is-checked .el-checkbox__inner { background-color: #1A1A1A !important; border-color: #1A1A1A !important; }';
-        document.head.appendChild(style);
+        style.textContent = `
+            .fcom_question .el-checkbox.is-checked .el-checkbox__inner,
+            .fcom_question_option .el-checkbox.is-checked .el-checkbox__inner,
+            .el-checkbox.is-checked .el-checkbox__inner {
+                background-color: #1A1A1A !important;
+                border-color: #1A1A1A !important;
+            }
+        `;
+        document.body.appendChild(style);
 
         console.log('FC 2.2.0 quiz checkbox fix loaded');
     })();
