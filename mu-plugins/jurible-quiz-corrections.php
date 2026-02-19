@@ -67,31 +67,37 @@ add_action('fluent_community/portal_head', function() {
      * Ce script synchronise manuellement la classe avec l'état checked natif
      */
     (function() {
-        function fixCheckboxes() {
-            document.querySelectorAll('.el-checkbox__original').forEach(function(input) {
-                if (input.dataset.fixApplied) return;
-                input.dataset.fixApplied = 'true';
+        // Utilise la phase de capture pour intercepter avant Vue
+        document.addEventListener('click', function(e) {
+            const checkbox = e.target.closest('.el-checkbox');
+            if (!checkbox) return;
 
-                input.addEventListener('change', function() {
-                    const wrapper = this.closest('.el-checkbox');
-                    if (wrapper) {
-                        if (this.checked) {
-                            wrapper.classList.add('is-checked');
-                        } else {
-                            wrapper.classList.remove('is-checked');
-                        }
-                    }
-                });
+            const input = checkbox.querySelector('.el-checkbox__original');
+            if (!input) return;
+
+            // Attend que Vue ait traité le clic, puis synchronise la classe
+            setTimeout(function() {
+                if (input.checked) {
+                    checkbox.classList.add('is-checked');
+                } else {
+                    checkbox.classList.remove('is-checked');
+                }
+            }, 10);
+        }, true); // true = capture phase
+
+        // Synchronise aussi périodiquement au cas où
+        setInterval(function() {
+            document.querySelectorAll('.el-checkbox').forEach(function(checkbox) {
+                const input = checkbox.querySelector('.el-checkbox__original');
+                if (!input) return;
+
+                if (input.checked && !checkbox.classList.contains('is-checked')) {
+                    checkbox.classList.add('is-checked');
+                } else if (!input.checked && checkbox.classList.contains('is-checked')) {
+                    checkbox.classList.remove('is-checked');
+                }
             });
-        }
-
-        // Run on load and periodically for dynamic content
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', fixCheckboxes);
-        } else {
-            fixCheckboxes();
-        }
-        setInterval(fixCheckboxes, 500);
+        }, 200);
     })();
 
     /**
