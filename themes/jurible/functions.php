@@ -391,6 +391,28 @@ add_action("wp_enqueue_scripts", "jurible_enqueue_buttons_styles");
 add_action("enqueue_block_assets", "jurible_enqueue_buttons_styles");
 
 
+# Charger la lightbox sur les pages produit
+function jurible_enqueue_lightbox()
+{
+    if (is_singular('sc_product')) {
+        wp_enqueue_style(
+            "jurible-lightbox",
+            get_template_directory_uri() . "/assets/css/lightbox.css",
+            [],
+            filemtime(get_template_directory() . "/assets/css/lightbox.css")
+        );
+        wp_enqueue_script(
+            "jurible-lightbox",
+            get_template_directory_uri() . "/assets/js/lightbox.js",
+            [],
+            filemtime(get_template_directory() . "/assets/js/lightbox.js"),
+            true
+        );
+    }
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_lightbox");
+
+
 # Enregistrer les Block Styles pour core/paragraph (Tags)
 function jurible_register_tag_block_styles()
 {
