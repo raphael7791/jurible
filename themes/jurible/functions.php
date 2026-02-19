@@ -1188,3 +1188,59 @@ function jurible_enqueue_checkout_assets()
 add_action("wp_enqueue_scripts", "jurible_enqueue_checkout_assets");
 add_action("enqueue_block_assets", "jurible_enqueue_checkout_assets");
 
+
+# ==========================================================================
+# ACF SHORTCODES POUR TEMPLATES FSE
+# ==========================================================================
+
+/**
+ * Shortcode générique pour afficher un champ ACF
+ * Usage: [acf field="matiere_name"] ou [acf field="rating_score" default="4.5"]
+ */
+function jurible_acf_shortcode($atts)
+{
+    $atts = shortcode_atts([
+        'field'   => '',
+        'post_id' => get_the_ID(),
+        'default' => '',
+    ], $atts);
+
+    if (empty($atts['field'])) {
+        return $atts['default'];
+    }
+
+    // Vérifier si ACF est actif
+    if (!function_exists('get_field')) {
+        return $atts['default'];
+    }
+
+    $value = get_field($atts['field'], $atts['post_id']);
+
+    if (empty($value) && $value !== 0 && $value !== '0') {
+        return esc_html($atts['default']);
+    }
+
+    // Si c'est une image, retourner l'URL
+    if (is_array($value) && isset($value['url'])) {
+        return esc_url($value['url']);
+    }
+
+    return esc_html($value);
+}
+add_shortcode('acf', 'jurible_acf_shortcode');
+
+
+/**
+ * Filtre pour exécuter do_shortcode() sur les templates FSE
+ * Nécessaire car les templates .html n'appliquent pas automatiquement les shortcodes
+ */
+function jurible_render_block_shortcodes($block_content, $block)
+{
+    // Exécuter les shortcodes ACF dans tous les blocs
+    if (strpos($block_content, '[acf') !== false) {
+        $block_content = do_shortcode($block_content);
+    }
+    return $block_content;
+}
+add_filter('render_block', 'jurible_render_block_shortcodes', 10, 2);
+
