@@ -62,16 +62,6 @@ add_action('fluent_community/portal_head', function() {
     ?>
     <script>
     /**
-     * Fix checkbox quiz FluentCommunity 2.2.0
-     * Injecté via JS pour s'assurer que ça s'applique après le CSS de FC
-     */
-    (function() {
-        const style = document.createElement('style');
-        style.textContent = '.el-checkbox.is-checked .el-checkbox__inner { background-color: #409EFF !important; border-color: #409EFF !important; }';
-        document.head.appendChild(style);
-    })();
-
-    /**
      * Quiz corrections - affiche les bonnes réponses après soumission
      */
     console.log('Quiz corrections script injected via portal_head');
