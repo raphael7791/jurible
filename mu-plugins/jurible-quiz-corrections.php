@@ -62,45 +62,6 @@ add_action('fluent_community/portal_head', function() {
     ?>
     <script>
     /**
-     * Fix FluentCommunity 2.2.0 checkbox reactivity bug
-     * Le stopPropagation de Vue empêche la classe is-checked d'être ajoutée
-     * Ce script synchronise manuellement la classe avec l'état checked natif
-     */
-    (function() {
-        // Utilise la phase de capture pour intercepter avant Vue
-        document.addEventListener('click', function(e) {
-            const checkbox = e.target.closest('.el-checkbox');
-            if (!checkbox) return;
-
-            const input = checkbox.querySelector('.el-checkbox__original');
-            if (!input) return;
-
-            // Attend que Vue ait traité le clic, puis synchronise la classe
-            setTimeout(function() {
-                if (input.checked) {
-                    checkbox.classList.add('is-checked');
-                } else {
-                    checkbox.classList.remove('is-checked');
-                }
-            }, 10);
-        }, true); // true = capture phase
-
-        // Synchronise aussi périodiquement au cas où
-        setInterval(function() {
-            document.querySelectorAll('.el-checkbox').forEach(function(checkbox) {
-                const input = checkbox.querySelector('.el-checkbox__original');
-                if (!input) return;
-
-                if (input.checked && !checkbox.classList.contains('is-checked')) {
-                    checkbox.classList.add('is-checked');
-                } else if (!input.checked && checkbox.classList.contains('is-checked')) {
-                    checkbox.classList.remove('is-checked');
-                }
-            });
-        }, 200);
-    })();
-
-    /**
      * Quiz corrections - affiche les bonnes réponses après soumission
      */
     console.log('Quiz corrections script injected via portal_head');

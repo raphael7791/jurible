@@ -628,3 +628,18 @@ p.correct_text {
 .dark .fcom_is_correct.incorrect .correct_text {
     color: #1a1a1a !important;
 }
+
+/* ============================================
+   FIX: Checkbox quiz FluentCommunity 2.2.0
+   La règle .fluent_com { background: var(--fcom-secondary-bg) }
+   écrase le background bleu d'Element UI sur les checkboxes
+   ============================================ */
+
+.el-checkbox.is-checked .el-checkbox__inner {
+    background-color: var(--fcom-primary-button, #409EFF) !important;
+    border-color: var(--fcom-primary-button, #409EFF) !important;
+}
+
+.el-checkbox__inner::after {
+    border-color: #ffffff !important;
+}
