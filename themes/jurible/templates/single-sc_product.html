@@ -465,9 +465,11 @@
 <!-- /wp:column -->
 
 <!-- wp:column {"width":"60%"} -->
-<div class="wp-block-column" style="flex-basis:60%"><!-- wp:image {"lightbox":{"enabled":true},"linkDestination":"media","className":"contenu-fiche__sommaire-image","style":{"border":{"radius":"12px"}}} -->
-<figure class="wp-block-image has-custom-border contenu-fiche__sommaire-image"><a href="http://jurible-local.local/wp-content/uploads/2026/02/Fiches-de-Droit-des-biens-aideauxtd.com_.png"><img src="http://jurible-local.local/wp-content/uploads/2026/02/Fiches-de-Droit-des-biens-aideauxtd.com_.png" alt="Sommaire du support" style="border-radius:12px"/></a></figure>
-<!-- /wp:image --></div>
+<div class="wp-block-column" style="flex-basis:60%"><!-- wp:html -->
+<figure class="wp-block-image has-custom-border contenu-fiche__sommaire-image" style="border-radius:12px;overflow:hidden;">
+<a href="[acf field='image_sommaire']" data-lightbox="true"><img src="[acf field='image_sommaire']" alt="Sommaire du support" style="border-radius:12px;width:100%;height:auto;"/></a>
+</figure>
+<!-- /wp:html --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
