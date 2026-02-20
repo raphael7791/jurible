@@ -3,6 +3,12 @@
 # Bases du thème
 # Dans https://capitainewp.io/formations/wordpress-full-site-editing/base-theme-fse/#le-fichier-functions-php
 
+# ACF JSON - Charger depuis le thème parent (même si un thème enfant est actif)
+add_filter('acf/settings/load_json', function($paths) {
+    $paths[] = get_template_directory() . '/acf-json';
+    return $paths;
+});
+
 # Retirer les accents des noms de fichiers
 add_filter("sanitize_file_name", "remove_accents");
 
