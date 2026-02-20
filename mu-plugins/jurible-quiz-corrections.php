@@ -62,34 +62,6 @@ add_action('fluent_community/portal_head', function() {
     ?>
     <script>
     /**
-     * Fix FluentCommunity 2.2.0 quiz checkbox bug
-     * Bug: is-checked class not added for multiple_choice questions (Vue reactivity issue)
-     * Solution: Force sync is-checked class with native input checked state
-     */
-    (function() {
-        document.addEventListener('click', function(e) {
-            const checkbox = e.target.closest('.fcom_question_option .el-checkbox');
-            if (!checkbox) return;
-
-            // Attendre que Vue ait traité le changement
-            requestAnimationFrame(function() {
-                setTimeout(function() {
-                    const input = checkbox.querySelector('.el-checkbox__original');
-                    if (!input) return;
-
-                    if (input.checked) {
-                        checkbox.classList.add('is-checked');
-                    } else {
-                        checkbox.classList.remove('is-checked');
-                    }
-                }, 0);
-            });
-        }, true);
-
-        console.log('FC 2.2.0 quiz checkbox fix loaded');
-    })();
-
-    /**
      * Quiz corrections - affiche les bonnes réponses après soumission
      */
     console.log('Quiz corrections script injected via portal_head');
