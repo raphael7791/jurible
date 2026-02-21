@@ -419,28 +419,6 @@ function jurible_enqueue_lightbox()
 add_action("wp_enqueue_scripts", "jurible_enqueue_lightbox");
 
 
-# Charger la sticky bar produit sur les pages produit
-function jurible_enqueue_sticky_product_bar()
-{
-    if (is_singular('sc_product')) {
-        wp_enqueue_style(
-            "jurible-sticky-product-bar",
-            get_template_directory_uri() . "/assets/css/sticky-product-bar.css",
-            [],
-            filemtime(get_template_directory() . "/assets/css/sticky-product-bar.css")
-        );
-        wp_enqueue_script(
-            "jurible-sticky-product-bar",
-            get_template_directory_uri() . "/assets/js/sticky-product-bar.js",
-            [],
-            filemtime(get_template_directory() . "/assets/js/sticky-product-bar.js"),
-            true
-        );
-    }
-}
-add_action("wp_enqueue_scripts", "jurible_enqueue_sticky_product_bar");
-
-
 # Enregistrer les Block Styles pour core/paragraph (Tags)
 function jurible_register_tag_block_styles()
 {
@@ -667,31 +645,6 @@ function jurible_header_minimal_checkout_shortcode()
     return ob_get_clean();
 }
 add_shortcode('jurible_header_minimal_checkout', 'jurible_header_minimal_checkout_shortcode');
-
-
-# Shortcode Sticky Bar Produit (barre en bas avec bouton achat)
-function jurible_sticky_product_bar_shortcode()
-{
-    ob_start();
-    ?>
-    <div id="sticky-product-bar" class="sticky-product-bar">
-        <div class="sticky-product-bar__inner">
-            <div class="sticky-product-bar__product">
-                <?php echo do_blocks('<!-- wp:surecart/product-media {"thumbnailsVisibility":"hidden","style":{"dimensions":{"width":"48px","height":"48px"}}} /-->'); ?>
-                <div class="sticky-product-bar__info">
-                    <?php echo do_blocks('<!-- wp:surecart/product-title {"level":4,"style":{"typography":{"fontWeight":"600","fontSize":"14px"}}} /-->'); ?>
-                </div>
-            </div>
-            <div class="sticky-product-bar__actions">
-                <?php echo do_blocks('<!-- wp:surecart/product-price {"style":{"typography":{"fontWeight":"700","fontSize":"18px"}}} /-->'); ?>
-                <?php echo do_blocks('<!-- wp:surecart/product-buy-button {"text":"Ajouter au panier","add_to_cart":true,"style":{"typography":{"fontWeight":"600","fontSize":"14px"}}} /-->'); ?>
-            </div>
-        </div>
-    </div>
-    <?php
-    return ob_get_clean();
-}
-add_shortcode('jurible_sticky_product_bar', 'jurible_sticky_product_bar_shortcode');
 
 
 # Shortcode pour afficher le header avec navigation
