@@ -605,7 +605,7 @@ function jurible_header_minimal_shortcode()
 {
     ob_start();
     ?>
-    <header class="site-header site-header--minimal">
+    <header id="site-header" class="site-header site-header--minimal">
         <div class="site-header__inner">
             <a href="<?php echo esc_url(home_url('/')); ?>" class="site-header__logo">
                 <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.svg'); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="site-header__logo-img">
