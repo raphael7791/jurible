@@ -37,7 +37,7 @@ function jurible_blocks_react_init() {
 	register_block_type( __DIR__ . '/build/cta-banner' );
 	register_block_type( __DIR__ . '/build/method-tabs' );
 	// register_block_type( __DIR__ . '/build/footer-accordion' ); // Désactivé - utilise CSS/JS à la place
-	// register_block_type( __DIR__ . '/build/playlist' );
+	register_block_type( __DIR__ . '/build/playlist' );
 }
 add_action( 'init', 'jurible_blocks_react_init' );
 

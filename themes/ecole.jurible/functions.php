@@ -70,10 +70,14 @@ add_action('fluent_community/block_editor_footer', function() {
 
 // Passer le nonce REST API au frontend pour les assessments
 add_action('fluent_community/portal_head', function() {
+    $pull_zone_url = get_option('jurible_playlist_pull_zone_url', 'https://iframe.mediadelivery.net/embed/35843/');
     ?>
     <script>
     var wpApiSettings = {
         nonce: '<?php echo wp_create_nonce('wp_rest'); ?>'
+    };
+    var juriblePlaylistConfig = {
+        pullZoneUrl: '<?php echo esc_js($pull_zone_url); ?>'
     };
     </script>
     <?php
@@ -89,6 +93,7 @@ add_action('fluent_community/portal_head', function() {
         plugins_url('jurible-blocks-react/build/citation/style-index.css'),
         plugins_url('jurible-blocks-react/build/flashcards/style-index.css'),
         plugins_url('jurible-blocks-react/build/assessment/style-index.css'),
+        plugins_url('jurible-blocks-react/build/playlist/style-index.css'),
     ];
     foreach ($styles as $style) {
         echo '<link rel="stylesheet" href="' . esc_url($style) . '">';
@@ -99,9 +104,10 @@ add_action('fluent_community/portal_head', function() {
 add_action('fluent_community/portal_head', function() {
     $flashcards_view = plugins_url('jurible-blocks-react/build/flashcards/view.js');
     $assessment_view = plugins_url('jurible-blocks-react/build/assessment/view.js');
-    // Note: jurible-playlist est un plugin séparé, son JS est chargé par le plugin lui-même
+    $playlist_view = plugins_url('jurible-blocks-react/build/playlist/view.js');
     echo '<script src="' . esc_url($flashcards_view) . '" defer></script>';
     echo '<script src="' . esc_url($assessment_view) . '" defer></script>';
+    echo '<script src="' . esc_url($playlist_view) . '" defer></script>';
 }, 20);
 
 // Charger le design system Jurible pour Fluent Community
