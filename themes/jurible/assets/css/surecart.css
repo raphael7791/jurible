@@ -87,6 +87,29 @@
    PRODUCT COLLECTION TAG (matches design system tag-dark)
    ========================================================================== */
 
+/* ==========================================================================
+   PRODUCT QUICK VIEW BUTTON (Ajouter sur les cards)
+   ========================================================================== */
+
+.wp-block-surecart-product-quick-view-button {
+    transition: all var(--wp--custom--transition--default) !important;
+    cursor: pointer;
+    box-shadow: none !important;
+}
+
+.wp-block-surecart-product-quick-view-button:hover {
+    transform: scale(1.05);
+    box-shadow: var(--wp--preset--shadow--md) !important;
+}
+
+.wp-block-surecart-product-quick-view-button:active {
+    transform: scale(0.98);
+}
+
+/* ==========================================================================
+   PRODUCT COLLECTION TAG (matches design system tag-dark)
+   ========================================================================== */
+
 .wp-block-surecart-product-collection-tag,
 .wp-block-surecart-product-collection-tag a {
     display: inline-flex;
