@@ -3,7 +3,50 @@
  * Réplique les variables du theme.json (WordPress + Jurible)
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+/* ===========================================
+   POLICES LOCALES (même fichiers que theme.json)
+   Nécessaire car Fluent Community ne charge pas theme.json
+   =========================================== */
+
+@font-face {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url('../../../jurible/assets/fonts/poppins-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+    src: url('../../../jurible/assets/fonts/poppins-400-italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+    src: url('../../../jurible/assets/fonts/poppins-500.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+    src: url('../../../jurible/assets/fonts/poppins-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url('../../../jurible/assets/fonts/poppins-700.woff2') format('woff2');
+}
 
 html {
     scroll-behavior: smooth !important;
@@ -553,9 +596,9 @@ html.dark .fcom_lesson_details .jurible-sommaire-list a:hover {
 }
 
 h3.jurible-current-title {
-    margin: 6 !important;
-    margin-block-start: 1 !important;
-    margin-block-end: 1 !important;
+    margin: 6px !important;
+    margin-block-start: 1px !important;
+    margin-block-end: 1px !important;
 }
 
 /* Mode sombre - Bordure image */
@@ -563,59 +606,21 @@ html.dark .fcom_lesson_details .wp-block-image img {
     border-color: var(--jurible-border) !important;
 }
 
+/* ===========================================
+   QUIZ FLUENT COMMUNITY
+   =========================================== */
+
 p.correct_text {
     margin-bottom: 0 !important;
 }
 
-.fcom_is_correct,
-.fcom_is_correct.incorrect {
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
-}
-
 .fcom_question_header {
     line-height: 1.4 !important;
-}
-
-.fcom_question_header {
     margin-bottom: 8px !important;
 }
 
 .fcom_question_label p {
     margin-bottom: 0 !important;
-}
-
-.fcom_is_correct,
-.fcom_is_correct.incorrect {
-    margin: 8px 0 !important;
-}
-
-.fcom_is_correct,
-.fcom_is_correct.incorrect {
-    margin: 22px 0 !important;
-}
-
-.fcom_is_correct,
-.fcom_is_correct.incorrect {
-    margin: 22px 0 !important;
-}
-
-.fcom_is_correct,
-.fcom_is_correct.incorrect {
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
-}
-
-.fcom_is_correct,
-.fcom_is_correct.incorrect {
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
-}
-
-.fcom_is_correct,
-.fcom_is_correct.incorrect {
-    margin-top: 8px !important;
-    margin-bottom: 10px !important;
 }
 
 .fcom_is_correct,
