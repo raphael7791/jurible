@@ -211,6 +211,69 @@ html {
 }
 
 /* ============================================
+   CONTENU PAGES WORDPRESS (FRONT)
+   Pour les pages WP standard (hors portail Fluent Community)
+   ============================================ */
+
+.wp-site-blocks,
+.entry-content,
+.page-content {
+    font-family: var(--jurible-font-family);
+    line-height: var(--jurible-line-height-relaxed);
+    color: var(--jurible-text-gray);
+}
+
+.wp-site-blocks h1,
+.entry-content h1,
+.wp-block-heading:where(h1) {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--wp--preset--font-size--heading-1) !important;
+    font-weight: 700 !important;
+    line-height: var(--jurible-line-height-tight) !important;
+    color: var(--jurible-text-dark) !important;
+}
+
+.wp-site-blocks h2,
+.entry-content h2,
+.wp-block-heading:where(h2) {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--wp--preset--font-size--heading-2) !important;
+    font-weight: 600 !important;
+    line-height: var(--jurible-line-height-h2) !important;
+    color: var(--jurible-text-dark) !important;
+    margin-top: clamp(18px, 4vw, 26px);
+    margin-bottom: clamp(18px, 4vw, 26px);
+}
+
+.wp-site-blocks h3,
+.entry-content h3,
+.wp-block-heading:where(h3) {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--wp--preset--font-size--heading-3) !important;
+    font-weight: 600 !important;
+    line-height: var(--jurible-line-height-p) !important;
+    color: var(--jurible-text-dark) !important;
+}
+
+.wp-site-blocks h4,
+.entry-content h4,
+.wp-block-heading:where(h4) {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--wp--preset--font-size--heading-4) !important;
+    font-weight: 600 !important;
+    color: var(--jurible-text-dark) !important;
+}
+
+.wp-site-blocks p,
+.entry-content p,
+.wp-block-paragraph {
+    font-family: var(--jurible-font-family);
+    font-size: var(--jurible-font-size-body);
+    line-height: var(--jurible-line-height-p);
+    color: var(--jurible-text-gray);
+}
+
+/* ============================================
    CONTENU DES LEÇONS (FRONT)
    ============================================ */
 
