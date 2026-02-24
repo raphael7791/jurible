@@ -121,6 +121,12 @@ add_action('fluent_community/block_editor_head', function() {
     echo '<link rel="stylesheet" href="' . esc_url($css_url) . '">';
 });
 
+// Charger le design system sur les pages WordPress standard aussi
+add_action('wp_enqueue_scripts', function() {
+    $css_url = get_theme_file_uri('assets/css/jurible-design-system.css');
+    wp_enqueue_style('jurible-design-system', $css_url, [], '1.0.0');
+});
+
 // Ajouter les ancres aux titres H2 côté front Fluent Community
 add_action('fluent_community/portal_head', function() {
     ?>
@@ -332,13 +338,25 @@ add_filter('fluent_community/get_auth_settings', function($settings) {
     return $settings;
 });
 
-// No link in logo fluent login page
+// No link in logo fluent login page + Remove admin bar spacing
 add_action('wp_head', function() {
     ?>
     <style>
     .fcom_logo a {
         pointer-events: none !important;
         cursor: default !important;
+    }
+    /* Supprimer l'espace pour l'admin bar */
+    html.admin-bar {
+        margin-top: 0 !important;
+    }
+    html.admin-bar body {
+        margin-top: 0 !important;
+    }
+    @media screen and (max-width: 782px) {
+        html.admin-bar {
+            margin-top: 0 !important;
+        }
     }
     </style>
     <?php
