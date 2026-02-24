@@ -211,16 +211,28 @@ html {
 }
 
 /* ============================================
-   CONTENU DES LEÇONS (FRONT)
+   OVERRIDE FLUENT COMMUNITY FONT VARIABLE
    ============================================ */
 
-.fcom_lesson_details {
+body {
+    --theme-font-family: 'Poppins', sans-serif !important;
+}
+
+/* ============================================
+   CONTENU DES LEÇONS (FRONT)
+   Supporte l'ancien (.fcom_lesson_details) et
+   le nouveau Gutenberg (.fcom_lesson_content)
+   ============================================ */
+
+.fcom_lesson_details,
+.fcom_lesson_content {
     font-family: var(--jurible-font-family) !important;
     line-height: var(--jurible-line-height-relaxed);
     color: var(--jurible-text-gray);
 }
 
-.fcom_lesson_details h1 {
+.fcom_lesson_details h1,
+.fcom_lesson_content h1 {
     font-family: var(--jurible-font-family) !important;
     font-size: var(--jurible-font-size-h1) !important;
     font-weight: 700 !important;
@@ -228,7 +240,8 @@ html {
     color: var(--jurible-text-dark) !important;
 }
 
-.fcom_lesson_details h2 {
+.fcom_lesson_details h2,
+.fcom_lesson_content h2 {
     font-family: var(--jurible-font-family) !important;
     font-size: var(--jurible-font-size-h2) !important;
     font-weight: 600 !important;
@@ -238,7 +251,8 @@ html {
     margin-bottom: clamp(18px, 4vw, 26px) !important;
 }
 
-.fcom_lesson_details h2::after {
+.fcom_lesson_details h2::after,
+.fcom_lesson_content h2::after {
     content: '';
     display: block;
     width: 60px;
@@ -248,7 +262,8 @@ html {
     border-radius: 2px;
 }
 
-.fcom_lesson_details h3 {
+.fcom_lesson_details h3,
+.fcom_lesson_content h3 {
     font-family: var(--jurible-font-family) !important;
     font-size: var(--jurible-font-size-h3) !important;
     font-weight: 600 !important;
@@ -258,7 +273,8 @@ html {
     margin-bottom: 1rem !important;
 }
 
-.fcom_lesson_details h4 {
+.fcom_lesson_details h4,
+.fcom_lesson_content h4 {
     font-family: var(--jurible-font-family) !important;
     font-size: var(--jurible-font-size-h4) !important;
     font-weight: 600 !important;
@@ -268,7 +284,8 @@ html {
     margin-bottom: 0.75rem !important;
 }
 
-.fcom_lesson_details p {
+.fcom_lesson_details p,
+.fcom_lesson_content p {
     font-family: var(--jurible-font-family) !important;
     font-size: var(--jurible-font-size-body) !important;
     line-height: var(--jurible-line-height-p) !important;
@@ -277,38 +294,48 @@ html {
     color: var(--jurible-text-gray) !important;
 }
 
-/* Tailles de texte Fluent Community (DOIT être après .fcom_lesson_details p) */
-.fcom_lesson_details p.has-small-font-size {
+/* Tailles de texte Fluent Community */
+.fcom_lesson_details p.has-small-font-size,
+.fcom_lesson_content p.has-small-font-size {
     font-size: var(--jurible-font-size-small) !important;
 }
 
-.fcom_lesson_details p.has-medium-font-size {
+.fcom_lesson_details p.has-medium-font-size,
+.fcom_lesson_content p.has-medium-font-size {
     font-size: var(--jurible-font-size-medium) !important;
 }
 
 .fcom_lesson_details p.has-large-font-size,
-.fcom_lesson_details p.has-larger-font-size {
+.fcom_lesson_details p.has-larger-font-size,
+.fcom_lesson_content p.has-large-font-size,
+.fcom_lesson_content p.has-larger-font-size {
     font-size: var(--jurible-font-size-large) !important;
 }
 
 .fcom_lesson_details p.has-xlarge-font-size,
-.fcom_lesson_details p.has-x-large-font-size {
+.fcom_lesson_details p.has-x-large-font-size,
+.fcom_lesson_content p.has-xlarge-font-size,
+.fcom_lesson_content p.has-x-large-font-size {
     font-size: var(--jurible-font-size-xlarge) !important;
 }
 
-.fcom_lesson_details p.has-xxlarge-font-size {
+.fcom_lesson_details p.has-xxlarge-font-size,
+.fcom_lesson_content p.has-xxlarge-font-size {
     font-size: var(--jurible-font-size-xxlarge) !important;
 }
 
-.fcom_lesson_details a {
+.fcom_lesson_details a,
+.fcom_lesson_content a {
     color: var(--jurible-primary) !important;
 }
 
-.fcom_lesson_details a:hover {
+.fcom_lesson_details a:hover,
+.fcom_lesson_content a:hover {
     color: var(--jurible-primary-hover) !important;
 }
 
-.fcom_lesson_details .wp-block-button__link {
+.fcom_lesson_details .wp-block-button__link,
+.fcom_lesson_content .wp-block-button__link {
     background-color: var(--jurible-primary) !important;
     color: #FFFFFF !important;
     border-radius: var(--jurible-radius-m) !important;
@@ -317,34 +344,40 @@ html {
     box-shadow: var(--jurible-shadow-cta) !important;
 }
 
-.fcom_lesson_details .wp-block-button__link:hover {
+.fcom_lesson_details .wp-block-button__link:hover,
+.fcom_lesson_content .wp-block-button__link:hover {
     background-color: var(--jurible-primary-hover) !important;
     box-shadow: var(--jurible-shadow-cta-hover) !important;
 }
 
-.fcom_lesson_details blockquote {
+.fcom_lesson_details blockquote,
+.fcom_lesson_content blockquote {
     border-left: 3px solid var(--jurible-primary) !important;
     padding-left: var(--jurible-spacing-s) !important;
     color: var(--jurible-text-gray) !important;
     font-style: italic !important;
 }
 
-.fcom_lesson_details hr {
+.fcom_lesson_details hr,
+.fcom_lesson_content hr {
     background-color: var(--jurible-border) !important;
     border: none !important;
     height: 1px !important;
 }
 
 /* Force les couleurs du sommaire */
-.fcom_lesson_details .jurible-sommaire-list a {
+.fcom_lesson_details .jurible-sommaire-list a,
+.fcom_lesson_content .jurible-sommaire-list a {
     color: #4A4A4A !important;
 }
 
-.fcom_lesson_details .jurible-sommaire-list a:hover {
+.fcom_lesson_details .jurible-sommaire-list a:hover,
+.fcom_lesson_content .jurible-sommaire-list a:hover {
     color: #B0001D !important;
 }
 
-.fcom_lesson_details img {
+.fcom_lesson_details img,
+.fcom_lesson_content img {
     border-radius: 12px;
 }
 
@@ -481,41 +514,52 @@ html.dark {
 html.dark .fcom_lesson_details h1,
 html.dark .fcom_lesson_details h2,
 html.dark .fcom_lesson_details h3,
-html.dark .fcom_lesson_details h4 {
+html.dark .fcom_lesson_details h4,
+html.dark .fcom_lesson_content h1,
+html.dark .fcom_lesson_content h2,
+html.dark .fcom_lesson_content h3,
+html.dark .fcom_lesson_content h4 {
     color: var(--jurible-text-dark) !important;
 }
 
 /* Paragraphes en mode sombre */
-html.dark .fcom_lesson_details p {
+html.dark .fcom_lesson_details p,
+html.dark .fcom_lesson_content p {
     color: var(--jurible-text-gray) !important;
 }
 
 /* Liens en mode sombre (garde la couleur primaire) */
-html.dark .fcom_lesson_details a {
+html.dark .fcom_lesson_details a,
+html.dark .fcom_lesson_content a {
     color: var(--jurible-primary) !important;
 }
 
-html.dark .fcom_lesson_details a:hover {
+html.dark .fcom_lesson_details a:hover,
+html.dark .fcom_lesson_content a:hover {
     color: var(--jurible-primary-hover) !important;
 }
 
 /* Blockquotes en mode sombre */
-html.dark .fcom_lesson_details blockquote {
+html.dark .fcom_lesson_details blockquote,
+html.dark .fcom_lesson_content blockquote {
     color: var(--jurible-text-gray) !important;
     border-left-color: var(--jurible-primary) !important;
 }
 
 /* HR en mode sombre */
-html.dark .fcom_lesson_details hr {
+html.dark .fcom_lesson_details hr,
+html.dark .fcom_lesson_content hr {
     background-color: var(--jurible-border) !important;
 }
 
 /* Sommaire en mode sombre */
-html.dark .fcom_lesson_details .jurible-sommaire-list a {
+html.dark .fcom_lesson_details .jurible-sommaire-list a,
+html.dark .fcom_lesson_content .jurible-sommaire-list a {
     color: var(--jurible-text-gray) !important;
 }
 
-html.dark .fcom_lesson_details .jurible-sommaire-list a:hover {
+html.dark .fcom_lesson_details .jurible-sommaire-list a:hover,
+html.dark .fcom_lesson_content .jurible-sommaire-list a:hover {
     color: var(--jurible-primary) !important;
 }
 
@@ -524,19 +568,22 @@ html.dark .fcom_lesson_details .jurible-sommaire-list a:hover {
    ============================================ */
 
 /* Front - Image avec marges */
-.fcom_lesson_details .wp-block-image {
+.fcom_lesson_details .wp-block-image,
+.fcom_lesson_content .wp-block-image {
     margin-top: clamp(1rem, 4vw, 3rem) !important;
     margin-bottom: clamp(1rem, 4vw, 3rem) !important;
 }
 
 /* Front - Image avec bordure arrondie */
-.fcom_lesson_details .wp-block-image img {
+.fcom_lesson_details .wp-block-image img,
+.fcom_lesson_content .wp-block-image img {
     border: 1px solid var(--jurible-border) !important;
     border-radius: 12px !important;
 }
 
 /* Front - Légende centrée avec icône */
-.fcom_lesson_details .wp-block-image figcaption {
+.fcom_lesson_details .wp-block-image figcaption,
+.fcom_lesson_content .wp-block-image figcaption {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -548,7 +595,8 @@ html.dark .fcom_lesson_details .jurible-sommaire-list a:hover {
     text-align: center;
 }
 
-.fcom_lesson_details .wp-block-image figcaption::before {
+.fcom_lesson_details .wp-block-image figcaption::before,
+.fcom_lesson_content .wp-block-image figcaption::before {
     content: "";
     display: inline-block;
     width: 18px;
@@ -602,7 +650,8 @@ h3.jurible-current-title {
 }
 
 /* Mode sombre - Bordure image */
-html.dark .fcom_lesson_details .wp-block-image img {
+html.dark .fcom_lesson_details .wp-block-image img,
+html.dark .fcom_lesson_content .wp-block-image img {
     border-color: var(--jurible-border) !important;
 }
 
