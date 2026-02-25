@@ -278,7 +278,7 @@
     height: 38px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--aga-primary) 0%, var(--aga-primary-hover) 50%, var(--aga-secondary) 100%);
-    color: white;
+    color: #FFFFFF !important;
     border: none;
     cursor: pointer;
     display: flex;
@@ -286,6 +286,10 @@
     justify-content: center;
     transition: all 0.2s ease;
     box-shadow: 0 2px 8px rgba(176, 0, 29, 0.3);
+}
+
+.aga-submit-btn svg {
+    stroke: #FFFFFF !important;
 }
 
 .aga-submit-btn:hover {
