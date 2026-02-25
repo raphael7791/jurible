@@ -36,11 +36,22 @@ body {
 
 @media (max-width: 782px) {
     .admin-bar .site-header {
-        top: 62px; /* 46px admin bar + 16px margin */
+        top: 54px; /* 46px admin bar + 8px margin */
     }
 
     .admin-bar {
-        padding-top: 116px; /* 70px + 46px */
+        padding-top: 108px; /* 62px + 46px */
+    }
+}
+
+/* Mobile : header plus proche du haut */
+@media (max-width: 768px) {
+    .site-header {
+        top: 8px;
+    }
+
+    body {
+        padding-top: 62px; /* 52px header + 2px border + 8px top margin */
     }
 }
 
