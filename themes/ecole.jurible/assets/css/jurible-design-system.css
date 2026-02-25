@@ -1138,6 +1138,94 @@ html.dark .section-bio-auteur .has-muted-background-color {
 }
 
 /* ===========================================
+   PRICING CARDS - Fixes Fluent Community
+   =========================================== */
+
+/* Badges Populaire / Meilleure valeur - forcer texte blanc */
+.minos-card__badge--popular,
+.minos-card__ribbon {
+    color: #FFFFFF !important;
+}
+
+/* Cards pricing - fond et bordures */
+.fcom_wp_content .minos-card {
+    background: var(--wp--preset--color--white, #FFFFFF) !important;
+    border-color: var(--wp--preset--color--border, #E5E7EB) !important;
+}
+
+/* Titres et textes dans les cards */
+.fcom_wp_content .minos-card__title {
+    color: var(--wp--preset--color--text-dark, #1A1A1A) !important;
+}
+
+.fcom_wp_content .minos-card__description,
+.fcom_wp_content .minos-card__include-item {
+    color: var(--wp--preset--color--text-gray, #4A4A4A) !important;
+}
+
+.fcom_wp_content .minos-card__price {
+    color: var(--wp--preset--color--text-dark, #1A1A1A) !important;
+}
+
+/* CTA buttons */
+.fcom_wp_content .minos-card__cta--gradient {
+    color: #FFFFFF !important;
+}
+
+.fcom_wp_content .minos-card__cta--gradient:hover {
+    color: #FFFFFF !important;
+}
+
+.fcom_wp_content .minos-card__cta--outline {
+    background: #FFFFFF !important;
+    color: var(--wp--preset--color--text-dark, #1A1A1A) !important;
+}
+
+.fcom_wp_content .minos-card__cta--outline:hover {
+    color: var(--wp--preset--color--warning-text, #92400E) !important;
+}
+
+/* Credits badges */
+.fcom_wp_content .minos-card__credits--pro {
+    color: #FFFFFF !important;
+}
+
+/* Dark mode pricing cards */
+html.dark .minos-card {
+    background: var(--el-bg-color-overlay, #1d1e1f) !important;
+    border-color: var(--el-border-color, #414243) !important;
+}
+
+html.dark .minos-card--featured {
+    background:
+        linear-gradient(var(--el-bg-color-overlay, #1d1e1f), var(--el-bg-color-overlay, #1d1e1f)) padding-box,
+        linear-gradient(135deg, var(--wp--preset--color--primary) 0%, var(--wp--preset--color--secondary) 100%) border-box !important;
+}
+
+html.dark .minos-card__title {
+    color: #F3F4F6 !important;
+}
+
+html.dark .minos-card__description,
+html.dark .minos-card__include-item {
+    color: #E5E7EB !important;
+}
+
+html.dark .minos-card__price {
+    color: #F3F4F6 !important;
+}
+
+html.dark .minos-card__cta--outline {
+    background: var(--el-bg-color-overlay, #1d1e1f) !important;
+    color: #E5E7EB !important;
+    border-color: var(--el-border-color, #414243) !important;
+}
+
+html.dark .minos-card__cta--outline:hover {
+    background: var(--wp--preset--color--warning-bg) !important;
+}
+
+/* ===========================================
    ACADEMIC GENERATOR - Fixes Fluent Community
    =========================================== */
 
