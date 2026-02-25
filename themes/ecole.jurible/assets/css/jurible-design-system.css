@@ -1274,3 +1274,27 @@ p.correct_text {
     color: #1a1a1a !important;
 }
 
+/* ===========================================
+   WORDPRESS COLOR CLASSES - Force white text
+   Dans Fluent Community, les classes WordPress
+   comme has-white-color sont écrasées
+   =========================================== */
+
+/* Badge "Populaire" et autres badges avec fond primary */
+.fcom_wp_content .has-white-color,
+.fcom_wp_content .has-white-color.has-text-color,
+.fcom_wp_content .has-primary-background-color .has-white-color,
+.fcom_wp_content .has-primary-background-color.has-white-color,
+.fcom_wp_content .has-secondary-background-color .has-white-color,
+.fcom_wp_content .has-secondary-background-color.has-white-color,
+.fcom_wp_content [class*="minos-card"] .has-white-color,
+.fcom_wp_content [class*="minos-card"] p.has-white-color {
+    color: #FFFFFF !important;
+}
+
+/* Ribbon "Meilleure valeur" */
+.fcom_wp_content [class*="ribbon"] p,
+.fcom_wp_content [class*="ribbon"] .has-white-color {
+    color: #FFFFFF !important;
+}
+
