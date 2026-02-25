@@ -53,6 +53,9 @@
    ========================================================================== */
 
 .header-minimal__secure {
+	display: flex;
+	align-items: center;
+	align-self: center;
 	color: var(--wp--preset--color--text-muted);
 	font-size: var(--wp--preset--font-size--caption);
 	font-weight: 500;
