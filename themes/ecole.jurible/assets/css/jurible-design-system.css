@@ -227,6 +227,12 @@ html {
     color: var(--wp--preset--color--secondary) !important;
 }
 
+/* Exclure les boutons du underline */
+.fcom_wp_content .wp-block-button__link,
+.fcom_wp_content .wp-block-button__link:hover {
+    text-decoration: none !important;
+}
+
 .fcom_wp_content .wp-block-button__link {
     background-color: var(--wp--preset--color--primary) !important;
     color: var(--wp--preset--color--white) !important;
