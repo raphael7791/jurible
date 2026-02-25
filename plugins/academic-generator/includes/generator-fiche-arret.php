@@ -49,18 +49,6 @@ function aga_render_formulaire_fiche() {
             </a>
         </nav>
 
-        <!-- Header -->
-        <header class="aga-header">
-            <div class="aga-header-content">
-                <h1 class="aga-title">Générateur de <span class="aga-title-highlight">fiche d'arrêt</span></h1>
-                <p class="aga-subtitle">Transformez n'importe quel arrêt en fiche parfaitement structurée.</p>
-            </div>
-            <div class="aga-header-actions">
-                <a href="<?php echo home_url('/mes-fiches/'); ?>" class="aga-btn aga-btn-outline">
-                    Mon historique
-                </a>
-            </div>
-        </header>
 
         <?php if ($verification['autorise']): ?>
         

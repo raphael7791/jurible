@@ -49,18 +49,6 @@ function aga_render_formulaire_cas_pratique() {
             </a>
         </nav>
 
-        <!-- Header -->
-        <header class="aga-header">
-            <div class="aga-header-content">
-                <h1 class="aga-title">Générateur de <span class="aga-title-highlight">cas pratique</span></h1>
-                <p class="aga-subtitle">Obtenez une correction complète de votre cas pratique.</p>
-            </div>
-            <div class="aga-header-actions">
-                <a href="<?php echo home_url('/mes-cas-pratiques/'); ?>" class="aga-btn aga-btn-outline">
-                    Mon historique
-                </a>
-            </div>
-        </header>
 
         <?php if ($verification['autorise']): ?>
         

@@ -52,7 +52,7 @@
 
 .aga-page {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0;
     padding: clamp(1rem, 4vw, 2rem) clamp(1rem, 3vw, 1.5rem);
     color: var(--aga-text);
 }

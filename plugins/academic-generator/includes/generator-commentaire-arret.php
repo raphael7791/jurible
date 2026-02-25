@@ -49,18 +49,6 @@ function aga_render_formulaire_commentaire_arret() {
             </a>
         </nav>
 
-        <!-- Header -->
-        <header class="aga-header">
-            <div class="aga-header-content">
-                <h1 class="aga-title">Générateur de <span class="aga-title-highlight">commentaire d'arrêt</span></h1>
-                <p class="aga-subtitle">Obtenez un commentaire complet selon la méthodologie universitaire.</p>
-            </div>
-            <div class="aga-header-actions">
-                <a href="<?php echo home_url('/mes-commentaires/'); ?>" class="aga-btn aga-btn-outline">
-                    Mon historique
-                </a>
-            </div>
-        </header>
 
         <?php if ($verification['autorise']): ?>
         
