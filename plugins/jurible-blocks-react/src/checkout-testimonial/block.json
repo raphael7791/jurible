@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jurible/checkout-testimonial",
+	"version": "1.0.0",
+	"title": "Checkout - Témoignage",
+	"category": "jurible",
+	"icon": "format-quote",
+	"description": "Card témoignage simple pour sidebar checkout",
+	"keywords": ["checkout", "testimonial", "témoignage", "avis", "quote"],
+	"supports": {
+		"html": false,
+		"align": false,
+		"spacing": {
+			"margin": true,
+			"padding": false
+		}
+	},
+	"attributes": {
+		"rating": {
+			"type": "number",
+			"default": 5
+		},
+		"quote": {
+			"type": "string",
+			"default": "L'Académie a changé ma façon de réviser. Les cours en vidéo sont ultra clairs et les fiches me font gagner un temps fou."
+		},
+		"authorName": {
+			"type": "string",
+			"default": "Thomas R."
+		},
+		"authorRole": {
+			"type": "string",
+			"default": "L3 Droit — Lyon III"
+		}
+	},
+	"textdomain": "jurible-blocks-react",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

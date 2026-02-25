@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jurible/checkout-included",
+	"version": "1.0.0",
+	"title": "Checkout - Ce qui est inclus",
+	"category": "jurible",
+	"icon": "yes-alt",
+	"description": "Card avec liste des éléments inclus pour sidebar checkout",
+	"keywords": ["checkout", "inclus", "included", "liste", "features"],
+	"supports": {
+		"html": false,
+		"align": false,
+		"spacing": {
+			"margin": true,
+			"padding": false
+		}
+	},
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": "Ce qui est inclus"
+		},
+		"items": {
+			"type": "array",
+			"default": [
+				"Tous les cours en vidéo (20 matières)",
+				"Par des enseignants en droit",
+				"Fiches de révision consultables",
+				"QCM et flashcards",
+				"Méthodologie complète",
+				"10 crédits IA offerts / mois",
+				"Mises à jour continues"
+			]
+		}
+	},
+	"textdomain": "jurible-blocks-react",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

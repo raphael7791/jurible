@@ -923,6 +923,211 @@ Commentaire d\'arrêt'
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css'
 	),
+	'checkout-included' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'jurible/checkout-included',
+		'version' => '1.0.0',
+		'title' => 'Checkout - Ce qui est inclus',
+		'category' => 'jurible',
+		'icon' => 'yes-alt',
+		'description' => 'Card avec liste des éléments inclus pour sidebar checkout',
+		'keywords' => array(
+			'checkout',
+			'inclus',
+			'included',
+			'liste',
+			'features'
+		),
+		'supports' => array(
+			'html' => false,
+			'align' => false,
+			'spacing' => array(
+				'margin' => true,
+				'padding' => false
+			)
+		),
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'default' => 'Ce qui est inclus'
+			),
+			'items' => array(
+				'type' => 'array',
+				'default' => array(
+					'Tous les cours en vidéo (20 matières)',
+					'Par des enseignants en droit',
+					'Fiches de révision consultables',
+					'QCM et flashcards',
+					'Méthodologie complète',
+					'10 crédits IA offerts / mois',
+					'Mises à jour continues'
+				)
+			)
+		),
+		'textdomain' => 'jurible-blocks-react',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
+	'checkout-reassurance' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'jurible/checkout-reassurance',
+		'version' => '1.0.0',
+		'title' => 'Checkout - Réassurance',
+		'category' => 'jurible',
+		'icon' => 'shield',
+		'description' => 'Card avec badges de réassurance pour sidebar checkout',
+		'keywords' => array(
+			'checkout',
+			'reassurance',
+			'trust',
+			'badges',
+			'sécurité'
+		),
+		'supports' => array(
+			'html' => false,
+			'align' => false,
+			'spacing' => array(
+				'margin' => true,
+				'padding' => false
+			)
+		),
+		'attributes' => array(
+			'items' => array(
+				'type' => 'array',
+				'default' => array(
+					array(
+						'icon' => '🔒',
+						'title' => 'Paiement 100% sécurisé',
+						'description' => 'Cryptage SSL via Stripe'
+					),
+					array(
+						'icon' => '⚡',
+						'title' => 'Accès immédiat',
+						'description' => 'Commencez à réviser tout de suite'
+					),
+					array(
+						'icon' => '💬',
+						'title' => 'Service client disponible',
+						'description' => 'Réponse rapide par email'
+					),
+					array(
+						'icon' => '🎓',
+						'title' => 'Conforme au programme',
+						'description' => 'Cours conformes au programme universitaire'
+					)
+				)
+			)
+		),
+		'textdomain' => 'jurible-blocks-react',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
+	'checkout-social-proof' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'jurible/checkout-social-proof',
+		'version' => '1.0.0',
+		'title' => 'Checkout - Social Proof',
+		'category' => 'jurible',
+		'icon' => 'groups',
+		'description' => 'Card avec statistiques et note pour sidebar checkout',
+		'keywords' => array(
+			'checkout',
+			'social proof',
+			'stats',
+			'rating',
+			'avis'
+		),
+		'supports' => array(
+			'html' => false,
+			'align' => false,
+			'spacing' => array(
+				'margin' => true,
+				'padding' => false
+			)
+		),
+		'attributes' => array(
+			'icon' => array(
+				'type' => 'string',
+				'default' => '🎓'
+			),
+			'label' => array(
+				'type' => 'string',
+				'default' => 'École en ligne depuis 2018'
+			),
+			'stats' => array(
+				'type' => 'string',
+				'default' => '25 000+ étudiants formés'
+			),
+			'rating' => array(
+				'type' => 'number',
+				'default' => 5
+			),
+			'score' => array(
+				'type' => 'string',
+				'default' => '4.8/5'
+			),
+			'reviewCount' => array(
+				'type' => 'string',
+				'default' => '(150+ avis)'
+			)
+		),
+		'textdomain' => 'jurible-blocks-react',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
+	'checkout-testimonial' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'jurible/checkout-testimonial',
+		'version' => '1.0.0',
+		'title' => 'Checkout - Témoignage',
+		'category' => 'jurible',
+		'icon' => 'format-quote',
+		'description' => 'Card témoignage simple pour sidebar checkout',
+		'keywords' => array(
+			'checkout',
+			'testimonial',
+			'témoignage',
+			'avis',
+			'quote'
+		),
+		'supports' => array(
+			'html' => false,
+			'align' => false,
+			'spacing' => array(
+				'margin' => true,
+				'padding' => false
+			)
+		),
+		'attributes' => array(
+			'rating' => array(
+				'type' => 'number',
+				'default' => 5
+			),
+			'quote' => array(
+				'type' => 'string',
+				'default' => 'L\'Académie a changé ma façon de réviser. Les cours en vidéo sont ultra clairs et les fiches me font gagner un temps fou.'
+			),
+			'authorName' => array(
+				'type' => 'string',
+				'default' => 'Thomas R.'
+			),
+			'authorRole' => array(
+				'type' => 'string',
+				'default' => 'L3 Droit — Lyon III'
+			)
+		),
+		'textdomain' => 'jurible-blocks-react',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
 	'citation' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,

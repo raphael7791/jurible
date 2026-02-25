@@ -1,0 +1,50 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jurible/checkout-reassurance",
+	"version": "1.0.0",
+	"title": "Checkout - Réassurance",
+	"category": "jurible",
+	"icon": "shield",
+	"description": "Card avec badges de réassurance pour sidebar checkout",
+	"keywords": ["checkout", "reassurance", "trust", "badges", "sécurité"],
+	"supports": {
+		"html": false,
+		"align": false,
+		"spacing": {
+			"margin": true,
+			"padding": false
+		}
+	},
+	"attributes": {
+		"items": {
+			"type": "array",
+			"default": [
+				{
+					"icon": "🔒",
+					"title": "Paiement 100% sécurisé",
+					"description": "Cryptage SSL via Stripe"
+				},
+				{
+					"icon": "⚡",
+					"title": "Accès immédiat",
+					"description": "Commencez à réviser tout de suite"
+				},
+				{
+					"icon": "💬",
+					"title": "Service client disponible",
+					"description": "Réponse rapide par email"
+				},
+				{
+					"icon": "🎓",
+					"title": "Conforme au programme",
+					"description": "Cours conformes au programme universitaire"
+				}
+			]
+		}
+	},
+	"textdomain": "jurible-blocks-react",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

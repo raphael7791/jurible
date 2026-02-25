@@ -1,0 +1,55 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/checkout-social-proof",
+  "version": "1.0.0",
+  "title": "Checkout - Social Proof",
+  "category": "jurible",
+  "icon": "groups",
+  "description": "Card avec statistiques et note pour sidebar checkout",
+  "keywords": [
+    "checkout",
+    "social proof",
+    "stats",
+    "rating",
+    "avis"
+  ],
+  "supports": {
+    "html": false,
+    "align": false,
+    "spacing": {
+      "margin": true,
+      "padding": false
+    }
+  },
+  "attributes": {
+    "icon": {
+      "type": "string",
+      "default": "🎓"
+    },
+    "label": {
+      "type": "string",
+      "default": "École en ligne depuis 2018"
+    },
+    "stats": {
+      "type": "string",
+      "default": "25 000+ étudiants formés"
+    },
+    "rating": {
+      "type": "number",
+      "default": 5
+    },
+    "score": {
+      "type": "string",
+      "default": "4.8/5"
+    },
+    "reviewCount": {
+      "type": "string",
+      "default": "(150+ avis)"
+    }
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
