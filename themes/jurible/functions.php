@@ -636,8 +636,7 @@ function jurible_header_minimal_checkout_shortcode()
                 <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.svg'); ?>" alt="Jurible" class="site-header__logo-img" width="120" height="32">
             </a>
             <span class="header-minimal__secure">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                Paiement sécurisé
+                🔒 Paiement sécurisé
             </span>
         </div>
     </header>
