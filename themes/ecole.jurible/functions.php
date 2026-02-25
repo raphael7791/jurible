@@ -110,16 +110,26 @@ add_action('fluent_community/portal_head', function() {
     echo '<script src="' . esc_url($playlist_view) . '" defer></script>';
 }, 20);
 
-// Charger le design system Jurible pour Fluent Community
+// Charger Google Fonts et le design system Jurible pour Fluent Community
+// Priorité 999 pour charger APRÈS tous les CSS de Fluent Community
 add_action('fluent_community/portal_head', function() {
+    // Préconnexion Google Fonts pour performance
+    echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
+    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+    // Charger Poppins directement via <link> (plus fiable que @import)
+    echo '<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">';
+    // Design system
     $css_url = get_theme_file_uri('assets/css/jurible-design-system.css');
     echo '<link rel="stylesheet" href="' . esc_url($css_url) . '">';
-});
+}, 999);
 
 add_action('fluent_community/block_editor_head', function() {
+    echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
+    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+    echo '<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">';
     $css_url = get_theme_file_uri('assets/css/jurible-design-system.css');
     echo '<link rel="stylesheet" href="' . esc_url($css_url) . '">';
-});
+}, 999);
 
 // Charger le design system sur les pages WordPress standard aussi
 add_action('wp_enqueue_scripts', function() {
@@ -346,17 +356,14 @@ add_action('wp_head', function() {
         pointer-events: none !important;
         cursor: default !important;
     }
-    /* Supprimer l'espace pour l'admin bar */
-    html.admin-bar {
-        margin-top: 0 !important;
+    /* Supprimer l'espace pour l'admin bar (override header.css de Fluent) */
+    .admin-bar {
+        padding-top: 0 !important;
     }
+    body.admin-bar,
     html.admin-bar body {
+        padding-top: 0 !important;
         margin-top: 0 !important;
-    }
-    @media screen and (max-width: 782px) {
-        html.admin-bar {
-            margin-top: 0 !important;
-        }
     }
     </style>
     <?php

@@ -1,52 +1,8 @@
 /*
  * Jurible Design System pour Fluent Community
  * Réplique les variables du theme.json (WordPress + Jurible)
+ * Note: Google Fonts Poppins est chargé via functions.php (plus fiable que @import)
  */
-
-/* ===========================================
-   POLICES LOCALES (même fichiers que theme.json)
-   Nécessaire car Fluent Community ne charge pas theme.json
-   =========================================== */
-
-@font-face {
-    font-family: 'Poppins';
-    font-weight: 400;
-    font-style: normal;
-    font-display: optional;
-    src: url('../../../jurible/assets/fonts/poppins-400.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Poppins';
-    font-weight: 400;
-    font-style: italic;
-    font-display: optional;
-    src: url('../../../jurible/assets/fonts/poppins-400-italic.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Poppins';
-    font-weight: 500;
-    font-style: normal;
-    font-display: optional;
-    src: url('../../../jurible/assets/fonts/poppins-500.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Poppins';
-    font-weight: 600;
-    font-style: normal;
-    font-display: optional;
-    src: url('../../../jurible/assets/fonts/poppins-600.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Poppins';
-    font-weight: 700;
-    font-style: normal;
-    font-display: optional;
-    src: url('../../../jurible/assets/fonts/poppins-700.woff2') format('woff2');
-}
 
 html {
     scroll-behavior: smooth !important;
@@ -211,7 +167,103 @@ html {
 }
 
 /* ============================================
-   CONTENU DES LEÇONS (FRONT)
+   PAGES WP DANS FLUENT COMMUNITY (FRONT)
+   Style identique à jurible.com (theme.json)
+   Classe: .fcom_wp_content
+   ============================================ */
+
+.fcom_wp_content {
+    font-family: var(--wp--preset--font-family--poppins) !important;
+    font-size: var(--wp--preset--font-size--body) !important;
+    line-height: var(--wp--custom--line-height--body) !important;
+    color: var(--wp--preset--color--text-dark) !important;
+}
+
+.fcom_wp_content h1 {
+    font-family: var(--wp--preset--font-family--poppins) !important;
+    font-size: var(--wp--preset--font-size--heading-1) !important;
+    font-weight: 700 !important;
+    line-height: var(--wp--custom--line-height--heading) !important;
+    color: var(--wp--preset--color--text-dark) !important;
+}
+
+.fcom_wp_content h2 {
+    font-family: var(--wp--preset--font-family--poppins) !important;
+    font-size: var(--wp--preset--font-size--heading-2) !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    color: var(--wp--preset--color--text-dark) !important;
+}
+
+.fcom_wp_content h3 {
+    font-family: var(--wp--preset--font-family--poppins) !important;
+    font-size: var(--wp--preset--font-size--heading-3) !important;
+    font-weight: 600 !important;
+    line-height: var(--wp--custom--line-height--subheading) !important;
+    color: var(--wp--preset--color--text-dark) !important;
+}
+
+.fcom_wp_content h4 {
+    font-family: var(--wp--preset--font-family--poppins) !important;
+    font-size: var(--wp--preset--font-size--heading-4) !important;
+    font-weight: 600 !important;
+    line-height: var(--wp--custom--line-height--subheading) !important;
+    color: var(--wp--preset--color--text-dark) !important;
+}
+
+.fcom_wp_content p {
+    font-family: var(--wp--preset--font-family--poppins) !important;
+    font-size: var(--wp--preset--font-size--body) !important;
+    line-height: var(--wp--custom--line-height--body) !important;
+    color: var(--wp--preset--color--text-dark) !important;
+}
+
+.fcom_wp_content a {
+    color: var(--wp--preset--color--primary) !important;
+    text-decoration: underline !important;
+}
+
+.fcom_wp_content a:hover {
+    color: var(--wp--preset--color--secondary) !important;
+}
+
+.fcom_wp_content .wp-block-button__link {
+    background-color: var(--wp--preset--color--primary) !important;
+    color: var(--wp--preset--color--white) !important;
+    border-radius: var(--wp--custom--border-radius--md) !important;
+    font-family: var(--wp--preset--font-family--poppins) !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: var(--wp--preset--shadow--cta) !important;
+}
+
+.fcom_wp_content .wp-block-button__link:hover {
+    background-color: var(--wp--preset--color--primary-hover) !important;
+}
+
+.fcom_wp_content blockquote {
+    border-left: 3px solid var(--wp--preset--color--primary) !important;
+    padding-left: var(--wp--preset--spacing--sm) !important;
+    color: var(--wp--preset--color--text-gray) !important;
+    font-style: italic !important;
+}
+
+.fcom_wp_content hr {
+    background-color: var(--wp--preset--color--border) !important;
+    border: none !important;
+    height: 1px !important;
+}
+
+.fcom_wp_content img {
+    border-radius: var(--wp--custom--border-radius--md) !important;
+    border: 1px solid var(--wp--preset--color--border) !important;
+}
+
+/* ============================================
+   LEÇONS FLUENT COMMUNITY (FRONT)
+   Style spécifique leçons (plus compact)
+   Classe: .fcom_lesson_details
    ============================================ */
 
 .fcom_lesson_details {
@@ -277,26 +329,26 @@ html {
     color: var(--jurible-text-gray) !important;
 }
 
-/* Tailles de texte Fluent Community (DOIT être après .fcom_lesson_details p) */
-.fcom_lesson_details p.has-small-font-size {
+/* Tailles de texte Fluent Community - Leçons */
+.fcom_lesson_details .has-small-font-size {
     font-size: var(--jurible-font-size-small) !important;
 }
 
-.fcom_lesson_details p.has-medium-font-size {
+.fcom_lesson_details .has-medium-font-size {
     font-size: var(--jurible-font-size-medium) !important;
 }
 
-.fcom_lesson_details p.has-large-font-size,
-.fcom_lesson_details p.has-larger-font-size {
+.fcom_lesson_details .has-large-font-size,
+.fcom_lesson_details .has-larger-font-size {
     font-size: var(--jurible-font-size-large) !important;
 }
 
-.fcom_lesson_details p.has-xlarge-font-size,
-.fcom_lesson_details p.has-x-large-font-size {
+.fcom_lesson_details .has-xlarge-font-size,
+.fcom_lesson_details .has-x-large-font-size {
     font-size: var(--jurible-font-size-xlarge) !important;
 }
 
-.fcom_lesson_details p.has-xxlarge-font-size {
+.fcom_lesson_details .has-xxlarge-font-size {
     font-size: var(--jurible-font-size-xxlarge) !important;
 }
 
@@ -335,7 +387,7 @@ html {
     height: 1px !important;
 }
 
-/* Force les couleurs du sommaire */
+/* Force les couleurs du sommaire - Leçons */
 .fcom_lesson_details .jurible-sommaire-list a {
     color: #4A4A4A !important;
 }
@@ -349,17 +401,35 @@ html {
 }
 
 /* ============================================
-   ÉDITEUR (BACK) - Contenu seulement
+   ÉDITEUR FLUENT COMMUNITY (BACK)
+   Classe principale: .fcom_lesson_content
    ============================================ */
 
-.editor-styles-wrapper {
+.fcom_lesson_content {
     font-family: var(--jurible-font-family) !important;
     line-height: var(--jurible-line-height-relaxed);
-    color: var(--jurible-text-dark);
+    color: var(--jurible-text-gray);
 }
 
-.editor-styles-wrapper h2::after,
-.editor-styles-wrapper [data-type="core/heading"] h2::after {
+.fcom_lesson_content h1 {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-h1) !important;
+    font-weight: 700 !important;
+    line-height: var(--jurible-line-height-tight) !important;
+    color: var(--jurible-text-dark) !important;
+}
+
+.fcom_lesson_content h2 {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-h2) !important;
+    font-weight: 600 !important;
+    line-height: var(--jurible-line-height-h2) !important;
+    color: var(--jurible-text-dark) !important;
+    margin-top: clamp(18px, 4vw, 26px) !important;
+    margin-bottom: clamp(18px, 4vw, 26px) !important;
+}
+
+.fcom_lesson_content h2::after {
     content: '';
     display: block;
     width: 60px;
@@ -369,70 +439,7 @@ html {
     border-radius: 2px;
 }
 
-/* Paragraphes */
-.editor-styles-wrapper .wp-block-paragraph,
-.editor-styles-wrapper p {
-    font-family: var(--jurible-font-family) !important;
-    font-size: var(--jurible-font-size-body) !important;
-    line-height: var(--jurible-line-height-p) !important;
-    font-weight: 400 !important;
-    color: var(--jurible-text-gray) !important;
-    margin-bottom: var(--jurible-spacing-m) !important;
-}
-
-/* Tailles de texte dans l'éditeur */
-.editor-styles-wrapper p.has-small-font-size,
-.editor-styles-wrapper .wp-block-paragraph.has-small-font-size {
-    font-size: var(--jurible-font-size-small) !important;
-}
-
-.editor-styles-wrapper p.has-medium-font-size,
-.editor-styles-wrapper .wp-block-paragraph.has-medium-font-size {
-    font-size: var(--jurible-font-size-medium) !important;
-}
-
-.editor-styles-wrapper p.has-large-font-size,
-.editor-styles-wrapper p.has-larger-font-size,
-.editor-styles-wrapper .wp-block-paragraph.has-large-font-size,
-.editor-styles-wrapper .wp-block-paragraph.has-larger-font-size {
-    font-size: var(--jurible-font-size-large) !important;
-}
-
-.editor-styles-wrapper p.has-xlarge-font-size,
-.editor-styles-wrapper p.has-x-large-font-size,
-.editor-styles-wrapper .wp-block-paragraph.has-xlarge-font-size,
-.editor-styles-wrapper .wp-block-paragraph.has-x-large-font-size {
-    font-size: var(--jurible-font-size-xlarge) !important;
-}
-
-.editor-styles-wrapper p.has-xxlarge-font-size,
-.editor-styles-wrapper .wp-block-paragraph.has-xxlarge-font-size {
-    font-size: var(--jurible-font-size-xxlarge) !important;
-}
-
-/* Titres */
-.editor-styles-wrapper h1,
-.editor-styles-wrapper [data-type="core/heading"] h1 {
-    font-family: var(--jurible-font-family) !important;
-    font-size: var(--jurible-font-size-h1) !important;
-    font-weight: 700 !important;
-    line-height: var(--jurible-line-height-tight) !important;
-    color: var(--jurible-text-dark) !important;
-}
-
-.editor-styles-wrapper h2,
-.editor-styles-wrapper [data-type="core/heading"] h2 {
-    font-family: var(--jurible-font-family) !important;
-    font-size: var(--jurible-font-size-h2) !important;
-    font-weight: 600 !important;
-    line-height: var(--jurible-line-height-tight) !important;
-    color: var(--jurible-text-dark) !important;
-    margin-top: clamp(18px, 4vw, 26px) !important;
-    margin-bottom: clamp(18px, 4vw, 26px) !important;
-}
-
-.editor-styles-wrapper h3,
-.editor-styles-wrapper [data-type="core/heading"] h3 {
+.fcom_lesson_content h3 {
     font-family: var(--jurible-font-family) !important;
     font-size: var(--jurible-font-size-h3) !important;
     font-weight: 600 !important;
@@ -442,15 +449,104 @@ html {
     margin-bottom: 1rem !important;
 }
 
-.editor-styles-wrapper h4,
-.editor-styles-wrapper [data-type="core/heading"] h4 {
+.fcom_lesson_content h4 {
     font-family: var(--jurible-font-family) !important;
     font-size: var(--jurible-font-size-h4) !important;
     font-weight: 600 !important;
-    line-height: var(--jurible-line-height-tight) !important;
+    line-height: var(--jurible-line-height-normal) !important;
     color: var(--jurible-text-dark) !important;
     margin-top: 1.25rem !important;
     margin-bottom: 0.75rem !important;
+}
+
+.fcom_lesson_content p {
+    font-family: var(--jurible-font-family) !important;
+    font-size: var(--jurible-font-size-body) !important;
+    line-height: var(--jurible-line-height-p) !important;
+    font-weight: 400 !important;
+    margin-bottom: var(--jurible-spacing-m) !important;
+    color: var(--jurible-text-gray) !important;
+}
+
+/* Tailles de texte dans l'éditeur Fluent */
+.fcom_lesson_content .has-small-font-size {
+    font-size: var(--jurible-font-size-small) !important;
+}
+
+.fcom_lesson_content .has-medium-font-size {
+    font-size: var(--jurible-font-size-medium) !important;
+}
+
+.fcom_lesson_content .has-large-font-size,
+.fcom_lesson_content .has-larger-font-size {
+    font-size: var(--jurible-font-size-large) !important;
+}
+
+.fcom_lesson_content .has-xlarge-font-size,
+.fcom_lesson_content .has-x-large-font-size {
+    font-size: var(--jurible-font-size-xlarge) !important;
+}
+
+.fcom_lesson_content .has-xxlarge-font-size {
+    font-size: var(--jurible-font-size-xxlarge) !important;
+}
+
+.fcom_lesson_content a {
+    color: var(--jurible-primary) !important;
+}
+
+.fcom_lesson_content a:hover {
+    color: var(--jurible-primary-hover) !important;
+}
+
+.fcom_lesson_content blockquote {
+    border-left: 3px solid var(--jurible-primary) !important;
+    padding-left: var(--jurible-spacing-s) !important;
+    color: var(--jurible-text-gray) !important;
+    font-style: italic !important;
+}
+
+.fcom_lesson_content hr {
+    background-color: var(--jurible-border) !important;
+    border: none !important;
+    height: 1px !important;
+}
+
+.fcom_lesson_content img {
+    border-radius: 12px;
+}
+
+.fcom_lesson_content .wp-block-image {
+    margin-top: clamp(1rem, 4vw, 3rem) !important;
+    margin-bottom: clamp(1rem, 4vw, 3rem) !important;
+}
+
+.fcom_lesson_content .wp-block-image img {
+    border: 1px solid var(--jurible-border) !important;
+    border-radius: 12px !important;
+}
+
+.fcom_lesson_content .wp-block-image figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--jurible-text-muted) !important;
+    font-size: var(--jurible-font-size-small) !important;
+    font-style: italic;
+    margin-top: var(--jurible-spacing-xs);
+    text-align: center;
+}
+
+.fcom_lesson_content .wp-block-image figcaption::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239CA3AF'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h12l-4-5z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 /* ============================================
@@ -477,7 +573,28 @@ html.dark {
     --jurible-text-muted: #9CA3AF;
 }
 
-/* Titres en mode sombre */
+/* Mode sombre - Pages WP */
+html.dark .fcom_wp_content {
+    color: var(--wp--preset--color--text-dark) !important;
+}
+
+html.dark .fcom_wp_content h1,
+html.dark .fcom_wp_content h2,
+html.dark .fcom_wp_content h3,
+html.dark .fcom_wp_content h4,
+html.dark .fcom_wp_content p {
+    color: var(--wp--preset--color--text-dark) !important;
+}
+
+html.dark .fcom_wp_content a {
+    color: var(--wp--preset--color--primary) !important;
+}
+
+html.dark .fcom_wp_content a:hover {
+    color: var(--wp--preset--color--secondary) !important;
+}
+
+/* Mode sombre - Leçons */
 html.dark .fcom_lesson_details h1,
 html.dark .fcom_lesson_details h2,
 html.dark .fcom_lesson_details h3,
@@ -485,12 +602,10 @@ html.dark .fcom_lesson_details h4 {
     color: var(--jurible-text-dark) !important;
 }
 
-/* Paragraphes en mode sombre */
 html.dark .fcom_lesson_details p {
     color: var(--jurible-text-gray) !important;
 }
 
-/* Liens en mode sombre (garde la couleur primaire) */
 html.dark .fcom_lesson_details a {
     color: var(--jurible-primary) !important;
 }
@@ -499,18 +614,15 @@ html.dark .fcom_lesson_details a:hover {
     color: var(--jurible-primary-hover) !important;
 }
 
-/* Blockquotes en mode sombre */
 html.dark .fcom_lesson_details blockquote {
     color: var(--jurible-text-gray) !important;
     border-left-color: var(--jurible-primary) !important;
 }
 
-/* HR en mode sombre */
 html.dark .fcom_lesson_details hr {
     background-color: var(--jurible-border) !important;
 }
 
-/* Sommaire en mode sombre */
 html.dark .fcom_lesson_details .jurible-sommaire-list a {
     color: var(--jurible-text-gray) !important;
 }
@@ -520,22 +632,19 @@ html.dark .fcom_lesson_details .jurible-sommaire-list a:hover {
 }
 
 /* ============================================
-   IMAGES - Marges, bordure et légendes avec icône
+   IMAGES - Leçons (style spécifique avec icône)
    ============================================ */
 
-/* Front - Image avec marges */
 .fcom_lesson_details .wp-block-image {
     margin-top: clamp(1rem, 4vw, 3rem) !important;
     margin-bottom: clamp(1rem, 4vw, 3rem) !important;
 }
 
-/* Front - Image avec bordure arrondie */
 .fcom_lesson_details .wp-block-image img {
     border: 1px solid var(--jurible-border) !important;
     border-radius: 12px !important;
 }
 
-/* Front - Légende centrée avec icône */
 .fcom_lesson_details .wp-block-image figcaption {
     display: flex;
     align-items: center;
@@ -559,51 +668,458 @@ html.dark .fcom_lesson_details .jurible-sommaire-list a:hover {
     background-repeat: no-repeat;
 }
 
-/* Éditeur - Image avec marges */
-.editor-styles-wrapper .wp-block-image {
-    margin-top: clamp(1rem, 4vw, 3rem) !important;
-    margin-bottom: clamp(1rem, 4vw, 3rem) !important;
-}
-
-/* Éditeur - Image avec bordure arrondie */
-.editor-styles-wrapper .wp-block-image img {
-    border: 1px solid var(--jurible-border) !important;
-    border-radius: 12px !important;
-}
-
-/* Éditeur - Légende centrée avec icône */
-.editor-styles-wrapper .wp-block-image figcaption {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: var(--jurible-text-muted) !important;
-    font-size: var(--jurible-font-size-small) !important;
-    font-style: italic;
-    margin-top: var(--jurible-spacing-xs);
-    text-align: center;
-}
-
-.editor-styles-wrapper .wp-block-image figcaption::before {
-    content: "";
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239CA3AF'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h12l-4-5z'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
 h3.jurible-current-title {
     margin: 6px !important;
     margin-block-start: 1px !important;
     margin-block-end: 1px !important;
 }
 
-/* Mode sombre - Bordure image */
+/* Mode sombre - Bordure image leçons */
 html.dark .fcom_lesson_details .wp-block-image img {
     border-color: var(--jurible-border) !important;
+}
+
+/* Mode sombre - Bordure image pages WP */
+html.dark .fcom_wp_content img {
+    border-color: var(--wp--preset--color--border) !important;
+}
+
+/* ============================================
+   DARK MODE - Classes WordPress Gutenberg
+   Pour compatibilité des patterns/compositions
+   ============================================ */
+
+/* Backgrounds */
+html.dark .has-white-background-color {
+    background-color: var(--el-bg-color-overlay, #1d1e1f) !important;
+}
+
+html.dark .has-background-background-color {
+    background-color: var(--el-bg-color, #141414) !important;
+}
+
+html.dark .has-muted-background-color {
+    background-color: var(--el-bg-color-overlay, #1d1e1f) !important;
+}
+
+/* Text colors */
+html.dark .has-text-dark-color {
+    color: #F3F4F6 !important;
+}
+
+html.dark .has-text-gray-color {
+    color: #E5E7EB !important;
+}
+
+html.dark .has-text-muted-color {
+    color: #9CA3AF !important;
+}
+
+html.dark .has-black-color {
+    color: #F3F4F6 !important;
+}
+
+/* Borders - Group blocks with borders */
+html.dark .wp-block-group[style*="border-color"] {
+    border-color: var(--el-border-color, #414243) !important;
+}
+
+html.dark .has-border-color {
+    border-color: var(--el-border-color, #414243) !important;
+}
+
+/* Cards and containers with white background */
+html.dark .wp-block-group.has-background {
+    border-color: var(--el-border-color, #414243) !important;
+}
+
+/* Shadows in dark mode - reduce intensity */
+html.dark .has-shadow,
+html.dark [style*="box-shadow"] {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Specific pattern elements */
+html.dark .wp-block-columns.has-background,
+html.dark .wp-block-column.has-background {
+    border-color: var(--el-border-color, #414243) !important;
+}
+
+/* Cover block text should stay visible */
+html.dark .wp-block-cover .has-text-dark-color {
+    color: #F3F4F6 !important;
+}
+
+/* Buttons - keep gradients but ensure visibility */
+html.dark .wp-block-button.is-style-outline .wp-block-button__link {
+    border-color: var(--wp--preset--color--primary) !important;
+    color: var(--wp--preset--color--primary) !important;
+    background: transparent !important;
+}
+
+html.dark .wp-block-button.is-style-outline .wp-block-button__link:hover {
+    background: rgba(176, 0, 29, 0.1) !important;
+}
+
+/* Separators */
+html.dark .wp-block-separator {
+    border-color: var(--el-border-color, #414243) !important;
+    background-color: var(--el-border-color, #414243) !important;
+}
+
+html.dark hr.wp-block-separator {
+    border-color: var(--el-border-color, #414243) !important;
+}
+
+/* Quote blocks */
+html.dark .wp-block-quote {
+    border-left-color: var(--wp--preset--color--primary) !important;
+    color: #E5E7EB !important;
+}
+
+html.dark .wp-block-quote cite {
+    color: #9CA3AF !important;
+}
+
+/* Table blocks */
+html.dark .wp-block-table table {
+    border-color: var(--el-border-color, #414243) !important;
+}
+
+html.dark .wp-block-table td,
+html.dark .wp-block-table th {
+    border-color: var(--el-border-color, #414243) !important;
+}
+
+html.dark .wp-block-table thead {
+    background-color: var(--el-bg-color-overlay, #1d1e1f) !important;
+}
+
+html.dark .wp-block-table tbody tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* List blocks */
+html.dark .wp-block-list li {
+    color: #E5E7EB !important;
+}
+
+html.dark .wp-block-list li::marker {
+    color: var(--wp--preset--color--primary) !important;
+}
+
+/* Headings in patterns */
+html.dark .wp-block-heading {
+    color: #F3F4F6 !important;
+}
+
+/* Paragraphs with explicit color classes */
+html.dark p.has-text-dark-color,
+html.dark p.has-black-color {
+    color: #F3F4F6 !important;
+}
+
+html.dark p.has-text-gray-color {
+    color: #E5E7EB !important;
+}
+
+/* Info/Success/Warning/Error backgrounds in dark mode */
+html.dark .has-info-bg-background-color {
+    background-color: rgba(59, 130, 246, 0.15) !important;
+}
+
+html.dark .has-success-bg-background-color {
+    background-color: rgba(16, 185, 129, 0.15) !important;
+}
+
+html.dark .has-warning-bg-background-color {
+    background-color: rgba(245, 158, 11, 0.15) !important;
+}
+
+html.dark .has-error-bg-background-color {
+    background-color: rgba(239, 68, 68, 0.15) !important;
+}
+
+html.dark .has-secondary-bg-background-color,
+html.dark .has-accent-bg-background-color {
+    background-color: rgba(124, 58, 237, 0.15) !important;
+}
+
+/* Info/Success/Warning/Error text colors */
+html.dark .has-info-text-color {
+    color: #60A5FA !important;
+}
+
+html.dark .has-success-text-color {
+    color: #34D399 !important;
+}
+
+html.dark .has-warning-text-color {
+    color: #FBBF24 !important;
+}
+
+html.dark .has-error-text-color {
+    color: #F87171 !important;
+}
+
+/* Inline images in patterns */
+html.dark .wp-block-image img {
+    border-color: var(--el-border-color, #414243) !important;
+}
+
+/* Spacer blocks - no change needed but ensure visibility if styled */
+html.dark .wp-block-spacer {
+    background: transparent !important;
+}
+
+/* ============================================
+   DARK MODE - Tags (Block Styles)
+   ============================================ */
+
+/* Tag Primary - fond rouge clair, texte rouge */
+html.dark p.is-style-tag-primary {
+    background: rgba(176, 0, 29, 0.2) !important;
+    color: #F87171 !important;
+}
+
+/* Tag Secondary - fond violet clair, texte violet */
+html.dark p.is-style-tag-secondary {
+    background: rgba(124, 58, 237, 0.2) !important;
+    color: #A78BFA !important;
+}
+
+/* Tag Gray - fond sombre, texte clair */
+html.dark p.is-style-tag-gray {
+    background: var(--el-bg-color-overlay, #1d1e1f) !important;
+    color: #E5E7EB !important;
+}
+
+/* Tag Success */
+html.dark p.is-style-tag-success {
+    background: rgba(16, 185, 129, 0.2) !important;
+    color: #34D399 !important;
+}
+
+/* Tag Warning */
+html.dark p.is-style-tag-warning {
+    background: rgba(245, 158, 11, 0.2) !important;
+    color: #FBBF24 !important;
+}
+
+/* Tag Error */
+html.dark p.is-style-tag-error {
+    background: rgba(239, 68, 68, 0.2) !important;
+    color: #F87171 !important;
+}
+
+/* Tag Info */
+html.dark p.is-style-tag-info {
+    background: rgba(59, 130, 246, 0.2) !important;
+    color: #60A5FA !important;
+}
+
+/* Tag Dark - inverse en dark mode */
+html.dark p.is-style-tag-dark {
+    background: #F3F4F6 !important;
+    color: #1A1A1A !important;
+}
+
+/* Tag Category (post terms) */
+html.dark .is-style-tag-category a {
+    background: var(--el-bg-color-overlay, #1d1e1f) !important;
+    color: #E5E7EB !important;
+}
+
+/* ============================================
+   DARK MODE - Buttons (Block Styles)
+   ============================================ */
+
+/* Primary button - gradient reste visible, texte blanc */
+html.dark .wp-block-button.is-style-primary .wp-block-button__link {
+    color: #FFFFFF !important;
+}
+
+/* Secondary button - fond clair, texte sombre */
+html.dark .wp-block-button.is-style-secondary .wp-block-button__link {
+    background: #F3F4F6 !important;
+    color: #1A1A1A !important;
+}
+
+html.dark .wp-block-button.is-style-secondary .wp-block-button__link:hover {
+    background: #FFFFFF !important;
+}
+
+/* Outline button */
+html.dark .wp-block-button.is-style-outline .wp-block-button__link {
+    border-color: var(--wp--preset--color--primary) !important;
+    color: #F87171 !important;
+    background: transparent !important;
+}
+
+html.dark .wp-block-button.is-style-outline .wp-block-button__link:hover {
+    background: var(--wp--preset--color--primary) !important;
+    color: #FFFFFF !important;
+}
+
+/* Outline Dark - pour fond gris/muted */
+html.dark .wp-block-button.is-style-outline-dark .wp-block-button__link {
+    border-color: #E5E7EB !important;
+    color: #E5E7EB !important;
+    background: transparent !important;
+}
+
+html.dark .wp-block-button.is-style-outline-dark .wp-block-button__link:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #FFFFFF !important;
+}
+
+/* Ghost button */
+html.dark .wp-block-button.is-style-ghost .wp-block-button__link {
+    color: #E5E7EB !important;
+}
+
+html.dark .wp-block-button.is-style-ghost .wp-block-button__link:hover {
+    background: var(--el-bg-color-overlay, #1d1e1f) !important;
+}
+
+/* Link button */
+html.dark .wp-block-button.is-style-link .wp-block-button__link {
+    color: #F87171 !important;
+}
+
+html.dark .wp-block-button.is-style-link .wp-block-button__link:hover {
+    color: #FCA5A5 !important;
+}
+
+/* Gray button */
+html.dark .wp-block-button.is-style-gray .wp-block-button__link {
+    background: var(--el-bg-color-overlay, #1d1e1f) !important;
+    color: #E5E7EB !important;
+    border-color: var(--el-border-color, #414243) !important;
+}
+
+html.dark .wp-block-button.is-style-gray .wp-block-button__link:hover {
+    background: var(--el-border-color, #414243) !important;
+}
+
+/* Accent button - violet reste visible */
+html.dark .wp-block-button.is-style-accent .wp-block-button__link {
+    color: #FFFFFF !important;
+}
+
+/* Destructive button */
+html.dark .wp-block-button.is-style-destructive .wp-block-button__link {
+    color: #FFFFFF !important;
+}
+
+/* CTA White - sur fond sombre, devient sombre */
+html.dark .wp-block-button.is-style-cta-white .wp-block-button__link,
+html.dark .wp-block-button.is-style-primary-white .wp-block-button__link {
+    background: var(--el-bg-color-overlay, #1d1e1f) !important;
+    color: #F87171 !important;
+    border: 1px solid var(--el-border-color, #414243) !important;
+}
+
+html.dark .wp-block-button.is-style-cta-white .wp-block-button__link:hover,
+html.dark .wp-block-button.is-style-primary-white .wp-block-button__link:hover {
+    background: var(--el-border-color, #414243) !important;
+}
+
+/* ============================================
+   DARK MODE - Badges (Hero patterns)
+   ============================================ */
+
+html.dark .hero-simple__badge,
+html.dark .hero-produit__badge {
+    background: rgba(124, 58, 237, 0.2) !important;
+    color: #A78BFA !important;
+    border-color: rgba(124, 58, 237, 0.3) !important;
+}
+
+/* ============================================
+   DARK MODE - Hero Patterns
+   ============================================ */
+
+/* Hero Simple - fond gradient devient sombre */
+html.dark .hero-simple {
+    background: linear-gradient(180deg, var(--el-bg-color, #141414) 0%, #1a1a2e 50%, #16213e 100%) !important;
+}
+
+html.dark .hero-simple__title {
+    color: #F3F4F6 !important;
+}
+
+html.dark .hero-simple__subtitle {
+    color: #E5E7EB !important;
+}
+
+/* Hero Produit - fond gradient devient sombre */
+html.dark .hero-produit {
+    background: linear-gradient(180deg, var(--el-bg-color, #141414) 0%, #1a1a2e 50%, #1e1b4b 100%) !important;
+}
+
+html.dark .hero-produit__title {
+    color: #F3F4F6 !important;
+}
+
+html.dark .hero-produit__meta,
+html.dark .hero-produit__subtitle {
+    color: #E5E7EB !important;
+}
+
+/* Hero tags group */
+html.dark .hero-produit__tags p {
+    background: var(--el-bg-color-overlay, #1d1e1f) !important;
+    color: #E5E7EB !important;
+}
+
+/* ============================================
+   DARK MODE - Cards with white background
+   ============================================ */
+
+html.dark .card-article,
+html.dark .equipe-grille__card {
+    background: var(--el-bg-color-overlay, #1d1e1f) !important;
+    border-color: var(--el-border-color, #414243) !important;
+}
+
+html.dark .card-article h3,
+html.dark .equipe-grille__card h3 {
+    color: #F3F4F6 !important;
+}
+
+html.dark .card-article p,
+html.dark .equipe-grille__card p {
+    color: #E5E7EB !important;
+}
+
+/* Credentials list in team cards */
+html.dark .enseignant-credentials {
+    color: #E5E7EB !important;
+}
+
+/* ============================================
+   DARK MODE - Section backgrounds
+   ============================================ */
+
+/* Sections with muted background */
+html.dark .section-articles-grid,
+html.dark .section-articles-lies {
+    background-color: var(--el-bg-color, #141414) !important;
+}
+
+/* Sections with white background */
+html.dark .equipe-section,
+html.dark .equipe-grille-section,
+html.dark .equipe-teaser-section,
+html.dark .comments-section,
+html.dark .section-bio-auteur {
+    background-color: var(--el-bg-color-overlay, #1d1e1f) !important;
+}
+
+/* Bio auteur inner card */
+html.dark .section-bio-auteur .has-muted-background-color {
+    background-color: var(--el-bg-color, #141414) !important;
 }
 
 /* ===========================================
