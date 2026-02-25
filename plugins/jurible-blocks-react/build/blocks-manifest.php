@@ -945,6 +945,9 @@ Commentaire d\'arrêt'
 			'spacing' => array(
 				'margin' => true,
 				'padding' => false
+			),
+			'typography' => array(
+				'textAlign' => true
 			)
 		),
 		'attributes' => array(
@@ -992,6 +995,9 @@ Commentaire d\'arrêt'
 			'spacing' => array(
 				'margin' => true,
 				'padding' => false
+			),
+			'typography' => array(
+				'textAlign' => true
 			)
 		),
 		'attributes' => array(
@@ -1048,6 +1054,9 @@ Commentaire d\'arrêt'
 			'spacing' => array(
 				'margin' => true,
 				'padding' => false
+			),
+			'typography' => array(
+				'textAlign' => true
 			)
 		),
 		'attributes' => array(
@@ -1103,6 +1112,9 @@ Commentaire d\'arrêt'
 			'spacing' => array(
 				'margin' => true,
 				'padding' => false
+			),
+			'typography' => array(
+				'textAlign' => true
 			)
 		),
 		'attributes' => array(
