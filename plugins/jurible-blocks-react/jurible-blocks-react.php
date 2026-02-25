@@ -38,6 +38,10 @@ function jurible_blocks_react_init() {
 	register_block_type( __DIR__ . '/build/method-tabs' );
 	// register_block_type( __DIR__ . '/build/footer-accordion' ); // Désactivé - utilise CSS/JS à la place
 	register_block_type( __DIR__ . '/build/playlist' );
+	register_block_type( __DIR__ . '/build/checkout-included' );
+	register_block_type( __DIR__ . '/build/checkout-reassurance' );
+	register_block_type( __DIR__ . '/build/checkout-social-proof' );
+	register_block_type( __DIR__ . '/build/checkout-testimonial' );
 }
 add_action( 'init', 'jurible_blocks_react_init' );
 
