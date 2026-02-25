@@ -65,6 +65,10 @@
 .header-minimal__secure svg {
 	color: var(--wp--preset--color--text-muted);
 	flex-shrink: 0;
+	width: 14px;
+	height: 14px;
+	position: relative;
+	top: 1px;
 }
 
 /* ==========================================================================
