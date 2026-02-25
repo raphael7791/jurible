@@ -1138,6 +1138,15 @@ html.dark .section-bio-auteur .has-muted-background-color {
 }
 
 /* ===========================================
+   ACADEMIC GENERATOR - Fixes Fluent Community
+   =========================================== */
+
+.aga-submit-btn svg,
+.aga-submit-btn svg path {
+    stroke: #FFFFFF !important;
+}
+
+/* ===========================================
    QUIZ FLUENT COMMUNITY
    =========================================== */
 
