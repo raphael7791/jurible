@@ -255,6 +255,15 @@ html {
     font-style: italic !important;
 }
 
+.fcom_wp_content ul,
+.fcom_wp_content ol,
+.fcom_wp_content li {
+    font-family: var(--wp--preset--font-family--poppins) !important;
+    font-size: var(--wp--preset--font-size--body) !important;
+    line-height: var(--wp--custom--line-height--body) !important;
+    color: var(--wp--preset--color--text-dark) !important;
+}
+
 .fcom_wp_content hr {
     background-color: var(--wp--preset--color--border) !important;
     border: none !important;
