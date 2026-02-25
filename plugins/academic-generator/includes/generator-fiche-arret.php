@@ -133,9 +133,7 @@ Attendu que..."
                                       required
                                       maxlength="12000"></textarea>
                             <button type="submit" class="aga-submit-btn" title="Générer la fiche">
-                                <svg width="20" height="20" viewBox="0 0 24 24" style="display:block!important;visibility:visible!important;opacity:1!important;">
-                                    <path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="#FFFFFF" stroke-width="2.5" style="stroke:#FFFFFF!important;"/>
-                                </svg>
+                                <span style="color:#FFFFFF!important;font-size:20px;line-height:1;">↑</span>
                             </button>
                         </div>
                     </div>
