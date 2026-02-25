@@ -605,6 +605,13 @@
       }
     }
   },
+  "customTemplates": [
+    {
+      "name": "page-minimal",
+      "title": "Page Minimale (Checkout)",
+      "postTypes": ["page"]
+    }
+  ],
   "templateParts": [
     {
       "name": "header",
