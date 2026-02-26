@@ -1257,3 +1257,382 @@ function jurible_render_block_shortcodes($block_content, $block)
 }
 add_filter('render_block', 'jurible_render_block_shortcodes', 10, 2);
 
+
+# ==========================================================================
+# CUSTOM POST TYPE : COURS
+# ==========================================================================
+
+/**
+ * Enregistrer le CPT "course" pour les pages de vente des cours de l'Académie
+ */
+function jurible_register_course_cpt()
+{
+    register_post_type('course', [
+        'labels' => [
+            'name'               => __('Cours', 'jurible'),
+            'singular_name'      => __('Cours', 'jurible'),
+            'add_new'            => __('Ajouter un cours', 'jurible'),
+            'add_new_item'       => __('Ajouter un nouveau cours', 'jurible'),
+            'edit_item'          => __('Modifier le cours', 'jurible'),
+            'new_item'           => __('Nouveau cours', 'jurible'),
+            'view_item'          => __('Voir le cours', 'jurible'),
+            'search_items'       => __('Rechercher des cours', 'jurible'),
+            'not_found'          => __('Aucun cours trouvé', 'jurible'),
+            'not_found_in_trash' => __('Aucun cours dans la corbeille', 'jurible'),
+            'all_items'          => __('Tous les cours', 'jurible'),
+            'menu_name'          => __('Cours', 'jurible'),
+        ],
+        'public'              => true,
+        'publicly_queryable'  => true,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'show_in_rest'        => true, // Gutenberg support
+        'query_var'           => true,
+        'rewrite'             => ['slug' => 'cours', 'with_front' => false],
+        'capability_type'     => 'post',
+        'has_archive'         => true,
+        'hierarchical'        => false,
+        'menu_position'       => 5,
+        'menu_icon'           => 'dashicons-welcome-learn-more',
+        'supports'            => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'],
+    ]);
+}
+add_action('init', 'jurible_register_course_cpt');
+
+
+/**
+ * Charger la lightbox sur les pages cours (comme pour les produits)
+ */
+function jurible_enqueue_course_lightbox()
+{
+    if (is_singular('course')) {
+        wp_enqueue_style(
+            "jurible-lightbox",
+            get_template_directory_uri() . "/assets/css/lightbox.css",
+            [],
+            filemtime(get_template_directory() . "/assets/css/lightbox.css")
+        );
+        wp_enqueue_script(
+            "jurible-lightbox",
+            get_template_directory_uri() . "/assets/js/lightbox.js",
+            [],
+            filemtime(get_template_directory() . "/assets/js/lightbox.js"),
+            true
+        );
+    }
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_course_lightbox");
+
+
+# ==========================================================================
+# ACF FIELDS : COURS (enregistrement programmatique)
+# ==========================================================================
+
+/**
+ * Enregistrer les champs ACF pour le CPT "course"
+ * Ces champs sont utilisés dans le template single-course.html
+ */
+function jurible_register_course_acf_fields()
+{
+    if (!function_exists('acf_add_local_field_group')) {
+        return;
+    }
+
+    acf_add_local_field_group([
+        'key' => 'group_course_fields',
+        'title' => 'Cours - Champs dynamiques',
+        'fields' => [
+            // === SECTION : HERO ===
+            [
+                'key' => 'field_course_tab_hero',
+                'label' => 'Hero',
+                'type' => 'tab',
+            ],
+            [
+                'key' => 'field_course_badge_text',
+                'label' => 'Badge',
+                'name' => 'badge_text',
+                'type' => 'text',
+                'default_value' => 'Cours complet',
+                'placeholder' => 'Ex: Cours complet, Nouveau, Populaire',
+            ],
+            [
+                'key' => 'field_course_niveau',
+                'label' => 'Niveau',
+                'name' => 'niveau',
+                'type' => 'select',
+                'choices' => [
+                    'L1' => 'L1',
+                    'L2' => 'L2',
+                    'L3' => 'L3',
+                    'M1' => 'M1',
+                    'M2' => 'M2',
+                ],
+                'default_value' => 'L2',
+            ],
+            [
+                'key' => 'field_course_semestre',
+                'label' => 'Semestre',
+                'name' => 'semestre',
+                'type' => 'select',
+                'choices' => [
+                    'S1' => 'Semestre 1',
+                    'S2' => 'Semestre 2',
+                    'Annuel' => 'Annuel',
+                ],
+                'default_value' => 'S1',
+            ],
+            [
+                'key' => 'field_course_titre_cours',
+                'label' => 'Titre du cours',
+                'name' => 'titre_cours',
+                'type' => 'text',
+                'required' => 1,
+                'placeholder' => 'Ex: Droit des obligations',
+            ],
+            [
+                'key' => 'field_course_sous_titre',
+                'label' => 'Sous-titre / Description courte',
+                'name' => 'sous_titre',
+                'type' => 'textarea',
+                'rows' => 2,
+                'placeholder' => 'Ex: Maîtrisez tous les concepts essentiels avec nos vidéos, fiches et exercices.',
+            ],
+            [
+                'key' => 'field_course_matiere_name',
+                'label' => 'Nom de la matière',
+                'name' => 'matiere_name',
+                'type' => 'text',
+                'required' => 1,
+                'placeholder' => 'Ex: droit des obligations',
+                'instructions' => 'Utilisé dans les titres dynamiques (sans majuscule)',
+            ],
+            [
+                'key' => 'field_course_image_hero',
+                'label' => 'Image Hero',
+                'name' => 'image_hero',
+                'type' => 'image',
+                'return_format' => 'url',
+                'preview_size' => 'medium',
+            ],
+            [
+                'key' => 'field_course_lien_inscription',
+                'label' => 'Lien d\'inscription',
+                'name' => 'lien_inscription',
+                'type' => 'url',
+                'default_value' => '/academie',
+            ],
+
+            // === SECTION : AUTEUR ===
+            [
+                'key' => 'field_course_tab_auteur',
+                'label' => 'Auteur',
+                'type' => 'tab',
+            ],
+            [
+                'key' => 'field_course_auteur_nom',
+                'label' => 'Nom de l\'auteur',
+                'name' => 'auteur_nom',
+                'type' => 'text',
+                'default_value' => 'Raphaël Briguet-Lamarre',
+            ],
+            [
+                'key' => 'field_course_auteur_titre',
+                'label' => 'Titre / Fonction',
+                'name' => 'auteur_titre',
+                'type' => 'text',
+                'default_value' => 'Ex-avocat, chargé d\'enseignement',
+            ],
+            [
+                'key' => 'field_course_texte_section_auteur',
+                'label' => 'Texte section auteur',
+                'name' => 'texte_section_auteur',
+                'type' => 'textarea',
+                'rows' => 3,
+                'instructions' => 'Texte additionnel sous la section équipe (optionnel)',
+            ],
+            [
+                'key' => 'field_course_texte_faq_auteur',
+                'label' => 'Réponse FAQ "Qui est l\'auteur"',
+                'name' => 'texte_faq_auteur',
+                'type' => 'textarea',
+                'rows' => 3,
+                'default_value' => 'Ce cours a été créé par notre équipe pédagogique composée d\'avocats, doctorants et chargés d\'enseignement, tous titulaires d\'un Master 2 minimum.',
+            ],
+
+            // === SECTION : AVIS ===
+            [
+                'key' => 'field_course_tab_avis',
+                'label' => 'Avis',
+                'type' => 'tab',
+            ],
+            [
+                'key' => 'field_course_note_moyenne',
+                'label' => 'Note moyenne',
+                'name' => 'note_moyenne',
+                'type' => 'number',
+                'default_value' => 4.8,
+                'min' => 1,
+                'max' => 5,
+                'step' => 0.1,
+            ],
+            [
+                'key' => 'field_course_nombre_avis',
+                'label' => 'Nombre d\'avis',
+                'name' => 'nombre_avis',
+                'type' => 'number',
+                'default_value' => 150,
+            ],
+
+            // === SECTION : STATISTIQUES ===
+            [
+                'key' => 'field_course_tab_stats',
+                'label' => 'Statistiques',
+                'type' => 'tab',
+            ],
+            [
+                'key' => 'field_course_videos_count',
+                'label' => 'Nombre de vidéos',
+                'name' => 'videos_count',
+                'type' => 'number',
+                'default_value' => 30,
+            ],
+            [
+                'key' => 'field_course_duree_totale',
+                'label' => 'Durée totale',
+                'name' => 'duree_totale',
+                'type' => 'text',
+                'default_value' => '12h',
+                'placeholder' => 'Ex: 12h, 8h30',
+            ],
+            [
+                'key' => 'field_course_qcm_count',
+                'label' => 'Nombre de QCM',
+                'name' => 'qcm_count',
+                'type' => 'number',
+                'default_value' => 200,
+            ],
+            [
+                'key' => 'field_course_flashcards_count',
+                'label' => 'Nombre de flashcards',
+                'name' => 'flashcards_count',
+                'type' => 'number',
+                'default_value' => 150,
+            ],
+            [
+                'key' => 'field_course_annales_count',
+                'label' => 'Nombre d\'annales',
+                'name' => 'annales_count',
+                'type' => 'number',
+                'default_value' => 10,
+            ],
+
+            // === SECTION : PROGRAMME ===
+            [
+                'key' => 'field_course_tab_programme',
+                'label' => 'Programme',
+                'type' => 'tab',
+            ],
+            [
+                'key' => 'field_course_texte_section_programme',
+                'label' => 'Texte section programme',
+                'name' => 'texte_section_programme',
+                'type' => 'textarea',
+                'rows' => 4,
+                'default_value' => 'Ce cours couvre l\'intégralité du programme universitaire. Chaque chapitre est accompagné de vidéos explicatives, de fiches de synthèse et d\'exercices corrigés.',
+            ],
+            [
+                'key' => 'field_course_image_sommaire',
+                'label' => 'Image du programme/sommaire',
+                'name' => 'image_sommaire',
+                'type' => 'image',
+                'return_format' => 'url',
+                'preview_size' => 'medium',
+            ],
+
+            // === SECTION : PAIN POINTS ===
+            [
+                'key' => 'field_course_tab_pain',
+                'label' => 'Pain Points',
+                'type' => 'tab',
+            ],
+            [
+                'key' => 'field_course_pain_1_titre',
+                'label' => 'Pain Point 1 - Titre',
+                'name' => 'pain_1_titre',
+                'type' => 'text',
+                'default_value' => 'Les manuels sont trop longs',
+            ],
+            [
+                'key' => 'field_course_pain_1_description',
+                'label' => 'Pain Point 1 - Description',
+                'name' => 'pain_1_description',
+                'type' => 'textarea',
+                'rows' => 2,
+                'default_value' => 'Des centaines de pages sans hiérarchie : impossible de savoir ce qui tombera au partiel.',
+            ],
+            [
+                'key' => 'field_course_pain_2_titre',
+                'label' => 'Pain Point 2 - Titre',
+                'name' => 'pain_2_titre',
+                'type' => 'text',
+                'default_value' => 'Vos notes sont incomplètes',
+            ],
+            [
+                'key' => 'field_course_pain_2_description',
+                'label' => 'Pain Point 2 - Description',
+                'name' => 'pain_2_description',
+                'type' => 'textarea',
+                'rows' => 2,
+                'default_value' => 'Le cours va trop vite en amphi, et vos notes manquent de structure et de précision.',
+            ],
+            [
+                'key' => 'field_course_pain_3_titre',
+                'label' => 'Pain Point 3 - Titre',
+                'name' => 'pain_3_titre',
+                'type' => 'text',
+                'default_value' => 'Pas de retour sur vos exercices',
+            ],
+            [
+                'key' => 'field_course_pain_3_description',
+                'label' => 'Pain Point 3 - Description',
+                'name' => 'pain_3_description',
+                'type' => 'textarea',
+                'rows' => 2,
+                'default_value' => 'Vous faites des exercices mais sans savoir si vous êtes sur la bonne voie.',
+            ],
+            [
+                'key' => 'field_course_pain_4_titre',
+                'label' => 'Pain Point 4 - Titre',
+                'name' => 'pain_4_titre',
+                'type' => 'text',
+                'default_value' => 'Vous manquez de temps',
+            ],
+            [
+                'key' => 'field_course_pain_4_description',
+                'label' => 'Pain Point 4 - Description',
+                'name' => 'pain_4_description',
+                'type' => 'textarea',
+                'rows' => 2,
+                'default_value' => 'Entre les TD, les autres matières et la vie perso, vous n\'avez pas le temps de tout réviser.',
+            ],
+        ],
+        'location' => [
+            [
+                [
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'course',
+                ],
+            ],
+        ],
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'active' => true,
+    ]);
+}
+add_action('acf/init', 'jurible_register_course_acf_fields');
+
