@@ -1632,6 +1632,7 @@ function jurible_register_course_acf_fields()
                 'required' => 1,
                 'placeholder' => 'Ex: droit des obligations',
                 'instructions' => 'Utilisé pour générer automatiquement : Badge "Cours complet de [matière]" et Titre "Maîtrisez le [matière]"',
+                'show_in_rest' => true,
             ],
             [
                 'key' => 'field_course_sous_titre',
@@ -1640,6 +1641,7 @@ function jurible_register_course_acf_fields()
                 'type' => 'textarea',
                 'rows' => 2,
                 'placeholder' => 'Ex: Maîtrisez tous les concepts essentiels avec nos vidéos, fiches et exercices.',
+                'show_in_rest' => true,
             ],
             [
                 'key' => 'field_course_video_url',
@@ -1648,6 +1650,7 @@ function jurible_register_course_acf_fields()
                 'type' => 'url',
                 'placeholder' => 'https://www.youtube.com/watch?v=...',
                 'instructions' => 'URL YouTube ou Vimeo pour l\'embed dans la card hero',
+                'show_in_rest' => true,
             ],
 
             // === SECTION : AUTEUR ===
@@ -1664,6 +1667,7 @@ function jurible_register_course_acf_fields()
                 'rows' => 4,
                 'placeholder' => 'Parmi eux, Raphaël est l\'auteur de ce cours. Ancien avocat inscrit au barreau et titulaire du Master 2...',
                 'instructions' => 'Texte de présentation de l\'auteur du cours',
+                'show_in_rest' => true,
             ],
 
             // === SECTION : PROGRAMME ===
@@ -1679,6 +1683,7 @@ function jurible_register_course_acf_fields()
                 'type' => 'textarea',
                 'rows' => 4,
                 'default_value' => 'Ce cours couvre l\'intégralité du programme universitaire. Chaque chapitre est accompagné de vidéos explicatives, de fiches de synthèse et d\'exercices corrigés.',
+                'show_in_rest' => true,
             ],
             [
                 'key' => 'field_course_sommaire_cours',
@@ -1701,6 +1706,7 @@ function jurible_register_course_acf_fields()
 ## Thème 2 — La source du pouvoir politique
 - Cours n°4 - La notion de souveraineté
 - Cours n°5 - Les modes d\'exercice du pouvoir',
+                'show_in_rest' => true,
             ],
             // === SECTION : SOLUTION ===
             [
@@ -1716,6 +1722,7 @@ function jurible_register_course_acf_fields()
                 'rows' => 2,
                 'default_value' => 'Tout ce dont vous avez besoin pour comprendre et réussir vos examens.',
                 'placeholder' => 'Ex: Tout ce dont vous avez besoin pour comprendre les institutions de la Vème République...',
+                'show_in_rest' => true,
             ],
 
         ],
