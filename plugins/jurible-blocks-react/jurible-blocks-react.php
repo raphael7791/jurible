@@ -46,6 +46,23 @@ function jurible_blocks_react_init() {
 add_action( 'init', 'jurible_blocks_react_init' );
 
 /**
+ * Register block category for Jurible blocks
+ */
+function jurible_blocks_react_register_block_category( $categories ) {
+	return array_merge(
+		array(
+			array(
+				'slug'  => 'jurible',
+				'title' => __( 'Jurible', 'jurible-blocks-react' ),
+				'icon'  => 'welcome-learn-more',
+			),
+		),
+		$categories
+	);
+}
+add_filter( 'block_categories_all', 'jurible_blocks_react_register_block_category', 10, 1 );
+
+/**
  * Register block pattern category
  */
 function jurible_blocks_react_register_pattern_category() {
