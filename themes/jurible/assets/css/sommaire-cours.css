@@ -1,0 +1,186 @@
+/* ==========================================================================
+   SOMMAIRE COURS - Affichage avec badges de type
+   ========================================================================== */
+
+.sommaire-cours {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--wp--preset--color--gray-200, #e5e7eb);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Scrollbar custom */
+.sommaire-cours::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sommaire-cours::-webkit-scrollbar-track {
+    background: var(--wp--preset--color--gray-100, #f3f4f6);
+    border-radius: 3px;
+    margin: 8px 0;
+}
+
+.sommaire-cours::-webkit-scrollbar-thumb {
+    background: var(--wp--preset--color--gray-300, #d1d5db);
+    border-radius: 3px;
+}
+
+.sommaire-cours::-webkit-scrollbar-thumb:hover {
+    background: var(--wp--preset--color--gray-400, #9ca3af);
+}
+
+/* Firefox scrollbar */
+.sommaire-cours {
+    scrollbar-width: thin;
+    scrollbar-color: var(--wp--preset--color--gray-300, #d1d5db) var(--wp--preset--color--gray-100, #f3f4f6);
+}
+
+/* Theme */
+.sommaire-cours__theme {
+    margin-bottom: var(--wp--preset--spacing--md, 16px);
+    padding-bottom: var(--wp--preset--spacing--sm, 12px);
+    border-bottom: 1px solid var(--wp--preset--color--gray-200, #e5e7eb);
+}
+
+.sommaire-cours__theme:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.sommaire-cours__theme-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--wp--preset--color--primary, #4A90D9);
+    margin: 0 0 var(--wp--preset--spacing--xs, 8px) 0;
+}
+
+/* Items list */
+.sommaire-cours__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sommaire-cours__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 13px;
+    color: var(--wp--preset--color--text-gray, #6b7280);
+}
+
+.sommaire-cours__item:last-child {
+    padding-bottom: 0;
+}
+
+/* Badge */
+.sommaire-cours__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Badge colors by type - matching platform colors */
+
+/* Leçon - Blue */
+.sommaire-cours__badge--lecon {
+    background: rgba(74, 144, 217, 0.15);
+    color: #4A90D9;
+}
+
+/* QCM - Green */
+.sommaire-cours__badge--qcm {
+    background: rgba(52, 199, 89, 0.15);
+    color: #22c55e;
+}
+
+/* Flashcards - Orange/Yellow */
+.sommaire-cours__badge--flashcard {
+    background: rgba(245, 158, 11, 0.15);
+    color: #d97706;
+}
+
+/* Fiche-arret - Yellow/Green */
+.sommaire-cours__badge--fiche-arret {
+    background: rgba(163, 230, 53, 0.2);
+    color: #65a30d;
+}
+
+/* All exercise types - Green */
+.sommaire-cours__badge--cas-pratique,
+.sommaire-cours__badge--dissertation,
+.sommaire-cours__badge--question,
+.sommaire-cours__badge--analyse-arret,
+.sommaire-cours__badge--commentaire-arret,
+.sommaire-cours__badge--commentaire-texte,
+.sommaire-cours__badge--commentaire {
+    background: rgba(52, 211, 153, 0.15);
+    color: #059669;
+}
+
+/* Annexe - Gray */
+.sommaire-cours__badge--annexe {
+    background: rgba(107, 114, 128, 0.12);
+    color: #6B7280;
+}
+
+/* Annale - Orange */
+.sommaire-cours__badge--annale {
+    background: rgba(255, 149, 0, 0.15);
+    color: #FF9500;
+}
+
+/* Fiche vidéo - Red */
+.sommaire-cours__badge--fiche-video {
+    background: rgba(255, 59, 48, 0.12);
+    color: #FF3B30;
+}
+
+/* Mindmap - Cyan */
+.sommaire-cours__badge--mindmap {
+    background: rgba(90, 200, 250, 0.15);
+    color: #0ea5e9;
+}
+
+/* Video - Pink */
+.sommaire-cours__badge--video {
+    background: rgba(255, 45, 85, 0.12);
+    color: #FF2D55;
+}
+
+/* Item title */
+.sommaire-cours__item-title {
+    flex: 1;
+    line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sommaire-cours {
+        max-height: 300px;
+    }
+
+    .sommaire-cours__item {
+        flex-wrap: wrap;
+    }
+
+    .sommaire-cours__badge {
+        font-size: 9px;
+        padding: 2px 6px;
+    }
+}

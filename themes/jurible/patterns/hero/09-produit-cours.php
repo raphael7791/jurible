@@ -23,9 +23,6 @@
 <h1 class="wp-block-heading hero-produit__title has-text-dark-color has-text-color">Maîtrisez le <mark style="background:linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">Droit constitutionnel</mark></h1>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"className":"hero-produit__meta"} -->
-<p class="hero-produit__meta">Principes fondamentaux (S1) – Licence 1</p>
-<!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"hero-produit__subtitle"} -->
 <p class="hero-produit__subtitle">Un cours conçu pour comprendre et mémoriser facilement tout le programme de droit constitutionnel.</p>
@@ -34,7 +31,7 @@
 <!-- wp:group {"className":"hero-produit__tags","layout":{"type":"flex","flexWrap":"wrap"}} -->
 <div class="wp-block-group hero-produit__tags">
 <!-- wp:paragraph {"className":"is-style-tag-gray"} -->
-<p class="is-style-tag-gray">🎬 20 vidéos</p>
+<p class="is-style-tag-gray">🎬 Vidéos</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"is-style-tag-gray"} -->
@@ -42,11 +39,11 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"is-style-tag-gray"} -->
-<p class="is-style-tag-gray">✅ 200+ QCM</p>
+<p class="is-style-tag-gray">✅ QCM</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"is-style-tag-gray"} -->
-<p class="is-style-tag-gray">🗂️ 200+ Flashcards</p>
+<p class="is-style-tag-gray">🗂️ Flashcards</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"is-style-tag-gray"} -->
@@ -62,11 +59,11 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"hero-produit__rating"} -->
-<p class="hero-produit__rating">4.8/5</p>
+<p class="hero-produit__rating">4,7/5</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"hero-produit__rating-count"} -->
-<p class="hero-produit__rating-count">basé sur 320 avis</p>
+<p class="hero-produit__rating-count">basé sur +150 avis</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
@@ -104,7 +101,7 @@
 <div class="wp-block-group hero-produit__card-body">
 
 <!-- wp:paragraph {"className":"hero-produit__card-title"} -->
-<p class="hero-produit__card-title">Inclus dans l'abonnement Jurible</p>
+<p class="hero-produit__card-title">Inclus dans l'abonnement AideAuxTD</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:group {"className":"hero-produit__card-features","layout":{"type":"flex","orientation":"vertical"}} -->
@@ -118,7 +115,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"hero-produit__card-feature"} -->
-<p class="hero-produit__card-feature"><span class="hero-produit__card-feature-icon">✅</span> Outils IA (fiches d'arrêt, plans…)</p>
+<p class="hero-produit__card-feature"><span class="hero-produit__card-feature-icon">✅</span> Outils IA (générateurs d'exercices juridiques)</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"hero-produit__card-feature"} -->
@@ -129,8 +126,12 @@
 
 <!-- wp:group {"className":"hero-produit__price-row","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"baseline"}} -->
 <div class="wp-block-group hero-produit__price-row">
+<!-- wp:paragraph {"className":"hero-produit__price-label","style":{"typography":{"fontWeight":"400"}},"textColor":"text-gray"} -->
+<p class="hero-produit__price-label has-text-gray-color has-text-color" style="font-weight:400">À partir de</p>
+<!-- /wp:paragraph -->
+
 <!-- wp:paragraph {"className":"hero-produit__price"} -->
-<p class="hero-produit__price">29€</p>
+<p class="hero-produit__price">20€</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"hero-produit__price-period"} -->

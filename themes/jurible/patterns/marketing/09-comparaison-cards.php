@@ -40,7 +40,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3,"textColor":"text-dark"} -->
-<h3 class="wp-block-heading has-text-dark-color has-text-color">Sans Jurible</h3>
+<h3 class="wp-block-heading has-text-dark-color has-text-color">Sans AideAuxTD</h3>
 <!-- /wp:heading -->
 
 </div>
@@ -86,7 +86,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3,"textColor":"success"} -->
-<h3 class="wp-block-heading has-success-color has-text-color">Avec Jurible</h3>
+<h3 class="wp-block-heading has-success-color has-text-color">Avec AideAuxTD</h3>
 <!-- /wp:heading -->
 
 </div>

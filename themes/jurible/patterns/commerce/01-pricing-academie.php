@@ -13,7 +13,7 @@
 <div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--lg)">
 
 <!-- wp:heading {"textAlign":"center","level":2,"textColor":"text-dark"} -->
-<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">L'abonnement Jurible</h2>
+<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">L'abonnement AideAuxTD</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","textColor":"text-muted"} -->

@@ -39,7 +39,7 @@
 <!-- wp:column {"width":"","className":"reassurance-minimal__item"} -->
 <div class="wp-block-column reassurance-minimal__item">
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"14px"}}} -->
-<p class="has-text-align-center" style="font-size:14px">⭐ <span style="color:#4B5563;font-size:12px;font-weight:500">4.8/5 (500+ avis)</span></p>
+<p class="has-text-align-center" style="font-size:14px">⭐ <span style="color:#4B5563;font-size:12px;font-weight:500">4,7 +150 avis</span></p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:column -->

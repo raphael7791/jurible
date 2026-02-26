@@ -70,7 +70,7 @@
 <!-- wp:group {"className":"hero-produit__features","layout":{"type":"flex","orientation":"vertical"}} -->
 <div class="wp-block-group hero-produit__features">
 <!-- wp:paragraph {"className":"hero-produit__feature"} -->
-<p class="hero-produit__feature"><span class="hero-produit__feature-icon">✅</span> Inclus dans l'abonnement Jurible</p>
+<p class="hero-produit__feature"><span class="hero-produit__feature-icon">✅</span> Inclus dans l'abonnement AideAuxTD</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"hero-produit__feature"} -->
@@ -104,7 +104,7 @@
 <div class="wp-block-group hero-produit__card-body">
 
 <!-- wp:paragraph {"className":"hero-produit__card-title"} -->
-<p class="hero-produit__card-title">Inclus dans l'abonnement Jurible</p>
+<p class="hero-produit__card-title">Inclus dans l'abonnement AideAuxTD</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:group {"className":"hero-produit__card-features","layout":{"type":"flex","orientation":"vertical"}} -->

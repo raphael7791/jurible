@@ -20,7 +20,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->
-<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Ils ont <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">réussi avec Jurible</mark></h2>
+<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Ils ont <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">réussi avec AideAuxTD</mark></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"18px","lineHeight":"1.6"}},"textColor":"text-gray"} -->
@@ -35,8 +35,8 @@
 
 <!-- wp:column -->
 <div class="wp-block-column">
-<!-- wp:jurible/card-testimonial {"variant":"standard","rating":5,"quote":"J'ai validé ma L1 du premier coup grâce à Jurible. Les vidéos sont super claires et les fiches m'ont fait gagner un temps fou.","showBadge":true,"badgeText":"L1 validée avec mention","avatarType":"initials","avatarInitials":"ML","authorName":"Marie L.","authorSubtitle":"L1 Droit — Paris 1"} -->
-<div class="wp-block-jurible-card-testimonial card-testimonial card-testimonial--standard"><div class="card-testimonial__stars"><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span></div><p class="card-testimonial__quote">J'ai validé ma L1 du premier coup grâce à Jurible. Les vidéos sont super claires et les fiches m'ont fait gagner un temps fou.</p><div class="card-testimonial__badge">✓ L1 validée avec mention</div><div class="card-testimonial__author"><div class="card-testimonial__avatar card-testimonial__avatar--initials">ML</div><div class="card-testimonial__author-info"><h4 class="card-testimonial__author-name">Marie L.</h4><p class="card-testimonial__author-subtitle">L1 Droit — Paris 1</p></div></div></div>
+<!-- wp:jurible/card-testimonial {"variant":"standard","rating":5,"quote":"J'ai validé ma L1 du premier coup grâce à AideAuxTD. Les vidéos sont super claires et les fiches m'ont fait gagner un temps fou.","showBadge":true,"badgeText":"L1 validée avec mention","avatarType":"initials","avatarInitials":"ML","authorName":"Marie L.","authorSubtitle":"L1 Droit — Paris 1"} -->
+<div class="wp-block-jurible-card-testimonial card-testimonial card-testimonial--standard"><div class="card-testimonial__stars"><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span></div><p class="card-testimonial__quote">J'ai validé ma L1 du premier coup grâce à AideAuxTD. Les vidéos sont super claires et les fiches m'ont fait gagner un temps fou.</p><div class="card-testimonial__badge">✓ L1 validée avec mention</div><div class="card-testimonial__author"><div class="card-testimonial__avatar card-testimonial__avatar--initials">ML</div><div class="card-testimonial__author-info"><h4 class="card-testimonial__author-name">Marie L.</h4><p class="card-testimonial__author-subtitle">L1 Droit — Paris 1</p></div></div></div>
 <!-- /wp:jurible/card-testimonial -->
 </div>
 <!-- /wp:column -->

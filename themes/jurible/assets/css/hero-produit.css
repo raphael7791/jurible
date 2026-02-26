@@ -184,6 +184,7 @@
 	justify-content: center;
 	color: rgba(255, 255, 255, 0.35);
 	font-size: var(--wp--preset--font-size--small);
+	position: relative;
 }
 
 .hero-produit__card-visual--violet {

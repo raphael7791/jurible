@@ -31,7 +31,7 @@
 <!-- wp:column {"width":"40%"} -->
 <div class="wp-block-column" style="flex-basis:40%">
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
-<p class="has-text-gray-color has-text-color" style="font-size:14px">Nos fiches couvrent l'intégralité du programme de Droit constitutionnel du premier semestre (Principes fondamentaux). Chaque notion est expliquée clairement avec des définitions, des exemples concrets et des références juridiques.</p>
+<p class="has-text-gray-color has-text-color" style="font-size:14px">Nos cours couvrent l'intégralité du programme de Droit constitutionnel du premier semestre (Principes fondamentaux). Chaque notion est expliquée clairement avec des définitions, des exemples concrets et des références juridiques.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"},"spacing":{"margin":{"top":"var:preset|spacing|sm"}}},"textColor":"text-gray"} -->
@@ -46,10 +46,10 @@
 <!-- wp:group {"className":"contenu-fiche__stat","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"8px"}},"backgroundColor":"muted","layout":{"type":"default"}} -->
 <div class="wp-block-group contenu-fiche__stat has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)">
 <!-- wp:paragraph {"align":"center","className":"contenu-fiche__stat-number","style":{"typography":{"fontSize":"28px","fontWeight":"700"}},"textColor":"primary"} -->
-<p class="has-text-align-center contenu-fiche__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">65</p>
+<p class="has-text-align-center contenu-fiche__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">20</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px"}},"textColor":"text-gray"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:13px">Pages</p>
+<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:13px">Vidéos</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
@@ -61,10 +61,10 @@
 <!-- wp:group {"className":"contenu-fiche__stat","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"8px"}},"backgroundColor":"muted","layout":{"type":"default"}} -->
 <div class="wp-block-group contenu-fiche__stat has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)">
 <!-- wp:paragraph {"align":"center","className":"contenu-fiche__stat-number","style":{"typography":{"fontSize":"28px","fontWeight":"700"}},"textColor":"primary"} -->
-<p class="has-text-align-center contenu-fiche__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">20</p>
+<p class="has-text-align-center contenu-fiche__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">200</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px"}},"textColor":"text-gray"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:13px">Fiches</p>
+<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:13px">QCM</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
@@ -82,10 +82,10 @@
 <!-- wp:group {"className":"contenu-fiche__stat","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"8px"}},"backgroundColor":"muted","layout":{"type":"default"}} -->
 <div class="wp-block-group contenu-fiche__stat has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)">
 <!-- wp:paragraph {"align":"center","className":"contenu-fiche__stat-number","style":{"typography":{"fontSize":"28px","fontWeight":"700"}},"textColor":"primary"} -->
-<p class="has-text-align-center contenu-fiche__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">5</p>
+<p class="has-text-align-center contenu-fiche__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">X</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px"}},"textColor":"text-gray"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:13px">Thèmes</p>
+<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:13px">Annales</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
@@ -97,10 +97,10 @@
 <!-- wp:group {"className":"contenu-fiche__stat","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"8px"}},"backgroundColor":"muted","layout":{"type":"default"}} -->
 <div class="wp-block-group contenu-fiche__stat has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)">
 <!-- wp:paragraph {"align":"center","className":"contenu-fiche__stat-number","style":{"typography":{"fontSize":"28px","fontWeight":"700"}},"textColor":"primary"} -->
-<p class="has-text-align-center contenu-fiche__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">10+</p>
+<p class="has-text-align-center contenu-fiche__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">200</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px"}},"textColor":"text-gray"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:13px">Cartes mentales</p>
+<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:13px">Flashcards</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->

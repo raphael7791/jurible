@@ -25,6 +25,264 @@ function jurible_copyright_shortcode() {
 }
 add_shortcode('jurible_copyright', 'jurible_copyright_shortcode');
 
+# Shortcode pour la vidéo YouTube du cours [course_video_embed]
+function jurible_course_video_embed_shortcode() {
+    $video_url = get_field('video_url');
+    if (empty($video_url)) {
+        return '';
+    }
+
+    // Extraire l'ID de la vidéo YouTube depuis différents formats d'URL
+    $video_id = '';
+
+    // Format: youtu.be/VIDEO_ID
+    if (preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $video_url, $matches)) {
+        $video_id = $matches[1];
+    }
+    // Format: youtube.com/watch?v=VIDEO_ID
+    elseif (preg_match('/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/', $video_url, $matches)) {
+        $video_id = $matches[1];
+    }
+    // Format: youtube.com/embed/VIDEO_ID
+    elseif (preg_match('/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/', $video_url, $matches)) {
+        $video_id = $matches[1];
+    }
+
+    if (empty($video_id)) {
+        return '';
+    }
+
+    $embed_url = 'https://www.youtube.com/embed/' . $video_id;
+
+    return '<div style="position:absolute;top:0;left:0;right:0;bottom:0;"><iframe src="' . esc_url($embed_url) . '" style="width:100%;height:100%;border:0;border-radius:8px;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>';
+}
+add_shortcode('course_video_embed', 'jurible_course_video_embed_shortcode');
+
+# Shortcode pour afficher le sommaire des cours dynamique [course_sommaire]
+function jurible_course_sommaire_shortcode() {
+    $sommaire = get_field('sommaire_cours');
+    if (empty($sommaire)) {
+        return '';
+    }
+
+    // Détecter si c'est du JSON (nouveau format) ou du texte (ancien format)
+    $data = json_decode($sommaire, true);
+
+    if (json_last_error() === JSON_ERROR_NONE && is_array($data)) {
+        // Nouveau format JSON avec types
+        return jurible_render_sommaire_json($data);
+    } else {
+        // Ancien format texte (rétrocompatibilité)
+        return jurible_render_sommaire_text($sommaire);
+    }
+}
+
+/**
+ * Rendu du sommaire au format JSON (avec badges de type)
+ */
+function jurible_render_sommaire_json($data) {
+    $output = '<div class="sommaire-cours">';
+
+    foreach ($data as $theme) {
+        $output .= '<div class="sommaire-cours__theme">';
+        $output .= '<h4 class="sommaire-cours__theme-title">' . esc_html($theme['title']) . '</h4>';
+        $output .= '<ul class="sommaire-cours__items">';
+
+        foreach ($theme['items'] as $item) {
+            $type = isset($item['type']) ? $item['type'] : 'lecon';
+            $badge = jurible_get_type_badge($type);
+
+            $output .= '<li class="sommaire-cours__item sommaire-cours__item--' . esc_attr($type) . '">';
+            $output .= '<span class="sommaire-cours__badge sommaire-cours__badge--' . esc_attr($type) . '">' . $badge['label'] . '</span>';
+            $output .= '<span class="sommaire-cours__item-title">' . esc_html($item['title']) . '</span>';
+            $output .= '</li>';
+        }
+
+        $output .= '</ul>';
+        $output .= '</div>';
+    }
+
+    $output .= '</div>';
+
+    return $output;
+}
+
+/**
+ * Retourne le badge correspondant au type de contenu
+ */
+function jurible_get_type_badge($type) {
+    $types = [
+        'lecon' => ['label' => 'Leçon', 'icon' => '📄', 'color' => '#4A90D9'],
+        'qcm' => ['label' => 'QCM', 'icon' => '✅', 'color' => '#34C759'],
+        'flashcard' => ['label' => 'Flashcards', 'icon' => '🃏', 'color' => '#F59E0B'],
+        'fiche-arret' => ['label' => 'Fiche-arret', 'icon' => '⚖️', 'color' => '#A3E635'],
+        'cas-pratique' => ['label' => 'Cas-pratique', 'icon' => '📝', 'color' => '#34D399'],
+        'dissertation' => ['label' => 'Dissertation', 'icon' => '✍️', 'color' => '#34D399'],
+        'question' => ['label' => 'Question-cours', 'icon' => '❓', 'color' => '#34D399'],
+        'analyse-arret' => ['label' => 'Analyse-arret', 'icon' => '🔍', 'color' => '#34D399'],
+        'commentaire-arret' => ['label' => 'Commentaire-arret', 'icon' => '📋', 'color' => '#34D399'],
+        'commentaire-texte' => ['label' => 'Commentaire-texte', 'icon' => '📝', 'color' => '#34D399'],
+        'commentaire' => ['label' => 'Commentaire', 'icon' => '📋', 'color' => '#34D399'],
+        'annexe' => ['label' => 'Annexe', 'icon' => '📎', 'color' => '#6B7280'],
+        'annale' => ['label' => 'Annale', 'icon' => '📚', 'color' => '#FF9500'],
+        'fiche-video' => ['label' => 'Fiche vidéo', 'icon' => '🎥', 'color' => '#FF3B30'],
+        'mindmap' => ['label' => 'Mindmap', 'icon' => '🗺️', 'color' => '#5AC8FA'],
+        'video' => ['label' => 'Vidéo', 'icon' => '🎬', 'color' => '#FF2D55'],
+    ];
+
+    return isset($types[$type]) ? $types[$type] : $types['lecon'];
+}
+
+/**
+ * Rendu du sommaire au format texte (rétrocompatibilité)
+ */
+function jurible_render_sommaire_text($sommaire) {
+    $output = '<div class="sommaire-cours">';
+    $lines = explode("\n", $sommaire);
+    $current_theme_items = [];
+    $current_theme_title = '';
+
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if (empty($line)) {
+            continue;
+        }
+
+        // Détecter un titre de thème (commence par ##)
+        if (strpos($line, '##') === 0) {
+            // Fermer le thème précédent s'il existe
+            if (!empty($current_theme_title) && !empty($current_theme_items)) {
+                $output .= jurible_render_sommaire_theme_text($current_theme_title, $current_theme_items);
+            }
+            // Nouveau thème
+            $current_theme_title = trim(str_replace('##', '', $line));
+            $current_theme_items = [];
+        }
+        // Détecter un cours (commence par -)
+        elseif (strpos($line, '-') === 0) {
+            $current_theme_items[] = trim(substr($line, 1));
+        }
+    }
+
+    // Fermer le dernier thème
+    if (!empty($current_theme_title) && !empty($current_theme_items)) {
+        $output .= jurible_render_sommaire_theme_text($current_theme_title, $current_theme_items);
+    }
+
+    $output .= '</div>';
+    return $output;
+}
+
+function jurible_render_sommaire_theme_text($title, $items) {
+    $html = '<div class="sommaire-cours__theme">';
+    $html .= '<h4 class="sommaire-cours__theme-title">' . esc_html($title) . '</h4>';
+    $html .= '<ul class="sommaire-cours__items">';
+
+    foreach ($items as $item) {
+        // Détecter le type à partir du titre
+        $type = jurible_detect_type_from_title($item);
+        $badge = jurible_get_type_badge($type);
+
+        $html .= '<li class="sommaire-cours__item sommaire-cours__item--' . esc_attr($type) . '">';
+        $html .= '<span class="sommaire-cours__badge sommaire-cours__badge--' . esc_attr($type) . '">' . $badge['label'] . '</span>';
+        $html .= '<span class="sommaire-cours__item-title">' . esc_html($item) . '</span>';
+        $html .= '</li>';
+    }
+
+    $html .= '</ul>';
+    $html .= '</div>';
+
+    return $html;
+}
+
+/**
+ * Détecte le type de contenu depuis le titre (pour format texte)
+ */
+function jurible_detect_type_from_title($title) {
+    $title_lower = mb_strtolower($title);
+
+    // Les titres commencent souvent par "Type : Titre"
+    if (strpos($title_lower, 'qcm') === 0 || strpos($title_lower, 'qcm :') !== false) {
+        return 'qcm';
+    }
+    if (strpos($title_lower, 'flashcard') === 0 || strpos($title_lower, 'flashcards :') !== false) {
+        return 'flashcard';
+    }
+    if (strpos($title_lower, 'cas pratique') === 0) {
+        return 'cas-pratique';
+    }
+    if (strpos($title_lower, 'fiche d\'arrêt') === 0 || strpos($title_lower, 'fiche d\'arret') === 0) {
+        return 'fiche-arret';
+    }
+    if (strpos($title_lower, 'question de cours') === 0) {
+        return 'question';
+    }
+    if (strpos($title_lower, 'dissertation') === 0) {
+        return 'dissertation';
+    }
+    if (strpos($title_lower, 'analyse d\'arrêt') === 0 || strpos($title_lower, 'analyse d\'arret') === 0 || strpos($title_lower, 'analyse-arret') === 0) {
+        return 'analyse-arret';
+    }
+    if (strpos($title_lower, 'commentaire d\'arrêt') === 0 || strpos($title_lower, 'commentaire d\'arret') === 0 || strpos($title_lower, 'commentaire-arret') === 0) {
+        return 'commentaire-arret';
+    }
+    if (strpos($title_lower, 'commentaire de texte') === 0 || strpos($title_lower, 'commentaire-texte') === 0) {
+        return 'commentaire-texte';
+    }
+    if (strpos($title_lower, 'commentaire') === 0) {
+        return 'commentaire';
+    }
+    if (strpos($title_lower, 'annexe') === 0) {
+        return 'annexe';
+    }
+    if (strpos($title_lower, 'leçon') === 0 || strpos($title_lower, 'lecon') === 0) {
+        return 'lecon';
+    }
+    if (strpos($title_lower, 'annale') !== false) {
+        return 'annale';
+    }
+    if (strpos($title_lower, 'fiche') !== false && strpos($title_lower, 'vidéo') !== false) {
+        return 'fiche-video';
+    }
+    if (strpos($title_lower, 'mindmap') !== false) {
+        return 'mindmap';
+    }
+
+    return 'lecon';
+}
+
+add_shortcode('course_sommaire', 'jurible_course_sommaire_shortcode');
+
+# Shortcode pour le badge du cours [course_badge] → "Cours complet de droit des obligations"
+function jurible_course_badge_shortcode() {
+    $matiere = get_field('matiere_name');
+    if (empty($matiere)) {
+        return 'Cours complet';
+    }
+    return 'Cours complet de ' . esc_html($matiere);
+}
+add_shortcode('course_badge', 'jurible_course_badge_shortcode');
+
+# Shortcode pour le titre du cours [course_title] → "Maîtrisez le droit des obligations"
+function jurible_course_title_shortcode() {
+    $matiere = get_field('matiere_name');
+    if (empty($matiere)) {
+        return 'Maîtrisez cette matière';
+    }
+    return 'Maîtrisez le ' . esc_html($matiere);
+}
+add_shortcode('course_title', 'jurible_course_title_shortcode');
+
+# Shortcode pour le titre Pain Points [course_pain_title] → "Le droit des obligations : une matière redoutée !"
+function jurible_course_pain_title_shortcode() {
+    $matiere = get_field('matiere_name');
+    if (empty($matiere)) {
+        return 'Une matière redoutée !';
+    }
+    return 'Le ' . esc_html($matiere) . ' : une matière redoutée !';
+}
+add_shortcode('course_pain_title', 'jurible_course_pain_title_shortcode');
+
 # Retirer le pattern directory et la suggestion de blocs
 remove_action("enqueue_block_editor_assets", "wp_enqueue_editor_block_directory_assets");
 remove_theme_support("core-block-patterns");
@@ -1249,8 +1507,9 @@ add_shortcode('acf', 'jurible_acf_shortcode');
  */
 function jurible_render_block_shortcodes($block_content, $block)
 {
-    // Exécuter les shortcodes ACF dans tous les blocs
-    if (strpos($block_content, '[acf') !== false) {
+    // Exécuter les shortcodes dans tous les blocs
+    if (strpos($block_content, '[acf') !== false ||
+        strpos($block_content, '[course_') !== false) {
         $block_content = do_shortcode($block_content);
     }
     return $block_content;
@@ -1287,6 +1546,7 @@ function jurible_register_course_cpt()
         'show_ui'             => true,
         'show_in_menu'        => true,
         'show_in_rest'        => true, // Gutenberg support
+        'rest_base'           => 'cours', // Endpoint API : /wp/v2/cours
         'query_var'           => true,
         'rewrite'             => ['slug' => 'cours', 'with_front' => false],
         'capability_type'     => 'post',
@@ -1323,6 +1583,22 @@ function jurible_enqueue_course_lightbox()
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_course_lightbox");
 
+/**
+ * Charger le CSS du sommaire cours (pages cours)
+ */
+function jurible_enqueue_sommaire_cours_assets()
+{
+    if (is_singular('course')) {
+        wp_enqueue_style(
+            "jurible-sommaire-cours",
+            get_template_directory_uri() . "/assets/css/sommaire-cours.css",
+            [],
+            filemtime(get_template_directory() . "/assets/css/sommaire-cours.css")
+        );
+    }
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_sommaire_cours_assets");
+
 
 # ==========================================================================
 # ACF FIELDS : COURS (enregistrement programmatique)
@@ -1349,46 +1625,13 @@ function jurible_register_course_acf_fields()
                 'type' => 'tab',
             ],
             [
-                'key' => 'field_course_badge_text',
-                'label' => 'Badge',
-                'name' => 'badge_text',
-                'type' => 'text',
-                'default_value' => 'Cours complet',
-                'placeholder' => 'Ex: Cours complet, Nouveau, Populaire',
-            ],
-            [
-                'key' => 'field_course_niveau',
-                'label' => 'Niveau',
-                'name' => 'niveau',
-                'type' => 'select',
-                'choices' => [
-                    'L1' => 'L1',
-                    'L2' => 'L2',
-                    'L3' => 'L3',
-                    'M1' => 'M1',
-                    'M2' => 'M2',
-                ],
-                'default_value' => 'L2',
-            ],
-            [
-                'key' => 'field_course_semestre',
-                'label' => 'Semestre',
-                'name' => 'semestre',
-                'type' => 'select',
-                'choices' => [
-                    'S1' => 'Semestre 1',
-                    'S2' => 'Semestre 2',
-                    'Annuel' => 'Annuel',
-                ],
-                'default_value' => 'S1',
-            ],
-            [
-                'key' => 'field_course_titre_cours',
-                'label' => 'Titre du cours',
-                'name' => 'titre_cours',
+                'key' => 'field_course_matiere_name',
+                'label' => 'Nom de la matière',
+                'name' => 'matiere_name',
                 'type' => 'text',
                 'required' => 1,
-                'placeholder' => 'Ex: Droit des obligations',
+                'placeholder' => 'Ex: droit des obligations',
+                'instructions' => 'Utilisé pour générer automatiquement : Badge "Cours complet de [matière]" et Titre "Maîtrisez le [matière]"',
             ],
             [
                 'key' => 'field_course_sous_titre',
@@ -1399,28 +1642,12 @@ function jurible_register_course_acf_fields()
                 'placeholder' => 'Ex: Maîtrisez tous les concepts essentiels avec nos vidéos, fiches et exercices.',
             ],
             [
-                'key' => 'field_course_matiere_name',
-                'label' => 'Nom de la matière',
-                'name' => 'matiere_name',
-                'type' => 'text',
-                'required' => 1,
-                'placeholder' => 'Ex: droit des obligations',
-                'instructions' => 'Utilisé dans les titres dynamiques (sans majuscule)',
-            ],
-            [
-                'key' => 'field_course_image_hero',
-                'label' => 'Image Hero',
-                'name' => 'image_hero',
-                'type' => 'image',
-                'return_format' => 'url',
-                'preview_size' => 'medium',
-            ],
-            [
-                'key' => 'field_course_lien_inscription',
-                'label' => 'Lien d\'inscription',
-                'name' => 'lien_inscription',
+                'key' => 'field_course_video_url',
+                'label' => 'URL Vidéo (embed)',
+                'name' => 'video_url',
                 'type' => 'url',
-                'default_value' => '/academie',
+                'placeholder' => 'https://www.youtube.com/watch?v=...',
+                'instructions' => 'URL YouTube ou Vimeo pour l\'embed dans la card hero',
             ],
 
             // === SECTION : AUTEUR ===
@@ -1430,101 +1657,13 @@ function jurible_register_course_acf_fields()
                 'type' => 'tab',
             ],
             [
-                'key' => 'field_course_auteur_nom',
-                'label' => 'Nom de l\'auteur',
-                'name' => 'auteur_nom',
-                'type' => 'text',
-                'default_value' => 'Raphaël Briguet-Lamarre',
-            ],
-            [
-                'key' => 'field_course_auteur_titre',
-                'label' => 'Titre / Fonction',
-                'name' => 'auteur_titre',
-                'type' => 'text',
-                'default_value' => 'Ex-avocat, chargé d\'enseignement',
-            ],
-            [
-                'key' => 'field_course_texte_section_auteur',
-                'label' => 'Texte section auteur',
-                'name' => 'texte_section_auteur',
+                'key' => 'field_course_texte_auteur',
+                'label' => 'Texte auteur',
+                'name' => 'texte_auteur',
                 'type' => 'textarea',
-                'rows' => 3,
-                'instructions' => 'Texte additionnel sous la section équipe (optionnel)',
-            ],
-            [
-                'key' => 'field_course_texte_faq_auteur',
-                'label' => 'Réponse FAQ "Qui est l\'auteur"',
-                'name' => 'texte_faq_auteur',
-                'type' => 'textarea',
-                'rows' => 3,
-                'default_value' => 'Ce cours a été créé par notre équipe pédagogique composée d\'avocats, doctorants et chargés d\'enseignement, tous titulaires d\'un Master 2 minimum.',
-            ],
-
-            // === SECTION : AVIS ===
-            [
-                'key' => 'field_course_tab_avis',
-                'label' => 'Avis',
-                'type' => 'tab',
-            ],
-            [
-                'key' => 'field_course_note_moyenne',
-                'label' => 'Note moyenne',
-                'name' => 'note_moyenne',
-                'type' => 'number',
-                'default_value' => 4.8,
-                'min' => 1,
-                'max' => 5,
-                'step' => 0.1,
-            ],
-            [
-                'key' => 'field_course_nombre_avis',
-                'label' => 'Nombre d\'avis',
-                'name' => 'nombre_avis',
-                'type' => 'number',
-                'default_value' => 150,
-            ],
-
-            // === SECTION : STATISTIQUES ===
-            [
-                'key' => 'field_course_tab_stats',
-                'label' => 'Statistiques',
-                'type' => 'tab',
-            ],
-            [
-                'key' => 'field_course_videos_count',
-                'label' => 'Nombre de vidéos',
-                'name' => 'videos_count',
-                'type' => 'number',
-                'default_value' => 30,
-            ],
-            [
-                'key' => 'field_course_duree_totale',
-                'label' => 'Durée totale',
-                'name' => 'duree_totale',
-                'type' => 'text',
-                'default_value' => '12h',
-                'placeholder' => 'Ex: 12h, 8h30',
-            ],
-            [
-                'key' => 'field_course_qcm_count',
-                'label' => 'Nombre de QCM',
-                'name' => 'qcm_count',
-                'type' => 'number',
-                'default_value' => 200,
-            ],
-            [
-                'key' => 'field_course_flashcards_count',
-                'label' => 'Nombre de flashcards',
-                'name' => 'flashcards_count',
-                'type' => 'number',
-                'default_value' => 150,
-            ],
-            [
-                'key' => 'field_course_annales_count',
-                'label' => 'Nombre d\'annales',
-                'name' => 'annales_count',
-                'type' => 'number',
-                'default_value' => 10,
+                'rows' => 4,
+                'placeholder' => 'Parmi eux, Raphaël est l\'auteur de ce cours. Ancien avocat inscrit au barreau et titulaire du Master 2...',
+                'instructions' => 'Texte de présentation de l\'auteur du cours',
             ],
 
             // === SECTION : PROGRAMME ===
@@ -1542,80 +1681,43 @@ function jurible_register_course_acf_fields()
                 'default_value' => 'Ce cours couvre l\'intégralité du programme universitaire. Chaque chapitre est accompagné de vidéos explicatives, de fiches de synthèse et d\'exercices corrigés.',
             ],
             [
-                'key' => 'field_course_image_sommaire',
-                'label' => 'Image du programme/sommaire',
-                'name' => 'image_sommaire',
-                'type' => 'image',
-                'return_format' => 'url',
-                'preview_size' => 'medium',
-            ],
+                'key' => 'field_course_sommaire_cours',
+                'label' => 'Sommaire du cours',
+                'name' => 'sommaire_cours',
+                'type' => 'textarea',
+                'rows' => 15,
+                'instructions' => 'Format: ## Titre du thème (sur une ligne) puis - Cours n°X - Titre (un par ligne). Exemple:
+## Thème 1 — Le cadre du pouvoir politique
+- Cours n°1 - Les composantes de l\'État
+- Cours n°2 - Les formes de l\'État
 
-            // === SECTION : PAIN POINTS ===
+## Thème 2 — La source du pouvoir politique
+- Cours n°3 - La notion de souveraineté',
+                'placeholder' => '## Thème 1 — Le cadre du pouvoir politique
+- Cours n°1 - Les composantes de l\'État
+- Cours n°2 - Les formes de l\'État : L\'État unitaire
+- Cours n°3 - Les formes de l\'État : L\'État fédéral
+
+## Thème 2 — La source du pouvoir politique
+- Cours n°4 - La notion de souveraineté
+- Cours n°5 - Les modes d\'exercice du pouvoir',
+            ],
+            // === SECTION : SOLUTION ===
             [
-                'key' => 'field_course_tab_pain',
-                'label' => 'Pain Points',
+                'key' => 'field_course_tab_solution',
+                'label' => 'Solution',
                 'type' => 'tab',
             ],
             [
-                'key' => 'field_course_pain_1_titre',
-                'label' => 'Pain Point 1 - Titre',
-                'name' => 'pain_1_titre',
-                'type' => 'text',
-                'default_value' => 'Les manuels sont trop longs',
-            ],
-            [
-                'key' => 'field_course_pain_1_description',
-                'label' => 'Pain Point 1 - Description',
-                'name' => 'pain_1_description',
+                'key' => 'field_course_solution_sous_titre',
+                'label' => 'Sous-titre section Solution',
+                'name' => 'solution_sous_titre',
                 'type' => 'textarea',
                 'rows' => 2,
-                'default_value' => 'Des centaines de pages sans hiérarchie : impossible de savoir ce qui tombera au partiel.',
+                'default_value' => 'Tout ce dont vous avez besoin pour comprendre et réussir vos examens.',
+                'placeholder' => 'Ex: Tout ce dont vous avez besoin pour comprendre les institutions de la Vème République...',
             ],
-            [
-                'key' => 'field_course_pain_2_titre',
-                'label' => 'Pain Point 2 - Titre',
-                'name' => 'pain_2_titre',
-                'type' => 'text',
-                'default_value' => 'Vos notes sont incomplètes',
-            ],
-            [
-                'key' => 'field_course_pain_2_description',
-                'label' => 'Pain Point 2 - Description',
-                'name' => 'pain_2_description',
-                'type' => 'textarea',
-                'rows' => 2,
-                'default_value' => 'Le cours va trop vite en amphi, et vos notes manquent de structure et de précision.',
-            ],
-            [
-                'key' => 'field_course_pain_3_titre',
-                'label' => 'Pain Point 3 - Titre',
-                'name' => 'pain_3_titre',
-                'type' => 'text',
-                'default_value' => 'Pas de retour sur vos exercices',
-            ],
-            [
-                'key' => 'field_course_pain_3_description',
-                'label' => 'Pain Point 3 - Description',
-                'name' => 'pain_3_description',
-                'type' => 'textarea',
-                'rows' => 2,
-                'default_value' => 'Vous faites des exercices mais sans savoir si vous êtes sur la bonne voie.',
-            ],
-            [
-                'key' => 'field_course_pain_4_titre',
-                'label' => 'Pain Point 4 - Titre',
-                'name' => 'pain_4_titre',
-                'type' => 'text',
-                'default_value' => 'Vous manquez de temps',
-            ],
-            [
-                'key' => 'field_course_pain_4_description',
-                'label' => 'Pain Point 4 - Description',
-                'name' => 'pain_4_description',
-                'type' => 'textarea',
-                'rows' => 2,
-                'default_value' => 'Entre les TD, les autres matières et la vie perso, vous n\'avez pas le temps de tout réviser.',
-            ],
+
         ],
         'location' => [
             [
@@ -1635,4 +1737,87 @@ function jurible_register_course_acf_fields()
     ]);
 }
 add_action('acf/init', 'jurible_register_course_acf_fields');
+
+/**
+ * TEMPORAIRE - Créer un cours de test
+ * Visiter : /wp-admin/?create_test_course=1
+ * À SUPPRIMER après les tests
+ */
+function jurible_create_test_course() {
+    if (!is_admin() || !current_user_can('manage_options')) {
+        return;
+    }
+
+    if (!isset($_GET['create_test_course']) || $_GET['create_test_course'] !== '1') {
+        return;
+    }
+
+    // Vérifier si le cours de test existe déjà
+    $existing = get_posts([
+        'post_type' => 'course',
+        'post_status' => 'any',
+        'meta_key' => '_is_test_course',
+        'meta_value' => '1',
+        'numberposts' => 1,
+    ]);
+
+    if (!empty($existing)) {
+        wp_redirect(get_edit_post_link($existing[0]->ID, 'redirect'));
+        exit;
+    }
+
+    // Créer le cours de test
+    $course_id = wp_insert_post([
+        'post_title' => 'Droit des obligations - TEST',
+        'post_type' => 'course',
+        'post_status' => 'draft',
+        'post_content' => '',
+    ]);
+
+    if (is_wp_error($course_id)) {
+        wp_die('Erreur lors de la création du cours de test');
+    }
+
+    // Marquer comme cours de test
+    update_post_meta($course_id, '_is_test_course', '1');
+
+    // Remplir tous les champs ACF
+    $acf_data = [
+        // Hero (simplifié : badge et titre générés automatiquement depuis matiere_name)
+        'matiere_name' => 'droit des obligations',
+        'sous_titre' => 'Maîtrisez les fondamentaux du droit des contrats et de la responsabilité civile avec notre formation complète en vidéo.',
+        'video_url' => 'https://www.youtube.com/embed/VRlP_VoONN8',
+
+        // Auteur
+        'texte_auteur' => 'Parmi eux, Raphaël est l\'auteur de ce cours. Ancien avocat inscrit au barreau et titulaire du Master 2 Droit et pratiques des relations de travail de l\'université Panthéon-Assas Paris II, il a également été chargé d\'enseignement à l\'université de Nice.',
+
+        // Programme
+        'texte_section_programme' => 'Ce cours couvre l\'intégralité du programme de droit des obligations de L2 : formation du contrat, validité, effets, inexécution, responsabilité contractuelle et délictuelle.',
+        'sommaire_cours' => '## Thème 1 — La formation du contrat
+- Cours n°1 - Les conditions de validité du contrat
+- Cours n°2 - Le consentement
+- Cours n°3 - La capacité et le pouvoir
+
+## Thème 2 — Le contenu du contrat
+- Cours n°4 - Les clauses du contrat
+- Cours n°5 - L\'interprétation du contrat
+
+## Thème 3 — Les effets du contrat
+- Cours n°6 - La force obligatoire du contrat
+- Cours n°7 - L\'effet relatif du contrat
+- Cours n°8 - L\'inexécution du contrat',
+
+        // Solution
+        'solution_sous_titre' => 'AideAuxTD vous accompagne avec une méthode claire et des contenus pensés pour votre réussite.',
+    ];
+
+    foreach ($acf_data as $field_name => $value) {
+        update_field($field_name, $value, $course_id);
+    }
+
+    // Rediriger vers l'édition du cours
+    wp_redirect(admin_url('post.php?post=' . $course_id . '&action=edit'));
+    exit;
+}
+add_action('admin_init', 'jurible_create_test_course');
 

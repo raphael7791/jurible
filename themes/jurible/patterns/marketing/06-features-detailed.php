@@ -53,9 +53,6 @@
 <li>BONUS : Fiches animées en vidéo</li>
 </ul>
 <!-- /wp:list -->
-<!-- wp:paragraph {"className":"fonctionnalites-detailed-card__link","style":{"typography":{"fontSize":"13px","fontWeight":"500"},"spacing":{"margin":{"top":"var:preset|spacing|sm"}}},"textColor":"primary"} -->
-<p class="fonctionnalites-detailed-card__link has-primary-color has-text-color" style="margin-top:var(--wp--preset--spacing--sm);font-size:13px;font-weight:500"><a href="#">Voir un extrait vidéo →</a></p>
-<!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
 </div>
@@ -86,9 +83,6 @@
 <li>Fiches de synthèse par chapitre</li>
 </ul>
 <!-- /wp:list -->
-<!-- wp:paragraph {"className":"fonctionnalites-detailed-card__link","style":{"typography":{"fontSize":"13px","fontWeight":"500"},"spacing":{"margin":{"top":"var:preset|spacing|sm"}}},"textColor":"primary"} -->
-<p class="fonctionnalites-detailed-card__link has-primary-color has-text-color" style="margin-top:var(--wp--preset--spacing--sm);font-size:13px;font-weight:500"><a href="#">Voir un exemple de fiche →</a></p>
-<!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
 </div>
@@ -125,9 +119,6 @@
 <li>Applications directes pour vos TD</li>
 </ul>
 <!-- /wp:list -->
-<!-- wp:paragraph {"className":"fonctionnalites-detailed-card__link","style":{"typography":{"fontSize":"13px","fontWeight":"500"},"spacing":{"margin":{"top":"var:preset|spacing|sm"}}},"textColor":"primary"} -->
-<p class="fonctionnalites-detailed-card__link has-primary-color has-text-color" style="margin-top:var(--wp--preset--spacing--sm);font-size:13px;font-weight:500"><a href="#">Accéder aux annales corrigées →</a></p>
-<!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
 </div>
@@ -158,9 +149,6 @@
 <li>Révisions interactives</li>
 </ul>
 <!-- /wp:list -->
-<!-- wp:paragraph {"className":"fonctionnalites-detailed-card__link","style":{"typography":{"fontSize":"13px","fontWeight":"500"},"spacing":{"margin":{"top":"var:preset|spacing|sm"}}},"textColor":"primary"} -->
-<p class="fonctionnalites-detailed-card__link has-primary-color has-text-color" style="margin-top:var(--wp--preset--spacing--sm);font-size:13px;font-weight:500"><a href="#">Tester les QCM gratuits →</a></p>
-<!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
 </div>
