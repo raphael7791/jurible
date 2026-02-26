@@ -1,188 +1,154 @@
-<!-- wp:template-part {"slug":"header-minimal","theme":"jurible","tagName":"header"} /-->
+<!-- wp:template-part {"slug":"header","theme":"jurible","tagName":"header"} /-->
 
-<!-- Section Hero Cours (Design Académie) -->
-
-<!-- wp:group {"align":"full","className":"hero-cours","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"background","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull hero-cours has-background-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)"><!-- wp:columns {"align":"wide","className":"hero-cours-columns","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|xl"}}}} -->
-<div class="wp-block-columns alignwide hero-cours-columns"><!-- wp:column {"width":"55%","className":"hero-cours-content","style":{"spacing":{"blockGap":"0"}}} -->
-<div class="wp-block-column hero-cours-content" style="flex-basis:55%"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs","margin":{"bottom":"var:preset|spacing|xs"}}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
-<div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--xs)"><!-- wp:paragraph {"className":"is-style-tag-primary"} -->
-<p class="is-style-tag-primary">[acf field="badge_text" default="Cours complet"]</p>
+<!-- wp:group {"metadata":{"categories":["hero"],"patternName":"jurible/hero-09-produit-cours","name":"Hero 09 - Produit Cours"},"align":"full","className":"hero-produit","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull hero-produit" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)"><!-- wp:columns {"align":"wide","className":"hero-produit__grid","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|xl","left":"var:preset|spacing|xl"}}}} -->
+<div class="wp-block-columns alignwide hero-produit__grid"><!-- wp:column {"className":"hero-produit__content"} -->
+<div class="wp-block-column hero-produit__content"><!-- wp:paragraph {"className":"hero-produit__badge"} -->
+<p class="hero-produit__badge">● [acf field="badge_text" default="Cours complet"] de [acf field="matiere_name" default="Droit"]</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"className":"is-style-tag-secondary"} -->
-<p class="is-style-tag-secondary">[acf field="niveau" default="L2"] · [acf field="semestre" default="S1"]</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:heading {"level":1,"style":{"typography":{"fontWeight":"800","lineHeight":"1.15"},"spacing":{"margin":{"top":"0","bottom":"var:preset|spacing|xs"}}},"textColor":"text-dark","fontSize":"heading-1"} -->
-<h1 class="wp-block-heading has-text-dark-color has-text-color has-heading-1-font-size" style="margin-top:0;margin-bottom:var(--wp--preset--spacing--xs);font-weight:800;line-height:1.15">[acf field="titre_cours" default="Cours de droit"]</h1>
+<!-- wp:heading {"level":1,"className":"hero-produit__title","textColor":"text-dark"} -->
+<h1 class="wp-block-heading hero-produit__title has-text-dark-color has-text-color">Maîtrisez le <mark style="background:linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">[acf field="matiere_name" default="Droit"]</mark></h1>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"style":{"typography":{"fontWeight":"500"},"spacing":{"margin":{"bottom":"var:preset|spacing|sm"}}},"textColor":"text-gray","fontSize":"medium"} -->
-<p class="has-text-gray-color has-text-color has-medium-font-size" style="margin-bottom:var(--wp--preset--spacing--sm);font-weight:500">[acf field="sous_titre" default="Maîtrisez tous les concepts essentiels avec nos vidéos, fiches et exercices."]</p>
+<!-- wp:paragraph {"className":"hero-produit__meta"} -->
+<p class="hero-produit__meta">[acf field="semestre" default="S1"] – [acf field="niveau" default="Licence 1"]</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs","margin":{"bottom":"var:preset|spacing|sm"}}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
-<div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--sm)"><!-- wp:paragraph {"style":{"typography":{"letterSpacing":"2px"}},"textColor":"warning","fontSize":"small"} -->
-<p class="has-warning-color has-text-color has-small-font-size" style="letter-spacing:2px">★★★★★</p>
+<!-- wp:paragraph {"className":"hero-produit__subtitle"} -->
+<p class="hero-produit__subtitle">[acf field="sous_titre" default="Un cours conçu pour comprendre et mémoriser facilement tout le programme."]</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"style":{"typography":{"fontWeight":"600"}},"textColor":"text-dark","fontSize":"small"} -->
-<p class="has-text-dark-color has-text-color has-small-font-size" style="font-weight:600">[acf field="note_moyenne" default="4.8"]/5</p>
+<!-- wp:group {"className":"hero-produit__tags","layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group hero-produit__tags"><!-- wp:paragraph {"className":"is-style-tag-gray"} -->
+<p class="is-style-tag-gray">🎬 Vidéos</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"textColor":"text-muted","fontSize":"caption"} -->
-<p class="has-text-muted-color has-text-color has-caption-font-size">basé sur [acf field="nombre_avis" default="150"]+ avis</p>
+<!-- wp:paragraph {"className":"is-style-tag-gray"} -->
+<p class="is-style-tag-gray">📄 Cours écrit</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"is-style-tag-gray"} -->
+<p class="is-style-tag-gray">🗺️ Mindmaps</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"is-style-tag-gray"} -->
+<p class="is-style-tag-gray">✅ QCM</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"is-style-tag-gray"} -->
+<p class="is-style-tag-gray">🗂️ Flashcards</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"is-style-tag-gray"} -->
+<p class="is-style-tag-gray">📋 Annales corrigées</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"is-style-tag-gray"} -->
+<p class="is-style-tag-gray">🎥 Fiches animées</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs","margin":{"bottom":"var:preset|spacing|sm"}}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
-<div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--sm)"><!-- wp:image {"width":"44px","height":"44px","scale":"cover","sizeSlug":"full","className":"is-style-rounded"} -->
-<figure class="wp-block-image size-full is-resized is-style-rounded"><img src="/wp-content/themes/jurible/assets/images/team/raphael.png" alt="Raphaël Briguet-Lamarre" style="object-fit:cover;width:44px;height:44px"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"style":{"typography":{"fontWeight":"600"}},"textColor":"text-dark","fontSize":"small"} -->
-<p class="has-text-dark-color has-text-color has-small-font-size" style="font-weight:600">[acf field="auteur_nom" default="Raphaël Briguet-Lamarre"]</p>
+<!-- wp:group {"className":"hero-produit__proof","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group hero-produit__proof"><!-- wp:paragraph {"className":"hero-produit__stars"} -->
+<p class="hero-produit__stars">★★★★★</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"textColor":"text-muted","fontSize":"caption"} -->
-<p class="has-text-muted-color has-text-color has-caption-font-size">[acf field="auteur_titre" default="Ex-avocat, chargé d'enseignement"]</p>
+<!-- wp:paragraph {"className":"hero-produit__rating"} -->
+<p class="hero-produit__rating">[acf field="note_moyenne" default="4.7"]/5</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"hero-produit__rating-count"} -->
+<p class="hero-produit__rating-count">basé sur [acf field="nombre_avis" default="320"] avis</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"hero-produit__features","layout":{"type":"flex","orientation":"vertical"}} -->
+<div class="wp-block-group hero-produit__features"><!-- wp:paragraph {"className":"hero-produit__feature"} -->
+<p class="hero-produit__feature"><span class="hero-produit__feature-icon">✅</span> Conforme au programme universitaire</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"hero-produit__feature"} -->
+<p class="hero-produit__feature"><span class="hero-produit__feature-icon">✅</span> + de 25 000 étudiants nous font confiance</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"className":"hero-produit__visual"} -->
+<div class="wp-block-column hero-produit__visual"><!-- wp:group {"className":"hero-produit__card","layout":{"type":"default"}} -->
+<div class="wp-block-group hero-produit__card"><!-- wp:group {"className":"hero-produit__card-visual","layout":{"type":"flex","justifyContent":"center","verticalAlignment":"center"}} -->
+<div class="wp-block-group hero-produit__card-visual"><!-- wp:html -->
+<img src="[acf field='image_hero']" alt="[acf field='titre_cours']" style="width:100%;height:auto;border-radius:8px;"/>
+<!-- /wp:html --></div>
 <!-- /wp:group -->
 
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|sm"}}},"textColor":"text-muted","fontSize":"caption"} -->
-<p class="has-text-muted-color has-text-color has-caption-font-size" style="margin-bottom:var(--wp--preset--spacing--sm)">Inclus dans l'Académie · Accès illimité · Nouveaux contenus chaque mois</p>
+<!-- wp:group {"className":"hero-produit__card-body","layout":{"type":"default"}} -->
+<div class="wp-block-group hero-produit__card-body"><!-- wp:paragraph {"className":"hero-produit__card-title"} -->
+<p class="hero-produit__card-title">Inclus dans l'abonnement Jurible</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons {"style":{"spacing":{"blockGap":"var:preset|spacing|xs","margin":{"bottom":"var:preset|spacing|xs"}}}} -->
-<div class="wp-block-buttons" style="margin-bottom:var(--wp--preset--spacing--xs)"><!-- wp:button {"gradient":"cta-gradient","style":{"typography":{"fontWeight":"600"}}} -->
-<div class="wp-block-button" style="font-weight:600"><a class="wp-block-button__link has-cta-gradient-gradient-background has-background wp-element-button" href="[acf field='lien_inscription' default='/academie']">Accéder au cours →</a></div>
-<!-- /wp:button -->
+<!-- wp:group {"className":"hero-produit__card-features","layout":{"type":"flex","orientation":"vertical"}} -->
+<div class="wp-block-group hero-produit__card-features"><!-- wp:paragraph {"className":"hero-produit__card-feature"} -->
+<p class="hero-produit__card-feature"><span class="hero-produit__card-feature-icon">✅</span> Accès à 20 matières de licence</p>
+<!-- /wp:paragraph -->
 
-<!-- wp:button {"className":"is-style-outline","style":{"typography":{"fontWeight":"600"}}} -->
-<div class="wp-block-button is-style-outline" style="font-weight:600"><a class="wp-block-button__link wp-element-button" href="#programme">Voir le programme</a></div>
+<!-- wp:paragraph {"className":"hero-produit__card-feature"} -->
+<p class="hero-produit__card-feature"><span class="hero-produit__card-feature-icon">✅</span> Cours de méthodologie inclus</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"hero-produit__card-feature"} -->
+<p class="hero-produit__card-feature"><span class="hero-produit__card-feature-icon">✅</span> Outils IA (fiches d'arrêt, plans…)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"hero-produit__card-feature"} -->
+<p class="hero-produit__card-feature"><span class="hero-produit__card-feature-icon">✅</span> Mises à jour régulières</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"hero-produit__price-row","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"baseline"}} -->
+<div class="wp-block-group hero-produit__price-row"><!-- wp:paragraph {"className":"hero-produit__cta-mention"} -->
+<p class="hero-produit__cta-mention">A partir de </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"hero-produit__price"} -->
+<p class="hero-produit__price">20€</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"hero-produit__price-period"} -->
+<p class="hero-produit__price-period">/mois</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:buttons {"className":"hero-produit__cta"} -->
+<div class="wp-block-buttons hero-produit__cta"><!-- wp:button {"width":100,"className":"is-style-primary"} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-primary"><a class="wp-block-button__link wp-element-button" href="[acf field='lien_inscription' default='/academie']">Rejoindre l'Académie →</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 
-<!-- wp:paragraph {"align":"center","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|md"}}},"textColor":"text-muted","fontSize":"caption"} -->
-<p class="has-text-align-center has-text-muted-color has-text-color has-caption-font-size" style="margin-bottom:var(--wp--preset--spacing--md)">🔒 Paiement sécurisé · Satisfait ou remboursé 14 jours</p>
+<!-- wp:group {"className":"hero-produit__cta-mentions","layout":{"type":"flex","justifyContent":"center"}} -->
+<div class="wp-block-group hero-produit__cta-mentions"><!-- wp:paragraph {"className":"hero-produit__cta-mention"} -->
+<p class="hero-produit__cta-mention">Accès immédiat       •</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:group {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|sm"},"blockGap":"0"},"border":{"width":"1px","color":"var:preset|color|border","radius":"var:preset|border-radius|lg"}},"backgroundColor":"white","layout":{"type":"default"}} -->
-<div class="wp-block-group has-border-color has-white-background-color has-background" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:var(--wp--preset--border-radius--lg);margin-bottom:var(--wp--preset--spacing--sm)"><!-- wp:columns {"style":{"spacing":{"margin":{"top":"0","bottom":"0"},"blockGap":{"top":"0","left":"0"}},"border":{"bottom":{"color":"var:preset|color|border","width":"1px"}}}} -->
-<div class="wp-block-columns" style="border-bottom-color:var(--wp--preset--color--border);border-bottom-width:1px;margin-top:0;margin-bottom:0"><!-- wp:column {"style":{"spacing":{"padding":{"top":"var:preset|spacing|xs","bottom":"var:preset|spacing|xs","left":"var:preset|spacing|xs","right":"var:preset|spacing|xs"}},"border":{"right":{"color":"var:preset|color|border","width":"1px"}}}} -->
-<div class="wp-block-column" style="border-right-color:var(--wp--preset--color--border);border-right-width:1px;padding-top:var(--wp--preset--spacing--xs);padding-right:var(--wp--preset--spacing--xs);padding-bottom:var(--wp--preset--spacing--xs);padding-left:var(--wp--preset--spacing--xs)"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"fontSize":"heading-4"} -->
-<p class="has-heading-4-font-size" style="margin-top:0;margin-bottom:0">🎬</p>
+<!-- wp:paragraph {"className":"hero-produit__cta-mention"} -->
+<p class="hero-produit__cta-mention">Sans engagement</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"style":{"typography":{"fontWeight":"600"},"spacing":{"margin":{"top":"0","bottom":"0"}}},"textColor":"text-dark","fontSize":"small"} -->
-<p class="has-text-dark-color has-text-color has-small-font-size" style="margin-top:0;margin-bottom:0;font-weight:600">[acf field="videos_count" default="30"]+ vidéos</p>
+<!-- wp:paragraph {"className":"hero-produit__cta-mention"} -->
+<p class="hero-produit__cta-mention">•</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"textColor":"text-muted","fontSize":"caption"} -->
-<p class="has-text-muted-color has-text-color has-caption-font-size" style="margin-top:0;margin-bottom:0">[acf field="duree_totale" default="12h"] de cours</p>
+<!-- wp:paragraph {"className":"hero-produit__cta-mention"} -->
+<p class="hero-produit__cta-mention">Annulable en 1 clic</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"style":{"spacing":{"padding":{"top":"var:preset|spacing|xs","bottom":"var:preset|spacing|xs","left":"var:preset|spacing|xs","right":"var:preset|spacing|xs"}}}} -->
-<div class="wp-block-column" style="padding-top:var(--wp--preset--spacing--xs);padding-right:var(--wp--preset--spacing--xs);padding-bottom:var(--wp--preset--spacing--xs);padding-left:var(--wp--preset--spacing--xs)"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"fontSize":"heading-4"} -->
-<p class="has-heading-4-font-size" style="margin-top:0;margin-bottom:0">📝</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"style":{"typography":{"fontWeight":"600"},"spacing":{"margin":{"top":"0","bottom":"0"}}},"textColor":"text-dark","fontSize":"small"} -->
-<p class="has-text-dark-color has-text-color has-small-font-size" style="margin-top:0;margin-bottom:0;font-weight:600">[acf field="qcm_count" default="200"]+ QCM</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"textColor":"text-muted","fontSize":"caption"} -->
-<p class="has-text-muted-color has-text-color has-caption-font-size" style="margin-top:0;margin-bottom:0">Pour s'entraîner</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns -->
-
-<!-- wp:columns {"style":{"spacing":{"margin":{"top":"0","bottom":"0"},"blockGap":{"top":"0","left":"0"}}}} -->
-<div class="wp-block-columns" style="margin-top:0;margin-bottom:0"><!-- wp:column {"style":{"spacing":{"padding":{"top":"var:preset|spacing|xs","bottom":"var:preset|spacing|xs","left":"var:preset|spacing|xs","right":"var:preset|spacing|xs"}},"border":{"right":{"color":"var:preset|color|border","width":"1px"}}}} -->
-<div class="wp-block-column" style="border-right-color:var(--wp--preset--color--border);border-right-width:1px;padding-top:var(--wp--preset--spacing--xs);padding-right:var(--wp--preset--spacing--xs);padding-bottom:var(--wp--preset--spacing--xs);padding-left:var(--wp--preset--spacing--xs)"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"fontSize":"heading-4"} -->
-<p class="has-heading-4-font-size" style="margin-top:0;margin-bottom:0">🃏</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"style":{"typography":{"fontWeight":"600"},"spacing":{"margin":{"top":"0","bottom":"0"}}},"textColor":"text-dark","fontSize":"small"} -->
-<p class="has-text-dark-color has-text-color has-small-font-size" style="margin-top:0;margin-bottom:0;font-weight:600">[acf field="flashcards_count" default="150"]+ flashcards</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"textColor":"text-muted","fontSize":"caption"} -->
-<p class="has-text-muted-color has-text-color has-caption-font-size" style="margin-top:0;margin-bottom:0">Mémorisation active</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"style":{"spacing":{"padding":{"top":"var:preset|spacing|xs","bottom":"var:preset|spacing|xs","left":"var:preset|spacing|xs","right":"var:preset|spacing|xs"}}}} -->
-<div class="wp-block-column" style="padding-top:var(--wp--preset--spacing--xs);padding-right:var(--wp--preset--spacing--xs);padding-bottom:var(--wp--preset--spacing--xs);padding-left:var(--wp--preset--spacing--xs)"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"fontSize":"heading-4"} -->
-<p class="has-heading-4-font-size" style="margin-top:0;margin-bottom:0">📄</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"style":{"typography":{"fontWeight":"600"},"spacing":{"margin":{"top":"0","bottom":"0"}}},"textColor":"text-dark","fontSize":"small"} -->
-<p class="has-text-dark-color has-text-color has-small-font-size" style="margin-top:0;margin-bottom:0;font-weight:600">[acf field="annales_count" default="10"]+ annales</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"textColor":"text-muted","fontSize":"caption"} -->
-<p class="has-text-muted-color has-text-color has-caption-font-size" style="margin-top:0;margin-bottom:0">Sujets corrigés</p>
-<!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|sm","bottom":"var:preset|spacing|sm","left":"var:preset|spacing|sm","right":"var:preset|spacing|sm"},"blockGap":"var:preset|spacing|sm"},"border":{"radius":"var:preset|border-radius|lg","width":"1px"}},"backgroundColor":"success-bg","borderColor":"success","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
-<div class="wp-block-group has-border-color has-success-border-color has-success-bg-background-color has-background" style="border-width:1px;border-radius:var(--wp--preset--border-radius--lg);padding-top:var(--wp--preset--spacing--sm);padding-right:var(--wp--preset--spacing--sm);padding-bottom:var(--wp--preset--spacing--sm);padding-left:var(--wp--preset--spacing--sm)"><!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|xs","bottom":"var:preset|spacing|xs","left":"var:preset|spacing|xs","right":"var:preset|spacing|xs"}},"border":{"radius":"var:preset|border-radius|full"}},"backgroundColor":"success","layout":{"type":"flex","justifyContent":"center","verticalAlignment":"center"}} -->
-<div class="wp-block-group has-success-background-color has-background" style="border-radius:var(--wp--preset--border-radius--full);padding-top:var(--wp--preset--spacing--xs);padding-right:var(--wp--preset--spacing--xs);padding-bottom:var(--wp--preset--spacing--xs);padding-left:var(--wp--preset--spacing--xs)"><!-- wp:paragraph {"textColor":"white","fontSize":"medium"} -->
-<p class="has-white-color has-text-color has-medium-font-size">🛡️</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"style":{"typography":{"fontWeight":"600"}},"textColor":"text-dark","fontSize":"small"} -->
-<p class="has-text-dark-color has-text-color has-small-font-size" style="font-weight:600">Garantie « Réussite ou Remboursé »</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"style":{"typography":{"lineHeight":"1.5"}},"textColor":"text-gray","fontSize":"caption"} -->
-<p class="has-text-gray-color has-text-color has-caption-font-size" style="line-height:1.5">Si vous n'obtenez pas la moyenne au partiel, nous vous remboursons intégralement.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"width":"45%","className":"hero-cours-image"} -->
-<div class="wp-block-column hero-cours-image" style="flex-basis:45%"><!-- wp:group {"style":{"border":{"radius":"var:preset|border-radius|lg"},"overflow":"hidden"},"layout":{"type":"default"}} -->
-<div class="wp-block-group" style="border-radius:var(--wp--preset--border-radius--lg)"><!-- wp:html -->
-<figure class="wp-block-image has-custom-border hero-cours__image" style="border-radius:12px;overflow:hidden;">
-<img src="[acf field='image_hero']" alt="[acf field='titre_cours']" style="border-radius:12px;width:100%;height:auto;"/>
-</figure>
-<!-- /wp:html --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:group -->
-
-<!-- Bandeau réassurance -->
-
-<!-- wp:group {"align":"full","className":"reassurance-full-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
+<!-- wp:group {"metadata":{"categories":["confiance"],"patternName":"jurible/confiance-01-reassurance-full","name":"Confiance 01 - Reassurance Full"},"align":"full","className":"reassurance-full-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull reassurance-full-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--md)"><!-- wp:group {"className":"reassurance-full","style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"},"blockGap":"0"}},"backgroundColor":"white","layout":{"type":"default"}} -->
 <div class="wp-block-group reassurance-full has-white-background-color has-background" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0"><!-- wp:columns {"className":"reassurance-full__row","style":{"spacing":{"margin":{"top":"0"}}}} -->
 <div class="wp-block-columns reassurance-full__row" style="margin-top:0"><!-- wp:column {"className":"reassurance-full__col"} -->
@@ -256,20 +222,18 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- Pain Points -->
-
-<!-- wp:group {"align":"full","className":"pain-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
+<!-- wp:group {"metadata":{"categories":["marketing"],"patternName":"jurible/marketing-01-pain-points-4","name":"Marketing 01 - Pain Points 4"},"align":"full","className":"pain-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull pain-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)"><!-- wp:group {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|lg"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 <div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--lg)"><!-- wp:paragraph {"align":"center","className":"is-style-tag-secondary"} -->
 <p class="has-text-align-center is-style-tag-secondary">🚨 Le constat</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->
-<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Réviser le [acf field="matiere_name" default="droit"], c'est <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">difficile</mark></h2>
+<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Le [acf field="matiere_name" default="droit"], une matière <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">redoutée</mark></h2>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"15px"}},"textColor":"text-gray"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:15px">Le problème n'est pas votre travail ou votre intelligence, c'est vos méthodes de révision.</p>
+<!-- wp:paragraph {"align":"center","textColor":"text-gray","fontSize":"body-large"} -->
+<p class="has-text-align-center has-text-gray-color has-text-color has-body-large-font-size">Pourquoi est-ce si difficile d'obtenir de bonnes notes en [acf field="matiere_name" default="droit"] ?</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
@@ -284,11 +248,11 @@
 <!-- /wp:group -->
 
 <!-- wp:heading {"level":3,"className":"pain-card__title","style":{"typography":{"fontWeight":"600"},"spacing":{"margin":{"bottom":"var:preset|spacing|xs"}}},"textColor":"text-dark","fontSize":"small"} -->
-<h3 class="wp-block-heading pain-card__title has-text-dark-color has-text-color has-small-font-size" style="margin-bottom:var(--wp--preset--spacing--xs);font-weight:600">[acf field="pain_1_titre" default="Les manuels sont trop longs"]</h3>
+<h3 class="wp-block-heading pain-card__title has-text-dark-color has-text-color has-small-font-size" style="margin-bottom:var(--wp--preset--spacing--xs);font-weight:600">[acf field="pain_1_titre" default="Des notions difficiles à démêler"]</h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"className":"pain-card__description","textColor":"text-gray","fontSize":"small"} -->
-<p class="pain-card__description has-text-gray-color has-text-color has-small-font-size">[acf field="pain_1_description" default="Des centaines de pages sans hiérarchie : impossible de savoir ce qui tombera au partiel."]</p>
+<p class="pain-card__description has-text-gray-color has-text-color has-small-font-size">[acf field="pain_1_description" default="Des concepts abstraits et des articulations complexes qui demandent un vrai travail de fond."]</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column -->
@@ -302,11 +266,11 @@
 <!-- /wp:group -->
 
 <!-- wp:heading {"level":3,"className":"pain-card__title","style":{"typography":{"fontWeight":"600"},"spacing":{"margin":{"bottom":"var:preset|spacing|xs"}}},"textColor":"text-dark","fontSize":"small"} -->
-<h3 class="wp-block-heading pain-card__title has-text-dark-color has-text-color has-small-font-size" style="margin-bottom:var(--wp--preset--spacing--xs);font-weight:600">[acf field="pain_2_titre" default="Vos notes sont incomplètes"]</h3>
+<h3 class="wp-block-heading pain-card__title has-text-dark-color has-text-color has-small-font-size" style="margin-bottom:var(--wp--preset--spacing--xs);font-weight:600">[acf field="pain_2_titre" default="Un programme dense, un semestre court"]</h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"className":"pain-card__description","textColor":"text-gray","fontSize":"small"} -->
-<p class="pain-card__description has-text-gray-color has-text-color has-small-font-size">[acf field="pain_2_description" default="Le cours va trop vite en amphi, et vos notes manquent de structure et de précision."]</p>
+<p class="pain-card__description has-text-gray-color has-text-color has-small-font-size">[acf field="pain_2_description" default="Entre les CM, les TD et les révisions, le semestre file. Et le programme ne pardonne pas le moindre retard."]</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column -->
@@ -320,11 +284,11 @@
 <!-- /wp:group -->
 
 <!-- wp:heading {"level":3,"className":"pain-card__title","style":{"typography":{"fontWeight":"600"},"spacing":{"margin":{"bottom":"var:preset|spacing|xs"}}},"textColor":"text-dark","fontSize":"small"} -->
-<h3 class="wp-block-heading pain-card__title has-text-dark-color has-text-color has-small-font-size" style="margin-bottom:var(--wp--preset--spacing--xs);font-weight:600">[acf field="pain_3_titre" default="Pas de retour sur vos exercices"]</h3>
+<h3 class="wp-block-heading pain-card__title has-text-dark-color has-text-color has-small-font-size" style="margin-bottom:var(--wp--preset--spacing--xs);font-weight:600">[acf field="pain_3_titre" default="La méthode, personne ne vous l'enseigne"]</h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"className":"pain-card__description","textColor":"text-gray","fontSize":"small"} -->
-<p class="pain-card__description has-text-gray-color has-text-color has-small-font-size">[acf field="pain_3_description" default="Vous faites des exercices mais sans savoir si vous êtes sur la bonne voie."]</p>
+<p class="pain-card__description has-text-gray-color has-text-color has-small-font-size">[acf field="pain_3_description" default="La fac vous donne le programme mais pas les outils pour le maîtriser."]</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column -->
@@ -333,16 +297,16 @@
 <div class="wp-block-column"><!-- wp:group {"className":"pain-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"var(\u002d\u002dwp\u002d\u002dcustom\u002d\u002dborder-radius\u002d\u002dlg)","width":"1px"}},"backgroundColor":"white","borderColor":"border","layout":{"type":"default"}} -->
 <div class="wp-block-group pain-card has-border-color has-border-border-color has-white-background-color has-background" style="border-width:1px;border-radius:var(--wp--custom--border-radius--lg);padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)"><!-- wp:group {"className":"pain-card__icon","backgroundColor":"muted","layout":{"type":"flex","justifyContent":"center","verticalAlignment":"center"}} -->
 <div class="wp-block-group pain-card__icon has-muted-background-color has-background"><!-- wp:paragraph {"fontSize":"heading-4"} -->
-<p class="has-heading-4-font-size">⏰</p>
+<p class="has-heading-4-font-size">🧍</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:heading {"level":3,"className":"pain-card__title","style":{"typography":{"fontWeight":"600"},"spacing":{"margin":{"bottom":"var:preset|spacing|xs"}}},"textColor":"text-dark","fontSize":"small"} -->
-<h3 class="wp-block-heading pain-card__title has-text-dark-color has-text-color has-small-font-size" style="margin-bottom:var(--wp--preset--spacing--xs);font-weight:600">[acf field="pain_4_titre" default="Vous manquez de temps"]</h3>
+<h3 class="wp-block-heading pain-card__title has-text-dark-color has-text-color has-small-font-size" style="margin-bottom:var(--wp--preset--spacing--xs);font-weight:600">[acf field="pain_4_titre" default="La peur de rater son année"]</h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"className":"pain-card__description","textColor":"text-gray","fontSize":"small"} -->
-<p class="pain-card__description has-text-gray-color has-text-color has-small-font-size">[acf field="pain_4_description" default="Entre les TD, les autres matières et la vie perso, vous n'avez pas le temps de tout réviser."]</p>
+<p class="pain-card__description has-text-gray-color has-text-color has-small-font-size">[acf field="pain_4_description" default="Des cours magistraux difficiles à suivre, des TD complexes, et la pression de valider."]</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
@@ -351,18 +315,16 @@
 
 <!-- wp:group {"className":"pain-banner","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|lg","right":"var:preset|spacing|lg"},"margin":{"top":"var:preset|spacing|lg"}},"border":{"radius":"12px"}},"gradient":"cta-gradient","layout":{"type":"default"}} -->
 <div class="wp-block-group pain-banner has-cta-gradient-gradient-background has-background" style="border-radius:12px;margin-top:var(--wp--preset--spacing--lg);padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--lg)"><!-- wp:paragraph {"align":"center","className":"pain-banner__title","style":{"typography":{"fontWeight":"700"},"spacing":{"margin":{"bottom":"4px"}}},"textColor":"white","fontSize":"medium"} -->
-<p class="has-text-align-center pain-banner__title has-white-color has-text-color has-medium-font-size" style="margin-bottom:4px;font-weight:700">C'est pourquoi nous avons créé l'Académie Jurible</p>
+<p class="has-text-align-center pain-banner__title has-white-color has-text-color has-medium-font-size" style="margin-bottom:4px;font-weight:700">L'Académie vous accompagne tout au long de votre licence</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","className":"pain-banner__text","textColor":"white","fontSize":"small"} -->
-<p class="has-text-align-center pain-banner__text has-white-color has-text-color has-small-font-size">Des cours vidéo, des exercices corrigés et des outils de mémorisation pour réussir vos partiels.</p>
+<p class="has-text-align-center pain-banner__text has-white-color has-text-color has-small-font-size">Des cours vidéo clairs, des fiches, des QCM et des outils pour travailler efficacement — de la L1 à la L3.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- Solution -->
-
-<!-- wp:group {"align":"full","className":"section-solution","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"0","right":"0"}}},"backgroundColor":"muted","layout":{"type":"constrained"}} -->
+<!-- wp:group {"metadata":{"categories":["marketing"],"patternName":"jurible/marketing-03-solution-4-gris","name":"Marketing 03 - Solution Grille 4 Gris"},"align":"full","className":"section-solution","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"0","right":"0"}}},"backgroundColor":"muted","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull section-solution has-muted-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:0;padding-bottom:var(--wp--preset--spacing--xl);padding-left:0"><!-- wp:group {"align":"wide","style":{"spacing":{"blockGap":"var:preset|spacing|xl","padding":{"left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"default"}} -->
 <div class="wp-block-group alignwide" style="padding-right:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"align":"center","className":"is-style-tag-secondary"} -->
@@ -370,68 +332,66 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->
-<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Révisez plus efficacement avec <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">l'Académie</mark></h2>
+<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Un cours pensé pour votre <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">réussite</mark></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"18px","lineHeight":"1.6"}},"textColor":"text-gray"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:18px;line-height:1.6">Un cours complet avec vidéos, exercices et outils de mémorisation pour maîtriser le [acf field="matiere_name" default="droit"].</p>
+<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:18px;line-height:1.6">Tout ce dont vous avez besoin pour comprendre le [acf field="matiere_name" default="droit"] et réussir vos examens.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:columns {"className":"solution-grid-4","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|md","top":"var:preset|spacing|md"}}}} -->
 <div class="wp-block-columns solution-grid-4"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:jurible/solution-card {"layout":"centered","icon":"🎬","title":"Cours vidéo HD","description":"Des explications claires et structurées par des experts du droit. Regardez à votre rythme."} -->
-<div class="wp-block-jurible-solution-card solution-card solution-card--centered"><div class="solution-card__icon">🎬</div><div class="solution-card__content"><h4 class="solution-card__title">Cours vidéo HD</h4><p class="solution-card__description">Des explications claires et structurées par des experts du droit. Regardez à votre rythme.</p></div></div>
+<div class="wp-block-column"><!-- wp:jurible/solution-card {"layout":"centered","icon":"&#x26a1;","title":"Apprenez à votre rythme","description":"Vidéos claires et supports variés pour comprendre facilement sur PC, mobile ou tablette."} -->
+<div class="wp-block-jurible-solution-card solution-card solution-card--centered"><div class="solution-card__icon">&#x26a1;</div><div class="solution-card__content"><h4 class="solution-card__title">Apprenez à votre rythme</h4><p class="solution-card__description">Vidéos claires et supports variés pour comprendre facilement sur PC, mobile ou tablette.</p></div></div>
 <!-- /wp:jurible/solution-card --></div>
 <!-- /wp:column -->
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:jurible/solution-card {"layout":"centered","icon":"📝","title":"QCM & Exercices","description":"Testez vos connaissances avec des centaines de questions et exercices corrigés."} -->
-<div class="wp-block-jurible-solution-card solution-card solution-card--centered"><div class="solution-card__icon">📝</div><div class="solution-card__content"><h4 class="solution-card__title">QCM & Exercices</h4><p class="solution-card__description">Testez vos connaissances avec des centaines de questions et exercices corrigés.</p></div></div>
+<div class="wp-block-column"><!-- wp:jurible/solution-card {"layout":"centered","icon":"&#x1f4b0;","title":"Exercez-vous régulièrement","description":"Exercices corrigés, flashcards et QCM pour tester vos connaissances et progresser rapidement."} -->
+<div class="wp-block-jurible-solution-card solution-card solution-card--centered"><div class="solution-card__icon">&#x1f4b0;</div><div class="solution-card__content"><h4 class="solution-card__title">Exercez-vous régulièrement</h4><p class="solution-card__description">Exercices corrigés, flashcards et QCM pour tester vos connaissances et progresser rapidement.</p></div></div>
 <!-- /wp:jurible/solution-card --></div>
 <!-- /wp:column -->
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:jurible/solution-card {"layout":"centered","icon":"🃏","title":"Flashcards","description":"Mémorisez efficacement grâce à la répétition espacée. Révisez n'importe où."} -->
-<div class="wp-block-jurible-solution-card solution-card solution-card--centered"><div class="solution-card__icon">🃏</div><div class="solution-card__content"><h4 class="solution-card__title">Flashcards</h4><p class="solution-card__description">Mémorisez efficacement grâce à la répétition espacée. Révisez n'importe où.</p></div></div>
+<div class="wp-block-column"><!-- wp:jurible/solution-card {"layout":"centered","icon":"&#x1f3af;","title":"Préparez vos examens","description":"Contenus conçus par des enseignants pour réussir vos TD et partiels du premier coup."} -->
+<div class="wp-block-jurible-solution-card solution-card solution-card--centered"><div class="solution-card__icon">&#x1f3af;</div><div class="solution-card__content"><h4 class="solution-card__title">Préparez vos examens</h4><p class="solution-card__description">Contenus conçus par des enseignants pour réussir vos TD et partiels du premier coup.</p></div></div>
 <!-- /wp:jurible/solution-card --></div>
 <!-- /wp:column -->
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:jurible/solution-card {"layout":"centered","icon":"📄","title":"Annales corrigées","description":"Entraînez-vous sur de vrais sujets d'examen avec des corrections détaillées."} -->
-<div class="wp-block-jurible-solution-card solution-card solution-card--centered"><div class="solution-card__icon">📄</div><div class="solution-card__content"><h4 class="solution-card__title">Annales corrigées</h4><p class="solution-card__description">Entraînez-vous sur de vrais sujets d'examen avec des corrections détaillées.</p></div></div>
+<div class="wp-block-column"><!-- wp:jurible/solution-card {"layout":"centered","icon":"&#x2705;","title":"Gagnez des points","description":"Prenez de l'avance sur les autres étudiants dès les prochains partiels."} -->
+<div class="wp-block-jurible-solution-card solution-card solution-card--centered"><div class="solution-card__icon">&#x2705;</div><div class="solution-card__content"><h4 class="solution-card__title">Gagnez des points</h4><p class="solution-card__description">Prenez de l'avance sur les autres étudiants dès les prochains partiels.</p></div></div>
 <!-- /wp:jurible/solution-card --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- Programme / Sommaire -->
-
-<!-- wp:group {"align":"full","className":"programme-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
-<div id="programme" class="wp-block-group alignfull programme-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)"><!-- wp:group {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|lg"}}},"layout":{"type":"constrained"}} -->
+<!-- wp:group {"metadata":{"categories":["contenu"],"patternName":"jurible/contenu-12-stats-sommaire","name":"Contenu 12 - Stats Sommaire"},"align":"full","className":"contenu-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull contenu-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)"><!-- wp:group {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|lg"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--lg)"><!-- wp:group {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-tag-secondary"} -->
-<p class="is-style-tag-secondary">📦 Programme</p>
+<p class="is-style-tag-secondary">📦 Contenu</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->
-<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Tout le programme de <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">[acf field="matiere_name" default="la matière"]</mark></h2>
+<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Tout le programme de <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">[acf field="matiere_name" default="Droit"]</mark></h2>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
-<!-- wp:columns {"align":"wide","className":"programme-cours","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|xl"}}}} -->
-<div class="wp-block-columns alignwide programme-cours"><!-- wp:column {"width":"40%"} -->
+<!-- wp:columns {"align":"wide","className":"contenu-fiche","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|xl"}}}} -->
+<div class="wp-block-columns alignwide contenu-fiche"><!-- wp:column {"width":"40%"} -->
 <div class="wp-block-column" style="flex-basis:40%"><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
 <p class="has-text-gray-color has-text-color" style="font-size:14px">[acf field="texte_section_programme" default="Ce cours couvre l'intégralité du programme universitaire. Chaque chapitre est accompagné de vidéos explicatives, de fiches de synthèse et d'exercices corrigés."]</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:columns {"className":"programme-cours__stats","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|sm","left":"var:preset|spacing|sm"},"margin":{"top":"var:preset|spacing|md"}}}} -->
-<div class="wp-block-columns programme-cours__stats" style="margin-top:var(--wp--preset--spacing--md)"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:group {"className":"programme-cours__stat","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"8px"}},"backgroundColor":"muted","layout":{"type":"default"}} -->
-<div class="wp-block-group programme-cours__stat has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)"><!-- wp:paragraph {"align":"center","className":"programme-cours__stat-number","style":{"typography":{"fontSize":"28px","fontWeight":"700"}},"textColor":"primary"} -->
-<p class="has-text-align-center programme-cours__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">[acf field="videos_count" default="30"]</p>
+<!-- wp:columns {"className":"contenu-fiche__stats","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|sm","left":"var:preset|spacing|sm"},"margin":{"top":"var:preset|spacing|md"}}}} -->
+<div class="wp-block-columns contenu-fiche__stats" style="margin-top:var(--wp--preset--spacing--md)"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"contenu-fiche__stat","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"8px"}},"backgroundColor":"muted","layout":{"type":"default"}} -->
+<div class="wp-block-group contenu-fiche__stat has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)"><!-- wp:paragraph {"align":"center","className":"contenu-fiche__stat-number","style":{"typography":{"fontSize":"28px","fontWeight":"700"}},"textColor":"primary"} -->
+<p class="has-text-align-center contenu-fiche__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">[acf field="videos_count" default="20"]</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px"}},"textColor":"text-gray"} -->
@@ -441,9 +401,9 @@
 <!-- /wp:column -->
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:group {"className":"programme-cours__stat","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"8px"}},"backgroundColor":"muted","layout":{"type":"default"}} -->
-<div class="wp-block-group programme-cours__stat has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)"><!-- wp:paragraph {"align":"center","className":"programme-cours__stat-number","style":{"typography":{"fontSize":"28px","fontWeight":"700"}},"textColor":"primary"} -->
-<p class="has-text-align-center programme-cours__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">[acf field="qcm_count" default="200"]</p>
+<div class="wp-block-column"><!-- wp:group {"className":"contenu-fiche__stat","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"8px"}},"backgroundColor":"muted","layout":{"type":"default"}} -->
+<div class="wp-block-group contenu-fiche__stat has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)"><!-- wp:paragraph {"align":"center","className":"contenu-fiche__stat-number","style":{"typography":{"fontSize":"28px","fontWeight":"700"}},"textColor":"primary"} -->
+<p class="has-text-align-center contenu-fiche__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">[acf field="qcm_count" default="200"]</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px"}},"textColor":"text-gray"} -->
@@ -453,27 +413,27 @@
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
 
-<!-- wp:columns {"className":"programme-cours__stats","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|sm","left":"var:preset|spacing|sm"},"margin":{"top":"var:preset|spacing|sm"}}}} -->
-<div class="wp-block-columns programme-cours__stats" style="margin-top:var(--wp--preset--spacing--sm)"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:group {"className":"programme-cours__stat","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"8px"}},"backgroundColor":"muted","layout":{"type":"default"}} -->
-<div class="wp-block-group programme-cours__stat has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)"><!-- wp:paragraph {"align":"center","className":"programme-cours__stat-number","style":{"typography":{"fontSize":"28px","fontWeight":"700"}},"textColor":"primary"} -->
-<p class="has-text-align-center programme-cours__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">[acf field="flashcards_count" default="150"]</p>
+<!-- wp:columns {"className":"contenu-fiche__stats","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|sm","left":"var:preset|spacing|sm"},"margin":{"top":"var:preset|spacing|sm"}}}} -->
+<div class="wp-block-columns contenu-fiche__stats" style="margin-top:var(--wp--preset--spacing--sm)"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"contenu-fiche__stat","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"8px"}},"backgroundColor":"muted","layout":{"type":"default"}} -->
+<div class="wp-block-group contenu-fiche__stat has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)"><!-- wp:paragraph {"align":"center","className":"contenu-fiche__stat-number","style":{"typography":{"fontSize":"28px","fontWeight":"700"}},"textColor":"primary"} -->
+<p class="has-text-align-center contenu-fiche__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">[acf field="annales_count" default="10"]</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px"}},"textColor":"text-gray"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:13px">Flashcards</p>
+<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:13px">Annales</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column -->
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:group {"className":"programme-cours__stat","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"8px"}},"backgroundColor":"muted","layout":{"type":"default"}} -->
-<div class="wp-block-group programme-cours__stat has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)"><!-- wp:paragraph {"align":"center","className":"programme-cours__stat-number","style":{"typography":{"fontSize":"28px","fontWeight":"700"}},"textColor":"primary"} -->
-<p class="has-text-align-center programme-cours__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">[acf field="annales_count" default="10"]</p>
+<div class="wp-block-column"><!-- wp:group {"className":"contenu-fiche__stat","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}},"border":{"radius":"8px"}},"backgroundColor":"muted","layout":{"type":"default"}} -->
+<div class="wp-block-group contenu-fiche__stat has-muted-background-color has-background" style="border-radius:8px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)"><!-- wp:paragraph {"align":"center","className":"contenu-fiche__stat-number","style":{"typography":{"fontSize":"28px","fontWeight":"700"}},"textColor":"primary"} -->
+<p class="has-text-align-center contenu-fiche__stat-number has-primary-color has-text-color" style="font-size:28px;font-weight:700">[acf field="flashcards_count" default="200"]</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px"}},"textColor":"text-gray"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:13px">Annales corrigées</p>
+<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:13px">Flashcards</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
@@ -482,7 +442,7 @@
 
 <!-- wp:column {"width":"60%"} -->
 <div class="wp-block-column" style="flex-basis:60%"><!-- wp:html -->
-<figure class="wp-block-image has-custom-border programme-cours__sommaire-image" style="border-radius:12px;overflow:hidden;">
+<figure class="wp-block-image has-custom-border contenu-fiche__sommaire-image" style="border-radius:12px;overflow:hidden;">
 <a href="[acf field='image_sommaire']" data-lightbox="true"><img src="[acf field='image_sommaire']" alt="Programme du cours" style="border-radius:12px;width:100%;height:auto;"/></a>
 </figure>
 <!-- /wp:html --></div>
@@ -490,22 +450,20 @@
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
 
-<!-- Enseignants -->
-
-<!-- wp:group {"align":"full","className":"equipe-teaser-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull equipe-teaser-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)"><!-- wp:group {"className":"equipe-teaser__photo-wrapper","gradient":"cta-gradient","layout":{"type":"default"}} -->
+<!-- wp:group {"metadata":{"categories":["equipe"],"patternName":"jurible/equipe-02-enseignant-matiere","name":"Equipe 02 - Enseignant Matiere"},"align":"full","className":"enseignant-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull enseignant-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)"><!-- wp:group {"className":"equipe-teaser__photo-wrapper","gradient":"cta-gradient","layout":{"type":"default"}} -->
 <div class="wp-block-group equipe-teaser__photo-wrapper has-cta-gradient-gradient-background has-background"><!-- wp:image {"sizeSlug":"full","className":"equipe-teaser__photo is-style-default"} -->
 <figure class="wp-block-image size-full equipe-teaser__photo is-style-default"><img src="/wp-content/themes/jurible/assets/images/team/photo-des-profs-jurible.com.webp" alt="L'équipe pédagogique Jurible"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:group -->
 
-<!-- wp:spacer {"height":"var:preset|spacing|xs"} -->
-<div style="height:var(--wp--preset--spacing--xs)" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer -->
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|sm","margin":{"bottom":"var:preset|spacing|lg"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
+<div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--lg)"><!-- wp:paragraph {"align":"center","className":"is-style-tag-secondary"} -->
+<p class="has-text-align-center is-style-tag-secondary">👨‍🏫 Votre enseignant</p>
+<!-- /wp:paragraph -->
 
-<!-- wp:group {"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
-<div class="wp-block-group"><!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->
-<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Des enseignants <mark>passionnés</mark></h2>
+<!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->
+<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Un cours créé par des <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">experts</mark></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","textColor":"text-gray","fontSize":"body-large"} -->
@@ -513,54 +471,264 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","textColor":"text-gray","fontSize":"body-large"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color has-body-large-font-size">[acf field="texte_section_auteur" default=""]</p>
+<p class="has-text-align-center has-text-gray-color has-text-color has-body-large-font-size">[acf field="texte_section_auteur"]</p>
 <!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|md","right":"var:preset|spacing|md"},"blockGap":"var:preset|spacing|md"},"border":{"radius":"12px"}},"backgroundColor":"muted","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top","justifyContent":"center"}} -->
+<div class="wp-block-group has-muted-background-color has-background" style="border-radius:12px;padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)"><!-- wp:image {"sizeSlug":"full","className":"is-style-rounded enseignant-avatar"} -->
+<figure class="wp-block-image size-full is-style-rounded enseignant-avatar"><img src="/wp-content/themes/jurible/assets/images/team/raphael.png" alt="Photo enseignant"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"flex","orientation":"vertical"}} -->
+<div class="wp-block-group"><!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"20px","fontWeight":"700"}},"textColor":"text-dark"} -->
+<h3 class="wp-block-heading has-text-dark-color has-text-color" style="font-size:20px;font-weight:700">[acf field="auteur_nom" default="Raphaël Briguet-Lamarre"]</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
+<p class="has-text-gray-color has-text-color" style="font-size:14px">[acf field="auteur_titre" default="Responsable pédagogique"]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"className":"enseignant-credentials","style":{"typography":{"fontSize":"13px"},"spacing":{"padding":{"top":"8px","bottom":"0"}}},"textColor":"text-gray"} -->
+<ul style="padding-top:8px;padding-bottom:0;font-size:13px" class="wp-block-list enseignant-credentials has-text-gray-color has-text-color"><!-- wp:list-item -->
+<li>Ex-chargé d'enseignement Université de Nice</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Ancien avocat inscrit au barreau</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Master 2 Droit et pratiques des relations de travail (Assas)</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- Témoignages -->
-
-<!-- wp:group {"align":"full","className":"section-temoignages","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"0","right":"0"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull section-temoignages has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:0;padding-bottom:var(--wp--preset--spacing--xl);padding-left:0"><!-- wp:group {"align":"wide","style":{"spacing":{"blockGap":"var:preset|spacing|xl","padding":{"left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"default"}} -->
+<!-- wp:group {"metadata":{"categories":["confiance"],"patternName":"jurible/confiance-05-temoignages-gris","name":"Confiance 05 - Temoignages Gris"},"align":"full","className":"section-temoignages","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"0","right":"0"}}},"backgroundColor":"muted","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull section-temoignages has-muted-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:0;padding-bottom:var(--wp--preset--spacing--xl);padding-left:0"><!-- wp:group {"align":"wide","style":{"spacing":{"blockGap":"var:preset|spacing|xl","padding":{"left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"layout":{"type":"default"}} -->
 <div class="wp-block-group alignwide" style="padding-right:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--md)"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"align":"center","className":"is-style-tag-secondary"} -->
 <p class="has-text-align-center is-style-tag-secondary">💬 Témoignages</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->
-<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Ils ont <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">réussi avec l'Académie</mark></h2>
+<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Ils ont <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">réussi avec Jurible</mark></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"18px","lineHeight":"1.6"}},"textColor":"text-gray"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:18px;line-height:1.6">Rejoignez les 25 000+ étudiants qui ont validé leur année grâce à nos cours.</p>
+<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:18px;line-height:1.6">Rejoignez les 25 000+ étudiants qui ont validé leur année grâce à nos cours et nos outils.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|md"}}}} -->
 <div class="wp-block-columns"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:jurible/card-testimonial {"quote":"Les cours vidéo sont super clairs et les QCM m'ont vraiment aidé à vérifier que j'avais compris. J'ai validé mon semestre avec 14 de moyenne !","avatarInitials":"LD","authorName":"Léa D.","authorSubtitle":"L2 Droit"} -->
+<div class="wp-block-column"><!-- wp:jurible/card-testimonial {"quote":"Les cours vidéo sont super clairs et les QCM m'ont vraiment aidé à vérifier que j'avais compris. J'ai validé mon semestre avec 14 de moyenne !","badgeText":"Semestre validé avec mention","avatarInitials":"LD","authorName":"Léa D.","authorSubtitle":"L2 Droit"} -->
 <div class="wp-block-jurible-card-testimonial card-testimonial card-testimonial--standard"><div class="card-testimonial__stars"><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span></div><p class="card-testimonial__quote">Les cours vidéo sont super clairs et les QCM m'ont vraiment aidé à vérifier que j'avais compris. J'ai validé mon semestre avec 14 de moyenne !</p><div class="card-testimonial__badge">✓ Semestre validé avec mention</div><div class="card-testimonial__author"><div class="card-testimonial__avatar card-testimonial__avatar--initials ">LD</div><div class="card-testimonial__author-info"><h4 class="card-testimonial__author-name">Léa D.</h4><p class="card-testimonial__author-subtitle">L2 Droit</p></div></div></div>
 <!-- /wp:jurible/card-testimonial --></div>
 <!-- /wp:column -->
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:jurible/card-testimonial {"quote":"Les flashcards sont géniales pour mémoriser les définitions et les dates. Je les utilise tous les jours dans les transports.","badgeText":"Gain de temps énorme","avatarInitials":"TM","authorName":"Thomas M.","authorSubtitle":"L3 Droit"} -->
-<div class="wp-block-jurible-card-testimonial card-testimonial card-testimonial--standard"><div class="card-testimonial__stars"><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span></div><p class="card-testimonial__quote">Les flashcards sont géniales pour mémoriser les définitions et les dates. Je les utilise tous les jours dans les transports.</p><div class="card-testimonial__badge">✓ Gain de temps énorme</div><div class="card-testimonial__author"><div class="card-testimonial__avatar card-testimonial__avatar--initials ">TM</div><div class="card-testimonial__author-info"><h4 class="card-testimonial__author-name">Thomas M.</h4><p class="card-testimonial__author-subtitle">L3 Droit</p></div></div></div>
+<div class="wp-block-column"><!-- wp:jurible/card-testimonial {"quote":"Les flashcards sont géniales pour mémoriser les définitions. Je les utilise tous les jours dans les transports.","badgeText":"Gain de temps énorme","avatarInitials":"TM","authorName":"Thomas M.","authorSubtitle":"L3 Droit"} -->
+<div class="wp-block-jurible-card-testimonial card-testimonial card-testimonial--standard"><div class="card-testimonial__stars"><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span></div><p class="card-testimonial__quote">Les flashcards sont géniales pour mémoriser les définitions. Je les utilise tous les jours dans les transports.</p><div class="card-testimonial__badge">✓ Gain de temps énorme</div><div class="card-testimonial__author"><div class="card-testimonial__avatar card-testimonial__avatar--initials ">TM</div><div class="card-testimonial__author-info"><h4 class="card-testimonial__author-name">Thomas M.</h4><p class="card-testimonial__author-subtitle">L3 Droit</p></div></div></div>
 <!-- /wp:jurible/card-testimonial --></div>
 <!-- /wp:column -->
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:jurible/card-testimonial {"quote":"Grâce aux annales corrigées, j'ai compris ce qu'on attendait de moi aux partiels. J'ai eu 16 en droit des obligations !","badgeText":"16/20 aux partiels","avatarInitials":"SB","authorName":"Sarah B.","authorSubtitle":"L2 Droit"} -->
-<div class="wp-block-jurible-card-testimonial card-testimonial card-testimonial--standard"><div class="card-testimonial__stars"><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span></div><p class="card-testimonial__quote">Grâce aux annales corrigées, j'ai compris ce qu'on attendait de moi aux partiels. J'ai eu 16 en droit des obligations !</p><div class="card-testimonial__badge">✓ 16/20 aux partiels</div><div class="card-testimonial__author"><div class="card-testimonial__avatar card-testimonial__avatar--initials ">SB</div><div class="card-testimonial__author-info"><h4 class="card-testimonial__author-name">Sarah B.</h4><p class="card-testimonial__author-subtitle">L2 Droit</p></div></div></div>
+<div class="wp-block-column"><!-- wp:jurible/card-testimonial {"quote":"Grâce aux annales corrigées, j'ai compris ce qu'on attendait de moi aux partiels. J'ai eu 16 !","badgeText":"16/20 aux partiels","avatarInitials":"SB","authorName":"Sarah B.","authorSubtitle":"L2 Droit"} -->
+<div class="wp-block-jurible-card-testimonial card-testimonial card-testimonial--standard"><div class="card-testimonial__stars"><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span><span class="card-testimonial__star card-testimonial__star--filled">★</span></div><p class="card-testimonial__quote">Grâce aux annales corrigées, j'ai compris ce qu'on attendait de moi aux partiels. J'ai eu 16 !</p><div class="card-testimonial__badge">✓ 16/20 aux partiels</div><div class="card-testimonial__author"><div class="card-testimonial__avatar card-testimonial__avatar--initials ">SB</div><div class="card-testimonial__author-info"><h4 class="card-testimonial__author-name">Sarah B.</h4><p class="card-testimonial__author-subtitle">L2 Droit</p></div></div></div>
 <!-- /wp:jurible/card-testimonial --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- FAQ -->
+<!-- wp:group {"metadata":{"categories":["commerce"],"patternName":"jurible/commerce-01-pricing-academie","name":"Commerce 01 - Pricing Academie"},"align":"full","className":"pricing-academie","style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"}}},"backgroundColor":"background","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull pricing-academie has-background-background-color has-background" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0"><!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|lg","right":"var:preset|spacing|lg"},"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"default"}} -->
+<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--lg)"><!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->
+<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">L'abonnement à l'Académie</h2>
+<!-- /wp:heading -->
 
-<!-- wp:group {"align":"full","className":"faq-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
+<!-- wp:paragraph {"align":"center","textColor":"text-gray","fontSize":"body-large"} -->
+<p class="has-text-align-center has-text-gray-color has-text-color has-body-large-font-size">Accès illimité à toutes les matières de Licence</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"align":"wide","className":"features-block__inner","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|xl","right":"var:preset|spacing|xl"}},"border":{"radius":"16px"}},"backgroundColor":"white","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide features-block__inner has-white-background-color has-background" style="border-radius:16px;padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--xl);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--xl)"><!-- wp:group {"className":"features-grid","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|lg"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group features-grid" style="margin-bottom:var(--wp--preset--spacing--lg)"><!-- wp:group {"className":"feature-item","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
+<div class="wp-block-group feature-item"><!-- wp:paragraph {"className":"feature-item__icon"} -->
+<p class="feature-item__icon">✓</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"feature-item__content","layout":{"type":"default"}} -->
+<div class="wp-block-group feature-item__content"><!-- wp:paragraph {"className":"feature-item__title"} -->
+<p class="feature-item__title">500h+ de cours vidéo</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"feature-item__desc"} -->
+<p class="feature-item__desc">Toutes les matières</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"feature-item","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
+<div class="wp-block-group feature-item"><!-- wp:paragraph {"className":"feature-item__icon"} -->
+<p class="feature-item__icon">✓</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"feature-item__content","layout":{"type":"default"}} -->
+<div class="wp-block-group feature-item__content"><!-- wp:paragraph {"className":"feature-item__title"} -->
+<p class="feature-item__title">Cours écrits &amp; Fiches</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"feature-item__desc"} -->
+<p class="feature-item__desc">Consultables en ligne</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"feature-item","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
+<div class="wp-block-group feature-item"><!-- wp:paragraph {"className":"feature-item__icon"} -->
+<p class="feature-item__icon">✓</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"feature-item__content","layout":{"type":"default"}} -->
+<div class="wp-block-group feature-item__content"><!-- wp:paragraph {"className":"feature-item__title"} -->
+<p class="feature-item__title">2000 QCM &amp; Quiz</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"feature-item__desc"} -->
+<p class="feature-item__desc">Pour tester vos connaissances</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"feature-item","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
+<div class="wp-block-group feature-item"><!-- wp:paragraph {"className":"feature-item__icon"} -->
+<p class="feature-item__icon">✓</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"feature-item__content","layout":{"type":"default"}} -->
+<div class="wp-block-group feature-item__content"><!-- wp:paragraph {"className":"feature-item__title"} -->
+<p class="feature-item__title">2000 Flashcards</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"feature-item__desc"} -->
+<p class="feature-item__desc">Pour mémoriser</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"feature-item","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
+<div class="wp-block-group feature-item"><!-- wp:paragraph {"className":"feature-item__icon"} -->
+<p class="feature-item__icon">✓</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"feature-item__content","layout":{"type":"default"}} -->
+<div class="wp-block-group feature-item__content"><!-- wp:paragraph {"className":"feature-item__title"} -->
+<p class="feature-item__title">400+ Annales corrigées</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"feature-item__desc"} -->
+<p class="feature-item__desc">Pour s'entraîner</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"feature-item","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
+<div class="wp-block-group feature-item"><!-- wp:paragraph {"className":"feature-item__icon"} -->
+<p class="feature-item__icon">✓</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"feature-item__content","layout":{"type":"default"}} -->
+<div class="wp-block-group feature-item__content"><!-- wp:paragraph {"className":"feature-item__title"} -->
+<p class="feature-item__title">45h+ de méthodologie</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"feature-item__desc"} -->
+<p class="feature-item__desc">Cas pratiques, commentaires…</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"feature-item","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
+<div class="wp-block-group feature-item"><!-- wp:paragraph {"className":"feature-item__icon"} -->
+<p class="feature-item__icon">✓</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"feature-item__content","layout":{"type":"default"}} -->
+<div class="wp-block-group feature-item__content"><!-- wp:paragraph {"className":"feature-item__title"} -->
+<p class="feature-item__title">Mindmaps</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"feature-item__desc"} -->
+<p class="feature-item__desc">Pour visualiser</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"feature-item","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
+<div class="wp-block-group feature-item"><!-- wp:paragraph {"className":"feature-item__icon"} -->
+<p class="feature-item__icon">✓</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"feature-item__content","layout":{"type":"default"}} -->
+<div class="wp-block-group feature-item__content"><!-- wp:paragraph {"className":"feature-item__title"} -->
+<p class="feature-item__title">Accès L1 + L2 + L3</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"feature-item__desc"} -->
+<p class="feature-item__desc">Toutes les matières</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"feature-item","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
+<div class="wp-block-group feature-item"><!-- wp:paragraph {"className":"feature-item__icon"} -->
+<p class="feature-item__icon">✓</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"feature-item__content","layout":{"type":"default"}} -->
+<div class="wp-block-group feature-item__content"><!-- wp:paragraph {"className":"feature-item__title"} -->
+<p class="feature-item__title">Mises à jour</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"feature-item__desc"} -->
+<p class="feature-item__desc">Contenus à jour</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:separator {"className":"pricing-academie__divider is-style-wide"} -->
+<hr class="wp-block-separator has-alpha-channel-opacity pricing-academie__divider is-style-wide"/>
+<!-- /wp:separator -->
+
+<!-- wp:group {"style":{"spacing":{"padding":{"left":"var:preset|spacing|xl","right":"var:preset|spacing|xl","bottom":"var:preset|spacing|lg","top":"var:preset|spacing|md"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--xl);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--xl)"><!-- wp:jurible/pricing-duration-selector -->
+<div class="wp-block-jurible-pricing-duration-selector pricing-duration-selector"><div class="pricing-grid"><a href="#" class="duration-card "><p class="duration-card__duration">1 mois</p><div class="duration-card__price-wrapper"><p class="duration-card__price">29<span>€</span></p></div><p class="duration-card__monthly">29€/mois</p><div class="duration-card__savings-placeholder"></div><span class="duration-card__cta duration-card__cta--outline">Commencer</span></a><a href="#" class="duration-card "><p class="duration-card__duration">3 mois</p><div class="duration-card__price-wrapper"><p class="duration-card__price-old">87€</p><p class="duration-card__price">78<span>€</span></p></div><p class="duration-card__monthly">26€/mois</p><div class="duration-card__savings"><span class="duration-card__savings-percent">-10%</span><span class="duration-card__savings-amount">Économisez 9€</span></div><span class="duration-card__cta duration-card__cta--outline">Commencer</span></a><a href="#" class="duration-card duration-card--popular"><span class="duration-card__badge">Populaire</span><p class="duration-card__duration">6 mois</p><div class="duration-card__price-wrapper"><p class="duration-card__price-old">174€</p><p class="duration-card__price">140<span>€</span></p></div><p class="duration-card__monthly">23€/mois</p><div class="duration-card__savings"><span class="duration-card__savings-percent">-20%</span><span class="duration-card__savings-amount">Économisez 34€</span></div><span class="duration-card__cta duration-card__cta--gradient">Commencer</span></a><a href="#" class="duration-card "><p class="duration-card__duration">12 mois</p><div class="duration-card__price-wrapper"><p class="duration-card__price-old">348€</p><p class="duration-card__price">240<span>€</span></p></div><p class="duration-card__monthly">20€/mois</p><div class="duration-card__savings"><span class="duration-card__savings-percent">-31%</span><span class="duration-card__savings-amount">Économisez 108€</span></div><span class="duration-card__cta duration-card__cta--outline">Commencer</span></a></div><p class="pricing-notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Tous les abonnements sont renouvelables automatiquement et résiliables en 1 clic</p></div>
+<!-- /wp:jurible/pricing-duration-selector --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|lg","left":"var:preset|spacing|lg","right":"var:preset|spacing|lg"}}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
+<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--lg)"><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px","fontWeight":"500"}},"textColor":"text-gray"} -->
+<p class="has-text-gray-color has-text-color" style="font-size:14px;font-weight:500"><span style="color:var(--wp--preset--color--success)">✓</span> Sans engagement</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"14px","fontWeight":"500"}},"textColor":"text-gray"} -->
+<p class="has-text-gray-color has-text-color" style="font-size:14px;font-weight:500"><span style="color:var(--wp--preset--color--success)">✓</span> Annulable en 1 clic</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"14px","fontWeight":"500"}},"textColor":"text-gray"} -->
+<p class="has-text-gray-color has-text-color" style="font-size:14px;font-weight:500">Accès immédiat</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"metadata":{"categories":["confiance"],"patternName":"jurible/confiance-04-faq","name":"Confiance 04 - FAQ"},"align":"full","className":"faq-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull faq-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)"><!-- wp:group {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|lg"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 <div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--lg)"><!-- wp:paragraph {"align":"center","className":"is-style-tag-secondary"} -->
 <p class="has-text-align-center is-style-tag-secondary">❓ FAQ</p>
@@ -571,32 +739,26 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","textColor":"text-gray","fontSize":"body-large"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color has-body-large-font-size">Tout ce que vous devez savoir sur ce cours.</p>
+<p class="has-text-align-center has-text-gray-color has-text-color has-body-large-font-size">Tout ce que vous devez savoir sur nos formations.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"faq-list","layout":{"type":"constrained"}} -->
 <div class="wp-block-group faq-list"><!-- wp:details {"className":"faq-item"} -->
-<details class="wp-block-details faq-item"><summary>Comment accéder au cours ?</summary><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
-<p class="has-text-gray-color has-text-color" style="font-size:14px">Ce cours est inclus dans l'abonnement Académie Jurible. Une fois inscrit, vous avez accès immédiatement à tous les contenus depuis votre espace membre.</p>
+<details class="wp-block-details faq-item"><summary>Le programme est-il adapté à toutes les universités françaises ?</summary><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
+<p class="has-text-gray-color has-text-color" style="font-size:14px">Oui. Notre cours couvre l'intégralité du programme commun à toutes les facultés de droit françaises.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 
 <!-- wp:details {"className":"faq-item"} -->
-<details class="wp-block-details faq-item"><summary>Le cours est-il conforme au programme de mon université ?</summary><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
-<p class="has-text-gray-color has-text-color" style="font-size:14px">Nos cours couvrent le programme national des études de droit. Ils sont conçus pour s'adapter à toutes les universités françaises et contiennent les notions essentielles du cours.</p>
+<details class="wp-block-details faq-item"><summary>En m'abonnant à l'Académie, est-ce que j'ai uniquement accès à ce cours ?</summary><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
+<p class="has-text-gray-color has-text-color" style="font-size:14px">Non, l'abonnement Académie vous donne accès à l'ensemble de la plateforme : tous les cours vidéo, fiches, QCM, flashcards, annales et contenus méthodologiques disponibles pour la L1, la L2 et la L3.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 
 <!-- wp:details {"className":"faq-item"} -->
-<details class="wp-block-details faq-item"><summary>Puis-je regarder les vidéos sur mobile ?</summary><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
-<p class="has-text-gray-color has-text-color" style="font-size:14px">Oui ! Notre plateforme est entièrement responsive. Vous pouvez regarder les vidéos, faire les QCM et réviser les flashcards sur votre smartphone ou tablette.</p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details -->
-
-<!-- wp:details {"className":"faq-item"} -->
-<details class="wp-block-details faq-item"><summary>Combien de temps ai-je accès au cours ?</summary><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
-<p class="has-text-gray-color has-text-color" style="font-size:14px">Tant que votre abonnement Académie est actif, vous avez accès à tous les cours. Les contenus sont régulièrement mis à jour et enrichis.</p>
+<details class="wp-block-details faq-item"><summary>Est-ce que ce cours remplace les cours de ma fac ?</summary><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
+<p class="has-text-gray-color has-text-color" style="font-size:14px">Non, et ce n'est pas son objectif. Jurible est un complément pédagogique conçu pour vous aider à mieux comprendre et mémoriser ce que vous voyez en cours magistral et en TD.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 
@@ -607,20 +769,8 @@
 <!-- /wp:details -->
 
 <!-- wp:details {"className":"faq-item"} -->
-<details class="wp-block-details faq-item"><summary>Comment fonctionne la garantie de remboursement ?</summary><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
-<p class="has-text-gray-color has-text-color" style="font-size:14px">Si vous n'obtenez pas la moyenne au partiel, nous vous remboursons intégralement. Contactez-nous avec votre relevé de notes et nous procéderons au remboursement sans condition.</p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details -->
-
-<!-- wp:details {"className":"faq-item"} -->
-<details class="wp-block-details faq-item"><summary>Les QCM sont-ils corrigés ?</summary><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
-<p class="has-text-gray-color has-text-color" style="font-size:14px">Oui ! Chaque QCM est accompagné d'une correction détaillée qui vous explique pourquoi la réponse est correcte et vous aide à comprendre vos erreurs.</p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details -->
-
-<!-- wp:details {"className":"faq-item"} -->
-<details class="wp-block-details faq-item"><summary>Puis-je poser des questions sur le cours ?</summary><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
-<p class="has-text-gray-color has-text-color" style="font-size:14px">Oui ! L'Académie inclut un accès à notre communauté où vous pouvez poser vos questions et échanger avec d'autres étudiants et notre équipe pédagogique.</p>
+<details class="wp-block-details faq-item"><summary>Comment résilier mon abonnement ?</summary><!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"}},"textColor":"text-gray"} -->
+<p class="has-text-gray-color has-text-color" style="font-size:14px">La résiliation est simple et immédiate. Depuis votre espace personnel sur la plateforme, rendez-vous dans la section « Mon abonnement », puis cliquez sur « Résilier ».</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details --></div>
 <!-- /wp:group -->
@@ -636,21 +786,19 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- CTA Final -->
-
-<!-- wp:group {"align":"full","className":"cta-final","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"gradient":"cta-gradient","layout":{"type":"constrained"}} -->
+<!-- wp:group {"metadata":{"categories":["commerce"],"patternName":"jurible/commerce-06-cta-final-basique","name":"Commerce 06 - CTA Final Basique"},"align":"full","className":"cta-final","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"gradient":"cta-gradient","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull cta-final has-cta-gradient-gradient-background has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)"><!-- wp:group {"className":"cta-final__content","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 <div class="wp-block-group cta-final__content"><!-- wp:heading {"textAlign":"center","className":"cta-final__title","textColor":"white"} -->
-<h2 class="wp-block-heading has-text-align-center cta-final__title has-white-color has-text-color">Prêt à maîtriser le [acf field="matiere_name" default="droit"] ?</h2>
+<h2 class="wp-block-heading has-text-align-center cta-final__title has-white-color has-text-color">Prêt à réussir votre partiel de [acf field="matiere_name" default="Droit"] ?</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","className":"cta-final__subtitle","textColor":"white","fontSize":"body-large"} -->
-<p class="has-text-align-center cta-final__subtitle has-white-color has-text-color has-body-large-font-size">Rejoignez l'Académie et accédez à tous nos cours, exercices et outils de révision.</p>
+<p class="has-text-align-center cta-final__subtitle has-white-color has-text-color has-body-large-font-size">Rejoignez 25 000+ étudiants et préparez vos partiels avec les meilleurs outils pédagogiques.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
-<div class="wp-block-buttons"><!-- wp:button {"className":"is-style-primary-white","style":{"typography":{"fontWeight":"600"},"border":{"radius":"var:preset|border-radius|md"}}} -->
-<div class="wp-block-button is-style-primary-white" style="font-weight:600"><a class="wp-block-button__link wp-element-button" href="[acf field='lien_inscription' default='/academie']" style="border-radius:var(--wp--preset--border-radius--md)">Rejoindre l'Académie →</a></div>
+<!-- wp:buttons {"className":"cta-final__buttons","style":{"spacing":{"margin":{"top":"var:preset|spacing|md"}}},"layout":{"type":"flex","justifyContent":"center"}} -->
+<div class="wp-block-buttons cta-final__buttons" style="margin-top:var(--wp--preset--spacing--md)"><!-- wp:button {"className":"is-style-primary-white","style":{"border":{"radius":"var:preset|border-radius|md"}}} -->
+<div class="wp-block-button is-style-primary-white"><a class="wp-block-button__link wp-element-button" href="[acf field='lien_inscription' default='/academie']" style="border-radius:var(--wp--preset--border-radius--md)">Débloquer le cours complet → 20€/mois</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 
@@ -660,14 +808,14 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"cta-final__mention","textColor":"white","fontSize":"small"} -->
-<p class="cta-final__mention has-white-color has-text-color has-small-font-size">✓ Tous les cours inclus</p>
+<p class="cta-final__mention has-white-color has-text-color has-small-font-size">✓ Sans engagement</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"cta-final__mention","textColor":"white","fontSize":"small"} -->
-<p class="cta-final__mention has-white-color has-text-color has-small-font-size">✓ Satisfait ou remboursé</p>
+<p class="cta-final__mention has-white-color has-text-color has-small-font-size">✓ Résiliable en un clic</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:template-part {"slug":"footer-minimal","theme":"jurible","tagName":"footer"} /-->
+<!-- wp:template-part {"slug":"footer","theme":"jurible","tagName":"footer"} /-->
