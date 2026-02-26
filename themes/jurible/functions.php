@@ -1746,6 +1746,37 @@ function jurible_register_course_acf_fields()
 add_action('acf/init', 'jurible_register_course_acf_fields');
 
 /**
+ * Exposer les champs ACF dans l'API REST pour le CPT course
+ */
+function jurible_add_acf_to_rest_api() {
+    register_rest_field('course', 'acf', [
+        'get_callback' => function($post) {
+            return [
+                'matiere_name' => get_field('matiere_name', $post['id']),
+                'sous_titre' => get_field('sous_titre', $post['id']),
+                'video_url' => get_field('video_url', $post['id']),
+                'texte_auteur' => get_field('texte_auteur', $post['id']),
+                'texte_section_programme' => get_field('texte_section_programme', $post['id']),
+                'sommaire_cours' => get_field('sommaire_cours', $post['id']),
+                'solution_sous_titre' => get_field('solution_sous_titre', $post['id']),
+            ];
+        },
+        'update_callback' => function($values, $post) {
+            if (!is_array($values)) return;
+
+            foreach ($values as $key => $value) {
+                update_field($key, $value, $post->ID);
+            }
+        },
+        'schema' => [
+            'type' => 'object',
+            'context' => ['view', 'edit'],
+        ],
+    ]);
+}
+add_action('rest_api_init', 'jurible_add_acf_to_rest_api');
+
+/**
  * TEMPORAIRE - Créer un cours de test
  * Visiter : /wp-admin/?create_test_course=1
  * À SUPPRIMER après les tests
