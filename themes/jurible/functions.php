@@ -1807,15 +1807,6 @@ function jurible_rankmath_post_types($post_types) {
 }
 add_filter('rank_math/sitemap/post_type', 'jurible_rankmath_post_types');
 
-// Forcer l'affichage de la metabox Rank Math sur le CPT course
-function jurible_rankmath_metabox_course($can_add, $post_type) {
-    if ($post_type === 'course') {
-        return true;
-    }
-    return $can_add;
-}
-add_filter('rank_math/metabox/add_seo_metabox', 'jurible_rankmath_metabox_course', 10, 2);
-
 /**
  * TEMPORAIRE - Créer un cours de test
  * Visiter : /wp-admin/?create_test_course=1
