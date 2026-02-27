@@ -161,6 +161,11 @@
           "slug": "accent-text",
           "name": "Accent Text",
           "color": "#5B21B6"
+        },
+        {
+          "slug": "success-dark",
+          "name": "Success Dark",
+          "color": "#059669"
         }
       ],
       "gradients": [

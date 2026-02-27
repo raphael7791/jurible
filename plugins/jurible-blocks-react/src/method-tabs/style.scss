@@ -1,31 +1,83 @@
 /**
  * Method Tabs Block - Frontend Styles
- * Version 2.0 - Redesign avec 7 onglets fixes
+ * Version 2.1 - Optimized with theme.json CSS custom properties
+ *
+ * IMPORTANT: SCSS variables below mirror theme.json values for rgba() computations.
+ * Keep them in sync with theme.json palette.
  */
 
-// Variables locales (fallback si theme.json non chargé)
-$bordeaux: #B0001D;
-$rouge: #DC2626;
-$violet: #7C3AED;
-$violet-light: #EDE9FE;
-$violet-50: #F5F3FF;
-$bg-section: #F6F5FF;
-$green: #10B981;
-$green-light: #D1FAE5;
-$green-dark: #059669;
-$green-bg: #F0FDF4;
-$red-light: #FEE2E2;
-$red-text: #DC2626;
-$text-primary: #1A1A2E;
-$text-secondary: #4B5563;
-$text-muted: #9CA3AF;
-$border: #E5E7EB;
-$border-light: #F3F4F6;
+// =============================================================================
+// SCSS Variables (for rgba() computations - must match theme.json)
+// =============================================================================
+$primary: #B0001D;       // --wp--preset--color--primary
+$primary-hover: #DC2626; // --wp--preset--color--primary-hover
+$secondary: #7C3AED;     // --wp--preset--color--secondary
 
+// =============================================================================
+// CSS Custom Properties Aliases (for readability)
+// =============================================================================
+$c-primary: var(--wp--preset--color--primary);
+$c-primary-hover: var(--wp--preset--color--primary-hover);
+$c-secondary: var(--wp--preset--color--secondary);
+$c-secondary-bg: var(--wp--preset--color--secondary-bg);
+$c-accent-bg: var(--wp--preset--color--accent-bg);
+$c-success: var(--wp--preset--color--success);
+$c-success-dark: var(--wp--preset--color--success-dark);
+$c-success-bg: var(--wp--preset--color--success-bg);
+$c-error: var(--wp--preset--color--error);
+$c-error-bg: var(--wp--preset--color--error-bg);
+$c-warning: var(--wp--preset--color--warning);
+$c-warning-bg: var(--wp--preset--color--warning-bg);
+$c-warning-text: var(--wp--preset--color--warning-text);
+$c-info: var(--wp--preset--color--info);
+$c-info-bg: var(--wp--preset--color--info-bg);
+$c-text-dark: var(--wp--preset--color--text-dark);
+$c-text-gray: var(--wp--preset--color--text-gray);
+$c-text-muted: var(--wp--preset--color--text-muted);
+$c-border: var(--wp--preset--color--border);
+$c-muted: var(--wp--preset--color--muted);
+$c-white: var(--wp--preset--color--white);
+
+// Gradient from theme.json
+$gradient-cta: var(--wp--preset--gradient--cta-gradient);
+
+// Shadows from theme.json
+$shadow-sm: var(--wp--preset--shadow--sm);
+$shadow-md: var(--wp--preset--shadow--md);
+$shadow-lg: var(--wp--preset--shadow--lg);
+$shadow-cta: var(--wp--preset--shadow--cta);
+$shadow-cta-hover: var(--wp--preset--shadow--cta-hover);
+
+// Spacing from theme.json
+$space-xs: var(--wp--preset--spacing--xs);
+$space-sm: var(--wp--preset--spacing--sm);
+$space-md: var(--wp--preset--spacing--md);
+$space-lg: var(--wp--preset--spacing--lg);
+$space-xl: var(--wp--preset--spacing--xl);
+
+// Font family from theme.json
+$font-family: var(--wp--preset--font-family--poppins);
+
+// Font sizes from theme.json
+$font-caption: var(--wp--preset--font-size--caption);
+$font-small: var(--wp--preset--font-size--small);
+$font-medium: var(--wp--preset--font-size--medium);
+$font-body-large: var(--wp--preset--font-size--body-large);
+
+// Border radius from theme.json
+$radius-xs: var(--wp--preset--border-size--xs, 4px);
+$radius-sm: var(--wp--preset--border-size--sm, 6px);
+$radius-md: var(--wp--preset--border-size--md, 8px);
+$radius-lg: var(--wp--preset--border-size--lg, 12px);
+$radius-full: var(--wp--preset--border-size--full, 9999px);
+
+// =============================================================================
+// MAIN BLOCK STYLES
+// =============================================================================
 .wp-block-jurible-method-tabs {
-	font-family: var(--wp--preset--font-family--poppins, 'Poppins', sans-serif);
-	background: $bg-section;
-	padding: 72px 24px 80px;
+	font-family: $font-family;
+	background: $c-accent-bg;
+	padding: $space-xl $space-md;
 	position: relative;
 	overflow: hidden;
 	margin-block-start: 0 !important; // Override WordPress default spacing
@@ -37,7 +89,7 @@ $border-light: #F3F4F6;
 		right: -200px;
 		width: 500px;
 		height: 500px;
-		background: radial-gradient(circle, rgba($violet, 0.05) 0%, transparent 70%);
+		background: radial-gradient(circle, rgba($secondary, 0.05) 0%, transparent 70%);
 		pointer-events: none;
 	}
 
@@ -46,7 +98,7 @@ $border-light: #F3F4F6;
 	   ═══════════════════════════════════════════ */
 	.method-tabs__header {
 		text-align: center;
-		margin-bottom: 36px;
+		margin-bottom: $space-lg;
 		position: relative;
 		z-index: 1;
 	}
@@ -55,11 +107,11 @@ $border-light: #F3F4F6;
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
-		font-size: 13px;
+		font-size: $font-caption;
 		font-weight: 600;
 		padding: 6px 16px;
-		border-radius: 9999px;
-		margin-bottom: 18px;
+		border-radius: $radius-full;
+		margin-bottom: $space-sm;
 
 		svg {
 			width: 14px;
@@ -67,8 +119,8 @@ $border-light: #F3F4F6;
 		}
 
 		&--green {
-			background: $green-light;
-			color: $green-dark;
+			background: rgba(16, 185, 129, 0.15); // success with opacity
+			color: $c-success-dark;
 		}
 	}
 
@@ -76,11 +128,11 @@ $border-light: #F3F4F6;
 		font-size: clamp(28px, 4vw, 42px);
 		font-weight: 800;
 		line-height: 1.2;
-		margin: 0 0 12px;
-		color: $text-primary;
+		margin: 0 0 $space-xs;
+		color: $c-text-dark;
 
 		mark {
-			background: linear-gradient(135deg, $bordeaux, $violet);
+			background: $gradient-cta;
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
 			background-clip: text;
@@ -88,8 +140,8 @@ $border-light: #F3F4F6;
 	}
 
 	.method-tabs__subtitle {
-		font-size: 16px;
-		color: $text-secondary;
+		font-size: $font-medium;
+		color: $c-text-gray;
 		font-weight: 400;
 		margin: 0;
 	}
@@ -101,8 +153,8 @@ $border-light: #F3F4F6;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		gap: 8px;
-		margin-bottom: 32px;
+		gap: $space-xs;
+		margin-bottom: $space-lg;
 		position: relative;
 		z-index: 1;
 	}
@@ -112,33 +164,33 @@ $border-light: #F3F4F6;
 		align-items: center;
 		gap: 6px;
 		padding: 10px 20px;
-		border: 1.5px solid $border;
-		border-radius: 9999px;
-		background: #fff;
-		color: $text-secondary;
+		border: 1.5px solid $c-border;
+		border-radius: $radius-full;
+		background: $c-white;
+		color: $c-text-gray;
 		font-family: inherit;
-		font-size: 14px;
+		font-size: $font-small;
 		font-weight: 500;
 		cursor: pointer;
 		transition: all 0.25s ease;
 		white-space: nowrap;
 
 		&:hover {
-			border-color: $violet;
-			color: $violet;
-			background: $violet-50;
+			border-color: $c-secondary;
+			color: $c-secondary;
+			background: $c-accent-bg;
 		}
 
 		&.is-active {
-			background: linear-gradient(135deg, $bordeaux, $rouge, $violet);
-			color: #fff;
+			background: $gradient-cta;
+			color: $c-white;
 			border-color: transparent;
-			box-shadow: 0 4px 12px rgba($bordeaux, 0.25);
+			box-shadow: $shadow-cta;
 		}
 	}
 
 	.method-tabs__tab-icon {
-		font-size: 16px;
+		font-size: $font-medium;
 		line-height: 1;
 	}
 
@@ -152,18 +204,18 @@ $border-light: #F3F4F6;
 	.method-tabs__card {
 		max-width: 1060px;
 		margin: 0 auto;
-		background: #fff;
+		background: $c-white;
 		border-radius: 20px;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+		box-shadow: $shadow-sm;
 		overflow: hidden;
 		min-height: 420px;
 		position: relative;
 		z-index: 1;
-		border: 1px solid $border-light;
+		border: 1px solid $c-muted;
 		transition: box-shadow 0.3s ease;
 
 		&:hover {
-			box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+			box-shadow: $shadow-md;
 		}
 	}
 
@@ -194,17 +246,17 @@ $border-light: #F3F4F6;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 8px;
-		background: linear-gradient(90deg, $violet-50, $violet-light);
-		color: $violet;
-		font-size: 13px;
+		gap: $space-xs;
+		background: linear-gradient(90deg, $c-accent-bg, $c-secondary-bg);
+		color: $c-secondary;
+		font-size: $font-caption;
 		font-weight: 600;
 		padding: 10px 16px;
-		border-bottom: 1px solid rgba($violet, 0.15);
+		border-bottom: 1px solid rgba($secondary, 0.15);
 	}
 
 	.method-tabs__example-banner-icon {
-		font-size: 16px;
+		font-size: $font-medium;
 	}
 
 	/* ═══════════════════════════════════════════
@@ -223,11 +275,11 @@ $border-light: #F3F4F6;
 		align-items: center;
 		justify-content: center;
 		overflow: hidden;
-		background: linear-gradient(135deg, $bordeaux 0%, $rouge 40%, $violet 100%);
+		background: $gradient-cta;
 
 		&--mindmap {
-			background: $violet-50;
-			padding: 24px;
+			background: $c-accent-bg;
+			padding: $space-md;
 		}
 	}
 
@@ -240,14 +292,14 @@ $border-light: #F3F4F6;
 		h3 {
 			font-size: 20px;
 			font-weight: 700;
-			margin: 0 0 12px;
-			color: $text-primary;
+			margin: 0 0 $space-xs;
+			color: $c-text-dark;
 		}
 
 		p {
-			font-size: 14px;
+			font-size: $font-small;
 			line-height: 1.7;
-			color: $text-secondary;
+			color: $c-text-gray;
 			margin: 0;
 		}
 	}
@@ -297,7 +349,7 @@ $border-light: #F3F4F6;
 		svg {
 			width: 28px;
 			height: 28px;
-			color: #fff;
+			color: $c-white;
 			margin-left: 4px;
 		}
 
@@ -311,8 +363,8 @@ $border-light: #F3F4F6;
 		position: absolute;
 		bottom: 48px;
 		left: 24px;
-		color: #fff;
-		font-size: 14px;
+		color: $c-white;
+		font-size: $font-small;
 		font-weight: 500;
 		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 	}
@@ -326,7 +378,7 @@ $border-light: #F3F4F6;
 		width: auto;
 		height: auto;
 		object-fit: contain;
-		border-radius: 8px;
+		border-radius: $radius-md;
 	}
 
 	.method-tabs__mindmap-svg {
@@ -350,15 +402,15 @@ $border-light: #F3F4F6;
 			width: 4px;
 		}
 		&::-webkit-scrollbar-thumb {
-			background: $border;
-			border-radius: 4px;
+			background: $c-border;
+			border-radius: $radius-xs;
 		}
 
 		h2 {
 			font-size: 1.375rem;
 			font-weight: 600;
 			line-height: 1.4;
-			color: $text-primary;
+			color: $c-text-dark;
 			margin-top: 26px;
 			margin-bottom: 26px;
 
@@ -367,8 +419,8 @@ $border-light: #F3F4F6;
 				display: block;
 				width: 60px;
 				height: 3px;
-				background: linear-gradient(90deg, $bordeaux 0%, $violet 100%);
-				margin-top: 8px;
+				background: linear-gradient(90deg, $c-primary 0%, $c-secondary 100%);
+				margin-top: $space-xs;
 				border-radius: 2px;
 			}
 		}
@@ -377,8 +429,8 @@ $border-light: #F3F4F6;
 			font-size: 1rem;
 			font-weight: 600;
 			line-height: 1.4;
-			margin: 0 0 12px;
-			color: $text-primary;
+			margin: 0 0 $space-xs;
+			color: $c-text-dark;
 
 			&:not(:first-child) {
 				margin-top: 20px;
@@ -388,40 +440,40 @@ $border-light: #F3F4F6;
 		h4 {
 			font-size: 17px;
 			font-weight: 700;
-			margin: 24px 0 12px;
-			color: $text-primary;
+			margin: $space-md 0 $space-xs;
+			color: $c-text-dark;
 		}
 
 		h5 {
 			font-size: 15px;
 			font-weight: 600;
-			margin: 16px 0 8px;
-			color: $text-primary;
+			margin: $space-sm 0 $space-xs;
+			color: $c-text-dark;
 		}
 	}
 
 	.method-tabs__fiche-meta {
-		font-size: 12px;
-		color: $text-muted;
-		margin-bottom: 24px;
+		font-size: $font-caption;
+		color: $c-text-muted;
+		margin-bottom: $space-md;
 	}
 
 	.method-tabs__theme-title {
-		font-size: 16px;
+		font-size: $font-medium;
 		line-height: 1.5;
-		color: $text-primary;
-		margin: 20px 0 16px;
+		color: $c-text-dark;
+		margin: 20px 0 $space-sm;
 	}
 
 	.method-tabs__notice {
 		display: flex;
 		align-items: center;
-		gap: 8px;
+		gap: $space-xs;
 		padding: 10px 16px;
-		background: #FEF3C7;
-		border-left: 3px solid #F59E0B;
-		font-size: 13px;
-		color: #92400E;
+		background: $c-warning-bg;
+		border-left: 3px solid $c-warning;
+		font-size: $font-caption;
+		color: $c-warning-text;
 		line-height: 1.5;
 	}
 
@@ -430,31 +482,31 @@ $border-light: #F3F4F6;
 	}
 
 	.method-tabs__body-text {
-		font-size: 14px;
+		font-size: $font-small;
 		line-height: 1.8;
-		color: $text-secondary;
-		margin: 0 0 12px;
+		color: $c-text-gray;
+		margin: 0 0 $space-xs;
 	}
 
 	.method-tabs__bloc {
-		padding: 16px 20px;
-		border-radius: 0 8px 8px 0;
-		margin: 16px 0;
+		padding: $space-sm 20px;
+		border-radius: 0 $radius-md $radius-md 0;
+		margin: $space-sm 0;
 
 		&--definition {
-			border-left: 4px solid $violet;
-			background: $violet-50;
+			border-left: 4px solid $c-secondary;
+			background: $c-accent-bg;
 		}
 
 		&--attention {
-			border-left: 4px solid $rouge;
-			background: $red-light;
+			border-left: 4px solid $c-primary-hover;
+			background: $c-error-bg;
 		}
 
 		p {
-			font-size: 14px;
+			font-size: $font-small;
 			line-height: 1.7;
-			color: $text-primary;
+			color: $c-text-dark;
 			margin: 0;
 		}
 	}
@@ -467,7 +519,7 @@ $border-light: #F3F4F6;
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
-		margin-bottom: 8px;
+		margin-bottom: $space-xs;
 
 		svg {
 			width: 14px;
@@ -475,11 +527,11 @@ $border-light: #F3F4F6;
 		}
 
 		.method-tabs__bloc--definition & {
-			color: $violet;
+			color: $c-secondary;
 		}
 
 		.method-tabs__bloc--attention & {
-			color: $rouge;
+			color: $c-primary-hover;
 		}
 	}
 
@@ -494,17 +546,17 @@ $border-light: #F3F4F6;
 		display: flex;
 		align-items: flex-end;
 		justify-content: center;
-		padding-bottom: 16px;
+		padding-bottom: $space-sm;
 		pointer-events: none;
 
 		span {
-			font-size: 12px;
+			font-size: $font-caption;
 			font-weight: 500;
-			color: $violet;
+			color: $c-secondary;
 			background: rgba(255, 255, 255, 0.9);
 			padding: 6px 16px;
-			border-radius: 9999px;
-			border: 1px solid $violet-light;
+			border-radius: $radius-full;
+			border: 1px solid $c-secondary-bg;
 			animation: pulseScroll 2s ease-in-out infinite;
 		}
 	}
@@ -530,21 +582,21 @@ $border-light: #F3F4F6;
 			font-size: 20px;
 			font-weight: 700;
 			margin: 0 0 4px;
-			color: $text-primary;
+			color: $c-text-dark;
 		}
 	}
 
 	.method-tabs__qcm-meta {
-		font-size: 12px;
-		color: $text-muted;
+		font-size: $font-caption;
+		color: $c-text-muted;
 		margin-bottom: 28px;
 	}
 
 	.method-tabs__qcm-question {
 		font-size: 15px;
 		font-weight: 600;
-		color: $text-primary;
-		margin-bottom: 16px;
+		color: $c-text-dark;
+		margin-bottom: $space-sm;
 		line-height: 1.5;
 	}
 
@@ -552,55 +604,55 @@ $border-light: #F3F4F6;
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
-		margin-bottom: 16px;
+		margin-bottom: $space-sm;
 	}
 
 	.method-tabs__qcm-option {
 		display: flex;
 		align-items: center;
-		gap: 12px;
+		gap: $space-xs;
 		padding: 14px 18px;
-		border: 1.5px solid $border;
-		border-radius: 12px;
+		border: 1.5px solid $c-border;
+		border-radius: $radius-lg;
 		cursor: pointer;
 		transition: all 0.2s ease;
-		font-size: 14px;
-		color: $text-primary;
+		font-size: $font-small;
+		color: $c-text-dark;
 
 		&:hover:not(.is-correct):not(.is-incorrect) {
-			border-color: $violet;
-			background: $violet-50;
+			border-color: $c-secondary;
+			background: $c-accent-bg;
 		}
 
 		&.is-correct {
-			border-color: $green;
-			background: $green-bg;
+			border-color: $c-success;
+			background: $c-success-bg;
 
 			.method-tabs__qcm-radio {
-				border-color: $green;
-				background: $green;
+				border-color: $c-success;
+				background: $c-success;
 
 				&::after {
 					content: '✓';
-					color: #fff;
-					font-size: 12px;
+					color: $c-white;
+					font-size: $font-caption;
 					font-weight: 700;
 				}
 			}
 		}
 
 		&.is-incorrect {
-			border-color: $red-text;
-			background: $red-light;
+			border-color: $c-error;
+			background: $c-error-bg;
 
 			.method-tabs__qcm-radio {
-				border-color: $red-text;
-				background: $red-text;
+				border-color: $c-error;
+				background: $c-error;
 
 				&::after {
 					content: '✕';
-					color: #fff;
-					font-size: 12px;
+					color: $c-white;
+					font-size: $font-caption;
 					font-weight: 700;
 				}
 			}
@@ -610,7 +662,7 @@ $border-light: #F3F4F6;
 	.method-tabs__qcm-radio {
 		width: 20px;
 		height: 20px;
-		border: 2px solid $border;
+		border: 2px solid $c-border;
 		border-radius: 50%;
 		flex-shrink: 0;
 		display: flex;
@@ -620,26 +672,26 @@ $border-light: #F3F4F6;
 	}
 
 	.method-tabs__qcm-feedback {
-		padding: 12px 16px;
-		border-radius: 8px;
-		font-size: 13px;
+		padding: $space-xs $space-sm;
+		border-radius: $radius-md;
+		font-size: $font-caption;
 		font-weight: 600;
 		display: none;
 		align-items: center;
-		gap: 8px;
+		gap: $space-xs;
 
 		&.is-visible {
 			display: flex;
 		}
 
 		&--success {
-			background: $green-light;
-			color: $green-dark;
+			background: rgba(16, 185, 129, 0.15);
+			color: $c-success-dark;
 		}
 
 		&--error {
-			background: $red-light;
-			color: $red-text;
+			background: $c-error-bg;
+			color: $c-error;
 		}
 	}
 
@@ -658,7 +710,7 @@ $border-light: #F3F4F6;
 		font-weight: 700;
 		margin-bottom: 20px;
 		text-align: center;
-		color: $text-primary;
+		color: $c-text-dark;
 	}
 
 	.method-tabs__fc-progress {
@@ -667,27 +719,27 @@ $border-light: #F3F4F6;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin-bottom: 8px;
+		margin-bottom: $space-xs;
 	}
 
 	.method-tabs__fc-progress-label {
-		font-size: 13px;
-		color: $text-muted;
+		font-size: $font-caption;
+		color: $c-text-muted;
 		font-weight: 500;
 	}
 
 	.method-tabs__fc-bar {
 		flex: 1;
 		height: 6px;
-		background: $border-light;
+		background: $c-muted;
 		border-radius: 3px;
-		margin: 0 16px;
+		margin: 0 $space-sm;
 		overflow: hidden;
 	}
 
 	.method-tabs__fc-bar-fill {
 		height: 100%;
-		background: linear-gradient(135deg, $bordeaux, $rouge, $violet);
+		background: $gradient-cta;
 		border-radius: 3px;
 		transition: width 0.4s ease;
 	}
@@ -696,7 +748,7 @@ $border-light: #F3F4F6;
 		width: 100%;
 		max-width: 500px;
 		perspective: 1000px;
-		margin: 16px 0;
+		margin: $space-sm 0;
 		cursor: pointer;
 	}
 
@@ -719,11 +771,11 @@ $border-light: #F3F4F6;
 		width: 100%;
 		height: 100%;
 		backface-visibility: hidden;
-		border-radius: 16px;
+		border-radius: $radius-lg;
 		overflow: hidden;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-		border: 1px solid $border-light;
-		background: #fff;
+		box-shadow: $shadow-sm;
+		border: 1px solid $c-muted;
+		background: $c-white;
 	}
 
 	.method-tabs__fc-back {
@@ -735,19 +787,19 @@ $border-light: #F3F4F6;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		font-size: 13px;
+		font-size: $font-caption;
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
 
 		&--question {
-			background: linear-gradient(135deg, $bordeaux, $rouge, $violet);
-			color: #fff;
+			background: $gradient-cta;
+			color: $c-white;
 		}
 
 		&--answer {
-			background: $border-light;
-			color: $text-secondary;
+			background: $c-muted;
+			color: $c-text-gray;
 		}
 	}
 
@@ -757,32 +809,32 @@ $border-light: #F3F4F6;
 		justify-content: center;
 		padding: 40px 32px;
 		min-height: 180px;
-		font-size: 18px;
+		font-size: $font-body-large;
 		font-weight: 500;
-		color: $text-primary;
+		color: $c-text-dark;
 		text-align: center;
 		line-height: 1.5;
 
 		.method-tabs__fc-back & {
-			font-size: 16px;
-			color: $text-secondary;
+			font-size: $font-medium;
+			color: $c-text-gray;
 			line-height: 1.7;
 		}
 	}
 
 	.method-tabs__fc-footer {
-		background: $border-light;
-		padding: 12px;
+		background: $c-muted;
+		padding: $space-xs;
 		text-align: center;
-		font-size: 13px;
-		color: $text-muted;
+		font-size: $font-caption;
+		color: $c-text-muted;
 	}
 
 	.method-tabs__fc-actions {
 		display: flex;
-		gap: 16px;
+		gap: $space-sm;
 		justify-content: center;
-		margin-top: 8px;
+		margin-top: $space-xs;
 		opacity: 0;
 		pointer-events: none;
 		transition: opacity 0.3s ease;
@@ -794,32 +846,32 @@ $border-light: #F3F4F6;
 	}
 
 	.method-tabs__fc-btn {
-		padding: 12px 32px;
-		border-radius: 9999px;
+		padding: $space-xs $space-lg;
+		border-radius: $radius-full;
 		font-family: inherit;
-		font-size: 14px;
+		font-size: $font-small;
 		font-weight: 600;
 		cursor: pointer;
 		transition: all 0.2s ease;
 
 		&--no {
-			background: #fff;
-			border: 2px solid $red-text;
-			color: $red-text;
+			background: $c-white;
+			border: 2px solid $c-error;
+			color: $c-error;
 
 			&:hover {
-				background: $red-light;
+				background: $c-error-bg;
 			}
 		}
 
 		&--yes {
-			background: $green;
-			border: 2px solid $green;
-			color: #fff;
+			background: $c-success;
+			border: 2px solid $c-success;
+			color: $c-white;
 
 			&:hover {
-				background: $green-dark;
-				border-color: $green-dark;
+				background: $c-success-dark;
+				border-color: $c-success-dark;
 			}
 		}
 	}
@@ -840,44 +892,44 @@ $border-light: #F3F4F6;
 			width: 4px;
 		}
 		&::-webkit-scrollbar-thumb {
-			background: $border;
-			border-radius: 4px;
+			background: $c-border;
+			border-radius: $radius-xs;
 		}
 
 		h3 {
 			font-size: 20px;
 			font-weight: 700;
-			margin: 0 0 8px;
-			color: $text-primary;
+			margin: 0 0 $space-xs;
+			color: $c-text-dark;
 		}
 	}
 
 	.method-tabs__annale-tag {
 		display: inline-block;
-		background: $bordeaux;
-		color: #fff;
+		background: $c-primary;
+		color: $c-white;
 		font-size: 11px;
 		font-weight: 600;
 		padding: 3px 10px;
-		border-radius: 9999px;
-		margin-bottom: 16px;
+		border-radius: $radius-full;
+		margin-bottom: $space-sm;
 	}
 
 	.method-tabs__annale-meta {
 		display: flex;
 		align-items: center;
-		gap: 8px;
-		background: $border-light;
-		border-radius: 8px;
-		padding: 12px 20px;
+		gap: $space-xs;
+		background: $c-muted;
+		border-radius: $radius-md;
+		padding: $space-xs 20px;
 		margin-bottom: 20px;
-		font-size: 13px;
-		color: $text-secondary;
+		font-size: $font-caption;
+		color: $c-text-gray;
 
 		svg {
 			width: 14px;
 			height: 14px;
-			color: $text-muted;
+			color: $c-text-muted;
 			flex-shrink: 0;
 		}
 	}
@@ -890,7 +942,7 @@ $border-light: #F3F4F6;
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
-		font-size: 12px;
+		font-size: $font-caption;
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
@@ -902,22 +954,22 @@ $border-light: #F3F4F6;
 		}
 
 		&--enonce {
-			color: $text-primary;
+			color: $c-text-dark;
 		}
 
 		&--video {
-			color: $bordeaux;
+			color: $c-primary;
 		}
 
 		&--correction {
-			color: $green-dark;
+			color: $c-success-dark;
 		}
 	}
 
 	.method-tabs__annale-enonce {
 		font-size: 15px;
 		line-height: 1.6;
-		color: $text-primary;
+		color: $c-text-dark;
 		font-style: italic;
 		margin: 0;
 	}
@@ -926,23 +978,23 @@ $border-light: #F3F4F6;
 		display: flex;
 		align-items: center;
 		gap: 14px;
-		background: linear-gradient(135deg, rgba($bordeaux, 0.06), rgba($violet, 0.06));
-		border: 1.5px solid rgba($violet, 0.15);
-		border-radius: 12px;
-		padding: 12px 18px;
+		background: linear-gradient(135deg, rgba($primary, 0.06), rgba($secondary, 0.06));
+		border: 1.5px solid rgba($secondary, 0.15);
+		border-radius: $radius-lg;
+		padding: $space-xs 18px;
 		cursor: pointer;
 		transition: all 0.2s ease;
 
 		&:hover {
-			border-color: $violet;
-			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+			border-color: $c-secondary;
+			box-shadow: $shadow-sm;
 		}
 	}
 
 	.method-tabs__annale-play-icon {
 		width: 40px;
 		height: 40px;
-		background: linear-gradient(135deg, $bordeaux, $rouge, $violet);
+		background: $gradient-cta;
 		border-radius: 50%;
 		display: flex;
 		align-items: center;
@@ -952,7 +1004,7 @@ $border-light: #F3F4F6;
 		svg {
 			width: 16px;
 			height: 16px;
-			color: #fff;
+			color: $c-white;
 			margin-left: 2px;
 		}
 	}
@@ -964,35 +1016,35 @@ $border-light: #F3F4F6;
 	}
 
 	.method-tabs__annale-mini-title {
-		font-size: 13px;
+		font-size: $font-caption;
 		font-weight: 600;
-		color: $text-primary;
+		color: $c-text-dark;
 	}
 
 	.method-tabs__annale-mini-dur {
-		font-size: 12px;
-		color: $text-muted;
+		font-size: $font-caption;
+		color: $c-text-muted;
 	}
 
 	.method-tabs__annale-plan {
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
-		padding: 16px 20px;
-		background: $green-bg;
-		border: 1px solid $green-light;
-		border-radius: 12px;
+		gap: $space-xs;
+		padding: $space-sm 20px;
+		background: $c-success-bg;
+		border: 1px solid rgba(16, 185, 129, 0.2);
+		border-radius: $radius-lg;
 	}
 
 	.method-tabs__annale-plan-item {
 		display: flex;
-		gap: 12px;
+		gap: $space-xs;
 	}
 
 	.method-tabs__annale-plan-num {
-		font-size: 16px;
+		font-size: $font-medium;
 		font-weight: 800;
-		background: linear-gradient(135deg, $bordeaux, $violet);
+		background: $gradient-cta;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
@@ -1007,9 +1059,9 @@ $border-light: #F3F4F6;
 	}
 
 	.method-tabs__annale-plan-title {
-		font-size: 14px;
+		font-size: $font-small;
 		font-weight: 600;
-		color: $text-primary;
+		color: $c-text-dark;
 		line-height: 1.4;
 	}
 
@@ -1017,12 +1069,12 @@ $border-light: #F3F4F6;
 		display: flex;
 		flex-direction: column;
 		gap: 2px;
-		padding-left: 8px;
-		border-left: 2px solid $border;
+		padding-left: $space-xs;
+		border-left: 2px solid $c-border;
 
 		span {
-			font-size: 12px;
-			color: $text-secondary;
+			font-size: $font-caption;
+			color: $c-text-gray;
 			line-height: 1.5;
 		}
 	}
@@ -1033,7 +1085,7 @@ $border-light: #F3F4F6;
 		left: 0;
 		right: 0;
 		height: 80px;
-		background: linear-gradient(transparent, #fff);
+		background: linear-gradient(transparent, $c-white);
 		pointer-events: none;
 	}
 
@@ -1052,7 +1104,7 @@ $border-light: #F3F4F6;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		background: linear-gradient(135deg, $bordeaux 0%, $rouge 40%, $violet 100%);
+		background: $gradient-cta;
 		min-height: 420px;
 
 		&--video {
@@ -1075,15 +1127,15 @@ $border-light: #F3F4F6;
 
 	.method-tabs__fv-badge {
 		position: absolute;
-		top: 16px;
-		left: 16px;
+		top: $space-sm;
+		left: $space-sm;
 		background: rgba(255, 255, 255, 0.2);
 		backdrop-filter: blur(8px);
-		color: #fff;
+		color: $c-white;
 		font-size: 11px;
 		font-weight: 600;
 		padding: 5px 14px;
-		border-radius: 9999px;
+		border-radius: $radius-full;
 		display: flex;
 		align-items: center;
 		gap: 5px;
@@ -1098,40 +1150,40 @@ $border-light: #F3F4F6;
 
 	.method-tabs__fv-duration {
 		position: absolute;
-		bottom: 16px;
-		right: 16px;
+		bottom: $space-sm;
+		right: $space-sm;
 		background: rgba(0, 0, 0, 0.6);
-		color: #fff;
-		font-size: 12px;
+		color: $c-white;
+		font-size: $font-caption;
 		font-weight: 600;
 		padding: 2px 8px;
-		border-radius: 4px;
+		border-radius: $radius-xs;
 		z-index: 2;
 	}
 
 	.method-tabs__fv-playlist {
 		display: flex;
 		flex-direction: column;
-		border-left: 1px solid $border-light;
+		border-left: 1px solid $c-muted;
 	}
 
 	.method-tabs__fv-playlist-header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 16px 20px;
-		border-bottom: 1px solid $border-light;
+		padding: $space-sm 20px;
+		border-bottom: 1px solid $c-muted;
 	}
 
 	.method-tabs__fv-playlist-title {
-		font-size: 14px;
+		font-size: $font-small;
 		font-weight: 700;
-		color: $text-primary;
+		color: $c-text-dark;
 	}
 
 	.method-tabs__fv-playlist-count {
-		font-size: 12px;
-		color: $text-muted;
+		font-size: $font-caption;
+		color: $c-text-muted;
 		font-weight: 500;
 	}
 
@@ -1143,7 +1195,7 @@ $border-light: #F3F4F6;
 			width: 3px;
 		}
 		&::-webkit-scrollbar-thumb {
-			background: $border;
+			background: $c-border;
 			border-radius: 3px;
 		}
 	}
@@ -1158,15 +1210,15 @@ $border-light: #F3F4F6;
 		position: relative;
 
 		&:hover {
-			background: $border-light;
+			background: $c-muted;
 		}
 
 		&--active {
-			background: $violet-50;
-			border-left: 3px solid $violet;
+			background: $c-accent-bg;
+			border-left: 3px solid $c-secondary;
 
 			.method-tabs__fv-item-num {
-				color: $violet;
+				color: $c-secondary;
 			}
 		}
 
@@ -1180,15 +1232,15 @@ $border-light: #F3F4F6;
 			}
 
 			.method-tabs__fv-item-name {
-				color: $text-muted;
+				color: $c-text-muted;
 			}
 		}
 	}
 
 	.method-tabs__fv-item-num {
-		font-size: 13px;
+		font-size: $font-caption;
 		font-weight: 600;
-		color: $text-muted;
+		color: $c-text-muted;
 		width: 18px;
 		text-align: center;
 		flex-shrink: 0;
@@ -1197,8 +1249,8 @@ $border-light: #F3F4F6;
 	.method-tabs__fv-item-thumb {
 		width: 44px;
 		height: 28px;
-		border-radius: 4px;
-		background: linear-gradient(135deg, $bordeaux, $rouge, $violet);
+		border-radius: $radius-xs;
+		background: $gradient-cta;
 		flex-shrink: 0;
 	}
 
@@ -1207,14 +1259,14 @@ $border-light: #F3F4F6;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		gap: 8px;
+		gap: $space-xs;
 		min-width: 0;
 	}
 
 	.method-tabs__fv-item-name {
-		font-size: 12px;
+		font-size: $font-caption;
 		font-weight: 500;
-		color: $text-primary;
+		color: $c-text-dark;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -1222,14 +1274,14 @@ $border-light: #F3F4F6;
 
 	.method-tabs__fv-item-dur {
 		font-size: 11px;
-		color: $text-muted;
+		color: $c-text-muted;
 		flex-shrink: 0;
 	}
 
 	.method-tabs__fv-lock {
 		width: 14px;
 		height: 14px;
-		color: $text-muted;
+		color: $c-text-muted;
 		flex-shrink: 0;
 	}
 
@@ -1238,7 +1290,7 @@ $border-light: #F3F4F6;
 	   ═══════════════════════════════════════════ */
 	.method-tabs__cta-wrapper {
 		text-align: center;
-		margin-top: 36px;
+		margin-top: $space-lg;
 		position: relative;
 		z-index: 1;
 	}
@@ -1246,30 +1298,30 @@ $border-light: #F3F4F6;
 	.method-tabs__cta-intro {
 		font-size: 15px;
 		font-weight: 500;
-		color: $text-secondary;
-		margin: 0 0 16px;
+		color: $c-text-gray;
+		margin: 0 0 $space-sm;
 	}
 
 	.method-tabs__cta {
 		display: inline-flex;
 		align-items: center;
-		gap: 8px;
-		padding: 16px 40px;
-		background: linear-gradient(135deg, $bordeaux, $rouge, $violet);
-		color: #fff;
+		gap: $space-xs;
+		padding: $space-sm 40px;
+		background: $gradient-cta;
+		color: $c-white;
 		font-family: inherit;
-		font-size: 16px;
+		font-size: $font-medium;
 		font-weight: 700;
 		border: none;
-		border-radius: 9999px;
+		border-radius: $radius-full;
 		cursor: pointer;
-		box-shadow: 0 6px 24px rgba($bordeaux, 0.3);
+		box-shadow: $shadow-cta;
 		transition: all 0.3s ease;
 		text-decoration: none;
 
 		&:hover {
 			transform: translateY(-2px);
-			box-shadow: 0 8px 32px rgba($bordeaux, 0.4);
+			box-shadow: $shadow-cta-hover;
 		}
 	}
 
@@ -1277,7 +1329,7 @@ $border-light: #F3F4F6;
 	   RESPONSIVE
 	   ═══════════════════════════════════════════ */
 	@media (max-width: 900px) {
-		padding: 48px 16px 56px;
+		padding: $space-xl $space-sm;
 
 		.method-tabs__title {
 			font-size: 28px;
@@ -1298,8 +1350,8 @@ $border-light: #F3F4F6;
 		}
 
 		.method-tabs__tab {
-			padding: 8px 14px;
-			font-size: 12px;
+			padding: $space-xs 14px;
+			font-size: $font-caption;
 			gap: 4px;
 			flex-shrink: 0;
 		}
@@ -1314,7 +1366,7 @@ $border-light: #F3F4F6;
 
 		.method-tabs__card {
 			min-height: auto;
-			border-radius: 16px;
+			border-radius: $radius-lg;
 		}
 
 		.method-tabs__split,
@@ -1327,14 +1379,14 @@ $border-light: #F3F4F6;
 		}
 
 		.method-tabs__split-info {
-			padding: 24px 20px;
+			padding: $space-md 20px;
 
 			h3 {
-				font-size: 18px;
+				font-size: $font-body-large;
 			}
 
 			p {
-				font-size: 13px;
+				font-size: $font-caption;
 			}
 		}
 
@@ -1356,7 +1408,7 @@ $border-light: #F3F4F6;
 		.method-tabs__qcm,
 		.method-tabs__flashcard,
 		.method-tabs__annale-content {
-			padding: 24px 20px;
+			padding: $space-md 20px;
 		}
 
 		.method-tabs__fc-card-wrapper {
@@ -1368,8 +1420,8 @@ $border-light: #F3F4F6;
 		}
 
 		.method-tabs__fc-body {
-			font-size: 16px;
-			padding: 32px 24px;
+			font-size: $font-medium;
+			padding: $space-lg $space-md;
 			min-height: 150px;
 		}
 
@@ -1385,7 +1437,7 @@ $border-light: #F3F4F6;
 
 		.method-tabs__fv-playlist {
 			border-left: none;
-			border-top: 1px solid $border-light;
+			border-top: 1px solid $c-muted;
 		}
 
 		.method-tabs__fv-playlist-items {
@@ -1394,6 +1446,8 @@ $border-light: #F3F4F6;
 
 		.method-tabs__cta {
 			width: 100%;
+			max-width: 100%;
+			box-sizing: border-box;
 			justify-content: center;
 			font-size: 15px;
 			padding: 14px 28px;
@@ -1401,19 +1455,19 @@ $border-light: #F3F4F6;
 	}
 
 	@media (max-width: 480px) {
-		padding: 36px 12px 44px;
+		padding: $space-lg $space-xs;
 
 		.method-tabs__title {
 			font-size: 24px;
 		}
 
 		.method-tabs__badge {
-			font-size: 12px;
-			padding: 5px 12px;
+			font-size: $font-caption;
+			padding: 5px $space-xs;
 		}
 
 		.method-tabs__tab {
-			padding: 8px 10px;
+			padding: $space-xs 10px;
 			font-size: 11px;
 
 			.method-tabs__tab-label--short {
@@ -1440,14 +1494,14 @@ $border-light: #F3F4F6;
 		.method-tabs__qcm,
 		.method-tabs__flashcard,
 		.method-tabs__annale-content {
-			padding: 20px 16px;
+			padding: 20px $space-sm;
 			max-height: 360px;
 		}
 
 		.method-tabs__qcm-option {
-			padding: 10px 12px;
-			font-size: 12px;
-			gap: 8px;
+			padding: 10px $space-xs;
+			font-size: $font-caption;
+			gap: $space-xs;
 		}
 
 		.method-tabs__fc-card {
@@ -1459,6 +1513,11 @@ $border-light: #F3F4F6;
 			padding: 28px 20px;
 			min-height: 130px;
 		}
+
+		.method-tabs__cta {
+			padding: 12px 20px;
+			font-size: 14px;
+		}
 	}
 
 	/* ═══════════════════════════════════════════
@@ -1467,22 +1526,22 @@ $border-light: #F3F4F6;
 	.jurible-infobox {
 		display: flex;
 		flex-direction: column;
-		padding: 20px 24px;
-		gap: 8px;
-		border-radius: 12px;
+		padding: 20px $space-md;
+		gap: $space-xs;
+		border-radius: $radius-lg;
 		width: 100%;
 		box-sizing: border-box;
-		margin: 16px 0;
+		margin: $space-sm 0;
 	}
 
 	.jurible-infobox-header {
 		display: flex;
 		align-items: center;
-		gap: 8px;
+		gap: $space-xs;
 	}
 
 	.jurible-infobox-icon {
-		font-size: 14px;
+		font-size: $font-small;
 		color: initial !important;
 		font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
 	}
@@ -1498,64 +1557,64 @@ $border-light: #F3F4F6;
 
 	.jurible-infobox-content {
 		margin: 0 !important;
-		font-size: 14px;
+		font-size: $font-small;
 		line-height: 1.7;
-		color: $text-secondary;
+		color: $c-text-gray;
 	}
 
 	.jurible-infobox-important {
-		background: #EFF6FF;
+		background: $c-info-bg;
 
 		.jurible-infobox-title {
-			color: #3B82F6;
+			color: $c-info;
 		}
 	}
 
 	.jurible-infobox-definition {
-		background: #F9FAFB;
+		background: $c-muted;
 
 		.jurible-infobox-title {
-			color: $text-muted;
+			color: $c-text-muted;
 		}
 	}
 
 	.jurible-infobox-attention {
-		background: rgba(239, 68, 68, 0.1);
+		background: $c-error-bg;
 
 		.jurible-infobox-title {
-			color: $red-text;
+			color: $c-error;
 		}
 	}
 
 	.jurible-infobox-retenir {
-		background: rgba(245, 158, 11, 0.1);
+		background: $c-warning-bg;
 
 		.jurible-infobox-title {
-			color: #D97706;
+			color: $c-warning;
 		}
 	}
 
 	.jurible-infobox-exemple {
-		background: linear-gradient(100.94deg, rgba(176, 0, 29, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
+		background: linear-gradient(100.94deg, rgba($primary, 0.08) 0%, rgba($secondary, 0.08) 100%);
 
 		.jurible-infobox-title {
-			color: $bordeaux;
+			color: $c-primary;
 		}
 	}
 
 	.jurible-infobox-astuce {
-		background: $green-bg;
+		background: $c-success-bg;
 
 		.jurible-infobox-title {
-			color: $green;
+			color: $c-success;
 		}
 	}
 
 	.jurible-infobox-conditions {
-		background: #F9FAFB;
+		background: $c-muted;
 
 		.jurible-infobox-title {
-			color: $text-muted;
+			color: $c-text-muted;
 		}
 	}
 }
