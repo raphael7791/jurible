@@ -28,6 +28,7 @@ $border-light: #F3F4F6;
 	padding: 72px 24px 80px;
 	position: relative;
 	overflow: hidden;
+	margin-block-start: 0 !important; // Override WordPress default spacing
 
 	&::before {
 		content: '';
