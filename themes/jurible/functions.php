@@ -25,11 +25,22 @@ function jurible_copyright_shortcode() {
 }
 add_shortcode('jurible_copyright', 'jurible_copyright_shortcode');
 
-# Shortcode pour la vidéo YouTube du cours [course_video_embed]
+# Shortcode pour la vidéo du cours (YouTube ou Bunny Stream) [course_video_embed]
 function jurible_course_video_embed_shortcode() {
     $video_url = get_field('video_url');
     if (empty($video_url)) {
         return '';
+    }
+
+    $embed_url = '';
+
+    // Bunny Stream (iframe.mediadelivery.net) - déjà en format embed
+    if (strpos($video_url, 'mediadelivery.net') !== false || strpos($video_url, 'bunnycdn') !== false) {
+        $embed_url = $video_url;
+        if (strpos($embed_url, '?') === false) {
+            $embed_url .= '?autoplay=false&preload=true';
+        }
+        return '<div style="position:absolute;top:0;left:0;right:0;bottom:0;"><iframe src="' . esc_attr($embed_url) . '" style="width:100%;height:100%;border:0;border-radius:8px;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true" loading="lazy"></iframe></div>';
     }
 
     // Extraire l'ID de la vidéo YouTube depuis différents formats d'URL
