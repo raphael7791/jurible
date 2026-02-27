@@ -42,6 +42,7 @@ function jurible_blocks_react_init() {
 	register_block_type( __DIR__ . '/build/checkout-reassurance' );
 	register_block_type( __DIR__ . '/build/checkout-social-proof' );
 	register_block_type( __DIR__ . '/build/checkout-testimonial' );
+	register_block_type( __DIR__ . '/build/hero-dashboard' );
 }
 add_action( 'init', 'jurible_blocks_react_init' );
 
