@@ -1,0 +1,78 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/hero-dashboard",
+  "version": "1.0.0",
+  "title": "Hero Dashboard",
+  "category": "jurible",
+  "icon": "dashboard",
+  "description": "Dashboard visuel style Stripe avec cartes flottantes et effet 3D",
+  "keywords": ["hero", "dashboard", "stripe", "mockup"],
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "userName": {
+      "type": "string",
+      "default": "Marie"
+    },
+    "userInitials": {
+      "type": "string",
+      "default": "ML"
+    },
+    "currentCourse": {
+      "type": "string",
+      "default": "Droit constitutionnel"
+    },
+    "lessonTitle": {
+      "type": "string",
+      "default": "La séparation des pouvoirs"
+    },
+    "lessonMeta": {
+      "type": "string",
+      "default": "Leçon 8 · 18 min · Raphaël Briguet-Lamarre"
+    },
+    "progressPercent": {
+      "type": "number",
+      "default": 67
+    },
+    "qcmCount": {
+      "type": "number",
+      "default": 84
+    },
+    "fichesCount": {
+      "type": "number",
+      "default": 12
+    },
+    "fichesTotal": {
+      "type": "number",
+      "default": 16
+    },
+    "gradeValue": {
+      "type": "number",
+      "default": 15
+    },
+    "gradeImprovement": {
+      "type": "string",
+      "default": "+3 pts vs dernier semestre"
+    },
+    "enableParallax": {
+      "type": "boolean",
+      "default": true
+    },
+    "enableAnimations": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "viewScript": "file:./view.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

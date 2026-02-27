@@ -1296,6 +1296,92 @@ Commentaire d\'arrêt'
 		'style' => 'file:./style-index.css',
 		'viewScript' => 'file:./view.js'
 	),
+	'hero-dashboard' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'jurible/hero-dashboard',
+		'version' => '1.0.0',
+		'title' => 'Hero Dashboard',
+		'category' => 'jurible',
+		'icon' => 'dashboard',
+		'description' => 'Dashboard visuel style Stripe avec cartes flottantes et effet 3D',
+		'keywords' => array(
+			'hero',
+			'dashboard',
+			'stripe',
+			'mockup'
+		),
+		'supports' => array(
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			)
+		),
+		'attributes' => array(
+			'align' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'userName' => array(
+				'type' => 'string',
+				'default' => 'Marie'
+			),
+			'userInitials' => array(
+				'type' => 'string',
+				'default' => 'ML'
+			),
+			'currentCourse' => array(
+				'type' => 'string',
+				'default' => 'Droit constitutionnel'
+			),
+			'lessonTitle' => array(
+				'type' => 'string',
+				'default' => 'La séparation des pouvoirs'
+			),
+			'lessonMeta' => array(
+				'type' => 'string',
+				'default' => 'Leçon 8 · 18 min · Raphaël Briguet-Lamarre'
+			),
+			'progressPercent' => array(
+				'type' => 'number',
+				'default' => 67
+			),
+			'qcmCount' => array(
+				'type' => 'number',
+				'default' => 84
+			),
+			'fichesCount' => array(
+				'type' => 'number',
+				'default' => 12
+			),
+			'fichesTotal' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'gradeValue' => array(
+				'type' => 'number',
+				'default' => 15
+			),
+			'gradeImprovement' => array(
+				'type' => 'string',
+				'default' => '+3 pts vs dernier semestre'
+			),
+			'enableParallax' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'enableAnimations' => array(
+				'type' => 'boolean',
+				'default' => true
+			)
+		),
+		'textdomain' => 'jurible-blocks-react',
+		'editorScript' => 'file:./index.js',
+		'viewScript' => 'file:./view.js',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php'
+	),
 	'infobox' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,

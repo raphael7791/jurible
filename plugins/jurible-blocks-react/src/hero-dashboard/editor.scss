@@ -1,0 +1,27 @@
+.hero-dashboard-editor {
+	padding: 20px;
+}
+
+.hero-dashboard-preview {
+	background: #f9fafb;
+	border: 1px solid #e5e7eb;
+	border-radius: 12px;
+	padding: 24px;
+	text-align: center;
+
+	&__label {
+		font-size: 14px;
+		font-weight: 600;
+		color: #7c3aed;
+		margin-bottom: 16px;
+	}
+
+	&__info {
+		font-size: 13px;
+		color: #4a4a4a;
+		line-height: 1.8;
+		text-align: left;
+		max-width: 400px;
+		margin: 0 auto;
+	}
+}

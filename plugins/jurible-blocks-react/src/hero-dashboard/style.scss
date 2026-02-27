@@ -1,0 +1,745 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO DASHBOARD BLOCK
+   Style Stripe-inspired avec cartes flottantes et effet 3D
+   Utilise les variables theme.json pour cohérence design system
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── THEME.JSON VARIABLES ─── */
+$c-primary: var(--wp--preset--color--primary);
+$c-secondary: var(--wp--preset--color--secondary);
+$c-secondary-bg: var(--wp--preset--color--secondary-bg);
+$c-white: var(--wp--preset--color--white);
+$c-background: var(--wp--preset--color--background);
+$c-muted: var(--wp--preset--color--muted);
+$c-border: var(--wp--preset--color--border);
+$c-text-dark: var(--wp--preset--color--text-dark);
+$c-text-gray: var(--wp--preset--color--text-gray);
+$c-text-muted: var(--wp--preset--color--text-muted);
+$c-success: var(--wp--preset--color--success);
+$c-success-bg: var(--wp--preset--color--success-bg);
+$c-success-text: var(--wp--preset--color--success-text);
+$c-warning: var(--wp--preset--color--warning);
+$c-info: var(--wp--preset--color--info);
+
+$gradient-cta: var(--wp--preset--gradient--cta-gradient);
+
+$shadow-sm: var(--wp--preset--shadow--sm);
+$shadow-md: var(--wp--preset--shadow--md);
+$shadow-lg: var(--wp--preset--shadow--lg);
+$shadow-xl: var(--wp--preset--shadow--xl);
+
+$radius-xs: var(--wp--custom--border-radius--xs);
+$radius-sm: var(--wp--custom--border-radius--sm);
+$radius-md: var(--wp--custom--border-radius--md);
+$radius-lg: var(--wp--custom--border-radius--lg);
+
+$space-xs: var(--wp--preset--spacing--xs);
+$space-sm: var(--wp--preset--spacing--sm);
+$space-md: var(--wp--preset--spacing--md);
+
+$font-family: var(--wp--preset--font-family--poppins);
+
+/* ─── CUSTOM SHADOWS (plus prononcés pour l'effet) ─── */
+$shadow-dashboard: 0 24px 60px rgba(0, 0, 0, 0.15);
+$shadow-float: 0 12px 40px rgba(0, 0, 0, 0.12);
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MAIN CONTAINER
+   ═══════════════════════════════════════════════════════════════════════════ */
+.wp-block-jurible-hero-dashboard {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 60px 40px;
+	font-family: $font-family;
+
+	@media (max-width: 640px) {
+		padding: 40px 20px;
+	}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO VISUAL WRAPPER
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hero-dashboard {
+	position: relative;
+	perspective: 1200px;
+	max-width: 640px;
+	width: 100%;
+
+	&.has-animations {
+		opacity: 0;
+		animation: hd-fadeIn 1s 0.3s forwards;
+	}
+
+	&:not(.has-animations) {
+		opacity: 1;
+	}
+}
+
+.hero-dashboard__wrapper {
+	position: relative;
+	transform: rotateY(-4deg) rotateX(2deg);
+	transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+	will-change: transform;
+
+	.hero-dashboard:hover & {
+		transform: rotateY(-1deg) rotateX(0.5deg);
+	}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MAIN DASHBOARD CARD
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hero-dashboard__main {
+	background: $c-white;
+	border-radius: $radius-lg;
+	box-shadow: $shadow-dashboard;
+	overflow: hidden;
+	border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* ─── TOP BAR ─── */
+.hero-dashboard__topbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 20px;
+	border-bottom: 1px solid $c-muted;
+	background: #fcfcfd;
+}
+
+.hero-dashboard__topbar-left {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.hero-dashboard__logo {
+	width: 26px;
+	height: 26px;
+	background: linear-gradient(135deg, $c-secondary 0%, $c-primary 100%);
+	border-radius: 7px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: $c-white;
+	font-weight: 700;
+	font-size: 13px;
+}
+
+.hero-dashboard__brand {
+	font-weight: 600;
+	font-size: 14px;
+	color: $c-text-dark;
+}
+
+.hero-dashboard__nav {
+	display: flex;
+	gap: 4px;
+
+	@media (max-width: 640px) {
+		display: none;
+	}
+}
+
+.hero-dashboard__nav-item {
+	font-size: 11.5px;
+	padding: 5px 10px;
+	border-radius: $radius-xs;
+	color: $c-text-muted;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	&.is-active {
+		background: $c-secondary-bg;
+		color: $c-secondary;
+	}
+}
+
+.hero-dashboard__topbar-right {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.hero-dashboard__action-btn {
+	width: 28px;
+	height: 28px;
+	border-radius: $radius-xs;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	background: transparent;
+	border: 1px solid $c-muted;
+}
+
+.hero-dashboard__user {
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #c4b5fd 0%, $c-secondary 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 11px;
+	font-weight: 600;
+	color: $c-white;
+}
+
+/* ─── BODY LAYOUT ─── */
+.hero-dashboard__body {
+	display: grid;
+	grid-template-columns: 190px 1fr;
+	min-height: 320px;
+
+	@media (max-width: 640px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ─── SIDEBAR ─── */
+.hero-dashboard__sidebar {
+	background: $c-background;
+	border-right: 1px solid $c-muted;
+	padding: 16px 12px;
+
+	@media (max-width: 640px) {
+		display: none;
+	}
+}
+
+.hero-dashboard__sidebar-title {
+	font-size: 10px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	color: $c-text-muted;
+	margin-bottom: 10px;
+	padding-left: 8px;
+}
+
+.hero-dashboard__sidebar-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 7px 8px;
+	border-radius: 7px;
+	font-size: 11.5px;
+	color: $c-text-gray;
+	font-weight: 400;
+	margin-bottom: 2px;
+
+	&.is-active {
+		background: $c-white;
+		color: $c-secondary;
+		font-weight: 500;
+		box-shadow: $shadow-sm;
+	}
+}
+
+.hero-dashboard__sidebar-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	flex-shrink: 0;
+}
+
+.hero-dashboard__sidebar-section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 7px 8px;
+	font-size: 10px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	color: $c-text-muted;
+
+	span {
+		font-size: 11px;
+		color: $c-border;
+	}
+}
+
+/* ─── MAIN CONTENT ─── */
+.hero-dashboard__content {
+	padding: 18px 20px;
+}
+
+.hero-dashboard__welcome {
+	margin-bottom: 16px;
+
+	h3 {
+		font-size: 15px;
+		font-weight: 600;
+		color: $c-text-dark;
+		margin: 0 0 3px;
+	}
+
+	p {
+		font-size: 11.5px;
+		color: $c-text-muted;
+		margin: 0;
+	}
+}
+
+/* ─── STATS GRID ─── */
+.hero-dashboard__stats {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+	margin-bottom: 16px;
+
+	@media (max-width: 480px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.hero-dashboard__stat {
+	background: $c-background;
+	border-radius: $radius-sm;
+	padding: 12px;
+	border: 1px solid $c-muted;
+}
+
+.hero-dashboard__stat-label {
+	font-size: 10px;
+	color: $c-text-muted;
+	font-weight: 500;
+	margin-bottom: 4px;
+}
+
+.hero-dashboard__stat-value {
+	font-size: 20px;
+	font-weight: 700;
+	color: $c-text-dark;
+	line-height: 1;
+}
+
+.hero-dashboard__stat-change {
+	font-size: 10px;
+	color: $c-success;
+	font-weight: 500;
+	margin-top: 3px;
+}
+
+/* ─── COURSE CARD ─── */
+.hero-dashboard__course {
+	background: $c-background;
+	border-radius: $radius-sm;
+	padding: 12px;
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	border: 1px solid $c-muted;
+}
+
+.hero-dashboard__course-thumb {
+	width: 80px;
+	height: 52px;
+	border-radius: $radius-xs;
+	background: linear-gradient(135deg, $c-secondary 0%, #8b5cf6 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+
+	&::after {
+		content: "▶";
+		color: $c-white;
+		font-size: 16px;
+		opacity: 0.9;
+	}
+}
+
+.hero-dashboard__course-info {
+	flex: 1;
+	min-width: 0;
+}
+
+.hero-dashboard__course-title {
+	font-size: 12px;
+	font-weight: 600;
+	color: $c-text-dark;
+	margin-bottom: 4px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.hero-dashboard__course-meta {
+	font-size: 10px;
+	color: $c-text-muted;
+	margin-bottom: 6px;
+}
+
+.hero-dashboard__progress-bar {
+	width: 100%;
+	height: 4px;
+	background: $c-border;
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.hero-dashboard__progress-fill {
+	height: 100%;
+	background: linear-gradient(90deg, $c-secondary, #8b5cf6);
+	border-radius: 2px;
+	width: 0%;
+	transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+	.has-animations & {
+		transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1) 1.5s;
+	}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FLOATING CARDS
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hero-dashboard__float {
+	position: absolute;
+	background: $c-white;
+	border-radius: $radius-sm;
+	box-shadow: $shadow-float;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	z-index: 10;
+	opacity: 0;
+	transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+	will-change: transform, opacity;
+
+	&:hover {
+		transform: translateY(-4px) scale(1.02) !important;
+	}
+
+	@media (max-width: 640px) {
+		display: none;
+	}
+}
+
+/* ─── QCM CARD ─── */
+.hero-dashboard__float--qcm {
+	top: -20px;
+	right: -30px;
+	padding: 14px 16px;
+	width: 210px;
+
+	.has-animations & {
+		animation: hd-floatIn1 0.8s 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+			hd-floatIdle1 4s 2s ease-in-out infinite;
+	}
+
+	.hero-dashboard:not(.has-animations) & {
+		opacity: 1;
+	}
+}
+
+.hero-dashboard__qcm-title {
+	font-size: 11px;
+	font-weight: 600;
+	color: $c-text-dark;
+	margin-bottom: 8px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+
+	&::before {
+		content: "🧠";
+		font-size: 13px;
+	}
+}
+
+.hero-dashboard__qcm-option {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 6px 8px;
+	border-radius: $radius-xs;
+	font-size: 10.5px;
+	color: $c-text-gray;
+	margin-bottom: 3px;
+	background: $c-background;
+	border: 1px solid $c-muted;
+
+	&.is-correct {
+		background: $c-success-bg;
+		border-color: #a7f3d0;
+		color: $c-success-text;
+	}
+}
+
+.hero-dashboard__qcm-radio {
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	border: 2px solid $c-border;
+	flex-shrink: 0;
+	position: relative;
+
+	.is-correct & {
+		border-color: $c-success;
+		background: $c-success;
+
+		&::after {
+			content: "✓";
+			color: $c-white;
+			font-size: 9px;
+			font-weight: 700;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+}
+
+/* ─── FLASHCARD ─── */
+.hero-dashboard__float--flash {
+	bottom: 30px;
+	right: -40px;
+	width: 210px;
+	overflow: hidden;
+	padding: 0;
+
+	.has-animations & {
+		animation: hd-floatIn2 0.8s 1s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+			hd-floatIdle2 5s 2.5s ease-in-out infinite;
+	}
+
+	.hero-dashboard:not(.has-animations) & {
+		opacity: 1;
+	}
+}
+
+.hero-dashboard__flash-header {
+	background: $gradient-cta;
+	padding: 8px 12px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.hero-dashboard__flash-label {
+	font-size: 9px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-dashboard__flash-count {
+	font-size: 9px;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.hero-dashboard__flash-question {
+	padding: 12px;
+	text-align: center;
+}
+
+.hero-dashboard__flash-q {
+	font-size: 11px;
+	font-weight: 600;
+	color: $c-text-dark;
+	line-height: 1.4;
+	margin-bottom: 6px;
+}
+
+.hero-dashboard__flash-hint {
+	font-size: 9px;
+	color: $c-text-muted;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+
+	&::before {
+		content: "👆";
+		font-size: 10px;
+	}
+}
+
+.hero-dashboard__flash-answer {
+	background: $c-background;
+	border-top: 1px solid $c-muted;
+	padding: 10px 12px;
+}
+
+.hero-dashboard__flash-answer-label {
+	font-size: 8px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	color: $c-secondary;
+	margin-bottom: 5px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	&::before {
+		content: "💡";
+		font-size: 9px;
+	}
+}
+
+.hero-dashboard__flash-a {
+	font-size: 10px;
+	color: $c-text-gray;
+	line-height: 1.45;
+
+	strong {
+		color: $c-text-dark;
+	}
+}
+
+/* ─── GRADE CARD ─── */
+.hero-dashboard__float--grade {
+	top: 60px;
+	left: -40px;
+	padding: 14px 16px;
+	width: 160px;
+
+	.has-animations & {
+		animation: hd-floatIn3 0.8s 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+			hd-floatIdle3 4.5s 3s ease-in-out infinite;
+	}
+
+	.hero-dashboard:not(.has-animations) & {
+		opacity: 1;
+	}
+}
+
+.hero-dashboard__grade-icon {
+	width: 32px;
+	height: 32px;
+	border-radius: $radius-md;
+	background: linear-gradient(135deg, #fde68a, $c-warning);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	margin-bottom: 8px;
+}
+
+.hero-dashboard__grade-label {
+	font-size: 10px;
+	color: $c-text-muted;
+	font-weight: 500;
+	margin-bottom: 2px;
+}
+
+.hero-dashboard__grade-value {
+	font-size: 24px;
+	font-weight: 700;
+	color: $c-text-dark;
+	line-height: 1;
+
+	span {
+		font-size: 14px;
+		color: $c-text-muted;
+	}
+}
+
+.hero-dashboard__grade-sub {
+	font-size: 10px;
+	color: $c-success;
+	font-weight: 500;
+	margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+@keyframes hd-fadeIn {
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes hd-floatIn1 {
+	from {
+		opacity: 0;
+		transform: translateY(20px) translateX(10px) scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) translateX(0) scale(1);
+	}
+}
+
+@keyframes hd-floatIn2 {
+	from {
+		opacity: 0;
+		transform: translateY(20px) translateX(-10px) scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) translateX(0) scale(1);
+	}
+}
+
+@keyframes hd-floatIn3 {
+	from {
+		opacity: 0;
+		transform: translateY(15px) translateX(10px) scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) translateX(0) scale(1);
+	}
+}
+
+@keyframes hd-floatIdle1 {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-6px);
+	}
+}
+
+@keyframes hd-floatIdle2 {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-8px);
+	}
+}
+
+@keyframes hd-floatIdle3 {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-5px);
+	}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+	.hero-dashboard,
+	.hero-dashboard__float,
+	.hero-dashboard__wrapper,
+	.hero-dashboard__progress-fill {
+		animation: none !important;
+		transition: none !important;
+	}
+
+	.hero-dashboard.has-animations {
+		opacity: 1;
+	}
+
+	.hero-dashboard__float {
+		opacity: 1;
+	}
+}
