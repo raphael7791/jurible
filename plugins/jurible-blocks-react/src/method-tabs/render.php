@@ -103,11 +103,11 @@ $tabs = [
                     <?php if (!empty($embed_url)) : ?>
                         <div class="method-tabs__video-player">
                             <iframe
-                                src="<?php echo esc_url($embed_url); ?>"
+                                src="<?php echo esc_attr($embed_url); ?>"
                                 title="Vidéo de présentation"
                                 frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
+                                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                allowfullscreen="true"
                                 loading="lazy"
                             ></iframe>
                         </div>
