@@ -1819,6 +1819,23 @@ function jurible_register_rankmath_meta() {
         'type'           => 'string',
         'auth_callback'  => '__return_true',
     ]);
+
+    // SureCart products (sc_product)
+    register_meta('post', 'rank_math_facebook_image', [
+        'object_subtype' => 'sc_product',
+        'show_in_rest'   => true,
+        'single'         => true,
+        'type'           => 'string',
+        'auth_callback'  => '__return_true',
+    ]);
+
+    register_meta('post', 'rank_math_facebook_image_id', [
+        'object_subtype' => 'sc_product',
+        'show_in_rest'   => true,
+        'single'         => true,
+        'type'           => 'string',
+        'auth_callback'  => '__return_true',
+    ]);
 }
 add_action('init', 'jurible_register_rankmath_meta');
 
