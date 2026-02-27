@@ -1777,6 +1777,26 @@ function jurible_add_acf_to_rest_api() {
 add_action('rest_api_init', 'jurible_add_acf_to_rest_api');
 
 /**
+ * Exposer les métadonnées Rank Math via l'API REST pour le CPT course
+ */
+function jurible_register_rankmath_meta() {
+    register_meta('post', 'rank_math_title', [
+        'object_subtype' => 'course',
+        'show_in_rest'   => true,
+        'single'         => true,
+        'type'           => 'string',
+    ]);
+
+    register_meta('post', 'rank_math_description', [
+        'object_subtype' => 'course',
+        'show_in_rest'   => true,
+        'single'         => true,
+        'type'           => 'string',
+    ]);
+}
+add_action('init', 'jurible_register_rankmath_meta');
+
+/**
  * TEMPORAIRE - Créer un cours de test
  * Visiter : /wp-admin/?create_test_course=1
  * À SUPPRIMER après les tests
