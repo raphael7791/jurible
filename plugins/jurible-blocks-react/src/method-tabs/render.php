@@ -21,11 +21,19 @@ if (empty($video_url)) {
     $video_url = $attributes['videoUrl'] ?? '';
 }
 
-// Convert YouTube URL to embed URL
+// Convert video URL to embed URL (YouTube or Bunny Stream)
 $embed_url = '';
 if (!empty($video_url)) {
+    // Handle Bunny Stream (iframe.mediadelivery.net) - already embed format
+    if (strpos($video_url, 'mediadelivery.net') !== false || strpos($video_url, 'bunnycdn') !== false) {
+        $embed_url = $video_url;
+        // Add default params if not present
+        if (strpos($embed_url, '?') === false) {
+            $embed_url .= '?autoplay=false&preload=true';
+        }
+    }
     // Handle youtu.be format
-    if (preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $video_url, $matches)) {
+    elseif (preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $video_url, $matches)) {
         $embed_url = 'https://www.youtube.com/embed/' . $matches[1];
     }
     // Handle youtube.com/watch?v= format
