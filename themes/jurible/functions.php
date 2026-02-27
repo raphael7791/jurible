@@ -1811,6 +1811,14 @@ function jurible_register_rankmath_meta() {
         'type'           => 'string',
         'auth_callback'  => '__return_true',
     ]);
+
+    register_meta('post', 'rank_math_facebook_image_id', [
+        'object_subtype' => 'course',
+        'show_in_rest'   => true,
+        'single'         => true,
+        'type'           => 'string',
+        'auth_callback'  => '__return_true',
+    ]);
 }
 add_action('init', 'jurible_register_rankmath_meta');
 
