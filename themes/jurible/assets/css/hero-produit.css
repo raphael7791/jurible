@@ -491,7 +491,7 @@
 	}
 
 	.hero-produit__title {
-		font-size: 1.5rem !important;
+		font-size: clamp(1.625rem, 6vw, 1.875rem) !important; /* 26px → 30px */
 	}
 
 	.hero-produit__meta {
