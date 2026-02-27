@@ -1799,6 +1799,16 @@ function jurible_register_rankmath_meta() {
 add_action('init', 'jurible_register_rankmath_meta');
 
 /**
+ * Activer Rank Math SEO sur le CPT course
+ */
+function jurible_rankmath_post_types($post_types) {
+    $post_types[] = 'course';
+    return array_unique($post_types);
+}
+add_filter('rank_math/sitemap/post_type', 'jurible_rankmath_post_types');
+add_filter('rank_math/metabox/post_types', 'jurible_rankmath_post_types');
+
+/**
  * TEMPORAIRE - Créer un cours de test
  * Visiter : /wp-admin/?create_test_course=1
  * À SUPPRIMER après les tests
