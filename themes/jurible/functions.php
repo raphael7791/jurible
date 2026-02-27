@@ -1785,6 +1785,7 @@ function jurible_register_rankmath_meta() {
         'show_in_rest'   => true,
         'single'         => true,
         'type'           => 'string',
+        'auth_callback'  => '__return_true',
     ]);
 
     register_meta('post', 'rank_math_description', [
@@ -1792,6 +1793,7 @@ function jurible_register_rankmath_meta() {
         'show_in_rest'   => true,
         'single'         => true,
         'type'           => 'string',
+        'auth_callback'  => '__return_true',
     ]);
 }
 add_action('init', 'jurible_register_rankmath_meta');
