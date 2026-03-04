@@ -688,6 +688,49 @@ function jurible_enqueue_lightbox()
 add_action("wp_enqueue_scripts", "jurible_enqueue_lightbox");
 
 
+# Smooth scroll avec easing sur les pages produit
+function jurible_enqueue_smooth_scroll()
+{
+    if (is_singular('sc_product')) {
+        wp_add_inline_script('jquery', "
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('a[href^=\"#\"]').forEach(function(anchor) {
+                    anchor.addEventListener('click', function(e) {
+                        var targetId = this.getAttribute('href');
+                        if (targetId === '#') return;
+                        var target = document.querySelector(targetId);
+                        if (target) {
+                            e.preventDefault();
+                            var targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                            var startPosition = window.pageYOffset;
+                            var distance = targetPosition - startPosition;
+                            var duration = 1200;
+                            var start = null;
+
+                            function easeInOutCubic(t) {
+                                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                            }
+
+                            function animation(currentTime) {
+                                if (start === null) start = currentTime;
+                                var timeElapsed = currentTime - start;
+                                var progress = Math.min(timeElapsed / duration, 1);
+                                var ease = easeInOutCubic(progress);
+                                window.scrollTo(0, startPosition + distance * ease);
+                                if (timeElapsed < duration) requestAnimationFrame(animation);
+                            }
+
+                            requestAnimationFrame(animation);
+                        }
+                    });
+                });
+            });
+        ");
+    }
+}
+add_action("wp_enqueue_scripts", "jurible_enqueue_smooth_scroll");
+
+
 # Enregistrer les Block Styles pour core/paragraph (Tags)
 function jurible_register_tag_block_styles()
 {
