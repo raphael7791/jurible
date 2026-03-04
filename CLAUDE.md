@@ -38,15 +38,28 @@ cd ~/Code/jurible/plugins/jurible-blocks-react && npm run build
 
 # Mode watch (développement)
 cd ~/Code/jurible/plugins/jurible-blocks-react && npm run start
+```
 
-# SSH serveur O2switch
-ssh aideauxtd@dogfish.o2switch.net
+## Déploiement (via SSH)
 
-# Déployer (sur le serveur)
-cd ~/jurible-repo && git pull
-rm -rf ~/jurible.com/wp-content/themes/jurible
-cp -r themes/jurible ~/jurible.com/wp-content/themes/
-# (voir README.md pour le script complet)
+Claude Code peut déployer directement sur O2switch. Utilise `/deploy` ou demande "déploie".
+
+**Serveur O2switch :**
+- Hôte : `dogfish.o2switch.net`
+- User : `aideauxtd`
+- Repo sur serveur : `~/jurible-repo`
+
+**Commandes de déploiement (exécutables depuis Claude Code) :**
+
+```bash
+# Déployer le thème jurible
+ssh aideauxtd@dogfish.o2switch.net "cd ~/jurible-repo && git pull && rm -rf ~/jurible.com/wp-content/themes/jurible && cp -r themes/jurible ~/jurible.com/wp-content/themes/"
+
+# Déployer le thème ecole.jurible
+ssh aideauxtd@dogfish.o2switch.net "cd ~/jurible-repo && git pull && rm -rf ~/ecole.jurible.com/wp-content/themes/ecole.jurible && cp -r themes/ecole.jurible ~/ecole.jurible.com/wp-content/themes/"
+
+# Déployer les blocs React
+ssh aideauxtd@dogfish.o2switch.net "cd ~/jurible-repo && git pull && rm -rf ~/jurible.com/wp-content/plugins/jurible-blocks-react && cp -r plugins/jurible-blocks-react ~/jurible.com/wp-content/plugins/"
 ```
 
 ## Stack technique
