@@ -3,7 +3,7 @@
 <!-- Section Hero Produit (Design B2 - Fiche PDF unitaire) -->
 
 <!-- wp:group {"align":"full","className":"hero-produit","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"background","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull hero-produit has-background-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)"><!-- wp:surecart/product-page {"metadata":{"categories":["surecart_product_page"],"patternName":"jurible-product-b2","name":"Jurible Product B2"},"align":"wide","layout":{"type":"constrained"}} -->
+<div id="hero-produit" class="wp-block-group alignfull hero-produit has-background-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)"><!-- wp:surecart/product-page {"metadata":{"categories":["surecart_product_page"],"patternName":"jurible-product-b2","name":"Jurible Product B2"},"align":"wide","layout":{"type":"constrained"}} -->
 <!-- wp:columns {"align":"wide","className":"hero-produit-columns","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|xl"}}}} -->
 <div class="wp-block-columns alignwide hero-produit-columns"><!-- wp:column {"width":"55%","className":"hero-produit-content","style":{"spacing":{"blockGap":"0"}}} -->
 <div class="wp-block-column hero-produit-content" style="flex-basis:55%"><!-- wp:surecart/product-collection-tags {"count":5,"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|xs"}}}} -->
@@ -465,7 +465,11 @@
 <!-- /wp:column -->
 
 <!-- wp:column {"width":"60%"} -->
-<div class="wp-block-column" style="flex-basis:60%"><!-- wp:html -->
+<div class="wp-block-column" style="flex-basis:60%"><!-- wp:paragraph {"align":"right","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|sm"}}},"fontSize":"small"} -->
+<p class="has-text-align-right has-small-font-size" style="margin-bottom:var(--wp--preset--spacing--sm)"><a href="#hero-produit" style="text-decoration:none;">↑ Voir le sommaire complet en haut de page</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
 <figure class="wp-block-image has-custom-border contenu-fiche__sommaire-image" style="border-radius:12px;overflow:hidden;">
 <a href="[acf field='image_sommaire']" data-lightbox="true"><img src="[acf field='image_sommaire']" alt="Sommaire du support" style="border-radius:12px;width:100%;height:auto;"/></a>
 </figure>
