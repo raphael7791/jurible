@@ -49,6 +49,12 @@ Claude Code peut déployer directement sur O2switch. Utilise `/deploy` ou demand
 - User : `aideauxtd`
 - Repo sur serveur : `~/jurible-repo`
 
+**Si SSH échoue (timeout ou permission denied) :**
+L'IP actuelle n'est pas autorisée sur O2switch. L'utilisateur doit :
+1. Aller sur cPanel : https://dogfish.o2switch.net:2083
+2. Section Sécurité → Accès SSH → Autoriser l'IP actuelle
+3. Relancer le déploiement
+
 **Commandes de déploiement (exécutables depuis Claude Code) :**
 
 ```bash

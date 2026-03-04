@@ -2,6 +2,17 @@
 
 Déploie les changements sur le serveur O2switch.
 
+## Si la connexion SSH échoue (IP non autorisée)
+
+O2switch restreint l'accès SSH par IP. Si tu changes de lieu (maison, café, etc.) :
+
+1. Va sur cPanel O2switch : https://dogfish.o2switch.net:2083
+2. Section **Sécurité** → **Accès SSH**
+3. Autorise ta nouvelle IP (ou clique "Ajouter mon IP actuelle")
+4. Relance le déploiement
+
+Pour connaître ton IP actuelle : `curl ifconfig.me`
+
 ## Étapes
 
 1. Vérifie qu'il n'y a pas de modifications non commitées
