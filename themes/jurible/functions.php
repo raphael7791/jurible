@@ -669,7 +669,7 @@ add_action("enqueue_block_assets", "jurible_enqueue_buttons_styles");
 # Charger la lightbox sur les pages produit
 function jurible_enqueue_lightbox()
 {
-    if (is_singular('sc_product')) {
+    if (is_singular(['sc_product', 'post'])) {
         wp_enqueue_style(
             "jurible-lightbox",
             get_template_directory_uri() . "/assets/css/lightbox.css",
@@ -920,7 +920,7 @@ function jurible_header_minimal_shortcode()
     <header id="site-header" class="site-header site-header--minimal">
         <div class="site-header__inner">
             <a href="<?php echo esc_url(home_url('/')); ?>" class="site-header__logo">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.svg'); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="site-header__logo-img">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.png'); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="site-header__logo-img">
             </a>
             <div class="site-header__actions">
                 <a href="/boutique" class="header-minimal__back">
@@ -945,7 +945,7 @@ function jurible_header_minimal_checkout_shortcode()
     <header class="site-header site-header--minimal site-header--checkout">
         <div class="site-header__inner">
             <a href="<?php echo esc_url(home_url('/')); ?>" class="site-header__logo">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.svg'); ?>" alt="Jurible" class="site-header__logo-img" width="120" height="32">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.png'); ?>" alt="Jurible" class="site-header__logo-img" width="120" height="32">
             </a>
             <span class="header-minimal__secure">
                 🔒 Paiement sécurisé

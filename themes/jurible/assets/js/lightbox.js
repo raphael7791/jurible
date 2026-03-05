@@ -11,11 +11,22 @@
 
         const lightboxImg = overlay.querySelector('.jurible-lightbox-image');
 
-        // Gère le clic sur les images avec zoom
+        // Gère le clic sur les liens images (sommaire fiches)
         document.querySelectorAll('.contenu-fiche__sommaire-image a').forEach(function(link) {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 lightboxImg.src = this.href;
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Gère le clic sur les images des blocs wp-block-image
+        document.querySelectorAll('.wp-block-image img').forEach(function(img) {
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                lightboxImg.src = this.src;
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });

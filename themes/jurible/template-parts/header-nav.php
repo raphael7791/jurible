@@ -16,7 +16,7 @@ get_template_part('template-parts/sticky-bar');
 <header class="site-header" id="site-header">
     <div class="site-header__inner">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="site-header__logo">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.svg'); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="site-header__logo-img">
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.png'); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="site-header__logo-img">
         </a>
         <nav class="site-header__nav" aria-label="<?php esc_attr_e('Navigation principale', 'jurible'); ?>">
             <ul class="site-header__menu">
@@ -151,7 +151,7 @@ get_template_part('template-parts/sticky-bar');
 <div class="mobile-menu" id="mobile-menu">
     <div class="mobile-menu__header">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="mobile-menu__logo">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.svg'); ?>" alt="Jurible" class="site-header__logo-img">
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.png'); ?>" alt="Jurible" class="site-header__logo-img">
         </a>
         <button class="mobile-menu__close" id="mobile-menu-close" aria-label="Fermer le menu">✕</button>
     </div>
