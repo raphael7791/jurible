@@ -342,10 +342,6 @@
    ========================================================================== */
 
 .wp-block-image figcaption {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
     color: var(--wp--preset--color--text-muted);
     font-size: var(--wp--preset--font-size--small);
     font-style: italic;
@@ -358,7 +354,8 @@
     display: inline-block;
     width: 18px;
     height: 18px;
-    flex-shrink: 0;
+    margin-right: 0.5rem;
+    vertical-align: middle;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239CA3AF'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h12l-4-5z'/%3E%3C/svg%3E");
     background-size: contain;
     background-repeat: no-repeat;
