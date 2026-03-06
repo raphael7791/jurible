@@ -76,7 +76,10 @@
 
             let actionHtml;
             if (isMigrated) {
-                actionHtml = '<a href="' + migratedStatus[post.ID].edit_url + '" target="_blank" class="btn-view">Voir</a> ';
+                actionHtml = '<a href="' + migratedStatus[post.ID].edit_url + '" target="_blank" class="btn-view">Back</a> ';
+                if (migratedStatus[post.ID].view_url) {
+                    actionHtml += '<a href="' + migratedStatus[post.ID].view_url + '" target="_blank" class="btn-view">Front</a> ';
+                }
                 actionHtml += '<button type="button" class="button btn-undo" data-id="' + post.ID + '">Annuler</button>';
             } else {
                 actionHtml = '<button type="button" class="button btn-migrate" data-id="' + post.ID + '">Migrer</button>';
@@ -120,12 +123,16 @@
                     // Update status
                     migratedStatus[postId] = {
                         new_id: response.data.new_post_id,
-                        edit_url: response.data.edit_url
+                        edit_url: response.data.edit_url,
+                        view_url: response.data.view_url
                     };
 
                     // Update row
                     $row.find('td:eq(3)').html('<span class="status-migrated">✅ Migré</span>');
-                    $row.find('td:eq(4)').html('<a href="' + response.data.edit_url + '" target="_blank" class="btn-view">Voir l\'article</a>');
+                    var actionHtml = '<a href="' + response.data.edit_url + '" target="_blank" class="btn-view">Back</a> ';
+                    actionHtml += '<a href="' + response.data.view_url + '" target="_blank" class="btn-view">Front</a> ';
+                    actionHtml += '<button type="button" class="button btn-undo" data-id="' + postId + '">Annuler</button>';
+                    $row.find('td:eq(4)').html(actionHtml);
 
                     // Update stats
                     updateStats();

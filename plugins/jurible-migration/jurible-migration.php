@@ -111,6 +111,7 @@ class Jurible_Migration {
             'message' => 'Article migré avec succès',
             'new_post_id' => $result,
             'edit_url' => admin_url('post.php?post=' . $result . '&action=edit'),
+            'view_url' => get_permalink($result),
         ]);
     }
 
@@ -205,6 +206,8 @@ class Jurible_Migration {
         $status[$source_id] = [
             'new_id' => $new_id,
             'date' => current_time('mysql'),
+            'edit_url' => admin_url('post.php?post=' . $new_id . '&action=edit'),
+            'view_url' => get_permalink($new_id),
         ];
         update_option('jurible_migration_status', $status);
     }
