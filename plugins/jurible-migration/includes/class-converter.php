@@ -45,6 +45,7 @@ class Jurible_Migration_Converter {
         $this->content = $this->stripThriveContainers($this->content);
 
         // Convert standard elements
+        $this->content = $this->convertBlockquotes($this->content);
         $this->content = $this->convertHeadings($this->content);
         $this->content = $this->convertTables($this->content);
         $this->content = $this->convertLists($this->content);
@@ -66,6 +67,26 @@ class Jurible_Migration_Converter {
 
         // Remove __CONFIG__ blocks (can span multiple lines and contain HTML)
         $html = preg_replace('/__CONFIG_[^_]+__.*?__CONFIG_[^_]+__/s', '', $html);
+
+        // Remove "Lire aussi" and similar Thrive buttons
+        // Pattern for thrv-button blocks containing promotional/navigation links
+        $buttonPattern = '/<div[^>]*class="[^"]*tcb-clear[^"]*"[^>]*>\s*<div[^>]*class="[^"]*thrv-button[^"]*"[^>]*>[\s\S]*?<\/div>\s*<\/div>/is';
+
+        $html = preg_replace_callback($buttonPattern, function($matches) {
+            $block = $matches[0];
+            $buttonPatterns = [
+                'Lire aussi', 'Voir plus de', 'Accéder au cours',
+                'Fiches vidéo', 'fiches-droit-videos',
+                'accroche-citation', 'Trouver une accroche',
+            ];
+
+            foreach ($buttonPatterns as $pattern) {
+                if (stripos($block, $pattern) !== false) {
+                    return '';
+                }
+            }
+            return $block;
+        }, $html);
 
         // Remove CTA content boxes
         $pattern = '/<div[^>]*class="[^"]*thrv_contentbox_shortcode[^"]*"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>\s*<\/div>/i';
@@ -107,12 +128,32 @@ class Jurible_Migration_Converter {
     }
 
     private function convertAparteBlocks(string $html): string {
-        $pattern = '/💬\s*(?:<span[^>]*><\/span>\s*)*<span[^>]*>([^<]+)<\/span>(?:\s*<\/div>)+\s*<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:\s*<p[^>]*>.+?<\/p>)+)\s*<\/div>/is';
+        // Pattern 1: Aparté avec emoji 💬 et titre
+        $pattern1 = '/💬\s*(?:<span[^>]*><\/span>\s*)*<span[^>]*>([^<]+)<\/span>(?:\s*<\/div>)+\s*<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:\s*<p[^>]*>.+?<\/p>)+)\s*<\/div>/is';
 
-        return preg_replace_callback($pattern, function($matches) {
+        $html = preg_replace_callback($pattern1, function($matches) {
             $content = $this->extractParagraphsContent($matches[2]);
             return "###INFOBOX_RETENIR###" . base64_encode($content) . "###/INFOBOX###";
         }, $html);
+
+        // Pattern 2: Aparté avec "Aparté :" ou "Aparté" sans emoji (texte seul)
+        // Structure: <span>Aparté :&nbsp;</span>Titre</div>...</div><div class="thrv_text_element"><p>contenu</p></div>
+        $pattern2 = '/<span[^>]*>Aparté\s*:?&nbsp;<\/span>([^<]+)(?:<\/div>)+\s*(?:<\/div>\s*)*<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:\s*<p[^>]*>.+?<\/p>)+)\s*<\/div>/is';
+
+        $html = preg_replace_callback($pattern2, function($matches) {
+            $content = $this->extractParagraphsContent($matches[2]);
+            return "###INFOBOX_RETENIR###" . base64_encode($content) . "###/INFOBOX###";
+        }, $html);
+
+        // Pattern 3: Aparté simple sans titre (juste "Aparté" comme header)
+        $pattern3 = '/<span[^>]*>Aparté<\/span>(?:<\/div>)+\s*(?:<\/div>\s*)*<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:\s*<p[^>]*>.+?<\/p>)+)\s*<\/div>/is';
+
+        $html = preg_replace_callback($pattern3, function($matches) {
+            $content = $this->extractParagraphsContent($matches[1]);
+            return "###INFOBOX_RETENIR###" . base64_encode($content) . "###/INFOBOX###";
+        }, $html);
+
+        return $html;
     }
 
     private function convertYouTubeVideos(string $html): string {
@@ -308,6 +349,19 @@ class Jurible_Migration_Converter {
         }, $html);
     }
 
+    private function convertBlockquotes(string $html): string {
+        // Convert blockquote elements to Gutenberg quote blocks
+        return preg_replace_callback('/<blockquote[^>]*>(.+?)<\/blockquote>/is', function($matches) {
+            $content = $this->cleanInlineHtml($matches[1]);
+            // Remove trailing <br> tags
+            $content = preg_replace('/<br\s*\/?>\s*$/i', '', $content);
+            if (empty(trim(strip_tags($content)))) {
+                return '';
+            }
+            return $this->createQuote($content);
+        }, $html);
+    }
+
     private function restoreInfoboxes(string $html): string {
         // Exemple
         $html = preg_replace_callback('/###INFOBOX_EXEMPLE###([^#]+)###\/INFOBOX###/', function($matches) {
@@ -350,6 +404,25 @@ class Jurible_Migration_Converter {
     private function cleanupOutput(string $html): string {
         $html = preg_replace('/<img[^>]*emoji[^>]*>/i', '', $html);
         $html = preg_replace('/<img[^>]*s\.w\.org[^>]*>/i', '', $html);
+
+        // Remove all SVG elements (Thrive icons)
+        $html = preg_replace('/<svg[^>]*>[\s\S]*?<\/svg>/i', '', $html);
+
+        // Remove Thrive button links with promotional content
+        $html = preg_replace_callback('/<a[^>]*class="[^"]*tcb-button-link[^"]*"[^>]*>[\s\S]*?<\/a>/i', function($matches) {
+            $link = $matches[0];
+            $removePatterns = ['Lire aussi', 'Voir plus', 'Accéder au', 'Fiches vidéo', 'accroche'];
+            foreach ($removePatterns as $pattern) {
+                if (stripos($link, $pattern) !== false) {
+                    return '';
+                }
+            }
+            return $link;
+        }, $html);
+
+        // Remove empty spans (leftover from button icons)
+        $html = preg_replace('/<span[^>]*class="[^"]*tcb-button-icon[^"]*"[^>]*>\s*<\/span>/i', '', $html);
+
         $html = preg_replace('/\n{3,}/', "\n\n", $html);
         $html = preg_replace('/^\s+$/m', '', $html);
         $html = preg_replace('/^[📌💬🔎]\s*/m', '', $html);
@@ -396,6 +469,19 @@ class Jurible_Migration_Converter {
             '<!-- wp:paragraph -->
 <p>%s</p>
 <!-- /wp:paragraph -->
+
+',
+            $content
+        );
+    }
+
+    private function createQuote(string $content): string {
+        return sprintf(
+            '<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p>%s</p>
+<!-- /wp:paragraph --></blockquote>
+<!-- /wp:quote -->
 
 ',
             $content
