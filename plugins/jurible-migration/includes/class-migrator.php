@@ -55,6 +55,9 @@ class Jurible_Migration_Migrator {
         // 7. Copier les catégories/tags si nécessaire
         $this->copyTaxonomies($sourcePostId, $newPostId);
 
+        // 8. Migrer les données SEO (Yoast → Rank Math)
+        $this->migrateSeoData($sourcePostId, $newPostId);
+
         return $newPostId;
     }
 
@@ -284,5 +287,132 @@ class Jurible_Migration_Migrator {
                 shell_exec($command);
             }
         }
+    }
+
+    /**
+     * Migrer les données SEO de Yoast vers Rank Math
+     */
+    private function migrateSeoData(int $sourcePostId, int $newPostId): void {
+        // Mapping Yoast → Rank Math
+        $metaMapping = [
+            '_yoast_wpseo_title' => 'rank_math_title',
+            '_yoast_wpseo_metadesc' => 'rank_math_description',
+            '_yoast_wpseo_focuskw' => 'rank_math_focus_keyword',
+            '_yoast_wpseo_opengraph-title' => 'rank_math_facebook_title',
+            '_yoast_wpseo_opengraph-description' => 'rank_math_facebook_description',
+            '_yoast_wpseo_twitter-title' => 'rank_math_twitter_title',
+            '_yoast_wpseo_twitter-description' => 'rank_math_twitter_description',
+        ];
+
+        foreach ($metaMapping as $yoastKey => $rankMathKey) {
+            $value = $this->getSourceMeta($sourcePostId, $yoastKey);
+            if (!empty($value)) {
+                // Remplacer aideauxtd.com par jurible.com dans les valeurs
+                $value = str_replace('aideauxtd.com', 'jurible.com', $value);
+                $this->setDestMeta($newPostId, $rankMathKey, $value);
+            }
+        }
+
+        // Migrer l'image Open Graph
+        $this->migrateSeoImage($sourcePostId, $newPostId);
+
+        // Activer les robots index par défaut
+        $this->setDestMeta($newPostId, 'rank_math_robots', 'a:1:{i:0;s:5:"index";}');
+    }
+
+    /**
+     * Migrer l'image sociale (Open Graph) de Yoast vers Rank Math
+     */
+    private function migrateSeoImage(int $sourcePostId, int $newPostId): void {
+        // Récupérer l'URL de l'image OG depuis Yoast
+        $ogImageUrl = $this->getSourceMeta($sourcePostId, '_yoast_wpseo_opengraph-image');
+
+        if (empty($ogImageUrl)) {
+            return;
+        }
+
+        // Extraire le chemin du fichier
+        $urlPath = parse_url($ogImageUrl, PHP_URL_PATH);
+        if (empty($urlPath)) {
+            return;
+        }
+
+        $filename = basename($urlPath);
+
+        // Récupérer year/month depuis le chemin
+        if (preg_match('#/uploads/(\d{4}/\d{2})/#', $urlPath, $match)) {
+            $yearMonth = $match[1];
+        } else {
+            $yearMonth = date('Y/m');
+        }
+
+        $sourcePath = JURIBLE_AIDEAUXTD_PATH . '/wp-content/uploads/' . $yearMonth . '/' . $filename;
+        $destPath = ABSPATH . 'wp-content/uploads/' . $yearMonth . '/' . $filename;
+
+        // Créer le répertoire si nécessaire
+        $destDir = dirname($destPath);
+        if (!is_dir($destDir)) {
+            mkdir($destDir, 0755, true);
+        }
+
+        // Copier l'image si elle n'existe pas
+        if (file_exists($sourcePath) && !file_exists($destPath)) {
+            copy($sourcePath, $destPath);
+        }
+
+        if (!file_exists($destPath)) {
+            return;
+        }
+
+        // Importer dans la médiathèque
+        $title = str_replace(['-', '_'], ' ', pathinfo($filename, PATHINFO_FILENAME));
+        $title = preg_replace('/\s*Aideauxtd.*$/i', '', $title);
+        $title = ucfirst(trim($title));
+
+        $command = sprintf(
+            'cd %s && wp media import %s --title=%s --porcelain --allow-root 2>/dev/null',
+            escapeshellarg(ABSPATH),
+            escapeshellarg($destPath),
+            escapeshellarg($title)
+        );
+
+        $attachmentId = trim(shell_exec($command));
+
+        if (is_numeric($attachmentId)) {
+            // Définir l'image pour Facebook/Twitter dans Rank Math
+            $newImageUrl = home_url('/wp-content/uploads/' . $yearMonth . '/' . $filename);
+            $this->setDestMeta($newPostId, 'rank_math_facebook_image', $newImageUrl);
+            $this->setDestMeta($newPostId, 'rank_math_facebook_image_id', $attachmentId);
+            $this->setDestMeta($newPostId, 'rank_math_twitter_use_facebook', 'on');
+        }
+    }
+
+    /**
+     * Récupérer une meta du post source via WP-CLI
+     */
+    private function getSourceMeta(int $postId, string $metaKey): string {
+        $command = sprintf(
+            'cd %s && wp post meta get %d %s --allow-root 2>/dev/null',
+            escapeshellarg(JURIBLE_AIDEAUXTD_PATH),
+            $postId,
+            escapeshellarg($metaKey)
+        );
+
+        return trim(shell_exec($command) ?? '');
+    }
+
+    /**
+     * Définir une meta sur le post destination via WP-CLI
+     */
+    private function setDestMeta(int $postId, string $metaKey, string $value): void {
+        $command = sprintf(
+            'cd %s && wp post meta update %d %s %s --allow-root 2>/dev/null',
+            escapeshellarg(ABSPATH),
+            $postId,
+            escapeshellarg($metaKey),
+            escapeshellarg($value)
+        );
+
+        shell_exec($command);
     }
 }
