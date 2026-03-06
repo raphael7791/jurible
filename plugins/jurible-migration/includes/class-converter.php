@@ -60,9 +60,16 @@ class Jurible_Migration_Converter {
     }
 
     private function removeCTABlocks(string $html): string {
+        // Remove Thrive shortcode config blocks (they break rendering)
+        $html = preg_replace('/<div[^>]*class="[^"]*thrive-shortcode-config[^"]*"[^>]*>.*?<\/div>/is', '', $html);
+
+        // Remove __CONFIG__ blocks
+        $html = preg_replace('/__CONFIG_[^_]+__.*?__CONFIG_[^_]+__/s', '', $html);
+
+        // Remove CTA content boxes
         $pattern = '/<div[^>]*class="[^"]*thrv_contentbox_shortcode[^"]*"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>\s*<\/div>/i';
 
-        return preg_replace_callback($pattern, function($matches) {
+        $html = preg_replace_callback($pattern, function($matches) {
             $block = $matches[0];
             $ctaPatterns = [
                 'Académie', 'academie', 'Rejoignez', 'En savoir plus',
@@ -78,6 +85,8 @@ class Jurible_Migration_Converter {
             }
             return $block;
         }, $html);
+
+        return $html;
     }
 
     private function normalizeHtml(string $html): string {
