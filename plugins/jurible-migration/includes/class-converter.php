@@ -157,8 +157,10 @@ class Jurible_Migration_Converter {
     }
 
     private function convertYouTubeVideos(string $html): string {
-        $pattern = '/<div[^>]*class="[^"]*thrv_responsive_video[^"]*"[^>]*data-url="([^"]+)"[^>]*>[\s\S]*?<\/iframe>[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/is';
+        // Pattern simplifié - capture juste le data-url du conteneur vidéo
+        $pattern = '/<div[^>]*class="[^"]*thrv_responsive_video[^"]*"[^>]*data-url="([^"]+)"[^>]*>/is';
 
+        // D'abord extraire les URLs et les remplacer par des placeholders
         $html = preg_replace_callback($pattern, function($matches) {
             $videoId = $this->extractYouTubeId($matches[1]);
             if ($videoId) {
@@ -167,8 +169,11 @@ class Jurible_Migration_Converter {
             return '';
         }, $html);
 
-        // Clean remaining video containers
+        // Nettoyer les conteneurs vidéo restants (iframes, overlays, etc.)
         $html = preg_replace('/<div[^>]*class="[^"]*tve_responsive_video_container[^"]*"[^>]*>[\s\S]*?<\/div>\s*<\/div>/is', '', $html);
+        $html = preg_replace('/<div[^>]*class="[^"]*tcb-video-float-container[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
+        $html = preg_replace('/<div[^>]*class="[^"]*video_overlay[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
+        $html = preg_replace('/<iframe[^>]*tcb-responsive-video[^>]*>[\s\S]*?<\/iframe>/is', '', $html);
 
         return $html;
     }
