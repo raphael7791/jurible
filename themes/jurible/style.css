@@ -27,6 +27,22 @@ html {
     }
 }
 
+/* Embed YouTube - taille réduite, centré, arrondi */
+.wp-block-embed-youtube {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wp-block-embed-youtube .wp-block-embed__wrapper {
+    border-radius: var(--wp--custom--border-radius--lg);
+    overflow: hidden;
+}
+
+.wp-block-embed-youtube iframe {
+    border-radius: var(--wp--custom--border-radius--lg);
+}
+
 /* ==========================================================================
    JURIBLE DESIGN SYSTEM - Components
    ========================================================================== */

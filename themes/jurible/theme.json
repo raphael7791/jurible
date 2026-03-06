@@ -615,6 +615,14 @@
           }
         }
       },
+      "core/embed": {
+        "spacing": {
+          "margin": {
+            "left": "auto",
+            "right": "auto"
+          }
+        }
+      },
       "core/group": {
         "spacing": {
           "margin": {
