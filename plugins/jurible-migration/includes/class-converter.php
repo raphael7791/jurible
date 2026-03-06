@@ -406,8 +406,8 @@ class Jurible_Migration_Converter {
         $caption = $alt;
         if (!empty($caption)) {
             return sprintf(
-                '<!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="%s" alt="%s"/><figcaption class="wp-element-caption">%s</figcaption></figure>
+                '<!-- wp:image {"align":"center","sizeSlug":"large"} -->
+<figure class="wp-block-image aligncenter size-large"><img src="%s" alt="%s"/><figcaption class="wp-element-caption">%s</figcaption></figure>
 <!-- /wp:image -->
 
 ',
@@ -417,8 +417,8 @@ class Jurible_Migration_Converter {
             );
         }
         return sprintf(
-            '<!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="%s" alt="%s"/></figure>
+            '<!-- wp:image {"align":"center","sizeSlug":"large"} -->
+<figure class="wp-block-image aligncenter size-large"><img src="%s" alt="%s"/></figure>
 <!-- /wp:image -->
 
 ',
