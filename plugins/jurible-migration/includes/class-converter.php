@@ -410,6 +410,13 @@ class Jurible_Migration_Converter {
         $html = preg_replace('/<img[^>]*emoji[^>]*>/i', '', $html);
         $html = preg_replace('/<img[^>]*s\.w\.org[^>]*>/i', '', $html);
 
+        // Remove floating Thrive content box titles (text on its own line before blocks)
+        // These appear as: newline + spaces + Title text + spaces + <!-- wp:
+        $html = preg_replace('/\n\s{2,}[A-ZÀ-Ü][^<\n]{0,60}(?=\s*<!-- wp:)/u', "\n", $html);
+
+        // Remove &nbsp; titles before blocks
+        $html = preg_replace('/\n\s*&nbsp;[^<\n]{0,100}(?=\s*<!-- wp:)/u', "\n", $html);
+
         // Remove all SVG elements (Thrive icons)
         $html = preg_replace('/<svg[^>]*>[\s\S]*?<\/svg>/i', '', $html);
 
