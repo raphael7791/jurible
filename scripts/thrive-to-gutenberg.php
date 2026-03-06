@@ -11,10 +11,117 @@
  *   php thrive-to-gutenberg.php --test <post_id>
  */
 
+// Include media import functions
+require_once __DIR__ . '/import-media.php';
+
 class ThriveToGutenbergConverter
 {
     private $content;
     private $blocks = [];
+    private $imagesToImport = [];
+    private $localSitePath;
+    private $localSiteUrl;
+    private $featuredImageId = null;
+
+    public function __construct(string $localSitePath = null, string $localSiteUrl = null)
+    {
+        $this->localSitePath = $localSitePath ?? getenv('HOME') . '/Local Sites/jurible-local/app/public';
+        $this->localSiteUrl = $localSiteUrl ?? 'http://jurible-local.local';
+    }
+
+    /**
+     * Get list of images that were imported
+     */
+    public function getImagesToImport(): array
+    {
+        return $this->imagesToImport;
+    }
+
+    /**
+     * Get the featured image attachment ID (if set)
+     */
+    public function getFeaturedImageId(): ?int
+    {
+        return $this->featuredImageId;
+    }
+
+    /**
+     * Set featured image from source post
+     */
+    public function setFeaturedImageFromSource(int $sourcePostId): ?int
+    {
+        // Get featured image URL from source via SSH
+        $cmd = sprintf(
+            'ssh aideauxtd@dogfish.o2switch.net "cd /home/aideauxtd/public_html && wp post meta get %d _thumbnail_id --allow-root 2>/dev/null"',
+            $sourcePostId
+        );
+        $thumbnailId = trim(shell_exec($cmd));
+
+        if (empty($thumbnailId) || !is_numeric($thumbnailId)) {
+            return null;
+        }
+
+        // Get the image URL
+        $cmd = sprintf(
+            'ssh aideauxtd@dogfish.o2switch.net "cd /home/aideauxtd/public_html && wp post get %s --field=guid --allow-root 2>/dev/null"',
+            $thumbnailId
+        );
+        $imageUrl = trim(shell_exec($cmd));
+
+        if (empty($imageUrl)) {
+            return null;
+        }
+
+        // Download and import the featured image
+        $localPath = $this->downloadImageViaScp($imageUrl);
+        if ($localPath) {
+            $attachmentId = import_image_to_media_library($localPath);
+            $this->featuredImageId = $attachmentId;
+            return $attachmentId;
+        }
+
+        return null;
+    }
+
+    /**
+     * Download image via SCP and return local path
+     */
+    private function downloadImageViaScp(string $url): ?string
+    {
+        if (strpos($url, 'aideauxtd.com') === false) {
+            return null;
+        }
+
+        $urlPath = parse_url($url, PHP_URL_PATH);
+        $filename = basename($urlPath);
+
+        if (preg_match('#/uploads/(\d{4}/\d{2})/#', $urlPath, $match)) {
+            $yearMonth = $match[1];
+        } else {
+            $yearMonth = date('Y/m');
+        }
+
+        $uploadsDir = $this->localSitePath . '/wp-content/uploads/' . $yearMonth;
+        if (!is_dir($uploadsDir)) {
+            mkdir($uploadsDir, 0755, true);
+        }
+
+        $localPath = $uploadsDir . '/' . $filename;
+
+        if (file_exists($localPath)) {
+            return $localPath;
+        }
+
+        $remotePath = '/home/aideauxtd/public_html' . $urlPath;
+        $scpCommand = sprintf(
+            'scp -q aideauxtd@dogfish.o2switch.net:%s %s 2>/dev/null',
+            escapeshellarg($remotePath),
+            escapeshellarg($localPath)
+        );
+
+        exec($scpCommand, $output, $returnCode);
+        return ($returnCode === 0 && file_exists($localPath)) ? $localPath : null;
+    }
 
     /**
      * Convert Thrive HTML to Gutenberg blocks
@@ -24,6 +131,9 @@ class ThriveToGutenbergConverter
         $this->content = $html;
         $this->blocks = [];
 
+        // Remove CTA blocks first (before any other processing)
+        $this->content = $this->removeCTABlocks($this->content);
+
         // Pre-process: normalize HTML
         $this->content = $this->normalizeHtml($this->content);
 
@@ -32,12 +142,21 @@ class ThriveToGutenbergConverter
         $this->content = $this->convertAparteBlocks($this->content);
         $this->content = $this->convertCodePenalBlocks($this->content);
 
+        // Convert media BEFORE stripping containers (URLs are in Thrive attributes)
+        $this->content = $this->convertYouTubeVideos($this->content);
+        $this->content = $this->convertImages($this->content);
+
+        // Strip Thrive containers
+        $this->content = $this->stripThriveContainers($this->content);
+
         // Convert standard elements
         $this->content = $this->convertHeadings($this->content);
-        $this->content = $this->convertImages($this->content);
         $this->content = $this->convertTables($this->content);
         $this->content = $this->convertLists($this->content);
         $this->content = $this->convertParagraphs($this->content);
+
+        // Restore infoboxes after paragraph conversion
+        $this->content = $this->restoreInfoboxes($this->content);
 
         // Clean up
         $this->content = $this->cleanupOutput($this->content);
@@ -70,33 +189,123 @@ class ThriveToGutenbergConverter
     }
 
     /**
+     * Remove CTA promotional blocks
+     * These are content boxes with promotional text for the Académie/courses
+     */
+    private function removeCTABlocks(string $html): string
+    {
+        // Pattern to match thrv_contentbox_shortcode blocks containing CTA patterns
+        // We match the entire content box and check if it contains promotional content
+        $pattern = '/<div[^>]*class="[^"]*thrv_contentbox_shortcode[^"]*"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>\s*<\/div>/i';
+
+        $html = preg_replace_callback($pattern, function($matches) {
+            $block = $matches[0];
+            // Check if this content box contains CTA patterns
+            $ctaPatterns = [
+                'Académie',
+                'academie',
+                'Rejoignez',
+                'En savoir plus',
+                'cours complet',
+                'Besoin d\'un cours',
+                'Academie-droit-CTA',
+                'fiches de révision',
+                'flashcards',
+                'annales corrigées',
+                'réussir vos partiels',
+            ];
+
+            foreach ($ctaPatterns as $ctaPattern) {
+                if (stripos($block, $ctaPattern) !== false) {
+                    // This is a CTA block, remove it
+                    return '';
+                }
+            }
+
+            // Not a CTA, keep it
+            return $block;
+        }, $html);
+
+        return $html;
+    }
+
+    /**
      * Convert Bloc Exemple (📌)
-     * Pattern: <img alt="📌"...> Exemple<p style="font-size: var(--tve-font-size...">content</p>
+     * Thrive structure: <img alt="📌"> Exemple</div>...</div><div class="thrv_text_element"><p>content</p></div>
      */
     private function convertExempleBlocks(string $html): string
     {
-        // Pattern for emoji image followed by "Exemple" and content paragraph
-        $pattern = '/<img[^>]*alt="📌"[^>]*>\s*Exemple\s*<p[^>]*>(.+?)<\/p>/is';
+        // Pattern: emoji image + "Exemple" + closing divs + text element div with paragraphs
+        $pattern = '/<img[^>]*alt="📌"[^>]*>\s*Exemple\s*(?:<\/div>)*\s*(?:<\/div>)*\s*<div[^>]*class="[^"]*thrv_text_element[^"]*"[^>]*>((?:\s*<p[^>]*>.+?<\/p>)+)\s*<\/div>/is';
 
         return preg_replace_callback($pattern, function($matches) {
-            $content = $this->cleanInlineHtml($matches[1]);
-            return $this->createInfobox('exemple', 'Exemple', $content);
+            $content = $this->extractParagraphsContent($matches[1]);
+            // Marquer le bloc pour éviter la conversion en paragraphe
+            return "###INFOBOX_EXEMPLE###" . base64_encode($content) . "###/INFOBOX###";
         }, $html);
     }
 
     /**
+     * Restore placeholders after strip/conversion
+     */
+    private function restoreInfoboxes(string $html): string
+    {
+        // Restore Exemple blocks
+        $html = preg_replace_callback('/###INFOBOX_EXEMPLE###([^#]+)###\/INFOBOX###/', function($matches) {
+            $content = base64_decode($matches[1]);
+            return $this->createInfobox('exemple', 'Exemple', $content);
+        }, $html);
+
+        // Restore Retenir blocks (Aparté → "À retenir")
+        $html = preg_replace_callback('/###INFOBOX_RETENIR###([^#]+)###TITLE###([^#]+)###\/INFOBOX###/', function($matches) {
+            $content = base64_decode($matches[1]);
+            // Titre toujours "À retenir" (défaut du bloc)
+            return $this->createInfobox('retenir', 'À retenir', $content);
+        }, $html);
+
+        // Restore YouTube embeds
+        $html = preg_replace_callback('/###YOUTUBE###([a-zA-Z0-9_-]+)###\/YOUTUBE###/', function($matches) {
+            $videoId = $matches[1];
+            $youtubeUrl = 'https://www.youtube.com/watch?v=' . $videoId;
+            return sprintf(
+                '<!-- wp:embed {"url":"%s","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+%s
+</div></figure>
+<!-- /wp:embed -->
+
+',
+                $youtubeUrl,
+                $youtubeUrl
+            );
+        }, $html);
+
+        // Restore Images
+        $html = preg_replace_callback('/###IMAGE###([^#]+)###ALT###([^#]*)###\/IMAGE###/', function($matches) {
+            $src = base64_decode($matches[1]);
+            $alt = base64_decode($matches[2]);
+            return $this->createImage($src, $alt);
+        }, $html);
+
+        return $html;
+    }
+
+    /**
      * Convert Bloc Aparté (💬)
-     * Pattern: 💬 <span...>Title</span><p style="font-size...">content</p>
+     * Thrive structures:
+     *   - 💬 <span></span><span>Title</span></div>...</div><div class="thrv_wrapper thrv_text_element"><p>content</p></div>
+     *   - 💬 <span>Title</span></div>...</div><div class="thrv_wrapper thrv_text_element"><p>content</p></div>
      */
     private function convertAparteBlocks(string $html): string
     {
-        // Pattern for 💬 emoji followed by title span and content paragraphs
-        $pattern = '/💬\s*<span[^>]*>[^<]*<\/span>\s*<span[^>]*>([^<]+)<\/span>((?:\s*<p[^>]*>.+?<\/p>)+)/is';
+        // Pattern: 💬 emoji + optional empty spans + span with title + multiple closing divs + thrv_wrapper text element
+        $pattern = '/💬\s*(?:<span[^>]*><\/span>\s*)*<span[^>]*>([^<]+)<\/span>(?:\s*<\/div>)+\s*<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:\s*<p[^>]*>.+?<\/p>)+)\s*<\/div>/is';
 
         return preg_replace_callback($pattern, function($matches) {
             $title = trim($matches[1]);
             $content = $this->extractParagraphsContent($matches[2]);
-            return $this->createInfobox('astuce', $title, $content);
+            // Marquer le bloc pour éviter la conversion en paragraphe
+            return "###INFOBOX_RETENIR###" . base64_encode($content) . "###TITLE###" . base64_encode($title) . "###/INFOBOX###";
         }, $html);
     }
 
@@ -158,25 +367,162 @@ class ThriveToGutenbergConverter
      */
     private function convertImages(string $html): string
     {
-        // Images wrapped in span
-        $pattern = '/<span>\s*<img[^>]*src="([^"]+)"[^>]*alt="([^"]*)"[^>]*>\s*<\/span>/is';
+        // Images wrapped in Thrive span (tve_image_frame or plain span)
+        $html = preg_replace_callback(
+            '/<span[^>]*(?:class="[^"]*tve_image[^"]*")?[^>]*>\s*<img([^>]*)>\s*<\/span>/is',
+            function($matches) {
+                return $this->extractAndCreateImage($matches[1]);
+            },
+            $html
+        );
+
+        // Standalone images from aideauxtd.com (not already converted, not emojis)
+        $html = preg_replace_callback(
+            '/<img([^>]*aideauxtd\.com[^>]*)>/is',
+            function($matches) {
+                // Skip emoji images
+                if (strpos($matches[1], 'emoji') !== false) {
+                    return $matches[0];
+                }
+                return $this->extractAndCreateImage($matches[1]);
+            },
+            $html
+        );
+
+        return $html;
+    }
+
+    /**
+     * Extract src and alt from img attributes and create image block
+     */
+    private function extractAndCreateImage(string $attributes): string
+    {
+        // Extract src
+        if (!preg_match('/src="([^"]+)"/i', $attributes, $srcMatch)) {
+            return ''; // No src, skip
+        }
+        $src = $srcMatch[1];
+
+        // Skip emoji images
+        if (strpos($src, 'emoji') !== false || strpos($src, 's.w.org') !== false) {
+            return '';
+        }
+
+        // Generate alt/caption from filename (remove Aideauxtd and after)
+        $filename = pathinfo(parse_url($src, PHP_URL_PATH), PATHINFO_FILENAME);
+        $alt = str_replace(['-', '_'], ' ', $filename);
+        $alt = preg_replace('/\s*Aideauxtd.*$/i', '', $alt);
+        $alt = ucfirst(trim($alt));
+
+        // Download and import image
+        $localSrc = $this->downloadAndImportImage($src);
+        if (!$localSrc) {
+            // Fallback to just changing domain if download fails
+            $localSrc = str_replace('aideauxtd.com', 'jurible.com', $src);
+        }
+
+        // Use placeholder to protect from strip (alt is also used as caption)
+        return "###IMAGE###" . base64_encode($localSrc) . "###ALT###" . base64_encode($alt) . "###/IMAGE###";
+    }
+
+    /**
+     * Download image from source via SCP and save to local uploads
+     */
+    private function downloadAndImportImage(string $url): ?string
+    {
+        // Only process aideauxtd.com images
+        if (strpos($url, 'aideauxtd.com') === false) {
+            return null;
+        }
+
+        // Extract path from URL
+        $urlPath = parse_url($url, PHP_URL_PATH);
+        $filename = basename($urlPath);
+        if (empty($filename)) {
+            return null;
+        }
+
+        // Keep original year/month structure from source
+        if (preg_match('#/uploads/(\d{4}/\d{2})/#', $urlPath, $match)) {
+            $yearMonth = $match[1];
+        } else {
+            $yearMonth = date('Y/m');
+        }
+
+        $uploadsDir = $this->localSitePath . '/wp-content/uploads/' . $yearMonth;
+        if (!is_dir($uploadsDir)) {
+            mkdir($uploadsDir, 0755, true);
+        }
+
+        $localPath = $uploadsDir . '/' . $filename;
+        $localUrl = $this->localSiteUrl . '/wp-content/uploads/' . $yearMonth . '/' . $filename;
+
+        // Skip download if already exists, but still ensure it's in media library
+        if (file_exists($localPath)) {
+            $attachmentId = import_image_to_media_library($localPath);
+            $this->imagesToImport[] = ['source' => $url, 'local' => $localUrl, 'path' => $localPath, 'attachment_id' => $attachmentId];
+            return $localUrl;
+        }
+
+        // Download via SCP from O2switch server
+        $remotePath = '/home/aideauxtd/public_html' . $urlPath;
+        $scpCommand = sprintf(
+            'scp -q aideauxtd@dogfish.o2switch.net:%s %s 2>/dev/null',
+            escapeshellarg($remotePath),
+            escapeshellarg($localPath)
+        );
+
+        exec($scpCommand, $output, $returnCode);
+        if ($returnCode !== 0 || !file_exists($localPath)) {
+            error_log("Failed to download image via SCP: $url");
+            return null;
+        }
+
+        // Import into WordPress media library
+        $attachmentId = import_image_to_media_library($localPath);
+        $this->imagesToImport[] = ['source' => $url, 'local' => $localUrl, 'path' => $localPath, 'attachment_id' => $attachmentId];
+        return $localUrl;
+    }
+
+    /**
+     * Convert YouTube videos (Thrive responsive video blocks)
+     */
+    private function convertYouTubeVideos(string $html): string
+    {
+        // Pattern for complete Thrive responsive video block with data-url
+        // Captures the entire block including all nested content
+        $pattern = '/<div[^>]*class="[^"]*thrv_responsive_video[^"]*"[^>]*data-url="([^"]+)"[^>]*>[\s\S]*?<\/iframe>[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/is';
 
         $html = preg_replace_callback($pattern, function($matches) {
-            $src = $matches[1];
-            $alt = $matches[2];
-            // Convert aideauxtd.com URLs to jurible.com
-            $src = str_replace('aideauxtd.com', 'jurible.com', $src);
-            return $this->createImage($src, $alt);
+            $url = $matches[1];
+            return $this->createYouTubeEmbed($url);
         }, $html);
 
-        // Standalone images (not emojis)
-        $pattern = '/<img[^>]*src="(https:\/\/aideauxtd\.com[^"]+)"[^>]*alt="([^"]*)"[^>]*>/is';
+        // Clean up any remaining video containers
+        $html = preg_replace('/<div[^>]*class="[^"]*tve_responsive_video_container[^"]*"[^>]*>[\s\S]*?<\/div>\s*<\/div>/is', '', $html);
+        $html = preg_replace('/<div[^>]*class="[^"]*video_overlay[^"]*"[^>]*>.*?<\/div>/is', '', $html);
 
-        return preg_replace_callback($pattern, function($matches) {
-            $src = str_replace('aideauxtd.com', 'jurible.com', $matches[1]);
-            $alt = $matches[2];
-            return $this->createImage($src, $alt);
-        }, $html);
+        return $html;
+    }
+
+    private function createYouTubeEmbed(string $url): string
+    {
+        // Normalize URL to standard YouTube format
+        $videoId = '';
+        if (preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $url, $match)) {
+            $videoId = $match[1];
+        } elseif (preg_match('/youtube\.com.*[?&]v=([a-zA-Z0-9_-]+)/', $url, $match)) {
+            $videoId = $match[1];
+        } elseif (preg_match('/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/', $url, $match)) {
+            $videoId = $match[1];
+        }
+
+        if (empty($videoId)) {
+            return '';
+        }
+
+        // Use placeholder to protect from strip
+        return "###YOUTUBE###" . $videoId . "###/YOUTUBE###";
     }
 
     /**
@@ -188,9 +534,29 @@ class ThriveToGutenbergConverter
 
         return preg_replace_callback($pattern, function($matches) {
             $tableContent = $matches[1];
-            // Clean up table content
-            $tableContent = preg_replace('/\s*style="[^"]*"\s*/i', '', $tableContent);
-            $tableContent = preg_replace('/\s*data-[a-z-]+="[^"]*"\s*/i', '', $tableContent);
+
+            // Remove all attributes from tags
+            $tableContent = preg_replace('/<(thead|tbody|tr|th|td|tfoot)([^>]*)>/i', '<$1>', $tableContent);
+
+            // Clean inline content in cells
+            $tableContent = preg_replace_callback('/<(td|th)>(.*?)<\/\1>/is', function($cell) {
+                $content = $this->cleanInlineHtml($cell[2]);
+                return '<' . $cell[1] . '>' . $content . '</' . $cell[1] . '>';
+            }, $tableContent);
+
+            // Ensure tbody exists - wrap rows if no tbody
+            if (stripos($tableContent, '<tbody') === false) {
+                // Extract thead if present
+                $thead = '';
+                if (preg_match('/<thead[^>]*>.*?<\/thead>/is', $tableContent, $theadMatch)) {
+                    $thead = $theadMatch[0];
+                    $tableContent = str_replace($thead, '', $tableContent);
+                }
+
+                // Wrap remaining content in tbody
+                $tableContent = $thead . '<tbody>' . trim($tableContent) . '</tbody>';
+            }
+
             return $this->createTable($tableContent);
         }, $html);
     }
@@ -259,25 +625,22 @@ class ThriveToGutenbergConverter
         ];
         $icon = $icons[$type] ?? '💡';
 
+        // Nettoyer le contenu (pas de HTML sauf inline)
+        $cleanContent = strip_tags($content, '<strong><em><a><mark><br>');
+
         return sprintf(
             '<!-- wp:jurible/infobox {"type":"%s","title":"%s","content":"%s"} -->
-<div class="wp-block-jurible-infobox jurible-infobox jurible-infobox-%s">
-<div class="jurible-infobox-header">
-<span class="jurible-infobox-icon">%s</span>
-<span class="jurible-infobox-title">%s</span>
-</div>
-<p class="jurible-infobox-content">%s</p>
-</div>
+<div class="wp-block-jurible-infobox jurible-infobox jurible-infobox-%s"><div class="jurible-infobox-header"><span class="jurible-infobox-icon">%s</span><span class="jurible-infobox-title">%s</span></div><p class="jurible-infobox-content">%s</p></div>
 <!-- /wp:jurible/infobox -->
 
 ',
             $type,
             $this->escapeAttribute($title),
-            $this->escapeAttribute($content),
+            $this->escapeAttribute($cleanContent),
             $type,
             $icon,
             htmlspecialchars($title),
-            $content
+            $cleanContent
         );
     }
 
@@ -328,6 +691,19 @@ class ThriveToGutenbergConverter
 
     private function createImage(string $src, string $alt): string
     {
+        $caption = $alt; // Use alt as caption
+        if (!empty($caption)) {
+            return sprintf(
+                '<!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="%s" alt="%s"/><figcaption class="wp-element-caption">%s</figcaption></figure>
+<!-- /wp:image -->
+
+',
+                htmlspecialchars($src),
+                htmlspecialchars($alt),
+                htmlspecialchars($caption)
+            );
+        }
         return sprintf(
             '<!-- wp:image {"sizeSlug":"large"} -->
 <figure class="wp-block-image size-large"><img src="%s" alt="%s"/></figure>
@@ -356,7 +732,9 @@ class ThriveToGutenbergConverter
         $tag = $ordered ? 'ol' : 'ul';
         $listItems = '';
         foreach ($items as $item) {
-            $listItems .= sprintf('<li>%s</li>', $item);
+            $listItems .= sprintf('<!-- wp:list-item -->
+<li>%s</li>
+<!-- /wp:list-item -->', $item);
         }
 
         return sprintf(
@@ -408,16 +786,42 @@ class ThriveToGutenbergConverter
         return str_replace(['"', "\n", "\r"], ['\"', ' ', ''], $value);
     }
 
+    /**
+     * Strip Thrive container divs while preserving content
+     */
+    private function stripThriveContainers(string $html): string
+    {
+        // Remove Thrive container opening tags
+        $html = preg_replace('/<div[^>]*class="[^"]*(?:thrv_|tcb-|tve-|kbu)[^"]*"[^>]*>/i', '', $html);
+
+        // Remove closing div tags (they're now orphaned)
+        $html = preg_replace('/<\/div>/i', '', $html);
+
+        // Remove Thrive spans with only styling (preserve content)
+        $html = preg_replace('/<span[^>]*(?:data-css|tcb-)[^>]*>([^<]*)<\/span>/i', '$1', $html);
+
+        // Remove style tags
+        $html = preg_replace('/<style[^>]*>.*?<\/style>/is', '', $html);
+
+        return $html;
+    }
+
     private function cleanupOutput(string $html): string
     {
         // Remove any remaining Thrive artifacts
         $html = preg_replace('/<img[^>]*emoji[^>]*>/i', '', $html);
+        $html = preg_replace('/<img[^>]*s\.w\.org[^>]*>/i', '', $html);
 
-        // Remove empty lines
+        // Remove empty lines and excessive whitespace
         $html = preg_replace('/\n{3,}/', "\n\n", $html);
+        $html = preg_replace('/^\s+$/m', '', $html);
 
         // Remove any leftover emoji characters not in blocks
         $html = preg_replace('/^[📌💬🔎]\s*/m', '', $html);
+
+        // Remove leftover "Exemple" and "Aparté" text
+        $html = preg_replace('/^\s*Exemple\s*$/m', '', $html);
+        $html = preg_replace('/^\s*Aparté\s*$/m', '', $html);
 
         return trim($html);
     }
@@ -427,7 +831,8 @@ class ThriveToGutenbergConverter
 // CLI Interface
 // =============================================================================
 
-if (php_sapi_name() === 'cli') {
+// CLI usage - only when run directly (not when included)
+if (php_sapi_name() === 'cli' && realpath($argv[0]) === realpath(__FILE__)) {
     $converter = new ThriveToGutenbergConverter();
 
     // Test mode with sample content
