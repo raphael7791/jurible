@@ -60,10 +60,11 @@ class Jurible_Migration_Converter {
     }
 
     private function removeCTABlocks(string $html): string {
-        // Remove Thrive shortcode config blocks (they break rendering)
-        $html = preg_replace('/<div[^>]*class="[^"]*thrive-shortcode-config[^"]*"[^>]*>.*?<\/div>/is', '', $html);
+        // Remove ALL Thrive config blocks (they break rendering)
+        // These blocks often have unclosed tags
+        $html = preg_replace('/<div[^>]*class="[^"]*thrive-[^"]*config[^"]*"[^>]*>.*?(?:<\/div>|(?=<!-- wp:))/is', '', $html);
 
-        // Remove __CONFIG__ blocks
+        // Remove __CONFIG__ blocks (can span multiple lines and contain HTML)
         $html = preg_replace('/__CONFIG_[^_]+__.*?__CONFIG_[^_]+__/s', '', $html);
 
         // Remove CTA content boxes
