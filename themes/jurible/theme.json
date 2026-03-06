@@ -603,9 +603,15 @@
       },
       "core/list": {
         "spacing": {
-          "blockGap": "var(--wp--preset--spacing--md)",
           "margin": {
             "top": "var(--wp--preset--spacing--sm)"
+          }
+        }
+      },
+      "core/list-item": {
+        "spacing": {
+          "margin": {
+            "top": "var(--wp--preset--spacing--md)"
           }
         }
       },
