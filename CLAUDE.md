@@ -6,6 +6,31 @@
 - **jurible.com** : site public (cours, méthodologie, blog)
 - **ecole.jurible.com** : espace membre payant (Fluent Community)
 
+## Projet de refonte (Migration aideauxtd → jurible)
+
+**Contexte :** Le site principal actuel est **aideauxtd.com** (Thrive Architect + Yoast SEO). La refonte se fait sur **jurible.com** (WordPress FSE + Gutenberg + Rank Math).
+
+**Flux de migration :**
+1. **Phase actuelle** : Migration articles aideauxtd.com → jurible.com (refonte/développement)
+2. **Phase finale** : Copie complète jurible.com → aideauxtd.com (mise en production)
+
+**Plugin de migration** : `plugins/jurible-migration/`
+- Convertit Thrive Architect → blocs Gutenberg (jurible/infobox, etc.)
+- Migre les données SEO Yoast → Rank Math (titre, description, image OG)
+- **Conserve les dates de publication originales** (important pour SEO)
+- Copie les images vers la médiathèque
+
+**Impact SEO = AUCUN si :**
+- Mêmes URLs/slugs conservés
+- Mêmes dates de publication (✅ gérées par le plugin)
+- Même domaine final (aideauxtd.com)
+- Contenu identique (juste reformaté)
+
+**Déploiement plugin migration :**
+```bash
+ssh aideauxtd@dogfish.o2switch.net "cd ~/jurible-repo && git pull && rm -rf ~/jurible.com/wp-content/plugins/jurible-migration && cp -r plugins/jurible-migration ~/jurible.com/wp-content/plugins/"
+```
+
 ## Architecture
 
 - **Repo local** : `~/Code/jurible/` (source de vérité)
