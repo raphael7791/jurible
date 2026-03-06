@@ -307,6 +307,10 @@ class Jurible_Migration_Migrator {
         foreach ($metaMapping as $yoastKey => $rankMathKey) {
             $value = $this->getSourceMeta($sourcePostId, $yoastKey);
             if (!empty($value)) {
+                // Ignorer les templates Yoast (contiennent %% placeholders)
+                if (strpos($value, '%%') !== false) {
+                    continue;
+                }
                 // Remplacer aideauxtd.com par jurible.com dans les valeurs
                 $value = str_replace('aideauxtd.com', 'jurible.com', $value);
                 $this->setDestMeta($newPostId, $rankMathKey, $value);
