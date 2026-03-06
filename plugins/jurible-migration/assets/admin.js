@@ -13,6 +13,7 @@
         $('#refresh-list').on('click', loadPosts);
         $('#filter-pending').on('change', renderTable);
         $(document).on('click', '.btn-migrate', handleMigrate);
+        $(document).on('click', '.btn-undo', handleUndo);
     }
 
     function loadPosts() {
@@ -75,7 +76,8 @@
 
             let actionHtml;
             if (isMigrated) {
-                actionHtml = '<a href="' + migratedStatus[post.ID].edit_url + '" target="_blank" class="btn-view">Voir l\'article</a>';
+                actionHtml = '<a href="' + migratedStatus[post.ID].edit_url + '" target="_blank" class="btn-view">Voir</a> ';
+                actionHtml += '<button type="button" class="button btn-undo" data-id="' + post.ID + '">Annuler</button>';
             } else {
                 actionHtml = '<button type="button" class="button btn-migrate" data-id="' + post.ID + '">Migrer</button>';
             }
@@ -139,6 +141,47 @@
                 $btn.prop('disabled', false).text('Migrer');
                 $row.find('td:eq(3)').html('<span class="status-error">❌ Erreur</span>');
                 addLog('❌ Erreur de connexion pour l\'article #' + postId, 'error');
+            }
+        });
+    }
+
+    function handleUndo() {
+        const $btn = $(this);
+        const postId = $btn.data('id');
+        const $row = $btn.closest('tr');
+
+        if (!confirm('Supprimer cet article migré et ses images ? Cette action est irréversible.')) {
+            return;
+        }
+
+        $btn.prop('disabled', true).text('Suppression...');
+
+        $.ajax({
+            url: juribleMigration.ajaxUrl,
+            method: 'POST',
+            data: {
+                action: 'jurible_undo_migration',
+                nonce: juribleMigration.nonce,
+                post_id: postId
+            },
+            success: function(response) {
+                if (response.success) {
+                    delete migratedStatus[postId];
+                    updateStats();
+
+                    // Update row
+                    $row.find('td:eq(3)').html('<span class="status-pending">⏳ En attente</span>');
+                    $row.find('td:eq(4)').html('<button type="button" class="button btn-migrate" data-id="' + postId + '">Migrer</button>');
+
+                    addLog('🗑️ Migration annulée pour l\'article #' + postId, 'info');
+                } else {
+                    $btn.prop('disabled', false).text('Annuler');
+                    addLog('❌ Erreur: ' + response.data, 'error');
+                }
+            },
+            error: function() {
+                $btn.prop('disabled', false).text('Annuler');
+                addLog('❌ Erreur de connexion', 'error');
             }
         });
     }

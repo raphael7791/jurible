@@ -44,6 +44,7 @@ class Jurible_Migration {
         add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_assets']);
         add_action('wp_ajax_jurible_migrate_post', [$this, 'ajax_migrate_post']);
         add_action('wp_ajax_jurible_get_source_posts', [$this, 'ajax_get_source_posts']);
+        add_action('wp_ajax_jurible_undo_migration', [$this, 'ajax_undo_migration']);
     }
 
     public function add_admin_menu() {
@@ -150,6 +151,53 @@ class Jurible_Migration {
         set_transient($cache_key, $posts, HOUR_IN_SECONDS);
 
         return $posts;
+    }
+
+    public function ajax_undo_migration() {
+        check_ajax_referer('jurible_migration_nonce', 'nonce');
+
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error('Permission refusée');
+        }
+
+        $source_post_id = intval($_POST['post_id'] ?? 0);
+        if (!$source_post_id) {
+            wp_send_json_error('ID article invalide');
+        }
+
+        $status = get_option('jurible_migration_status', []);
+        if (!isset($status[$source_post_id])) {
+            wp_send_json_error('Article non migré');
+        }
+
+        $migrated_post_id = $status[$source_post_id]['new_id'];
+
+        // Supprimer l'image à la une
+        $thumbnail_id = get_post_thumbnail_id($migrated_post_id);
+        if ($thumbnail_id) {
+            wp_delete_attachment($thumbnail_id, true);
+        }
+
+        // Supprimer les images dans le contenu (attachées au post)
+        $attachments = get_posts([
+            'post_type' => 'attachment',
+            'post_parent' => $migrated_post_id,
+            'numberposts' => -1,
+        ]);
+        foreach ($attachments as $attachment) {
+            wp_delete_attachment($attachment->ID, true);
+        }
+
+        // Supprimer le post
+        wp_delete_post($migrated_post_id, true);
+
+        // Retirer du statut
+        unset($status[$source_post_id]);
+        update_option('jurible_migration_status', $status);
+
+        wp_send_json_success([
+            'message' => 'Migration annulée',
+        ]);
     }
 
     private function mark_as_migrated($source_id, $new_id) {

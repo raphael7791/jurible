@@ -102,6 +102,17 @@
     text-decoration: underline;
 }
 
+.btn-undo {
+    color: #d63638;
+    border-color: #d63638;
+    margin-left: 5px;
+}
+
+.btn-undo:hover {
+    background: #d63638;
+    color: #fff;
+}
+
 .jurible-migration-log {
     margin-top: 30px;
     background: #fff;
