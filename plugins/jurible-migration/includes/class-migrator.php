@@ -42,6 +42,7 @@ class Jurible_Migration_Migrator {
             'content' => $gutenbergContent,
             'status' => 'draft',
             'date' => $sourcePost['post_date'],
+            'author' => get_current_user_id(),
         ]);
 
         if (is_wp_error($newPostId)) {
@@ -133,13 +134,16 @@ class Jurible_Migration_Migrator {
         $contentFile = tempnam(sys_get_temp_dir(), 'jurible_content_');
         file_put_contents($contentFile, $args['content']);
 
+        $authorId = $args['author'] ?? 1;
+
         $command = sprintf(
-            'cd %s && wp post create %s --post_title=%s --post_status=%s --post_date=%s --porcelain --allow-root 2>/dev/null',
+            'cd %s && wp post create %s --post_title=%s --post_status=%s --post_date=%s --post_author=%d --porcelain --allow-root 2>/dev/null',
             escapeshellarg(ABSPATH),
             escapeshellarg($contentFile),
             escapeshellarg($args['title']),
             escapeshellarg($args['status']),
-            escapeshellarg($args['date'])
+            escapeshellarg($args['date']),
+            $authorId
         );
 
         $postId = trim(shell_exec($command));

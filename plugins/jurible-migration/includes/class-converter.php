@@ -478,9 +478,7 @@ class Jurible_Migration_Converter {
     private function createQuote(string $content): string {
         return sprintf(
             '<!-- wp:quote -->
-<blockquote class="wp-block-quote"><!-- wp:paragraph -->
-<p>%s</p>
-<!-- /wp:paragraph --></blockquote>
+<blockquote class="wp-block-quote"><p>%s</p></blockquote>
 <!-- /wp:quote -->
 
 ',
