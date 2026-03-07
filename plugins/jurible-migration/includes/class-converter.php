@@ -71,8 +71,8 @@ class Jurible_Migration_Converter {
         $html = preg_replace('/\[thrive_lead_lock[^\]]*\].*?\[\/thrive_lead_lock\]/is', '', $html);
         $html = preg_replace('/\[thrive_[^\]]+\](?:.*?\[\/thrive_[^\]]+\])?/is', '', $html);
 
-        // Remove Thrive symbol blocks (contain __CONFIG_post_symbol__)
-        $html = preg_replace('/<div[^>]*class="[^"]*thrv_symbol[^"]*"[^>]*>[\s\S]*?<\/div>\s*<\/div>/is', '', $html);
+        // Remove Thrive symbol blocks (empty divs after config removal)
+        $html = preg_replace('/<div[^>]*class="[^"]*thrv_symbol[^"]*"[^>]*>\s*<\/div>/is', '', $html);
 
         // Remove Thrive Leads shortcode blocks (email capture forms)
         $html = preg_replace('/<div[^>]*class="[^"]*thrive_leads_shortcode[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
