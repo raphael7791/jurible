@@ -27,15 +27,15 @@ class Jurible_Migration_Converter {
         $this->content = $html;
         $this->importedImages = [];
 
-        // Remove CTA blocks first
+        // Convert special blocks FIRST (before removing Thrive elements that could break patterns)
+        $this->content = $this->convertExempleBlocks($this->content);
+        $this->content = $this->convertAparteBlocks($this->content);
+
+        // Remove CTA and Thrive elements
         $this->content = $this->removeCTABlocks($this->content);
 
         // Normalize HTML
         $this->content = $this->normalizeHtml($this->content);
-
-        // Convert special blocks
-        $this->content = $this->convertExempleBlocks($this->content);
-        $this->content = $this->convertAparteBlocks($this->content);
 
         // Convert media
         $this->content = $this->convertYouTubeVideos($this->content);
