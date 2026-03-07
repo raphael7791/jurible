@@ -284,7 +284,7 @@ class Jurible_Migration_Converter {
     }
 
     private function stripThriveContainers(string $html): string {
-        $html = preg_replace('/<div[^>]*class="[^"]*(?:thrv_|tcb-|tve-|kbu)[^"]*"[^>]*>/i', '', $html);
+        $html = preg_replace('/<div[^>]*class="[^"]*(?:thrv_|tcb-|tve-|kbu|container)[^"]*"[^>]*>/i', '', $html);
         $html = preg_replace('/<\/div>/i', '', $html);
         $html = preg_replace('/<span[^>]*(?:data-css|tcb-)[^>]*>([^<]*)<\/span>/i', '$1', $html);
         $html = preg_replace('/<style[^>]*>.*?<\/style>/is', '', $html);
