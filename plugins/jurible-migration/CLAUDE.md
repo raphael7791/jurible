@@ -43,13 +43,52 @@ Ce plugin fait partie d'une **refonte complète** :
 | Tables | `wp:table` |
 | Lists ul/ol | `wp:list` |
 
-## Éléments supprimés
+## Éléments Thrive supprimés (analyse complète)
 
-- Blocs CTA promotionnels (Académie, cours complet, etc.)
-- Boutons "Lire aussi", "Voir plus de", "Accéder au cours"
-- SVG icons Thrive
+**Blocs interactifs (non convertibles) :**
+- Toggle/FAQ/Accordéons (`tve_toggle`, `tve_faqI`, `thrv_toggle_item`)
+- Quiz Thrive (`thrive-quiz-builder-shortcode`)
+- Thrive Leads - formulaires email (`thrive_leads_shortcode`)
+- Thrive Symbols - blocs réutilisables (`thrv_symbol`)
+
+**Éléments promotionnels :**
+- Blocs CTA (Académie, cours complet, etc.)
+- Boutons "Lire aussi", "Voir plus de", "Accéder au cours" (`tcb-button-link`)
+
+**Éléments visuels Thrive :**
+- SVG icons (`<svg>`, `thrv_icon`, `tcb-icon`)
 - Blocs `__CONFIG__` Thrive
-- Quiz Thrive (non convertibles)
+- Timelines avec `position: absolute/relative`
+- Conteneurs Poppins (`font-family: Poppins`)
+- Flex containers (`tcb-flex-col`, `tcb-flex-row`)
+- Custom HTML wrappers (`thrv_custom_html_shortcode`)
+- Iframe covers (`tve_iframe_cover`)
+
+**Iframes externes :**
+- Spotify, Soundcloud (orphelins)
+- Leaflet maps
+
+**Data attributes nettoyés :**
+- `data-css`, `data-ct`, `data-ct-name`, `data-element-name`, `data-selector`
+
+**Divs vides supprimés :**
+- `thrv_wrapper` vides
+- `tcb-clear` vides
+- `tve_empty_dropzone`
+
+**Filet de sécurité :**
+- Équilibrage automatique des `<div>` non fermés
+
+## Règles critiques du converter
+
+**ORDRE D'EXÉCUTION** (class-converter.php) :
+1. `convertExempleBlocks()` et `convertAparteBlocks()` **EN PREMIER**
+2. `removeCTABlocks()` **APRÈS**
+3. Puis normalizeHtml, YouTube, images, etc.
+
+**Pourquoi cet ordre ?** Le pattern `thrv_symbol` dans removeCTABlocks supprime des parties du HTML qui cassent les patterns Aparté/Exemple. Si on convertit les blocs Aparté en placeholders (`###INFOBOX###`) d'abord, ils sont protégés de la suppression.
+
+**Ne JAMAIS modifier l'ordre** sans tester sur l'article Carbonnier (ID source 54322) qui contient 3 blocs Aparté.
 
 ## Mapping SEO Yoast → Rank Math
 
