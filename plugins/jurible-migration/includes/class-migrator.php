@@ -58,6 +58,9 @@ class Jurible_Migration_Migrator {
         // 8. Migrer les données SEO (Yoast → Rank Math)
         $this->migrateSeoData($sourcePostId, $newPostId);
 
+        // 9. Migrer les commentaires
+        $this->migrateComments($sourcePostId, $newPostId);
+
         return $newPostId;
     }
 
@@ -418,5 +421,45 @@ class Jurible_Migration_Migrator {
         );
 
         shell_exec($command);
+    }
+
+    /**
+     * Migrer les commentaires du post source vers le post destination
+     */
+    private function migrateComments(int $sourcePostId, int $newPostId): void {
+        // Récupérer les commentaires du post source
+        $command = sprintf(
+            'cd %s && wp comment list --post_id=%d --fields=comment_author,comment_author_email,comment_author_url,comment_date,comment_content,comment_approved --format=json --allow-root 2>/dev/null',
+            escapeshellarg(JURIBLE_AIDEAUXTD_PATH),
+            $sourcePostId
+        );
+
+        $output = shell_exec($command);
+        $comments = json_decode($output, true);
+
+        if (empty($comments)) {
+            return;
+        }
+
+        foreach ($comments as $comment) {
+            // Créer le commentaire sur le nouveau post
+            $contentFile = tempnam(sys_get_temp_dir(), 'jurible_comment_');
+            file_put_contents($contentFile, $comment['comment_content']);
+
+            $command = sprintf(
+                'cd %s && wp comment create --comment_post_ID=%d --comment_author=%s --comment_author_email=%s --comment_author_url=%s --comment_date=%s --comment_approved=%s %s --porcelain --allow-root 2>/dev/null',
+                escapeshellarg(ABSPATH),
+                $newPostId,
+                escapeshellarg($comment['comment_author']),
+                escapeshellarg($comment['comment_author_email']),
+                escapeshellarg($comment['comment_author_url'] ?? ''),
+                escapeshellarg($comment['comment_date']),
+                escapeshellarg($comment['comment_approved']),
+                escapeshellarg($contentFile)
+            );
+
+            shell_exec($command);
+            unlink($contentFile);
+        }
     }
 }
