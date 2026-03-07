@@ -13,7 +13,7 @@
 <!-- wp:group {"className":"hero-article__container","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 <div class="wp-block-group hero-article__container">
 
-<!-- wp:post-terms {"term":"category","textAlign":"center","className":"hero-article__badge"} /-->
+<!-- wp:post-terms {"term":"category","textAlign":"center","separator":" | ","className":"hero-article__badge"} /-->
 
 <!-- wp:post-title {"textAlign":"center","level":1,"className":"hero-article__title"} /-->
 
