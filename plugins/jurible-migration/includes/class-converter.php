@@ -62,11 +62,39 @@ class Jurible_Migration_Converter {
 
     private function removeCTABlocks(string $html): string {
         // Remove ALL Thrive config blocks (they break rendering)
-        // These blocks often have unclosed tags
         $html = preg_replace('/<div[^>]*class="[^"]*thrive-[^"]*config[^"]*"[^>]*>.*?(?:<\/div>|(?=<!-- wp:))/is', '', $html);
 
         // Remove __CONFIG__ blocks (can span multiple lines and contain HTML)
         $html = preg_replace('/__CONFIG_[^_]+__.*?__CONFIG_[^_]+__/s', '', $html);
+
+        // Remove Thrive shortcodes (lead_lock, leads, symbol, etc.)
+        $html = preg_replace('/\[thrive_lead_lock[^\]]*\].*?\[\/thrive_lead_lock\]/is', '', $html);
+        $html = preg_replace('/\[thrive_[^\]]+\](?:.*?\[\/thrive_[^\]]+\])?/is', '', $html);
+
+        // Remove Thrive symbol blocks (contain __CONFIG_post_symbol__)
+        $html = preg_replace('/<div[^>]*class="[^"]*thrv_symbol[^"]*"[^>]*>[\s\S]*?<\/div>\s*<\/div>/is', '', $html);
+
+        // Remove Thrive Leads shortcode blocks (email capture forms)
+        $html = preg_replace('/<div[^>]*class="[^"]*thrive_leads_shortcode[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
+
+        // Remove Thrive Quiz blocks
+        $html = preg_replace('/<div[^>]*class="[^"]*thrive-quiz-builder[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
+
+        // Remove Toggle/FAQ/Accordion blocks (interactive elements not convertible)
+        $html = preg_replace('/<div[^>]*class="[^"]*thrv_toggle[^"]*"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/is', '', $html);
+        $html = preg_replace('/<div[^>]*class="[^"]*tve_toggle[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
+        $html = preg_replace('/<div[^>]*class="[^"]*tve_faq[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
+        $html = preg_replace('/<div[^>]*class="[^"]*faq-container[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
+
+        // Remove Thrive icon elements
+        $html = preg_replace('/<div[^>]*class="[^"]*thrv_icon[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
+        $html = preg_replace('/<span[^>]*class="[^"]*tcb-icon[^"]*"[^>]*>[\s\S]*?<\/span>/is', '', $html);
+
+        // Remove flex containers (keep content inside)
+        $html = preg_replace('/<div[^>]*class="[^"]*tcb-flex-(?:col|row)[^"]*"[^>]*>/is', '', $html);
+
+        // Remove custom HTML shortcode wrappers (but keep content)
+        $html = preg_replace('/<div[^>]*class="[^"]*thrv_custom_html_shortcode[^"]*"[^>]*>/is', '', $html);
 
         // Remove "Lire aussi" and similar Thrive buttons
         // Pattern for thrv-button blocks containing promotional/navigation links
@@ -93,6 +121,15 @@ class Jurible_Migration_Converter {
 
         $html = preg_replace_callback($pattern, function($matches) {
             $block = $matches[0];
+
+            // Whitelist: keep blocks containing Aparté/Exemple content (to be converted later)
+            $keepPatterns = ['Aparté', 'Le saviez-vous', 'alt="💬"', 'alt="📌"', '>Exemple<'];
+            foreach ($keepPatterns as $keepPattern) {
+                if (stripos($block, $keepPattern) !== false) {
+                    return $block; // Keep this block for conversion
+                }
+            }
+
             $ctaPatterns = [
                 'Académie', 'academie', 'Rejoignez', 'En savoir plus',
                 'cours complet', 'Besoin d\'un cours', 'Academie-droit-CTA',
@@ -128,6 +165,15 @@ class Jurible_Migration_Converter {
     }
 
     private function convertAparteBlocks(string $html): string {
+        // Pattern 0: Aparté avec emoji 💬 dans <img alt="💬"> - très flexible
+        // Capture: img emoji + texte Aparté + contenu dans thrv_text_element qui suit
+        $pattern0 = '/<img[^>]*alt="💬"[^>]*>[\s\S]*?(?:Aparté|Le saviez-vous)[\s\S]*?<\/div>\s*<\/div>\s*<\/div>[\s\S]*?<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:<[pu][^>]*>[\s\S]*?<\/[pu]>[\s\S]*?)+)<\/div>\s*<\/div>\s*<\/div>/is';
+
+        $html = preg_replace_callback($pattern0, function($matches) {
+            $content = $this->extractParagraphsContent($matches[1]);
+            return "###INFOBOX_RETENIR###" . base64_encode($content) . "###/INFOBOX###";
+        }, $html);
+
         // Pattern 1: Aparté avec emoji 💬 et titre
         $pattern1 = '/💬\s*(?:<span[^>]*><\/span>\s*)*<span[^>]*>([^<]+)<\/span>(?:\s*<\/div>)+\s*<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:\s*<p[^>]*>.+?<\/p>)+)\s*<\/div>/is';
 
@@ -420,34 +466,89 @@ class Jurible_Migration_Converter {
         $html = preg_replace('/<img[^>]*s\.w\.org[^>]*>/i', '', $html);
 
         // Remove floating Thrive content box titles (text on its own line before blocks)
-        // These appear as: newline + spaces + Title text + spaces + <!-- wp:
         $html = preg_replace('/\n\s{2,}[A-ZÀ-Ü][^<\n]{0,60}(?=\s*<!-- wp:)/u', "\n", $html);
 
         // Remove &nbsp; titles before blocks
         $html = preg_replace('/\n\s*&nbsp;[^<\n]{0,100}(?=\s*<!-- wp:)/u', "\n", $html);
 
-
         // Remove all SVG elements (Thrive icons)
         $html = preg_replace('/<svg[^>]*>[\s\S]*?<\/svg>/i', '', $html);
 
-        // Remove Thrive button links with promotional content
-        $html = preg_replace_callback('/<a[^>]*class="[^"]*tcb-button-link[^"]*"[^>]*>[\s\S]*?<\/a>/i', function($matches) {
-            $link = $matches[0];
-            $removePatterns = ['Lire aussi', 'Voir plus', 'Accéder au', 'Fiches vidéo', 'accroche'];
-            foreach ($removePatterns as $pattern) {
-                if (stripos($link, $pattern) !== false) {
-                    return '';
-                }
-            }
-            return $link;
-        }, $html);
+        // Remove ALL Thrive button links (tcb-button-link)
+        $html = preg_replace('/<a[^>]*class="[^"]*tcb-button-link[^"]*"[^>]*>[\s\S]*?<\/a>/i', '', $html);
 
         // Remove empty spans (leftover from button icons)
         $html = preg_replace('/<span[^>]*class="[^"]*tcb-button-icon[^"]*"[^>]*>\s*<\/span>/i', '', $html);
 
+        // Remove [citation] placeholders (content issue from source)
+        $html = preg_replace("/'\[citation\]'/", '« ... »', $html);
+
+        // Note: YouTube URLs are handled via placeholder system in convertYouTubeVideos()
+        // Don't remove orphan URLs here as it breaks the embed blocks
+
+        // Clean up <br> at start of paragraphs (often in quotes)
+        $html = preg_replace('/<p><br>\s*/i', '<p>', $html);
+        $html = preg_replace('/<p>\s*<br>/i', '<p>', $html);
+
+        // Remove Thrive timeline elements (inline styled divs with year comments)
+        $html = preg_replace('/<!--\s*\d{4}\s*-->\s*<div[^>]*style="[^"]*"[^>]*>[\s\S]*?(?=<!--\s*\d{4}\s*-->|<!-- wp:|$)/i', '', $html);
+
+        // Remove Timeline line comments and their following divs
+        $html = preg_replace('/<!--\s*Timeline[^>]*-->\s*<div[^>]*style="[^"]*"[^>]*>/i', '', $html);
+
+        // Remove Thrive Poppins-styled containers (timelines, etc.) - often unclosed
+        $html = preg_replace('/<div[^>]*style="[^"]*font-family:\s*[\'"]?Poppins[^"]*"[^>]*>/i', '', $html);
+
+        // Remove Thrive iframe covers
+        $html = preg_replace('/<div[^>]*class="[^"]*tve_iframe_cover[^"]*"[^>]*>/i', '', $html);
+
+        // Remove divs with position:relative or position:absolute in inline style
+        $html = preg_replace('/<div[^>]*style="[^"]*position:\s*(?:relative|absolute)[^"]*"[^>]*>/i', '', $html);
+
+        // Remove orphan iframes (Spotify, Soundcloud, Leaflet, etc.) - outside of Gutenberg blocks
+        $html = preg_replace('/<iframe[^>]*(?:spotify|soundcloud)[^>]*>.*?<\/iframe>/is', '', $html);
+
+        // Remove Leaflet map scripts and CSS
+        $html = preg_replace('/<!--\s*Leaflet[^>]*-->[\s\S]*?(?=<!-- wp:|$)/i', '', $html);
+
+        // Remove data-css and other Thrive data attributes from remaining elements
+        $html = preg_replace('/\s*data-css="[^"]*"/i', '', $html);
+        $html = preg_replace('/\s*data-ct="[^"]*"/i', '', $html);
+        $html = preg_replace('/\s*data-ct-name="[^"]*"/i', '', $html);
+        $html = preg_replace('/\s*data-element-name="[^"]*"/i', '', $html);
+        $html = preg_replace('/\s*data-selector="[^"]*"/i', '', $html);
+
+        // Remove empty Thrive wrapper divs
+        $html = preg_replace('/<div[^>]*class="[^"]*thrv_wrapper[^"]*"[^>]*>\s*<\/div>/is', '', $html);
+
+        // Remove tcb-clear divs
+        $html = preg_replace('/<div[^>]*class="[^"]*tcb-clear[^"]*"[^>]*>\s*<\/div>/is', '', $html);
+
+        // Remove tve_empty_dropzone elements
+        $html = preg_replace('/<div[^>]*class="[^"]*tve_empty_dropzone[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
+
+        // Fix orphan "Conclusion" text - wrap in heading
+        $html = preg_replace('/\n\s*Conclusion\s*\n/i', "\n\n<!-- wp:heading {\"level\":2} -->\n<h2 class=\"wp-block-heading\">Conclusion</h2>\n<!-- /wp:heading -->\n\n", $html);
+
+        // Fix paragraphs that start without <p> tag (orphan text after removed elements)
+        $html = preg_replace('/<!-- \/wp:paragraph -->\s*\n\s*([A-ZÀ-Ü][^<]{20,}?)<\/p>/u', "<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p>$1</p>", $html);
+
         $html = preg_replace('/\n{3,}/', "\n\n", $html);
         $html = preg_replace('/^\s+$/m', '', $html);
         $html = preg_replace('/^[📌💬🔎]\s*/m', '', $html);
+
+        // Balance unclosed divs - safety net for Thrive remnants
+        $openDivs = preg_match_all('/<div[^>]*>/i', $html);
+        $closeDivs = preg_match_all('/<\/div>/i', $html);
+        if ($openDivs > $closeDivs) {
+            $html .= str_repeat('</div>', $openDivs - $closeDivs);
+        } elseif ($closeDivs > $openDivs) {
+            // Remove excess closing divs from the end
+            for ($i = 0; $i < ($closeDivs - $openDivs); $i++) {
+                $html = preg_replace('/<\/div>\s*$/i', '', $html);
+            }
+        }
+
         return trim($html);
     }
 
