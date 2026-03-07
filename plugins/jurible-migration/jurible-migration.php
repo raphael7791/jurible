@@ -45,6 +45,7 @@ class Jurible_Migration {
         add_action('wp_ajax_jurible_migrate_post', [$this, 'ajax_migrate_post']);
         add_action('wp_ajax_jurible_get_source_posts', [$this, 'ajax_get_source_posts']);
         add_action('wp_ajax_jurible_undo_migration', [$this, 'ajax_undo_migration']);
+        add_action('wp_ajax_jurible_import_comments', [$this, 'ajax_import_comments']);
     }
 
     public function add_admin_menu() {
@@ -198,6 +199,65 @@ class Jurible_Migration {
 
         wp_send_json_success([
             'message' => 'Migration annulée',
+        ]);
+    }
+
+    public function ajax_import_comments() {
+        check_ajax_referer('jurible_migration_nonce', 'nonce');
+
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error('Permission refusée');
+        }
+
+        $source_post_id = intval($_POST['source_id'] ?? 0);
+        $dest_post_id = intval($_POST['dest_id'] ?? 0);
+
+        if (!$source_post_id || !$dest_post_id) {
+            wp_send_json_error('IDs invalides');
+        }
+
+        // Récupérer les commentaires du post source via WP-CLI
+        $command = sprintf(
+            'cd %s && wp comment list --post_id=%d --fields=comment_author,comment_author_email,comment_author_url,comment_date,comment_content,comment_approved --format=json --allow-root 2>/dev/null',
+            escapeshellarg(JURIBLE_AIDEAUXTD_PATH),
+            $source_post_id
+        );
+
+        $output = shell_exec($command);
+        $comments = json_decode($output, true);
+
+        if (empty($comments)) {
+            wp_send_json_success(['message' => 'Aucun commentaire à importer', 'count' => 0]);
+        }
+
+        $imported = 0;
+        foreach ($comments as $comment) {
+            $contentFile = tempnam(sys_get_temp_dir(), 'jurible_comment_');
+            file_put_contents($contentFile, $comment['comment_content']);
+
+            $cmd = sprintf(
+                'cd %s && wp comment create --comment_post_ID=%d --comment_author=%s --comment_author_email=%s --comment_author_url=%s --comment_date=%s --comment_approved=%s %s --porcelain --allow-root 2>/dev/null',
+                escapeshellarg(ABSPATH),
+                $dest_post_id,
+                escapeshellarg($comment['comment_author']),
+                escapeshellarg($comment['comment_author_email']),
+                escapeshellarg($comment['comment_author_url'] ?? ''),
+                escapeshellarg($comment['comment_date']),
+                escapeshellarg($comment['comment_approved']),
+                escapeshellarg($contentFile)
+            );
+
+            $result = shell_exec($cmd);
+            unlink($contentFile);
+
+            if (is_numeric(trim($result))) {
+                $imported++;
+            }
+        }
+
+        wp_send_json_success([
+            'message' => sprintf('%d commentaire(s) importé(s)', $imported),
+            'count' => $imported,
         ]);
     }
 

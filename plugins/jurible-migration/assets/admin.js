@@ -14,6 +14,7 @@
         $('#filter-pending').on('change', renderTable);
         $(document).on('click', '.btn-migrate', handleMigrate);
         $(document).on('click', '.btn-undo', handleUndo);
+        $(document).on('click', '.btn-comments', handleImportComments);
     }
 
     function loadPosts() {
@@ -80,6 +81,7 @@
                 if (migratedStatus[post.ID].view_url) {
                     actionHtml += '<a href="' + migratedStatus[post.ID].view_url + '" target="_blank" class="btn-view">Front</a> ';
                 }
+                actionHtml += '<button type="button" class="button btn-comments" data-source="' + post.ID + '" data-dest="' + migratedStatus[post.ID].new_id + '">💬</button> ';
                 actionHtml += '<button type="button" class="button btn-undo" data-id="' + post.ID + '">Annuler</button>';
             } else {
                 actionHtml = '<button type="button" class="button btn-migrate" data-id="' + post.ID + '">Migrer</button>';
@@ -188,6 +190,37 @@
             },
             error: function() {
                 $btn.prop('disabled', false).text('Annuler');
+                addLog('❌ Erreur de connexion', 'error');
+            }
+        });
+    }
+
+    function handleImportComments() {
+        const $btn = $(this);
+        const sourceId = $btn.data('source');
+        const destId = $btn.data('dest');
+
+        $btn.prop('disabled', true).text('...');
+
+        $.ajax({
+            url: juribleMigration.ajaxUrl,
+            method: 'POST',
+            data: {
+                action: 'jurible_import_comments',
+                nonce: juribleMigration.nonce,
+                source_id: sourceId,
+                dest_id: destId
+            },
+            success: function(response) {
+                $btn.prop('disabled', false).text('💬');
+                if (response.success) {
+                    addLog('💬 ' + response.data.message + ' pour #' + sourceId, 'success');
+                } else {
+                    addLog('❌ Erreur: ' + response.data, 'error');
+                }
+            },
+            error: function() {
+                $btn.prop('disabled', false).text('💬');
                 addLog('❌ Erreur de connexion', 'error');
             }
         });
