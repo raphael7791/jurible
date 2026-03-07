@@ -230,8 +230,8 @@ class Jurible_Migration {
             wp_send_json_error('Output vide. Command: ' . $command);
         }
 
-        // Extraire uniquement le JSON - trouver le premier [ et tout prendre jusqu'à la fin
-        $jsonStart = strpos($output, '[');
+        // Extraire uniquement le JSON - trouver [{ (début array d'objets JSON)
+        $jsonStart = strpos($output, '[{');
         if ($jsonStart !== false) {
             $output = substr($output, $jsonStart);
         }
