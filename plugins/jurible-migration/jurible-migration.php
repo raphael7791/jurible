@@ -230,15 +230,16 @@ class Jurible_Migration {
             wp_send_json_error('Output vide. Command: ' . $command);
         }
 
-        // Extraire uniquement le JSON (commence par [)
-        if (preg_match('/\[.*\]/s', $output, $matches)) {
-            $output = $matches[0];
+        // Extraire uniquement le JSON - trouver le premier [ et tout prendre jusqu'à la fin
+        $jsonStart = strpos($output, '[');
+        if ($jsonStart !== false) {
+            $output = substr($output, $jsonStart);
         }
 
         $comments = json_decode($output, true);
 
         if ($comments === null && json_last_error() !== JSON_ERROR_NONE) {
-            wp_send_json_error('JSON error: ' . json_last_error_msg() . ' | Output début: ' . substr($output, 0, 300));
+            wp_send_json_error('JSON error: ' . json_last_error_msg() . ' | Output: ' . substr($output, 0, 300));
         }
 
         if (empty($comments)) {
