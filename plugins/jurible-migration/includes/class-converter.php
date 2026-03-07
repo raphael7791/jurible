@@ -284,7 +284,7 @@ class Jurible_Migration_Converter {
     }
 
     private function stripThriveContainers(string $html): string {
-        $html = preg_replace('/<div[^>]*class="[^"]*(?:thrv_|tcb-|tve-|kbu|container)[^"]*"[^>]*>/i', '', $html);
+        $html = preg_replace('/<div[^>]*class="[^"]*(?:thrv_|tcb-|tve-|kbu|container|table-header)[^"]*"[^>]*>/i', '', $html);
         $html = preg_replace('/<\/div>/i', '', $html);
         $html = preg_replace('/<span[^>]*(?:data-css|tcb-)[^>]*>([^<]*)<\/span>/i', '$1', $html);
         $html = preg_replace('/<style[^>]*>.*?<\/style>/is', '', $html);
@@ -416,6 +416,16 @@ class Jurible_Migration_Converter {
 
         // Remove &nbsp; titles before blocks
         $html = preg_replace('/\n\s*&nbsp;[^<\n]{0,100}(?=\s*<!-- wp:)/u', "\n", $html);
+
+        // Convert raw YouTube URLs to embed blocks
+        $html = preg_replace_callback('/\n\s*https?:\/\/(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)[^\n]*/i', function($matches) {
+            $videoId = $matches[1];
+            $url = 'https://www.youtube.com/watch?v=' . $videoId;
+            return sprintf(
+                "\n\n<!-- wp:embed {\"url\":\"%s\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\n%s\n</div></figure>\n<!-- /wp:embed -->\n",
+                $url, $url
+            );
+        }, $html);
 
         // Remove all SVG elements (Thrive icons)
         $html = preg_replace('/<svg[^>]*>[\s\S]*?<\/svg>/i', '', $html);
