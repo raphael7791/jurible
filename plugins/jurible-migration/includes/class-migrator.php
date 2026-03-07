@@ -429,7 +429,7 @@ class Jurible_Migration_Migrator {
     private function migrateComments(int $sourcePostId, int $newPostId): void {
         // Récupérer les commentaires du post source
         $command = sprintf(
-            'cd %s && wp comment list --post_id=%d --fields=comment_author,comment_author_email,comment_author_url,comment_date,comment_content,comment_approved --format=json --allow-root 2>/dev/null',
+            'cd %s && wp comment list --post_id=%d --fields=comment_author,comment_author_email,comment_author_url,comment_date,comment_content,comment_approved --format=json --quiet --allow-root 2>/dev/null',
             escapeshellarg(JURIBLE_AIDEAUXTD_PATH),
             $sourcePostId
         );
@@ -447,7 +447,7 @@ class Jurible_Migration_Migrator {
             file_put_contents($contentFile, $comment['comment_content']);
 
             $command = sprintf(
-                'cd %s && wp comment create --comment_post_ID=%d --comment_author=%s --comment_author_email=%s --comment_author_url=%s --comment_date=%s --comment_approved=%s %s --porcelain --allow-root 2>/dev/null',
+                'cd %s && wp comment create --comment_post_ID=%d --comment_author=%s --comment_author_email=%s --comment_author_url=%s --comment_date=%s --comment_approved=%s %s --porcelain --quiet --allow-root 2>/dev/null',
                 escapeshellarg(ABSPATH),
                 $newPostId,
                 escapeshellarg($comment['comment_author']),
