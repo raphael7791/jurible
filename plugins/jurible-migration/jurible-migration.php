@@ -244,7 +244,7 @@ class Jurible_Migration {
         }
 
         if (empty($comments)) {
-            wp_send_json_success(['message' => 'Aucun commentaire à importer', 'count' => 0]);
+            wp_send_json_error('Comments vide après parsing. JSON extrait: ' . substr($output, 0, 200) . ' | Type: ' . gettype($comments));
         }
 
         $imported = 0;
