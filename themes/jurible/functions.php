@@ -1494,6 +1494,13 @@ function jurible_enqueue_single_assets()
             [],
             filemtime(get_template_directory() . "/assets/css/comments.css")
         );
+        wp_enqueue_script(
+            "jurible-comments-show-more",
+            get_template_directory_uri() . "/assets/js/comments-show-more.js",
+            [],
+            filemtime(get_template_directory() . "/assets/js/comments-show-more.js"),
+            true
+        );
     }
 }
 add_action("wp_enqueue_scripts", "jurible_enqueue_single_assets");
