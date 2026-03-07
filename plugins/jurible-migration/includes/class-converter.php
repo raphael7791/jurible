@@ -157,10 +157,9 @@ class Jurible_Migration_Converter {
     }
 
     private function convertYouTubeVideos(string $html): string {
-        // Pattern simplifié - capture juste le data-url du conteneur vidéo
-        $pattern = '/<div[^>]*class="[^"]*thrv_responsive_video[^"]*"[^>]*data-url="([^"]+)"[^>]*>/is';
+        // Pattern complet - capture tout le bloc vidéo Thrive avec son contenu
+        $pattern = '/<div[^>]*class="[^"]*thrv_responsive_video[^"]*"[^>]*data-url="([^"]+)"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/is';
 
-        // D'abord extraire les URLs et les remplacer par des placeholders
         $html = preg_replace_callback($pattern, function($matches) {
             $videoId = $this->extractYouTubeId($matches[1]);
             if ($videoId) {
@@ -169,11 +168,21 @@ class Jurible_Migration_Converter {
             return '';
         }, $html);
 
-        // Nettoyer les conteneurs vidéo restants (iframes, overlays, etc.)
-        $html = preg_replace('/<div[^>]*class="[^"]*tve_responsive_video_container[^"]*"[^>]*>[\s\S]*?<\/div>\s*<\/div>/is', '', $html);
+        // Fallback: pattern simplifié pour les vidéos avec structure différente
+        $patternSimple = '/<div[^>]*class="[^"]*thrv_responsive_video[^"]*"[^>]*data-url="([^"]+)"[^>]*>[\s\S]*?<\/div>\s*<\/div>/is';
+
+        $html = preg_replace_callback($patternSimple, function($matches) {
+            $videoId = $this->extractYouTubeId($matches[1]);
+            if ($videoId) {
+                return "###YOUTUBE###" . $videoId . "###/YOUTUBE###";
+            }
+            return '';
+        }, $html);
+
+        // Nettoyer les conteneurs vidéo restants
+        $html = preg_replace('/<div[^>]*class="[^"]*tve_responsive_video_container[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
         $html = preg_replace('/<div[^>]*class="[^"]*tcb-video-float-container[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
-        $html = preg_replace('/<div[^>]*class="[^"]*video_overlay[^"]*"[^>]*>[\s\S]*?<\/div>/is', '', $html);
-        $html = preg_replace('/<iframe[^>]*tcb-responsive-video[^>]*>[\s\S]*?<\/iframe>/is', '', $html);
+        $html = preg_replace('/<iframe[^>]*tcb-responsive-video[^>]*>[^<]*<\/iframe>/is', '', $html);
 
         return $html;
     }
