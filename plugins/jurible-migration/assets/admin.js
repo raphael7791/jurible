@@ -201,6 +201,8 @@
         const destId = $btn.data('dest');
 
         $btn.prop('disabled', true).text('...');
+        $('#migration-log').show();
+        addLog('💬 Import des commentaires pour #' + sourceId + '...', 'info');
 
         $.ajax({
             url: juribleMigration.ajaxUrl,
@@ -214,7 +216,10 @@
             success: function(response) {
                 $btn.prop('disabled', false).text('💬');
                 if (response.success) {
-                    addLog('💬 ' + response.data.message + ' pour #' + sourceId, 'success');
+                    var msg = response.data.count > 0
+                        ? '✅ ' + response.data.count + ' commentaire(s) importé(s) pour #' + sourceId
+                        : '⚪ Aucun commentaire à importer pour #' + sourceId;
+                    addLog(msg, response.data.count > 0 ? 'success' : 'info');
                 } else {
                     addLog('❌ Erreur: ' + response.data, 'error');
                 }
