@@ -156,7 +156,8 @@ class Jurible_Migration_Converter {
     }
 
     private function convertExempleBlocks(string $html): string {
-        $pattern = '/<img[^>]*alt="📌"[^>]*>\s*Exemple\s*(?:<\/div>)*\s*(?:<\/div>)*\s*<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:\s*<p[^>]*>.+?<\/p>)+)\s*<\/div>/is';
+        // Pattern flexible: max 500 chars entre emoji et "Exemple", puis max 500 chars jusqu'au contenu
+        $pattern = '/<img[^>]*alt="📌"[^>]*>[\s\S]{0,500}?Exemple[\s\S]{0,500}?<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:<p[^>]*>[\s\S]*?<\/p>\s*)+)<\/div>/is';
 
         return preg_replace_callback($pattern, function($matches) {
             $content = $this->extractParagraphsContent($matches[1]);
@@ -165,36 +166,11 @@ class Jurible_Migration_Converter {
     }
 
     private function convertAparteBlocks(string $html): string {
-        // Pattern 0: Aparté avec emoji 💬 dans <img alt="💬"> - très flexible
-        // Capture: img emoji + texte Aparté + contenu dans thrv_text_element qui suit
-        $pattern0 = '/<img[^>]*alt="💬"[^>]*>[\s\S]*?(?:Aparté|Le saviez-vous)[\s\S]*?<\/div>\s*<\/div>\s*<\/div>[\s\S]*?<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:<[pu][^>]*>[\s\S]*?<\/[pu]>[\s\S]*?)+)<\/div>\s*<\/div>\s*<\/div>/is';
+        // Pattern principal: Aparté avec emoji 💬 dans <img alt="💬">
+        // Flexible: max 500 chars entre emoji et "Aparté", puis max 500 chars jusqu'au contenu
+        $pattern = '/<img[^>]*alt="💬"[^>]*>[\s\S]{0,500}?(?:Aparté|Le saviez-vous)[\s\S]{0,500}?<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:<p[^>]*>[\s\S]*?<\/p>\s*)+)<\/div>/is';
 
-        $html = preg_replace_callback($pattern0, function($matches) {
-            $content = $this->extractParagraphsContent($matches[1]);
-            return "###INFOBOX_RETENIR###" . base64_encode($content) . "###/INFOBOX###";
-        }, $html);
-
-        // Pattern 1: Aparté avec emoji 💬 et titre
-        $pattern1 = '/💬\s*(?:<span[^>]*><\/span>\s*)*<span[^>]*>([^<]+)<\/span>(?:\s*<\/div>)+\s*<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:\s*<p[^>]*>.+?<\/p>)+)\s*<\/div>/is';
-
-        $html = preg_replace_callback($pattern1, function($matches) {
-            $content = $this->extractParagraphsContent($matches[2]);
-            return "###INFOBOX_RETENIR###" . base64_encode($content) . "###/INFOBOX###";
-        }, $html);
-
-        // Pattern 2: Aparté avec "Aparté :" ou "Aparté" sans emoji (texte seul)
-        // Structure: <span>Aparté :&nbsp;</span>Titre</div>...</div><div class="thrv_text_element"><p>contenu</p></div>
-        $pattern2 = '/<span[^>]*>Aparté\s*:?&nbsp;<\/span>([^<]+)(?:<\/div>)+\s*(?:<\/div>\s*)*<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:\s*<p[^>]*>.+?<\/p>)+)\s*<\/div>/is';
-
-        $html = preg_replace_callback($pattern2, function($matches) {
-            $content = $this->extractParagraphsContent($matches[2]);
-            return "###INFOBOX_RETENIR###" . base64_encode($content) . "###/INFOBOX###";
-        }, $html);
-
-        // Pattern 3: Aparté simple sans titre (juste "Aparté" comme header)
-        $pattern3 = '/<span[^>]*>Aparté<\/span>(?:<\/div>)+\s*(?:<\/div>\s*)*<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:\s*<p[^>]*>.+?<\/p>)+)\s*<\/div>/is';
-
-        $html = preg_replace_callback($pattern3, function($matches) {
+        $html = preg_replace_callback($pattern, function($matches) {
             $content = $this->extractParagraphsContent($matches[1]);
             return "###INFOBOX_RETENIR###" . base64_encode($content) . "###/INFOBOX###";
         }, $html);
