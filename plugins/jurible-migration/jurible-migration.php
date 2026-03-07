@@ -232,14 +232,15 @@ class Jurible_Migration {
 
         // Extraire uniquement le JSON - trouver [{ (début array d'objets JSON)
         $jsonStart = strpos($output, '[{');
-        if ($jsonStart !== false) {
-            $output = substr($output, $jsonStart);
+        if ($jsonStart === false) {
+            wp_send_json_error('Pas de JSON trouvé. Output brut: ' . substr($output, 0, 500));
         }
+        $output = substr($output, $jsonStart);
 
         $comments = json_decode($output, true);
 
-        if ($comments === null && json_last_error() !== JSON_ERROR_NONE) {
-            wp_send_json_error('JSON error: ' . json_last_error_msg() . ' | Output: ' . substr($output, 0, 300));
+        if ($comments === null) {
+            wp_send_json_error('JSON null. Error: ' . json_last_error_msg() . ' | JSON: ' . substr($output, 0, 300));
         }
 
         if (empty($comments)) {
