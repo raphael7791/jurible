@@ -52,9 +52,7 @@
 
 <!-- wp:post-author-name {"className":"hero-article__author-name"} /-->
 
-<!-- wp:paragraph {"className":"hero-article__author-role"} -->
-<p class="hero-article__author-role">Rédacteur Jurible</p>
-<!-- /wp:paragraph -->
+<!-- wp:post-author-biography {"className":"hero-article__author-role"} /-->
 
 </div>
 <!-- /wp:group -->
