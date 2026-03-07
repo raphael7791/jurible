@@ -218,13 +218,28 @@ class Jurible_Migration {
 
         // Récupérer les commentaires du post source via WP-CLI
         $command = sprintf(
-            'cd %s && /usr/local/bin/wp comment list --post_id=%d --fields=comment_author,comment_author_email,comment_author_url,comment_date,comment_content,comment_approved --format=json --quiet --allow-root 2>/dev/null',
+            'cd %s && /usr/local/bin/wp comment list --post_id=%d --fields=comment_author,comment_author_email,comment_author_url,comment_date,comment_content,comment_approved --format=json --quiet --allow-root 2>&1',
             escapeshellarg(JURIBLE_AIDEAUXTD_PATH),
             $source_post_id
         );
 
         $output = shell_exec($command);
+
+        // Debug
+        if (empty($output)) {
+            wp_send_json_error('Output vide. Command: ' . $command);
+        }
+
+        // Extraire uniquement le JSON (commence par [)
+        if (preg_match('/\[.*\]/s', $output, $matches)) {
+            $output = $matches[0];
+        }
+
         $comments = json_decode($output, true);
+
+        if ($comments === null && json_last_error() !== JSON_ERROR_NONE) {
+            wp_send_json_error('JSON error: ' . json_last_error_msg() . ' | Output début: ' . substr($output, 0, 300));
+        }
 
         if (empty($comments)) {
             wp_send_json_success(['message' => 'Aucun commentaire à importer', 'count' => 0]);
