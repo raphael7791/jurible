@@ -417,9 +417,6 @@ class Jurible_Migration_Converter {
         // Remove &nbsp; titles before blocks
         $html = preg_replace('/\n\s*&nbsp;[^<\n]{0,100}(?=\s*<!-- wp:)/u', "\n", $html);
 
-        // Remove raw YouTube URLs that are orphaned (already converted to embed elsewhere)
-        // These appear as standalone lines not inside a proper block
-        $html = preg_replace('/\n\s*https?:\/\/(?:www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9_-]+\s*\n/i', "\n", $html);
 
         // Remove all SVG elements (Thrive icons)
         $html = preg_replace('/<svg[^>]*>[\s\S]*?<\/svg>/i', '', $html);
