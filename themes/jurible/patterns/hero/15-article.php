@@ -67,11 +67,29 @@
 
 <!-- wp:post-featured-image {"className":"hero-article__image","sizeSlug":"large"} /-->
 
-<!-- wp:group {"className":"hero-article__cta","layout":{"type":"flex","justifyContent":"center"}} -->
+<!-- wp:group {"className":"hero-article__cta","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 <div class="wp-block-group hero-article__cta">
-<!-- wp:paragraph -->
-<p>Envie d'aller plus loin ? <a href="/academie">Rejoindre l'Académie</a></p>
+
+<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"20px","fontWeight":"700"}}} -->
+<h3 class="wp-block-heading has-text-align-center" style="font-size:20px;font-weight:700">Prêt à réussir vos partiels ?</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","fontSize":"small","textColor":"text-gray"} -->
+<p class="has-text-align-center has-text-gray-color has-text-color has-small-font-size">Rejoignez 25 000+ étudiants et préparez vos partiels avec les meilleurs outils pédagogiques.</p>
 <!-- /wp:paragraph -->
+
+<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+<div class="wp-block-buttons">
+<!-- wp:button {"className":"is-style-fill"} -->
+<div class="wp-block-button is-style-fill"><a class="wp-block-button__link wp-element-button" href="/academie">Débloquer le cours complet → 20€/mois</a></div>
+<!-- /wp:button -->
+</div>
+<!-- /wp:buttons -->
+
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"13px"}},"textColor":"text-muted"} -->
+<p class="has-text-align-center has-text-muted-color has-text-color" style="font-size:13px">✓ Téléchargement immédiat · ✓ Accès à vie · ✓ Résiliable en un clic</p>
+<!-- /wp:paragraph -->
+
 </div>
 <!-- /wp:group -->
 
