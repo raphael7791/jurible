@@ -26,7 +26,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"14px","lineHeight":"1.5"}},"textColor":"white"} -->
-<p class="has-white-color has-text-color" style="font-size:14px;line-height:1.5">Accède à +500h de cours, fiches et QCM pour réussir ta licence de droit.</p>
+<p class="has-white-color has-text-color" style="font-size:14px;line-height:1.5">Accèdez à +500h de cours, fiches et QCM pour réussir votre licence de droit.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|sm"}}}} -->
