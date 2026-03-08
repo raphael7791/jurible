@@ -12,6 +12,8 @@ class Jurible_Migration_Converter {
     private $destUploadsPath;
     private $destUploadsUrl;
     private $importedImages = [];
+    private $sourceText = '';
+    private $resultText = '';
 
     public function __construct() {
         $this->sourceUploadsPath = JURIBLE_AIDEAUXTD_PATH . '/wp-content/uploads';
@@ -23,9 +25,40 @@ class Jurible_Migration_Converter {
         return $this->importedImages;
     }
 
+    /**
+     * Validate conversion - returns array with ratio and lost sentences
+     */
+    public function validateConversion(): array {
+        $sourceLen = mb_strlen($this->sourceText);
+        $resultLen = mb_strlen($this->resultText);
+
+        $ratio = $sourceLen > 0 ? round($resultLen / $sourceLen * 100) : 0;
+
+        // Find lost sentences (sentences in source but not in result)
+        $lostSentences = [];
+        $sourceSentences = preg_split('/[.!?]+/', $this->sourceText);
+        foreach ($sourceSentences as $sentence) {
+            $sentence = trim($sentence);
+            if (mb_strlen($sentence) > 30 && stripos($this->resultText, $sentence) === false) {
+                $lostSentences[] = mb_substr($sentence, 0, 100) . '...';
+            }
+        }
+
+        return [
+            'ratio' => $ratio,
+            'source_length' => $sourceLen,
+            'result_length' => $resultLen,
+            'lost_sentences' => array_slice($lostSentences, 0, 10), // Max 10
+            'is_valid' => $ratio >= 90, // At least 90% text retained
+        ];
+    }
+
     public function convert(string $html): string {
         $this->content = $html;
         $this->importedImages = [];
+
+        // Store source text for validation
+        $this->sourceText = $this->extractText($html);
 
         // Convert special blocks FIRST (before removing Thrive elements that could break patterns)
         $this->content = $this->convertExempleBlocks($this->content);
@@ -57,7 +90,46 @@ class Jurible_Migration_Converter {
         // Cleanup
         $this->content = $this->cleanupOutput($this->content);
 
+        // Remove CTA paragraphs by text content (safer than HTML structure)
+        $this->content = $this->removeCTAByText($this->content);
+
+        // Store result text for validation
+        $this->resultText = $this->extractText($this->content);
+
         return $this->content;
+    }
+
+    private function extractText(string $html): string {
+        $text = strip_tags($html);
+        $text = preg_replace('/\s+/', ' ', $text);
+        return trim($text);
+    }
+
+    private function removeCTAByText(string $html): string {
+        $ctaTexts = [
+            'Rejoignez l\'Académie',
+            'Rejoignez l'Académie',
+            'fiches de révision',
+            'flashcards',
+            'annales corrigées',
+            'réussir vos partiels',
+            'Besoin d\'un cours',
+            'Besoin d'un cours',
+            'Accéder au cours complet',
+        ];
+
+        // Remove paragraphs containing CTA text
+        $html = preg_replace_callback('/<!-- wp:paragraph -->\s*<p[^>]*>([\s\S]*?)<\/p>\s*<!-- \/wp:paragraph -->/i', function($matches) use ($ctaTexts) {
+            $content = $matches[1];
+            foreach ($ctaTexts as $cta) {
+                if (stripos($content, $cta) !== false) {
+                    return ''; // Remove this paragraph
+                }
+            }
+            return $matches[0]; // Keep
+        }, $html);
+
+        return $html;
     }
 
     private function removeCTABlocks(string $html): string {
@@ -96,24 +168,29 @@ class Jurible_Migration_Converter {
         // Remove custom HTML shortcode wrappers (but keep content)
         $html = preg_replace('/<div[^>]*class="[^"]*thrv_custom_html_shortcode[^"]*"[^>]*>/is', '', $html);
 
-        // Remove "Lire aussi" and similar Thrive buttons
-        // Pattern for thrv-button blocks containing promotional/navigation links
-        $buttonPattern = '/<div[^>]*class="[^"]*tcb-clear[^"]*"[^>]*>\s*<div[^>]*class="[^"]*thrv-button[^"]*"[^>]*>[\s\S]*?<\/div>\s*<\/div>/is';
+        // Convert "Lire aussi" buttons to wp:button, remove other promo buttons
+        $buttonPattern = '/<a[^>]*href="([^"]*)"[^>]*>[\s\S]*?<span[^>]*class="[^"]*tcb-button-text[^"]*"[^>]*>([\s\S]*?)<\/span>[\s\S]*?<\/a>/is';
 
         $html = preg_replace_callback($buttonPattern, function($matches) {
-            $block = $matches[0];
-            $buttonPatterns = [
-                'Lire aussi', 'Voir plus de', 'Accéder au cours',
-                'Fiches vidéo', 'fiches-droit-videos',
-                'accroche-citation', 'Trouver une accroche',
-            ];
+            $url = $matches[1];
+            $text = trim(strip_tags($matches[2]));
 
-            foreach ($buttonPatterns as $pattern) {
-                if (stripos($block, $pattern) !== false) {
+            // Convert "Lire aussi" to wp:button
+            if (stripos($text, 'Lire aussi') !== false) {
+                // Replace aideauxtd.com with jurible.com in URL
+                $url = str_replace('aideauxtd.com', 'jurible.com', $url);
+                return "###BUTTON###" . base64_encode($url . '|' . $text) . "###/BUTTON###";
+            }
+
+            // Remove other promo buttons
+            $removePatterns = ['Voir plus de', 'Accéder au cours', 'Fiches vidéo', 'accroche-citation', 'Trouver une accroche'];
+            foreach ($removePatterns as $pattern) {
+                if (stripos($text, $pattern) !== false) {
                     return '';
                 }
             }
-            return $block;
+
+            return $matches[0];
         }, $html);
 
         // Note: CTA contentbox removal disabled - pattern too greedy, captures unrelated content
@@ -425,7 +502,28 @@ class Jurible_Migration_Converter {
             return $this->createImage($src, $alt);
         }, $html);
 
+        // Buttons (Lire aussi)
+        $html = preg_replace_callback('/###BUTTON###([^#]+)###\/BUTTON###/', function($matches) {
+            $data = base64_decode($matches[1]);
+            list($url, $text) = explode('|', $data, 2);
+            return $this->createButton($url, $text);
+        }, $html);
+
         return $html;
+    }
+
+    private function createButton(string $url, string $text): string {
+        return sprintf(
+            '<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="%s">%s</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+',
+            htmlspecialchars($url),
+            htmlspecialchars($text)
+        );
     }
 
     private function cleanupOutput(string $html): string {
