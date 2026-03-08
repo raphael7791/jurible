@@ -176,16 +176,16 @@ class Jurible_Migration_Converter {
     }
 
     private function convertAparteBlocks(string $html): string {
-        // Pattern 1: Aparté avec emoji 💬 dans <img alt="💬">
-        $pattern1 = '/<img[^>]*alt="💬"[^>]*>[\s\S]{0,500}?(?:Aparté|Le saviez-vous)[\s\S]{0,500}?<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:<p[^>]*>[\s\S]*?<\/p>\s*)+)<\/div>/is';
+        // Pattern 1: Tous les blocs avec emoji 💬 dans <img alt="💬"> (capture <p> et <ul>)
+        $pattern1 = '/<img[^>]*alt="💬"[^>]*>[\s\S]{0,500}?<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:(?:<p[^>]*>[\s\S]*?<\/p>|<ul[^>]*>[\s\S]*?<\/ul>)\s*)+)<\/div>/is';
 
         $html = preg_replace_callback($pattern1, function($matches) {
             $content = $this->extractParagraphsContent($matches[1]);
             return "###INFOBOX_RETENIR###" . base64_encode($content) . "###/INFOBOX###";
         }, $html);
 
-        // Pattern 2: Aparté avec emoji 💬 en texte brut (pas dans <img>)
-        $pattern2 = '/💬\s*<span[^>]*>(?:Aparté|Le saviez-vous)[^<]*<\/span>[\s\S]{0,500}?<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:<p[^>]*>[\s\S]*?<\/p>\s*)+)<\/div>/is';
+        // Pattern 2: Blocs avec emoji 💬 en texte brut (pas dans <img>)
+        $pattern2 = '/💬\s*<span[^>]*>[^<]*<\/span>[\s\S]{0,500}?<div[^>]*class="[^"]*thrv_wrapper[^"]*thrv_text_element[^"]*"[^>]*>((?:(?:<p[^>]*>[\s\S]*?<\/p>|<ul[^>]*>[\s\S]*?<\/ul>)\s*)+)<\/div>/is';
 
         $html = preg_replace_callback($pattern2, function($matches) {
             $content = $this->extractParagraphsContent($matches[1]);
@@ -667,9 +667,24 @@ class Jurible_Migration_Converter {
     }
 
     private function extractParagraphsContent(string $html): string {
-        preg_match_all('/<p[^>]*>(.+?)<\/p>/is', $html, $matches);
-        $content = implode("\n", $matches[1] ?? []);
-        return $this->cleanInlineHtml($content);
+        $parts = [];
+
+        // Extract paragraphs
+        preg_match_all('/<p[^>]*>(.+?)<\/p>/is', $html, $pMatches);
+        foreach ($pMatches[1] ?? [] as $p) {
+            $parts[] = $this->cleanInlineHtml($p);
+        }
+
+        // Extract lists (convert to text with bullet points)
+        preg_match_all('/<ul[^>]*>([\s\S]*?)<\/ul>/is', $html, $ulMatches);
+        foreach ($ulMatches[1] ?? [] as $ul) {
+            preg_match_all('/<li[^>]*>(.+?)<\/li>/is', $ul, $liMatches);
+            foreach ($liMatches[1] ?? [] as $li) {
+                $parts[] = '• ' . $this->cleanInlineHtml($li);
+            }
+        }
+
+        return implode("\n", $parts);
     }
 
     private function extractListItems(string $html): array {
