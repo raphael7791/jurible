@@ -43,6 +43,7 @@ class Jurible_Migration_Migrator {
             'status' => 'draft',
             'date' => $sourcePost['post_date'],
             'author' => get_current_user_id(),
+            'slug' => $sourcePost['post_name'],
         ]);
 
         if (is_wp_error($newPostId)) {
@@ -141,15 +142,17 @@ class Jurible_Migration_Migrator {
         file_put_contents($contentFile, $args['content']);
 
         $authorId = $args['author'] ?? 1;
+        $slug = $args['slug'] ?? '';
 
         $command = sprintf(
-            'cd %s && wp post create %s --post_title=%s --post_status=%s --post_date=%s --post_author=%d --porcelain --allow-root 2>/dev/null',
+            'cd %s && wp post create %s --post_title=%s --post_status=%s --post_date=%s --post_author=%d --post_name=%s --porcelain --allow-root 2>/dev/null',
             escapeshellarg(ABSPATH),
             escapeshellarg($contentFile),
             escapeshellarg($args['title']),
             escapeshellarg($args['status']),
             escapeshellarg($args['date']),
-            $authorId
+            $authorId,
+            escapeshellarg($slug)
         );
 
         $postId = trim(shell_exec($command));
