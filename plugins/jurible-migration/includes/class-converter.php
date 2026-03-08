@@ -116,34 +116,8 @@ class Jurible_Migration_Converter {
             return $block;
         }, $html);
 
-        // Remove CTA content boxes
-        $pattern = '/<div[^>]*class="[^"]*thrv_contentbox_shortcode[^"]*"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>\s*<\/div>/i';
-
-        $html = preg_replace_callback($pattern, function($matches) {
-            $block = $matches[0];
-
-            // Whitelist: keep blocks containing Aparté/Exemple content (to be converted later)
-            $keepPatterns = ['Aparté', 'Le saviez-vous', 'alt="💬"', 'alt="📌"', '>Exemple<'];
-            foreach ($keepPatterns as $keepPattern) {
-                if (stripos($block, $keepPattern) !== false) {
-                    return $block; // Keep this block for conversion
-                }
-            }
-
-            $ctaPatterns = [
-                'Académie', 'academie', 'Rejoignez', 'En savoir plus',
-                'cours complet', 'Besoin d\'un cours', 'Academie-droit-CTA',
-                'fiches de révision', 'flashcards', 'annales corrigées',
-                'réussir vos partiels',
-            ];
-
-            foreach ($ctaPatterns as $ctaPattern) {
-                if (stripos($block, $ctaPattern) !== false) {
-                    return '';
-                }
-            }
-            return $block;
-        }, $html);
+        // Note: CTA contentbox removal disabled - pattern too greedy, captures unrelated content
+        // The CTA blocks will be cleaned up by stripThriveContainers instead
 
         return $html;
     }
