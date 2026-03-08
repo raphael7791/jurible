@@ -14,6 +14,7 @@ class Jurible_Migration_Converter {
     private $importedImages = [];
     private $sourceText = '';
     private $resultText = '';
+    private $resultHtml = '';
 
     public function __construct() {
         $this->sourceUploadsPath = JURIBLE_AIDEAUXTD_PATH . '/wp-content/uploads';
@@ -49,12 +50,19 @@ class Jurible_Migration_Converter {
             }
         }
 
+        // Check structural elements are present in HTML
+        $hasStructure = (
+            substr_count($this->resultHtml, 'wp:paragraph') > 5 ||
+            substr_count($this->resultHtml, 'wp:heading') > 0
+        );
+
         return [
             'ratio' => $ratio,
             'source_length' => $sourceLen,
             'result_length' => $resultLen,
             'lost_sentences' => array_slice($lostSentences, 0, 10), // Max 10
-            'is_valid' => $ratio >= 90, // At least 90% text retained
+            // Valid if ratio >= 60% (Thrive has lots of removed markup)
+            'is_valid' => $ratio >= 60 && $hasStructure,
         ];
     }
 
@@ -98,7 +106,8 @@ class Jurible_Migration_Converter {
         // Remove CTA paragraphs by text content (safer than HTML structure)
         $this->content = $this->removeCTAByText($this->content);
 
-        // Store result text for validation
+        // Store result for validation
+        $this->resultHtml = $this->content;
         $this->resultText = $this->extractText($this->content);
 
         return $this->content;
