@@ -248,12 +248,14 @@ class Jurible_Migration {
         }
 
         $imported = 0;
+        $errors = [];
         foreach ($comments as $comment) {
+            // wp comment create n'accepte pas de fichier, utiliser --comment_content avec $(cat file)
             $contentFile = tempnam(sys_get_temp_dir(), 'jurible_comment_');
             file_put_contents($contentFile, $comment['comment_content']);
 
             $cmd = sprintf(
-                'cd %s && /usr/local/bin/wp comment create --comment_post_ID=%d --comment_author=%s --comment_author_email=%s --comment_author_url=%s --comment_date=%s --comment_approved=%s %s --porcelain --quiet --allow-root 2>/dev/null',
+                'cd %s && /usr/local/bin/wp comment create --comment_post_ID=%d --comment_author=%s --comment_author_email=%s --comment_author_url=%s --comment_date=%s --comment_approved=%s --comment_content="$(cat %s)" --porcelain --allow-root 2>&1',
                 escapeshellarg(ABSPATH),
                 $dest_post_id,
                 escapeshellarg($comment['comment_author']),
@@ -269,13 +271,22 @@ class Jurible_Migration {
 
             if (is_numeric(trim($result))) {
                 $imported++;
+            } else {
+                $errors[] = trim($result);
             }
         }
 
-        wp_send_json_success([
+        $response = [
             'message' => sprintf('%d commentaire(s) importé(s)', $imported),
             'count' => $imported,
-        ]);
+        ];
+
+        // Debug: inclure les erreurs s'il y en a
+        if (!empty($errors)) {
+            $response['debug'] = 'Erreurs: ' . implode(' | ', array_slice($errors, 0, 3));
+        }
+
+        wp_send_json_success($response);
     }
 
     private function mark_as_migrated($source_id, $new_id) {

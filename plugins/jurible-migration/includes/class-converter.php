@@ -107,15 +107,13 @@ class Jurible_Migration_Converter {
 
     private function removeCTAByText(string $html): string {
         $ctaTexts = [
-            'Rejoignez l\'Académie',
-            'Rejoignez l'Académie',
-            'fiches de révision',
-            'flashcards',
-            'annales corrigées',
-            'réussir vos partiels',
-            'Besoin d\'un cours',
-            'Besoin d'un cours',
-            'Accéder au cours complet',
+            "Rejoignez l'Académie",
+            "fiches de révision",
+            "flashcards",
+            "annales corrigées",
+            "réussir vos partiels",
+            "Besoin d'un cours",
+            "Accéder au cours complet",
         ];
 
         // Remove paragraphs containing CTA text

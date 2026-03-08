@@ -220,6 +220,10 @@
                         ? '✅ ' + response.data.count + ' commentaire(s) importé(s) pour #' + sourceId
                         : '⚪ Aucun commentaire à importer pour #' + sourceId;
                     addLog(msg, response.data.count > 0 ? 'success' : 'info');
+                    // Afficher les erreurs de debug si présentes
+                    if (response.data.debug) {
+                        addLog('🔧 ' + response.data.debug, 'error');
+                    }
                 } else {
                     addLog('❌ Erreur: ' + response.data, 'error');
                 }
