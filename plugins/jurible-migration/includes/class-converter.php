@@ -187,11 +187,14 @@ class Jurible_Migration_Converter {
         $html = preg_replace('/<div[^>]*class="[^"]*thrv_custom_html_shortcode[^"]*"[^>]*>/is', '', $html);
 
         // Convert "Lire aussi" buttons to wp:button, remove other promo buttons
-        $buttonPattern = '/<a[^>]*href="([^"]*)"[^>]*>[\s\S]*?<span[^>]*class="[^"]*tcb-button-text[^"]*"[^>]*>([\s\S]*?)<\/span>[\s\S]*?<\/a>/is';
+        // IMPORTANT: Must require tcb-button-link class to avoid matching regular links
+        // Pattern handles class before or after href
+        $buttonPattern = '/<a[^>]*(?:class="[^"]*tcb-button-link[^"]*"[^>]*href="([^"]*)"|href="([^"]*)"[^>]*class="[^"]*tcb-button-link[^"]*")[^>]*>[\s\S]*?<span[^>]*class="[^"]*tcb-button-text[^"]*"[^>]*>([\s\S]*?)<\/span>[\s\S]*?<\/a>/is';
 
         $html = preg_replace_callback($buttonPattern, function($matches) {
-            $url = $matches[1];
-            $text = trim(strip_tags($matches[2]));
+            // URL is in group 1 or 2 depending on attribute order
+            $url = !empty($matches[1]) ? $matches[1] : $matches[2];
+            $text = trim(strip_tags($matches[3]));
 
             // Convert "Lire aussi" to wp:button
             if (stripos($text, 'Lire aussi') !== false) {
