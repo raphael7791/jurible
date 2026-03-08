@@ -17,7 +17,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","className":"cta-final__subtitle","textColor":"white","fontSize":"body-large"} -->
-<p class="has-text-align-center cta-final__subtitle has-white-color has-text-color has-body-large-font-size">Accède à +500h de cours, fiches et QCM pour réussir ta licence de droit.</p>
+<p class="has-text-align-center cta-final__subtitle has-white-color has-text-color has-body-large-font-size">Accèdez à + 500h de cours vidéos et écrits, fiches, QCM et flashcards pour réussir votre licence de droit.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"className":"cta-final__buttons","layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|md"}}}} -->
@@ -27,6 +27,17 @@
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->
+
+<!-- wp:group {"className":"cta-final__mentions","style":{"spacing":{"margin":{"top":"var:preset|spacing|md"},"blockGap":"var:preset|spacing|md"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
+<div class="wp-block-group cta-final__mentions" style="margin-top:var(--wp--preset--spacing--md)">
+<!-- wp:paragraph {"className":"cta-final__mention","textColor":"white","fontSize":"small"} -->
+<p class="cta-final__mention has-white-color has-text-color has-small-font-size">✓ Accès à vie</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"cta-final__mention","textColor":"white","fontSize":"small"} -->
+<p class="cta-final__mention has-white-color has-text-color has-small-font-size">✓ Résiliable en un clic</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
 
 </div>
 <!-- /wp:group -->
