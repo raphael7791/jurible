@@ -39,7 +39,12 @@ class Jurible_Migration_Converter {
         $sourceSentences = preg_split('/[.!?]+/', $this->sourceText);
         foreach ($sourceSentences as $sentence) {
             $sentence = trim($sentence);
-            if (mb_strlen($sentence) > 30 && stripos($this->resultText, $sentence) === false) {
+            // Skip short sentences, config blocks, and titles that become block headers
+            if (mb_strlen($sentence) > 50
+                && stripos($this->resultText, $sentence) === false
+                && strpos($sentence, 'CONFIG') === false
+                && !preg_match('/^(Aparté|Exemple|À retenir|Le saviez-vous)\s/', $sentence)
+            ) {
                 $lostSentences[] = mb_substr($sentence, 0, 100) . '...';
             }
         }
@@ -100,6 +105,12 @@ class Jurible_Migration_Converter {
     }
 
     private function extractText(string $html): string {
+        // Remove Thrive config blocks BEFORE counting text
+        $html = preg_replace('/__CONFIG_[^_]+__.*?__CONFIG_[^_]+__/s', '', $html);
+
+        // Remove Thrive shortcodes
+        $html = preg_replace('/\[thrive_[^\]]+\](?:.*?\[\/thrive_[^\]]+\])?/is', '', $html);
+
         $text = strip_tags($html);
         $text = preg_replace('/\s+/', ' ', $text);
         return trim($text);
