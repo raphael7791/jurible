@@ -46,6 +46,7 @@ class Jurible_Migration {
         add_action('wp_ajax_jurible_get_source_posts', [$this, 'ajax_get_source_posts']);
         add_action('wp_ajax_jurible_undo_migration', [$this, 'ajax_undo_migration']);
         add_action('wp_ajax_jurible_import_comments', [$this, 'ajax_import_comments']);
+        add_action('wp_ajax_jurible_rebuild_status', [$this, 'ajax_rebuild_status']);
     }
 
     public function add_admin_menu() {
@@ -202,6 +203,26 @@ class Jurible_Migration {
         ]);
     }
 
+    public function ajax_rebuild_status() {
+        check_ajax_referer('jurible_migration_nonce', 'nonce');
+
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error('Permission refusée');
+        }
+
+        $result = self::rebuild_migration_status();
+
+        wp_send_json_success([
+            'message' => sprintf(
+                'Reconstruction terminée : %d nouveaux articles matchés. Total trackés : %d / %d',
+                $result['newly_matched'],
+                $result['total_tracked'],
+                $result['total_dest']
+            ),
+            'stats' => $result,
+        ]);
+    }
+
     public function ajax_import_comments() {
         check_ajax_referer('jurible_migration_nonce', 'nonce');
 
@@ -290,6 +311,21 @@ class Jurible_Migration {
     }
 
     private function mark_as_migrated($source_id, $new_id) {
+        // Verrou pour éviter les race conditions lors de migrations parallèles
+        $lock_key = 'jurible_migration_lock';
+        $max_wait = 10; // secondes max d'attente
+        $waited = 0;
+
+        // Attendre que le verrou soit libre
+        while (get_transient($lock_key) && $waited < $max_wait) {
+            usleep(100000); // 100ms
+            $waited += 0.1;
+        }
+
+        // Poser le verrou (expire après 5 secondes au cas où)
+        set_transient($lock_key, true, 5);
+
+        // Lecture-modification-écriture atomique
         $status = get_option('jurible_migration_status', []);
         $status[$source_id] = [
             'new_id' => $new_id,
@@ -298,10 +334,80 @@ class Jurible_Migration {
             'view_url' => get_permalink($new_id),
         ];
         update_option('jurible_migration_status', $status);
+
+        // Libérer le verrou
+        delete_transient($lock_key);
     }
 
     public static function get_migration_status() {
         return get_option('jurible_migration_status', []);
+    }
+
+    /**
+     * Reconstruire l'option jurible_migration_status à partir des articles existants
+     * Match par titre entre jurible.com et aideauxtd.com
+     */
+    public static function rebuild_migration_status() {
+        // Récupérer tous les articles sur jurible.com
+        $dest_posts = get_posts([
+            'post_type' => 'post',
+            'post_status' => ['publish', 'draft'],
+            'numberposts' => -1,
+        ]);
+
+        // Récupérer tous les articles source via WP-CLI
+        $command = sprintf(
+            'cd %s && wp post list --post_type=post --post_status=publish --fields=ID,post_title --format=json --allow-root 2>/dev/null',
+            escapeshellarg(JURIBLE_AIDEAUXTD_PATH)
+        );
+        $output = shell_exec($command);
+        $source_posts = json_decode($output, true) ?: [];
+
+        // Créer un index par titre (normalisé) pour les sources
+        $source_by_title = [];
+        foreach ($source_posts as $post) {
+            $normalized = self::normalize_title($post['post_title']);
+            $source_by_title[$normalized] = $post['ID'];
+        }
+
+        // Matcher les articles destination avec leur source
+        $status = get_option('jurible_migration_status', []);
+        $matched = 0;
+
+        foreach ($dest_posts as $dest_post) {
+            $normalized = self::normalize_title($dest_post->post_title);
+
+            if (isset($source_by_title[$normalized])) {
+                $source_id = $source_by_title[$normalized];
+
+                // Vérifier si déjà dans l'option
+                if (!isset($status[$source_id])) {
+                    $status[$source_id] = [
+                        'new_id' => $dest_post->ID,
+                        'date' => $dest_post->post_date,
+                        'edit_url' => admin_url('post.php?post=' . $dest_post->ID . '&action=edit'),
+                        'view_url' => get_permalink($dest_post->ID),
+                    ];
+                    $matched++;
+                }
+            }
+        }
+
+        update_option('jurible_migration_status', $status);
+
+        return [
+            'total_dest' => count($dest_posts),
+            'total_source' => count($source_posts),
+            'newly_matched' => $matched,
+            'total_tracked' => count($status),
+        ];
+    }
+
+    private static function normalize_title($title) {
+        $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
+        $title = mb_strtolower($title);
+        $title = preg_replace('/[^a-z0-9àâäéèêëïîôùûüç]/u', '', $title);
+        return $title;
     }
 }
 

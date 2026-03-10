@@ -35,6 +35,9 @@ class Jurible_Migration_Admin_Page {
                 <button type="button" class="button" id="refresh-list">
                     Actualiser la liste
                 </button>
+                <button type="button" class="button" id="rebuild-status" title="Reconstruire le statut de migration en matchant les titres">
+                    🔄 Reconstruire le compteur
+                </button>
             </div>
 
             <div class="jurible-migration-table-wrap">

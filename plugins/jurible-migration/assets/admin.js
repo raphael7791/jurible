@@ -12,6 +12,7 @@
     function bindEvents() {
         $('#refresh-list').on('click', loadPosts);
         $('#filter-pending').on('change', renderTable);
+        $('#rebuild-status').on('click', handleRebuildStatus);
         $(document).on('click', '.btn-migrate', handleMigrate);
         $(document).on('click', '.btn-undo', handleUndo);
         $(document).on('click', '.btn-comments', handleImportComments);
@@ -190,6 +191,41 @@
             },
             error: function() {
                 $btn.prop('disabled', false).text('Annuler');
+                addLog('❌ Erreur de connexion', 'error');
+            }
+        });
+    }
+
+    function handleRebuildStatus() {
+        const $btn = $('#rebuild-status');
+
+        if (!confirm('Reconstruire le compteur en matchant les titres entre jurible.com et aideauxtd.com ?')) {
+            return;
+        }
+
+        $btn.prop('disabled', true).text('Reconstruction...');
+        $('#migration-log').show();
+        addLog('🔄 Reconstruction du statut de migration...', 'info');
+
+        $.ajax({
+            url: juribleMigration.ajaxUrl,
+            method: 'POST',
+            data: {
+                action: 'jurible_rebuild_status',
+                nonce: juribleMigration.nonce
+            },
+            success: function(response) {
+                $btn.prop('disabled', false).text('🔄 Reconstruire le compteur');
+                if (response.success) {
+                    addLog('✅ ' + response.data.message, 'success');
+                    // Recharger la liste pour mettre à jour les stats
+                    loadPosts();
+                } else {
+                    addLog('❌ Erreur: ' + response.data, 'error');
+                }
+            },
+            error: function() {
+                $btn.prop('disabled', false).text('🔄 Reconstruire le compteur');
                 addLog('❌ Erreur de connexion', 'error');
             }
         });
