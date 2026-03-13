@@ -2023,6 +2023,18 @@ function jurible_pack_body_class($classes) {
 add_filter('body_class', 'jurible_pack_body_class');
 
 /**
+ * Forcer le template pack pour les produits dont le slug contient "pack".
+ * Insère single-sc_product-pack en tête de la hiérarchie de templates.
+ */
+add_filter('single_template_hierarchy', function($templates) {
+    $post = get_queried_object();
+    if ($post && $post->post_type === 'sc_product' && strpos($post->post_name, 'pack') !== false) {
+        array_unshift($templates, 'single-sc_product-pack');
+    }
+    return $templates;
+});
+
+/**
  * Migration one-shot : nettoyer les wp_template orphelins et assigner le template
  * aux produits pack existants. Le fichier templates/single-sc_product-pack.html
  * + theme.json suffisent pour que WordPress FSE reconnaisse le template.
