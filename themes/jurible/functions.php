@@ -2023,13 +2023,17 @@ function jurible_pack_body_class($classes) {
 add_filter('body_class', 'jurible_pack_body_class');
 
 /**
- * Forcer le template pack pour les produits dont le slug contient "pack".
- * Insère sc-products-pack en tête de la hiérarchie de templates.
+ * Forcer le template pack/custom selon le _wp_page_template du produit.
  */
 add_filter('single_template_hierarchy', function($templates) {
     $post = get_queried_object();
-    if ($post && $post->post_type === 'sc_product' && strpos($post->post_name, 'pack') !== false) {
-        array_unshift($templates, 'sc-products-pack');
+    if ($post && $post->post_type === 'sc_product') {
+        $tpl = get_post_meta($post->ID, '_wp_page_template', true);
+        if ($tpl && $tpl !== 'default') {
+            array_unshift($templates, $tpl);
+        } elseif (strpos($post->post_name, 'pack') !== false) {
+            array_unshift($templates, 'sc-products-pack');
+        }
     }
     return $templates;
 });

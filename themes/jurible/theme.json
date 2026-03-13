@@ -642,6 +642,11 @@
       "name": "sc-products-pack",
       "title": "Produit - Pack de fiches",
       "postTypes": ["sc_product"]
+    },
+    {
+      "name": "sc-products-custom",
+      "title": "Produit - Custom",
+      "postTypes": ["sc_product"]
     }
   ],
   "templateParts": [
