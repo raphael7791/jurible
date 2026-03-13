@@ -1838,6 +1838,28 @@ function jurible_add_acf_to_rest_api() {
 add_action('rest_api_init', 'jurible_add_acf_to_rest_api');
 
 /**
+ * Endpoint REST pour assigner un template FSE à un sc_product.
+ * L'API REST standard ne supporte pas le champ "template" pour sc_product.
+ */
+add_action('rest_api_init', function() {
+    register_rest_route('jurible/v1', '/set-template', [
+        'methods'  => 'POST',
+        'callback' => function($request) {
+            $post_id  = intval($request->get_param('post_id'));
+            $template = sanitize_text_field($request->get_param('template'));
+            if (!$post_id || !$template) {
+                return new WP_Error('missing_params', 'post_id et template requis', ['status' => 400]);
+            }
+            update_post_meta($post_id, '_wp_page_template', $template);
+            return ['success' => true, 'post_id' => $post_id, 'template' => $template];
+        },
+        'permission_callback' => function() {
+            return current_user_can('edit_posts');
+        },
+    ]);
+});
+
+/**
  * Exposer les métadonnées Rank Math via l'API REST pour le CPT course
  */
 function jurible_register_rankmath_meta() {
