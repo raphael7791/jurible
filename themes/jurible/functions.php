@@ -1992,3 +1992,135 @@ function jurible_create_test_course() {
 }
 add_action('admin_init', 'jurible_create_test_course');
 
+
+# ==========================================================================
+# SURECART - TEMPLATE PACK
+# ==========================================================================
+
+/**
+ * Détecter si un produit SureCart est un pack via son slug
+ */
+function jurible_is_product_pack($post_id = null) {
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+    $post = get_post($post_id);
+    if (!$post) {
+        return false;
+    }
+    return strpos($post->post_name, 'pack') !== false;
+}
+
+/**
+ * Ajouter une classe body pour les packs
+ */
+function jurible_pack_body_class($classes) {
+    if (is_singular('sc_product') && jurible_is_product_pack()) {
+        $classes[] = 'is-product-pack';
+    }
+    return $classes;
+}
+add_filter('body_class', 'jurible_pack_body_class');
+
+/**
+ * Créer le template Pack dans la base de données WordPress
+ * S'exécute une seule fois à l'activation du thème
+ */
+function jurible_create_pack_template() {
+    // Vérifier si déjà créé
+    if (get_option('jurible_pack_template_created')) {
+        return;
+    }
+
+    // Charger le contenu du template
+    $template_path = get_template_directory() . '/templates/single-sc_product-pack.html';
+    if (!file_exists($template_path)) {
+        return;
+    }
+    $template_content = file_get_contents($template_path);
+
+    // Vérifier si le template existe déjà
+    $existing = get_posts([
+        'post_type' => 'wp_template',
+        'post_status' => 'publish',
+        'name' => 'single-sc_product-pack',
+        'posts_per_page' => 1,
+    ]);
+
+    if (empty($existing)) {
+        // Créer le template
+        wp_insert_post([
+            'post_type' => 'wp_template',
+            'post_name' => 'single-sc_product-pack',
+            'post_title' => 'Produit - Pack de fiches',
+            'post_content' => $template_content,
+            'post_status' => 'publish',
+            'tax_input' => [
+                'wp_theme' => ['jurible'],
+            ],
+            'meta_input' => [
+                'origin' => 'theme',
+            ],
+        ]);
+    }
+
+    update_option('jurible_pack_template_created', true);
+}
+add_action('after_setup_theme', 'jurible_create_pack_template');
+
+/**
+ * Réinitialiser le flag pour recréer le template (utile en dev)
+ * Visiter : /wp-admin/?recreate_pack_template=1
+ */
+function jurible_recreate_pack_template() {
+    if (is_admin() && current_user_can('manage_options') && isset($_GET['recreate_pack_template'])) {
+        delete_option('jurible_pack_template_created');
+
+        // Supprimer l'ancien template
+        $existing = get_posts([
+            'post_type' => 'wp_template',
+            'post_status' => 'any',
+            'name' => 'single-sc_product-pack',
+            'posts_per_page' => 1,
+        ]);
+        if (!empty($existing)) {
+            wp_delete_post($existing[0]->ID, true);
+        }
+
+        // Recréer
+        jurible_create_pack_template();
+
+        wp_redirect(admin_url());
+        exit;
+    }
+}
+add_action('admin_init', 'jurible_recreate_pack_template');
+
+/**
+ * Ajouter le support page-attributes à sc_product (permet l'assignation de template via REST API)
+ */
+add_action('init', function() {
+    add_post_type_support('sc_product', 'page-attributes');
+}, 20);
+
+/**
+ * Auto-assigner le template pack quand un produit sc_product contient "pack" dans son slug
+ */
+add_action('save_post_sc_product', function($post_id) {
+    $post = get_post($post_id);
+    if (!$post) return;
+
+    $current_template = get_post_meta($post_id, '_wp_page_template', true);
+
+    if (strpos($post->post_name, 'pack') !== false) {
+        if ($current_template !== 'single-sc_product-pack') {
+            update_post_meta($post_id, '_wp_page_template', 'single-sc_product-pack');
+        }
+    } else {
+        // Si ce n'est pas un pack mais qu'il avait le template pack, le retirer
+        if ($current_template === 'single-sc_product-pack') {
+            delete_post_meta($post_id, '_wp_page_template');
+        }
+    }
+}, 20);
+

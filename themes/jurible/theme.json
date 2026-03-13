@@ -637,6 +637,11 @@
       "name": "page-minimal",
       "title": "Page Minimale (Checkout)",
       "postTypes": ["page"]
+    },
+    {
+      "name": "single-sc_product-pack",
+      "title": "Produit - Pack de fiches",
+      "postTypes": ["sc_product"]
     }
   ],
   "templateParts": [
