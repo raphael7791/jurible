@@ -2024,41 +2024,45 @@ add_filter('body_class', 'jurible_pack_body_class');
 
 /**
  * Forcer le template pack pour les produits dont le slug contient "pack".
- * Insère single-sc_product-pack en tête de la hiérarchie de templates.
+ * Insère sc-products-pack en tête de la hiérarchie de templates.
  */
 add_filter('single_template_hierarchy', function($templates) {
     $post = get_queried_object();
     if ($post && $post->post_type === 'sc_product' && strpos($post->post_name, 'pack') !== false) {
-        array_unshift($templates, 'single-sc_product-pack');
+        array_unshift($templates, 'sc-products-pack');
     }
     return $templates;
 });
 
 /**
  * Migration one-shot : nettoyer les wp_template orphelins et assigner le template
- * aux produits pack existants. Le fichier templates/single-sc_product-pack.html
+ * aux produits pack existants. Le fichier templates/sc-products-pack.html
  * + theme.json suffisent pour que WordPress FSE reconnaisse le template.
  */
 add_action('admin_init', function() {
-    if (get_option('jurible_pack_template_cleanup_v1')) {
+    // v2 : corrige le nom du template (sc-products-pack au lieu de single-sc_product-pack)
+    if (get_option('jurible_pack_template_cleanup_v2')) {
         return;
     }
 
     // Supprimer les wp_template DB orphelins créés par l'ancien code
-    $orphans = get_posts([
-        'post_type' => 'wp_template',
-        'post_status' => 'any',
-        'name' => 'single-sc_product-pack',
-        'posts_per_page' => -1,
-    ]);
-    foreach ($orphans as $orphan) {
-        wp_delete_post($orphan->ID, true);
+    foreach (['single-sc_product-pack', 'sc-products-pack'] as $slug) {
+        $orphans = get_posts([
+            'post_type' => 'wp_template',
+            'post_status' => 'any',
+            'name' => $slug,
+            'posts_per_page' => -1,
+        ]);
+        foreach ($orphans as $orphan) {
+            wp_delete_post($orphan->ID, true);
+        }
     }
 
     // Nettoyer les anciennes options
     delete_option('jurible_pack_template_created');
+    delete_option('jurible_pack_template_cleanup_v1');
 
-    // Assigner le template à tous les produits pack existants
+    // Assigner le bon template à tous les produits pack existants
     $packs = get_posts([
         'post_type' => 'sc_product',
         'post_status' => 'any',
@@ -2066,11 +2070,11 @@ add_action('admin_init', function() {
     ]);
     foreach ($packs as $pack) {
         if (strpos($pack->post_name, 'pack') !== false) {
-            update_post_meta($pack->ID, '_wp_page_template', 'single-sc_product-pack');
+            update_post_meta($pack->ID, '_wp_page_template', 'sc-products-pack');
         }
     }
 
-    update_option('jurible_pack_template_cleanup_v1', true);
+    update_option('jurible_pack_template_cleanup_v2', true);
 });
 
 /**
@@ -2090,12 +2094,12 @@ add_action('save_post_sc_product', function($post_id) {
     $current_template = get_post_meta($post_id, '_wp_page_template', true);
 
     if (strpos($post->post_name, 'pack') !== false) {
-        if ($current_template !== 'single-sc_product-pack') {
-            update_post_meta($post_id, '_wp_page_template', 'single-sc_product-pack');
+        if ($current_template !== 'sc-products-pack') {
+            update_post_meta($post_id, '_wp_page_template', 'sc-products-pack');
         }
     } else {
         // Si ce n'est pas un pack mais qu'il avait le template pack, le retirer
-        if ($current_template === 'single-sc_product-pack') {
+        if ($current_template === 'sc-products-pack') {
             delete_post_meta($post_id, '_wp_page_template');
         }
     }

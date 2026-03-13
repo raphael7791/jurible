@@ -639,7 +639,7 @@
       "postTypes": ["page"]
     },
     {
-      "name": "single-sc_product-pack",
+      "name": "sc-products-pack",
       "title": "Produit - Pack de fiches",
       "postTypes": ["sc_product"]
     }
