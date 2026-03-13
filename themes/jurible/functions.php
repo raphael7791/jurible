@@ -2023,78 +2023,43 @@ function jurible_pack_body_class($classes) {
 add_filter('body_class', 'jurible_pack_body_class');
 
 /**
- * Créer le template Pack dans la base de données WordPress
- * S'exécute une seule fois à l'activation du thème
+ * Migration one-shot : nettoyer les wp_template orphelins et assigner le template
+ * aux produits pack existants. Le fichier templates/single-sc_product-pack.html
+ * + theme.json suffisent pour que WordPress FSE reconnaisse le template.
  */
-function jurible_create_pack_template() {
-    // Vérifier si déjà créé
-    if (get_option('jurible_pack_template_created')) {
+add_action('admin_init', function() {
+    if (get_option('jurible_pack_template_cleanup_v1')) {
         return;
     }
 
-    // Charger le contenu du template
-    $template_path = get_template_directory() . '/templates/single-sc_product-pack.html';
-    if (!file_exists($template_path)) {
-        return;
-    }
-    $template_content = file_get_contents($template_path);
-
-    // Vérifier si le template existe déjà
-    $existing = get_posts([
+    // Supprimer les wp_template DB orphelins créés par l'ancien code
+    $orphans = get_posts([
         'post_type' => 'wp_template',
-        'post_status' => 'publish',
+        'post_status' => 'any',
         'name' => 'single-sc_product-pack',
-        'posts_per_page' => 1,
+        'posts_per_page' => -1,
     ]);
-
-    if (empty($existing)) {
-        // Créer le template
-        wp_insert_post([
-            'post_type' => 'wp_template',
-            'post_name' => 'single-sc_product-pack',
-            'post_title' => 'Produit - Pack de fiches',
-            'post_content' => $template_content,
-            'post_status' => 'publish',
-            'tax_input' => [
-                'wp_theme' => ['jurible'],
-            ],
-            'meta_input' => [
-                'origin' => 'theme',
-            ],
-        ]);
+    foreach ($orphans as $orphan) {
+        wp_delete_post($orphan->ID, true);
     }
 
-    update_option('jurible_pack_template_created', true);
-}
-add_action('after_setup_theme', 'jurible_create_pack_template');
+    // Nettoyer les anciennes options
+    delete_option('jurible_pack_template_created');
 
-/**
- * Réinitialiser le flag pour recréer le template (utile en dev)
- * Visiter : /wp-admin/?recreate_pack_template=1
- */
-function jurible_recreate_pack_template() {
-    if (is_admin() && current_user_can('manage_options') && isset($_GET['recreate_pack_template'])) {
-        delete_option('jurible_pack_template_created');
-
-        // Supprimer l'ancien template
-        $existing = get_posts([
-            'post_type' => 'wp_template',
-            'post_status' => 'any',
-            'name' => 'single-sc_product-pack',
-            'posts_per_page' => 1,
-        ]);
-        if (!empty($existing)) {
-            wp_delete_post($existing[0]->ID, true);
+    // Assigner le template à tous les produits pack existants
+    $packs = get_posts([
+        'post_type' => 'sc_product',
+        'post_status' => 'any',
+        'posts_per_page' => -1,
+    ]);
+    foreach ($packs as $pack) {
+        if (strpos($pack->post_name, 'pack') !== false) {
+            update_post_meta($pack->ID, '_wp_page_template', 'single-sc_product-pack');
         }
-
-        // Recréer
-        jurible_create_pack_template();
-
-        wp_redirect(admin_url());
-        exit;
     }
-}
-add_action('admin_init', 'jurible_recreate_pack_template');
+
+    update_option('jurible_pack_template_cleanup_v1', true);
+});
 
 /**
  * Ajouter le support page-attributes à sc_product (permet l'assignation de template via REST API)
