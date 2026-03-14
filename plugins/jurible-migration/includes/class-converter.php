@@ -271,18 +271,7 @@ class Jurible_Migration_Converter {
     }
 
     private function convertYouTubeVideos(string $html): string {
-        // Pattern complet - capture tout le bloc vidéo Thrive avec son contenu
-        $pattern = '/<div[^>]*class="[^"]*thrv_responsive_video[^"]*"[^>]*data-url="([^"]+)"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/is';
-
-        $html = preg_replace_callback($pattern, function($matches) {
-            $videoId = $this->extractYouTubeId($matches[1]);
-            if ($videoId) {
-                return "###YOUTUBE###" . $videoId . "###/YOUTUBE###";
-            }
-            return '';
-        }, $html);
-
-        // Fallback: pattern simplifié pour les vidéos avec structure différente
+        // Pattern: capture le bloc vidéo Thrive (2 niveaux de div)
         $patternSimple = '/<div[^>]*class="[^"]*thrv_responsive_video[^"]*"[^>]*data-url="([^"]+)"[^>]*>[\s\S]*?<\/div>\s*<\/div>/is';
 
         $html = preg_replace_callback($patternSimple, function($matches) {
