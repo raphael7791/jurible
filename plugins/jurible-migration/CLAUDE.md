@@ -42,13 +42,13 @@ Ce plugin fait partie d'une **refonte complète** :
 | Paragraphs | `wp:paragraph` |
 | Tables | `wp:table` |
 | Lists ul/ol | `wp:list` |
+| QCM (questions dans section Explications) | `jurible/qcm` |
 
 ## Éléments Thrive supprimés (analyse complète)
 
 **Blocs interactifs (non convertibles) :**
 - Toggle/FAQ/Accordéons (`tve_toggle`, `tve_faqI`, `thrv_toggle_item`)
 - Quiz Thrive (`thrive-quiz-builder-shortcode`)
-- Thrive Leads - formulaires email (`thrive_leads_shortcode`)
 - Thrive Symbols - blocs réutilisables (`thrv_symbol`)
 
 **Éléments promotionnels :**

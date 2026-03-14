@@ -73,7 +73,10 @@ class Jurible_Migration_Converter {
         // Store source text for validation
         $this->sourceText = $this->extractText($html);
 
-        // Convert special blocks FIRST (before removing Thrive elements that could break patterns)
+        // Convert QCM blocks FIRST (before Aparté which would capture 💬 explanations as infoboxes)
+        $this->content = $this->convertQcmBlocks($this->content);
+
+        // Convert special blocks (before removing Thrive elements that could break patterns)
         $this->content = $this->convertExempleBlocks($this->content);
         $this->content = $this->convertAparteBlocks($this->content);
 
@@ -403,6 +406,142 @@ class Jurible_Migration_Converter {
         return null;
     }
 
+    private function convertQcmBlocks(string $html): string {
+        // Quick check: need question headers AND green highlights for correct answers
+        if (!preg_match('/<h3[^>]*>.*?Question\s+\d+\s*:/is', $html)
+            || strpos($html, 'rgba(56, 203, 105') === false) {
+            return $html;
+        }
+
+        // Extract title from H2 containing "QCM" (e.g., "I. QCM Droit pénal général (30 questions)")
+        $title = 'Quiz';
+        if (preg_match('/<h2[^>]*>[^<]*?(QCM\s+[^(<]+)/i', $html, $titleMatch)) {
+            $title = trim(html_entity_decode($titleMatch[1], ENT_QUOTES, 'UTF-8'));
+        }
+
+        // Match section from H2 "Explication" through all questions to next H2 or end
+        if (!preg_match('/(<h2[^>]*>[^<]*Explication[^<]*<\/h2>)(.*?)(?=<h2[^>]*>|\z)/is', $html, $sectionMatch)) {
+            return $html;
+        }
+
+        $questionsHtml = $sectionMatch[2];
+        $fullSection = $sectionMatch[0];
+
+        // Parse individual questions by splitting on <h3>
+        $questions = [];
+        $blocks = preg_split('/<h3[^>]*>/i', $questionsHtml);
+
+        foreach ($blocks as $block) {
+            if (!preg_match('/Question\s+\d+/i', $block)) {
+                continue;
+            }
+
+            // Extract question text after "Question N :"
+            if (!preg_match('/<strong>\s*Question\s+\d+\s*:(?:&nbsp;|\s)*<\/strong>\s*(.*?)<\/h3>/is', $block, $qMatch)) {
+                continue;
+            }
+            $questionText = trim(html_entity_decode(strip_tags($qMatch[1]), ENT_QUOTES, 'UTF-8'));
+            if (empty($questionText)) {
+                continue;
+            }
+
+            // Extract all <p> contents
+            preg_match_all('/<p[^>]*>(.*?)<\/p>/is', $block, $pMatches);
+
+            $answers = [];
+            $correctIndex = 0;
+            $explanation = '';
+            $answerIdx = 0;
+            $foundReponseCorrecteLine = false;
+
+            foreach ($pMatches[1] as $pContent) {
+                $cleanText = trim(html_entity_decode(strip_tags($pContent), ENT_QUOTES, 'UTF-8'));
+
+                // Answer line (a-d)
+                if (preg_match('/^[a-d]\)\s*(.*)/u', $cleanText, $ansMatch)) {
+                    if (strpos($pContent, 'rgba(56, 203, 105') !== false) {
+                        $correctIndex = $answerIdx;
+                    }
+                    $answers[] = trim($ansMatch[1]);
+                    $answerIdx++;
+                }
+                // "Réponse correcte" marker
+                elseif (mb_strpos($cleanText, 'Réponse correcte') !== false) {
+                    $foundReponseCorrecteLine = true;
+                }
+                // Explanation text: first substantial <p> after "Réponse correcte"
+                // (💬 is in a <div> in Thrive HTML, not a <p>, so we use this marker instead)
+                elseif ($foundReponseCorrecteLine && !empty($cleanText) && mb_strlen($cleanText) > 20) {
+                    $explanation = $cleanText;
+                    $foundReponseCorrecteLine = false;
+                }
+            }
+
+            if (count($answers) < 2) {
+                continue;
+            }
+
+            $questions[] = [
+                'question' => $questionText,
+                'answers' => $answers,
+                'correctIndex' => $correctIndex,
+                'explanation' => $explanation,
+            ];
+        }
+
+        if (empty($questions)) {
+            return $html;
+        }
+
+        // Generate QCM block and use placeholder
+        $qcmBlock = $this->createQcmBlock($title, $questions);
+
+        // Remove the QCM title H2 (e.g., "I. QCM Droit pénal général (30 questions et réponses)")
+        $html = preg_replace('/<h2[^>]*>[^<]*QCM[^<]*questions[^<]*<\/h2>/i', '', $html);
+
+        // Replace the Explication section with QCM placeholder
+        $html = str_replace($fullSection, '###QCM###' . base64_encode($qcmBlock) . '###/QCM###', $html);
+
+        return $html;
+    }
+
+    private function createQcmBlock(string $title, array $questions): string {
+        $questionsJson = json_encode($questions, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        // Build SEO content (accessible without JS)
+        $seoHtml = '<h3 class="qcm-seo-title">' . htmlspecialchars($title) . '</h3>';
+        foreach ($questions as $q) {
+            $seoHtml .= '<details class="qcm-seo-question"><summary>' . htmlspecialchars($q['question']) . '</summary><ul>';
+            foreach ($q['answers'] as $j => $answer) {
+                $class = ($j === $q['correctIndex']) ? ' class="qcm-correct"' : '';
+                $check = ($j === $q['correctIndex']) ? ' ✓' : '';
+                $seoHtml .= '<li' . $class . '>' . htmlspecialchars($answer) . $check . '</li>';
+            }
+            $seoHtml .= '</ul>';
+            if (!empty($q['explanation'])) {
+                $seoHtml .= '<p class="qcm-seo-explanation">' . htmlspecialchars($q['explanation']) . '</p>';
+            }
+            $seoHtml .= '</details>';
+        }
+
+        $attrs = json_encode([
+            'title' => $title,
+            'questions' => $questions,
+            'shuffleAnswers' => true,
+            'showExplanations' => true,
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        return sprintf(
+            '<!-- wp:jurible/qcm %s -->' . "\n" .
+            '<div class="wp-block-jurible-qcm"><div class="jurible-qcm-container" data-questions="%s" data-shuffle="true" data-explanations="true" data-title="%s"><div class="qcm-seo-content">%s</div></div></div>' . "\n" .
+            '<!-- /wp:jurible/qcm -->' . "\n\n",
+            $attrs,
+            htmlspecialchars($questionsJson, ENT_QUOTES, 'UTF-8'),
+            htmlspecialchars($title, ENT_QUOTES, 'UTF-8'),
+            $seoHtml
+        );
+    }
+
     private function stripThriveContainers(string $html): string {
         $html = preg_replace('/<div[^>]*class="[^"]*(?:thrv_|tcb-|tve-|kbu|container|table-header)[^"]*"[^>]*>/i', '', $html);
         $html = preg_replace('/<\/div>/i', '', $html);
@@ -528,6 +667,11 @@ class Jurible_Migration_Converter {
             $data = base64_decode($matches[1]);
             list($url, $text) = explode('|', $data, 2);
             return $this->createButton($url, $text);
+        }, $html);
+
+        // QCM blocks
+        $html = preg_replace_callback('/###QCM###([^#]+)###\/QCM###/', function($matches) {
+            return base64_decode($matches[1]);
         }, $html);
 
         return $html;
