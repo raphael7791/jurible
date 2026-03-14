@@ -30,9 +30,9 @@ class Jurible_Contact_API {
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public static function handle_submission( WP_REST_Request $request ) {
-		// Verify nonce
+		// Verify nonce from request body (works for non-logged-in users)
 		$nonce = $request->get_param( '_wpnonce' );
-		if ( ! wp_verify_nonce( $nonce, 'jurible_contact_form' ) ) {
+		if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, 'jurible_contact_form' ) ) {
 			return new WP_Error(
 				'invalid_nonce',
 				'Session expirée. Veuillez rafraîchir la page et réessayer.',

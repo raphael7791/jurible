@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					'X-WP-Nonce': nonce,
 				},
 				body: JSON.stringify({
 					firstName: firstName,
