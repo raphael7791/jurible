@@ -14,6 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once __DIR__ . '/includes/class-contact-api.php';
+add_action( 'rest_api_init', [ 'Jurible_Contact_API', 'register_routes' ] );
+
 function jurible_blocks_react_init() {
 	register_block_type( __DIR__ . '/build/infobox' );
 	register_block_type( __DIR__ . '/build/sommaire' );
@@ -43,6 +46,8 @@ function jurible_blocks_react_init() {
 	register_block_type( __DIR__ . '/build/checkout-social-proof' );
 	register_block_type( __DIR__ . '/build/checkout-testimonial' );
 	register_block_type( __DIR__ . '/build/hero-dashboard' );
+	register_block_type( __DIR__ . '/build/qcm' );
+	register_block_type( __DIR__ . '/build/contact-form' );
 }
 add_action( 'init', 'jurible_blocks_react_init' );
 

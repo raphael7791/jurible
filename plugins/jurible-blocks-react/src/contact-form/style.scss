@@ -1,0 +1,202 @@
+/* Contact Form Block - Frontend Styles */
+
+.jurible-contact-form {
+	max-width: 600px;
+	background: var(--wp--preset--color--white);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--wp--custom--border-radius--lg);
+	padding: var(--wp--preset--spacing--lg);
+	box-shadow: var(--wp--preset--shadow--sm);
+	box-sizing: border-box;
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	p.jurible-contact-form__description {
+		font-family: var(--wp--preset--font-family--poppins);
+		font-size: var(--wp--preset--font-size--body);
+		line-height: var(--wp--custom--line-height--body);
+		color: var(--wp--preset--color--text-gray);
+		margin: 0 0 var(--wp--preset--spacing--md) 0;
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--sm);
+	}
+
+	&__row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--wp--preset--spacing--sm);
+	}
+
+	&__field {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	&__label {
+		font-family: var(--wp--preset--font-family--poppins);
+		font-size: var(--wp--preset--font-size--small);
+		font-weight: 500;
+		color: var(--wp--preset--color--text-dark);
+	}
+
+	&__required {
+		color: var(--wp--preset--color--primary);
+	}
+
+	&__form input[type="text"].jurible-contact-form__input,
+	&__form input[type="email"].jurible-contact-form__input,
+	&__form select.jurible-contact-form__select,
+	&__form textarea.jurible-contact-form__textarea {
+		width: 100%;
+		padding: 10px 14px;
+		background-color: var(--wp--preset--color--white);
+		border: 1.5px solid var(--wp--preset--color--border-muted);
+		border-radius: var(--wp--custom--border-radius--md);
+		font-family: var(--wp--preset--font-family--poppins);
+		font-size: var(--wp--preset--font-size--small);
+		color: var(--wp--preset--color--text-dark);
+		outline: none;
+		transition: var(--wp--custom--transition--default);
+
+		&::placeholder {
+			color: var(--wp--preset--color--text-muted);
+		}
+
+		&:hover {
+			border-color: var(--wp--preset--color--text-muted);
+		}
+
+		&:focus {
+			border-color: var(--wp--preset--color--primary);
+			box-shadow: 0 0 0 3px rgba(176, 0, 29, 0.1);
+		}
+	}
+
+	&__form select.jurible-contact-form__select {
+		appearance: none;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239CA3AF' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: right 14px center;
+		padding-right: 36px;
+		cursor: pointer;
+	}
+
+	&__form textarea.jurible-contact-form__textarea {
+		resize: vertical;
+		min-height: 120px;
+	}
+
+	/* Honeypot - hidden from view */
+	&__hp {
+		position: absolute;
+		left: -9999px;
+		opacity: 0;
+		height: 0;
+		overflow: hidden;
+	}
+
+	&__consent {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+		font-family: var(--wp--preset--font-family--poppins);
+		font-size: var(--wp--preset--font-size--caption);
+		color: var(--wp--preset--color--text-gray);
+		line-height: 1.5;
+
+		input[type="checkbox"] {
+			margin-top: 3px;
+			flex-shrink: 0;
+			accent-color: var(--wp--preset--color--primary);
+		}
+
+		a {
+			color: var(--wp--preset--color--primary);
+			text-decoration: underline;
+
+			&:hover {
+				color: var(--wp--preset--color--primary-hover);
+			}
+		}
+	}
+
+	&__btn {
+		width: 100%;
+		padding: 14px 32px;
+		background: linear-gradient(
+			135deg,
+			var(--wp--preset--color--primary) 0%,
+			#dc2626 50%,
+			var(--wp--preset--color--secondary) 100%
+		);
+		color: var(--wp--preset--color--white);
+		border: none;
+		border-radius: var(--wp--custom--border-radius--md);
+		font-family: var(--wp--preset--font-family--poppins);
+		font-size: var(--wp--preset--font-size--body);
+		font-weight: 600;
+		cursor: pointer;
+		transition: var(--wp--custom--transition--default);
+
+		&:hover {
+			transform: translateY(-1px);
+			box-shadow: 0 4px 14px rgba(176, 0, 29, 0.3);
+		}
+
+		&:disabled {
+			opacity: 0.7;
+			cursor: not-allowed;
+			transform: none;
+			box-shadow: none;
+		}
+	}
+
+	&__status {
+		margin-top: var(--wp--preset--spacing--xs);
+		font-family: var(--wp--preset--font-family--poppins);
+		font-size: var(--wp--preset--font-size--small);
+		border-radius: var(--wp--custom--border-radius--md);
+		transition: var(--wp--custom--transition--default);
+
+		&:empty {
+			display: none;
+		}
+
+		&--success {
+			display: block;
+			padding: 12px 16px;
+			background: var(--wp--preset--color--success-bg);
+			color: var(--wp--preset--color--success-text);
+			border: 1px solid var(--wp--preset--color--success);
+		}
+
+		&--error {
+			display: block;
+			padding: 12px 16px;
+			background: var(--wp--preset--color--error-bg);
+			color: var(--wp--preset--color--error-text);
+			border: 1px solid var(--wp--preset--color--error);
+		}
+	}
+}
+
+/* Responsive - stack on mobile */
+@media (max-width: 480px) {
+	.jurible-contact-form {
+		max-width: 100%;
+		padding: var(--wp--preset--spacing--md);
+
+		&__row {
+			grid-template-columns: 1fr;
+		}
+	}
+}

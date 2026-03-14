@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jurible/contact-form",
+	"version": "1.0.0",
+	"title": "Formulaire de Contact",
+	"category": "jurible",
+	"icon": "email-alt",
+	"description": "Formulaire de contact avec envoi par email (prénom, nom, email, sujet, message)",
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"attributes": {
+		"recipientEmail": {
+			"type": "string",
+			"default": ""
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		},
+		"buttonText": {
+			"type": "string",
+			"default": "Envoyer mon message →"
+		},
+		"successMessage": {
+			"type": "string",
+			"default": "Votre message a bien été envoyé. Nous vous répondrons rapidement."
+		},
+		"subjects": {
+			"type": "string",
+			"default": "Question générale,Support technique,Partenariat,Autre"
+		}
+	},
+	"textdomain": "jurible-blocks-react",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}

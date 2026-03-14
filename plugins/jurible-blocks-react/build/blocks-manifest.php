@@ -1167,6 +1167,51 @@ Commentaire d\'arrêt'
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css'
 	),
+	'contact-form' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'jurible/contact-form',
+		'version' => '1.0.0',
+		'title' => 'Formulaire de Contact',
+		'category' => 'jurible',
+		'icon' => 'email-alt',
+		'description' => 'Formulaire de contact avec envoi par email (prénom, nom, email, sujet, message)',
+		'supports' => array(
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			)
+		),
+		'attributes' => array(
+			'recipientEmail' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'description' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'buttonText' => array(
+				'type' => 'string',
+				'default' => 'Envoyer mon message →'
+			),
+			'successMessage' => array(
+				'type' => 'string',
+				'default' => 'Votre message a bien été envoyé. Nous vous répondrons rapidement.'
+			),
+			'subjects' => array(
+				'type' => 'string',
+				'default' => 'Question générale,Support technique,Partenariat,Autre'
+			)
+		),
+		'textdomain' => 'jurible-blocks-react',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'render' => 'file:./render.php'
+	),
 	'cta-banner' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -1793,6 +1838,47 @@ Commentaire d\'arrêt'
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css'
+	),
+	'qcm' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'jurible/qcm',
+		'version' => '1.0.0',
+		'title' => 'QCM Jurible',
+		'category' => 'jurible',
+		'icon' => 'editor-help',
+		'description' => 'Quiz à choix multiples interactif pour les articles SEO',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'default' => 'Quiz'
+			),
+			'questions' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'shuffleAnswers' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showExplanations' => array(
+				'type' => 'boolean',
+				'default' => true
+			)
+		),
+		'textdomain' => 'jurible-blocks-react',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js'
 	),
 	'solution-card' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',

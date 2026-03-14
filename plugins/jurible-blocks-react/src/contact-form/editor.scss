@@ -1,0 +1,13 @@
+/* Contact Form Block - Editor Styles */
+
+.jurible-contact-form {
+	&__input,
+	&__textarea {
+		cursor: not-allowed;
+		opacity: 0.8;
+	}
+
+	&__btn {
+		cursor: default;
+	}
+}
