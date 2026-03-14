@@ -499,8 +499,9 @@ class Jurible_Migration_Converter {
         // Remove the QCM title H2 (e.g., "I. QCM Droit pénal général (30 questions et réponses)")
         $html = preg_replace('/<h2[^>]*>[^<]*QCM[^<]*questions[^<]*<\/h2>/i', '', $html);
 
-        // Replace the Explication section with QCM placeholder
-        $html = str_replace($fullSection, '###QCM###' . base64_encode($qcmBlock) . '###/QCM###', $html);
+        // Insert QCM block BEFORE the "Explication" H2 (keep the H2 + questions for SEO)
+        $explH2 = $sectionMatch[1];
+        $html = str_replace($explH2, '###QCM###' . base64_encode($qcmBlock) . '###/QCM###' . $explH2, $html);
 
         return $html;
     }
