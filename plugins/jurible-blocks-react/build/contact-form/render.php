@@ -18,11 +18,9 @@ $wrapper_attributes = get_block_wrapper_attributes([
     'class' => 'jurible-contact-form'
 ]);
 
-$nonce = wp_create_nonce('jurible_contact_form');
 ?>
 
 <div <?php echo $wrapper_attributes; ?>
-     data-nonce="<?php echo esc_attr($nonce); ?>"
      data-success-message="<?php echo esc_attr($successMessage); ?>"
      data-recipient="<?php echo esc_attr($recipientEmail); ?>">
 

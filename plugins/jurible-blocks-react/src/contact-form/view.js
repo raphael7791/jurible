@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		const form = block.querySelector('.jurible-contact-form__form');
 		const statusEl = block.querySelector('.jurible-contact-form__status');
 		const submitBtn = block.querySelector('.jurible-contact-form__btn');
-		const nonce = block.dataset.nonce;
 		const successMessage = block.dataset.successMessage;
 		const recipient = block.dataset.recipient;
 
@@ -56,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
 					subject: subject,
 					message: message,
 					website: website,
-					_wpnonce: nonce,
 					recipient: recipient,
 				}),
 			})
