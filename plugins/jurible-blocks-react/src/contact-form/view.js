@@ -25,8 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			const subject = form.querySelector('select[name="subject"]').value;
 			const message = form.querySelector('textarea[name="message"]').value.trim();
 			const website = form.querySelector('input[name="website"]').value;
-			const consent = form.querySelector('input[name="consent"]').checked;
-
 			// Client-side validation
 			if (!firstName || !lastName || !email || !message) {
 				statusEl.className = 'jurible-contact-form__status jurible-contact-form__status--error';
@@ -37,12 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (!isValidEmail(email)) {
 				statusEl.className = 'jurible-contact-form__status jurible-contact-form__status--error';
 				statusEl.textContent = 'Veuillez entrer une adresse email valide.';
-				return;
-			}
-
-			if (!consent) {
-				statusEl.className = 'jurible-contact-form__status jurible-contact-form__status--error';
-				statusEl.textContent = 'Veuillez accepter les conditions générales.';
 				return;
 			}
 

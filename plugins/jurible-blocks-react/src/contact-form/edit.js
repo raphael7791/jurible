@@ -102,10 +102,6 @@ export default function Edit({ attributes, setAttributes }) {
 							disabled
 						/>
 					</div>
-					<div className="jurible-contact-form__consent">
-						<input type="checkbox" disabled />
-						<span>J'accepte les <a href="/conditions-generales">conditions générales</a> et la <a href="/politique-de-confidentialite">politique de confidentialité</a></span>
-					</div>
 					<button type="button" className="jurible-contact-form__btn">
 						{buttonText}
 					</button>

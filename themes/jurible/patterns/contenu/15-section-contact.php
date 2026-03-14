@@ -151,7 +151,7 @@
 <!-- wp:column {"width":"55%"} -->
 <div class="wp-block-column" style="flex-basis:55%">
 
-<!-- wp:jurible/contact-form {"recipientEmail":"contact@jurible.com","buttonText":"Envoyer mon message →"} /-->
+<!-- wp:jurible/contact-form {"recipientEmail":"mails@aideauxtd.com","buttonText":"Envoyer mon message →"} /-->
 
 </div>
 <!-- /wp:column -->

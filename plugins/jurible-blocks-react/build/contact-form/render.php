@@ -92,11 +92,6 @@ $nonce = wp_create_nonce('jurible_contact_form');
             <input type="text" name="website" autocomplete="off" tabindex="-1" />
         </div>
 
-        <div class="jurible-contact-form__consent">
-            <input type="checkbox" name="consent" required />
-            <span>J'accepte les <a href="/conditions-generales" target="_blank">conditions générales</a> et la <a href="/politique-de-confidentialite" target="_blank">politique de confidentialité</a></span>
-        </div>
-
         <button type="submit" class="jurible-contact-form__btn">
             <?php echo esc_html($buttonText); ?>
         </button>
