@@ -65,9 +65,9 @@ document.addEventListener('DOMContentLoaded', function () {
 				})
 				.then(function (result) {
 					if (result.ok) {
+						form.style.display = 'none';
 						statusEl.className = 'jurible-contact-form__status jurible-contact-form__status--success';
-						statusEl.textContent = successMessage;
-						form.reset();
+						statusEl.innerHTML = '<strong>Message envoyé !</strong><br>' + successMessage;
 					} else {
 						statusEl.className = 'jurible-contact-form__status jurible-contact-form__status--error';
 						statusEl.textContent = result.data.message || 'Une erreur est survenue. Veuillez réessayer.';
