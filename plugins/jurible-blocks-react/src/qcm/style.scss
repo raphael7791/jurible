@@ -1,0 +1,520 @@
+/* QCM Jurible - Front - Design + Dark Mode */
+
+/* CSS Variables for theming */
+:root {
+    --qcm-bg-card: var(--wp--preset--color--white);
+    --qcm-bg-secondary: var(--wp--preset--color--background);
+    --qcm-text-primary: var(--wp--preset--color--text-dark);
+    --qcm-text-secondary: var(--wp--preset--color--text-gray);
+    --qcm-text-muted: var(--wp--preset--color--text-muted);
+    --qcm-border-color: var(--wp--preset--color--border);
+    --qcm-shadow: var(--wp--preset--shadow--lg);
+    --qcm-shadow-light: var(--wp--preset--shadow--xs);
+    --qcm-correct: var(--wp--preset--color--success, #10b981);
+    --qcm-incorrect: var(--wp--preset--color--error, #ef4444);
+}
+
+/* Dark mode overrides */
+html.dark {
+    --qcm-bg-card: var(--el-bg-color-overlay, #1d1e1f);
+    --qcm-bg-secondary: var(--el-bg-color, #141414);
+    --qcm-text-primary: var(--el-text-color-primary, #E5EAF3);
+    --qcm-text-secondary: var(--el-text-color-regular, #CFD3DC);
+    --qcm-text-muted: var(--el-text-color-secondary, #A3A6AD);
+    --qcm-border-color: var(--el-border-color, #414243);
+    --qcm-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3), 0px 4px 6px rgba(0, 0, 0, 0.2);
+    --qcm-shadow-light: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.jurible-qcm-container {
+    font-family: var(--wp--preset--font-family--poppins);
+    max-width: 640px;
+    margin: 0 auto;
+    padding: clamp(20px, 5vw, 32px);
+    background: var(--qcm-bg-secondary);
+    border: 1px solid var(--qcm-border-color);
+    border-radius: var(--wp--custom--border-radius--lg);
+}
+
+/* Hide SEO content when JS has initialized */
+.jurible-qcm-container[data-initialized="true"] .qcm-seo-content {
+    display: none;
+}
+
+.qcm-app {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 4vw, 24px);
+}
+
+/* ==================== PROGRESS BAR ==================== */
+.qcm-progress-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wp--preset--spacing--xs);
+    width: 100%;
+}
+
+.qcm-progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.qcm-progress-title {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 600;
+    font-size: clamp(14px, 3.5vw, 16px);
+    color: var(--qcm-text-primary);
+}
+
+.qcm-progress-count {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 700;
+    font-size: clamp(13px, 3vw, 14px);
+    color: var(--qcm-text-muted);
+    background: var(--qcm-bg-card);
+    padding: 4px 10px;
+    border-radius: var(--wp--custom--border-radius--full, 999px);
+}
+
+.qcm-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--qcm-border-color);
+    border-radius: var(--wp--custom--border-radius--xs);
+    overflow: hidden;
+}
+
+.qcm-progress-fill {
+    height: 6px;
+    background: linear-gradient(90.72deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    border-radius: var(--wp--custom--border-radius--xs);
+    transition: var(--wp--custom--transition--slow);
+}
+
+/* ==================== QUESTION CARD ==================== */
+.qcm-card {
+    box-sizing: border-box;
+    width: 100%;
+    background: var(--qcm-bg-card);
+    border: 1px solid var(--qcm-border-color);
+    box-shadow: var(--qcm-shadow);
+    border-radius: var(--wp--custom--border-radius--lg);
+    overflow: hidden;
+}
+
+.qcm-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px var(--wp--preset--spacing--md);
+    height: 45px;
+    background: linear-gradient(94.73deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+}
+
+.qcm-card-label {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 700;
+    font-size: var(--wp--preset--font-size--caption);
+    line-height: 18px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--white, #fff);
+}
+
+.qcm-card-num {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 600;
+    font-size: var(--wp--preset--font-size--small);
+    line-height: 21px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.qcm-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(16px, 4vw, 24px) clamp(16px, 4vw, 32px);
+    background: var(--qcm-bg-card);
+}
+
+.qcm-question-text {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 600;
+    font-size: clamp(16px, 4vw, 20px);
+    line-height: var(--wp--custom--line-height--body);
+    text-align: center;
+    color: var(--qcm-text-primary);
+    margin: 0 !important;
+}
+
+/* ==================== ANSWERS GRID ==================== */
+.qcm-answers-grid {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 2vw, 12px);
+}
+
+.qcm-answer-btn {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(10px, 3vw, 16px);
+    padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 20px);
+    width: 100%;
+    background: var(--qcm-bg-card);
+    border: 2px solid var(--qcm-border-color);
+    border-radius: var(--wp--custom--border-radius--md);
+    cursor: pointer;
+    transition: var(--wp--custom--transition--default);
+    text-align: left;
+    font-family: var(--wp--preset--font-family--poppins);
+
+    &:hover:not(:disabled) {
+        border-color: var(--wp--preset--color--primary);
+        background: rgba(124, 58, 237, 0.05);
+        transform: translateY(-1px);
+        box-shadow: var(--qcm-shadow-light);
+    }
+}
+
+.qcm-answer-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(28px, 6vw, 36px);
+    height: clamp(28px, 6vw, 36px);
+    min-width: clamp(28px, 6vw, 36px);
+    border-radius: 50%;
+    background: var(--qcm-bg-secondary);
+    font-weight: 700;
+    font-size: clamp(12px, 3vw, 14px);
+    color: var(--qcm-text-secondary);
+    transition: var(--wp--custom--transition--default);
+}
+
+.qcm-answer-text {
+    font-weight: 500;
+    font-size: clamp(14px, 3.5vw, 16px);
+    line-height: 1.5;
+    color: var(--qcm-text-primary);
+}
+
+/* Answer states */
+.qcm-answer-correct {
+    border-color: var(--qcm-correct) !important;
+    background: rgba(16, 185, 129, 0.08) !important;
+
+    .qcm-answer-letter {
+        background: var(--qcm-correct);
+        color: #fff;
+    }
+
+    .qcm-answer-text {
+        color: var(--qcm-correct);
+        font-weight: 600;
+    }
+}
+
+.qcm-answer-incorrect {
+    border-color: var(--qcm-incorrect) !important;
+    background: rgba(239, 68, 68, 0.08) !important;
+
+    .qcm-answer-letter {
+        background: var(--qcm-incorrect);
+        color: #fff;
+    }
+
+    .qcm-answer-text {
+        color: var(--qcm-incorrect);
+    }
+}
+
+.qcm-answer-disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* ==================== EXPLANATION (style alerte info) ==================== */
+.qcm-explanation {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: clamp(10px, 3vw, 14px);
+    padding: clamp(14px, 3.5vw, 20px);
+    background: var(--wp--preset--color--info-bg, #EFF6FF);
+    border-radius: var(--wp--custom--border-radius--md);
+}
+
+html.dark .qcm-explanation {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.qcm-explanation-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(24px, 5vw, 28px);
+    height: clamp(24px, 5vw, 28px);
+    min-width: clamp(24px, 5vw, 28px);
+    color: var(--wp--preset--color--info, #3B82F6);
+    font-size: clamp(16px, 4vw, 20px);
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.qcm-explanation p {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 500;
+    font-size: clamp(13px, 3.5vw, 15px);
+    line-height: 1.6;
+    color: var(--wp--preset--color--info-text, #1E40AF);
+    margin: 0 !important;
+    padding: 0;
+}
+
+html.dark .qcm-explanation p {
+    color: #93C5FD;
+}
+
+/* ==================== NEXT BUTTON ==================== */
+.qcm-next-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.qcm-next-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: clamp(14px, 3.5vw, 18px) clamp(32px, 8vw, 48px);
+    background: linear-gradient(94.73deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    color: var(--wp--preset--color--white, #fff);
+    border: none;
+    border-radius: var(--wp--custom--border-radius--md);
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 600;
+    font-size: clamp(14px, 3.5vw, 16px);
+    cursor: pointer;
+    transition: var(--wp--custom--transition--default);
+    box-shadow: var(--wp--preset--shadow--accent);
+    width: 100%;
+
+    &:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+        box-shadow: 0px 6px 16px rgba(124, 58, 237, 0.3);
+    }
+}
+
+/* ==================== SCORE RING ==================== */
+.qcm-score-ring {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(80px, 16vw, 100px);
+    height: clamp(80px, 16vw, 100px);
+    border-radius: 50%;
+    background: linear-gradient(94.73deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+}
+
+.qcm-score-percent {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 700;
+    font-size: clamp(22px, 5vw, 28px);
+    color: #fff;
+}
+
+/* ==================== RESULTS SCREEN ==================== */
+.qcm-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--wp--preset--spacing--md);
+}
+
+.qcm-results-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px var(--wp--preset--spacing--lg);
+    background: linear-gradient(94.73deg, var(--wp--preset--color--primary) 0%, #DC2626 50%, var(--wp--preset--color--secondary) 100%);
+    border-radius: var(--wp--custom--border-radius--full);
+}
+
+.qcm-results-header span {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 700;
+    font-size: var(--wp--preset--font-size--caption);
+    line-height: 18px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--white, #fff);
+}
+
+.qcm-results-icon {
+    font-size: clamp(48px, 10vw, 64px);
+    line-height: 1;
+}
+
+.qcm-results-title {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 700;
+    font-size: clamp(24px, 6vw, 32px);
+    line-height: var(--wp--custom--line-height--subheading);
+    text-align: center;
+    color: var(--qcm-text-primary);
+    margin: 0 !important;
+}
+
+.qcm-results-sub {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 400;
+    font-size: clamp(14px, 3.5vw, 16px);
+    line-height: 24px;
+    text-align: center;
+    color: var(--qcm-text-secondary);
+    margin: 0 !important;
+}
+
+/* Stats Pills */
+.qcm-results-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(8px, 3vw, 16px);
+    flex-wrap: wrap;
+}
+
+.qcm-stat {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px);
+    gap: clamp(8px, 2vw, 12px);
+    background: var(--qcm-bg-card);
+    border: 1px solid var(--qcm-border-color);
+    border-radius: var(--wp--custom--border-radius--lg);
+    box-shadow: var(--qcm-shadow-light);
+}
+
+.qcm-stat-icon {
+    font-size: clamp(18px, 4vw, 24px);
+}
+
+.qcm-stat-num {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 700;
+    font-size: clamp(16px, 4vw, 20px);
+    line-height: 30px;
+}
+
+.qcm-stat-green .qcm-stat-num {
+    color: var(--wp--preset--color--success);
+}
+
+.qcm-stat-orange .qcm-stat-num {
+    color: var(--wp--preset--color--error);
+}
+
+.qcm-stat-label {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 500;
+    font-size: clamp(12px, 3vw, 14px);
+    line-height: 21px;
+    color: var(--qcm-text-secondary);
+}
+
+.qcm-restart-wrapper {
+    margin-top: var(--wp--preset--spacing--sm);
+}
+
+/* ==================== SEO CONTENT (visible before JS) ==================== */
+.qcm-seo-content {
+    background: var(--qcm-bg-card);
+    border: 1px solid var(--qcm-border-color);
+    border-radius: var(--wp--custom--border-radius--lg);
+    padding: clamp(16px, 4vw, 24px);
+}
+
+.qcm-seo-title {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 700;
+    font-size: clamp(18px, 4.5vw, 22px);
+    color: var(--qcm-text-primary);
+    margin: 0 0 16px;
+}
+
+.qcm-seo-question {
+    border-bottom: 1px solid var(--qcm-border-color);
+    padding: 12px 0;
+
+    summary {
+        font-family: var(--wp--preset--font-family--poppins);
+        font-weight: 500;
+        font-size: clamp(14px, 3.5vw, 16px);
+        color: var(--qcm-text-primary);
+        cursor: pointer;
+        padding: 4px 0;
+    }
+
+    ul {
+        list-style: none;
+        padding: 8px 0 0 16px;
+        margin: 0;
+    }
+
+    li {
+        font-family: var(--wp--preset--font-family--poppins);
+        font-size: clamp(13px, 3vw, 14px);
+        color: var(--qcm-text-secondary);
+        padding: 4px 0;
+    }
+
+    li.qcm-correct {
+        color: var(--qcm-correct);
+        font-weight: 600;
+    }
+}
+
+.qcm-seo-explanation {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-size: clamp(13px, 3vw, 14px);
+    color: var(--qcm-text-muted);
+    font-style: italic;
+    margin: 8px 0 0;
+    padding-left: 16px;
+}
+
+/* ==================== EMPTY & ERROR STATES ==================== */
+.qcm-empty,
+.qcm-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px var(--wp--preset--spacing--md);
+    background: var(--qcm-bg-secondary);
+    border: 1px solid var(--qcm-border-color);
+    border-radius: var(--wp--custom--border-radius--lg);
+    text-align: center;
+}
+
+.qcm-empty p,
+.qcm-error p {
+    font-family: var(--wp--preset--font-family--poppins);
+    font-weight: 500;
+    font-size: var(--wp--preset--font-size--body);
+    line-height: 24px;
+    color: var(--qcm-text-secondary);
+    margin: 0;
+}

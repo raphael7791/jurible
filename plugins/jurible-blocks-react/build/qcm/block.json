@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jurible/qcm",
+  "version": "1.0.0",
+  "title": "QCM Jurible",
+  "category": "jurible",
+  "icon": "editor-help",
+  "description": "Quiz à choix multiples interactif pour les articles SEO",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Quiz"
+    },
+    "questions": {
+      "type": "array",
+      "default": []
+    },
+    "shuffleAnswers": {
+      "type": "boolean",
+      "default": true
+    },
+    "showExplanations": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "textdomain": "jurible-blocks-react",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}
