@@ -28,7 +28,7 @@ html.dark {
 
 .jurible-qcm-container {
     font-family: var(--wp--preset--font-family--poppins);
-    max-width: 640px;
+    max-width: var(--wp--style--global--content-size, 720px);
     margin: 0 auto;
     padding: clamp(20px, 5vw, 32px);
     background: var(--qcm-bg-secondary);
