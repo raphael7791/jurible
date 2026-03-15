@@ -471,7 +471,7 @@ class Jurible_Migration_Converter {
 
     private function convertQcmBlocks(string $html): string {
         // Quick check: need question headers AND green highlights for correct answers
-        if (!preg_match('/<h3[^>]*>.*?Question\s+\d+\s*:/is', $html)
+        if (!preg_match('/<h3[^>]*>.*?Question\s+\d+/is', $html)
             || strpos($html, 'rgba(56, 203, 105') === false) {
             return $html;
         }
