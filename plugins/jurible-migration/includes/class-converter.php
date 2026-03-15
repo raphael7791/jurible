@@ -611,9 +611,12 @@ class Jurible_Migration_Converter {
     }
 
     private function convertARetenirToInfobox(string $html): string {
+        // Match both HTML entity &#x1f4cd; and UTF-8 📍 character
+        $pinEmoji = '(?:&#x1f4cd;|\x{1F4CD}|📍|&#x1f4cc;|\x{1F4CC}|📌)';
+
         // Pattern 1: H4 Gutenberg "📍A retenir sur..." + paragraphs
         $html = preg_replace_callback(
-            '/<!-- wp:heading \{"level":4\} -->\s*<h4[^>]*><strong>&#x1f4cd;A retenir sur\s*(.*?)<\/strong><\/h4>\s*<!-- \/wp:heading -->\s*((?:<!-- wp:paragraph -->\s*<p>.*?<\/p>\s*<!-- \/wp:paragraph -->\s*)+)/is',
+            '/<!-- wp:heading \{"level":4\} -->\s*<h4[^>]*>(?:<strong>)?' . $pinEmoji . '\s*A retenir sur\s*(.*?)(?:<\/strong>)?<\/h4>\s*<!-- \/wp:heading -->\s*((?:<!-- wp:paragraph -->\s*<p>.*?<\/p>\s*<!-- \/wp:paragraph -->\s*)+)/isu',
             function($matches) {
                 $name = trim(html_entity_decode(strip_tags($matches[1]), ENT_QUOTES, 'UTF-8'));
                 preg_match_all('/<p>(.*?)<\/p>/is', $matches[2], $pMatches);
@@ -625,7 +628,7 @@ class Jurible_Migration_Converter {
 
         // Pattern 2: Orphan text "📍A retenir sur..." (malformed, no heading wrapper)
         $html = preg_replace_callback(
-            '/<strong>&#x1f4cd;A retenir sur\s*(.*?)<\/strong>\s*\n\s*(.*?)<\/p>\s*<!-- \/wp:paragraph -->/is',
+            '/<strong>' . $pinEmoji . '\s*A retenir sur\s*(.*?)<\/strong>\s*\n\s*(.*?)<\/p>\s*<!-- \/wp:paragraph -->/isu',
             function($matches) {
                 $name = trim(html_entity_decode(strip_tags($matches[1]), ENT_QUOTES, 'UTF-8'));
                 $content = trim(strip_tags($matches[2], '<strong><em><a><br>'));
