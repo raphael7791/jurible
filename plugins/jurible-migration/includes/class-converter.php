@@ -571,7 +571,7 @@ class Jurible_Migration_Converter {
         return $html;
     }
 
-    private function createQcmBlock(string $title, array $questions): string {
+    public function createQcmBlock(string $title, array $questions): string {
         $questionsJson = json_encode($questions, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         // Build SEO content (accessible without JS)

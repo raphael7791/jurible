@@ -29,6 +29,9 @@ class Jurible_Migration_Migrator {
             return new WP_Error('no_content', 'Aucun contenu Thrive trouvé pour cet article');
         }
 
+        // 2b. Convertir les quiz Thrive Quiz Builder (shortcodes [tqb_quiz]) en blocs QCM
+        $thriveContent = $this->convertTqbQuizzes($thriveContent);
+
         // 3. Convertir en Gutenberg
         $gutenbergContent = $this->converter->convert($thriveContent);
 
@@ -424,6 +427,122 @@ class Jurible_Migration_Migrator {
         );
 
         shell_exec($command);
+    }
+
+    /**
+     * Convertir les shortcodes [tqb_quiz id='X'] en blocs QCM Gutenberg
+     * en extrayant les questions/réponses de la BDD source (tables tge_questions/tge_answers)
+     */
+    private function convertTqbQuizzes(string $html): string {
+        if (!preg_match_all('/\[tqb_quiz\s+id=[\'"](\d+)[\'"]\s*\]/i', $html, $matches)) {
+            return $html;
+        }
+
+        foreach ($matches[0] as $idx => $shortcode) {
+            $quizId = (int) $matches[1][$idx];
+
+            // Get quiz title from source DB
+            $command = sprintf(
+                'cd %s && wp eval "echo get_the_title(%d);" --allow-root 2>/dev/null',
+                escapeshellarg(JURIBLE_AIDEAUXTD_PATH),
+                $quizId
+            );
+            $quizTitle = trim(shell_exec($command) ?? 'Quiz');
+            // Clean up title: "QCM - Institutions juridictionnelles (L1 Droit )" -> "QCM Institutions juridictionnelles"
+            $quizTitle = preg_replace('/\s*\([^)]*\)\s*$/', '', $quizTitle);
+            $quizTitle = str_replace(' - ', ' ', $quizTitle);
+
+            // Get questions and answers via WP-CLI eval on source DB
+            $evalCode = sprintf(
+                'global $wpdb; '
+                . '$prefix = $wpdb->prefix; '
+                . '$questions = $wpdb->get_results($wpdb->prepare('
+                . '"SELECT id, text, description FROM {$prefix}tge_questions WHERE quiz_id = %%d ORDER BY id", %d'
+                . ')); '
+                . '$result = []; '
+                . 'foreach ($questions as $q) { '
+                . '  $answers = $wpdb->get_results($wpdb->prepare('
+                . '  "SELECT text, is_right FROM {$prefix}tge_answers WHERE question_id = %%d ORDER BY `order`", $q->id'
+                . '  )); '
+                . '  $result[] = ["question" => strip_tags($q->text), "description" => $q->description, "answers" => array_map(function($a) { '
+                . '    return ["text" => strip_tags($a->text), "is_right" => (int)$a->is_right]; '
+                . '  }, $answers)]; '
+                . '} '
+                . 'echo json_encode($result, JSON_UNESCAPED_UNICODE);',
+                $quizId
+            );
+
+            $command = sprintf(
+                'cd %s && wp eval %s --allow-root 2>/dev/null',
+                escapeshellarg(JURIBLE_AIDEAUXTD_PATH),
+                escapeshellarg($evalCode)
+            );
+
+            $output = shell_exec($command);
+            $rawQuestions = json_decode($output, true);
+
+            if (empty($rawQuestions)) {
+                // Remove the shortcode if no questions found
+                $html = str_replace($shortcode, '', $html);
+                continue;
+            }
+
+            // Convert to QCM block format
+            $qcmQuestions = [];
+            foreach ($rawQuestions as $rq) {
+                $questionText = trim(preg_replace('/^\d+\s*[-–—.]\s*/', '', $rq['question']));
+                if (empty($questionText)) continue;
+
+                $answers = [];
+                $correctIndex = 0;
+                $rightIndices = [];
+
+                foreach ($rq['answers'] as $j => $a) {
+                    $answers[] = trim($a['text']);
+                    if ($a['is_right']) {
+                        $rightIndices[] = $j;
+                    }
+                }
+
+                if (count($answers) < 2) continue;
+
+                // Use first correct answer as correctIndex
+                $correctIndex = !empty($rightIndices) ? $rightIndices[0] : 0;
+
+                // Build explanation for multi-answer questions
+                $explanation = '';
+                if (count($rightIndices) > 1) {
+                    $letters = array_map(fn($i) => chr(97 + $i), $rightIndices);
+                    $explanation = 'Plusieurs réponses correctes : ' . implode(', ', array_map(fn($l) => $l . ')', $letters));
+                }
+                if (!empty($rq['description'])) {
+                    $desc = trim(strip_tags($rq['description']));
+                    if (!empty($desc)) {
+                        $explanation = $explanation ? $explanation . '. ' . $desc : $desc;
+                    }
+                }
+
+                $qcmQuestions[] = [
+                    'question' => $questionText,
+                    'answers' => $answers,
+                    'correctIndex' => $correctIndex,
+                    'explanation' => $explanation,
+                ];
+            }
+
+            if (empty($qcmQuestions)) {
+                $html = str_replace($shortcode, '', $html);
+                continue;
+            }
+
+            // Generate the QCM block
+            $qcmBlock = $this->converter->createQcmBlock($quizTitle, $qcmQuestions);
+
+            // Replace the shortcode with the QCM block
+            $html = str_replace($shortcode, $qcmBlock, $html);
+        }
+
+        return $html;
     }
 
     /**
