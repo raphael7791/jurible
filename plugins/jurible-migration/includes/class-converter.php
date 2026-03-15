@@ -158,6 +158,11 @@ class Jurible_Migration_Converter {
     }
 
     private function removeCTABlocks(string $html): string {
+        // Remove Thrive Table of Contents block (tve-toc) — contains SVG, anchors, headings text
+        // Must be removed early to prevent TOC content leaking into paragraphs and breaking H2 conversion
+        // Uses lookahead to match until the next actual content div (thrv_text_element)
+        $html = preg_replace('/<div[^>]*class="[^"]*\btve-toc\b[^"]*"[^>]*>[\s\S]*?(?=<div[^>]*class="[^"]*thrv_text_element)/is', '', $html);
+
         // Remove ALL Thrive config blocks (they break rendering)
         $html = preg_replace('/<div[^>]*class="[^"]*thrive-[^"]*config[^"]*"[^>]*>.*?(?:<\/div>|(?=<!-- wp:))/is', '', $html);
 
