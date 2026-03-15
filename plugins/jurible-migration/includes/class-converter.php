@@ -100,6 +100,7 @@ class Jurible_Migration_Converter {
         $this->content = $this->convertTables($this->content);
         $this->content = $this->convertLists($this->content);
         $this->content = $this->convertParagraphs($this->content);
+        $this->content = $this->convertExplicationToInfobox($this->content);
         $this->content = $this->convertNBtoInfobox($this->content);
         $this->content = $this->convertARetenirToInfobox($this->content);
         $this->content = $this->convertAvisProfToInfobox($this->content);
@@ -716,6 +717,20 @@ class Jurible_Migration_Converter {
                 preg_match_all('/<p>(.*?)<\/p>/is', $matches[1], $pMatches);
                 $content = implode('<br><br>', array_map('trim', $pMatches[1]));
                 return $this->createInfobox('retenir', "L'avis du prof de droit \u{1F913}", $content);
+            },
+            $html
+        );
+    }
+
+    private function convertExplicationToInfobox(string $html): string {
+        return preg_replace_callback(
+            '/<!-- wp:paragraph -->\s*<p>(?:<strong>)?Explication\s*:\s*(.*?)(?:<\/strong>)?<\/p>\s*<!-- \/wp:paragraph -->/is',
+            function($matches) {
+                $content = trim($matches[1]);
+                if (empty(strip_tags($content))) {
+                    return '';
+                }
+                return $this->createInfobox('exemple', 'Explication', $content);
             },
             $html
         );
