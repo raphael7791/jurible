@@ -760,44 +760,78 @@ class Jurible_Migration_Converter {
         for ($i = 1; $i < count($parts); $i += 2) {
             $questionBlock = $parts[$i] . ($parts[$i + 1] ?? '');
 
-            // Extract question text: "Question n°X – texte"
+            // Extract question text: "Question n°X – texte" (– or - as separator)
             if (!preg_match('/<h3[^>]*>Question\s+n°\d+\s*[–—-]\s*(.*?)<\/h3>/is', $questionBlock, $qMatch)) {
                 continue;
             }
-            $questionText = trim(html_entity_decode(strip_tags($qMatch[1]), ENT_QUOTES, 'UTF-8'));
-            $questionText = mb_convert_encoding($questionText, 'UTF-8', 'UTF-8');
-            $questionText = preg_replace('/\s+/', ' ', $questionText);
-            if (empty($questionText)) continue;
+            $h3Inner = $qMatch[1];
 
-            // Extract answers from list items
-            preg_match_all('/<li>(.*?)<\/li>/is', $questionBlock, $liMatches);
+            // Check if answers are inline in H3 (malformed format: "texte : 1. Réponse<strong>2. Réponse (bonne réponse)</strong>")
             $answers = [];
             $correctIndices = [];
 
-            foreach ($liMatches[1] as $j => $li) {
-                $isCorrect = (stripos($li, 'bonne réponse') !== false);
-                // Clean answer text: remove number prefix, "(bonne réponse)", bold tags
-                $answerText = strip_tags($li);
-                $answerText = preg_replace('/\(bonne réponse\)/i', '', $answerText);
-                $answerText = preg_replace('/^\d+\.\s*/', '', trim($answerText));
-                $answerText = trim(html_entity_decode($answerText, ENT_QUOTES, 'UTF-8'));
-                $answerText = mb_convert_encoding($answerText, 'UTF-8', 'UTF-8');
-                $answerText = preg_replace('/\s+/', ' ', $answerText);
-                if (empty($answerText)) continue;
-
-                if ($isCorrect) {
-                    $correctIndices[] = count($answers);
+            if (preg_match('/^(.*?)\s*\d+\.\s/s', strip_tags($h3Inner), $splitMatch)) {
+                // Answers are inline in the H3
+                $questionText = trim(html_entity_decode($splitMatch[1], ENT_QUOTES, 'UTF-8'));
+                // Extract numbered answers from the H3 content
+                // Split by "1.", "2.", "3." etc, keeping the HTML to detect <strong> for correct answers
+                preg_match_all('/(\d+)\.\s*(.*?)(?=\d+\.|Explications?\s*:|$)/is', $h3Inner, $inlineAnswers);
+                foreach ($inlineAnswers[2] as $j => $rawAnswer) {
+                    $isCorrect = (stripos($rawAnswer, 'bonne réponse') !== false);
+                    $answerText = strip_tags($rawAnswer);
+                    $answerText = preg_replace('/\(bonne réponse\)/i', '', $answerText);
+                    $answerText = trim(html_entity_decode($answerText, ENT_QUOTES, 'UTF-8'));
+                    $answerText = preg_replace('/\s+/', ' ', $answerText);
+                    if (empty($answerText)) continue;
+                    if ($isCorrect) $correctIndices[] = count($answers);
+                    $answers[] = $answerText;
                 }
-                $answers[] = $answerText;
+                // Extract inline explanation if present
+                $inlineExplanation = '';
+                if (preg_match('/Explications?\s*:\s*(.*?)$/is', strip_tags($h3Inner), $inlineExplMatch)) {
+                    $inlineExplanation = trim(html_entity_decode($inlineExplMatch[1], ENT_QUOTES, 'UTF-8'));
+                    $inlineExplanation = preg_replace('/\s+/', ' ', $inlineExplanation);
+                }
+            } else {
+                $questionText = trim(html_entity_decode(strip_tags($h3Inner), ENT_QUOTES, 'UTF-8'));
+                $inlineExplanation = '';
+            }
+
+            $questionText = mb_convert_encoding($questionText, 'UTF-8', 'UTF-8');
+            $questionText = preg_replace('/^\?+\s*/', '', $questionText);
+            $questionText = preg_replace('/\s+/', ' ', $questionText);
+            if (empty($questionText)) continue;
+
+            // If no inline answers found, extract from list items
+            if (count($answers) < 2) {
+                preg_match_all('/<li>(.*?)<\/li>/is', $questionBlock, $liMatches);
+                $answers = [];
+                $correctIndices = [];
+
+                foreach ($liMatches[1] as $j => $li) {
+                    $isCorrect = (stripos($li, 'bonne réponse') !== false);
+                    $answerText = strip_tags($li);
+                    $answerText = preg_replace('/\(bonne réponse\)/i', '', $answerText);
+                    $answerText = preg_replace('/^\d+\.\s*/', '', trim($answerText));
+                    $answerText = trim(html_entity_decode($answerText, ENT_QUOTES, 'UTF-8'));
+                    $answerText = mb_convert_encoding($answerText, 'UTF-8', 'UTF-8');
+                    $answerText = preg_replace('/\s+/', ' ', $answerText);
+                    if (empty($answerText)) continue;
+
+                    if ($isCorrect) {
+                        $correctIndices[] = count($answers);
+                    }
+                    $answers[] = $answerText;
+                }
             }
 
             if (count($answers) < 2) continue;
 
             $correctIndex = !empty($correctIndices) ? $correctIndices[0] : 0;
 
-            // Extract explanation paragraph
-            $explanation = '';
-            if (preg_match('/<!-- wp:paragraph -->\s*<p>Explications?\s*:\s*(.*?)<\/p>\s*<!-- \/wp:paragraph -->/is', $questionBlock, $explMatch)) {
+            // Extract explanation paragraph (or use inline explanation from H3)
+            $explanation = $inlineExplanation ?? '';
+            if (empty($explanation) && preg_match('/<!-- wp:paragraph -->\s*<p>Explications?\s*:\s*(.*?)<\/p>\s*<!-- \/wp:paragraph -->/is', $questionBlock, $explMatch)) {
                 $explanation = trim(html_entity_decode(strip_tags($explMatch[1]), ENT_QUOTES, 'UTF-8'));
                 $explanation = mb_convert_encoding($explanation, 'UTF-8', 'UTF-8');
                 $explanation = preg_replace('/\s+/', ' ', $explanation);
