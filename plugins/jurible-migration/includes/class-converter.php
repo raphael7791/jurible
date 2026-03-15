@@ -770,12 +770,14 @@ class Jurible_Migration_Converter {
             $answers = [];
             $correctIndices = [];
 
-            if (preg_match('/^(.*?)\s*\d+\.\s/s', strip_tags($h3Inner), $splitMatch)) {
+            $h3Plain = html_entity_decode(strip_tags($h3Inner), ENT_QUOTES, 'UTF-8');
+            if (preg_match('/^(.*?)\s*\d+\.\s/s', $h3Plain, $splitMatch)) {
                 // Answers are inline in the H3
-                $questionText = trim(html_entity_decode($splitMatch[1], ENT_QUOTES, 'UTF-8'));
-                // Extract numbered answers from the H3 content
-                // Split by "1.", "2.", "3." etc, keeping the HTML to detect <strong> for correct answers
-                preg_match_all('/(\d+)\.\s*(.*?)(?=\d+\.|Explications?\s*:|$)/is', $h3Inner, $inlineAnswers);
+                $questionText = trim($splitMatch[1]);
+                // Decode HTML entities in h3 for regex matching, but keep tags for <strong> detection
+                $h3Decoded = str_replace('&nbsp;', ' ', $h3Inner);
+                // Extract numbered answers, keeping HTML to detect <strong> for correct answers
+                preg_match_all('/(\d+)\.\s*(.*?)(?=\d+\.|Explications?\s*:|$)/is', $h3Decoded, $inlineAnswers);
                 foreach ($inlineAnswers[2] as $j => $rawAnswer) {
                     $isCorrect = (stripos($rawAnswer, 'bonne réponse') !== false);
                     $answerText = strip_tags($rawAnswer);
@@ -788,8 +790,8 @@ class Jurible_Migration_Converter {
                 }
                 // Extract inline explanation if present
                 $inlineExplanation = '';
-                if (preg_match('/Explications?\s*:\s*(.*?)$/is', strip_tags($h3Inner), $inlineExplMatch)) {
-                    $inlineExplanation = trim(html_entity_decode($inlineExplMatch[1], ENT_QUOTES, 'UTF-8'));
+                if (preg_match('/Explications?\s*:\s*(.*?)$/is', $h3Plain, $inlineExplMatch)) {
+                    $inlineExplanation = trim($inlineExplMatch[1]);
                     $inlineExplanation = preg_replace('/\s+/', ' ', $inlineExplanation);
                 }
             } else {
