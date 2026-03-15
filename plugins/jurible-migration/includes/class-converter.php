@@ -561,8 +561,7 @@ class Jurible_Migration_Converter {
         // Generate QCM block and use placeholder
         $qcmBlock = $this->createQcmBlock($title, $questions);
 
-        // Remove the QCM title H2 (e.g., "I. QCM Droit pénal général (30 questions et réponses)")
-        $html = preg_replace('/<h2[^>]*>[^<]*QCM[^<]*questions[^<]*<\/h2>/i', '', $html);
+        // Keep the QCM title H2 (e.g., "I. QCM Droit pénal général (30 questions et réponses)")
 
         // Insert QCM block BEFORE the "Explication" H2 (keep the H2 + questions for SEO)
         $explH2 = $sectionMatch[1];
