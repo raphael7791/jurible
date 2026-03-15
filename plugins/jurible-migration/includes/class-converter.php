@@ -88,6 +88,7 @@ class Jurible_Migration_Converter {
 
         // Convert media
         $this->content = $this->convertYouTubeVideos($this->content);
+        $this->content = $this->convertPodcastEmbeds($this->content);
         $this->content = $this->convertImages($this->content);
 
         // Strip Thrive containers
@@ -306,6 +307,60 @@ class Jurible_Migration_Converter {
         return null;
     }
 
+    private function convertPodcastEmbeds(string $html): string {
+        // Spotify iframes → wp:embed placeholder
+        $html = preg_replace_callback(
+            '/<iframe[^>]*src="([^"]*spotify[^"]*)"[^>]*>.*?<\/iframe>/is',
+            function($matches) {
+                $url = $this->extractSpotifyUrl($matches[1]);
+                if ($url) {
+                    return "###PODCAST_SPOTIFY###" . base64_encode($url) . "###/PODCAST###";
+                }
+                return '';
+            },
+            $html
+        );
+
+        // Soundcloud iframes → wp:embed placeholder
+        $html = preg_replace_callback(
+            '/<iframe[^>]*src="([^"]*soundcloud[^"]*)"[^>]*>.*?<\/iframe>/is',
+            function($matches) {
+                $url = $this->extractSoundcloudUrl($matches[1]);
+                if ($url) {
+                    return "###PODCAST_SOUNDCLOUD###" . base64_encode($url) . "###/PODCAST###";
+                }
+                return '';
+            },
+            $html
+        );
+
+        return $html;
+    }
+
+    private function extractSpotifyUrl(string $src): ?string {
+        // Convert embed URL to standard URL: open.spotify.com/embed/episode/xxx → open.spotify.com/episode/xxx
+        if (preg_match('#open\.spotify\.com/embed/(episode|show|track|playlist)/([a-zA-Z0-9]+)#', $src, $match)) {
+            return 'https://open.spotify.com/' . $match[1] . '/' . $match[2];
+        }
+        // Already a standard Spotify URL
+        if (preg_match('#open\.spotify\.com/(episode|show|track|playlist)/([a-zA-Z0-9]+)#', $src, $match)) {
+            return 'https://open.spotify.com/' . $match[1] . '/' . $match[2];
+        }
+        return null;
+    }
+
+    private function extractSoundcloudUrl(string $src): ?string {
+        // Soundcloud player iframe: src contains url= parameter with the real URL
+        if (preg_match('/[?&]url=([^&]+)/i', $src, $match)) {
+            return urldecode($match[1]);
+        }
+        // Direct soundcloud.com URL
+        if (preg_match('#(https?://soundcloud\.com/[^\s"&]+)#i', $src, $match)) {
+            return $match[1];
+        }
+        return null;
+    }
+
     private function convertImages(string $html): string {
         // Images in Thrive spans
         $html = preg_replace_callback(
@@ -433,7 +488,8 @@ class Jurible_Migration_Converter {
             }
 
             // Extract question text after "Question N :"
-            if (!preg_match('/<strong>\s*Question\s+\d+\s*:(?:&nbsp;|\s)*<\/strong>\s*(.*?)<\/h3>/is', $block, $qMatch)) {
+            // Handles both <strong>Question N :</strong> Text and Question N : Text
+            if (!preg_match('/(?:<strong>\s*)?Question\s+\d+\s*:(?:&nbsp;|\s)*(?:<\/strong>)?\s*(.*?)<\/h3>/is', $block, $qMatch)) {
                 continue;
             }
             $questionText = trim(html_entity_decode(strip_tags($qMatch[1]), ENT_QUOTES, 'UTF-8'));
@@ -461,8 +517,9 @@ class Jurible_Migration_Converter {
                     $answers[] = trim($ansMatch[1]);
                     $answerIdx++;
                 }
-                // "Réponse correcte" marker
-                elseif (mb_strpos($cleanText, 'Réponse correcte') !== false) {
+                // "Réponse correcte" or "Réponse : X)" marker
+                elseif (mb_strpos($cleanText, 'Réponse correcte') !== false
+                    || preg_match('/^Réponse\s*:\s*[a-d]\)/u', $cleanText)) {
                     $foundReponseCorrecteLine = true;
                 }
                 // Explanation text: first substantial <p> after "Réponse correcte"
@@ -720,6 +777,32 @@ class Jurible_Migration_Converter {
             return $this->createButton($url, $text);
         }, $html);
 
+        // Podcast Spotify
+        $html = preg_replace_callback('/###PODCAST_SPOTIFY###([^#]+)###\/PODCAST###/', function($matches) {
+            $url = base64_decode($matches[1]);
+            return sprintf(
+                '<!-- wp:embed {"url":"%s","type":"rich","providerNameSlug":"spotify","responsive":true} -->' . "\n" .
+                '<figure class="wp-block-embed is-type-rich is-provider-spotify wp-block-embed-spotify"><div class="wp-block-embed__wrapper">' . "\n" .
+                '%s' . "\n" .
+                '</div></figure>' . "\n" .
+                '<!-- /wp:embed -->' . "\n\n",
+                $url, $url
+            );
+        }, $html);
+
+        // Podcast Soundcloud
+        $html = preg_replace_callback('/###PODCAST_SOUNDCLOUD###([^#]+)###\/PODCAST###/', function($matches) {
+            $url = base64_decode($matches[1]);
+            return sprintf(
+                '<!-- wp:embed {"url":"%s","type":"rich","providerNameSlug":"soundcloud","responsive":true} -->' . "\n" .
+                '<figure class="wp-block-embed is-type-rich is-provider-soundcloud wp-block-embed-soundcloud"><div class="wp-block-embed__wrapper">' . "\n" .
+                '%s' . "\n" .
+                '</div></figure>' . "\n" .
+                '<!-- /wp:embed -->' . "\n\n",
+                $url, $url
+            );
+        }, $html);
+
         // QCM blocks
         $html = preg_replace_callback('/###QCM###([^#]+)###\/QCM###/', function($matches) {
             return base64_decode($matches[1]);
@@ -786,8 +869,8 @@ class Jurible_Migration_Converter {
         // Remove divs with position:relative or position:absolute in inline style
         $html = preg_replace('/<div[^>]*style="[^"]*position:\s*(?:relative|absolute)[^"]*"[^>]*>/i', '', $html);
 
-        // Remove orphan iframes (Spotify, Soundcloud, Leaflet, etc.) - outside of Gutenberg blocks
-        $html = preg_replace('/<iframe[^>]*(?:spotify|soundcloud)[^>]*>.*?<\/iframe>/is', '', $html);
+        // Remove orphan iframes (Leaflet, etc.) - Spotify/Soundcloud are now converted to wp:embed
+        $html = preg_replace('/<iframe[^>]*(?:leaflet)[^>]*>.*?<\/iframe>/is', '', $html);
 
         // Remove Leaflet map scripts and CSS
         $html = preg_replace('/<!--\s*Leaflet[^>]*-->[\s\S]*?(?=<!-- wp:|$)/i', '', $html);
