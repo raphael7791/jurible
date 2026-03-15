@@ -29,11 +29,17 @@ class Jurible_Migration_Migrator {
             return new WP_Error('no_content', 'Aucun contenu Thrive trouvé pour cet article');
         }
 
-        // 2b. Convertir les quiz Thrive Quiz Builder (shortcodes [tqb_quiz]) en blocs QCM
-        $thriveContent = $this->convertTqbQuizzes($thriveContent);
+        // 2b. Convertir les quiz Thrive Quiz Builder (shortcodes [tqb_quiz]) en placeholders QCM
+        $tqbBlocks = [];
+        $thriveContent = $this->convertTqbQuizzes($thriveContent, $tqbBlocks);
 
         // 3. Convertir en Gutenberg
         $gutenbergContent = $this->converter->convert($thriveContent);
+
+        // 3b. Restaurer les blocs QCM TQB (après conversion pour éviter que le converter ne les altère)
+        foreach ($tqbBlocks as $key => $block) {
+            $gutenbergContent = str_replace('###TQB_QCM_' . $key . '###', $block, $gutenbergContent);
+        }
 
         // 4. Importer les images dans la médiathèque via WP-CLI
         $importedImages = $this->converter->getImportedImages();
@@ -433,7 +439,7 @@ class Jurible_Migration_Migrator {
      * Convertir les shortcodes [tqb_quiz id='X'] en blocs QCM Gutenberg
      * en extrayant les questions/réponses de la BDD source (tables tge_questions/tge_answers)
      */
-    private function convertTqbQuizzes(string $html): string {
+    private function convertTqbQuizzes(string $html, array &$tqbBlocks): string {
         // Match shortcode with its Thrive wrapper (tve_shortcode_raw with HTML-encoded content)
         $pattern = '/<div[^>]*class="[^"]*thrv_wrapper[^"]*tve_wp_shortcode[^"]*"[^>]*>\s*<div[^>]*class="[^"]*tve_shortcode_raw[^"]*"[^>]*>.*?\[tqb_quiz\s+id=[\'"](\d+)[\'"]\s*\].*?<\/div>\s*<\/div>/is';
 
@@ -541,11 +547,13 @@ class Jurible_Migration_Migrator {
                 continue;
             }
 
-            // Generate the QCM block
+            // Generate the QCM block and store it with a placeholder key
             $qcmBlock = $this->converter->createQcmBlock($quizTitle, $qcmQuestions);
+            $key = count($tqbBlocks);
+            $tqbBlocks[$key] = $qcmBlock;
 
-            // Replace the full Thrive wrapper with the QCM block
-            $html = str_replace($fullMatch, $qcmBlock, $html);
+            // Replace the full Thrive wrapper with a placeholder (protected from converter)
+            $html = str_replace($fullMatch, '###TQB_QCM_' . $key . '###', $html);
         }
 
         return $html;
