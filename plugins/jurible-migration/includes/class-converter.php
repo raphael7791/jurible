@@ -335,6 +335,10 @@ class Jurible_Migration_Converter {
         $src = $srcMatch[1];
 
         if (strpos($src, 'emoji') !== false || strpos($src, 's.w.org') !== false) {
+            // Preserve emoji as their alt text character (e.g. ⭐)
+            if (preg_match('/alt="([^"]*)"/i', $attributes, $altMatch)) {
+                return $altMatch[1];
+            }
             return '';
         }
 
