@@ -99,6 +99,7 @@ class Jurible_Migration_Converter {
         $this->content = $this->convertTables($this->content);
         $this->content = $this->convertLists($this->content);
         $this->content = $this->convertParagraphs($this->content);
+        $this->content = $this->convertNBtoInfobox($this->content);
 
         // Restore placeholders
         $this->content = $this->restoreInfoboxes($this->content);
@@ -605,6 +606,17 @@ class Jurible_Migration_Converter {
             }
             return $this->createParagraph($content);
         }, $html);
+    }
+
+    private function convertNBtoInfobox(string $html): string {
+        return preg_replace_callback(
+            '/<!-- wp:paragraph -->\s*<p><em>NB\s*:\s*(.*?)<\/em><\/p>\s*<!-- \/wp:paragraph -->/is',
+            function($matches) {
+                $content = trim($matches[1]);
+                return $this->createInfobox('attention', 'NB', $content);
+            },
+            $html
+        );
     }
 
     private function convertBlockquotes(string $html): string {
