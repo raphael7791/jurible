@@ -24,6 +24,10 @@
    TABLES
    ========================================================================== */
 
+.wp-block-table {
+    overflow-x: auto;
+}
+
 .wp-block-table table {
     border-radius: var(--wp--custom--border-radius--lg);
     overflow: hidden;
@@ -34,12 +38,14 @@
     background: var(--wp--preset--color--muted);
     padding: 16px 24px;
     border: none;
+    min-width: 80px;
 }
 
 .wp-block-table table td {
     padding: 16px 24px;
     border: none;
     border-bottom: 1px solid var(--wp--preset--color--border);
+    min-width: 80px;
 }
 
 .wp-block-table table td:first-child {

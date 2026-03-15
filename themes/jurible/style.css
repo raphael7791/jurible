@@ -154,6 +154,12 @@ hr,
    TABLES
    ========================================================================== */
 
+/* Table wrapper — horizontal scroll for wide tables */
+.wp-block-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 /* Default table style */
 .wp-block-table table {
     width: 100%;
@@ -173,6 +179,7 @@ hr,
     padding: 16px 24px;
     color: var(--wp--preset--color--text-dark);
     border: none;
+    min-width: 80px;
 }
 
 /* Cells */
@@ -181,6 +188,7 @@ hr,
     color: var(--wp--preset--color--text-dark);
     border: none;
     border-bottom: 1px solid var(--wp--preset--color--border);
+    min-width: 80px;
 }
 
 /* Première colonne (label) */
