@@ -434,11 +434,17 @@ class Jurible_Migration_Migrator {
      * en extrayant les questions/réponses de la BDD source (tables tge_questions/tge_answers)
      */
     private function convertTqbQuizzes(string $html): string {
-        if (!preg_match_all('/\[tqb_quiz\s+id=[\'"](\d+)[\'"]\s*\]/i', $html, $matches)) {
-            return $html;
+        // Match shortcode with its Thrive wrapper (tve_shortcode_raw with HTML-encoded content)
+        $pattern = '/<div[^>]*class="[^"]*thrv_wrapper[^"]*tve_wp_shortcode[^"]*"[^>]*>\s*<div[^>]*class="[^"]*tve_shortcode_raw[^"]*"[^>]*>.*?\[tqb_quiz\s+id=[\'"](\d+)[\'"]\s*\].*?<\/div>\s*<\/div>/is';
+
+        if (!preg_match_all($pattern, $html, $matches)) {
+            // Fallback: try bare shortcode
+            if (!preg_match_all('/\[tqb_quiz\s+id=[\'"](\d+)[\'"]\s*\]/i', $html, $matches)) {
+                return $html;
+            }
         }
 
-        foreach ($matches[0] as $idx => $shortcode) {
+        foreach ($matches[0] as $idx => $fullMatch) {
             $quizId = (int) $matches[1][$idx];
 
             // Get quiz title from source DB
@@ -483,7 +489,7 @@ class Jurible_Migration_Migrator {
 
             if (empty($rawQuestions)) {
                 // Remove the shortcode if no questions found
-                $html = str_replace($shortcode, '', $html);
+                $html = str_replace($fullMatch, '', $html);
                 continue;
             }
 
@@ -531,15 +537,15 @@ class Jurible_Migration_Migrator {
             }
 
             if (empty($qcmQuestions)) {
-                $html = str_replace($shortcode, '', $html);
+                $html = str_replace($fullMatch, '', $html);
                 continue;
             }
 
             // Generate the QCM block
             $qcmBlock = $this->converter->createQcmBlock($quizTitle, $qcmQuestions);
 
-            // Replace the shortcode with the QCM block
-            $html = str_replace($shortcode, $qcmBlock, $html);
+            // Replace the full Thrive wrapper with the QCM block
+            $html = str_replace($fullMatch, $qcmBlock, $html);
         }
 
         return $html;
