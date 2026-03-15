@@ -731,13 +731,8 @@ class Jurible_Migration_Converter {
      * Also removes the matching questions-only section (section I).
      */
     private function convertQcmFromCorrectionSection(string $html): string {
-        // Find correction section: H2 containing "Correction" or "réponses" followed by Question n° blocks
-        if (strpos($html, 'bonne réponse') === false) {
-            return $html;
-        }
-
-        // Match the correction H2
-        if (!preg_match('/<!-- wp:heading[^>]*-->\s*<h2[^>]*>(.*?(?:Correction|réponses\s+expliquées)[^<]*)<\/h2>\s*<!-- \/wp:heading -->/is', $html, $h2Match, PREG_OFFSET_CAPTURE)) {
+        // Match the correction H2 (contains "Correction", "réponses expliquées", or "réponses" in QCM context)
+        if (!preg_match('/<!-- wp:heading[^>]*-->\s*<h2[^>]*>(.*?(?:Correction|réponses)[^<]*)<\/h2>\s*<!-- \/wp:heading -->/is', $html, $h2Match, PREG_OFFSET_CAPTURE)) {
             return $html;
         }
 
@@ -754,16 +749,21 @@ class Jurible_Migration_Converter {
 
         $correctionContent = substr($html, $correctionStart + strlen($correctionH2), $correctionEnd - $correctionStart - strlen($correctionH2));
 
+        // Verify this section contains questions with answers (either "(bonne réponse)" or <strong> in list items)
+        if (strpos($correctionContent, 'bonne réponse') === false && !preg_match('/<li>\s*<strong>/i', $correctionContent)) {
+            return $html;
+        }
+
         // Parse questions from correction section
-        // Split by H3 "Question n°"
-        $parts = preg_split('/(<!-- wp:heading[^>]*-->\s*<h3[^>]*>Question\s+n°)/is', $correctionContent, -1, PREG_SPLIT_DELIM_CAPTURE);
+        // Split by H3 with either "Question n°N" or bare "N –" format
+        $parts = preg_split('/(<!-- wp:heading[^>]*-->\s*<h3[^>]*>(?:Question\s+n°)?\d+)/is', $correctionContent, -1, PREG_SPLIT_DELIM_CAPTURE);
 
         $questions = [];
         for ($i = 1; $i < count($parts); $i += 2) {
             $questionBlock = $parts[$i] . ($parts[$i + 1] ?? '');
 
-            // Extract question text: "Question n°X – texte" (– or - as separator)
-            if (!preg_match('/<h3[^>]*>Question\s+n°\d+\s*[–—-]\s*(.*?)<\/h3>/is', $questionBlock, $qMatch)) {
+            // Extract question text: "Question n°X – texte" or "N – texte" (– or - as separator)
+            if (!preg_match('/<h3[^>]*>(?:Question\s+n°)?\d+\s*[–—-]+\s*(.*?)<\/h3>/is', $questionBlock, $qMatch)) {
                 continue;
             }
             $h3Inner = $qMatch[1];
@@ -782,7 +782,7 @@ class Jurible_Migration_Converter {
                 // Extract numbered answers, keeping HTML to detect <strong> for correct answers
                 preg_match_all('/(\d+)\.\s*(.*?)(?=\d+\.|Explications?\s*:|$)/is', $h3Decoded, $inlineAnswers);
                 foreach ($inlineAnswers[2] as $j => $rawAnswer) {
-                    $isCorrect = (stripos($rawAnswer, 'bonne réponse') !== false);
+                    $isCorrect = (stripos($rawAnswer, 'bonne réponse') !== false) || preg_match('/<strong>/i', $rawAnswer);
                     $answerText = strip_tags($rawAnswer);
                     $answerText = preg_replace('/\(bonne réponse\)/i', '', $answerText);
                     $answerText = trim(html_entity_decode($answerText, ENT_QUOTES, 'UTF-8'));
@@ -814,7 +814,8 @@ class Jurible_Migration_Converter {
                 $correctIndices = [];
 
                 foreach ($liMatches[1] as $j => $li) {
-                    $isCorrect = (stripos($li, 'bonne réponse') !== false);
+                    // Correct answer: marked with "(bonne réponse)" text OR wrapped in <strong>
+                    $isCorrect = (stripos($li, 'bonne réponse') !== false) || preg_match('/^\s*<strong>/i', $li);
                     $answerText = strip_tags($li);
                     $answerText = preg_replace('/\(bonne réponse\)/i', '', $answerText);
                     $answerText = preg_replace('/^\d+\.\s*/', '', trim($answerText));
@@ -836,7 +837,7 @@ class Jurible_Migration_Converter {
 
             // Extract explanation paragraph (or use inline explanation from H3)
             $explanation = $inlineExplanation ?? '';
-            if (empty($explanation) && preg_match('/<!-- wp:paragraph -->\s*<p>Explications?\s*:\s*(.*?)<\/p>\s*<!-- \/wp:paragraph -->/is', $questionBlock, $explMatch)) {
+            if (empty($explanation) && preg_match('/<!-- wp:paragraph -->\s*<p>[^<]*Explications?\s*:\s*(.*?)<\/p>\s*<!-- \/wp:paragraph -->/is', $questionBlock, $explMatch)) {
                 $explanation = trim(html_entity_decode(strip_tags($explMatch[1]), ENT_QUOTES, 'UTF-8'));
                 $explanation = mb_convert_encoding($explanation, 'UTF-8', 'UTF-8');
                 $explanation = preg_replace('/\s+/', ' ', $explanation);
@@ -892,7 +893,7 @@ class Jurible_Migration_Converter {
 
     private function convertExplicationToInfobox(string $html): string {
         return preg_replace_callback(
-            '/<!-- wp:paragraph -->\s*<p>\s*(?:<strong>)?Explications?\s*(?:&nbsp;\s*)*:\s*(?:&nbsp;\s*)*(.*?)(?:<\/strong>)?<\/p>\s*<!-- \/wp:paragraph -->/is',
+            '/<!-- wp:paragraph -->\s*<p>\s*(?:&#x[0-9a-f]+;\s*)*(?:<strong>)?Explications?\s*(?:&nbsp;\s*)*:\s*(?:&nbsp;\s*)*(.*?)(?:<\/strong>)?<\/p>\s*<!-- \/wp:paragraph -->/is',
             function($matches) {
                 $content = trim($matches[1]);
                 if (empty(strip_tags($content))) {
