@@ -100,6 +100,7 @@ class Jurible_Migration_Converter {
         $this->content = $this->convertLists($this->content);
         $this->content = $this->convertParagraphs($this->content);
         $this->content = $this->convertNBtoInfobox($this->content);
+        $this->content = $this->convertAvisProfToInfobox($this->content);
 
         // Restore placeholders
         $this->content = $this->restoreInfoboxes($this->content);
@@ -606,6 +607,19 @@ class Jurible_Migration_Converter {
             }
             return $this->createParagraph($content);
         }, $html);
+    }
+
+    private function convertAvisProfToInfobox(string $html): string {
+        return preg_replace_callback(
+            '/<!-- wp:heading \{"level":3\} -->\s*<h3[^>]*>L\'avis du prof de droit[^<]*<\/h3>\s*<!-- \/wp:heading -->\s*((?:<!-- wp:paragraph -->\s*<p>.*?<\/p>\s*<!-- \/wp:paragraph -->\s*)+)/is',
+            function($matches) {
+                // Extract paragraph contents
+                preg_match_all('/<p>(.*?)<\/p>/is', $matches[1], $pMatches);
+                $content = implode('<br><br>', array_map('trim', $pMatches[1]));
+                return $this->createInfobox('retenir', "L'avis du prof de droit \u{1F913}", $content);
+            },
+            $html
+        );
     }
 
     private function convertNBtoInfobox(string $html): string {
