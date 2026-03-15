@@ -735,7 +735,7 @@ class Jurible_Migration_Converter {
         }
 
         // Match the correction H2
-        if (!preg_match('/<!-- wp:heading[^>]*-->\s*<h2[^>]*>(.*?(?:Correction|réponses\s+expliquées)[^<]*)<\/h2>\s*<!-- \/wp:heading -->/is', $html, $h2Match, PREG_OFFSET_MATCH)) {
+        if (!preg_match('/<!-- wp:heading[^>]*-->\s*<h2[^>]*>(.*?(?:Correction|réponses\s+expliquées)[^<]*)<\/h2>\s*<!-- \/wp:heading -->/is', $html, $h2Match, PREG_OFFSET_CAPTURE)) {
             return $html;
         }
 
@@ -744,7 +744,7 @@ class Jurible_Migration_Converter {
 
         // Find the end of the correction section (next H2 or end)
         $afterH2 = substr($html, $correctionStart + strlen($correctionH2));
-        if (preg_match('/<!-- wp:heading\s*(?:\{[^}]*"level"\s*:\s*2[^}]*\})?\s*-->\s*<h2/i', $afterH2, $nextH2, PREG_OFFSET_MATCH)) {
+        if (preg_match('/<!-- wp:heading\s*(?:\{[^}]*"level"\s*:\s*2[^}]*\})?\s*-->\s*<h2/i', $afterH2, $nextH2, PREG_OFFSET_CAPTURE)) {
             $correctionEnd = $correctionStart + strlen($correctionH2) + $nextH2[0][1];
         } else {
             $correctionEnd = strlen($html);
@@ -829,7 +829,7 @@ class Jurible_Migration_Converter {
 
         // Remove section I (questions only, no answers) - from "I. QCM..." H2 to "II. Correction" H2
         $sectionIPattern = '/(<!-- wp:heading[^>]*-->\s*<h2[^>]*>[^<]*(?:QCM|Quiz)[^<]*(?:questions)[^<]*<\/h2>\s*<!-- \/wp:heading -->)(.*?)(?=<!-- wp:heading[^>]*-->\s*<h2)/is';
-        if (preg_match($sectionIPattern, $html, $secIMatch, PREG_OFFSET_MATCH)) {
+        if (preg_match($sectionIPattern, $html, $secIMatch, PREG_OFFSET_CAPTURE)) {
             // Replace section I with the QCM block
             $sectionIStart = $secIMatch[0][1];
             $sectionIEnd = $sectionIStart + strlen($secIMatch[0][0]);
@@ -843,7 +843,7 @@ class Jurible_Migration_Converter {
         if ($correctionStart !== false) {
             // Find end of correction section again
             $afterH2 = substr($html, $correctionStart + strlen($correctionH2));
-            if (preg_match('/<!-- wp:heading\s*(?:\{[^}]*"level"\s*:\s*2[^}]*\})?\s*-->\s*<h2/i', $afterH2, $nextH2, PREG_OFFSET_MATCH)) {
+            if (preg_match('/<!-- wp:heading\s*(?:\{[^}]*"level"\s*:\s*2[^}]*\})?\s*-->\s*<h2/i', $afterH2, $nextH2, PREG_OFFSET_CAPTURE)) {
                 $correctionEnd = $correctionStart + strlen($correctionH2) + $nextH2[0][1];
             } else {
                 $correctionEnd = strlen($html);
