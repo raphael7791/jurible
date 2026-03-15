@@ -765,6 +765,7 @@ class Jurible_Migration_Converter {
                 continue;
             }
             $questionText = trim(html_entity_decode(strip_tags($qMatch[1]), ENT_QUOTES, 'UTF-8'));
+            $questionText = mb_convert_encoding($questionText, 'UTF-8', 'UTF-8');
             $questionText = preg_replace('/\s+/', ' ', $questionText);
             if (empty($questionText)) continue;
 
@@ -780,6 +781,7 @@ class Jurible_Migration_Converter {
                 $answerText = preg_replace('/\(bonne réponse\)/i', '', $answerText);
                 $answerText = preg_replace('/^\d+\.\s*/', '', trim($answerText));
                 $answerText = trim(html_entity_decode($answerText, ENT_QUOTES, 'UTF-8'));
+                $answerText = mb_convert_encoding($answerText, 'UTF-8', 'UTF-8');
                 $answerText = preg_replace('/\s+/', ' ', $answerText);
                 if (empty($answerText)) continue;
 
@@ -797,6 +799,7 @@ class Jurible_Migration_Converter {
             $explanation = '';
             if (preg_match('/<!-- wp:paragraph -->\s*<p>Explications?\s*:\s*(.*?)<\/p>\s*<!-- \/wp:paragraph -->/is', $questionBlock, $explMatch)) {
                 $explanation = trim(html_entity_decode(strip_tags($explMatch[1]), ENT_QUOTES, 'UTF-8'));
+                $explanation = mb_convert_encoding($explanation, 'UTF-8', 'UTF-8');
                 $explanation = preg_replace('/\s+/', ' ', $explanation);
             }
 
@@ -822,7 +825,8 @@ class Jurible_Migration_Converter {
         // Extract QCM title from the H2 before section I (e.g., "I. QCM Institutions juridictionnelles (questions)")
         $title = 'Quiz';
         if (preg_match('/<h2[^>]*>[^<]*?(?:QCM|Quiz)\s+([^(<]+)/i', $html, $titleMatch)) {
-            $title = 'QCM ' . trim($titleMatch[1]);
+            $title = 'QCM ' . trim(html_entity_decode($titleMatch[1], ENT_QUOTES, 'UTF-8'));
+            $title = mb_convert_encoding($title, 'UTF-8', 'UTF-8');
         }
 
         $qcmBlock = $this->createQcmBlock($title, $questions);
