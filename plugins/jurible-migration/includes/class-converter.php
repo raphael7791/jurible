@@ -866,30 +866,36 @@ class Jurible_Migration_Converter {
             $title = mb_convert_encoding($title, 'UTF-8', 'UTF-8');
         }
 
-        $qcmBlock = $this->createQcmBlock($title, $questions);
+        // Build replacement: H2 heading + QCM block
+        $heading = "<!-- wp:heading {\"level\":2} -->\n<h2 class=\"wp-block-heading\">" . esc_html($title) . "</h2>\n<!-- /wp:heading -->\n\n";
+        $qcmBlock = $heading . $this->createQcmBlock($title, $questions);
 
         // Remove section I (questions only, no answers) - from "I. QCM..." H2 to "II. Correction" H2
         $sectionIPattern = '/(<!-- wp:heading[^>]*-->\s*<h2[^>]*>[^<]*(?:QCM|Quiz)[^<]*(?:questions)[^<]*<\/h2>\s*<!-- \/wp:heading -->)(.*?)(?=<!-- wp:heading[^>]*-->\s*<h2)/is';
+        $sectionIFound = false;
         if (preg_match($sectionIPattern, $html, $secIMatch, PREG_OFFSET_CAPTURE)) {
-            // Replace section I with the QCM block
             $sectionIStart = $secIMatch[0][1];
             $sectionIEnd = $sectionIStart + strlen($secIMatch[0][0]);
             $html = substr($html, 0, $sectionIStart) . $qcmBlock . substr($html, $sectionIEnd);
-
-            // Recalculate correction section position after replacement
-            $correctionStart = strpos($html, $correctionH2);
+            $sectionIFound = true;
         }
 
-        // Remove correction section (II) - now redundant since QCM block has the data
-        if ($correctionStart !== false) {
-            // Find end of correction section again
-            $afterH2 = substr($html, $correctionStart + strlen($correctionH2));
-            if (preg_match('/<!-- wp:heading\s*(?:\{[^}]*"level"\s*:\s*2[^}]*\})?\s*-->\s*<h2/i', $afterH2, $nextH2, PREG_OFFSET_CAPTURE)) {
-                $correctionEnd = $correctionStart + strlen($correctionH2) + $nextH2[0][1];
+        // Remove correction section (II) - use fresh regex to find it reliably after any prior replacements
+        $correctionPattern = '/<!-- wp:heading[^>]*-->\s*<h2[^>]*>[^<]*(?:Correction|réponses\s+expliquées)[^<]*<\/h2>\s*<!-- \/wp:heading -->/is';
+        if (preg_match($correctionPattern, $html, $corrMatch, PREG_OFFSET_CAPTURE)) {
+            $corrStart = $corrMatch[0][1];
+            $afterCorr = substr($html, $corrStart + strlen($corrMatch[0][0]));
+            if (preg_match('/<!-- wp:heading\s*(?:\{[^}]*"level"\s*:\s*2[^}]*\})?\s*-->\s*<h2/i', $afterCorr, $nextH2, PREG_OFFSET_CAPTURE)) {
+                $corrEnd = $corrStart + strlen($corrMatch[0][0]) + $nextH2[0][1];
             } else {
-                $correctionEnd = strlen($html);
+                $corrEnd = strlen($html);
             }
-            $html = substr($html, 0, $correctionStart) . substr($html, $correctionEnd);
+            if (!$sectionIFound) {
+                // No section I found, place QCM block at correction section position
+                $html = substr($html, 0, $corrStart) . $qcmBlock . substr($html, $corrEnd);
+            } else {
+                $html = substr($html, 0, $corrStart) . substr($html, $corrEnd);
+            }
         }
 
         return $html;

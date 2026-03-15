@@ -461,8 +461,9 @@ class Jurible_Migration_Migrator {
             );
             $quizTitle = trim(shell_exec($command) ?? 'Quiz');
             // Clean up title: "QCM - Institutions juridictionnelles (L1 Droit )" -> "QCM Institutions juridictionnelles"
+            $quizTitle = html_entity_decode($quizTitle, ENT_QUOTES, 'UTF-8');
             $quizTitle = preg_replace('/\s*\([^)]*\)\s*$/', '', $quizTitle);
-            $quizTitle = str_replace(' - ', ' ', $quizTitle);
+            $quizTitle = str_replace([' – ', ' — ', ' - '], ' ', $quizTitle);
             $quizTitle = mb_convert_encoding($quizTitle, 'UTF-8', 'UTF-8');
 
             // Get questions and answers via temporary PHP file executed on source DB
