@@ -464,33 +464,37 @@ class Jurible_Migration_Migrator {
             $quizTitle = preg_replace('/\s*\([^)]*\)\s*$/', '', $quizTitle);
             $quizTitle = str_replace(' - ', ' ', $quizTitle);
 
-            // Get questions and answers via WP-CLI eval on source DB
-            $evalCode = sprintf(
-                'global $wpdb; '
-                . '$prefix = $wpdb->prefix; '
-                . '$questions = $wpdb->get_results($wpdb->prepare('
-                . '"SELECT id, text, description FROM {$prefix}tge_questions WHERE quiz_id = %%d ORDER BY id", %d'
-                . ')); '
-                . '$result = []; '
-                . 'foreach ($questions as $q) { '
-                . '  $answers = $wpdb->get_results($wpdb->prepare('
-                . '  "SELECT text, is_right FROM {$prefix}tge_answers WHERE question_id = %%d ORDER BY `order`", $q->id'
-                . '  )); '
-                . '  $result[] = ["question" => strip_tags($q->text), "description" => $q->description, "answers" => array_map(function($a) { '
-                . '    return ["text" => strip_tags($a->text), "is_right" => (int)$a->is_right]; '
-                . '  }, $answers)]; '
-                . '} '
-                . 'echo json_encode($result, JSON_UNESCAPED_UNICODE);',
-                $quizId
-            );
+            // Get questions and answers via temporary PHP file executed on source DB
+            $phpCode = '<?php' . PHP_EOL
+                . 'global $wpdb;' . PHP_EOL
+                . '$prefix = $wpdb->prefix;' . PHP_EOL
+                . '$questions = $wpdb->get_results($wpdb->prepare(' . PHP_EOL
+                . '    "SELECT id, text, description FROM {$prefix}tge_questions WHERE quiz_id = %d ORDER BY id",' . PHP_EOL
+                . '    ' . $quizId . PHP_EOL
+                . '));' . PHP_EOL
+                . '$result = [];' . PHP_EOL
+                . 'foreach ($questions as $q) {' . PHP_EOL
+                . '    $answers = $wpdb->get_results($wpdb->prepare(' . PHP_EOL
+                . '        "SELECT text, is_right FROM {$prefix}tge_answers WHERE question_id = %d ORDER BY `order`",' . PHP_EOL
+                . '        $q->id' . PHP_EOL
+                . '    ));' . PHP_EOL
+                . '    $result[] = ["question" => strip_tags($q->text), "description" => $q->description, "answers" => array_map(function($a) {' . PHP_EOL
+                . '        return ["text" => strip_tags($a->text), "is_right" => (int)$a->is_right];' . PHP_EOL
+                . '    }, $answers)];' . PHP_EOL
+                . '}' . PHP_EOL
+                . 'echo json_encode($result, JSON_UNESCAPED_UNICODE);' . PHP_EOL;
+
+            $tmpFile = tempnam(sys_get_temp_dir(), 'tqb_');
+            file_put_contents($tmpFile, $phpCode);
 
             $command = sprintf(
-                'cd %s && wp eval %s --allow-root 2>/dev/null',
+                'cd %s && wp eval-file %s --allow-root 2>/dev/null',
                 escapeshellarg(JURIBLE_AIDEAUXTD_PATH),
-                escapeshellarg($evalCode)
+                escapeshellarg($tmpFile)
             );
 
             $output = shell_exec($command);
+            unlink($tmpFile);
             $rawQuestions = json_decode($output, true);
 
             if (empty($rawQuestions)) {
