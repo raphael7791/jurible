@@ -100,6 +100,7 @@ class Jurible_Migration_Converter {
         $this->content = $this->convertLists($this->content);
         $this->content = $this->convertParagraphs($this->content);
         $this->content = $this->convertNBtoInfobox($this->content);
+        $this->content = $this->convertARetenirToInfobox($this->content);
         $this->content = $this->convertAvisProfToInfobox($this->content);
 
         // Restore placeholders
@@ -607,6 +608,33 @@ class Jurible_Migration_Converter {
             }
             return $this->createParagraph($content);
         }, $html);
+    }
+
+    private function convertARetenirToInfobox(string $html): string {
+        // Pattern 1: H4 Gutenberg "📍A retenir sur..." + paragraphs
+        $html = preg_replace_callback(
+            '/<!-- wp:heading \{"level":4\} -->\s*<h4[^>]*><strong>&#x1f4cd;A retenir sur\s*(.*?)<\/strong><\/h4>\s*<!-- \/wp:heading -->\s*((?:<!-- wp:paragraph -->\s*<p>.*?<\/p>\s*<!-- \/wp:paragraph -->\s*)+)/is',
+            function($matches) {
+                $name = trim(html_entity_decode(strip_tags($matches[1]), ENT_QUOTES, 'UTF-8'));
+                preg_match_all('/<p>(.*?)<\/p>/is', $matches[2], $pMatches);
+                $content = implode('<br><br>', array_map('trim', $pMatches[1]));
+                return $this->createInfobox('retenir', "A retenir sur $name", $content);
+            },
+            $html
+        );
+
+        // Pattern 2: Orphan text "📍A retenir sur..." (malformed, no heading wrapper)
+        $html = preg_replace_callback(
+            '/<strong>&#x1f4cd;A retenir sur\s*(.*?)<\/strong>\s*\n\s*(.*?)<\/p>\s*<!-- \/wp:paragraph -->/is',
+            function($matches) {
+                $name = trim(html_entity_decode(strip_tags($matches[1]), ENT_QUOTES, 'UTF-8'));
+                $content = trim(strip_tags($matches[2], '<strong><em><a><br>'));
+                return $this->createInfobox('retenir', "A retenir sur $name", $content) . "\n";
+            },
+            $html
+        );
+
+        return $html;
     }
 
     private function convertAvisProfToInfobox(string $html): string {
