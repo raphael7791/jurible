@@ -500,8 +500,8 @@ class Jurible_Migration_Converter {
             }
 
             // Extract question text after "Question N :"
-            // Handles both <strong>Question N :</strong> Text and Question N : Text
-            if (!preg_match('/(?:<strong>\s*)?Question\s+\d+\s*:(?:&nbsp;|\s)*(?:<\/strong>)?\s*(.*?)<\/h3>/is', $block, $qMatch)) {
+            // Handles: <strong>Question N :</strong> Text, <strong>Question N</strong> : Text, Question N : Text
+            if (!preg_match('/(?:<strong>\s*)?Question\s+\d+\s*(?:<\/strong>)?\s*:(?:&nbsp;|\s)*(?:<\/strong>)?\s*(.*?)<\/h3>/is', $block, $qMatch)) {
                 continue;
             }
             $questionText = trim(html_entity_decode(strip_tags($qMatch[1]), ENT_QUOTES, 'UTF-8'));
