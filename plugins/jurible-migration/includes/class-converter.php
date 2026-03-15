@@ -235,6 +235,8 @@ class Jurible_Migration_Converter {
     }
 
     private function normalizeHtml(string $html): string {
+        // Replace unicode whitespace (narrow no-break space U+202F, etc.) with regular spaces
+        $html = str_replace(["\xE2\x80\xAF", "\xC2\xA0"], ' ', $html);
         $html = preg_replace('/style="[^"]*--tve-[^"]*"/i', '', $html);
         $html = preg_replace('/<span>\s*<\/span>/i', '', $html);
         $html = preg_replace('/\s+/', ' ', $html);
