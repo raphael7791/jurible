@@ -463,6 +463,7 @@ class Jurible_Migration_Migrator {
             // Clean up title: "QCM - Institutions juridictionnelles (L1 Droit )" -> "QCM Institutions juridictionnelles"
             $quizTitle = preg_replace('/\s*\([^)]*\)\s*$/', '', $quizTitle);
             $quizTitle = str_replace(' - ', ' ', $quizTitle);
+            $quizTitle = mb_convert_encoding($quizTitle, 'UTF-8', 'UTF-8');
 
             // Get questions and answers via temporary PHP file executed on source DB
             $phpCode = '<?php' . PHP_EOL
@@ -508,7 +509,10 @@ class Jurible_Migration_Migrator {
             // Convert to QCM block format
             $qcmQuestions = [];
             foreach ($rawQuestions as $rq) {
-                $questionText = trim(preg_replace('/^\d+\s*[-–—.]\s*/', '', $rq['question']));
+                // Clean malformed UTF-8 characters from DB
+                $questionText = mb_convert_encoding($rq['question'], 'UTF-8', 'UTF-8');
+                $questionText = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/u', '', $questionText);
+                $questionText = trim(preg_replace('/^\d+\s*[-–—.]\s*/u', '', $questionText));
                 if (empty($questionText)) continue;
 
                 $answers = [];
@@ -516,7 +520,8 @@ class Jurible_Migration_Migrator {
                 $rightIndices = [];
 
                 foreach ($rq['answers'] as $j => $a) {
-                    $answers[] = trim($a['text']);
+                    $text = mb_convert_encoding($a['text'], 'UTF-8', 'UTF-8');
+                    $answers[] = trim($text);
                     if ($a['is_right']) {
                         $rightIndices[] = $j;
                     }
