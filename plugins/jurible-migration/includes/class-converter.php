@@ -887,6 +887,8 @@ class Jurible_Migration_Converter {
 
     // Helpers
     private function cleanInlineHtml(string $html): string {
+        // Convert emoji <img> to their alt text before stripping tags
+        $html = preg_replace('/<img[^>]*class="[^"]*emoji[^"]*"[^>]*alt="([^"]*)"[^>]*>/i', '$1', $html);
         $html = strip_tags($html, '<strong><em><a><mark><br>');
         $html = preg_replace('/<a[^>]*href="([^"]*)"[^>]*>/', '<a href="$1">', $html);
         $html = str_replace('aideauxtd.com', 'jurible.com', $html);
