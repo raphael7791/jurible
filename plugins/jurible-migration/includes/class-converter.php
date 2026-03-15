@@ -313,15 +313,20 @@ class Jurible_Migration_Converter {
     }
 
     private function convertPodcastEmbeds(string $html): string {
-        // Spotify iframes → wp:embed placeholder
+        // Spotify iframes → placeholder (episode uses wp:embed, show/track/playlist use wp:html iframe)
         $html = preg_replace_callback(
             '/<iframe[^>]*src="([^"]*spotify[^"]*)"[^>]*>.*?<\/iframe>/is',
             function($matches) {
-                $url = $this->extractSpotifyUrl($matches[1]);
-                if ($url) {
-                    return "###PODCAST_SPOTIFY###" . base64_encode($url) . "###/PODCAST###";
+                $info = $this->extractSpotifyInfo($matches[1]);
+                if (!$info) {
+                    return '';
                 }
-                return '';
+                // Episodes support oEmbed → wp:embed
+                if ($info['type'] === 'episode') {
+                    return "###PODCAST_SPOTIFY###" . base64_encode($info['url']) . "###/PODCAST###";
+                }
+                // Shows/tracks/playlists don't support oEmbed → wp:html with iframe
+                return "###PODCAST_SPOTIFY_IFRAME###" . base64_encode($info['embed_url']) . "###/PODCAST###";
             },
             $html
         );
@@ -342,14 +347,16 @@ class Jurible_Migration_Converter {
         return $html;
     }
 
-    private function extractSpotifyUrl(string $src): ?string {
-        // Convert embed URL to standard URL: open.spotify.com/embed/episode/xxx → open.spotify.com/episode/xxx
-        if (preg_match('#open\.spotify\.com/embed/(episode|show|track|playlist)/([a-zA-Z0-9]+)#', $src, $match)) {
-            return 'https://open.spotify.com/' . $match[1] . '/' . $match[2];
-        }
-        // Already a standard Spotify URL
-        if (preg_match('#open\.spotify\.com/(episode|show|track|playlist)/([a-zA-Z0-9]+)#', $src, $match)) {
-            return 'https://open.spotify.com/' . $match[1] . '/' . $match[2];
+    private function extractSpotifyInfo(string $src): ?array {
+        // Extract type and ID from embed or standard Spotify URL
+        if (preg_match('#open\.spotify\.com/(?:embed/)?(episode|show|track|playlist)/([a-zA-Z0-9]+)#', $src, $match)) {
+            $type = $match[1];
+            $id = $match[2];
+            return [
+                'type' => $type,
+                'url' => 'https://open.spotify.com/' . $type . '/' . $id,
+                'embed_url' => 'https://open.spotify.com/embed/' . $type . '/' . $id,
+            ];
         }
         return null;
     }
@@ -782,7 +789,7 @@ class Jurible_Migration_Converter {
             return $this->createButton($url, $text);
         }, $html);
 
-        // Podcast Spotify
+        // Podcast Spotify (episodes only — oEmbed works)
         $html = preg_replace_callback('/###PODCAST_SPOTIFY###([^#]+)###\/PODCAST###/', function($matches) {
             $url = base64_decode($matches[1]);
             return sprintf(
@@ -792,6 +799,17 @@ class Jurible_Migration_Converter {
                 '</div></figure>' . "\n" .
                 '<!-- /wp:embed -->' . "\n\n",
                 $url, $url
+            );
+        }, $html);
+
+        // Podcast Spotify iframe (shows/tracks/playlists — oEmbed not supported, use direct iframe)
+        $html = preg_replace_callback('/###PODCAST_SPOTIFY_IFRAME###([^#]+)###\/PODCAST###/', function($matches) {
+            $embedUrl = base64_decode($matches[1]);
+            return sprintf(
+                '<!-- wp:html -->' . "\n" .
+                '<iframe style="border-radius:12px" src="%s" width="100%%" height="352" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>' . "\n" .
+                '<!-- /wp:html -->' . "\n\n",
+                htmlspecialchars($embedUrl)
             );
         }, $html);
 
