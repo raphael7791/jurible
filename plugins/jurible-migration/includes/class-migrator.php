@@ -500,11 +500,11 @@ class Jurible_Migration_Migrator {
 
             if (empty($rawQuestions)) {
                 // Remove the shortcode if no questions found
-                error_log('[TQB] No questions found for quiz ' . $quizId . '. Output: ' . substr($output ?? '', 0, 200));
+
                 $html = str_replace($fullMatch, '', $html);
                 continue;
             }
-            error_log('[TQB] Found ' . count($rawQuestions) . ' questions for quiz ' . $quizId);
+
 
             // Convert to QCM block format
             $qcmQuestions = [];
@@ -560,7 +560,7 @@ class Jurible_Migration_Migrator {
 
             // Generate the QCM block and store it with a placeholder key
             $qcmBlock = $this->converter->createQcmBlock($quizTitle, $qcmQuestions);
-            error_log('[TQB] Generated QCM block: ' . strlen($qcmBlock) . ' chars, first 300: ' . substr($qcmBlock, 0, 300));
+
             $key = count($tqbBlocks);
             $tqbBlocks[$key] = $qcmBlock;
 
