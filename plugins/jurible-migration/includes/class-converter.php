@@ -771,6 +771,7 @@ class Jurible_Migration_Converter {
             $correctIndices = [];
 
             $h3Plain = html_entity_decode(strip_tags($h3Inner), ENT_QUOTES, 'UTF-8');
+            $h3Plain = str_replace("\xC2\xA0", ' ', $h3Plain); // Replace non-breaking spaces (U+00A0) with regular spaces
             if (preg_match('/^(.*?)\s*\d+\.\s/s', $h3Plain, $splitMatch)) {
                 // Answers are inline in the H3
                 $questionText = trim($splitMatch[1]);
