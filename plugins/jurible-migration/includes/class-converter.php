@@ -100,6 +100,7 @@ class Jurible_Migration_Converter {
         $this->content = $this->convertTables($this->content);
         $this->content = $this->convertLists($this->content);
         $this->content = $this->convertParagraphs($this->content);
+        $this->content = $this->convertQcmFromCorrectionSection($this->content);
         $this->content = $this->convertExplicationToInfobox($this->content);
         $this->content = $this->convertNBtoInfobox($this->content);
         $this->content = $this->convertARetenirToInfobox($this->content);
@@ -720,6 +721,137 @@ class Jurible_Migration_Converter {
             },
             $html
         );
+    }
+
+    /**
+     * Convert "Correction du QCM" sections (with "(bonne réponse)" markers) to jurible/qcm blocks.
+     * Pattern: H2 "Correction" section with H3 questions + lists with bold "(bonne réponse)" + explanation paragraphs.
+     * Also removes the matching questions-only section (section I).
+     */
+    private function convertQcmFromCorrectionSection(string $html): string {
+        // Find correction section: H2 containing "Correction" or "réponses" followed by Question n° blocks
+        if (strpos($html, 'bonne réponse') === false) {
+            return $html;
+        }
+
+        // Match the correction H2
+        if (!preg_match('/<!-- wp:heading[^>]*-->\s*<h2[^>]*>(.*?(?:Correction|réponses\s+expliquées)[^<]*)<\/h2>\s*<!-- \/wp:heading -->/is', $html, $h2Match, PREG_OFFSET_MATCH)) {
+            return $html;
+        }
+
+        $correctionStart = $h2Match[0][1];
+        $correctionH2 = $h2Match[0][0];
+
+        // Find the end of the correction section (next H2 or end)
+        $afterH2 = substr($html, $correctionStart + strlen($correctionH2));
+        if (preg_match('/<!-- wp:heading\s*(?:\{[^}]*"level"\s*:\s*2[^}]*\})?\s*-->\s*<h2/i', $afterH2, $nextH2, PREG_OFFSET_MATCH)) {
+            $correctionEnd = $correctionStart + strlen($correctionH2) + $nextH2[0][1];
+        } else {
+            $correctionEnd = strlen($html);
+        }
+
+        $correctionContent = substr($html, $correctionStart + strlen($correctionH2), $correctionEnd - $correctionStart - strlen($correctionH2));
+
+        // Parse questions from correction section
+        // Split by H3 "Question n°"
+        $parts = preg_split('/(<!-- wp:heading[^>]*-->\s*<h3[^>]*>Question\s+n°)/is', $correctionContent, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+        $questions = [];
+        for ($i = 1; $i < count($parts); $i += 2) {
+            $questionBlock = $parts[$i] . ($parts[$i + 1] ?? '');
+
+            // Extract question text: "Question n°X – texte"
+            if (!preg_match('/<h3[^>]*>Question\s+n°\d+\s*[–—-]\s*(.*?)<\/h3>/is', $questionBlock, $qMatch)) {
+                continue;
+            }
+            $questionText = trim(html_entity_decode(strip_tags($qMatch[1]), ENT_QUOTES, 'UTF-8'));
+            $questionText = preg_replace('/\s+/', ' ', $questionText);
+            if (empty($questionText)) continue;
+
+            // Extract answers from list items
+            preg_match_all('/<li>(.*?)<\/li>/is', $questionBlock, $liMatches);
+            $answers = [];
+            $correctIndices = [];
+
+            foreach ($liMatches[1] as $j => $li) {
+                $isCorrect = (stripos($li, 'bonne réponse') !== false);
+                // Clean answer text: remove number prefix, "(bonne réponse)", bold tags
+                $answerText = strip_tags($li);
+                $answerText = preg_replace('/\(bonne réponse\)/i', '', $answerText);
+                $answerText = preg_replace('/^\d+\.\s*/', '', trim($answerText));
+                $answerText = trim(html_entity_decode($answerText, ENT_QUOTES, 'UTF-8'));
+                $answerText = preg_replace('/\s+/', ' ', $answerText);
+                if (empty($answerText)) continue;
+
+                if ($isCorrect) {
+                    $correctIndices[] = count($answers);
+                }
+                $answers[] = $answerText;
+            }
+
+            if (count($answers) < 2) continue;
+
+            $correctIndex = !empty($correctIndices) ? $correctIndices[0] : 0;
+
+            // Extract explanation paragraph
+            $explanation = '';
+            if (preg_match('/<!-- wp:paragraph -->\s*<p>Explications?\s*:\s*(.*?)<\/p>\s*<!-- \/wp:paragraph -->/is', $questionBlock, $explMatch)) {
+                $explanation = trim(html_entity_decode(strip_tags($explMatch[1]), ENT_QUOTES, 'UTF-8'));
+                $explanation = preg_replace('/\s+/', ' ', $explanation);
+            }
+
+            // Note multiple correct answers in explanation
+            if (count($correctIndices) > 1) {
+                $letters = array_map(fn($i) => chr(97 + $i) . ')', $correctIndices);
+                $multiNote = 'Plusieurs réponses correctes : ' . implode(', ', $letters);
+                $explanation = $explanation ? $multiNote . '. ' . $explanation : $multiNote;
+            }
+
+            $questions[] = [
+                'question' => $questionText,
+                'answers' => $answers,
+                'correctIndex' => $correctIndex,
+                'explanation' => $explanation,
+            ];
+        }
+
+        if (empty($questions)) {
+            return $html;
+        }
+
+        // Extract QCM title from the H2 before section I (e.g., "I. QCM Institutions juridictionnelles (questions)")
+        $title = 'Quiz';
+        if (preg_match('/<h2[^>]*>[^<]*?(?:QCM|Quiz)\s+([^(<]+)/i', $html, $titleMatch)) {
+            $title = 'QCM ' . trim($titleMatch[1]);
+        }
+
+        $qcmBlock = $this->createQcmBlock($title, $questions);
+
+        // Remove section I (questions only, no answers) - from "I. QCM..." H2 to "II. Correction" H2
+        $sectionIPattern = '/(<!-- wp:heading[^>]*-->\s*<h2[^>]*>[^<]*(?:QCM|Quiz)[^<]*(?:questions)[^<]*<\/h2>\s*<!-- \/wp:heading -->)(.*?)(?=<!-- wp:heading[^>]*-->\s*<h2)/is';
+        if (preg_match($sectionIPattern, $html, $secIMatch, PREG_OFFSET_MATCH)) {
+            // Replace section I with the QCM block
+            $sectionIStart = $secIMatch[0][1];
+            $sectionIEnd = $sectionIStart + strlen($secIMatch[0][0]);
+            $html = substr($html, 0, $sectionIStart) . $qcmBlock . substr($html, $sectionIEnd);
+
+            // Recalculate correction section position after replacement
+            $correctionStart = strpos($html, $correctionH2);
+        }
+
+        // Remove correction section (II) - now redundant since QCM block has the data
+        if ($correctionStart !== false) {
+            // Find end of correction section again
+            $afterH2 = substr($html, $correctionStart + strlen($correctionH2));
+            if (preg_match('/<!-- wp:heading\s*(?:\{[^}]*"level"\s*:\s*2[^}]*\})?\s*-->\s*<h2/i', $afterH2, $nextH2, PREG_OFFSET_MATCH)) {
+                $correctionEnd = $correctionStart + strlen($correctionH2) + $nextH2[0][1];
+            } else {
+                $correctionEnd = strlen($html);
+            }
+            $html = substr($html, 0, $correctionStart) . substr($html, $correctionEnd);
+        }
+
+        return $html;
     }
 
     private function convertExplicationToInfobox(string $html): string {
