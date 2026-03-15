@@ -870,31 +870,18 @@ class Jurible_Migration_Converter {
         $heading = "<!-- wp:heading {\"level\":2} -->\n<h2 class=\"wp-block-heading\">" . esc_html($title) . "</h2>\n<!-- /wp:heading -->\n\n";
         $qcmBlock = $heading . $this->createQcmBlock($title, $questions);
 
-        // Remove section I (questions only, no answers) - from "I. QCM..." H2 to "II. Correction" H2
+        // Replace section I (questions only) with H2 + QCM block, keep section II (corrections) intact
         $sectionIPattern = '/(<!-- wp:heading[^>]*-->\s*<h2[^>]*>[^<]*(?:QCM|Quiz)[^<]*(?:questions)[^<]*<\/h2>\s*<!-- \/wp:heading -->)(.*?)(?=<!-- wp:heading[^>]*-->\s*<h2)/is';
-        $sectionIFound = false;
         if (preg_match($sectionIPattern, $html, $secIMatch, PREG_OFFSET_CAPTURE)) {
             $sectionIStart = $secIMatch[0][1];
             $sectionIEnd = $sectionIStart + strlen($secIMatch[0][0]);
             $html = substr($html, 0, $sectionIStart) . $qcmBlock . substr($html, $sectionIEnd);
-            $sectionIFound = true;
-        }
-
-        // Remove correction section (II) - use fresh regex to find it reliably after any prior replacements
-        $correctionPattern = '/<!-- wp:heading[^>]*-->\s*<h2[^>]*>[^<]*(?:Correction|réponses\s+expliquées)[^<]*<\/h2>\s*<!-- \/wp:heading -->/is';
-        if (preg_match($correctionPattern, $html, $corrMatch, PREG_OFFSET_CAPTURE)) {
-            $corrStart = $corrMatch[0][1];
-            $afterCorr = substr($html, $corrStart + strlen($corrMatch[0][0]));
-            if (preg_match('/<!-- wp:heading\s*(?:\{[^}]*"level"\s*:\s*2[^}]*\})?\s*-->\s*<h2/i', $afterCorr, $nextH2, PREG_OFFSET_CAPTURE)) {
-                $corrEnd = $corrStart + strlen($corrMatch[0][0]) + $nextH2[0][1];
-            } else {
-                $corrEnd = strlen($html);
-            }
-            if (!$sectionIFound) {
-                // No section I found, place QCM block at correction section position
-                $html = substr($html, 0, $corrStart) . $qcmBlock . substr($html, $corrEnd);
-            } else {
-                $html = substr($html, 0, $corrStart) . substr($html, $corrEnd);
+        } else {
+            // No section I found, insert QCM block before correction section
+            $correctionPattern = '/<!-- wp:heading[^>]*-->\s*<h2[^>]*>[^<]*(?:Correction|réponses\s+expliquées)[^<]*<\/h2>\s*<!-- \/wp:heading -->/is';
+            if (preg_match($correctionPattern, $html, $corrMatch, PREG_OFFSET_CAPTURE)) {
+                $corrStart = $corrMatch[0][1];
+                $html = substr($html, 0, $corrStart) . $qcmBlock . "\n\n" . substr($html, $corrStart);
             }
         }
 
@@ -903,7 +890,7 @@ class Jurible_Migration_Converter {
 
     private function convertExplicationToInfobox(string $html): string {
         return preg_replace_callback(
-            '/<!-- wp:paragraph -->\s*<p>(?:<strong>)?Explication\s*:\s*(.*?)(?:<\/strong>)?<\/p>\s*<!-- \/wp:paragraph -->/is',
+            '/<!-- wp:paragraph -->\s*<p>\s*(?:<strong>)?Explications?\s*(?:&nbsp;\s*)*:\s*(?:&nbsp;\s*)*(.*?)(?:<\/strong>)?<\/p>\s*<!-- \/wp:paragraph -->/is',
             function($matches) {
                 $content = trim($matches[1]);
                 if (empty(strip_tags($content))) {
