@@ -893,7 +893,7 @@ class Jurible_Migration_Converter {
 
     private function convertExplicationToInfobox(string $html): string {
         return preg_replace_callback(
-            '/<!-- wp:paragraph -->\s*<p>\s*(?:&#x[0-9a-f]+;\s*)*(?:<strong>)?Explications?\s*(?:&nbsp;\s*)*:\s*(?:&nbsp;\s*)*(.*?)(?:<\/strong>)?<\/p>\s*<!-- \/wp:paragraph -->/is',
+            '/<!-- wp:paragraph -->\s*<p>[^<]*?(?:<strong>)?Explications?\s*(?:&nbsp;\s*)*:\s*(?:&nbsp;\s*)*(.*?)(?:<\/strong>)?<\/p>\s*<!-- \/wp:paragraph -->/isu',
             function($matches) {
                 $content = trim($matches[1]);
                 if (empty(strip_tags($content))) {
