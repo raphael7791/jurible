@@ -14,6 +14,7 @@ class JAM_Admin_Menu {
         add_action( 'wp_ajax_jam_search_users', [ __CLASS__, 'ajax_search_users' ] );
         add_action( 'wp_ajax_jam_toggle_enrollment', [ __CLASS__, 'ajax_toggle_enrollment' ] );
         add_action( 'wp_ajax_jam_run_sync', [ __CLASS__, 'ajax_run_sync' ] );
+        add_action( 'wp_ajax_jam_toggle_product_new', [ __CLASS__, 'ajax_toggle_product_new' ] );
     }
 
     public static function register_menu() {
@@ -168,6 +169,33 @@ class JAM_Admin_Menu {
         wp_send_json_success( [
             'message' => $action === 'enroll' ? 'Utilisateur inscrit.' : 'Utilisateur désinscrit.',
         ] );
+    }
+
+    // ─── AJAX: Toggle Product New/Old ───
+    public static function ajax_toggle_product_new() {
+        check_ajax_referer( 'jam_admin_nonce', 'nonce' );
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_send_json_error( 'Permission refusée.' );
+        }
+
+        $product_id = sanitize_text_field( $_POST['product_id'] ?? '' );
+        $is_new     = (bool) ( $_POST['is_new'] ?? false );
+
+        if ( ! $product_id ) {
+            wp_send_json_error( 'ID produit manquant.' );
+        }
+
+        $new_ids = get_option( 'jam_new_product_ids', [] );
+
+        if ( $is_new ) {
+            $new_ids[ $product_id ] = true;
+        } else {
+            unset( $new_ids[ $product_id ] );
+        }
+
+        update_option( 'jam_new_product_ids', $new_ids );
+        wp_send_json_success();
     }
 
     // ─── AJAX: Run Sync ───

@@ -12,6 +12,30 @@
         $('input[name="fcom_course_ids[]"]').prop('checked', false);
     });
 
+    // ─── Toggle product new/old ───
+    $(document).on('click', '.jam-toggle-new', function() {
+        var $btn = $(this);
+        var productId = $btn.data('product-id');
+        var isNew = $btn.data('is-new');
+
+        $btn.prop('disabled', true).text('...');
+
+        $.post(jamAdmin.ajaxUrl, {
+            action: 'jam_toggle_product_new',
+            nonce: jamAdmin.nonce,
+            product_id: productId,
+            is_new: isNew
+        }, function(response) {
+            if (response.success) {
+                location.reload();
+            } else {
+                $btn.prop('disabled', false).text('Erreur');
+            }
+        }).fail(function() {
+            $btn.prop('disabled', false).text('Erreur');
+        });
+    });
+
     // ─── Sync button ───
     $('#jam-sync-btn').on('click', function() {
         var $btn = $(this);
