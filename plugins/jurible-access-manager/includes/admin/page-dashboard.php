@@ -20,11 +20,26 @@ foreach ( $all_rules as $rule ) {
 
 $hide_old = ! empty( $_GET['hide_old'] );
 
-// Split products
+// Split products: auto-new if created after 2026-02-01, with manual override
+$manual_old_ids = get_option( 'jam_old_product_ids', [] ); // manual override: force old
+$cutoff = strtotime( '2026-02-01' );
+
 $new_products = [];
 $old_products = [];
 foreach ( $sc_products as $product ) {
-    if ( isset( $new_product_ids[ $product['id'] ] ) ) {
+    $created   = ! empty( $product['created_at'] ) ? strtotime( $product['created_at'] ) : 0;
+    $auto_new  = $created >= $cutoff;
+
+    // Manual overrides take priority
+    if ( isset( $manual_old_ids[ $product['id'] ] ) ) {
+        $is_new = false;
+    } elseif ( isset( $new_product_ids[ $product['id'] ] ) ) {
+        $is_new = true;
+    } else {
+        $is_new = $auto_new;
+    }
+
+    if ( $is_new ) {
         $new_products[] = $product;
     } else {
         $old_products[] = $product;
@@ -405,6 +420,7 @@ function jam_dashboard_get_sc_products() {
                             'active'       => ! ( $p->archived ?? false ),
                             'prices'       => [],
                             'active_count' => 0,
+                            'created_at'   => $p->created_at ?? '',
                         ];
                     }
                 }
@@ -468,6 +484,7 @@ function jam_dashboard_get_sc_products() {
                     'active'       => empty( $p['archived'] ),
                     'prices'       => $prices_display,
                     'active_count' => 0,
+                    'created_at'   => $p['created_at'] ?? '',
                 ];
             }
         }

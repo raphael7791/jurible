@@ -187,14 +187,24 @@ class JAM_Admin_Menu {
         }
 
         $new_ids = get_option( 'jam_new_product_ids', [] );
+        $old_ids = get_option( 'jam_old_product_ids', [] );
 
         if ( $is_new ) {
+            // Mark as new: add to new list, remove from old overrides
             $new_ids[ $product_id ] = true;
+            unset( $old_ids[ $product_id ] );
         } else {
+            // Mark as old: add to old overrides, remove from new list
+            $old_ids[ $product_id ] = true;
             unset( $new_ids[ $product_id ] );
         }
 
         update_option( 'jam_new_product_ids', $new_ids );
+        update_option( 'jam_old_product_ids', $old_ids );
+
+        // Clear product cache to reflect changes
+        delete_transient( 'jam_sc_products_v2' );
+
         wp_send_json_success();
     }
 
