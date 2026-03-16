@@ -62,9 +62,14 @@ $new_product_ids = get_option( 'jam_new_product_ids', [] );
 $manual_old_ids  = get_option( 'jam_old_product_ids', [] );
 $cutoff          = strtotime( '2026-02-01' );
 
+// Filter out PDF products (handled natively by SureCart, not Fluent Community)
+$sc_products_filtered = array_filter( $sc_products, function( $p ) {
+    return ! preg_match( '/^(Fiches|Pack|Manuel)/i', $p['name'] );
+} );
+
 $new_products_list = [];
 $old_products_list = [];
-foreach ( $sc_products as $product ) {
+foreach ( $sc_products_filtered as $product ) {
     $created  = intval( $product['created_at'] ?? 0 );
     $auto_new = $created >= $cutoff;
 
