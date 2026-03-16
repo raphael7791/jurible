@@ -27,7 +27,7 @@ $cutoff = strtotime( '2026-02-01' );
 $new_products = [];
 $old_products = [];
 foreach ( $sc_products as $product ) {
-    $created   = ! empty( $product['created_at'] ) ? strtotime( $product['created_at'] ) : 0;
+    $created   = intval( $product['created_at'] ?? 0 );
     $auto_new  = $created >= $cutoff;
 
     // Manual overrides take priority
