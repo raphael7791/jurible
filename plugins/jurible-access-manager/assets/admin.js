@@ -12,6 +12,15 @@
         $('input[name="fcom_course_ids[]"]').prop('checked', false);
     });
 
+    // ─── Accordion toggle ───
+    $(document).on('click', '.jam-accordion__toggle', function() {
+        var $accordion = $(this).closest('.jam-accordion');
+        var $content = $accordion.find('.jam-accordion__content');
+
+        $accordion.toggleClass('is-open');
+        $content.slideToggle(200);
+    });
+
     // ─── Toggle product new/old ───
     $(document).on('click', '.jam-toggle-new', function() {
         var $btn = $(this);

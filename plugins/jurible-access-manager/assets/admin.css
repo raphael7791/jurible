@@ -267,6 +267,48 @@
     margin-right: 12px;
 }
 
+/* ─── Accordion ─── */
+.jam-accordion {
+    border-bottom: 1px solid #f0f0f1;
+}
+
+.jam-accordion:last-child {
+    border-bottom: none;
+}
+
+.jam-accordion__toggle {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    color: #1d2327;
+    text-align: left;
+}
+
+.jam-accordion__toggle:hover {
+    background: #f6f7f7;
+}
+
+.jam-accordion__arrow {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 11px;
+    color: #646970;
+    transition: transform 0.2s;
+}
+
+.jam-accordion.is-open .jam-accordion__arrow {
+    transform: rotate(90deg);
+}
+
+.jam-accordion__content .jam-table {
+    border-top: 1px solid #f0f0f1;
+}
+
 /* ─── User Card ─── */
 .jam-user-card {
     background: #f6f7f7;

@@ -94,7 +94,7 @@ $per_page = 20;
         </div>
     </div>
 
-    <!-- Section 1b: SureCart Products — Anciens -->
+    <!-- Section 1b: SureCart Products — Anciens (accordéon par groupe) -->
     <div class="jam-section">
         <div class="jam-section__header">
             <h2>Anciens produits SureCart (aideauxtd)</h2>
@@ -112,7 +112,22 @@ $per_page = 20;
                 <?php if ( empty( $old_products ) ) : ?>
                     <div class="jam-empty">Tous les produits sont marqués comme nouveaux.</div>
                 <?php else : ?>
-                    <?php jam_render_products_table( $old_products, $ruled_product_ids, false ); ?>
+                    <?php
+                    $groups = jam_group_old_products( $old_products );
+                    foreach ( $groups as $group_name => $group_products ) :
+                        $group_id = 'jam-group-' . sanitize_title( $group_name );
+                    ?>
+                        <div class="jam-accordion">
+                            <button type="button" class="jam-accordion__toggle" data-target="<?php echo esc_attr( $group_id ); ?>">
+                                <span class="jam-accordion__arrow">&#9654;</span>
+                                <strong><?php echo esc_html( $group_name ); ?></strong>
+                                <span class="jam-badge jam-badge--gray" style="margin-left:8px;"><?php echo count( $group_products ); ?></span>
+                            </button>
+                            <div class="jam-accordion__content" id="<?php echo esc_attr( $group_id ); ?>" style="display:none;">
+                                <?php jam_render_products_table( $group_products, $ruled_product_ids, false ); ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
@@ -323,6 +338,38 @@ function jam_status_badge( $status ) {
 
     $info  = $map[ $status ] ?? [ 'gray', ucfirst( $status ) ];
     return '<span class="jam-badge jam-badge--' . $info[0] . '">' . esc_html( $info[1] ) . '</span>';
+}
+
+function jam_group_old_products( $products ) {
+    $groups = [];
+
+    foreach ( $products as $product ) {
+        $name = $product['name'];
+
+        // Detect group from product name
+        if ( preg_match( '/^Académie (L\d|Licence|Capacité)/i', $name, $m ) ) {
+            $group = 'Académie ' . $m[1];
+        } elseif ( preg_match( '/^Fiches de révision/i', $name ) ) {
+            $group = 'Fiches de révision (nouvelles)';
+        } elseif ( preg_match( '/^Fiches (de |-)/', $name ) ) {
+            $group = 'Fiches (anciennes)';
+        } elseif ( preg_match( '/^Pack Fiches/i', $name ) ) {
+            $group = 'Packs Fiches';
+        } elseif ( preg_match( '/^Pack/i', $name ) ) {
+            $group = 'Packs';
+        } elseif ( preg_match( '/^Prépa/i', $name ) ) {
+            $group = 'Prépa';
+        } else {
+            $group = 'Autres';
+        }
+
+        $groups[ $group ][] = $product;
+    }
+
+    // Sort groups alphabetically
+    ksort( $groups );
+
+    return $groups;
 }
 
 function jam_render_products_table( $products, $ruled_product_ids, $is_new_section ) {
