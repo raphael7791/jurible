@@ -372,7 +372,7 @@ function jam_group_products( $products ) {
             $group = 'Académie ' . $m[1];
         } elseif ( preg_match( '/^Académie/i', $name ) ) {
             $group = 'Académie';
-        } elseif ( preg_match( '/^(Fiches|Pack)/i', $name ) ) {
+        } elseif ( preg_match( '/^(Fiches|Pack|Manuel)/i', $name ) ) {
             $group = 'PDF';
         } elseif ( preg_match( '/^Prépa/i', $name ) ) {
             $group = 'Prépa';
