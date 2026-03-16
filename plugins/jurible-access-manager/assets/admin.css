@@ -1,0 +1,424 @@
+/* Jurible Access Manager — Admin Styles */
+
+/* ─── Layout ─── */
+.jam-wrap {
+    max-width: 1200px;
+    margin: 20px 20px 20px 0;
+}
+
+.jam-wrap h1 {
+    font-size: 23px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+/* ─── Stat Cards ─── */
+.jam-stats {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.jam-stat-card {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 20px 24px;
+    min-width: 160px;
+    flex: 1;
+}
+
+.jam-stat-card__number {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #1d2327;
+}
+
+.jam-stat-card__label {
+    font-size: 13px;
+    color: #646970;
+    margin-top: 4px;
+}
+
+/* ─── Sections ─── */
+.jam-section {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.jam-section__header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #dcdcde;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.jam-section__header h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+.jam-section__body {
+    padding: 0;
+}
+
+.jam-section__body--padded {
+    padding: 20px;
+}
+
+/* ─── Tables ─── */
+.jam-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.jam-table th {
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+    color: #1d2327;
+    border-bottom: 1px solid #dcdcde;
+    background: #f6f7f7;
+}
+
+.jam-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0f0f1;
+    color: #2c3338;
+    vertical-align: middle;
+}
+
+.jam-table tr:last-child td {
+    border-bottom: none;
+}
+
+.jam-table tr:hover td {
+    background: #f6f7f7;
+}
+
+/* ─── Badges ─── */
+.jam-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.6;
+    white-space: nowrap;
+}
+
+.jam-badge--green {
+    background: #d4edda;
+    color: #155724;
+}
+
+.jam-badge--red {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.jam-badge--orange {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.jam-badge--blue {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.jam-badge--gray {
+    background: #e9ecef;
+    color: #495057;
+}
+
+/* ─── Pagination ─── */
+.jam-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-top: 1px solid #dcdcde;
+    font-size: 13px;
+    color: #646970;
+}
+
+.jam-pagination__links a,
+.jam-pagination__links span {
+    display: inline-block;
+    padding: 4px 10px;
+    margin: 0 2px;
+    border: 1px solid #dcdcde;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #2271b1;
+    background: #fff;
+}
+
+.jam-pagination__links span.current {
+    background: #2271b1;
+    color: #fff;
+    border-color: #2271b1;
+}
+
+.jam-pagination__links a:hover {
+    border-color: #2271b1;
+    background: #f6f7f7;
+}
+
+/* ─── Filters ─── */
+.jam-filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid #dcdcde;
+    background: #f6f7f7;
+    flex-wrap: wrap;
+}
+
+.jam-filters select,
+.jam-filters input[type="text"],
+.jam-filters input[type="search"],
+.jam-filters input[type="date"] {
+    padding: 4px 8px;
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.jam-filters .button {
+    margin-left: 4px;
+}
+
+/* ─── Forms ─── */
+.jam-form {
+    max-width: 700px;
+}
+
+.jam-form-row {
+    margin-bottom: 16px;
+}
+
+.jam-form-row label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: #1d2327;
+}
+
+.jam-form-row input[type="text"],
+.jam-form-row select {
+    width: 100%;
+    max-width: 400px;
+    padding: 6px 10px;
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.jam-form-row .description {
+    font-size: 12px;
+    color: #646970;
+    margin-top: 4px;
+}
+
+/* ─── Checkboxes Grid ─── */
+.jam-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.jam-checkbox-grid label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 400;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.jam-checkbox-grid label:hover {
+    background: #f0f0f1;
+}
+
+.jam-checkbox-actions {
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+.jam-checkbox-actions a {
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 12px;
+}
+
+/* ─── User Card ─── */
+.jam-user-card {
+    background: #f6f7f7;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.jam-user-card__avatar {
+    flex-shrink: 0;
+}
+
+.jam-user-card__info h3 {
+    margin: 0 0 4px;
+    font-size: 15px;
+}
+
+.jam-user-card__info p {
+    margin: 0;
+    font-size: 13px;
+    color: #646970;
+}
+
+/* ─── Search ─── */
+.jam-search-box {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.jam-search-box input[type="search"] {
+    width: 300px;
+    padding: 6px 10px;
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+/* ─── Sync Report ─── */
+.jam-sync-report {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 16px;
+}
+
+.jam-sync-report h3 {
+    margin-top: 0;
+}
+
+.jam-sync-report ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+/* ─── Notices ─── */
+.jam-notice {
+    padding: 12px 16px;
+    border-left: 4px solid #2271b1;
+    background: #fff;
+    margin-bottom: 16px;
+}
+
+.jam-notice--success {
+    border-left-color: #00a32a;
+}
+
+.jam-notice--error {
+    border-left-color: #d63638;
+}
+
+.jam-notice--warning {
+    border-left-color: #dba617;
+}
+
+/* ─── Loading Spinner ─── */
+.jam-loading {
+    text-align: center;
+    padding: 40px;
+    color: #646970;
+}
+
+.jam-loading .spinner {
+    float: none;
+    margin: 0 8px 0 0;
+    visibility: visible;
+}
+
+/* ─── Empty State ─── */
+.jam-empty {
+    text-align: center;
+    padding: 40px;
+    color: #646970;
+    font-size: 14px;
+}
+
+/* ─── Actions Column ─── */
+.jam-actions a {
+    margin-right: 8px;
+}
+
+.jam-actions .jam-delete {
+    color: #b32d2e;
+}
+
+.jam-actions .jam-delete:hover {
+    color: #a00;
+}
+
+/* ─── Tab navigation ─── */
+.jam-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #dcdcde;
+    margin-bottom: 20px;
+}
+
+.jam-tabs a {
+    padding: 10px 16px;
+    text-decoration: none;
+    color: #646970;
+    border-bottom: 2px solid transparent;
+    font-size: 14px;
+}
+
+.jam-tabs a:hover {
+    color: #2271b1;
+}
+
+.jam-tabs a.active {
+    color: #1d2327;
+    border-bottom-color: #2271b1;
+    font-weight: 600;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 782px) {
+    .jam-stats {
+        flex-direction: column;
+    }
+
+    .jam-checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .jam-search-box input[type="search"] {
+        width: 100%;
+    }
+}
