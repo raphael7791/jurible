@@ -372,12 +372,8 @@ function jam_group_products( $products ) {
             $group = 'Académie ' . $m[1];
         } elseif ( preg_match( '/^Académie/i', $name ) ) {
             $group = 'Académie';
-        } elseif ( preg_match( '/^Fiches de révision/i', $name ) ) {
-            $group = 'Fiches de révision';
-        } elseif ( preg_match( '/^Fiches (de |-)/', $name ) ) {
-            $group = 'Fiches unitaires';
-        } elseif ( preg_match( '/^Pack/i', $name ) ) {
-            $group = 'Packs';
+        } elseif ( preg_match( '/^(Fiches|Pack)/i', $name ) ) {
+            $group = 'PDF';
         } elseif ( preg_match( '/^Prépa/i', $name ) ) {
             $group = 'Prépa';
         } elseif ( preg_match( '/^(Crédits|Minos)/i', $name ) ) {
