@@ -18,6 +18,7 @@ define( 'JAM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 // Includes
 require_once JAM_PLUGIN_DIR . 'includes/class-database.php';
+require_once JAM_PLUGIN_DIR . 'includes/class-helpers.php';
 require_once JAM_PLUGIN_DIR . 'includes/class-access-rules.php';
 require_once JAM_PLUGIN_DIR . 'includes/class-access-log.php';
 require_once JAM_PLUGIN_DIR . 'includes/class-enrollment.php';

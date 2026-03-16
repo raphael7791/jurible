@@ -90,7 +90,7 @@ $per_page = 20;
                 <div class="jam-empty">Aucun produit marqué comme nouveau. Cliquez sur le bouton dans la section "Anciens produits" pour reclasser.</div>
             <?php else : ?>
                 <?php
-                $new_groups = jam_group_products( $new_products );
+                $new_groups = JAM_Helpers::group_products( $new_products );
                 foreach ( $new_groups as $group_name => $group_products ) :
                     $group_id = 'jam-newgroup-' . sanitize_title( $group_name );
                     if ( count( $new_groups ) === 1 ) :
@@ -135,7 +135,7 @@ $per_page = 20;
                     <div class="jam-empty">Tous les produits sont marqués comme nouveaux.</div>
                 <?php else : ?>
                     <?php
-                    $groups = jam_group_products( $old_products );
+                    $groups = JAM_Helpers::group_products( $old_products );
                     foreach ( $groups as $group_name => $group_products ) :
                         $group_id = 'jam-group-' . sanitize_title( $group_name );
                     ?>
@@ -243,7 +243,7 @@ $per_page = 20;
                                 <td><?php echo esc_html( $sub['product_name'] ); ?></td>
                                 <td><?php echo esc_html( $sub['price_display'] ); ?></td>
                                 <td>
-                                    <?php echo jam_status_badge( $sub['status'] ); ?>
+                                    <?php echo JAM_Helpers::status_badge( $sub['status'] ); ?>
                                 </td>
                                 <td><?php echo esc_html( $sub['created_at'] ); ?></td>
                             </tr>
@@ -342,52 +342,7 @@ $per_page = 20;
 
 <?php
 
-// ─── Helper Functions ───
-
-function jam_status_badge( $status ) {
-    $map = [
-        'active'        => [ 'green', 'Actif' ],
-        'trialing'      => [ 'blue', 'Essai' ],
-        'past_due'      => [ 'orange', 'En retard' ],
-        'canceled'      => [ 'red', 'Annulé' ],
-        'completed'     => [ 'gray', 'Terminé' ],
-        'unpaid'        => [ 'red', 'Impayé' ],
-        'enrolled'      => [ 'green', 'Inscrit' ],
-        'unenrolled'    => [ 'red', 'Désinscrit' ],
-        'published'     => [ 'green', 'Publié' ],
-        'draft'         => [ 'orange', 'Brouillon' ],
-    ];
-
-    $info  = $map[ $status ] ?? [ 'gray', ucfirst( $status ) ];
-    return '<span class="jam-badge jam-badge--' . $info[0] . '">' . esc_html( $info[1] ) . '</span>';
-}
-
-function jam_group_products( $products ) {
-    $groups = [];
-
-    foreach ( $products as $product ) {
-        $name = $product['name'];
-
-        if ( preg_match( '/^Académie (L\d|Licence|Capacité)/i', $name, $m ) ) {
-            $group = 'Académie ' . $m[1];
-        } elseif ( preg_match( '/^Académie/i', $name ) ) {
-            $group = 'Académie';
-        } elseif ( preg_match( '/^(Fiches|Pack|Manuel)/i', $name ) ) {
-            $group = 'PDF';
-        } elseif ( preg_match( '/^Prépa/i', $name ) ) {
-            $group = 'Prépa';
-        } elseif ( preg_match( '/^(Crédits|Minos)/i', $name ) ) {
-            $group = 'Crédits IA';
-        } else {
-            $group = 'Autres';
-        }
-
-        $groups[ $group ][] = $product;
-    }
-
-    ksort( $groups );
-    return $groups;
-}
+// ─── Dashboard-specific helpers ───
 
 function jam_render_products_table( $products, $ruled_product_ids, $is_new_section ) {
     ?>
@@ -457,212 +412,7 @@ function jam_render_products_table( $products, $ruled_product_ids, $is_new_secti
     <?php
 }
 
-function jam_dashboard_get_sc_products() {
-    $cached = get_transient( 'jam_sc_products_v2' );
-    if ( $cached !== false ) {
-        return $cached;
-    }
-
-    $products = [];
-
-    if ( ! function_exists( 'sc_api_token' ) ) {
-        // Try SureCart PHP models
-        if ( class_exists( '\SureCart\Models\Product' ) ) {
-            try {
-                $result = \SureCart\Models\Product::where( [ 'archived' => false ] )->paginate( [
-                    'per_page' => 100,
-                ] );
-
-                $items = $result->data ?? $result;
-                if ( is_array( $items ) || is_object( $items ) ) {
-                    foreach ( $items as $p ) {
-                        $p = (object) $p;
-                        $products[] = [
-                            'id'           => $p->id ?? '',
-                            'name'         => $p->name ?? '',
-                            'type'         => isset( $p->recurring ) && $p->recurring ? 'Abonnement' : 'One-shot',
-                            'active'       => ! ( $p->archived ?? false ),
-                            'prices'       => [],
-                            'active_count' => 0,
-                            'created_at'   => $p->created_at ?? '',
-                        ];
-                    }
-                }
-            } catch ( \Exception $e ) {
-                // silent
-            }
-        }
-
-        set_transient( 'jam_sc_products_v2', $products, 15 * MINUTE_IN_SECONDS );
-        return $products;
-    }
-
-    // SureCart REST API — products with prices expanded
-    $response = wp_remote_get( 'https://api.surecart.com/v1/products?archived=false&limit=100&expand[]=prices', [
-        'headers' => [
-            'Authorization' => 'Bearer ' . sc_api_token(),
-            'Content-Type'  => 'application/json',
-        ],
-    ] );
-
-    if ( ! is_wp_error( $response ) ) {
-        $body = json_decode( wp_remote_retrieve_body( $response ), true );
-        if ( ! empty( $body['data'] ) ) {
-            foreach ( $body['data'] as $p ) {
-                $prices_display = [];
-                $has_recurring  = false;
-
-                $price_list = $p['prices']['data'] ?? $p['prices'] ?? [];
-                if ( is_array( $price_list ) ) {
-                    foreach ( $price_list as $price ) {
-                        if ( ! empty( $price['archived'] ) ) {
-                            continue;
-                        }
-                        $amount   = ( $price['amount'] ?? 0 ) / 100;
-                        $currency = strtoupper( $price['currency'] ?? 'EUR' );
-                        $label    = number_format( $amount, 2, ',', ' ' ) . ' ' . $currency;
-
-                        $interval       = $price['recurring_interval'] ?? '';
-                        $interval_count = $price['recurring_interval_count'] ?? 1;
-                        if ( $interval ) {
-                            $has_recurring = true;
-                            if ( $interval === 'month' && $interval_count == 1 ) {
-                                $label .= '/mois';
-                            } elseif ( $interval === 'month' ) {
-                                $label .= '/' . $interval_count . ' mois';
-                            } elseif ( $interval === 'year' ) {
-                                $label .= '/an';
-                            } elseif ( $interval === 'week' ) {
-                                $label .= '/sem.';
-                            }
-                        }
-
-                        $prices_display[] = $label;
-                    }
-                }
-
-                $products[] = [
-                    'id'           => $p['id'] ?? '',
-                    'name'         => $p['name'] ?? '',
-                    'type'         => $has_recurring ? 'Abonnement' : 'One-shot',
-                    'active'       => empty( $p['archived'] ),
-                    'prices'       => $prices_display,
-                    'active_count' => 0,
-                    'created_at'   => $p['created_at'] ?? '',
-                ];
-            }
-        }
-    }
-
-    // Fetch active subscription counts per product
-    $sub_counts = jam_dashboard_get_active_counts_per_product();
-    foreach ( $products as &$product ) {
-        $product['active_count'] = $sub_counts[ $product['id'] ] ?? 0;
-    }
-    unset( $product );
-
-    set_transient( 'jam_sc_products_v2', $products, 15 * MINUTE_IN_SECONDS );
-    return $products;
-}
-
-function jam_dashboard_get_active_counts_per_product() {
-    if ( ! function_exists( 'sc_api_token' ) ) {
-        return [];
-    }
-
-    $counts = [];
-    $page   = 1;
-    $limit  = 100;
-
-    // Paginate through active subscriptions
-    do {
-        $offset   = ( $page - 1 ) * $limit;
-        $url      = "https://api.surecart.com/v1/subscriptions?status=active&limit={$limit}&offset={$offset}&expand[]=price&expand[]=price.product";
-        $response = wp_remote_get( $url, [
-            'headers' => [
-                'Authorization' => 'Bearer ' . sc_api_token(),
-                'Content-Type'  => 'application/json',
-            ],
-            'timeout' => 30,
-        ] );
-
-        if ( is_wp_error( $response ) ) {
-            break;
-        }
-
-        $body     = json_decode( wp_remote_retrieve_body( $response ), true );
-        $subs     = $body['data'] ?? [];
-        $has_more = ! empty( $body['pagination']['has_more'] );
-
-        foreach ( $subs as $sub ) {
-            $price   = $sub['price'] ?? [];
-            $product = $price['product'] ?? [];
-            $pid     = is_array( $product ) ? ( $product['id'] ?? '' ) : $product;
-            if ( $pid ) {
-                $counts[ $pid ] = ( $counts[ $pid ] ?? 0 ) + 1;
-            }
-        }
-
-        $page++;
-    } while ( $has_more && $page <= 20 ); // Safety limit
-
-    return $counts;
-}
-
-function jam_dashboard_get_fcom_courses() {
-    $cached = get_transient( 'jam_fcom_courses' );
-    if ( $cached !== false ) {
-        return $cached;
-    }
-
-    $courses = [];
-
-    if ( class_exists( '\FluentCommunity\Modules\Course\Model\Course' ) ) {
-        try {
-            $all = \FluentCommunity\Modules\Course\Model\Course::all();
-            foreach ( $all as $course ) {
-                $enrolled_count = 0;
-                if ( method_exists( $course, 'students' ) ) {
-                    $enrolled_count = $course->students()->count();
-                }
-                $courses[] = [
-                    'id'             => $course->id,
-                    'title'          => $course->title ?? $course->name ?? '(sans titre)',
-                    'status'         => $course->status ?? 'draft',
-                    'enrolled_count' => $enrolled_count,
-                ];
-            }
-        } catch ( \Exception $e ) {
-            // silent
-        }
-    }
-
-    // Fallback: query DB directly
-    if ( empty( $courses ) ) {
-        global $wpdb;
-        $table = $wpdb->prefix . 'fcom_spaces';
-        if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) === $table ) {
-            $rows = $wpdb->get_results(
-                "SELECT s.id, s.title, s.status,
-                    (SELECT COUNT(*) FROM {$wpdb->prefix}fcom_space_user su WHERE su.space_id = s.id) as enrolled_count
-                FROM {$table} s
-                WHERE s.type = 'course'
-                ORDER BY s.title ASC"
-            );
-            foreach ( $rows as $row ) {
-                $courses[] = [
-                    'id'             => $row->id,
-                    'title'          => $row->title,
-                    'status'         => $row->status,
-                    'enrolled_count' => (int) $row->enrolled_count,
-                ];
-            }
-        }
-    }
-
-    set_transient( 'jam_fcom_courses', $courses, 15 * MINUTE_IN_SECONDS );
-    return $courses;
-}
+// Dashboard-specific data functions
 
 function jam_dashboard_get_sc_subscriptions( $page = 1, $per_page = 20, $product_filter = '', $status_filter = '' ) {
     $result = [
