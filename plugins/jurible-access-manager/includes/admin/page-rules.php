@@ -156,34 +156,53 @@ if ( $crm_active ) {
                         <p class="description">Nom interne pour identifier cette règle.</p>
                     </div>
 
+                    <?php
+                    // Determine if current product is new or old
+                    $current_is_new = false;
+                    foreach ( $new_products_list as $np ) {
+                        if ( $np['id'] === $current->sc_product_id ) {
+                            $current_is_new = true;
+                            break;
+                        }
+                    }
+                    ?>
+                    <input type="hidden" name="sc_product_id" id="sc_product_id" value="<?php echo esc_attr( $current->sc_product_id ); ?>">
+
                     <div class="jam-form-row">
-                        <label for="sc_product_id">Produit SureCart</label>
-                        <select id="sc_product_id" name="sc_product_id" required>
-                            <option value="">— Sélectionner un produit —</option>
+                        <label>Nouveaux produits</label>
+                        <select id="jam-select-new" class="jam-product-select">
+                            <option value="">— Nouveau produit —</option>
                             <?php foreach ( $grouped_new as $group_name => $group_items ) : ?>
-                                <optgroup label="NOUVEAU — <?php echo esc_attr( $group_name ); ?>">
+                                <optgroup label="<?php echo esc_attr( $group_name ); ?>">
                                     <?php foreach ( $group_items as $product ) :
                                         $has_rule = isset( $ruled_product_ids[ $product['id'] ] ) && $product['id'] !== $current->sc_product_id;
                                         $prices_text = ! empty( $product['prices'] ) ? ' — ' . implode( ', ', $product['prices'] ) : '';
                                         $rule_marker = $has_rule ? ' [Règle: ' . $ruled_product_ids[ $product['id'] ] . ']' : '';
                                     ?>
                                         <option value="<?php echo esc_attr( $product['id'] ); ?>"
-                                            <?php selected( $current->sc_product_id, $product['id'] ); ?>
+                                            <?php selected( $current_is_new && $current->sc_product_id === $product['id'] ); ?>
                                             <?php if ( $has_rule ) : ?>style="color:#999;"<?php endif; ?>>
                                             <?php echo esc_html( $product['name'] . $prices_text . $rule_marker ); ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </optgroup>
                             <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="jam-form-row">
+                        <label>Anciens produits</label>
+                        <select id="jam-select-old" class="jam-product-select">
+                            <option value="">— Ancien produit —</option>
                             <?php foreach ( $grouped_old as $group_name => $group_items ) : ?>
-                                <optgroup label="ANCIEN — <?php echo esc_attr( $group_name ); ?>">
+                                <optgroup label="<?php echo esc_attr( $group_name ); ?>">
                                     <?php foreach ( $group_items as $product ) :
                                         $has_rule = isset( $ruled_product_ids[ $product['id'] ] ) && $product['id'] !== $current->sc_product_id;
                                         $prices_text = ! empty( $product['prices'] ) ? ' — ' . implode( ', ', $product['prices'] ) : '';
                                         $rule_marker = $has_rule ? ' [Règle: ' . $ruled_product_ids[ $product['id'] ] . ']' : '';
                                     ?>
                                         <option value="<?php echo esc_attr( $product['id'] ); ?>"
-                                            <?php selected( $current->sc_product_id, $product['id'] ); ?>
+                                            <?php selected( ! $current_is_new && $current->sc_product_id === $product['id'] ); ?>
                                             <?php if ( $has_rule ) : ?>style="color:#999;"<?php endif; ?>>
                                             <?php echo esc_html( $product['name'] . $prices_text . $rule_marker ); ?>
                                         </option>
@@ -192,7 +211,7 @@ if ( $crm_active ) {
                             <?php endforeach; ?>
                         </select>
                         <?php if ( ! empty( $ruled_product_ids ) ) : ?>
-                            <p class="description">Les produits grisés avec [Règle: ...] ont déjà une règle configurée.</p>
+                            <p class="description">Les produits avec [Règle: ...] ont déjà une règle configurée.</p>
                         <?php endif; ?>
                     </div>
 

@@ -12,6 +12,25 @@
         $('input[name="fcom_course_ids[]"]').prop('checked', false);
     });
 
+    // ─── Product dual dropdown sync ───
+    $('#jam-select-new').on('change', function() {
+        if ($(this).val()) {
+            $('#jam-select-old').val('');
+            $('#sc_product_id').val($(this).val());
+        } else if (!$('#jam-select-old').val()) {
+            $('#sc_product_id').val('');
+        }
+    });
+
+    $('#jam-select-old').on('change', function() {
+        if ($(this).val()) {
+            $('#jam-select-new').val('');
+            $('#sc_product_id').val($(this).val());
+        } else if (!$('#jam-select-new').val()) {
+            $('#sc_product_id').val('');
+        }
+    });
+
     // ─── Accordion toggle ───
     $(document).on('click', '.jam-accordion__toggle', function() {
         var $accordion = $(this).closest('.jam-accordion');
