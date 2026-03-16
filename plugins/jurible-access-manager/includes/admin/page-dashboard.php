@@ -89,7 +89,29 @@ $per_page = 20;
             <?php if ( empty( $new_products ) ) : ?>
                 <div class="jam-empty">Aucun produit marqué comme nouveau. Cliquez sur le bouton dans la section "Anciens produits" pour reclasser.</div>
             <?php else : ?>
-                <?php jam_render_products_table( $new_products, $ruled_product_ids, true ); ?>
+                <?php
+                $new_groups = jam_group_products( $new_products );
+                foreach ( $new_groups as $group_name => $group_products ) :
+                    $group_id = 'jam-newgroup-' . sanitize_title( $group_name );
+                    if ( count( $new_groups ) === 1 ) :
+                        // Single group: no accordion needed
+                        jam_render_products_table( $group_products, $ruled_product_ids, true );
+                    else :
+                ?>
+                    <div class="jam-accordion">
+                        <button type="button" class="jam-accordion__toggle" data-target="<?php echo esc_attr( $group_id ); ?>">
+                            <span class="jam-accordion__arrow">&#9654;</span>
+                            <strong><?php echo esc_html( $group_name ); ?></strong>
+                            <span class="jam-badge jam-badge--blue" style="margin-left:8px;"><?php echo count( $group_products ); ?></span>
+                        </button>
+                        <div class="jam-accordion__content" id="<?php echo esc_attr( $group_id ); ?>" style="display:none;">
+                            <?php jam_render_products_table( $group_products, $ruled_product_ids, true ); ?>
+                        </div>
+                    </div>
+                <?php
+                    endif;
+                endforeach;
+                ?>
             <?php endif; ?>
         </div>
     </div>
@@ -113,7 +135,7 @@ $per_page = 20;
                     <div class="jam-empty">Tous les produits sont marqués comme nouveaux.</div>
                 <?php else : ?>
                     <?php
-                    $groups = jam_group_old_products( $old_products );
+                    $groups = jam_group_products( $old_products );
                     foreach ( $groups as $group_name => $group_products ) :
                         $group_id = 'jam-group-' . sanitize_title( $group_name );
                     ?>
@@ -340,25 +362,26 @@ function jam_status_badge( $status ) {
     return '<span class="jam-badge jam-badge--' . $info[0] . '">' . esc_html( $info[1] ) . '</span>';
 }
 
-function jam_group_old_products( $products ) {
+function jam_group_products( $products ) {
     $groups = [];
 
     foreach ( $products as $product ) {
         $name = $product['name'];
 
-        // Detect group from product name
         if ( preg_match( '/^Académie (L\d|Licence|Capacité)/i', $name, $m ) ) {
             $group = 'Académie ' . $m[1];
+        } elseif ( preg_match( '/^Académie/i', $name ) ) {
+            $group = 'Académie';
         } elseif ( preg_match( '/^Fiches de révision/i', $name ) ) {
-            $group = 'Fiches de révision (nouvelles)';
+            $group = 'Fiches de révision';
         } elseif ( preg_match( '/^Fiches (de |-)/', $name ) ) {
-            $group = 'Fiches (anciennes)';
-        } elseif ( preg_match( '/^Pack Fiches/i', $name ) ) {
-            $group = 'Packs Fiches';
+            $group = 'Fiches unitaires';
         } elseif ( preg_match( '/^Pack/i', $name ) ) {
             $group = 'Packs';
         } elseif ( preg_match( '/^Prépa/i', $name ) ) {
             $group = 'Prépa';
+        } elseif ( preg_match( '/^(Crédits|Minos)/i', $name ) ) {
+            $group = 'Crédits IA';
         } else {
             $group = 'Autres';
         }
@@ -366,9 +389,7 @@ function jam_group_old_products( $products ) {
         $groups[ $group ][] = $product;
     }
 
-    // Sort groups alphabetically
     ksort( $groups );
-
     return $groups;
 }
 
