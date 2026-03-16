@@ -50,6 +50,22 @@ if ( isset( $_GET['add_rule'] ) ) {
 $sc_products  = jam_dashboard_get_sc_products();
 $fcom_courses = jam_dashboard_get_fcom_courses();
 
+// Build list of product IDs that already have a rule (for indicator)
+$all_rules_list     = JAM_Access_Rules::get_all();
+$ruled_product_ids  = [];
+foreach ( $all_rules_list as $r ) {
+    $ruled_product_ids[ $r->sc_product_id ] = $r->rule_name;
+}
+
+// Group products for optgroup
+$grouped_products = JAM_Helpers::group_products( $sc_products );
+
+// Build course name lookup
+$course_name_map = [];
+foreach ( $fcom_courses as $c ) {
+    $course_name_map[ $c['id'] ] = $c['title'];
+}
+
 // FluentCRM data
 $crm_tags  = [];
 $crm_lists = [];
@@ -118,12 +134,25 @@ if ( $crm_active ) {
                         <label for="sc_product_id">Produit SureCart</label>
                         <select id="sc_product_id" name="sc_product_id" required>
                             <option value="">— Sélectionner un produit —</option>
-                            <?php foreach ( $sc_products as $product ) : ?>
-                                <option value="<?php echo esc_attr( $product['id'] ); ?>" <?php selected( $current->sc_product_id, $product['id'] ); ?>>
-                                    <?php echo esc_html( $product['name'] ); ?> (<?php echo esc_html( $product['type'] ); ?>)
-                                </option>
+                            <?php foreach ( $grouped_products as $group_name => $group_items ) : ?>
+                                <optgroup label="<?php echo esc_attr( $group_name ); ?>">
+                                    <?php foreach ( $group_items as $product ) :
+                                        $has_rule = isset( $ruled_product_ids[ $product['id'] ] ) && $product['id'] !== $current->sc_product_id;
+                                        $prices_text = ! empty( $product['prices'] ) ? ' — ' . implode( ', ', $product['prices'] ) : '';
+                                        $rule_marker = $has_rule ? ' [Règle: ' . $ruled_product_ids[ $product['id'] ] . ']' : '';
+                                    ?>
+                                        <option value="<?php echo esc_attr( $product['id'] ); ?>"
+                                            <?php selected( $current->sc_product_id, $product['id'] ); ?>
+                                            <?php if ( $has_rule ) : ?>style="color:#999;"<?php endif; ?>>
+                                            <?php echo esc_html( $product['name'] . $prices_text . $rule_marker ); ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </optgroup>
                             <?php endforeach; ?>
                         </select>
+                        <?php if ( ! empty( $ruled_product_ids ) ) : ?>
+                            <p class="description">Les produits grisés avec [Règle: ...] ont déjà une règle configurée.</p>
+                        <?php endif; ?>
                     </div>
 
                     <div class="jam-form-row">
@@ -225,12 +254,19 @@ if ( $crm_active ) {
                                         break;
                                     }
                                 }
+                                $course_names = [];
+                                foreach ( $course_ids as $cid ) {
+                                    $course_names[] = $course_name_map[ $cid ] ?? '#' . $cid;
+                                }
                             ?>
                                 <tr>
                                     <td><strong><?php echo esc_html( $rule->rule_name ); ?></strong></td>
                                     <td><?php echo esc_html( $product_name ); ?></td>
                                     <td>
                                         <span class="jam-badge jam-badge--blue"><?php echo count( $course_ids ); ?> cours</span>
+                                        <?php if ( ! empty( $course_names ) ) : ?>
+                                            <br><small style="color:#646970;"><?php echo esc_html( implode( ', ', $course_names ) ); ?></small>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <?php if ( $rule->credit_amount > 0 ) : ?>
