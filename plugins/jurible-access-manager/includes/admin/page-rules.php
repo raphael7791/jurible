@@ -57,8 +57,34 @@ foreach ( $all_rules_list as $r ) {
     $ruled_product_ids[ $r->sc_product_id ] = $r->rule_name;
 }
 
-// Group products for optgroup
-$grouped_products = JAM_Helpers::group_products( $sc_products );
+// Split new/old then group each
+$new_product_ids = get_option( 'jam_new_product_ids', [] );
+$manual_old_ids  = get_option( 'jam_old_product_ids', [] );
+$cutoff          = strtotime( '2026-02-01' );
+
+$new_products_list = [];
+$old_products_list = [];
+foreach ( $sc_products as $product ) {
+    $created  = intval( $product['created_at'] ?? 0 );
+    $auto_new = $created >= $cutoff;
+
+    if ( isset( $manual_old_ids[ $product['id'] ] ) ) {
+        $is_new = false;
+    } elseif ( isset( $new_product_ids[ $product['id'] ] ) ) {
+        $is_new = true;
+    } else {
+        $is_new = $auto_new;
+    }
+
+    if ( $is_new ) {
+        $new_products_list[] = $product;
+    } else {
+        $old_products_list[] = $product;
+    }
+}
+
+$grouped_new = JAM_Helpers::group_products( $new_products_list );
+$grouped_old = JAM_Helpers::group_products( $old_products_list );
 
 // Build course name lookup
 $course_name_map = [];
@@ -134,8 +160,23 @@ if ( $crm_active ) {
                         <label for="sc_product_id">Produit SureCart</label>
                         <select id="sc_product_id" name="sc_product_id" required>
                             <option value="">— Sélectionner un produit —</option>
-                            <?php foreach ( $grouped_products as $group_name => $group_items ) : ?>
-                                <optgroup label="<?php echo esc_attr( $group_name ); ?>">
+                            <?php foreach ( $grouped_new as $group_name => $group_items ) : ?>
+                                <optgroup label="NOUVEAU — <?php echo esc_attr( $group_name ); ?>">
+                                    <?php foreach ( $group_items as $product ) :
+                                        $has_rule = isset( $ruled_product_ids[ $product['id'] ] ) && $product['id'] !== $current->sc_product_id;
+                                        $prices_text = ! empty( $product['prices'] ) ? ' — ' . implode( ', ', $product['prices'] ) : '';
+                                        $rule_marker = $has_rule ? ' [Règle: ' . $ruled_product_ids[ $product['id'] ] . ']' : '';
+                                    ?>
+                                        <option value="<?php echo esc_attr( $product['id'] ); ?>"
+                                            <?php selected( $current->sc_product_id, $product['id'] ); ?>
+                                            <?php if ( $has_rule ) : ?>style="color:#999;"<?php endif; ?>>
+                                            <?php echo esc_html( $product['name'] . $prices_text . $rule_marker ); ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </optgroup>
+                            <?php endforeach; ?>
+                            <?php foreach ( $grouped_old as $group_name => $group_items ) : ?>
+                                <optgroup label="ANCIEN — <?php echo esc_attr( $group_name ); ?>">
                                     <?php foreach ( $group_items as $product ) :
                                         $has_rule = isset( $ruled_product_ids[ $product['id'] ] ) && $product['id'] !== $current->sc_product_id;
                                         $prices_text = ! empty( $product['prices'] ) ? ' — ' . implode( ', ', $product['prices'] ) : '';
