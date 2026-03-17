@@ -1341,9 +1341,12 @@ html.dark .aga-feedback.error .aga-feedback-content {
     padding: 0.875rem 1.25rem;
     background: transparent;
     border: none;
-    border-bottom: 1px solid rgba(245, 158, 11, 0.2);
     cursor: pointer;
     font-family: var(--aga-font);
+}
+
+.aga-result-accordion-toggle:checked ~ .aga-result-accordion-header {
+    border-bottom: 1px solid rgba(245, 158, 11, 0.2);
 }
 
 .aga-result-accordion-title {
