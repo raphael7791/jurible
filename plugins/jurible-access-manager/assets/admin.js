@@ -262,35 +262,91 @@
     $('#jam-sync-btn').on('click', function() {
         var $btn = $(this);
         var $report = $('#jam-sync-report');
+        var dryRun = $('#jam-sync-dry-run').is(':checked');
 
-        $btn.prop('disabled', true).text('Synchronisation en cours...');
-        $report.html('<div class="jam-loading"><span class="spinner"></span> Veuillez patienter...</div>');
+        var label = dryRun ? 'Simulation en cours...' : 'Synchronisation en cours...';
+        $btn.prop('disabled', true).text(label);
+        $report.html('<div class="jam-loading"><span class="spinner"></span> Veuillez patienter (peut prendre 1-2 minutes)...</div>');
 
-        $.post(jamAdmin.ajaxUrl, {
-            action: 'jam_run_sync',
-            nonce: jamAdmin.nonce
-        }, function(response) {
-            $btn.prop('disabled', false).text('Lancer la synchronisation');
+        $.ajax({
+            url: jamAdmin.ajaxUrl,
+            type: 'POST',
+            timeout: 120000,
+            data: {
+                action: 'jam_run_sync',
+                nonce: jamAdmin.nonce,
+                dry_run: dryRun ? 1 : 0
+            },
+            success: function(response) {
+                $btn.prop('disabled', false).text('Lancer la synchronisation');
 
-            if (response.success) {
-                var r = response.data;
-                $report.html(
-                    '<div class="jam-sync-report">' +
-                    '<h3>Rapport de synchronisation</h3>' +
-                    '<ul>' +
-                    '<li><strong>' + (r.enrolled || 0) + '</strong> utilisateurs inscrits</li>' +
-                    '<li><strong>' + (r.already_enrolled || 0) + '</strong> déjà à jour</li>' +
-                    '<li><strong>' + (r.errors || 0) + '</strong> erreurs</li>' +
-                    '</ul>' +
-                    '</div>'
-                );
-            } else {
-                $report.html('<div class="jam-notice jam-notice--error">' + (response.data || 'Erreur inconnue.') + '</div>');
+                if (response.success) {
+                    $report.html(buildSyncReport(response.data));
+                } else {
+                    $report.html('<div class="jam-notice jam-notice--error">' + escHtml(response.data || 'Erreur inconnue.') + '</div>');
+                }
+            },
+            error: function() {
+                $btn.prop('disabled', false).text('Lancer la synchronisation');
+                $report.html('<div class="jam-notice jam-notice--error">Erreur reseau ou timeout.</div>');
             }
-        }).fail(function() {
-            $btn.prop('disabled', false).text('Lancer la synchronisation');
-            $report.html('<div class="jam-notice jam-notice--error">Erreur réseau.</div>');
         });
     });
+
+    function buildSyncReport(r) {
+        var isDry = r.dry_run;
+        var title = isDry ? 'Rapport de simulation' : 'Rapport de synchronisation';
+        var verb  = isDry ? 'seraient inscrits' : 'inscrits';
+        var verbAlready = isDry ? 'deja a jour' : 'deja a jour';
+
+        var html = '<div class="jam-sync-report" style="margin-top:16px;">';
+
+        if (isDry) {
+            html += '<div class="jam-notice jam-notice--info" style="margin-bottom:12px;">Mode simulation — aucune inscription effectuee.</div>';
+        }
+
+        html += '<h3>' + escHtml(title) + '</h3>';
+        html += '<ul>';
+        html += '<li><strong>' + (r.enrolled || 0) + '</strong> ' + verb + '</li>';
+        html += '<li><strong>' + (r.already_enrolled || 0) + '</strong> ' + verbAlready + '</li>';
+        html += '<li><strong>' + (r.errors || 0) + '</strong> erreurs (user WP introuvable)</li>';
+        html += '<li>Duree : <strong>' + (r.duration || 0) + 's</strong></li>';
+        html += '</ul>';
+
+        // Per-product table
+        if (r.products && r.products.length > 0) {
+            html += '<h4>Detail par produit</h4>';
+            html += '<table class="jam-table jam-table--compact">';
+            html += '<thead><tr><th>Produit</th><th>' + (isDry ? 'A inscrire' : 'Inscrits') + '</th><th>Deja OK</th><th>Erreurs</th></tr></thead>';
+            html += '<tbody>';
+            for (var i = 0; i < r.products.length; i++) {
+                var p = r.products[i];
+                html += '<tr>';
+                html += '<td>' + escHtml(p.name) + '</td>';
+                html += '<td><strong>' + (p.enrolled || 0) + '</strong></td>';
+                html += '<td>' + (p.already || 0) + '</td>';
+                html += '<td>' + (p.errors || 0) + '</td>';
+                html += '</tr>';
+            }
+            html += '</tbody></table>';
+        }
+
+        // Error emails
+        if (r.error_emails && r.error_emails.length > 0) {
+            html += '<h4>Emails sans compte WP (' + r.error_emails.length + ')</h4>';
+            html += '<div style="max-height:200px;overflow-y:auto;background:#f9f9f9;padding:8px;border-radius:4px;font-size:12px;">';
+            for (var j = 0; j < r.error_emails.length; j++) {
+                html += escHtml(r.error_emails[j]) + '<br>';
+            }
+            html += '</div>';
+        }
+
+        if (r.message) {
+            html += '<p style="color:#646970;">' + escHtml(r.message) + '</p>';
+        }
+
+        html += '</div>';
+        return html;
+    }
 
 })(jQuery);

@@ -327,13 +327,19 @@ $per_page = 20;
         </div>
     </div>
 
-    <!-- Sync Button -->
+    <!-- Sync -->
     <div class="jam-section">
         <div class="jam-section__header">
             <h2>Synchronisation</h2>
         </div>
         <div class="jam-section__body jam-section__body--padded">
             <p>Synchronise les achats SureCart actifs avec les inscriptions Fluent Community selon les règles définies.</p>
+            <div style="margin:12px 0;">
+                <label>
+                    <input type="checkbox" id="jam-sync-dry-run" checked>
+                    <strong>Simulation (dry-run)</strong> — vérifie sans inscrire personne
+                </label>
+            </div>
             <button type="button" class="button button-primary" id="jam-sync-btn">Lancer la synchronisation</button>
             <div id="jam-sync-report"></div>
         </div>

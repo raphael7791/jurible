@@ -38,7 +38,25 @@ ssh aideauxtd@dogfish.o2switch.net "cd ~/jurible-repo && git pull && rm -rf ~/ju
 - **Thème enfant** : `themes/ecole.jurible` → espace membre uniquement
 - **Blocs React** : `plugins/jurible-blocks-react` (28 blocs custom)
 
-Les sites Local by Flywheel (`~/Local Sites/`) utilisent des **symlinks** vers ce repo.
+### Sites Local by Flywheel
+
+Les sites locaux (`~/Local Sites/`) utilisent des **symlinks** vers `~/Code/jurible/`.
+
+| Site local | URL | Rôle |
+|------------|-----|------|
+| `~/Local Sites/jurible-local/` | `jurible-local.local` | Site principal (vente SureCart) |
+| `~/Local Sites/ecole-jurible-local/` | `ecole-jurible-local.local` | Site école (Fluent Community, cours) |
+
+**Plugins symlinkés sur ecole-jurible-local :**
+- `academic-generator`, `jurible-assessments`, `jurible-blocks-react`, `jurible-flashcards`, `jurible-playlist`, `jurible-access-manager`
+
+**Plugins symlinkés sur jurible-local :**
+- `jurible-blocks-react`
+
+Pour ajouter un nouveau plugin au site local :
+```bash
+ln -s ~/Code/jurible/plugins/MON-PLUGIN ~/Local\ Sites/NOM-DU-SITE/app/public/wp-content/plugins/MON-PLUGIN
+```
 
 ## Règles critiques
 
