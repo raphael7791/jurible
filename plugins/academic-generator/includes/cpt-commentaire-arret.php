@@ -469,8 +469,9 @@ function aga_parser_contenu_commentaire($contenu) {
         'partie_2' => array('titre' => '', 'contenu' => ''),
         'parsing_reussi' => false
     );
-    
-    // Nettoyer le contenu
+
+    // Nettoyer le contenu (strip HTML de wpautop)
+    $contenu = wp_strip_all_tags($contenu);
     $contenu = trim($contenu);
     
     // Diviser en lignes

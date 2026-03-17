@@ -424,8 +424,9 @@ function aga_parser_contenu_cas_pratique($contenu) {
         'contenu' => '',
         'parsing_reussi' => false
     );
-    
-    // Nettoyer le contenu
+
+    // Nettoyer le contenu (strip HTML de wpautop)
+    $contenu = wp_strip_all_tags($contenu);
     $contenu = trim($contenu);
     
     // Tentative de parsing avec marqueurs

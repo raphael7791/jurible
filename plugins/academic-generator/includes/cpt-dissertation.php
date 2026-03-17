@@ -362,7 +362,8 @@ function aga_formater_contenu_dissertation_fc($content) {
             </div>
             <div class="aga-result-card-body">
                 <?php
-                $lignes = explode("\n", $content);
+                $contenu_brut = wp_strip_all_tags($content);
+                $lignes = explode("\n", $contenu_brut);
                 $in_list = false;
 
                 foreach ($lignes as $ligne) {
