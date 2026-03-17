@@ -114,21 +114,11 @@ class JAM_Sync {
      */
     private static function fetch_active_subscriptions( $product_id ) {
         $results  = [];
-        $page     = 1;
+        $offset   = 0;
         $limit    = 100;
         $token    = JAM_Helpers::get_sc_api_token();
 
         do {
-            $offset = ( $page - 1 ) * $limit;
-            $url    = add_query_arg( [
-                'status[]'       => 'active',
-                'product_ids[]'  => $product_id,
-                'expand[]'       => 'customer',
-                'limit'          => $limit,
-                'offset'         => $offset,
-            ], 'https://api.surecart.com/v1/subscriptions' );
-
-            // SureCart API needs multiple status[] params — build manually
             $url = 'https://api.surecart.com/v1/subscriptions'
                 . '?status[]=active&status[]=trialing'
                 . '&product_ids[]=' . urlencode( $product_id )
@@ -148,9 +138,9 @@ class JAM_Sync {
                 break;
             }
 
-            $body     = json_decode( wp_remote_retrieve_body( $response ), true );
-            $items    = $body['data'] ?? [];
-            $has_more = ! empty( $body['pagination']['has_more'] );
+            $body  = json_decode( wp_remote_retrieve_body( $response ), true );
+            $items = $body['data'] ?? [];
+            $total = $body['pagination']['count'] ?? 0;
 
             foreach ( $items as $item ) {
                 $customer = $item['customer'] ?? [];
@@ -160,8 +150,8 @@ class JAM_Sync {
                 }
             }
 
-            $page++;
-        } while ( $has_more && $page <= 50 );
+            $offset += count( $items );
+        } while ( $offset < $total && $offset < 5000 );
 
         return $results;
     }
@@ -175,13 +165,12 @@ class JAM_Sync {
      */
     private static function fetch_active_purchases( $product_id ) {
         $results  = [];
-        $page     = 1;
+        $offset   = 0;
         $limit    = 100;
         $token    = JAM_Helpers::get_sc_api_token();
 
         do {
-            $offset = ( $page - 1 ) * $limit;
-            $url    = 'https://api.surecart.com/v1/purchases'
+            $url = 'https://api.surecart.com/v1/purchases'
                 . '?product_ids[]=' . urlencode( $product_id )
                 . '&expand[]=customer'
                 . '&limit=' . $limit
@@ -199,9 +188,9 @@ class JAM_Sync {
                 break;
             }
 
-            $body     = json_decode( wp_remote_retrieve_body( $response ), true );
-            $items    = $body['data'] ?? [];
-            $has_more = ! empty( $body['pagination']['has_more'] );
+            $body  = json_decode( wp_remote_retrieve_body( $response ), true );
+            $items = $body['data'] ?? [];
+            $total = $body['pagination']['count'] ?? 0;
 
             foreach ( $items as $item ) {
                 // Skip purchases linked to a subscription
@@ -222,8 +211,8 @@ class JAM_Sync {
                 }
             }
 
-            $page++;
-        } while ( $has_more && $page <= 50 );
+            $offset += count( $items );
+        } while ( $offset < $total && $offset < 5000 );
 
         return $results;
     }

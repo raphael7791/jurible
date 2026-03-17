@@ -169,12 +169,11 @@ class JAM_Helpers {
         }
 
         $counts = [];
-        $page   = 1;
+        $offset = 0;
         $limit  = 100;
 
         do {
-            $offset   = ( $page - 1 ) * $limit;
-            $url      = "https://api.surecart.com/v1/subscriptions?status=active&limit={$limit}&offset={$offset}&expand[]=price&expand[]=price.product";
+            $url      = "https://api.surecart.com/v1/subscriptions?status[]=active&status[]=trialing&limit={$limit}&offset={$offset}&expand[]=price&expand[]=price.product";
             $response = wp_remote_get( $url, [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $token,
@@ -187,9 +186,9 @@ class JAM_Helpers {
                 break;
             }
 
-            $body     = json_decode( wp_remote_retrieve_body( $response ), true );
-            $subs     = $body['data'] ?? [];
-            $has_more = ! empty( $body['pagination']['has_more'] );
+            $body  = json_decode( wp_remote_retrieve_body( $response ), true );
+            $subs  = $body['data'] ?? [];
+            $total = $body['pagination']['count'] ?? 0;
 
             foreach ( $subs as $sub ) {
                 $price   = $sub['price'] ?? [];
@@ -200,8 +199,8 @@ class JAM_Helpers {
                 }
             }
 
-            $page++;
-        } while ( $has_more && $page <= 20 );
+            $offset += count( $subs );
+        } while ( $offset < $total && $offset < 5000 );
 
         return $counts;
     }
