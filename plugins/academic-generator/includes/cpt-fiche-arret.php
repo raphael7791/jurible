@@ -244,18 +244,19 @@ add_action('template_redirect', 'aga_securiser_acces_fiche');
  */
 function aga_forcer_template_fiche($template) {
     global $post;
-    
-    // Vérifier si nous sommes sur une page de fiche d'arrêt
+
     if ($post && $post->post_type == 'fiche_arret') {
-        // Chemin vers le template dans le plugin
+        // Si FC gère le template (block theme ou classic), ne pas override
+        if (class_exists('FluentCommunity\App\App')) {
+            return $template;
+        }
+
         $plugin_template = AGA_PLUGIN_PATH . 'templates/single-fiche-arret.php';
-        
-        // Vérifier si le template existe dans le plugin
         if (file_exists($plugin_template)) {
             return $plugin_template;
         }
     }
-    
+
     return $template;
 }
 add_filter('template_include', 'aga_forcer_template_fiche', 99);

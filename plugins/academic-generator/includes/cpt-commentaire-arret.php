@@ -197,15 +197,18 @@ add_action('template_redirect', 'aga_securiser_acces_commentaire');
  */
 function aga_forcer_template_commentaire($template) {
     global $post;
-    
+
     if ($post && $post->post_type == 'commentaire_arret') {
+        if (class_exists('FluentCommunity\App\App')) {
+            return $template;
+        }
+
         $plugin_template = AGA_PLUGIN_PATH . 'templates/single-commentaire-arret.php';
-        
         if (file_exists($plugin_template)) {
             return $plugin_template;
         }
     }
-    
+
     return $template;
 }
 add_filter('template_include', 'aga_forcer_template_commentaire', 99);

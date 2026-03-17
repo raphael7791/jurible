@@ -190,15 +190,18 @@ add_action('template_redirect', 'aga_securiser_acces_cas_pratique');
  */
 function aga_forcer_template_cas_pratique($template) {
     global $post;
-    
+
     if ($post && $post->post_type == 'cas_pratique') {
+        if (class_exists('FluentCommunity\App\App')) {
+            return $template;
+        }
+
         $plugin_template = AGA_PLUGIN_PATH . 'templates/single-cas-pratique.php';
-        
         if (file_exists($plugin_template)) {
             return $plugin_template;
         }
     }
-    
+
     return $template;
 }
 add_filter('template_include', 'aga_forcer_template_cas_pratique', 99);

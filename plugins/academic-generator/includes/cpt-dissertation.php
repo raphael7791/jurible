@@ -197,30 +197,18 @@ add_action('template_redirect', 'aga_securiser_acces_dissertation');
  */
 function aga_forcer_template_dissertation($template) {
     global $post;
-    
-    error_log('=== TEMPLATE DISSERTATION DEBUG ===');
-    error_log('Post existe: ' . ($post ? 'OUI' : 'NON'));
-    
-    if ($post) {
-        error_log('Post type: ' . $post->post_type);
-        error_log('Post ID: ' . $post->ID);
-    }
-    
+
     if ($post && $post->post_type == 'dissertation') {
+        if (class_exists('FluentCommunity\App\App')) {
+            return $template;
+        }
+
         $plugin_template = AGA_PLUGIN_PATH . 'templates/single-dissertation.php';
-        
-        error_log('DISSERTATION DÉTECTÉE !');
-        error_log('Chemin template: ' . $plugin_template);
-        error_log('Fichier existe: ' . (file_exists($plugin_template) ? 'OUI' : 'NON'));
-        
         if (file_exists($plugin_template)) {
-            error_log('TEMPLATE APPLIQUÉ !');
             return $plugin_template;
-        } else {
-            error_log('ERREUR: Fichier template introuvable !');
         }
     }
-    
+
     return $template;
 }
 add_filter('template_include', 'aga_forcer_template_dissertation', 99);
