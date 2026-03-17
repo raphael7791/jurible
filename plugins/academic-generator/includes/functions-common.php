@@ -495,3 +495,56 @@ function aga_doit_afficher_modal_avis($user_id) {
 
     return !$verification['autorise'];
 }
+
+// ============================================================================
+// SCRIPTS JS POUR LES PAGES DE RÉSULTAT (PORTAIL FC)
+// ============================================================================
+
+/**
+ * Ajouter le JS de copie et navigation sur les pages de résultat CPT
+ */
+function aga_enqueue_result_scripts() {
+    $cpts = ['fiche_arret', 'dissertation', 'cas_pratique', 'commentaire_arret'];
+    if (!is_singular($cpts)) {
+        return;
+    }
+    ?>
+    <script>
+    function agaCopyContent(selector) {
+        var el = document.querySelector(selector);
+        if (!el) return;
+        var text = el.innerText;
+        var btn = event.target.closest('.aga-btn-copy');
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(function() { agaShowCopied(btn); });
+        } else {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            agaShowCopied(btn);
+        }
+    }
+    function agaShowCopied(btn) {
+        if (!btn) return;
+        var original = btn.innerHTML;
+        btn.classList.add('copied');
+        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>Copié !';
+        setTimeout(function() {
+            btn.classList.remove('copied');
+            btn.innerHTML = original;
+        }, 2000);
+    }
+    document.querySelectorAll('.aga-result-nav-link').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+    </script>
+    <?php
+}
+add_action('wp_footer', 'aga_enqueue_result_scripts');

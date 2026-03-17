@@ -313,6 +313,123 @@ function aga_supprimer_dissertation() {
 add_action('wp_ajax_supprimer_dissertation', 'aga_supprimer_dissertation');
 
 // ============================================================================
+// FORMATAGE DU CONTENU DANS LE PORTAIL FC
+// ============================================================================
+
+/**
+ * Formater le contenu de la dissertation quand affichée via the_content() (portail FC)
+ */
+function aga_formater_contenu_dissertation_fc($content) {
+    if (!is_singular('dissertation') || is_admin()) {
+        return $content;
+    }
+
+    remove_filter('the_content', 'aga_formater_contenu_dissertation_fc', 20);
+
+    $post_id = get_the_ID();
+    $sujet = get_post_meta($post_id, '_aga_sujet', true);
+    $matiere = get_post_meta($post_id, '_aga_matiere', true);
+    $type_generation = get_post_meta($post_id, '_aga_type_generation', true);
+    $date_generation = get_post_meta($post_id, '_aga_date_generation', true);
+
+    $type_label = ($type_generation === 'plan_detaille') ? 'Plan détaillé' : 'Dissertation complète';
+    $matiere_formatee = aga_formater_matiere($matiere);
+
+    ob_start();
+    ?>
+    <div class="aga-result">
+
+        <div class="aga-result-alert aga-result-alert--success">
+            <svg class="aga-result-alert-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22,4 12,14.01 9,11.01"></polyline>
+            </svg>
+            <div>
+                <span class="aga-result-alert-title"><?php echo esc_html($type_label); ?> générée !</span>
+                <p class="aga-result-alert-text">Ce contenu est généré par IA et peut contenir des erreurs. Relisez et vérifiez l'exactitude juridique avant utilisation.</p>
+            </div>
+        </div>
+
+        <nav class="aga-result-breadcrumb">
+            <a href="<?php echo home_url('/generateur-dissertation/'); ?>">Générateur</a>
+            <span class="aga-result-breadcrumb-sep">›</span>
+            <span class="aga-result-breadcrumb-current">Ma dissertation</span>
+        </nav>
+
+        <h1 class="aga-result-title"><?php echo esc_html($sujet); ?></h1>
+
+        <div class="aga-result-meta">
+            <span><strong>Type :</strong> <?php echo esc_html($type_label); ?></span>
+            <span><strong>Matière :</strong> <?php echo esc_html($matiere_formatee); ?></span>
+            <?php if ($date_generation): ?>
+                <span><strong>Date :</strong> <?php echo date('d/m/Y', strtotime($date_generation)); ?></span>
+            <?php endif; ?>
+        </div>
+
+        <div class="aga-result-card">
+            <div class="aga-result-card-header">
+                <h2 class="aga-result-card-title">Contenu de la dissertation</h2>
+                <button class="aga-btn-copy" onclick="agaCopyContent('.aga-result-card-body')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    Copier
+                </button>
+            </div>
+            <div class="aga-result-card-body">
+                <?php
+                $lignes = explode("\n", $content);
+                $in_list = false;
+
+                foreach ($lignes as $ligne) {
+                    $ligne = trim($ligne);
+                    if (empty($ligne)) continue;
+
+                    if (preg_match('/^Introduction$/i', $ligne)) {
+                        if ($in_list) { echo '</ul>'; $in_list = false; }
+                        echo '<h2>' . esc_html($ligne) . '</h2>';
+                    } elseif (preg_match('/^(I{1,3})\.\s+(.+)$/', $ligne)) {
+                        if ($in_list) { echo '</ul>'; $in_list = false; }
+                        echo '<h2>' . esc_html($ligne) . '</h2>';
+                    } elseif (preg_match('/^([A-B])\.\s+(.+)$/', $ligne)) {
+                        if ($in_list) { echo '</ul>'; $in_list = false; }
+                        echo '<h3>' . esc_html($ligne) . '</h3>';
+                    } elseif (preg_match('/^(\(Transition\)|Transition\s*:)\s*(.*)$/i', $ligne, $match)) {
+                        if ($in_list) { echo '</ul>'; $in_list = false; }
+                        echo '<p class="aga-result-transition"><strong>(Transition)</strong> ' . esc_html($match[2]) . '</p>';
+                    } elseif (preg_match('/^\(([^)]+)\)\s*(.+)$/i', $ligne, $match)) {
+                        if ($in_list) { echo '</ul>'; $in_list = false; }
+                        echo '<p><strong>(' . esc_html($match[1]) . ')</strong> ' . esc_html($match[2]) . '</p>';
+                    } elseif (preg_match('/^[\-\*]\s+(.+)$/', $ligne, $match)) {
+                        if (!$in_list) { echo '<ul>'; $in_list = true; }
+                        echo '<li>' . esc_html($match[1]) . '</li>';
+                    } else {
+                        if ($in_list) { echo '</ul>'; $in_list = false; }
+                        echo '<p>' . esc_html($ligne) . '</p>';
+                    }
+                }
+                if ($in_list) { echo '</ul>'; }
+                ?>
+            </div>
+        </div>
+
+        <div class="aga-result-actions">
+            <a href="<?php echo home_url('/generateur-dissertation/'); ?>" class="aga-result-action aga-result-action--outline">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Nouvelle dissertation
+            </a>
+            <a href="<?php echo home_url('/mes-dissertations/'); ?>" class="aga-result-action aga-result-action--primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v5h5"></path><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"></path><path d="M12 7v5l4 2"></path></svg>
+                Mes dissertations
+            </a>
+        </div>
+    </div>
+    <?php
+
+    add_filter('the_content', 'aga_formater_contenu_dissertation_fc', 20);
+    return ob_get_clean();
+}
+add_filter('the_content', 'aga_formater_contenu_dissertation_fc', 20);
+
+// ============================================================================
 // PARSER CONTENU DISSERTATION
 // ============================================================================
 

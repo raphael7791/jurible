@@ -291,6 +291,126 @@ function aga_supprimer_cas_pratique() {
 add_action('wp_ajax_supprimer_cas_pratique', 'aga_supprimer_cas_pratique');
 
 // ============================================================================
+// FORMATAGE DU CONTENU DANS LE PORTAIL FC
+// ============================================================================
+
+/**
+ * Formater le contenu du cas pratique quand affiché via the_content() (portail FC)
+ */
+function aga_formater_contenu_cas_pratique_fc($content) {
+    if (!is_singular('cas_pratique') || is_admin()) {
+        return $content;
+    }
+
+    remove_filter('the_content', 'aga_formater_contenu_cas_pratique_fc', 20);
+
+    $post_id = get_the_ID();
+    $sujet = get_post_meta($post_id, '_aga_sujet_cas_pratique', true);
+    $matiere = get_post_meta($post_id, '_aga_matiere', true);
+    $date_generation = get_post_meta($post_id, '_aga_date_generation', true);
+    $matiere_formatee = aga_formater_matiere($matiere);
+
+    $sections = aga_parser_contenu_cas_pratique($content);
+
+    ob_start();
+    ?>
+    <div class="aga-result">
+
+        <div class="aga-result-alert aga-result-alert--success">
+            <svg class="aga-result-alert-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22,4 12,14.01 9,11.01"></polyline>
+            </svg>
+            <div>
+                <span class="aga-result-alert-title">Cas pratique corrigé !</span>
+                <p class="aga-result-alert-text"><strong>Attention :</strong> Cette correction est générée par IA et peut contenir des erreurs. Utilisez-la comme base de travail et vérifiez avec votre cours et les articles cités.</p>
+            </div>
+        </div>
+
+        <nav class="aga-result-breadcrumb">
+            <a href="<?php echo home_url('/generateur-cas-pratique/'); ?>">Générateur</a>
+            <span class="aga-result-breadcrumb-sep">›</span>
+            <span class="aga-result-breadcrumb-current">Mon cas pratique</span>
+        </nav>
+
+        <h1 class="aga-result-title">Correction de <span class="highlight">cas pratique</span></h1>
+
+        <div class="aga-result-meta">
+            <span><strong>Matière :</strong> <?php echo esc_html($matiere_formatee); ?></span>
+            <?php if ($date_generation): ?>
+                <span><strong>Date :</strong> <?php echo date('d/m/Y', strtotime($date_generation)); ?></span>
+            <?php endif; ?>
+        </div>
+
+        <?php if ($sujet): ?>
+        <div class="aga-result-accordion">
+            <input type="checkbox" id="aga-sujet-toggle" class="aga-result-accordion-toggle">
+            <label for="aga-sujet-toggle" class="aga-result-accordion-header">
+                <h2 class="aga-result-accordion-title">Sujet</h2>
+                <span class="aga-result-accordion-arrow">&#9660;</span>
+            </label>
+            <div class="aga-result-accordion-body"><?php echo esc_html($sujet); ?></div>
+        </div>
+        <?php endif; ?>
+
+        <div class="aga-result-card">
+            <div class="aga-result-card-header">
+                <h2 class="aga-result-card-title">Correction</h2>
+                <button class="aga-btn-copy" onclick="agaCopyContent('.aga-result-card-body')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    Copier
+                </button>
+            </div>
+            <div class="aga-result-card-body">
+                <?php if ($sections['parsing_reussi'] && !empty($sections['plan'])): ?>
+                    <div class="aga-result-plan-box">
+                        <h3>Plan de résolution</h3>
+                        <div><?php echo esc_html($sections['plan']); ?></div>
+                    </div>
+                <?php endif; ?>
+
+                <?php
+                $contenu_a_afficher = $sections['contenu'];
+                $lignes = explode("\n", $contenu_a_afficher);
+
+                foreach ($lignes as $ligne) {
+                    $ligne = trim($ligne);
+                    if (empty($ligne)) continue;
+
+                    if (preg_match('/^(I{1,3})\.\s+(.+)$/', $ligne)) {
+                        echo '<h2>' . esc_html($ligne) . '</h2>';
+                    } elseif (preg_match('/^(FAITS|PROBLÈME DE DROIT|SOLUTION EN DROIT|SOLUTION EN L\'ESPÈCE|CONCLUSION)\s*:\s*(.*)$/i', $ligne, $match)) {
+                        echo '<h3>' . esc_html($match[1]) . '</h3>';
+                        if (!empty(trim($match[2]))) {
+                            echo '<p>' . esc_html($match[2]) . '</p>';
+                        }
+                    } else {
+                        echo '<p>' . esc_html($ligne) . '</p>';
+                    }
+                }
+                ?>
+            </div>
+        </div>
+
+        <div class="aga-result-actions">
+            <a href="<?php echo home_url('/generateur-cas-pratique/'); ?>" class="aga-result-action aga-result-action--outline">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Nouveau cas pratique
+            </a>
+            <a href="<?php echo home_url('/mes-cas-pratiques/'); ?>" class="aga-result-action aga-result-action--primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v5h5"></path><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"></path><path d="M12 7v5l4 2"></path></svg>
+                Mes cas pratiques
+            </a>
+        </div>
+    </div>
+    <?php
+
+    add_filter('the_content', 'aga_formater_contenu_cas_pratique_fc', 20);
+    return ob_get_clean();
+}
+add_filter('the_content', 'aga_formater_contenu_cas_pratique_fc', 20);
+
+// ============================================================================
 // PARSER CONTENU CAS PRATIQUE
 // ============================================================================
 

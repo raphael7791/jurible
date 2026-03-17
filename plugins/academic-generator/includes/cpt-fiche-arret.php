@@ -435,3 +435,153 @@ function aga_supprimer_fiche() {
     }
 }
 add_action('wp_ajax_supprimer_fiche', 'aga_supprimer_fiche');
+
+// ============================================================================
+// FORMATAGE DU CONTENU DANS LE PORTAIL FC
+// ============================================================================
+
+/**
+ * Formater le contenu de la fiche quand affichée via the_content() (portail FC)
+ */
+function aga_formater_contenu_fiche_fc($content) {
+    if (!is_singular('fiche_arret') || is_admin()) {
+        return $content;
+    }
+
+    // Éviter la récursion
+    remove_filter('the_content', 'aga_formater_contenu_fiche_fc', 20);
+
+    $post_id = get_the_ID();
+    $references_normalized = get_post_meta($post_id, '_aga_references_normalized', true) ?: get_post_meta($post_id, '_gfa_references_normalized', true);
+    $references = $references_normalized ?: (get_post_meta($post_id, '_aga_references', true) ?: get_post_meta($post_id, '_gfa_references', true));
+    $matiere = get_post_meta($post_id, '_aga_matiere', true) ?: get_post_meta($post_id, '_gfa_matiere', true);
+    $date_generation = get_post_meta($post_id, '_aga_date_generation', true) ?: get_post_meta($post_id, '_gfa_date_generation', true);
+
+    $sections = aga_parser_contenu_fiche($content);
+
+    ob_start();
+    ?>
+    <div class="aga-result">
+
+        <div class="aga-result-alert aga-result-alert--success">
+            <svg class="aga-result-alert-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22,4 12,14.01 9,11.01"></polyline>
+            </svg>
+            <div>
+                <span class="aga-result-alert-title">Fiche d'arrêt générée !</span>
+                <p class="aga-result-alert-text">Cette fiche est générée par IA et peut contenir des erreurs. Relisez et vérifiez l'exactitude juridique avant utilisation.</p>
+            </div>
+        </div>
+
+        <nav class="aga-result-breadcrumb">
+            <a href="<?php echo home_url('/generateur-fiche/'); ?>">Générateur</a>
+            <span class="aga-result-breadcrumb-sep">›</span>
+            <span class="aga-result-breadcrumb-current">Ma fiche d'arrêt</span>
+        </nav>
+
+        <h1 class="aga-result-title">
+            Fiche d'arrêt <span class="highlight">générée</span>
+            <?php if ($references): ?> (<?php echo esc_html($references); ?>)<?php endif; ?>
+        </h1>
+
+        <div class="aga-result-meta">
+            <?php if ($matiere): ?>
+                <span><strong>Matière :</strong> <?php echo esc_html(aga_formater_matiere($matiere)); ?></span>
+            <?php endif; ?>
+            <?php if ($date_generation): ?>
+                <span><strong>Date :</strong> <?php echo date('d/m/Y', strtotime($date_generation)); ?></span>
+            <?php endif; ?>
+        </div>
+
+        <?php if (!$sections['parsing_reussi']): ?>
+
+            <div class="aga-result-alert aga-result-alert--warning">
+                <svg class="aga-result-alert-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <div>
+                    <span class="aga-result-alert-title">Structure non détectée</span>
+                    <p class="aga-result-alert-text">Le contenu complet est affiché ci-dessous.</p>
+                </div>
+            </div>
+
+            <div class="aga-result-card">
+                <div class="aga-result-card-header">
+                    <h2 class="aga-result-card-title">Contenu complet</h2>
+                    <button class="aga-btn-copy" onclick="agaCopyContent('.aga-result-card-body')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        Copier
+                    </button>
+                </div>
+                <div class="aga-result-card-body">
+                    <?php echo wpautop(wp_kses_post($content)); ?>
+                </div>
+            </div>
+
+        <?php else: ?>
+
+            <div class="aga-result-card">
+                <div class="aga-result-nav">
+                    <div class="aga-result-nav-links">
+                        <a href="#section-faits" class="aga-result-nav-link"><span class="aga-result-nav-number">1</span> Faits</a>
+                        <a href="#section-procedure" class="aga-result-nav-link"><span class="aga-result-nav-number">2</span> Procédure</a>
+                        <a href="#section-probleme" class="aga-result-nav-link"><span class="aga-result-nav-number">3</span> Problème</a>
+                        <a href="#section-solution" class="aga-result-nav-link"><span class="aga-result-nav-number">4</span> Solution</a>
+                    </div>
+                    <button class="aga-btn-copy" onclick="agaCopyContent('.aga-result-card')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        Copier
+                    </button>
+                </div>
+
+                <div class="aga-result-section" id="section-faits">
+                    <h2 class="aga-result-section-title">
+                        <span class="aga-result-section-number aga-result-section-number--blue">1</span> Faits
+                    </h2>
+                    <div class="aga-result-section-content"><?php echo wpautop(wp_kses_post($sections['faits'])); ?></div>
+                </div>
+
+                <div class="aga-result-section" id="section-procedure">
+                    <h2 class="aga-result-section-title">
+                        <span class="aga-result-section-number aga-result-section-number--purple">2</span> Procédure
+                    </h2>
+                    <div class="aga-result-section-content"><?php echo wpautop(wp_kses_post($sections['procedure'])); ?></div>
+                </div>
+
+                <div class="aga-result-section" id="section-probleme">
+                    <h2 class="aga-result-section-title">
+                        <span class="aga-result-section-number aga-result-section-number--red">3</span> Problème de droit
+                    </h2>
+                    <div class="aga-result-section-content"><?php echo wpautop(wp_kses_post($sections['probleme'])); ?></div>
+                </div>
+
+                <div class="aga-result-section" id="section-solution">
+                    <h2 class="aga-result-section-title">
+                        <span class="aga-result-section-number aga-result-section-number--green">4</span> Solution
+                    </h2>
+                    <div class="aga-result-section-content"><?php echo wpautop(wp_kses_post($sections['solution'])); ?></div>
+                </div>
+            </div>
+
+        <?php endif; ?>
+
+        <div class="aga-result-actions">
+            <a href="<?php echo home_url('/generateur-fiche/'); ?>" class="aga-result-action aga-result-action--outline">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Nouvelle fiche
+            </a>
+            <a href="<?php echo home_url('/mes-fiches/'); ?>" class="aga-result-action aga-result-action--primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v5h5"></path><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"></path><path d="M12 7v5l4 2"></path></svg>
+                Mes fiches
+            </a>
+        </div>
+    </div>
+    <?php
+
+    add_filter('the_content', 'aga_formater_contenu_fiche_fc', 20);
+    return ob_get_clean();
+}
+add_filter('the_content', 'aga_formater_contenu_fiche_fc', 20);

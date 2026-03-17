@@ -134,6 +134,19 @@ function aga_add_rewrite_rules() {
 add_action('init', 'aga_add_rewrite_rules');
 
 /**
+ * Forcer le template Fluent Community Frame sur les CPTs générés
+ * Permet d'afficher les résultats dans le portail FC (header + sidebar)
+ */
+function aga_forcer_template_fc($template_slug) {
+    $cpts = ['fiche_arret', 'dissertation', 'cas_pratique', 'commentaire_arret'];
+    if (is_singular($cpts)) {
+        return 'fluent-community-frame.php';
+    }
+    return $template_slug;
+}
+add_filter('fluent_community/template_slug', 'aga_forcer_template_fc');
+
+/**
  * Modifier les permaliens pour utiliser l'ID
  */
 function aga_custom_post_link($post_link, $post) {
