@@ -536,10 +536,11 @@ class JAM_SureCart_Hooks {
         }
 
         // Fallback: REST API
-        if ( function_exists( 'sc_api_token' ) ) {
+        $token = JAM_Helpers::get_sc_api_token();
+        if ( $token ) {
             $response = wp_remote_get( "https://api.surecart.com/v1/customers/{$customer_id}", [
                 'headers' => [
-                    'Authorization' => 'Bearer ' . sc_api_token(),
+                    'Authorization' => 'Bearer ' . $token,
                     'Content-Type'  => 'application/json',
                 ],
                 'timeout' => 10,

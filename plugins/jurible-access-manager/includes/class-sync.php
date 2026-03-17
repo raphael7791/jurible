@@ -26,8 +26,9 @@ class JAM_Sync {
             'duration'         => 0,
         ];
 
-        if ( ! function_exists( 'sc_api_token' ) ) {
-            $report['message'] = 'SureCart API indisponible (sc_api_token introuvable).';
+        $token = JAM_Helpers::get_sc_api_token();
+        if ( ! $token ) {
+            $report['message'] = 'SureCart API indisponible (aucun token trouvé).';
             return $report;
         }
 
@@ -115,7 +116,7 @@ class JAM_Sync {
         $results  = [];
         $page     = 1;
         $limit    = 100;
-        $token    = sc_api_token();
+        $token    = JAM_Helpers::get_sc_api_token();
 
         do {
             $offset = ( $page - 1 ) * $limit;
@@ -176,7 +177,7 @@ class JAM_Sync {
         $results  = [];
         $page     = 1;
         $limit    = 100;
-        $token    = sc_api_token();
+        $token    = JAM_Helpers::get_sc_api_token();
 
         do {
             $offset = ( $page - 1 ) * $limit;

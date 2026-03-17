@@ -7,6 +7,49 @@ if ( ! defined( 'ABSPATH' ) ) {
 class JAM_Helpers {
 
     /**
+     * Get the SureCart API token (works on all environments).
+     *
+     * Tries: 1) sc_api_token() global function
+     *        2) SureCart\Models\ApiToken::get() (protected, called via __callStatic)
+     *        3) Direct option decrypt
+     *
+     * @return string|false Token or false if unavailable.
+     */
+    public static function get_sc_api_token() {
+        // 1. Global function (older SureCart versions or custom sites)
+        if ( function_exists( 'sc_api_token' ) ) {
+            return sc_api_token();
+        }
+
+        // 2. SureCart ApiToken model
+        if ( class_exists( '\SureCart\Models\ApiToken' ) ) {
+            try {
+                $token = \SureCart\Models\ApiToken::get();
+                if ( $token ) {
+                    return $token;
+                }
+            } catch ( \Exception $e ) {
+                // Fall through
+            }
+        }
+
+        // 3. Direct decrypt from option
+        $encrypted = get_option( 'sc_api_token', '' );
+        if ( $encrypted && class_exists( '\SureCart\Support\Encryption' ) ) {
+            try {
+                $token = \SureCart\Support\Encryption::decrypt( $encrypted );
+                if ( $token ) {
+                    return $token;
+                }
+            } catch ( \Exception $e ) {
+                // Fall through
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Get SureCart products (cached 15 min).
      */
     public static function get_sc_products() {
@@ -17,7 +60,7 @@ class JAM_Helpers {
 
         $products = [];
 
-        if ( ! function_exists( 'sc_api_token' ) ) {
+        if ( ! self::get_sc_api_token() ) {
             if ( class_exists( '\SureCart\Models\Product' ) ) {
                 try {
                     $result = \SureCart\Models\Product::where( [ 'archived' => false ] )->paginate( [
@@ -51,7 +94,7 @@ class JAM_Helpers {
         // SureCart REST API — products with prices expanded
         $response = wp_remote_get( 'https://api.surecart.com/v1/products?archived=false&limit=100&expand[]=prices', [
             'headers' => [
-                'Authorization' => 'Bearer ' . sc_api_token(),
+                'Authorization' => 'Bearer ' . self::get_sc_api_token(),
                 'Content-Type'  => 'application/json',
             ],
         ] );
@@ -120,7 +163,8 @@ class JAM_Helpers {
      * Get active subscription counts per SureCart product.
      */
     public static function get_active_counts_per_product() {
-        if ( ! function_exists( 'sc_api_token' ) ) {
+        $token = self::get_sc_api_token();
+        if ( ! $token ) {
             return [];
         }
 
@@ -133,7 +177,7 @@ class JAM_Helpers {
             $url      = "https://api.surecart.com/v1/subscriptions?status=active&limit={$limit}&offset={$offset}&expand[]=price&expand[]=price.product";
             $response = wp_remote_get( $url, [
                 'headers' => [
-                    'Authorization' => 'Bearer ' . sc_api_token(),
+                    'Authorization' => 'Bearer ' . $token,
                     'Content-Type'  => 'application/json',
                 ],
                 'timeout' => 30,

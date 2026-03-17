@@ -246,7 +246,8 @@ class JAM_Admin_Menu {
         $purchases     = [];
         $active_product_ids = [];
 
-        if ( ! empty( $customer_ids ) && function_exists( 'sc_api_token' ) ) {
+        $sc_token = JAM_Helpers::get_sc_api_token();
+        if ( ! empty( $customer_ids ) && $sc_token ) {
             $cids = is_array( $customer_ids ) ? $customer_ids : [ $customer_ids ];
 
             foreach ( $cids as $cid ) {
@@ -254,7 +255,7 @@ class JAM_Admin_Menu {
                 $sub_url  = 'https://api.surecart.com/v1/subscriptions?customer_ids[]=' . urlencode( $cid ) . '&expand[]=price&expand[]=price.product&limit=100';
                 $sub_resp = wp_remote_get( $sub_url, [
                     'headers' => [
-                        'Authorization' => 'Bearer ' . sc_api_token(),
+                        'Authorization' => 'Bearer ' . $sc_token,
                         'Content-Type'  => 'application/json',
                     ],
                     'timeout' => 15,
@@ -304,7 +305,7 @@ class JAM_Admin_Menu {
                 $pur_url  = 'https://api.surecart.com/v1/purchases?customer_ids[]=' . urlencode( $cid ) . '&expand[]=product&limit=100';
                 $pur_resp = wp_remote_get( $pur_url, [
                     'headers' => [
-                        'Authorization' => 'Bearer ' . sc_api_token(),
+                        'Authorization' => 'Bearer ' . $sc_token,
                         'Content-Type'  => 'application/json',
                     ],
                     'timeout' => 15,

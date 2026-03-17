@@ -439,14 +439,15 @@ function jam_dashboard_get_sc_subscriptions( $page = 1, $per_page = 20, $product
         $args['product_ids[]'] = $product_filter;
     }
 
-    if ( ! function_exists( 'sc_api_token' ) ) {
+    $token = JAM_Helpers::get_sc_api_token();
+    if ( ! $token ) {
         return $result;
     }
 
     $url      = 'https://api.surecart.com/v1/subscriptions?' . http_build_query( $args );
     $response = wp_remote_get( $url, [
         'headers' => [
-            'Authorization' => 'Bearer ' . sc_api_token(),
+            'Authorization' => 'Bearer ' . $token,
             'Content-Type'  => 'application/json',
         ],
     ] );
