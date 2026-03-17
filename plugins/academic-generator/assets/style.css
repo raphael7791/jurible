@@ -1359,21 +1359,24 @@ html.dark .aga-feedback.error .aga-feedback-content {
     font-size: var(--wp--preset--font-size--small, 0.875rem);
 }
 
-.aga-result-accordion-toggle:checked ~ .aga-result-accordion-body {
-    display: block;
-}
-
 .aga-result-accordion-toggle:checked ~ .aga-result-accordion-header .aga-result-accordion-arrow {
     transform: rotate(180deg);
 }
 
-.aga-result-accordion-body {
-    display: none;
+.aga-result-accordion-body,
+.fcom_wp_content .aga-result-accordion-body {
+    display: none !important;
     padding: 1.25rem;
     white-space: pre-wrap;
     font-size: var(--wp--preset--font-size--small, 0.875rem);
     line-height: 1.7;
     color: var(--wp--preset--color--warning-text, #92400E);
+    overflow: hidden;
+}
+
+.aga-result-accordion-toggle:checked ~ .aga-result-accordion-body,
+.fcom_wp_content .aga-result-accordion-toggle:checked ~ .aga-result-accordion-body {
+    display: block !important;
 }
 
 /* Plan box (cas pratique) — uses accent palette */
