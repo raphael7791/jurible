@@ -130,6 +130,21 @@ function aga_add_rewrite_rules() {
         'index.php?post_type=fiche_arret&p=$matches[1]',
         'top'
     );
+    add_rewrite_rule(
+        '^dissertation/([0-9]+)/?$',
+        'index.php?post_type=dissertation&p=$matches[1]',
+        'top'
+    );
+    add_rewrite_rule(
+        '^cas-pratique/([0-9]+)/?$',
+        'index.php?post_type=cas_pratique&p=$matches[1]',
+        'top'
+    );
+    add_rewrite_rule(
+        '^commentaire-arret/([0-9]+)/?$',
+        'index.php?post_type=commentaire_arret&p=$matches[1]',
+        'top'
+    );
 }
 add_action('init', 'aga_add_rewrite_rules');
 
@@ -169,8 +184,14 @@ add_filter('fluent_community/template_slug', function($template_slug) {
  * Modifier les permaliens pour utiliser l'ID
  */
 function aga_custom_post_link($post_link, $post) {
-    if ($post->post_type == 'fiche_arret') {
-        return home_url('fiche/' . $post->ID . '/');
+    $slug_map = array(
+        'fiche_arret'       => 'fiche',
+        'dissertation'      => 'dissertation',
+        'cas_pratique'      => 'cas-pratique',
+        'commentaire_arret' => 'commentaire-arret',
+    );
+    if (isset($slug_map[$post->post_type])) {
+        return home_url($slug_map[$post->post_type] . '/' . $post->ID . '/');
     }
     return $post_link;
 }
