@@ -143,14 +143,42 @@
 /* ─── Pagination ─── */
 .jam-pagination {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 12px 20px;
-    border-top: 1px solid #dcdcde;
+    gap: 4px;
+    padding: 12px 0;
     font-size: 13px;
+    color: #646970;
+    flex-wrap: wrap;
+}
+
+.jam-pagination__link,
+.jam-pagination__current {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid #dcdcde;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #2271b1;
+    background: #fff;
+}
+
+.jam-pagination__current {
+    background: #2271b1;
+    color: #fff;
+    border-color: #2271b1;
+}
+
+.jam-pagination__link:hover {
+    border-color: #2271b1;
+    background: #f6f7f7;
+}
+
+.jam-pagination__info {
+    margin-left: 12px;
     color: #646970;
 }
 
+/* Legacy pagination classes */
 .jam-pagination__links a,
 .jam-pagination__links span {
     display: inline-block;
@@ -176,12 +204,17 @@
 
 /* ─── Filters ─── */
 .jam-filters {
+    padding: 12px 20px;
+    background: #f6f7f7;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.jam-filters__row {
     display: flex;
     gap: 10px;
     align-items: center;
-    padding: 12px 20px;
-    border-bottom: 1px solid #dcdcde;
-    background: #f6f7f7;
     flex-wrap: wrap;
 }
 
@@ -448,6 +481,27 @@
     color: #1d2327;
     border-bottom-color: #2271b1;
     font-weight: 600;
+}
+
+/* ─── Hooks Status Section ─── */
+.jam-section h2 {
+    padding: 16px 20px;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1d2327;
+    border-bottom: 1px solid #f0f0f1;
+}
+
+.jam-hooks-status {
+    padding: 16px 20px;
+}
+
+.jam-section .description {
+    padding: 0 20px 16px;
+    margin: 0;
+    font-size: 13px;
+    color: #646970;
 }
 
 /* ─── Responsive ─── */
