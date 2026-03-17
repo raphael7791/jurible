@@ -1053,8 +1053,9 @@ html.dark .aga-feedback.error .aga-feedback-content {
     margin-bottom: 0.25rem;
 }
 
-.aga-result-alert-text {
-    margin: 0;
+.aga-result-alert-text,
+.fcom_wp_content .aga-result-alert-text {
+    margin: 0 !important;
     font-size: var(--wp--preset--font-size--small, 0.875rem);
     line-height: var(--wp--custom--line-height--body, 1.6);
 }
