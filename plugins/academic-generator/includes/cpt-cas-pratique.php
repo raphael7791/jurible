@@ -378,9 +378,13 @@ function aga_formater_contenu_cas_pratique_fc($content) {
                     $ligne = trim($ligne);
                     if (empty($ligne)) continue;
 
-                    if (preg_match('/^(I{1,3})\.\s+(.+)$/', $ligne)) {
-                        echo '<h2>' . esc_html($ligne) . '</h2>';
-                    } elseif (preg_match('/^(FAITS|PROBLÈME DE DROIT|SOLUTION EN DROIT|SOLUTION EN L\'ESPÈCE|CONCLUSION)\s*:\s*(.*)$/i', $ligne, $match)) {
+                    // Nettoyer les marqueurs markdown gras ** avant parsing
+                    $ligne_clean = preg_replace('/\*{1,2}/', '', $ligne);
+                    $ligne_clean = trim($ligne_clean);
+
+                    if (preg_match('/^(I{1,3})\.\s+(.+)$/', $ligne_clean)) {
+                        echo '<h2>' . esc_html($ligne_clean) . '</h2>';
+                    } elseif (preg_match('/^(FAITS|PROBLÈME DE DROIT|SOLUTION EN DROIT|SOLUTION EN L.ESP[ÈE]CE|CONCLUSION)\s*:\s*(.*)$/iu', $ligne_clean, $match)) {
                         echo '<h3>' . esc_html($match[1]) . '</h3>';
                         if (!empty(trim($match[2]))) {
                             echo '<p>' . esc_html($match[2]) . '</p>';
