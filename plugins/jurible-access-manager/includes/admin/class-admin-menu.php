@@ -15,6 +15,7 @@ class JAM_Admin_Menu {
         add_action( 'wp_ajax_jam_toggle_enrollment', [ __CLASS__, 'ajax_toggle_enrollment' ] );
         add_action( 'wp_ajax_jam_run_sync', [ __CLASS__, 'ajax_run_sync' ] );
         add_action( 'wp_ajax_jam_toggle_product_new', [ __CLASS__, 'ajax_toggle_product_new' ] );
+        add_action( 'wp_ajax_jam_get_user_details', [ __CLASS__, 'ajax_get_user_details' ] );
     }
 
     public static function register_menu() {
@@ -57,8 +58,8 @@ class JAM_Admin_Menu {
 
         add_submenu_page(
             'jam-dashboard',
-            'Gestion manuelle',
-            'Gestion manuelle',
+            'Utilisateurs',
+            'Utilisateurs',
             'manage_options',
             'jam-manual',
             [ __CLASS__, 'render_manual' ]
@@ -104,7 +105,7 @@ class JAM_Admin_Menu {
     }
 
     public static function render_manual() {
-        require_once JAM_PLUGIN_DIR . 'includes/admin/page-manual-access.php';
+        require_once JAM_PLUGIN_DIR . 'includes/admin/page-utilisateurs.php';
     }
 
     // ─── AJAX: Search Users ───
@@ -218,5 +219,197 @@ class JAM_Admin_Menu {
 
         $report = JAM_Sync::run();
         wp_send_json_success( $report );
+    }
+
+    // ─── AJAX: Get User Details (subscriptions + coherence) ───
+    public static function ajax_get_user_details() {
+        check_ajax_referer( 'jam_admin_nonce', 'nonce' );
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_send_json_error( 'Permission refusée.' );
+        }
+
+        $user_id = absint( $_POST['user_id'] ?? 0 );
+        if ( ! $user_id ) {
+            wp_send_json_error( 'ID utilisateur manquant.' );
+        }
+
+        $user = get_userdata( $user_id );
+        if ( ! $user ) {
+            wp_send_json_error( 'Utilisateur introuvable.' );
+        }
+
+        // ─── 1. SureCart subscriptions + purchases ───
+        $customer_ids = get_user_meta( $user_id, 'sc_customer_ids', true );
+        $subscriptions = [];
+        $purchases     = [];
+        $active_product_ids = [];
+
+        if ( ! empty( $customer_ids ) && function_exists( 'sc_api_token' ) ) {
+            $cids = is_array( $customer_ids ) ? $customer_ids : [ $customer_ids ];
+
+            foreach ( $cids as $cid ) {
+                // Subscriptions
+                $sub_url  = 'https://api.surecart.com/v1/subscriptions?customer_ids[]=' . urlencode( $cid ) . '&expand[]=price&expand[]=price.product&limit=100';
+                $sub_resp = wp_remote_get( $sub_url, [
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . sc_api_token(),
+                        'Content-Type'  => 'application/json',
+                    ],
+                    'timeout' => 15,
+                ] );
+
+                if ( ! is_wp_error( $sub_resp ) ) {
+                    $sub_body = json_decode( wp_remote_retrieve_body( $sub_resp ), true );
+                    foreach ( ( $sub_body['data'] ?? [] ) as $sub ) {
+                        $price   = $sub['price'] ?? [];
+                        $product = $price['product'] ?? [];
+
+                        $amount   = ( $price['amount'] ?? 0 ) / 100;
+                        $currency = strtoupper( $price['currency'] ?? 'EUR' );
+                        $interval = $price['recurring_interval'] ?? '';
+                        $period   = '';
+                        if ( $interval === 'month' ) {
+                            $count = $price['recurring_interval_count'] ?? 1;
+                            $period = $count == 1 ? '/mois' : '/' . $count . ' mois';
+                        } elseif ( $interval === 'year' ) {
+                            $period = '/an';
+                        } elseif ( $interval === 'week' ) {
+                            $period = '/sem.';
+                        }
+
+                        $product_id   = is_array( $product ) ? ( $product['id'] ?? '' ) : $product;
+                        $product_name = is_array( $product ) ? ( $product['name'] ?? '—' ) : '—';
+                        $status       = $sub['status'] ?? 'unknown';
+
+                        $subscriptions[] = [
+                            'product_name' => $product_name,
+                            'product_id'   => $product_id,
+                            'price'        => number_format( $amount, 2, ',', ' ' ) . ' ' . $currency . $period,
+                            'status'       => $status,
+                            'created_at'   => ! empty( $sub['created_at'] )
+                                ? wp_date( 'd/m/Y', $sub['created_at'] )
+                                : '—',
+                        ];
+
+                        // Track active products
+                        if ( in_array( $status, [ 'active', 'trialing' ], true ) && $product_id ) {
+                            $active_product_ids[] = $product_id;
+                        }
+                    }
+                }
+
+                // Purchases (one-shot)
+                $pur_url  = 'https://api.surecart.com/v1/purchases?customer_ids[]=' . urlencode( $cid ) . '&expand[]=product&limit=100';
+                $pur_resp = wp_remote_get( $pur_url, [
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . sc_api_token(),
+                        'Content-Type'  => 'application/json',
+                    ],
+                    'timeout' => 15,
+                ] );
+
+                if ( ! is_wp_error( $pur_resp ) ) {
+                    $pur_body = json_decode( wp_remote_retrieve_body( $pur_resp ), true );
+                    foreach ( ( $pur_body['data'] ?? [] ) as $pur ) {
+                        $product    = $pur['product'] ?? [];
+                        $product_id = is_array( $product ) ? ( $product['id'] ?? '' ) : $product;
+
+                        // Skip purchases that are part of a subscription (already counted above)
+                        if ( ! empty( $pur['subscription'] ) ) {
+                            continue;
+                        }
+
+                        $product_name = is_array( $product ) ? ( $product['name'] ?? '—' ) : '—';
+                        $status       = $pur['status'] ?? 'unknown';
+
+                        // Map purchase statuses
+                        $status_display = $status;
+                        if ( $status === 'paid' || $status === 'completed' ) {
+                            $status_display = 'active';
+                        }
+
+                        $purchases[] = [
+                            'product_name' => $product_name,
+                            'product_id'   => $product_id,
+                            'status'       => $status_display,
+                            'created_at'   => ! empty( $pur['created_at'] )
+                                ? wp_date( 'd/m/Y', $pur['created_at'] )
+                                : '—',
+                        ];
+
+                        if ( in_array( $status, [ 'paid', 'completed', 'active' ], true ) && $product_id ) {
+                            $active_product_ids[] = $product_id;
+                        }
+                    }
+                }
+            }
+        }
+
+        $active_product_ids = array_unique( $active_product_ids );
+
+        // ─── 2. Expected courses from rules ───
+        $expected_course_ids = [];
+        foreach ( $active_product_ids as $pid ) {
+            $rules = JAM_Access_Rules::find_by_product( $pid );
+            foreach ( $rules as $rule ) {
+                $cids = JAM_Access_Rules::get_course_ids( $rule );
+                $expected_course_ids = array_merge( $expected_course_ids, $cids );
+            }
+        }
+        $expected_course_ids = array_unique( array_map( 'intval', $expected_course_ids ) );
+
+        // ─── 3. Actual enrollments ───
+        global $wpdb;
+        $su_table      = $wpdb->prefix . 'fcom_space_user';
+        $enrolled_ids  = [];
+        $has_table     = $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $su_table ) ) === $su_table;
+        if ( $has_table ) {
+            $enrolled_ids = array_map( 'intval', $wpdb->get_col( $wpdb->prepare(
+                "SELECT space_id FROM {$su_table} WHERE user_id = %d",
+                $user_id
+            ) ) );
+        }
+
+        // ─── 4. Build course list with coherence ───
+        $all_courses = JAM_Helpers::get_fcom_courses();
+        $course_list = [];
+        foreach ( $all_courses as $c ) {
+            $cid        = (int) $c['id'];
+            $is_enrolled = in_array( $cid, $enrolled_ids, true );
+            $is_expected = in_array( $cid, $expected_course_ids, true );
+
+            $coherence = 'ok';
+            if ( $is_expected && ! $is_enrolled ) {
+                $coherence = 'missing'; // Should be enrolled but isn't
+            } elseif ( ! $is_expected && $is_enrolled ) {
+                $coherence = 'extra'; // Enrolled but no rule justifies it
+            }
+
+            $course_list[] = [
+                'id'         => $cid,
+                'title'      => $c['title'],
+                'enrolled'   => $is_enrolled,
+                'expected'   => $is_expected,
+                'coherence'  => $coherence,
+            ];
+        }
+
+        // Sort: missing first, then extra, then enrolled, then not enrolled
+        usort( $course_list, function( $a, $b ) {
+            $order = [ 'missing' => 0, 'extra' => 1, 'ok' => 2 ];
+            $oa = $order[ $a['coherence'] ] ?? 2;
+            $ob = $order[ $b['coherence'] ] ?? 2;
+            if ( $oa !== $ob ) return $oa - $ob;
+            // Within same coherence: enrolled first
+            if ( $a['enrolled'] !== $b['enrolled'] ) return $b['enrolled'] - $a['enrolled'];
+            return strcmp( $a['title'], $b['title'] );
+        } );
+
+        wp_send_json_success( [
+            'subscriptions' => $subscriptions,
+            'purchases'     => $purchases,
+            'courses'       => $course_list,
+        ] );
     }
 }

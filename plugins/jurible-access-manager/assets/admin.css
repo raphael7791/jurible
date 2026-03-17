@@ -504,6 +504,102 @@
     color: #646970;
 }
 
+/* ─── Users Page ─── */
+.jam-users-table .jam-user-row {
+    cursor: default;
+}
+
+.jam-user-detail > td {
+    padding: 0 !important;
+    background: #f9f9f9;
+    border-bottom: 2px solid #dcdcde;
+}
+
+.jam-user-detail__inner {
+    padding: 20px;
+}
+
+.jam-user-detail__inner h4 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+.jam-user-detail__cols {
+    display: flex;
+    gap: 24px;
+}
+
+.jam-user-detail__col {
+    flex: 1;
+    min-width: 0;
+}
+
+.jam-table--compact th,
+.jam-table--compact td {
+    padding: 6px 8px;
+    font-size: 12px;
+}
+
+/* ─── Course Items (detail panel) ─── */
+.jam-course-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border-radius: 3px;
+    margin-bottom: 2px;
+}
+
+.jam-course-item:hover {
+    background: #f0f0f1;
+}
+
+.jam-course-item--missing {
+    background: #fff3cd;
+}
+
+.jam-course-item--missing:hover {
+    background: #ffecb5;
+}
+
+.jam-course-item--extra {
+    background: #cce5ff;
+}
+
+.jam-course-item--extra:hover {
+    background: #b8daff;
+}
+
+.jam-course-item__info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    min-width: 0;
+}
+
+.jam-course-item__name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1d2327;
+}
+
+.jam-course-item__action {
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.jam-enroll-btn--unenroll {
+    color: #b32d2e !important;
+    border-color: #b32d2e !important;
+}
+
+.jam-enroll-btn--unenroll:hover {
+    background: #f8d7da !important;
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 782px) {
     .jam-stats {
@@ -516,5 +612,9 @@
 
     .jam-search-box input[type="search"] {
         width: 100%;
+    }
+
+    .jam-user-detail__cols {
+        flex-direction: column;
     }
 }
