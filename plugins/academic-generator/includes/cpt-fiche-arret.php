@@ -534,30 +534,30 @@ function aga_formater_contenu_fiche_fc($content) {
                 </div>
 
                 <div class="aga-result-section" id="section-faits">
-                    <h2 class="aga-result-section-title">
+                    <h3 class="aga-result-section-title">
                         <span class="aga-result-section-number aga-result-section-number--blue">1</span> Faits
-                    </h2>
+                    </h3>
                     <div class="aga-result-section-content"><?php echo wpautop(wp_kses_post($sections['faits'])); ?></div>
                 </div>
 
                 <div class="aga-result-section" id="section-procedure">
-                    <h2 class="aga-result-section-title">
+                    <h3 class="aga-result-section-title">
                         <span class="aga-result-section-number aga-result-section-number--purple">2</span> Procédure
-                    </h2>
+                    </h3>
                     <div class="aga-result-section-content"><?php echo wpautop(wp_kses_post($sections['procedure'])); ?></div>
                 </div>
 
                 <div class="aga-result-section" id="section-probleme">
-                    <h2 class="aga-result-section-title">
+                    <h3 class="aga-result-section-title">
                         <span class="aga-result-section-number aga-result-section-number--red">3</span> Problème de droit
-                    </h2>
+                    </h3>
                     <div class="aga-result-section-content"><?php echo wpautop(wp_kses_post($sections['probleme'])); ?></div>
                 </div>
 
                 <div class="aga-result-section" id="section-solution">
-                    <h2 class="aga-result-section-title">
+                    <h3 class="aga-result-section-title">
                         <span class="aga-result-section-number aga-result-section-number--green">4</span> Solution
-                    </h2>
+                    </h3>
                     <div class="aga-result-section-content"><?php echo wpautop(wp_kses_post($sections['solution'])); ?></div>
                 </div>
             </div>
