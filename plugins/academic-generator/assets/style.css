@@ -1012,11 +1012,6 @@ html.dark .aga-feedback.error .aga-feedback-content {
 }
 
 /* Override FC's .fcom_wp_content heading sizes (marketing → lesson sizes) */
-.aga-single-result .fcom_wp_content h1 {
-    font-size: var(--jurible-font-size-h1, 1.75rem) !important;
-    line-height: var(--jurible-line-height-tight, 1.2) !important;
-}
-
 .fcom_wp_content .aga-result h2 {
     font-size: var(--jurible-font-size-h2, 1.375rem) !important;
     font-weight: 700 !important;

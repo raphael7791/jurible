@@ -156,13 +156,12 @@ add_filter('get_post_metadata', function($value, $post_id, $meta_key, $single) {
     return $value;
 }, 10, 4);
 
-// Ajouter une classe body pour cibler nos CPTs en CSS
-add_filter('body_class', function($classes) {
+// Réduire la taille du h1 post-title sur nos CPTs (taille leçon, pas marketing)
+add_action('wp_head', function() {
     $cpts = ['fiche_arret', 'dissertation', 'cas_pratique', 'commentaire_arret'];
     if (is_singular($cpts)) {
-        $classes[] = 'aga-single-result';
+        echo '<style>.fcom_wp_content h1 { font-size: var(--jurible-font-size-h1, 1.75rem) !important; line-height: var(--jurible-line-height-tight, 1.2) !important; }</style>';
     }
-    return $classes;
 });
 
 // Classic theme (fallback) : forcer le template FC via le filtre template_slug
