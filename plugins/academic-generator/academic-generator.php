@@ -156,6 +156,15 @@ add_filter('get_post_metadata', function($value, $post_id, $meta_key, $single) {
     return $value;
 }, 10, 4);
 
+// Ajouter une classe body pour cibler nos CPTs en CSS
+add_filter('body_class', function($classes) {
+    $cpts = ['fiche_arret', 'dissertation', 'cas_pratique', 'commentaire_arret'];
+    if (is_singular($cpts)) {
+        $classes[] = 'aga-single-result';
+    }
+    return $classes;
+});
+
 // Classic theme (fallback) : forcer le template FC via le filtre template_slug
 add_filter('fluent_community/template_slug', function($template_slug) {
     $cpts = ['fiche_arret', 'dissertation', 'cas_pratique', 'commentaire_arret'];
