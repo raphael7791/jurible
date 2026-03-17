@@ -137,14 +137,33 @@ add_action('init', 'aga_add_rewrite_rules');
  * Forcer le template Fluent Community Frame sur les CPTs générés
  * Permet d'afficher les résultats dans le portail FC (header + sidebar)
  */
-function aga_forcer_template_fc($template_slug) {
+
+// Block theme : ajouter nos CPTs aux types supportés par le block template FC
+add_filter('fluent_communuty/block_templates_post_types', function($types) {
+    return array_merge($types, ['fiche_arret', 'dissertation', 'cas_pratique', 'commentaire_arret']);
+});
+
+// Block theme : forcer le template frame-template sur nos CPTs (via post meta virtuel)
+add_filter('get_post_metadata', function($value, $post_id, $meta_key, $single) {
+    if ($meta_key !== '_wp_page_template') {
+        return $value;
+    }
+    $post_type = get_post_type($post_id);
+    $cpts = ['fiche_arret', 'dissertation', 'cas_pratique', 'commentaire_arret'];
+    if (in_array($post_type, $cpts)) {
+        return ['frame-template'];
+    }
+    return $value;
+}, 10, 4);
+
+// Classic theme (fallback) : forcer le template FC via le filtre template_slug
+add_filter('fluent_community/template_slug', function($template_slug) {
     $cpts = ['fiche_arret', 'dissertation', 'cas_pratique', 'commentaire_arret'];
     if (is_singular($cpts)) {
         return 'fluent-community-frame.php';
     }
     return $template_slug;
-}
-add_filter('fluent_community/template_slug', 'aga_forcer_template_fc');
+});
 
 /**
  * Modifier les permaliens pour utiliser l'ID
