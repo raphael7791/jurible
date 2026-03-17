@@ -328,9 +328,16 @@ if ( $crm_active ) {
                                     <td><strong><?php echo esc_html( $rule->rule_name ); ?></strong></td>
                                     <td><?php echo esc_html( $product_name ); ?></td>
                                     <td>
-                                        <span class="jam-badge jam-badge--blue"><?php echo count( $course_ids ); ?> cours</span>
                                         <?php if ( ! empty( $course_names ) ) : ?>
-                                            <br><small style="color:#646970;"><?php echo esc_html( implode( ', ', $course_names ) ); ?></small>
+                                            <span class="jam-badge jam-badge--blue jam-rule-toggle" style="cursor:pointer;" data-rule-id="<?php echo esc_attr( $rule->id ); ?>">
+                                                <span class="jam-rule-toggle__arrow">&#9654;</span>
+                                                <?php echo count( $course_ids ); ?> cours
+                                            </span>
+                                            <div class="jam-rule-courses" id="jam-rule-courses-<?php echo esc_attr( $rule->id ); ?>" style="display:none;margin-top:6px;">
+                                                <small style="color:#646970;"><?php echo esc_html( implode( ', ', $course_names ) ); ?></small>
+                                            </div>
+                                        <?php else : ?>
+                                            <span class="jam-badge jam-badge--gray">0 cours</span>
                                         <?php endif; ?>
                                     </td>
                                     <td>

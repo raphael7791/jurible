@@ -40,6 +40,16 @@
         $content.slideToggle(200);
     });
 
+    // ─── Rule courses toggle ───
+    $(document).on('click', '.jam-rule-toggle', function() {
+        var ruleId = $(this).data('rule-id');
+        var $courses = $('#jam-rule-courses-' + ruleId);
+        var $arrow = $(this).find('.jam-rule-toggle__arrow');
+
+        $courses.slideToggle(150);
+        $arrow.toggleClass('is-open');
+    });
+
     // ─── Toggle product new/old ───
     $(document).on('click', '.jam-toggle-new', function() {
         var $btn = $(this);

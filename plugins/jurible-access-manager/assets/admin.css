@@ -338,6 +338,17 @@
     transform: rotate(90deg);
 }
 
+.jam-rule-toggle__arrow {
+    display: inline-block;
+    font-size: 9px;
+    margin-right: 4px;
+    transition: transform 0.15s;
+}
+
+.jam-rule-toggle__arrow.is-open {
+    transform: rotate(90deg);
+}
+
 .jam-accordion__content .jam-table {
     border-top: 1px solid #f0f0f1;
 }
