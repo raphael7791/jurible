@@ -1001,9 +1001,13 @@ html.dark .aga-feedback.error .aga-feedback-content {
    from jurible-design-system.css
    ============================================ */
 
+.aga-result,
+.aga-result * {
+    font-family: var(--aga-font);
+}
+
 .aga-result {
     padding: var(--wp--preset--spacing--md, 1.5rem) 0;
-    font-family: var(--aga-font);
     color: var(--aga-text);
 }
 
