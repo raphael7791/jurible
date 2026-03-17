@@ -110,10 +110,12 @@ class JAM_SureCart_Hooks {
         try {
             $purchase_id = self::get_purchase_id( $purchase );
             $product_id  = self::get_product_id( $purchase );
+            $price_id    = self::get_price_id( $purchase );
 
             self::log_debug( $event_name, [
                 'purchase_id' => $purchase_id,
                 'product_id'  => $product_id,
+                'price_id'    => $price_id,
                 'retry'       => $retry_count,
             ] );
 
@@ -155,12 +157,13 @@ class JAM_SureCart_Hooks {
 
             // Apply each matching rule
             foreach ( $rules as $rule ) {
-                $report = JAM_Enrollment::apply_rule( $wp_user->ID, $rule, 'surecart', $purchase_id );
+                $report = JAM_Enrollment::apply_rule( $wp_user->ID, $rule, 'surecart', $purchase_id, $price_id, $event_name );
 
                 self::log_debug( $event_name . '_applied', [
                     'rule_id'    => $rule->id,
                     'rule_name'  => $rule->rule_name,
                     'user_email' => $wp_user->user_email,
+                    'price_id'   => $price_id,
                     'report'     => $report,
                 ] );
             }
@@ -285,6 +288,7 @@ class JAM_SureCart_Hooks {
         $retry_data = [
             'purchase_id' => self::get_purchase_id( $purchase ),
             'product_id'  => self::get_product_id( $purchase ),
+            'price_id'    => self::get_price_id( $purchase ),
             'customer_id' => self::get_customer_id( $purchase ),
             'event_name'  => $event_name,
             'retry_count' => $retry_count + 1,
@@ -325,11 +329,14 @@ class JAM_SureCart_Hooks {
         // D'abord essayer de charger le vrai objet depuis l'API
         $purchase = self::fetch_purchase( $purchase_id );
 
+        $price_id    = $retry_data['price_id'] ?? '';
+
         if ( ! $purchase ) {
             // Fallback : objet minimal avec les données du retry
             $purchase = (object) [
                 'id'       => $purchase_id,
                 'product'  => $product_id,
+                'price'    => $price_id,
                 'customer' => $customer_id,
             ];
         }
@@ -467,6 +474,42 @@ class JAM_SureCart_Hooks {
         }
         if ( is_string( $product ) ) {
             return $product;
+        }
+        return '';
+    }
+
+    /**
+     * Get price ID from purchase.
+     */
+    private static function get_price_id( $purchase ) {
+        if ( is_object( $purchase ) ) {
+            // SureCart Purchase object may have price or price_id
+            if ( isset( $purchase->price ) ) {
+                $price = $purchase->price;
+                if ( is_object( $price ) ) {
+                    return $price->id ?? '';
+                }
+                if ( is_string( $price ) ) {
+                    return $price;
+                }
+            }
+            if ( isset( $purchase->price_id ) ) {
+                return $purchase->price_id;
+            }
+        }
+        if ( is_array( $purchase ) ) {
+            if ( isset( $purchase['price'] ) ) {
+                $price = $purchase['price'];
+                if ( is_array( $price ) ) {
+                    return $price['id'] ?? '';
+                }
+                if ( is_string( $price ) ) {
+                    return $price;
+                }
+            }
+            if ( isset( $purchase['price_id'] ) ) {
+                return $purchase['price_id'];
+            }
         }
         return '';
     }

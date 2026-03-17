@@ -31,6 +31,20 @@
         }
     });
 
+    // ─── Credit price map rows ───
+    $('#jam-add-price-row').on('click', function() {
+        var row = '<div class="jam-price-map-row" style="display:flex;gap:8px;margin-bottom:6px;align-items:center;">' +
+            '<input type="text" name="credit_price_ids[]" value="" placeholder="Price ID SureCart" style="flex:1;">' +
+            '<input type="number" name="credit_price_amounts[]" value="" placeholder="Crédits" style="width:100px;" min="0">' +
+            '<button type="button" class="button jam-remove-price-row" title="Supprimer">&times;</button>' +
+            '</div>';
+        $('#jam-price-map-rows').append(row);
+    });
+
+    $(document).on('click', '.jam-remove-price-row', function() {
+        $(this).closest('.jam-price-map-row').remove();
+    });
+
     // ─── Accordion toggle ───
     $(document).on('click', '.jam-accordion__toggle', function() {
         var $accordion = $(this).closest('.jam-accordion');

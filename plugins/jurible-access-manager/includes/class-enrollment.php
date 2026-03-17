@@ -186,9 +186,11 @@ class JAM_Enrollment {
      * @param object $rule     Access rule object.
      * @param string $source   Source of enrollment.
      * @param string $sc_purchase_id Optional SureCart purchase ID.
+     * @param string $price_id Optional SureCart price ID (for credit_price_map).
+     * @param string $event_name Optional event name ('purchase_created' or 'purchase_invoked').
      * @return array Report: ['enrolled' => N, 'already' => N, 'errors' => N]
      */
-    public static function apply_rule( $user_id, $rule, $source = 'surecart', $sc_purchase_id = '' ) {
+    public static function apply_rule( $user_id, $rule, $source = 'surecart', $sc_purchase_id = '', $price_id = '', $event_name = '' ) {
         $course_ids = JAM_Access_Rules::get_course_ids( $rule );
         $report     = [ 'enrolled' => 0, 'already' => 0, 'errors' => 0 ];
 
@@ -207,25 +209,78 @@ class JAM_Enrollment {
         }
 
         // Handle credits
-        if ( ! empty( $rule->credit_amount ) && $rule->credit_amount > 0 ) {
-            $current = (int) get_user_meta( $user_id, 'aga_compteur_mois', true );
-            update_user_meta( $user_id, 'aga_compteur_mois', $current + $rule->credit_amount );
+        $credits_to_add = self::resolve_credits( $rule, $price_id );
 
+        if ( $credits_to_add > 0 ) {
+            // For non-Minos products (no price_map), only add credits on first purchase
+            $price_map = JAM_Access_Rules::get_credit_price_map( $rule );
+            $is_price_mapped = ! empty( $price_map );
+
+            if ( ! $is_price_mapped ) {
+                // Bonus credits (e.g. Académie): only on first purchase, not renewals
+                if ( $event_name === 'purchase_invoked' ) {
+                    // Renewal — skip bonus credits
+                    return $report;
+                }
+
+                // Permanent flag: credits only once per product per user
+                $flag_key = 'jam_credits_granted_' . $rule->sc_product_id;
+                if ( get_user_meta( $user_id, $flag_key, true ) ) {
+                    return $report;
+                }
+                update_user_meta( $user_id, $flag_key, time() );
+            }
+
+            // Use aga_add_credits() if available (academic-generator plugin), else raw meta
+            if ( function_exists( 'aga_add_credits' ) ) {
+                $new_total = aga_add_credits( $user_id, $credits_to_add );
+            } else {
+                $current   = max( 0, (int) get_user_meta( $user_id, 'aga_credits', true ) );
+                $new_total = $current + $credits_to_add;
+                update_user_meta( $user_id, 'aga_credits', $new_total );
+            }
+
+            $user = get_user_by( 'id', $user_id );
             JAM_Access_Log::log( [
                 'user_id'        => $user_id,
-                'user_email'     => get_user_by( 'id', $user_id )->user_email ?? '',
+                'user_email'     => $user ? $user->user_email : '',
                 'fcom_course_id' => 0,
                 'action'         => 'credits_added',
                 'source'         => $source,
                 'sc_purchase_id' => $sc_purchase_id ?: null,
                 'details'        => wp_json_encode( [
-                    'credits_added' => $rule->credit_amount,
-                    'new_total'     => $current + $rule->credit_amount,
+                    'credits_added' => $credits_to_add,
+                    'new_total'     => $new_total,
+                    'price_id'      => $price_id ?: null,
+                    'rule_name'     => $rule->rule_name,
                 ] ),
             ] );
         }
 
         return $report;
+    }
+
+    /**
+     * Resolve how many credits to add for a rule + price_id.
+     *
+     * If credit_price_map is set and price_id matches, use that amount.
+     * Otherwise, fall back to credit_amount.
+     *
+     * @param object $rule
+     * @param string $price_id
+     * @return int
+     */
+    private static function resolve_credits( $rule, $price_id = '' ) {
+        // Check credit_price_map first
+        if ( $price_id ) {
+            $price_map = JAM_Access_Rules::get_credit_price_map( $rule );
+            if ( ! empty( $price_map ) && isset( $price_map[ $price_id ] ) ) {
+                return max( 0, (int) $price_map[ $price_id ] );
+            }
+        }
+
+        // Fallback to credit_amount
+        return max( 0, (int) ( $rule->credit_amount ?? 0 ) );
     }
 
     /**

@@ -8,13 +8,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 $action_msg = '';
 
 if ( isset( $_POST['jam_save_rule'] ) && check_admin_referer( 'jam_save_rule' ) ) {
+    // Build credit_price_map from submitted pairs
+    $credit_price_map = [];
+    if ( ! empty( $_POST['credit_price_ids'] ) && is_array( $_POST['credit_price_ids'] ) ) {
+        $price_ids     = $_POST['credit_price_ids'];
+        $price_amounts = $_POST['credit_price_amounts'] ?? [];
+        foreach ( $price_ids as $i => $pid ) {
+            $pid = sanitize_text_field( $pid );
+            $amt = absint( $price_amounts[ $i ] ?? 0 );
+            if ( $pid && $amt > 0 ) {
+                $credit_price_map[ $pid ] = $amt;
+            }
+        }
+    }
+
     $data = [
-        'rule_name'       => $_POST['rule_name'] ?? '',
-        'sc_product_id'   => $_POST['sc_product_id'] ?? '',
-        'fcom_course_ids' => $_POST['fcom_course_ids'] ?? [],
-        'crm_tag_ids'     => $_POST['crm_tag_ids'] ?? [],
-        'crm_list_ids'    => $_POST['crm_list_ids'] ?? [],
-        'credit_amount'   => $_POST['credit_amount'] ?? 0,
+        'rule_name'        => $_POST['rule_name'] ?? '',
+        'sc_product_id'    => $_POST['sc_product_id'] ?? '',
+        'fcom_course_ids'  => $_POST['fcom_course_ids'] ?? [],
+        'crm_tag_ids'      => $_POST['crm_tag_ids'] ?? [],
+        'crm_list_ids'     => $_POST['crm_list_ids'] ?? [],
+        'credit_amount'    => $_POST['credit_amount'] ?? 0,
+        'credit_price_map' => ! empty( $credit_price_map ) ? $credit_price_map : null,
     ];
 
     $edit_id = absint( $_POST['rule_id'] ?? 0 );
@@ -128,21 +143,23 @@ if ( $crm_active ) {
         <!-- ─── Edit / Add Form ─── -->
         <?php
         $current = $edit_rule ? (object) [
-            'id'              => $edit_rule->id,
-            'rule_name'       => $edit_rule->rule_name,
-            'sc_product_id'   => $edit_rule->sc_product_id,
-            'fcom_course_ids' => JAM_Access_Rules::get_course_ids( $edit_rule ),
-            'crm_tag_ids'     => JAM_Access_Rules::get_crm_tag_ids( $edit_rule ),
-            'crm_list_ids'    => JAM_Access_Rules::get_crm_list_ids( $edit_rule ),
-            'credit_amount'   => $edit_rule->credit_amount ?? 0,
+            'id'               => $edit_rule->id,
+            'rule_name'        => $edit_rule->rule_name,
+            'sc_product_id'    => $edit_rule->sc_product_id,
+            'fcom_course_ids'  => JAM_Access_Rules::get_course_ids( $edit_rule ),
+            'crm_tag_ids'      => JAM_Access_Rules::get_crm_tag_ids( $edit_rule ),
+            'crm_list_ids'     => JAM_Access_Rules::get_crm_list_ids( $edit_rule ),
+            'credit_amount'    => $edit_rule->credit_amount ?? 0,
+            'credit_price_map' => JAM_Access_Rules::get_credit_price_map( $edit_rule ),
         ] : (object) [
-            'id'              => 0,
-            'rule_name'       => '',
-            'sc_product_id'   => '',
-            'fcom_course_ids' => [],
-            'crm_tag_ids'     => [],
-            'crm_list_ids'    => [],
-            'credit_amount'   => 0,
+            'id'               => 0,
+            'rule_name'        => '',
+            'sc_product_id'    => '',
+            'fcom_course_ids'  => [],
+            'crm_tag_ids'      => [],
+            'crm_list_ids'     => [],
+            'credit_amount'    => 0,
+            'credit_price_map' => [],
         ];
         ?>
         <div class="jam-section">
@@ -242,9 +259,26 @@ if ( $crm_active ) {
                     </div>
 
                     <div class="jam-form-row">
-                        <label for="credit_amount">Crédits générateur à ajouter</label>
+                        <label for="credit_amount">Crédits générateur (par défaut)</label>
                         <input type="text" id="credit_amount" name="credit_amount" value="<?php echo esc_attr( $current->credit_amount ); ?>" style="max-width: 100px;">
-                        <p class="description">0 = pas de crédits. Ex: 20 pour un "Pack 20 crédits".</p>
+                        <p class="description">Crédits ajoutés au solde de l'utilisateur. 0 = pas de crédits. Utilisé sauf si un mapping par prix est défini ci-dessous.</p>
+                    </div>
+
+                    <div class="jam-form-row">
+                        <label>Mapping prix &rarr; crédits <small>(optionnel)</small></label>
+                        <p class="description" style="margin-bottom:8px;">Pour les produits avec plusieurs prix (ex: Minos 5€ = 10 crédits, 17€ = 100 crédits). Si renseigné, le price_id de l'achat détermine les crédits au lieu du champ par défaut ci-dessus.</p>
+                        <div id="jam-price-map-rows">
+                            <?php if ( ! empty( $current->credit_price_map ) ) : ?>
+                                <?php foreach ( $current->credit_price_map as $pid => $amt ) : ?>
+                                    <div class="jam-price-map-row" style="display:flex;gap:8px;margin-bottom:6px;align-items:center;">
+                                        <input type="text" name="credit_price_ids[]" value="<?php echo esc_attr( $pid ); ?>" placeholder="Price ID SureCart" style="flex:1;">
+                                        <input type="number" name="credit_price_amounts[]" value="<?php echo esc_attr( $amt ); ?>" placeholder="Crédits" style="width:100px;" min="0">
+                                        <button type="button" class="button jam-remove-price-row" title="Supprimer">&times;</button>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+                        <button type="button" class="button" id="jam-add-price-row">+ Ajouter un prix</button>
                     </div>
 
                     <?php if ( $crm_active ) : ?>
@@ -341,7 +375,16 @@ if ( $crm_active ) {
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <?php if ( $rule->credit_amount > 0 ) : ?>
+                                        <?php
+                                        $price_map = JAM_Access_Rules::get_credit_price_map( $rule );
+                                        if ( ! empty( $price_map ) ) :
+                                            foreach ( $price_map as $pid => $amt ) :
+                                                $short_pid = substr( $pid, 0, 8 ) . '...';
+                                        ?>
+                                                <span class="jam-badge jam-badge--orange" title="<?php echo esc_attr( $pid ); ?>"><?php echo intval( $amt ); ?>cr (<?php echo esc_html( $short_pid ); ?>)</span>
+                                        <?php
+                                            endforeach;
+                                        elseif ( $rule->credit_amount > 0 ) : ?>
                                             <span class="jam-badge jam-badge--orange"><?php echo intval( $rule->credit_amount ); ?> crédits</span>
                                         <?php else : ?>
                                             —

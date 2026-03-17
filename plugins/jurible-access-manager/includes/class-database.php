@@ -8,6 +8,7 @@ class JAM_Database {
 
     public static function activate() {
         self::create_tables();
+        self::maybe_migrate();
         update_option( 'jam_db_version', JAM_VERSION );
     }
 
@@ -26,6 +27,7 @@ class JAM_Database {
             crm_tag_ids TEXT DEFAULT NULL,
             crm_list_ids TEXT DEFAULT NULL,
             credit_amount INT UNSIGNED DEFAULT 0,
+            credit_price_map TEXT DEFAULT NULL,
             created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             PRIMARY KEY (id),
@@ -52,6 +54,23 @@ class JAM_Database {
 
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
         dbDelta( $sql );
+    }
+
+    /**
+     * Run migrations when DB version changes.
+     */
+    public static function maybe_migrate() {
+        global $wpdb;
+        $current_version = get_option( 'jam_db_version', '0' );
+
+        // Migration: add credit_price_map column
+        if ( version_compare( $current_version, '1.1.0', '<' ) ) {
+            $rules_table = self::get_rules_table();
+            $col = $wpdb->get_results( "SHOW COLUMNS FROM {$rules_table} LIKE 'credit_price_map'" );
+            if ( empty( $col ) ) {
+                $wpdb->query( "ALTER TABLE {$rules_table} ADD COLUMN credit_price_map TEXT DEFAULT NULL AFTER credit_amount" );
+            }
+        }
     }
 
     public static function get_rules_table() {

@@ -203,31 +203,22 @@ function aga_render_formulaire_dissertation() {
         </div>
 
         <?php else: ?>
-            <!-- Limite atteinte -->
-            <?php 
+            <!-- Plus de crédits -->
+            <?php
             $doit_afficher_modal = aga_doit_afficher_modal_avis($current_user_id);
             if ($doit_afficher_modal): aga_render_modal_avis(); endif;
             ?>
-            
+
             <div class="aga-limit-card" <?php echo $doit_afficher_modal ? 'style="display:none;"' : ''; ?>>
                 <div class="aga-limit-icon">🔒</div>
-                <h3>Limite <span class="highlight">mensuelle</span> atteinte</h3>
-                <?php if (aga_obtenir_type_compte() === 'gratuit'): ?>
-                    <p>Vous avez utilisé vos <?php echo $verification['limite']; ?> crédits gratuits ce mois-ci.</p>
-                    <div class="aga-limit-cta">
-                        <p><strong>Rejoignez l'Académie pour continuer :</strong></p>
-                        <ul>
-                            <li>✓ 30 crédits par mois</li>
-                            <li>✓ Accès à tous les générateurs</li>
-                            <li>✓ Support prioritaire</li>
-                        </ul>
-                        <a href="https://aideauxtd.com/academie-droit" class="aga-btn aga-btn-primary">
-                            Rejoindre l'Académie
-                        </a>
-                    </div>
-                <?php else: ?>
-                    <p>Votre limite premium se réinitialisera le 1er du mois prochain.</p>
-                <?php endif; ?>
+                <h3>Plus de <span class="highlight">crédits</span></h3>
+                <p>Votre solde est de 0 crédit.</p>
+                <div class="aga-limit-cta">
+                    <p><strong>Achetez des crédits pour continuer :</strong></p>
+                    <a href="https://jurible.com/credits-ia" class="aga-btn aga-btn-primary">
+                        Acheter des crédits
+                    </a>
+                </div>
             </div>
         <?php endif; ?>
     </div>
@@ -348,7 +339,7 @@ function aga_ajax_generer_dissertation() {
     $post_id = aga_creer_dissertation($sujet, $matiere, $type_generation, $resultat['succes'], 1);
 
     if ($post_id) {
-        aga_incrementer_compteur($user_id, 1);
+        aga_consommer_credits($user_id, 1);
         wp_send_json_success(['url' => get_permalink($post_id)]);
     } else {
         wp_send_json_error(['message' => 'Erreur lors de l\'enregistrement']);
@@ -392,7 +383,7 @@ function aga_render_historique_dissertations() {
         <header class="aga-header">
             <div class="aga-header-content">
                 <h1 class="aga-title">Mes <span class="aga-title-highlight">dissertations</span></h1>
-                <p class="aga-subtitle"><?php echo $verification['utilise']; ?>/<?php echo $verification['limite']; ?> crédits utilisés ce mois</p>
+                <p class="aga-subtitle"><?php echo $verification['solde']; ?> crédit<?php echo $verification['solde'] !== 1 ? 's' : ''; ?> restant<?php echo $verification['solde'] !== 1 ? 's' : ''; ?></p>
             </div>
             <div class="aga-header-actions">
                 <a href="<?php echo home_url('/generateur-dissertation/'); ?>" class="aga-btn aga-btn-primary">

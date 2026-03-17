@@ -53,14 +53,15 @@ class JAM_Access_Rules {
         $table = JAM_Database::get_rules_table();
 
         $result = $wpdb->insert( $table, [
-            'rule_name'       => sanitize_text_field( $data['rule_name'] ),
-            'sc_product_id'   => sanitize_text_field( $data['sc_product_id'] ),
-            'fcom_course_ids' => wp_json_encode( array_map( 'absint', (array) ( $data['fcom_course_ids'] ?? [] ) ) ),
-            'crm_tag_ids'     => ! empty( $data['crm_tag_ids'] ) ? wp_json_encode( array_map( 'absint', (array) $data['crm_tag_ids'] ) ) : null,
-            'crm_list_ids'    => ! empty( $data['crm_list_ids'] ) ? wp_json_encode( array_map( 'absint', (array) $data['crm_list_ids'] ) ) : null,
-            'credit_amount'   => absint( $data['credit_amount'] ?? 0 ),
-            'created_at'      => current_time( 'mysql' ),
-            'updated_at'      => current_time( 'mysql' ),
+            'rule_name'        => sanitize_text_field( $data['rule_name'] ),
+            'sc_product_id'    => sanitize_text_field( $data['sc_product_id'] ),
+            'fcom_course_ids'  => wp_json_encode( array_map( 'absint', (array) ( $data['fcom_course_ids'] ?? [] ) ) ),
+            'crm_tag_ids'      => ! empty( $data['crm_tag_ids'] ) ? wp_json_encode( array_map( 'absint', (array) $data['crm_tag_ids'] ) ) : null,
+            'crm_list_ids'     => ! empty( $data['crm_list_ids'] ) ? wp_json_encode( array_map( 'absint', (array) $data['crm_list_ids'] ) ) : null,
+            'credit_amount'    => absint( $data['credit_amount'] ?? 0 ),
+            'credit_price_map' => ! empty( $data['credit_price_map'] ) ? wp_json_encode( $data['credit_price_map'] ) : null,
+            'created_at'       => current_time( 'mysql' ),
+            'updated_at'       => current_time( 'mysql' ),
         ] );
 
         return $result ? $wpdb->insert_id : false;
@@ -76,13 +77,14 @@ class JAM_Access_Rules {
         return $wpdb->update(
             $table,
             [
-                'rule_name'       => sanitize_text_field( $data['rule_name'] ),
-                'sc_product_id'   => sanitize_text_field( $data['sc_product_id'] ),
-                'fcom_course_ids' => wp_json_encode( array_map( 'absint', (array) ( $data['fcom_course_ids'] ?? [] ) ) ),
-                'crm_tag_ids'     => ! empty( $data['crm_tag_ids'] ) ? wp_json_encode( array_map( 'absint', (array) $data['crm_tag_ids'] ) ) : null,
-                'crm_list_ids'    => ! empty( $data['crm_list_ids'] ) ? wp_json_encode( array_map( 'absint', (array) $data['crm_list_ids'] ) ) : null,
-                'credit_amount'   => absint( $data['credit_amount'] ?? 0 ),
-                'updated_at'      => current_time( 'mysql' ),
+                'rule_name'        => sanitize_text_field( $data['rule_name'] ),
+                'sc_product_id'    => sanitize_text_field( $data['sc_product_id'] ),
+                'fcom_course_ids'  => wp_json_encode( array_map( 'absint', (array) ( $data['fcom_course_ids'] ?? [] ) ) ),
+                'crm_tag_ids'      => ! empty( $data['crm_tag_ids'] ) ? wp_json_encode( array_map( 'absint', (array) $data['crm_tag_ids'] ) ) : null,
+                'crm_list_ids'     => ! empty( $data['crm_list_ids'] ) ? wp_json_encode( array_map( 'absint', (array) $data['crm_list_ids'] ) ) : null,
+                'credit_amount'    => absint( $data['credit_amount'] ?? 0 ),
+                'credit_price_map' => ! empty( $data['credit_price_map'] ) ? wp_json_encode( $data['credit_price_map'] ) : null,
+                'updated_at'       => current_time( 'mysql' ),
             ],
             [ 'id' => $id ],
             null,
@@ -127,5 +129,18 @@ class JAM_Access_Rules {
         }
         $ids = json_decode( $rule->crm_list_ids, true );
         return is_array( $ids ) ? $ids : [];
+    }
+
+    /**
+     * Get decoded credit price map from a rule.
+     *
+     * @return array Associative array of price_id => credit_amount, or empty array.
+     */
+    public static function get_credit_price_map( $rule ) {
+        if ( empty( $rule->credit_price_map ) ) {
+            return [];
+        }
+        $map = json_decode( $rule->credit_price_map, true );
+        return is_array( $map ) ? $map : [];
     }
 }
