@@ -429,8 +429,9 @@ function aga_parser_contenu_cas_pratique($contenu) {
         'parsing_reussi' => false
     );
 
-    // Nettoyer le contenu (strip HTML de wpautop)
+    // Nettoyer le contenu (strip HTML de wpautop + décoder entités de wptexturize)
     $contenu = wp_strip_all_tags($contenu);
+    $contenu = html_entity_decode($contenu, ENT_QUOTES, 'UTF-8');
     $contenu = trim($contenu);
     
     // Tentative de parsing avec marqueurs
