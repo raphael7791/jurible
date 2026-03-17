@@ -1528,19 +1528,31 @@ html.dark .aga-result-meta strong {
     color: #E5E7EB;
 }
 
-html.dark .aga-result-action--outline {
+html.dark .aga-result-action--outline,
+html.dark .fcom_wp_content .aga-result-action--outline {
     background: transparent;
     border-color: var(--el-border-color, #414243);
-    color: var(--aga-text-muted);
+    color: #E5E7EB !important;
 }
 
-html.dark .aga-result-action--outline:hover {
-    border-color: var(--aga-text);
-    color: var(--aga-text);
+html.dark .aga-result-action--outline:hover,
+html.dark .fcom_wp_content .aga-result-action--outline:hover {
+    border-color: #F3F4F6;
+    color: #F3F4F6 !important;
 }
 
-html.dark .aga-result-action--primary {
+html.dark .aga-result-action--primary,
+html.dark .fcom_wp_content .aga-result-action--primary {
+    background: var(--wp--preset--color--primary, #B0001D);
+    color: white !important;
+    border-color: var(--wp--preset--color--primary, #B0001D);
     box-shadow: none;
+}
+
+html.dark .aga-result-action--primary:hover,
+html.dark .fcom_wp_content .aga-result-action--primary:hover {
+    background: var(--wp--preset--color--primary-hover, #DC2626);
+    color: white !important;
 }
 
 /* Responsive - result pages */
