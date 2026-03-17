@@ -484,9 +484,14 @@ function aga_doit_afficher_modal_avis($user_id) {
     if (aga_utilisateur_a_deja_avis($user_id)) {
         return false;
     }
-    
-    // Afficher uniquement si limite atteinte
+
+    // Ne pas afficher si l'utilisateur n'a jamais généré (nouveau user à 0 crédits)
+    if (empty(get_user_meta($user_id, 'aga_last_generation', true))) {
+        return false;
+    }
+
+    // Afficher uniquement si plus de crédits
     $verification = aga_peut_generer($user_id, 1);
-    
+
     return !$verification['autorise'];
 }
