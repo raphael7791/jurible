@@ -51,7 +51,9 @@ function aga_render_formulaire_dissertation() {
 
 
         <?php if ($verification['autorise']): ?>
-        
+
+        <p class="aga-credits-info" style="text-align:right;color:#6B7280;font-size:14px;margin:0 0 12px;">Crédits restants : <strong><?php echo $verification['solde']; ?></strong></p>
+
         <!-- Formulaire -->
         <div class="aga-form-wrapper">
             <form id="dissertationForm" class="aga-form" method="POST">

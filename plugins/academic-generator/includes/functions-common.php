@@ -83,15 +83,15 @@ function aga_valider_donnees_formulaire($data, $type_generateur) {
                 $erreurs[] = 'Le contenu de l\'arrêt est obligatoire.';
             } elseif (strlen($data['contenu']) < 100) {
                 $erreurs[] = 'Le contenu de l\'arrêt doit faire au moins 100 caractères.';
-            } elseif (strlen($data['contenu']) > 15000) {
-                $erreurs[] = 'Le contenu de l\'arrêt ne peut pas dépasser 15 000 caractères.';
+            } elseif (strlen($data['contenu']) > 17000) {
+                $erreurs[] = 'Le contenu de l\'arrêt ne peut pas dépasser 17 000 caractères.';
             } elseif (aga_detecter_injection_prompt($data['contenu'])) {
                 $erreurs[] = 'Le contenu semble contenir des instructions non autorisées.';
             } elseif (!aga_est_texte_juridique($data['contenu'])) {
                 $erreurs[] = 'Le texte ne semble pas être un arrêt de justice. Veuillez vérifier votre saisie.';
             }
             break;
-            
+
         case 'dissertation':
             if (empty($data['sujet'])) {
                 $erreurs[] = 'Le sujet de dissertation est obligatoire.';
@@ -119,15 +119,15 @@ function aga_valider_donnees_formulaire($data, $type_generateur) {
                 $erreurs[] = 'Le contenu de l\'arrêt est obligatoire.';
             } elseif (strlen($data['contenu']) < 100) {
                 $erreurs[] = 'Le contenu de l\'arrêt doit faire au moins 100 caractères.';
-            } elseif (strlen($data['contenu']) > 15000) {
-                $erreurs[] = 'Le contenu de l\'arrêt ne peut pas dépasser 15 000 caractères.';
+            } elseif (strlen($data['contenu']) > 17000) {
+                $erreurs[] = 'Le contenu de l\'arrêt ne peut pas dépasser 17 000 caractères.';
             } elseif (aga_detecter_injection_prompt($data['contenu'])) {
                 $erreurs[] = 'Le contenu semble contenir des instructions non autorisées.';
             } elseif (!aga_est_texte_juridique($data['contenu'])) {
                 $erreurs[] = 'Le texte ne semble pas être un arrêt de justice. Veuillez vérifier votre saisie.';
             }
             break;
-            
+
         case 'cas_pratique':
             if (empty($data['cas_pratique'])) {
                 $erreurs[] = 'Le sujet du cas pratique est obligatoire.';

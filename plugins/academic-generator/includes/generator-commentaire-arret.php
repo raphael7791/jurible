@@ -51,7 +51,9 @@ function aga_render_formulaire_commentaire_arret() {
 
 
         <?php if ($verification['autorise']): ?>
-        
+
+        <p class="aga-credits-info" style="text-align:right;color:#6B7280;font-size:14px;margin:0 0 12px;">Crédits restants : <strong><?php echo $verification['solde']; ?></strong></p>
+
         <!-- Formulaire -->
         <div class="aga-form-wrapper">
             <form id="commentaireArretForm" class="aga-form" method="POST">
@@ -133,7 +135,7 @@ Sur le moyen unique :
 Attendu que..." 
                                       required
                                       minlength="100"
-                                      maxlength="15000"></textarea>
+                                      maxlength="17000"></textarea>
                             <button type="submit" class="aga-submit-btn" title="Générer le commentaire">
                                 <span style="color:#FFFFFF!important;font-size:20px;line-height:1;">↑</span>
                             </button>

@@ -51,7 +51,9 @@ function aga_render_formulaire_fiche() {
 
 
         <?php if ($verification['autorise']): ?>
-        
+
+        <p class="aga-credits-info" style="text-align:right;color:#6B7280;font-size:14px;margin:0 0 12px;">Crédits restants : <strong><?php echo $verification['solde']; ?></strong></p>
+
         <!-- Formulaire -->
         <div class="aga-form-wrapper">
             <form id="ficheArretForm" class="aga-form" method="POST">
@@ -131,7 +133,7 @@ LA COUR DE CASSATION, PREMIÈRE CHAMBRE CIVILE, a rendu l'arrêt suivant :
 Sur le moyen unique :
 Attendu que..." 
                                       required
-                                      maxlength="12000"></textarea>
+                                      maxlength="17000"></textarea>
                             <button type="submit" class="aga-submit-btn" title="Générer la fiche">
                                 <span style="color:#FFFFFF!important;font-size:20px;line-height:1;">↑</span>
                             </button>
