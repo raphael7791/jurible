@@ -336,8 +336,6 @@ function aga_formater_contenu_cas_pratique_fc($content) {
             <span class="aga-result-breadcrumb-current">Mon cas pratique</span>
         </nav>
 
-        <h1 class="aga-result-title">Correction de <span class="highlight">cas pratique</span></h1>
-
         <div class="aga-result-meta">
             <span><strong>Matière :</strong> <?php echo esc_html($matiere_formatee); ?></span>
             <?php if ($date_generation): ?>

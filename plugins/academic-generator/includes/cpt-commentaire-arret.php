@@ -344,8 +344,6 @@ function aga_formater_contenu_commentaire_fc($content) {
             <span class="aga-result-breadcrumb-current">Mon commentaire</span>
         </nav>
 
-        <h1 class="aga-result-title">Commentaire d'arrêt <span class="highlight">généré</span></h1>
-
         <div class="aga-result-meta">
             <span><strong>Arrêt :</strong> <?php echo esc_html($references); ?></span>
             <span><strong>Matière :</strong> <?php echo esc_html($matiere_formatee); ?></span>

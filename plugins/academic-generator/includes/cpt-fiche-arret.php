@@ -481,11 +481,6 @@ function aga_formater_contenu_fiche_fc($content) {
             <span class="aga-result-breadcrumb-current">Ma fiche d'arrêt</span>
         </nav>
 
-        <h1 class="aga-result-title">
-            Fiche d'arrêt <span class="highlight">générée</span>
-            <?php if ($references): ?> (<?php echo esc_html($references); ?>)<?php endif; ?>
-        </h1>
-
         <div class="aga-result-meta">
             <?php if ($matiere): ?>
                 <span><strong>Matière :</strong> <?php echo esc_html(aga_formater_matiere($matiere)); ?></span>

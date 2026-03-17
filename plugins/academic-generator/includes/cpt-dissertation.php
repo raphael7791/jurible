@@ -344,8 +344,6 @@ function aga_formater_contenu_dissertation_fc($content) {
             <span class="aga-result-breadcrumb-current">Ma dissertation</span>
         </nav>
 
-        <h1 class="aga-result-title"><?php echo esc_html($sujet); ?></h1>
-
         <div class="aga-result-meta">
             <span><strong>Type :</strong> <?php echo esc_html($type_label); ?></span>
             <span><strong>Matière :</strong> <?php echo esc_html($matiere_formatee); ?></span>
