@@ -83,7 +83,7 @@ if ( $needs_toggle ) {
 	</ol>
 	<?php if ( $needs_toggle ) : ?>
 		<button type="button" class="jurible-sommaire-toggle" data-count="<?php echo esc_attr( $count ); ?>">
-			Voir tout le sommaire (<?php echo esc_html( $count ); ?>)
+			Voir tout le sommaire (<?php echo esc_html( $count ); ?>) <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 		</button>
 	<?php endif; ?>
 </nav>
