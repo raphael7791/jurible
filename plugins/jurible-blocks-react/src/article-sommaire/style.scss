@@ -78,7 +78,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: var(--wp--preset--color--primary, #4F46E5);
+    background: var(--wp--preset--color--muted, #F3F4F6);
     border: none;
     border-radius: 100px;
     padding: 6px 14px;
@@ -86,7 +86,7 @@
     font-family: var(--wp--preset--font-family--poppins);
     font-size: var(--wp--preset--font-size--caption, 13px);
     font-weight: 500;
-    color: #fff;
+    color: var(--wp--preset--color--primary, #4F46E5);
     transition: var(--wp--custom--transition--default);
     line-height: 1;
 
