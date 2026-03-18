@@ -27,11 +27,11 @@
 <div class="wp-block-group">
 
 <!-- wp:heading {"textAlign":"center","textColor":"text-dark"} -->
-<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Des enseignants <mark>passionnés</mark></h2>
+<h2 class="wp-block-heading has-text-align-center has-text-dark-color has-text-color">Qui sommes-nous ?</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","textColor":"text-gray","fontSize":"body-large"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color has-body-large-font-size">Tous nos cours sont conçus par des professionnels du droit — avocats, doctorants et chargés d'enseignement — titulaires d'un Master 2 minimum.</p>
+<p class="has-text-align-center has-text-gray-color has-text-color has-body-large-font-size">AideauxTD est la première plateforme d'e-learning dédiée aux étudiants en licence de droit, créée par des avocats et enseignants.</p>
 <!-- /wp:paragraph -->
 
 </div>
