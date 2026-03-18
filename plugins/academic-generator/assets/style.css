@@ -1595,6 +1595,10 @@ html.dark .aga-result-plan-box h3 {
     background: var(--aga-primary) !important;
 }
 
+.fcom_wp_content .aga-page .aga-btn-primary:hover {
+    background: var(--aga-primary-hover) !important;
+}
+
 .fcom_wp_content .aga-page .aga-btn-small {
     color: var(--aga-text) !important;
     text-decoration: none !important;
