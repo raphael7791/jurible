@@ -315,6 +315,11 @@ html.dark .aga-credits-badge {
     padding-right: 4rem;
 }
 
+/* Input inside textarea-wrapper (ex: dissertation subject) */
+.aga-textarea-wrapper .aga-input {
+    padding-right: 4rem;
+}
+
 .aga-submit-btn {
     position: absolute;
     bottom: 1rem;
@@ -340,6 +345,17 @@ html.dark .aga-credits-badge {
 .aga-submit-btn:hover {
     transform: scale(1.05);
     box-shadow: var(--wp--preset--shadow--cta-hover, 0 6px 20px rgba(176, 0, 29, 0.35));
+}
+
+/* Submit button next to input (single line) — center vertically */
+.aga-input + .aga-submit-btn {
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.aga-input + .aga-submit-btn:hover {
+    transform: translateY(-50%) scale(1.05);
 }
 
 .aga-submit-btn:disabled {
@@ -972,7 +988,7 @@ html.dark .aga-btn-outline {
 .aga-btn-outline:hover,
 a.aga-btn-outline:hover,
 .fcom_lesson_details a.aga-btn-outline:hover {
-    background: var(--aga-text);
+    background: var(--wp--preset--color--primary, #B0001D);
     color: white !important;
 }
 
