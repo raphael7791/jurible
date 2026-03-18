@@ -105,6 +105,14 @@
 
 .card-article .wp-block-post-terms {
     margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* Masquer la catégorie fourre-tout "Tous les articles" */
+.card-article .wp-block-post-terms a[href*="blog-droit"] {
+    display: none;
 }
 
 .card-article .wp-block-post-terms a {
