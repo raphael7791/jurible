@@ -1754,3 +1754,13 @@ html.dark .fcom_wp_content .aga-result-action--primary:hover {
         gap: 0.375rem;
     }
 }
+
+/* ============================================
+   FC OVERRIDE — WordPress block buttons
+   Prevents FC from overriding text color on hover
+   ============================================ */
+
+.fcom_wp_content .wp-block-button.is-style-primary a:hover,
+.fcom_wp_content .wp-block-button.is-style-cta-gradient a:hover {
+    color: #FFFFFF !important;
+}
