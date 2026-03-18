@@ -49,16 +49,12 @@ function jam_init() {
     }
 }
 
-// FC frame-template: notification dropdown script
-add_action( 'wp_enqueue_scripts', 'jam_enqueue_fc_notifications' );
+// FC frame-template & block: notification dropdown script
+// Hooks into FC's own asset action so it loads on ALL FC-framed pages (template + Gutenberg block)
+add_action( 'fluent_community/enqueue_global_assets', 'jam_enqueue_fc_notifications' );
 
 function jam_enqueue_fc_notifications() {
     if ( ! is_user_logged_in() ) {
-        return;
-    }
-
-    $template = get_page_template_slug();
-    if ( ! in_array( $template, [ 'fluent-community-frame.php', 'fluent-community-frame-full.php' ], true ) ) {
         return;
     }
 
