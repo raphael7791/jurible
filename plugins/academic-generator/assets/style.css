@@ -196,13 +196,13 @@
     font-weight: 600;
     letter-spacing: 0.03em;
     white-space: nowrap;
-    background: rgba(74, 144, 217, 0.15);
-    color: #4A90D9;
+    background: var(--wp--preset--color--info-bg, #EFF6FF);
+    color: var(--wp--preset--color--info-text, #1E40AF);
 }
 
 html.dark .aga-credits-badge {
-    background: rgba(74, 144, 217, 0.25);
-    color: #93c5fd;
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--wp--preset--color--info, #3B82F6);
 }
 
 /* ============================================
