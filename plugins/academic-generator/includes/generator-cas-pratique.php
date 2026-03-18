@@ -363,7 +363,6 @@ function aga_render_historique_cas_pratiques() {
 
         <header class="aga-header">
             <div class="aga-header-content">
-                <h1 class="aga-title">Mes <span class="aga-title-highlight">cas pratiques</span></h1>
                 <p class="aga-subtitle"><?php echo $verification['solde']; ?> crédit<?php echo $verification['solde'] !== 1 ? 's' : ''; ?> restant<?php echo $verification['solde'] !== 1 ? 's' : ''; ?></p>
             </div>
             <div class="aga-header-actions">

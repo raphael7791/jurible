@@ -1527,6 +1527,92 @@ html.dark .aga-result-plan-box h3 {
     color: #A78BFA;
 }
 
+/* ============================================
+   FC OVERRIDES — PAGES HISTORIQUE (.aga-page)
+   ============================================ */
+
+/* Post title size in FC context */
+.fcom_wp_content:has(.aga-page) h1,
+.fcom_wp_content:has(.aga-page) h2.wp-block-post-title,
+.fcom_wp_content:has(.aga-page) .wp-block-post-title {
+    font-size: var(--jurible-font-size-h1, 1.75rem) !important;
+    line-height: var(--jurible-line-height-tight, 1.2) !important;
+}
+
+/* Section titles (h2) */
+.fcom_wp_content .aga-page h2 {
+    font-size: var(--jurible-font-size-h3, 1.125rem) !important;
+    line-height: 1.4 !important;
+}
+
+/* Font family */
+.fcom_wp_content .aga-page,
+.fcom_wp_content .aga-page * {
+    font-family: var(--aga-font) !important;
+}
+
+/* Breadcrumb links */
+.fcom_wp_content .aga-page .aga-breadcrumb-link {
+    color: var(--aga-text-muted) !important;
+    text-decoration: none !important;
+}
+
+/* Buttons — prevent FC red color + underline on links */
+.fcom_wp_content .aga-page .aga-btn {
+    text-decoration: none !important;
+}
+
+.fcom_wp_content .aga-page .aga-btn-primary {
+    color: white !important;
+    background: var(--aga-primary) !important;
+}
+
+.fcom_wp_content .aga-page .aga-btn-small {
+    color: var(--aga-text) !important;
+    text-decoration: none !important;
+    border: 1.5px solid var(--aga-border);
+    background: transparent;
+}
+
+.fcom_wp_content .aga-page .aga-btn-danger {
+    color: var(--aga-error) !important;
+    background: transparent !important;
+}
+
+/* Subtitle text */
+.fcom_wp_content .aga-page .aga-subtitle {
+    margin: 0 !important;
+}
+
+/* Dark mode */
+html.dark .fcom_wp_content .aga-page .aga-btn-primary {
+    color: white !important;
+    background: var(--wp--preset--color--primary, #B0001D) !important;
+}
+
+html.dark .fcom_wp_content .aga-page .aga-btn-small {
+    color: #E5E7EB !important;
+    border-color: var(--el-border-color, #414243);
+}
+
+html.dark .fcom_wp_content .aga-page .aga-list-item {
+    background: var(--el-bg-color-overlay, #1d1e1f);
+    border-color: var(--el-border-color, #414243);
+}
+
+html.dark .fcom_wp_content .aga-page .aga-list-title {
+    color: #E5E7EB;
+}
+
+html.dark .fcom_wp_content .aga-page .aga-section-title {
+    color: #E5E7EB;
+    border-color: var(--el-border-color, #414243);
+}
+
+html.dark .fcom_wp_content .aga-page .aga-empty-state {
+    background: var(--el-bg-color-overlay, #1d1e1f);
+}
+
 html.dark .aga-result-section-content {
     color: #E5E7EB;
 }

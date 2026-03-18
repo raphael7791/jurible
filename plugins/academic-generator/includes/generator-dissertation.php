@@ -384,7 +384,6 @@ function aga_render_historique_dissertations() {
 
         <header class="aga-header">
             <div class="aga-header-content">
-                <h1 class="aga-title">Mes <span class="aga-title-highlight">dissertations</span></h1>
                 <p class="aga-subtitle"><?php echo $verification['solde']; ?> crédit<?php echo $verification['solde'] !== 1 ? 's' : ''; ?> restant<?php echo $verification['solde'] !== 1 ? 's' : ''; ?></p>
             </div>
             <div class="aga-header-actions">
