@@ -125,13 +125,12 @@ function aga_render_formulaire_dissertation() {
                             Sujet de dissertation <span class="aga-required">*</span>
                         </label>
                         <div class="aga-textarea-wrapper">
-                            <input type="text"
-                                   class="aga-input"
-                                   name="sujet_dissertation"
-                                   placeholder="Ex: La séparation des pouvoirs en France sous la Ve République"
-                                   required
-                                   minlength="10"
-                                   maxlength="500">
+                            <textarea class="aga-textarea aga-textarea--short"
+                                      name="sujet_dissertation"
+                                      placeholder="Ex: La séparation des pouvoirs en France sous la Ve République"
+                                      required
+                                      minlength="10"
+                                      maxlength="500"></textarea>
                             <button type="submit" class="aga-submit-btn" title="Générer la dissertation">
                                 <span style="color:#FFFFFF!important;font-size:20px;line-height:1;">↑</span>
                             </button>
