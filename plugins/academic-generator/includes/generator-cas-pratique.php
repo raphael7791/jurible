@@ -52,7 +52,10 @@ function aga_render_formulaire_cas_pratique() {
 
         <?php if ($verification['autorise']): ?>
 
-        <p style="text-align:right;margin:0 0 12px;"><span class="aga-credits-badge"><?php echo $verification['solde']; ?> crédit<?php echo $verification['solde'] !== 1 ? 's' : ''; ?></span></p>
+        <div class="aga-topbar">
+            <a href="<?php echo home_url('/mes-cas-pratiques/'); ?>" class="aga-btn aga-btn-small">Mes cas pratiques</a>
+            <span class="aga-credits-badge"><?php echo $verification['solde']; ?> crédit<?php echo $verification['solde'] !== 1 ? 's' : ''; ?></span>
+        </div>
 
         <!-- Formulaire -->
         <div class="aga-form-wrapper">
