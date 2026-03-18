@@ -41,7 +41,7 @@ function aga_render_formulaire_fiche() {
     <div class="aga-page">
         <!-- Breadcrumb -->
         <nav class="aga-breadcrumb">
-            <a href="<?php echo home_url('/generateurs/'); ?>" class="aga-breadcrumb-link">
+            <a href="<?php echo home_url('/suite-ia/'); ?>" class="aga-breadcrumb-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
@@ -375,7 +375,7 @@ function aga_render_historique_fiches() {
 
     <div class="aga-page">
         <nav class="aga-breadcrumb">
-            <a href="<?php echo home_url('/generateur-fiche/'); ?>" class="aga-breadcrumb-link">
+            <a href="<?php echo home_url('/generateur-de-fiches-darret/'); ?>" class="aga-breadcrumb-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
@@ -388,7 +388,7 @@ function aga_render_historique_fiches() {
                 <span class="aga-credits-badge"><?php echo $verification['solde']; ?> crédit<?php echo $verification['solde'] !== 1 ? 's' : ''; ?></span>
             </div>
             <div class="aga-header-actions">
-                <a href="<?php echo home_url('/generateur-fiche/'); ?>" class="aga-btn aga-btn-primary">
+                <a href="<?php echo home_url('/generateur-de-fiches-darret/'); ?>" class="aga-btn aga-btn-primary">
                     + Nouvelle fiche
                 </a>
             </div>
@@ -397,7 +397,7 @@ function aga_render_historique_fiches() {
         <?php if (empty($fiches_par_matiere)): ?>
             <div class="aga-empty-state">
                 <p>Aucune fiche d'arrêt pour le moment.</p>
-                <a href="<?php echo home_url('/generateur-fiche/'); ?>" class="aga-btn aga-btn-outline">Créer ma première fiche</a>
+                <a href="<?php echo home_url('/generateur-de-fiches-darret/'); ?>" class="aga-btn aga-btn-outline">Créer ma première fiche</a>
             </div>
         <?php else: ?>
             <?php foreach ($fiches_par_matiere as $matiere => $fiches): ?>

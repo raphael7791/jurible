@@ -41,7 +41,7 @@ function aga_render_formulaire_commentaire_arret() {
     <div class="aga-page">
         <!-- Breadcrumb -->
         <nav class="aga-breadcrumb">
-            <a href="<?php echo home_url('/generateurs/'); ?>" class="aga-breadcrumb-link">
+            <a href="<?php echo home_url('/suite-ia/'); ?>" class="aga-breadcrumb-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
@@ -376,7 +376,7 @@ function aga_render_historique_commentaires() {
 
     <div class="aga-page">
         <nav class="aga-breadcrumb">
-            <a href="<?php echo home_url('/generateur-commentaire-arret/'); ?>" class="aga-breadcrumb-link">
+            <a href="<?php echo home_url('/generateur-de-commentaire-darret/'); ?>" class="aga-breadcrumb-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
@@ -389,7 +389,7 @@ function aga_render_historique_commentaires() {
                 <span class="aga-credits-badge"><?php echo $verification['solde']; ?> crédit<?php echo $verification['solde'] !== 1 ? 's' : ''; ?></span>
             </div>
             <div class="aga-header-actions">
-                <a href="<?php echo home_url('/generateur-commentaire-arret/'); ?>" class="aga-btn aga-btn-primary">
+                <a href="<?php echo home_url('/generateur-de-commentaire-darret/'); ?>" class="aga-btn aga-btn-primary">
                     + Nouveau commentaire
                 </a>
             </div>
@@ -398,7 +398,7 @@ function aga_render_historique_commentaires() {
         <?php if (empty($commentaires_par_matiere)): ?>
             <div class="aga-empty-state">
                 <p>Aucun commentaire d'arrêt pour le moment.</p>
-                <a href="<?php echo home_url('/generateur-commentaire-arret/'); ?>" class="aga-btn aga-btn-outline">Créer mon premier commentaire</a>
+                <a href="<?php echo home_url('/generateur-de-commentaire-darret/'); ?>" class="aga-btn aga-btn-outline">Créer mon premier commentaire</a>
             </div>
         <?php else: ?>
             <?php foreach ($commentaires_par_matiere as $matiere => $commentaires): ?>

@@ -41,7 +41,7 @@ function aga_render_formulaire_dissertation() {
     <div class="aga-page">
         <!-- Breadcrumb -->
         <nav class="aga-breadcrumb">
-            <a href="<?php echo home_url('/generateurs/'); ?>" class="aga-breadcrumb-link">
+            <a href="<?php echo home_url('/suite-ia/'); ?>" class="aga-breadcrumb-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
@@ -374,7 +374,7 @@ function aga_render_historique_dissertations() {
 
     <div class="aga-page">
         <nav class="aga-breadcrumb">
-            <a href="<?php echo home_url('/generateur-dissertation/'); ?>" class="aga-breadcrumb-link">
+            <a href="<?php echo home_url('/generateur-de-dissertation/'); ?>" class="aga-breadcrumb-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
@@ -387,7 +387,7 @@ function aga_render_historique_dissertations() {
                 <span class="aga-credits-badge"><?php echo $verification['solde']; ?> crédit<?php echo $verification['solde'] !== 1 ? 's' : ''; ?></span>
             </div>
             <div class="aga-header-actions">
-                <a href="<?php echo home_url('/generateur-dissertation/'); ?>" class="aga-btn aga-btn-primary">
+                <a href="<?php echo home_url('/generateur-de-dissertation/'); ?>" class="aga-btn aga-btn-primary">
                     + Nouvelle dissertation
                 </a>
             </div>
@@ -396,7 +396,7 @@ function aga_render_historique_dissertations() {
         <?php if (empty($dissertations_par_matiere)): ?>
             <div class="aga-empty-state">
                 <p>Aucune dissertation pour le moment.</p>
-                <a href="<?php echo home_url('/generateur-dissertation/'); ?>" class="aga-btn aga-btn-outline">Créer ma première dissertation</a>
+                <a href="<?php echo home_url('/generateur-de-dissertation/'); ?>" class="aga-btn aga-btn-outline">Créer ma première dissertation</a>
             </div>
         <?php else: ?>
             <?php foreach ($dissertations_par_matiere as $matiere => $dissertations): ?>
