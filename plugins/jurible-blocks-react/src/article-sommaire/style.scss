@@ -1,0 +1,129 @@
+.jurible-sommaire {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--wp--preset--color--background);
+    border: 1px solid var(--wp--preset--color--border);
+    border-radius: var(--wp--custom--border-radius--lg);
+    margin-bottom: var(--wp--preset--spacing--md);
+    padding-top: clamp(20px, 4vw, 24px);
+    padding-right: clamp(20px, 4vw, 24px);
+    padding-bottom: clamp(12px, 3vw, 16px);
+    padding-left: clamp(20px, 4vw, 24px);
+}
+
+.jurible-sommaire-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: var(--wp--preset--spacing--xs);
+
+    .jurible-sommaire-icon {
+        font-size: var(--wp--preset--font-size--body);
+    }
+
+    .jurible-sommaire-title {
+        font-family: var(--wp--preset--font-family--poppins);
+        font-weight: 600;
+        font-size: var(--wp--preset--font-size--small);
+        color: var(--wp--preset--color--text-dark);
+    }
+}
+
+.jurible-sommaire-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 0;
+    list-style: none !important;
+    width: 100%;
+    counter-reset: sommaire;
+
+    li {
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    li + li {
+        border-top: 1px solid var(--wp--preset--color--border) !important;
+        margin-top: 9px !important;
+        padding-top: 9px !important;
+    }
+
+    a {
+        color: var(--wp--preset--color--text-gray) !important;
+        text-decoration: none !important;
+        font-family: var(--wp--preset--font-family--poppins) !important;
+        font-size: var(--wp--preset--font-size--small) !important;
+        margin-bottom: 0 !important;
+        transition: var(--wp--custom--transition--default);
+
+        &:hover {
+            color: var(--wp--preset--color--primary) !important;
+        }
+    }
+}
+
+/* Toggle bouton */
+.jurible-sommaire-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: var(--wp--preset--font-family--poppins);
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 500;
+    color: var(--wp--preset--color--primary);
+    transition: var(--wp--custom--transition--default);
+
+    &:hover {
+        color: var(--wp--preset--color--primary-dark, var(--wp--preset--color--primary));
+        text-decoration: underline;
+    }
+}
+
+/* Collapsed : masquer les items après le 5e */
+.jurible-sommaire.is-collapsed .jurible-sommaire-list li:nth-child(n+6) {
+    display: none !important;
+}
+
+/* Scroll compensation pour header sticky */
+h2[id] {
+    scroll-margin-top: 80px;
+}
+
+/* Mode sombre */
+html.dark .jurible-sommaire {
+    background: var(--el-bg-color-overlay, #1d1e1f);
+    border-color: #2d2d2f;
+}
+
+html.dark .jurible-sommaire-header .jurible-sommaire-title {
+    color: #F3F4F6;
+}
+
+html.dark .jurible-sommaire-list {
+    li + li {
+        border-top-color: #2d2d2f !important;
+    }
+
+    a {
+        color: var(--wp--preset--color--border) !important;
+
+        &:hover {
+            color: var(--wp--preset--color--primary) !important;
+        }
+    }
+}
+
+html.dark .jurible-sommaire-toggle {
+    color: var(--wp--preset--color--primary);
+}

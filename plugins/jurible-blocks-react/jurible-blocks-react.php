@@ -48,8 +48,67 @@ function jurible_blocks_react_init() {
 	register_block_type( __DIR__ . '/build/hero-dashboard' );
 	register_block_type( __DIR__ . '/build/qcm' );
 	register_block_type( __DIR__ . '/build/contact-form' );
+	register_block_type( __DIR__ . '/build/article-sommaire' );
 }
 add_action( 'init', 'jurible_blocks_react_init' );
+
+/**
+ * Génère un slug à partir d'un texte de heading (compatible PHP/JS).
+ * Utilisé par render.php du sommaire et par le filtre heading ci-dessous.
+ */
+function jurible_heading_to_slug( $text ) {
+	$slug = remove_accents( $text );
+	$slug = strtolower( $slug );
+	$slug = preg_replace( '/[^a-z0-9]+/', '-', $slug );
+	$slug = trim( $slug, '-' );
+	return $slug;
+}
+
+/**
+ * Injecte un id="slug" sur les H2 du contenu (singulier uniquement).
+ * Permet aux ancres du sommaire de fonctionner.
+ */
+function jurible_inject_heading_ids( $block_content, $block ) {
+	if ( ! is_singular() ) {
+		return $block_content;
+	}
+
+	$level = isset( $block['attrs']['level'] ) ? (int) $block['attrs']['level'] : 2;
+	if ( 2 !== $level ) {
+		return $block_content;
+	}
+
+	// Ne pas écraser un id déjà présent
+	if ( preg_match( '/\bid=["\']/', $block_content ) ) {
+		return $block_content;
+	}
+
+	$text = trim( wp_strip_all_tags( $block_content ) );
+	if ( '' === $text ) {
+		return $block_content;
+	}
+
+	$slug = jurible_heading_to_slug( $text );
+
+	// Injecter l'id dans la balise <h2>
+	$block_content = preg_replace(
+		'/<h2(\s)/',
+		'<h2 id="' . esc_attr( $slug ) . '"$1',
+		$block_content,
+		1
+	);
+
+	// Cas <h2> sans attributs
+	$block_content = preg_replace(
+		'/<h2>/',
+		'<h2 id="' . esc_attr( $slug ) . '">',
+		$block_content,
+		1
+	);
+
+	return $block_content;
+}
+add_filter( 'render_block_core/heading', 'jurible_inject_heading_ids', 10, 2 );
 
 /**
  * Register block category for Jurible blocks

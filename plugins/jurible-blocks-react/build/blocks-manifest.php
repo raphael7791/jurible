@@ -66,6 +66,33 @@ return array(
 		'style' => 'file:./style-index.css',
 		'viewScript' => 'file:./view.js'
 	),
+	'article-sommaire' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'jurible/article-sommaire',
+		'version' => '1.0.0',
+		'title' => 'Sommaire Article',
+		'category' => 'jurible',
+		'icon' => 'list-view',
+		'description' => 'Sommaire dynamique généré à partir des titres H2 de l\'article.',
+		'keywords' => array(
+			'sommaire',
+			'table',
+			'contents',
+			'toc',
+			'article'
+		),
+		'supports' => array(
+			'html' => false,
+			'multiple' => false
+		),
+		'textdomain' => 'jurible-blocks-react',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php',
+		'viewScript' => 'file:./view.js'
+	),
 	'assessment' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -221,7 +248,10 @@ return array(
 		),
 		'supports' => array(
 			'html' => false,
-			'align' => false
+			'align' => array(
+				'wide',
+				'full'
+			)
 		),
 		'textdomain' => 'jurible-blocks-react',
 		'editorScript' => 'file:./index.js',
