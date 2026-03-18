@@ -34,6 +34,10 @@
 <p class="has-text-align-center has-text-gray-color has-text-color has-body-large-font-size">Nos enseignants — avocats, doctorants et chargés d'enseignement — sont tous titulaires d'un Master 2 minimum. Ils savent exactement ce qui est attendu le jour de l'examen.</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:paragraph {"align":"center","textColor":"text-muted","fontSize":"small"} -->
+<p class="has-text-align-center has-text-muted-color has-text-color has-small-font-size">AideauxTD est une école de droit en ligne dédiée à la réussite des étudiants inscrits en licence ou en capacité de droit depuis 2018 🇫🇷</p>
+<!-- /wp:paragraph -->
+
 </div>
 <!-- /wp:group -->
 
