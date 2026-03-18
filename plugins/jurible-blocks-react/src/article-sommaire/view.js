@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 sommaire.classList.remove('is-expanded');
                 sommaire.classList.add('is-collapsed');
-                btn.innerHTML = `Voir tout le sommaire (${count}) ${arrowDown}`;
+                btn.innerHTML = `Voir tout le sommaire ${arrowDown}`;
             }
         });
     });
