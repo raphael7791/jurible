@@ -163,7 +163,7 @@
 }
 
 .aga-btn-outline {
-    background: white;
+    background: var(--jurible-background, #FFFFFF);
     color: var(--aga-text);
     border: 1.5px solid var(--aga-text);
     border-radius: var(--aga-radius-m);
@@ -325,7 +325,7 @@ html.dark .aga-credits-badge {
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(176, 0, 29, 0.3);
+    box-shadow: var(--wp--preset--shadow--cta, 0 4px 14px rgba(176, 0, 29, 0.25));
 }
 
 .aga-submit-btn svg {
@@ -334,7 +334,7 @@ html.dark .aga-credits-badge {
 
 .aga-submit-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+    box-shadow: var(--wp--preset--shadow--cta-hover, 0 6px 20px rgba(176, 0, 29, 0.35));
 }
 
 .aga-submit-btn:disabled {
@@ -624,7 +624,7 @@ html.dark .aga-credits-badge {
 
 .aga-limit-cta .aga-btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+    box-shadow: var(--wp--preset--shadow--cta-hover, 0 6px 20px rgba(176, 0, 29, 0.35));
 }
 
 /* ============================================
@@ -884,7 +884,7 @@ html.dark .aga-credits-badge {
 
 .aga-btn-full:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+    box-shadow: var(--wp--preset--shadow--cta-hover, 0 6px 20px rgba(176, 0, 29, 0.35));
 }
 
 /* ============================================
