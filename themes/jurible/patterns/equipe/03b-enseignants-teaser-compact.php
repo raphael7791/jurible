@@ -6,8 +6,8 @@
  * Description: Version compacte du teaser équipe pour les articles (sans alignfull)
  */
 ?>
-<!-- wp:group {"className":"equipe-teaser-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"0"}}},"layout":{"type":"default"}} -->
-<div class="wp-block-group equipe-teaser-section" style="padding-top:var(--wp--preset--spacing--xl);padding-bottom:0">
+<!-- wp:group {"align":"full","className":"equipe-teaser-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"var:preset|spacing|md","right":"var:preset|spacing|md"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull equipe-teaser-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:group {"className":"equipe-teaser__photo-wrapper","gradient":"cta-gradient","layout":{"type":"default"}} -->
 <div class="wp-block-group equipe-teaser__photo-wrapper has-cta-gradient-gradient-background has-background">
