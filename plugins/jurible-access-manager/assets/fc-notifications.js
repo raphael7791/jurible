@@ -101,7 +101,7 @@
                     html += '<img class="jam-notif-avatar" src="' + esc(avatar) + '" alt="" loading="lazy">';
                 }
                 html += '<div class="jam-notif-body">';
-                html += '<div class="jam-notif-content">' + esc(content) + '</div>';
+                html += '<div class="jam-notif-content">' + content + '</div>';
                 html += '<div class="jam-notif-time">' + time + '</div>';
                 html += '</div>';
                 html += '</div>';
