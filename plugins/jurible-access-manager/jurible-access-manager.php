@@ -48,3 +48,37 @@ function jam_init() {
         JAM_Admin_Menu::init();
     }
 }
+
+// FC frame-template: notification dropdown script
+add_action( 'wp_enqueue_scripts', 'jam_enqueue_fc_notifications' );
+
+function jam_enqueue_fc_notifications() {
+    if ( ! is_user_logged_in() ) {
+        return;
+    }
+
+    $template = get_page_template_slug();
+    if ( ! in_array( $template, [ 'fluent-community-frame.php', 'fluent-community-frame-full.php' ], true ) ) {
+        return;
+    }
+
+    wp_enqueue_style(
+        'jam-fc-notifications',
+        JAM_PLUGIN_URL . 'assets/fc-notifications.css',
+        [],
+        JAM_VERSION
+    );
+
+    wp_enqueue_script(
+        'jam-fc-notifications',
+        JAM_PLUGIN_URL . 'assets/fc-notifications.js',
+        [],
+        JAM_VERSION,
+        true
+    );
+
+    wp_localize_script( 'jam-fc-notifications', 'jamFcNotif', [
+        'restUrl' => esc_url_raw( rest_url( 'fluent-community/v2' ) ),
+        'nonce'   => wp_create_nonce( 'wp_rest' ),
+    ] );
+}
