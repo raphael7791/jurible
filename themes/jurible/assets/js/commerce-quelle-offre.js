@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     flipCards.forEach(function(card) {
         card.addEventListener('click', function(e) {
-            // Don't flip if clicking on the CTA button
-            if (e.target.closest('.wp-block-button__link')) {
+            // Don't flip if clicking on a CTA button that has a real link (back side)
+            var link = e.target.closest('.wp-block-button__link');
+            if (link && link.getAttribute('href')) {
                 return;
             }
 
