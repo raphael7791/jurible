@@ -1764,3 +1764,14 @@ html.dark .fcom_wp_content .aga-result-action--primary:hover {
 .fcom_wp_content .wp-block-button.is-style-cta-gradient a:hover {
     color: #FFFFFF !important;
 }
+
+/* Force Poppins on all WP block content inside FC */
+.fcom_wp_content .wp-block-group,
+.fcom_wp_content .wp-block-columns,
+.fcom_wp_content .wp-block-column,
+.fcom_wp_content .wp-block-heading,
+.fcom_wp_content .wp-block-paragraph,
+.fcom_wp_content .wp-block-list,
+.fcom_wp_content .wp-block-button__link {
+    font-family: var(--aga-font) !important;
+}
