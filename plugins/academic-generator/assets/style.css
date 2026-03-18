@@ -1585,6 +1585,10 @@ html.dark .aga-result-plan-box h3 {
     text-decoration: none !important;
 }
 
+.fcom_wp_content .aga-page .aga-breadcrumb-link:hover {
+    color: var(--aga-primary) !important;
+}
+
 /* Buttons — prevent FC red color + underline on links */
 .fcom_wp_content .aga-page .aga-btn {
     text-decoration: none !important;
