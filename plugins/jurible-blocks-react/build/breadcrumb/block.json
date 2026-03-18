@@ -29,7 +29,10 @@
   },
   "supports": {
     "html": false,
-    "align": false
+    "align": [
+      "wide",
+      "full"
+    ]
   },
   "textdomain": "jurible-blocks-react",
   "editorScript": "file:./index.js",
