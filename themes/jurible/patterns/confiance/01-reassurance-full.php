@@ -91,8 +91,8 @@
 <p class="has-text-align-center has-text-muted-color has-text-color" style="font-size:10px;text-transform:uppercase">Lauréat</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:image {"width":"auto","height":"55px","align":"center","sizeSlug":"full","className":"reassurance-full__partner-logo","style":{"spacing":{"margin":{"bottom":"0"}}}} -->
-<figure class="wp-block-image aligncenter size-full is-resized reassurance-full__partner-logo" style="margin-bottom:0"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/partners/french-tech.jpg'); ?>" alt="La French Tech" style="width:auto;height:55px"/></figure>
+<!-- wp:image {"width":"auto","height":"70px","align":"center","sizeSlug":"full","className":"reassurance-full__partner-logo","style":{"spacing":{"margin":{"bottom":"0"}}}} -->
+<figure class="wp-block-image aligncenter size-full is-resized reassurance-full__partner-logo" style="margin-bottom:0"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/partners/french-tech.jpg'); ?>" alt="La French Tech" style="width:auto;height:70px"/></figure>
 <!-- /wp:image -->
 </div>
 <!-- /wp:column -->
