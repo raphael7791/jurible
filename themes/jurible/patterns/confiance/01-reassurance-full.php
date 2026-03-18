@@ -88,11 +88,11 @@
 <!-- wp:column -->
 <div class="wp-block-column">
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"10px","textTransform":"uppercase"}},"textColor":"text-muted"} -->
-<p class="has-text-align-center has-text-muted-color has-text-color" style="font-size:10px;text-transform:uppercase">Incubé par</p>
+<p class="has-text-align-center has-text-muted-color has-text-color" style="font-size:10px;text-transform:uppercase">Lauréat</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:image {"align":"center","sizeSlug":"full","className":"reassurance-full__partner-logo","style":{"spacing":{"margin":{"bottom":"0"}}}} -->
-<figure class="wp-block-image aligncenter size-full reassurance-full__partner-logo" style="margin-bottom:0"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/partners/assaslab.png'); ?>" alt="Assas Lab"/></figure>
+<!-- wp:image {"width":"auto","height":"40px","align":"center","sizeSlug":"full","className":"reassurance-full__partner-logo","style":{"spacing":{"margin":{"bottom":"0"}}}} -->
+<figure class="wp-block-image aligncenter size-full is-resized reassurance-full__partner-logo" style="margin-bottom:0"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/partners/french-tech.jpg'); ?>" alt="La French Tech" style="width:auto;height:40px"/></figure>
 <!-- /wp:image -->
 </div>
 <!-- /wp:column -->
