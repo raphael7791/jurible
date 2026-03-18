@@ -52,7 +52,7 @@ function aga_render_formulaire_commentaire_arret() {
 
         <?php if ($verification['autorise']): ?>
 
-        <p class="aga-credits-info" style="text-align:right;color:#6B7280;font-size:14px;margin:0 0 12px;">Crédits restants : <strong><?php echo $verification['solde']; ?></strong></p>
+        <p style="text-align:right;margin:0 0 12px;"><span class="aga-credits-badge"><?php echo $verification['solde']; ?> crédit<?php echo $verification['solde'] !== 1 ? 's' : ''; ?></span></p>
 
         <!-- Formulaire -->
         <div class="aga-form-wrapper">
@@ -386,7 +386,7 @@ function aga_render_historique_commentaires() {
 
         <header class="aga-header">
             <div class="aga-header-content">
-                <p class="aga-subtitle"><?php echo $verification['solde']; ?> crédit<?php echo $verification['solde'] !== 1 ? 's' : ''; ?> restant<?php echo $verification['solde'] !== 1 ? 's' : ''; ?></p>
+                <span class="aga-credits-badge"><?php echo $verification['solde']; ?> crédit<?php echo $verification['solde'] !== 1 ? 's' : ''; ?></span>
             </div>
             <div class="aga-header-actions">
                 <a href="<?php echo home_url('/generateur-commentaire-arret/'); ?>" class="aga-btn aga-btn-primary">
