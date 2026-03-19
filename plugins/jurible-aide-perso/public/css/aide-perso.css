@@ -82,10 +82,16 @@ html.dark {
 
 /* ── Container ───────────────────────────────────────────────────────── */
 
+.aide-perso,
+.aide-perso *,
+.fcom_wp_content .aide-perso,
+.fcom_wp_content .aide-perso * {
+    font-family: var(--ap-font);
+}
+
 .aide-perso {
     max-width: 720px;
     margin: 0 auto;
-    font-family: var(--ap-font);
     color: var(--ap-text);
     line-height: 1.6;
 }
