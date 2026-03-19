@@ -634,6 +634,49 @@
     margin: 0 0 16px;
 }
 
+/* ── Limit card (credits exhausted) ─────────────────────────────────── */
+
+.aide-perso__limit-card {
+    background: #fff;
+    border: 1px solid var(--ap-gray-200);
+    border-radius: var(--ap-radius);
+    padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2rem);
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.aide-perso__limit-icon {
+    width: clamp(48px, 10vw, 64px);
+    height: clamp(48px, 10vw, 64px);
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(176, 0, 29, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+    border-radius: 50%;
+    color: var(--ap-secondary);
+}
+
+.aide-perso__limit-card h3 {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 700;
+    color: var(--ap-gray-900);
+    margin: 0 0 8px;
+}
+
+.aide-perso__limit-highlight {
+    color: var(--ap-secondary);
+}
+
+.aide-perso__limit-card > p {
+    font-size: 15px;
+    color: var(--ap-gray-500);
+    margin: 0;
+    line-height: 1.6;
+}
+
 /* ── Locked states ───────────────────────────────────────────────────── */
 
 .aide-perso--locked {
@@ -856,5 +899,9 @@
 
     .aide-perso--locked {
         padding: 40px 16px;
+    }
+
+    .aide-perso__limit-card {
+        max-width: 100%;
     }
 }

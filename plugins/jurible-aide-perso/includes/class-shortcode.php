@@ -83,12 +83,12 @@ class Jaide_Shortcode {
                 <?php endif; ?>
 
                 <?php if ( $questions_limit > 0 && $questions_remaining <= 0 ) : ?>
-                    <div class="aide-perso__alert aide-perso__alert--error">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-                        <div>
-                            <strong>Limite atteinte</strong>
-                            <p>Vous avez utilisé vos <?php echo esc_html( $questions_limit ); ?> question(s) incluse(s) dans votre formule.</p>
+                    <div class="aide-perso__limit-card">
+                        <div class="aide-perso__limit-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
                         </div>
+                        <h3>Plus de <span class="aide-perso__limit-highlight">crédits</span></h3>
+                        <p>Vous avez utilisé vos <?php echo esc_html( $questions_limit ); ?> question<?php echo $questions_limit > 1 ? 's' : ''; ?> incluse<?php echo $questions_limit > 1 ? 's' : ''; ?> dans votre Formule Réussite.</p>
                     </div>
                 <?php else : ?>
 
@@ -146,12 +146,12 @@ class Jaide_Shortcode {
                 <?php endif; ?>
 
                 <?php if ( $copies_remaining <= 0 ) : ?>
-                    <div class="aide-perso__alert aide-perso__alert--error">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-                        <div>
-                            <strong>Limite atteinte</strong>
-                            <p>Vous avez utilisé vos <?php echo esc_html( $copies_limit ); ?> correction(s) de copie incluse(s) dans votre formule.</p>
+                    <div class="aide-perso__limit-card">
+                        <div class="aide-perso__limit-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
                         </div>
+                        <h3>Plus de <span class="aide-perso__limit-highlight">crédits</span></h3>
+                        <p>Vous avez utilisé vos <?php echo esc_html( $copies_limit ); ?> correction<?php echo $copies_limit > 1 ? 's' : ''; ?> de copie incluse<?php echo $copies_limit > 1 ? 's' : ''; ?> dans votre Formule Réussite.</p>
                     </div>
                 <?php else : ?>
 
