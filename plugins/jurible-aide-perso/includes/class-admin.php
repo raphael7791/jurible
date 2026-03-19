@@ -120,8 +120,16 @@ class Jaide_Admin {
     public static function render_settings() {
         // Save settings
         if ( isset( $_POST['jaide_save_settings'] ) && check_admin_referer( 'jaide_save_settings' ) ) {
+            // Gérer les IDs produits : checkboxes ou champ texte
+            if ( ! empty( $_POST['product_id_from_checkboxes'] ) ) {
+                $product_ids = array_map( 'sanitize_text_field', $_POST['product_ids'] ?? [] );
+                $product_id_value = implode( ',', $product_ids );
+            } else {
+                $product_id_value = sanitize_text_field( $_POST['product_id'] ?? '' );
+            }
+
             $options = [
-                'product_id'           => sanitize_text_field( $_POST['product_id'] ?? '' ),
+                'product_id'           => $product_id_value,
                 'copies_limit'         => max( 0, intval( $_POST['copies_limit'] ?? 1 ) ),
                 'questions_limit'      => max( 0, intval( $_POST['questions_limit'] ?? 0 ) ),
                 'notify_prof_new'      => ! empty( $_POST['notify_prof_new'] ),

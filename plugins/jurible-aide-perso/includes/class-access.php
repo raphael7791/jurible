@@ -14,16 +14,27 @@ class Jaide_Access {
             return false;
         }
 
-        $options    = get_option( 'jaide_options', [] );
-        $product_id = $options['product_id'] ?? '';
+        $options      = get_option( 'jaide_options', [] );
+        $product_ids_raw = $options['product_id'] ?? '';
 
         // Si pas de product ID configuré, accès libre
-        if ( empty( $product_id ) ) {
+        if ( empty( trim( $product_ids_raw ) ) ) {
             return true;
         }
 
-        // Vérifier via SureCart : l'user a-t-il un achat actif pour ce produit ?
-        return self::check_surecart_purchase( $user_id, $product_id );
+        // Supporter plusieurs IDs séparés par des virgules
+        $product_ids = array_filter( array_map( 'trim', explode( ',', $product_ids_raw ) ) );
+        if ( empty( $product_ids ) ) {
+            return true;
+        }
+
+        // Vérifier via SureCart : l'user a-t-il un achat actif pour l'un de ces produits ?
+        foreach ( $product_ids as $product_id ) {
+            if ( self::check_surecart_purchase( $user_id, $product_id ) ) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -71,6 +82,46 @@ class Jaide_Access {
         }
 
         return false;
+    }
+
+    /**
+     * Récupère la liste des produits SureCart (avec cache 15 min).
+     */
+    public static function get_sc_products() {
+        $cached = get_transient( 'jaide_sc_products' );
+        if ( $cached !== false ) {
+            return $cached;
+        }
+
+        $products = [];
+
+        if ( ! class_exists( '\SureCart\Models\Product' ) ) {
+            return $products;
+        }
+
+        try {
+            $result = \SureCart\Models\Product::where( [ 'archived' => false ] )
+                ->paginate( [ 'per_page' => 100 ] );
+
+            $items = $result->data ?? $result;
+            if ( is_array( $items ) ) {
+                foreach ( $items as $p ) {
+                    $products[] = [
+                        'id'   => $p->id ?? '',
+                        'name' => $p->name ?? '',
+                    ];
+                }
+                // Tri alphabétique
+                usort( $products, function ( $a, $b ) {
+                    return strcasecmp( $a['name'], $b['name'] );
+                } );
+            }
+        } catch ( \Exception $e ) {
+            error_log( 'Jaide: erreur récupération produits SC: ' . $e->getMessage() );
+        }
+
+        set_transient( 'jaide_sc_products', $products, 15 * MINUTE_IN_SECONDS );
+        return $products;
     }
 
     /**
