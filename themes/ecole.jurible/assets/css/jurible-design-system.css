@@ -167,20 +167,6 @@ html {
 }
 
 /* ============================================
-   FLUENT COMMUNITY — Font globale
-   Applique Poppins à tout le shell FC
-   ============================================ */
-
-#fcom_app,
-#fcom_app *,
-.fcom_app,
-.fcom_app *,
-body.flavor-developer,
-body.flavor-developer * {
-    font-family: var(--jurible-font-family) !important;
-}
-
-/* ============================================
    PAGES WP DANS FLUENT COMMUNITY (FRONT)
    Style identique à jurible.com (theme.json)
    Classe: .fcom_wp_content
