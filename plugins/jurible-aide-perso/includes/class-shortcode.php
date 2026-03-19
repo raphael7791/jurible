@@ -59,30 +59,24 @@ class Jaide_Shortcode {
                 <button class="aide-perso__tab aide-perso__tab--active" data-tab="question" type="button">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                     Poser une question
-                    <?php if ( $questions_limit > 0 ) : ?>
-                        <span class="aide-perso__tab-counter"><?php echo esc_html( $questions_remaining . '/' . $questions_limit ); ?></span>
-                    <?php endif; ?>
+                    <span class="aide-perso__tab-counter"><?php echo esc_html( $questions_remaining . '/' . $questions_limit ); ?></span>
                 </button>
                 <button class="aide-perso__tab" data-tab="copie" type="button">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                     Déposer une copie
-                    <?php if ( $copies_limit > 0 ) : ?>
-                        <span class="aide-perso__tab-counter"><?php echo esc_html( $copies_remaining . '/' . $copies_limit ); ?></span>
-                    <?php endif; ?>
+                    <span class="aide-perso__tab-counter"><?php echo esc_html( $copies_remaining . '/' . $copies_limit ); ?></span>
                 </button>
             </div>
 
             <!-- Tab Question -->
             <div class="aide-perso__panel aide-perso__panel--active" id="panel-question">
 
-                <?php if ( $questions_limit > 0 ) : ?>
-                    <div class="aide-perso__credits aide-perso__credits--<?php echo $questions_remaining <= 0 ? 'empty' : ( $questions_remaining === 1 ? 'low' : 'ok' ); ?>">
-                        <span class="aide-perso__credits-number"><?php echo esc_html( $questions_remaining ); ?></span>
-                        <span class="aide-perso__credits-text">question<?php echo $questions_remaining > 1 ? 's' : ''; ?> restante<?php echo $questions_remaining > 1 ? 's' : ''; ?> sur <?php echo esc_html( $questions_limit ); ?></span>
-                    </div>
-                <?php endif; ?>
+                <div class="aide-perso__credits aide-perso__credits--<?php echo $questions_remaining <= 0 ? 'empty' : ( $questions_remaining === 1 ? 'low' : 'ok' ); ?>">
+                    <span class="aide-perso__credits-number"><?php echo esc_html( $questions_remaining ); ?></span>
+                    <span class="aide-perso__credits-text">question<?php echo $questions_remaining > 1 ? 's' : ''; ?> restante<?php echo $questions_remaining > 1 ? 's' : ''; ?> sur <?php echo esc_html( $questions_limit ); ?></span>
+                </div>
 
-                <?php if ( $questions_limit > 0 && $questions_remaining <= 0 ) : ?>
+                <?php if ( $questions_remaining <= 0 ) : ?>
                     <div class="aide-perso__limit-card">
                         <div class="aide-perso__limit-icon">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
@@ -138,12 +132,10 @@ class Jaide_Shortcode {
             <!-- Tab Copie -->
             <div class="aide-perso__panel" id="panel-copie">
 
-                <?php if ( $copies_limit > 0 ) : ?>
-                    <div class="aide-perso__credits aide-perso__credits--<?php echo $copies_remaining <= 0 ? 'empty' : ( $copies_remaining === 1 ? 'low' : 'ok' ); ?>">
-                        <span class="aide-perso__credits-number"><?php echo esc_html( $copies_remaining ); ?></span>
-                        <span class="aide-perso__credits-text">correction<?php echo $copies_remaining > 1 ? 's' : ''; ?> restante<?php echo $copies_remaining > 1 ? 's' : ''; ?> sur <?php echo esc_html( $copies_limit ); ?></span>
-                    </div>
-                <?php endif; ?>
+                <div class="aide-perso__credits aide-perso__credits--<?php echo $copies_remaining <= 0 ? 'empty' : ( $copies_remaining === 1 ? 'low' : 'ok' ); ?>">
+                    <span class="aide-perso__credits-number"><?php echo esc_html( $copies_remaining ); ?></span>
+                    <span class="aide-perso__credits-text">correction<?php echo $copies_remaining > 1 ? 's' : ''; ?> restante<?php echo $copies_remaining > 1 ? 's' : ''; ?> sur <?php echo esc_html( $copies_limit ); ?></span>
+                </div>
 
                 <?php if ( $copies_remaining <= 0 ) : ?>
                     <div class="aide-perso__limit-card">

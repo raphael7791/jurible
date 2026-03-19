@@ -165,10 +165,6 @@ class Jaide_Access {
         $user_id = $user_id ?: get_current_user_id();
         $limit   = self::get_copies_limit( $user_id );
 
-        if ( $limit === 0 ) {
-            return PHP_INT_MAX;
-        }
-
         $table = $wpdb->prefix . 'jurible_aide_requests';
         $count = (int) $wpdb->get_var( $wpdb->prepare(
             "SELECT COUNT(*) FROM $table WHERE user_id = %d AND type = 'copie'",
@@ -186,10 +182,6 @@ class Jaide_Access {
 
         $user_id = $user_id ?: get_current_user_id();
         $limit   = self::get_questions_limit( $user_id );
-
-        if ( $limit === 0 ) {
-            return PHP_INT_MAX;
-        }
 
         $table = $wpdb->prefix . 'jurible_aide_requests';
         $count = (int) $wpdb->get_var( $wpdb->prepare(
@@ -224,13 +216,13 @@ class Jaide_Access {
             'copies_limit_global'=> (int) ( $options['copies_limit'] ?? 1 ),
             'copies_has_override'=> get_user_meta( $user_id, 'jaide_copies_limit', true ) !== '',
             'copies_used'        => $copies_used,
-            'copies_remaining'   => $copies_limit === 0 ? PHP_INT_MAX : max( 0, $copies_limit - $copies_used ),
+            'copies_remaining'   => max( 0, $copies_limit - $copies_used ),
 
             'questions_limit'       => $questions_limit,
             'questions_limit_global'=> (int) ( $options['questions_limit'] ?? 0 ),
             'questions_has_override'=> get_user_meta( $user_id, 'jaide_questions_limit', true ) !== '',
             'questions_used'        => $questions_used,
-            'questions_remaining'   => $questions_limit === 0 ? PHP_INT_MAX : max( 0, $questions_limit - $questions_used ),
+            'questions_remaining'   => max( 0, $questions_limit - $questions_used ),
         ];
     }
 }

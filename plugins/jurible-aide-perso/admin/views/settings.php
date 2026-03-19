@@ -56,13 +56,13 @@ $options = get_option( 'jaide_options', [] );
                 <div class="jaide-form-field">
                     <label for="copies_limit" class="jaide-form-label">Corrections de copies (total)</label>
                     <input type="number" id="copies_limit" name="copies_limit" class="jaide-form-input jaide-form-input--sm" value="<?php echo esc_attr( $options['copies_limit'] ?? 1 ); ?>" min="0" />
-                    <p class="jaide-form-hint">0 = illimité</p>
+                    <p class="jaide-form-hint">Nombre total par étudiant</p>
                 </div>
 
                 <div class="jaide-form-field">
                     <label for="questions_limit" class="jaide-form-label">Questions (total)</label>
                     <input type="number" id="questions_limit" name="questions_limit" class="jaide-form-input jaide-form-input--sm" value="<?php echo esc_attr( $options['questions_limit'] ?? 0 ); ?>" min="0" />
-                    <p class="jaide-form-hint">0 = illimité</p>
+                    <p class="jaide-form-hint">Nombre total par étudiant</p>
                 </div>
             </div>
         </div>
