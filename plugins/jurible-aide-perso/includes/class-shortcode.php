@@ -286,7 +286,6 @@ class Jaide_Shortcode {
             </div>
             <h3>Réservé à la Formule Réussite</h3>
             <p>L'aide personnalisée (questions de cours et corrections de copies) est incluse dans la <strong>Formule Réussite</strong>.</p>
-            <a href="https://jurible.com" class="aide-perso__btn" target="_blank" rel="noopener">Découvrir la Formule Réussite</a>
         </div>
         <?php
     }
