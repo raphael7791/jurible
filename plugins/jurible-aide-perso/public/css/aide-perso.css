@@ -264,9 +264,11 @@ html.dark {
     font-size: 13px;
 }
 
-.aide-perso__input,
-.aide-perso__select,
-.aide-perso__textarea {
+.aide-perso .aide-perso__input,
+.aide-perso .aide-perso__input[type="text"],
+.aide-perso .aide-perso__input[type="email"],
+.aide-perso .aide-perso__select,
+.aide-perso .aide-perso__textarea {
     width: 100%;
     padding: 10px 14px;
     border: 1.5px solid var(--ap-border-strong);
@@ -279,17 +281,17 @@ html.dark {
     box-sizing: border-box;
 }
 
-.aide-perso__input:focus,
-.aide-perso__select:focus,
-.aide-perso__textarea:focus {
+.aide-perso .aide-perso__input:focus,
+.aide-perso .aide-perso__select:focus,
+.aide-perso .aide-perso__textarea:focus {
     outline: none;
     border-color: var(--ap-secondary);
     box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
 }
 
-.aide-perso__input.aide-perso__input--error,
-.aide-perso__select.aide-perso__select--error,
-.aide-perso__textarea.aide-perso__textarea--error {
+.aide-perso .aide-perso__input.aide-perso__input--error,
+.aide-perso .aide-perso__select.aide-perso__select--error,
+.aide-perso .aide-perso__textarea.aide-perso__textarea--error {
     border-color: var(--ap-error);
     box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
@@ -307,12 +309,22 @@ html.dark {
     padding-right: 36px;
 }
 
-html.dark .aide-perso__select {
+html.dark .aide-perso .aide-perso__input,
+html.dark .aide-perso .aide-perso__input[type="text"],
+html.dark .aide-perso .aide-perso__input[type="email"],
+html.dark .aide-perso .aide-perso__select,
+html.dark .aide-perso .aide-perso__textarea {
+    background: var(--ap-bg);
+    color: var(--ap-text);
+    border-color: var(--ap-border-strong);
+}
+
+html.dark .aide-perso .aide-perso__select {
     background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
 }
 
-html.dark .aide-perso__input::placeholder,
-html.dark .aide-perso__textarea::placeholder {
+html.dark .aide-perso .aide-perso__input::placeholder,
+html.dark .aide-perso .aide-perso__textarea::placeholder {
     color: var(--ap-text-muted);
 }
 
