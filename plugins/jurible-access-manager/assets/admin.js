@@ -344,13 +344,14 @@
         if (r.products && r.products.length > 0) {
             html += '<h4>Detail par produit</h4>';
             html += '<table class="jam-table jam-table--compact">';
-            html += '<thead><tr><th>Produit</th><th>' + (isDry ? 'A inscrire' : 'Inscrits') + '</th><th>Deja OK</th><th>Sans compte WP</th></tr></thead>';
+            html += '<thead><tr><th>Produit</th><th>Users</th><th>' + (isDry ? 'Inscriptions a faire' : 'Inscriptions') + '</th><th>Deja OK</th><th>Sans compte WP</th></tr></thead>';
             html += '<tbody>';
             for (var i = 0; i < r.products.length; i++) {
                 var p = r.products[i];
                 html += '<tr>';
                 html += '<td>' + escHtml(p.name) + '</td>';
-                html += '<td><strong>' + (p.enrolled || 0) + '</strong></td>';
+                html += '<td><strong>' + (p.users || 0) + '</strong></td>';
+                html += '<td>' + (p.enrolled || 0) + '</td>';
                 html += '<td>' + (p.already || 0) + '</td>';
                 html += '<td>' + (p.errors || 0) + '</td>';
                 html += '</tr>';

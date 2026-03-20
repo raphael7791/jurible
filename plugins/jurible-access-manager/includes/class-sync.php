@@ -57,6 +57,7 @@ class JAM_Sync {
             $product_name    = $rules[0]->rule_name ?? $product_id;
             $product_report  = [
                 'name'    => $product_name,
+                'users'    => 0,
                 'enrolled' => 0,
                 'already'  => 0,
                 'errors'   => 0,
@@ -90,6 +91,10 @@ class JAM_Sync {
                 $product_report['enrolled'] += $result['enrolled'];
                 $product_report['already']  += $result['already'];
                 $product_report['errors']   += $result['errors'];
+
+                if ( $result['enrolled'] > 0 || $result['already'] > 0 ) {
+                    $product_report['users']++;
+                }
 
                 if ( ! empty( $result['error_email'] ) ) {
                     $report['error_emails'][] = $result['error_email'];
