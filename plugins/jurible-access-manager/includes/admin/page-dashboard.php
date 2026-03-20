@@ -426,25 +426,22 @@ function jam_dashboard_get_sc_subscriptions( $page = 1, $per_page = 20, $product
         'total_pages' => 1,
     ];
 
-    $args = [
-        'limit'    => $per_page,
-        'offset'   => ( $page - 1 ) * $per_page,
-        'expand[]' => 'customer,price,price.product',
-    ];
-
-    if ( $status_filter ) {
-        $args['status'] = $status_filter;
-    }
-    if ( $product_filter ) {
-        $args['product_ids[]'] = $product_filter;
-    }
-
     $token = JAM_Helpers::get_sc_api_token();
     if ( ! $token ) {
         return $result;
     }
 
-    $url      = 'https://api.surecart.com/v1/subscriptions?' . http_build_query( $args );
+    $url = 'https://api.surecart.com/v1/subscriptions'
+        . '?limit=' . $per_page
+        . '&offset=' . ( ( $page - 1 ) * $per_page )
+        . '&expand[]=customer&expand[]=price&expand[]=price.product';
+
+    if ( $status_filter ) {
+        $url .= '&status[]=' . urlencode( $status_filter );
+    }
+    if ( $product_filter ) {
+        $url .= '&product_ids[]=' . urlencode( $product_filter );
+    }
     $response = wp_remote_get( $url, [
         'headers' => [
             'Authorization' => 'Bearer ' . $token,
