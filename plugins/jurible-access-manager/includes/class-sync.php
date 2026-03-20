@@ -20,8 +20,10 @@ class JAM_Sync {
             'enrolled'         => 0,
             'already_enrolled' => 0,
             'errors'           => 0,
+            'users_enrolled'   => 0,
             'products'         => [],
             'error_emails'     => [],
+            'success_emails'   => [],
             'dry_run'          => $dry_run,
             'duration'         => 0,
         ];
@@ -92,6 +94,9 @@ class JAM_Sync {
                 if ( ! empty( $result['error_email'] ) ) {
                     $report['error_emails'][] = $result['error_email'];
                 }
+                if ( ! empty( $result['success_email'] ) ) {
+                    $report['success_emails'][] = $result['success_email'];
+                }
             }
 
             $report['enrolled']         += $product_report['enrolled'];
@@ -100,8 +105,10 @@ class JAM_Sync {
             $report['products'][]        = $product_report;
         }
 
-        $report['error_emails'] = array_unique( $report['error_emails'] );
-        $report['duration']     = round( microtime( true ) - $start, 1 );
+        $report['error_emails']   = array_unique( $report['error_emails'] );
+        $report['success_emails'] = array_unique( $report['success_emails'] );
+        $report['users_enrolled'] = count( $report['success_emails'] );
+        $report['duration']       = round( microtime( true ) - $start, 1 );
 
         return $report;
     }
@@ -227,10 +234,11 @@ class JAM_Sync {
      */
     private static function process_customer( $email, $rules, $dry_run ) {
         $result = [
-            'enrolled'    => 0,
-            'already'     => 0,
-            'errors'      => 0,
-            'error_email' => '',
+            'enrolled'      => 0,
+            'already'       => 0,
+            'errors'        => 0,
+            'error_email'   => '',
+            'success_email' => '',
         ];
 
         $user = get_user_by( 'email', $email );
@@ -257,6 +265,11 @@ class JAM_Sync {
                 $result['already']  += $sub_report['already'];
                 $result['errors']   += $sub_report['errors'];
             }
+        }
+
+        // Mark as success if at least one enrollment happened (or would happen)
+        if ( $result['enrolled'] > 0 || $result['already'] > 0 ) {
+            $result['success_email'] = $email;
         }
 
         return $result;

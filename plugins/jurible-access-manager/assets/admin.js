@@ -320,8 +320,10 @@
     function buildSyncReport(r) {
         var isDry = r.dry_run;
         var title = isDry ? 'Rapport de simulation' : 'Rapport de synchronisation';
-        var verb  = isDry ? 'seraient inscrits' : 'inscrits';
-        var verbAlready = isDry ? 'deja a jour' : 'deja a jour';
+        var usersEnrolled = r.users_enrolled || 0;
+        var totalEnrolled = r.enrolled || 0;
+        var totalAlready  = r.already_enrolled || 0;
+        var totalErrors   = r.errors || 0;
 
         var html = '<div class="jam-sync-report" style="margin-top:16px;">';
 
@@ -331,9 +333,10 @@
 
         html += '<h3>' + escHtml(title) + '</h3>';
         html += '<ul>';
-        html += '<li><strong>' + (r.enrolled || 0) + '</strong> ' + verb + '</li>';
-        html += '<li><strong>' + (r.already_enrolled || 0) + '</strong> ' + verbAlready + '</li>';
-        html += '<li><strong>' + (r.errors || 0) + '</strong> erreurs (user WP introuvable)</li>';
+        html += '<li><strong>' + usersEnrolled + '</strong> utilisateur' + (usersEnrolled > 1 ? 's' : '') + ' concerne' + (usersEnrolled > 1 ? 's' : '') + '</li>';
+        html += '<li><strong>' + totalEnrolled + '</strong> inscription' + (totalEnrolled > 1 ? 's' : '') + ' aux cours ' + (isDry ? 'a effectuer' : 'effectuees') + '</li>';
+        html += '<li><strong>' + totalAlready + '</strong> deja inscrit' + (totalAlready > 1 ? 's' : '') + ' (aucun changement)</li>';
+        html += '<li><strong>' + totalErrors + '</strong> client' + (totalErrors > 1 ? 's' : '') + ' SureCart sans compte WP</li>';
         html += '<li>Duree : <strong>' + (r.duration || 0) + 's</strong></li>';
         html += '</ul>';
 
@@ -341,7 +344,7 @@
         if (r.products && r.products.length > 0) {
             html += '<h4>Detail par produit</h4>';
             html += '<table class="jam-table jam-table--compact">';
-            html += '<thead><tr><th>Produit</th><th>' + (isDry ? 'A inscrire' : 'Inscrits') + '</th><th>Deja OK</th><th>Erreurs</th></tr></thead>';
+            html += '<thead><tr><th>Produit</th><th>' + (isDry ? 'A inscrire' : 'Inscrits') + '</th><th>Deja OK</th><th>Sans compte WP</th></tr></thead>';
             html += '<tbody>';
             for (var i = 0; i < r.products.length; i++) {
                 var p = r.products[i];
@@ -355,12 +358,22 @@
             html += '</tbody></table>';
         }
 
+        // Success emails
+        if (r.success_emails && r.success_emails.length > 0) {
+            html += '<h4>Utilisateurs ' + (isDry ? 'a synchroniser' : 'synchronises') + ' (' + r.success_emails.length + ')</h4>';
+            html += '<div style="max-height:200px;overflow-y:auto;background:#f0fdf4;padding:8px;border-radius:4px;font-size:12px;border:1px solid #bbf7d0;">';
+            for (var j = 0; j < r.success_emails.length; j++) {
+                html += escHtml(r.success_emails[j]) + '<br>';
+            }
+            html += '</div>';
+        }
+
         // Error emails
         if (r.error_emails && r.error_emails.length > 0) {
-            html += '<h4>Emails sans compte WP (' + r.error_emails.length + ')</h4>';
+            html += '<h4>Clients SureCart sans compte WP (' + r.error_emails.length + ')</h4>';
             html += '<div style="max-height:200px;overflow-y:auto;background:#f9f9f9;padding:8px;border-radius:4px;font-size:12px;">';
-            for (var j = 0; j < r.error_emails.length; j++) {
-                html += escHtml(r.error_emails[j]) + '<br>';
+            for (var k = 0; k < r.error_emails.length; k++) {
+                html += escHtml(r.error_emails[k]) + '<br>';
             }
             html += '</div>';
         }
