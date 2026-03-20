@@ -210,9 +210,14 @@ class JAM_Sync {
                     continue;
                 }
 
-                // Only keep paid/active purchases
+                // Skip revoked purchases
+                if ( ! empty( $item['revoked'] ) ) {
+                    continue;
+                }
+
+                // Only keep paid/active/fulfilled purchases (SureCart leaves status empty for fulfilled)
                 $status = $item['status'] ?? '';
-                if ( ! in_array( $status, [ 'paid', 'active', 'completed' ], true ) ) {
+                if ( $status !== '' && ! in_array( $status, [ 'paid', 'active', 'completed' ], true ) ) {
                     continue;
                 }
 
