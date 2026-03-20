@@ -21,7 +21,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","className":"hero-simple__subtitle"} -->
-<p class="has-text-align-center hero-simple__subtitle">Retrouvez les réponses aux questions les plus posées sur l'abonnement, les cours, les fiches et les outils Jurible.</p>
+<p class="has-text-align-center hero-simple__subtitle">Retrouvez les réponses aux questions les plus posées sur l'abonnement, les cours, les fiches et les outils AideauxTD.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:separator {"className":"hero-simple__separator"} -->

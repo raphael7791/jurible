@@ -10,7 +10,7 @@
 <div class="wp-block-group alignfull hero-archive" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--md)">
 
 <!-- wp:paragraph {"align":"center","className":"hero-archive__badge"} -->
-<p class="has-text-align-center hero-archive__badge">📝 Le Blog Jurible</p>
+<p class="has-text-align-center hero-archive__badge">📝 Le Blog AideauxTD</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"textAlign":"center","level":1,"className":"hero-archive__title","textColor":"text-dark"} -->

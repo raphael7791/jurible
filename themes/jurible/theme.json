@@ -647,6 +647,11 @@
       "name": "sc-products-custom",
       "title": "Produit - Custom",
       "postTypes": ["sc_product"]
+    },
+    {
+      "name": "page-thank-you",
+      "title": "Page Merci (Thank You)",
+      "postTypes": ["page"]
     }
   ],
   "templateParts": [

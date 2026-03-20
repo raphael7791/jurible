@@ -60,7 +60,7 @@
 <p class="has-text-align-center is-style-tag-white" style="font-size:12px">Recommandé</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"20px","fontWeight":"700"}},"textColor":"white"} -->
-<p class="has-text-align-center has-white-color has-text-color" style="font-size:20px;font-weight:700">L'Académie Jurible</p>
+<p class="has-text-align-center has-white-color has-text-color" style="font-size:20px;font-weight:700">L'Académie AideauxTD</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"14px"}},"textColor":"white"} -->
 <p class="has-text-align-center has-white-color has-text-color" style="font-size:14px">Cours vidéo + QCM + Flashcards + Outils IA. Tout en un.</p>

@@ -24,7 +24,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"textColor":"text-gray"} -->
-<p class="has-text-gray-color has-text-color">L'Académie Jurible vous donne accès à l'ensemble de nos cours de droit en vidéo, des fiches de révision interactives et des centaines de QCM pour valider vos acquis.</p>
+<p class="has-text-gray-color has-text-color">L'Académie AideauxTD vous donne accès à l'ensemble de nos cours de droit en vidéo, des fiches de révision interactives et des centaines de QCM pour valider vos acquis.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:list {"className":"is-style-checkmark-list","textColor":"text-gray"} -->

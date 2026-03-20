@@ -114,7 +114,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"hero-produit__card-feature"} -->
-<p class="hero-produit__card-feature"><span class="hero-produit__card-feature-icon">✅</span> + tous les cours et outils Jurible</p>
+<p class="hero-produit__card-feature"><span class="hero-produit__card-feature-icon">✅</span> + tous les cours et outils AideauxTD</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"hero-produit__card-feature"} -->

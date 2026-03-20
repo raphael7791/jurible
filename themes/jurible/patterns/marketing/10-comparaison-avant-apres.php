@@ -31,7 +31,7 @@
 <div class="wp-block-group comparison-table-wrapper has-white-background-color has-background" style="border-radius:16px;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0">
 
 <!-- wp:table {"hasFixedLayout":true,"className":"comparison-table-avant-apres"} -->
-<figure class="wp-block-table comparison-table-avant-apres"><table class="has-fixed-layout"><thead><tr><th>Tâche</th><th>Avant</th><th>Avec Jurible</th></tr></thead><tbody><tr><td>Comprendre le cours</td><td>3h à relire des notes de CM</td><td>30 min de vidéo claire</td></tr><tr><td>Préparer un TD</td><td>4h de stress sans méthode</td><td>1h de préparation ciblée</td></tr><tr><td>Réviser pour les partiels</td><td>Journées entières à reprendre</td><td>Révision intelligente et ciblée</td></tr></tbody></table></figure>
+<figure class="wp-block-table comparison-table-avant-apres"><table class="has-fixed-layout"><thead><tr><th>Tâche</th><th>Avant</th><th>Avec AideauxTD</th></tr></thead><tbody><tr><td>Comprendre le cours</td><td>3h à relire des notes de CM</td><td>30 min de vidéo claire</td></tr><tr><td>Préparer un TD</td><td>4h de stress sans méthode</td><td>1h de préparation ciblée</td></tr><tr><td>Réviser pour les partiels</td><td>Journées entières à reprendre</td><td>Révision intelligente et ciblée</td></tr></tbody></table></figure>
 <!-- /wp:table -->
 
 </div>

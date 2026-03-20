@@ -66,7 +66,7 @@
 					<!-- /wp:group -->
 
 					<!-- wp:paragraph {"style":{"typography":{"fontSize":"13px","lineHeight":"1.5"}},"textColor":"text-gray"} -->
-					<p class="has-text-gray-color has-text-color" style="font-size:13px;line-height:1.5">Fondateur de Jurible, enseignant à l'Université Nice Sophia Antipolis et formateur en droit social.</p>
+					<p class="has-text-gray-color has-text-color" style="font-size:13px;line-height:1.5">Fondateur de AideauxTD, enseignant à l'Université Nice Sophia Antipolis et formateur en droit social.</p>
 					<!-- /wp:paragraph -->
 
 					<!-- wp:paragraph {"className":"equipe-grille__diploma","style":{"typography":{"fontSize":"12px"}},"textColor":"text-muted"} -->
@@ -124,7 +124,7 @@
 					<!-- /wp:group -->
 
 					<!-- wp:paragraph {"style":{"typography":{"fontSize":"13px","lineHeight":"1.5"}},"textColor":"text-gray"} -->
-					<p class="has-text-gray-color has-text-color" style="font-size:13px;line-height:1.5">Co-fondatrice de Jurible, ancienne responsable de clientèle dans la publicité.</p>
+					<p class="has-text-gray-color has-text-color" style="font-size:13px;line-height:1.5">Co-fondatrice de AideauxTD, ancienne responsable de clientèle dans la publicité.</p>
 					<!-- /wp:paragraph -->
 
 					<!-- wp:paragraph {"className":"equipe-grille__diploma","style":{"typography":{"fontSize":"12px"}},"textColor":"text-muted"} -->

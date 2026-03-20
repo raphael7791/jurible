@@ -48,7 +48,7 @@
 <div class="wp-block-column" style="flex-basis:55%">
 
 <!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"30px","fontWeight":"600"}},"textColor":"text-dark"} -->
-<h3 class="wp-block-heading has-text-dark-color has-text-color" style="font-size:30px;font-weight:600">L'Académie Jurible</h3>
+<h3 class="wp-block-heading has-text-dark-color has-text-color" style="font-size:30px;font-weight:600">L'Académie AideauxTD</h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"16px","lineHeight":"1.6"},"spacing":{"margin":{"bottom":"var:preset|spacing|md"}}},"textColor":"text-gray"} -->

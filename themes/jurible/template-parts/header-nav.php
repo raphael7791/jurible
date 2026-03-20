@@ -151,7 +151,7 @@ get_template_part('template-parts/sticky-bar');
 <div class="mobile-menu" id="mobile-menu">
     <div class="mobile-menu__header">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="mobile-menu__logo">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.png'); ?>" alt="Jurible" class="site-header__logo-img">
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.png'); ?>" alt="AideauxTD" class="site-header__logo-img">
         </a>
         <button class="mobile-menu__close" id="mobile-menu-close" aria-label="Fermer le menu">✕</button>
     </div>

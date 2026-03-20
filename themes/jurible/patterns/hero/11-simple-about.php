@@ -21,7 +21,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","className":"hero-simple__subtitle"} -->
-<p class="has-text-align-center hero-simple__subtitle">Jurible est né d'une conviction : chaque étudiant en droit mérite des outils de qualité pour réussir sa licence. Découvrez l'équipe et le projet derrière la plateforme.</p>
+<p class="has-text-align-center hero-simple__subtitle">AideauxTD est né d'une conviction : chaque étudiant en droit mérite des outils de qualité pour réussir sa licence. Découvrez l'équipe et le projet derrière la plateforme.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:separator {"className":"hero-simple__separator"} -->

@@ -17,11 +17,11 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"textColor":"text-dark"} -->
-<p class="has-text-dark-color has-text-color">Les présentes conditions générales d'utilisation régissent l'accès et l'utilisation de la plateforme Jurible, accessible à l'adresse <a href="https://jurible.com">jurible.com</a> et <a href="https://ecole.jurible.com">ecole.jurible.com</a>. En accédant à nos services, vous acceptez sans réserve les présentes conditions.</p>
+<p class="has-text-dark-color has-text-color">Les présentes conditions générales d'utilisation régissent l'accès et l'utilisation de la plateforme AideauxTD, accessible à l'adresse <a href="https://jurible.com">jurible.com</a> et <a href="https://ecole.jurible.com">ecole.jurible.com</a>. En accédant à nos services, vous acceptez sans réserve les présentes conditions.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"text-dark"} -->
-<p class="has-text-dark-color has-text-color">Jurible est édité par ATD Formation, société par actions simplifiée au capital de 10 000 euros, dont le siège social est situé à Paris. La plateforme propose des contenus pédagogiques en droit sous forme de cours vidéo, fiches, exercices et outils numériques.</p>
+<p class="has-text-dark-color has-text-color">AideauxTD est édité par ATD Formation, société par actions simplifiée au capital de 10 000 euros, dont le siège social est situé à Paris. La plateforme propose des contenus pédagogiques en droit sous forme de cours vidéo, fiches, exercices et outils numériques.</p>
 <!-- /wp:paragraph -->
 
 </div>

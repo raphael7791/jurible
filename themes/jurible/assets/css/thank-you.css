@@ -1,0 +1,211 @@
+/* =============================================
+   THANK YOU PAGE — Page de confirmation commande
+   Variables theme.json :
+   - Couleurs : var(--wp--preset--color--*)
+   - Spacing  : var(--wp--preset--spacing--*)
+   - Shadows  : var(--wp--preset--shadow--*)
+   - Radius   : var(--wp--custom--border-radius--*)
+   ============================================= */
+
+.ty-page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: var(--wp--preset--spacing--xl) var(--wp--preset--spacing--sm) 80px;
+}
+
+/* =============================================
+   BLOC HERO — Confirmation principale
+   ============================================= */
+.ty-hero {
+    background: var(--wp--preset--color--white);
+    border-radius: var(--wp--custom--border-radius--lg);
+    border: 1px solid var(--wp--preset--color--border);
+    padding: 40px 32px;
+    text-align: center;
+    margin-bottom: var(--wp--preset--spacing--md);
+    box-shadow: var(--wp--preset--shadow--xs);
+}
+
+.ty-check {
+    width: 64px;
+    height: 64px;
+    background: var(--wp--preset--color--success-bg);
+    border-radius: var(--wp--custom--border-radius--full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.ty-check svg {
+    width: 28px;
+    height: 28px;
+    color: var(--wp--preset--color--success);
+}
+
+.ty-hero h1 {
+    font-size: var(--wp--preset--font-size--heading-3);
+    font-weight: 700;
+    color: var(--wp--preset--color--text-dark);
+    margin-bottom: var(--wp--preset--spacing--xs);
+    line-height: var(--wp--custom--line-height--subheading);
+}
+
+.ty-hero > p {
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--text-gray);
+    line-height: var(--wp--custom--line-height--body);
+}
+
+/* Récap commande */
+.ty-recap {
+    margin-top: var(--wp--preset--spacing--md);
+    background: var(--wp--preset--color--muted);
+    border-radius: var(--wp--custom--border-radius--lg);
+    padding: var(--wp--preset--spacing--sm) 20px;
+    text-align: left;
+}
+
+.ty-recap-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--wp--preset--color--text-dark);
+    margin-bottom: var(--wp--preset--spacing--xs);
+}
+
+.ty-recap-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--wp--preset--color--text-gray);
+    padding: 4px 0;
+}
+
+.ty-recap-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--wp--preset--color--primary);
+    padding-top: var(--wp--preset--spacing--xs);
+    margin-top: var(--wp--preset--spacing--xs);
+    border-top: 1px solid var(--wp--preset--color--border);
+}
+
+/* =============================================
+   BLOCS CONDITIONNELS — Instructions produit
+   ============================================= */
+.ty-block {
+    background: var(--wp--preset--color--white);
+    border-radius: var(--wp--custom--border-radius--lg);
+    border: 1px solid var(--wp--preset--color--border);
+    padding: 28px 32px;
+    margin-bottom: var(--wp--preset--spacing--sm);
+    box-shadow: var(--wp--preset--shadow--xs);
+}
+
+.ty-block-title {
+    font-size: var(--wp--preset--font-size--body-large);
+    font-weight: 600;
+    color: var(--wp--preset--color--text-dark);
+    margin-bottom: var(--wp--preset--spacing--xs);
+}
+
+.ty-block p {
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--text-gray);
+    line-height: var(--wp--custom--line-height--body);
+    margin: 0;
+}
+
+.ty-block ol {
+    margin-top: var(--wp--preset--spacing--sm);
+    padding-left: 0;
+    list-style: none;
+    counter-reset: steps;
+}
+
+.ty-block ol li {
+    counter-increment: steps;
+    display: flex;
+    align-items: center;
+    gap: var(--wp--preset--spacing--xs);
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--text-gray);
+    line-height: 1.5;
+    padding: var(--wp--preset--spacing--xs) 0;
+}
+
+.ty-block ol li::before {
+    content: counter(steps);
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: var(--wp--preset--color--secondary-bg);
+    color: var(--wp--preset--color--secondary);
+    border-radius: var(--wp--custom--border-radius--full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.ty-block ol li strong {
+    color: var(--wp--preset--color--text-dark);
+}
+
+/* =============================================
+   BLOC CONTACT — Pied de page fixe
+   ============================================= */
+.ty-contact {
+    background: var(--wp--preset--color--white);
+    border-radius: var(--wp--custom--border-radius--lg);
+    border: 1px solid var(--wp--preset--color--border);
+    padding: 20px 32px;
+    text-align: center;
+    margin-top: var(--wp--preset--spacing--xs);
+    box-shadow: var(--wp--preset--shadow--xs);
+}
+
+.ty-contact-label {
+    font-size: 13px;
+    color: var(--wp--preset--color--text-muted);
+    margin-bottom: 4px;
+}
+
+.ty-contact-email {
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 600;
+    color: var(--wp--preset--color--primary);
+}
+
+.ty-contact-sub {
+    font-size: 12px;
+    color: var(--wp--preset--color--text-muted);
+    margin-top: 4px;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 600px) {
+    .ty-page {
+        padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--sm) 60px;
+    }
+
+    .ty-hero {
+        padding: 28px 20px;
+    }
+
+    .ty-block {
+        padding: 24px 20px;
+    }
+
+    .ty-contact {
+        padding: 20px;
+    }
+}

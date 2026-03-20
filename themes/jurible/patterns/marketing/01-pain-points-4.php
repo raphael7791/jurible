@@ -123,7 +123,7 @@
 <!-- wp:group {"className":"pain-banner","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|lg","right":"var:preset|spacing|lg"},"margin":{"top":"var:preset|spacing|lg"}},"border":{"radius":"12px"}},"gradient":"cta-gradient","layout":{"type":"default"}} -->
 <div class="wp-block-group pain-banner has-cta-gradient-gradient-background has-background" style="border-radius:12px;margin-top:var(--wp--preset--spacing--lg);padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--lg)">
 <!-- wp:paragraph {"align":"center","className":"pain-banner__title","style":{"typography":{"fontWeight":"700"},"spacing":{"margin":{"bottom":"4px"}}},"fontSize":"medium","textColor":"white"} -->
-<p class="has-text-align-center pain-banner__title has-white-color has-text-color has-medium-font-size" style="margin-bottom:4px;font-weight:700">Jurible t'accompagne de la L1 à la L3</p>
+<p class="has-text-align-center pain-banner__title has-white-color has-text-color has-medium-font-size" style="margin-bottom:4px;font-weight:700">AideauxTD t'accompagne de la L1 à la L3</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"align":"center","className":"pain-banner__text","fontSize":"small","textColor":"white"} -->
 <p class="has-text-align-center pain-banner__text has-white-color has-text-color has-small-font-size">Cours vidéo, fiches, QCM, flashcards et outils IA pour réussir tes études de droit.</p>

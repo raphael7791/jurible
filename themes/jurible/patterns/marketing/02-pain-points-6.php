@@ -170,7 +170,7 @@
 <!-- wp:group {"className":"pain-banner","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|md","left":"var:preset|spacing|lg","right":"var:preset|spacing|lg"},"margin":{"top":"var:preset|spacing|lg"}},"border":{"radius":"12px"}},"gradient":"cta-gradient","layout":{"type":"default"}} -->
 <div class="wp-block-group pain-banner has-cta-gradient-gradient-background has-background" style="border-radius:12px;margin-top:var(--wp--preset--spacing--lg);padding-top:var(--wp--preset--spacing--md);padding-right:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--md);padding-left:var(--wp--preset--spacing--lg)">
 <!-- wp:paragraph {"align":"center","className":"pain-banner__title","style":{"typography":{"fontSize":"16px","fontWeight":"700"},"spacing":{"margin":{"bottom":"4px"}}},"textColor":"white"} -->
-<p class="has-text-align-center pain-banner__title has-white-color has-text-color" style="margin-bottom:4px;font-size:16px;font-weight:700">L'Académie Jurible t'accompagne pour surmonter ces obstacles</p>
+<p class="has-text-align-center pain-banner__title has-white-color has-text-color" style="margin-bottom:4px;font-size:16px;font-weight:700">L'Académie AideauxTD t'accompagne pour surmonter ces obstacles</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"align":"center","className":"pain-banner__text","style":{"typography":{"fontSize":"14px"}},"textColor":"white"} -->
 <p class="has-text-align-center pain-banner__text has-white-color has-text-color" style="font-size:14px">Rejoins les 25 000+ étudiants qui ont transformé leurs résultats.</p>

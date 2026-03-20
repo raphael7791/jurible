@@ -13,6 +13,7 @@
     flex: 1;
     min-width: 0;
     max-width: 880px;
+    overflow: hidden;
 }
 
 .article-sidebar {
@@ -89,6 +90,13 @@
     .article-sidebar p {
         font-size: var(--wp--preset--font-size--body) !important;
     }
+}
+
+/* Protéger la sidebar des styles globaux injectés par les blocs wp:html */
+.article-sidebar table,
+.article-sidebar th,
+.article-sidebar td {
+    all: revert;
 }
 
 /* Post terms (tags) styling */

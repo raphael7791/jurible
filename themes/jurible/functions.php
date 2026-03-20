@@ -21,7 +21,7 @@ add_shortcode('jurible_year', 'jurible_year_shortcode');
 # Shortcode pour le copyright complet [jurible_copyright]
 function jurible_copyright_shortcode() {
     $year = date('Y');
-    return '<p class="footer-copyright" style="font-size:13px;margin:0;">© ' . $year . ' Jurible.com - Tous droits réservés</p>';
+    return '<p class="footer-copyright" style="font-size:13px;margin:0;">© ' . $year . ' AideauxTD.com - Tous droits réservés</p>';
 }
 add_shortcode('jurible_copyright', 'jurible_copyright_shortcode');
 
@@ -294,6 +294,26 @@ function jurible_course_pain_title_shortcode() {
 }
 add_shortcode('course_pain_title', 'jurible_course_pain_title_shortcode');
 
+# Shortcode conditionnel [course_bonus_fiches] — affiche le bonus fiches animées uniquement sur certains cours
+function jurible_course_bonus_fiches_shortcode() {
+    $post = get_post();
+    if (!$post) return '';
+
+    $slugs_avec_fiches = [
+        'introduction-au-droit',
+        'droit-constitutionnel-s1',
+        'droit-constitutionnel-s2',
+        'droit-des-personnes',
+        'droit-de-la-famille',
+    ];
+
+    if (in_array($post->post_name, $slugs_avec_fiches)) {
+        return '<li>BONUS : Fiches animées en vidéo</li>';
+    }
+    return '';
+}
+add_shortcode('course_bonus_fiches', 'jurible_course_bonus_fiches_shortcode');
+
 # Retirer le pattern directory et la suggestion de blocs
 remove_action("enqueue_block_editor_assets", "wp_enqueue_editor_block_directory_assets");
 remove_theme_support("core-block-patterns");
@@ -480,6 +500,46 @@ function jurible_deregister_blocks($allowed_block_types, $editor_context)
     $active_blocks = array_keys(
         WP_Block_Type_Registry::get_instance()->get_all_registered()
     );
+
+    // Blocs SureCart enregistrés uniquement côté JS (non présents dans le registre PHP)
+    $client_only_blocks = [
+        "surecart/checkbox",
+        "surecart/card",
+        "surecart/divider",
+        "surecart/donation",
+        "surecart/donation-amount",
+        "surecart/express-payment",
+        "surecart/first-name",
+        "surecart/heading",
+        "surecart/input",
+        "surecart/last-name",
+        "surecart/line-items",
+        "surecart/name",
+        "surecart/name-your-price",
+        "surecart/order-bumps",
+        "surecart/phone",
+        "surecart/radio",
+        "surecart/radio-group",
+        "surecart/shipping-choices",
+        "surecart/subtotal",
+        "surecart/switch",
+        "surecart/tax-id-input",
+        "surecart/textarea",
+        "surecart/total",
+        "surecart/totals",
+        "surecart/checkout-errors",
+        "surecart/invoice-details",
+        "surecart/invoice-due-date",
+        "surecart/invoice-memo",
+        "surecart/invoice-number",
+        "surecart/invoice-receipt-download",
+        "surecart/session-detail",
+        "surecart/line-item-shipping",
+        "surecart/tax-line-item",
+        "surecart/bump-line-item",
+    ];
+
+    $active_blocks = array_merge($active_blocks, $client_only_blocks);
 
     return array_values(array_diff($active_blocks, $blocks_to_disable));
 }
@@ -945,7 +1005,7 @@ function jurible_header_minimal_checkout_shortcode()
     <header class="site-header site-header--minimal site-header--checkout">
         <div class="site-header__inner">
             <a href="<?php echo esc_url(home_url('/')); ?>" class="site-header__logo">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.png'); ?>" alt="Jurible" class="site-header__logo-img" width="120" height="32">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo-color.png'); ?>" alt="AideauxTD" class="site-header__logo-img" width="120" height="32">
             </a>
             <span class="header-minimal__secure">
                 🔒 Paiement sécurisé
@@ -2130,4 +2190,209 @@ add_action('save_post_sc_product', function($post_id) {
         }
     }
 }, 20);
+
+
+# ==========================================================================
+# PAGE THANK YOU — Confirmation de commande SureCart
+# ==========================================================================
+
+/**
+ * Shortcode [jurible_thank_you]
+ * Affiche la page de confirmation après un achat SureCart.
+ * SureCart redirige vers /merci-confirmation/?sc_checkout_id=xxx
+ */
+function jurible_thank_you_shortcode() {
+    // Charger le CSS
+    wp_enqueue_style(
+        'jurible-thank-you',
+        get_template_directory_uri() . '/assets/css/thank-you.css',
+        [],
+        filemtime(get_template_directory() . '/assets/css/thank-you.css')
+    );
+
+    $checkout_id = isset($_GET['sc_checkout_id']) ? sanitize_text_field($_GET['sc_checkout_id']) : '';
+
+    $first_name = '';
+    $line_items = [];
+    $total = 0;
+    $currency = 'eur';
+    $product_categories = [];
+
+    // Récupérer les données SureCart
+    if ($checkout_id && class_exists('\SureCart\Models\Checkout')) {
+        try {
+            $checkout = (new \SureCart\Models\Checkout())
+                ->with(['line_items', 'line_items.price', 'line_items.price.product', 'customer'])
+                ->find($checkout_id);
+
+            if ($checkout && !is_wp_error($checkout)) {
+                $first_name = $checkout->first_name ?? $checkout->name ?? '';
+                if (empty($first_name) && !empty($checkout->customer->first_name)) {
+                    $first_name = $checkout->customer->first_name;
+                }
+                $total = ($checkout->total_amount ?? 0) / 100;
+                $currency = $checkout->currency ?? 'eur';
+                $product_categories = [];
+
+                if (!empty($checkout->line_items->data)) {
+                    foreach ($checkout->line_items->data as $item) {
+                        $product_name = '';
+                        $price_amount = 0;
+
+                        if (!empty($item->price)) {
+                            $price_amount = ($item->price->amount ?? 0) / 100;
+                            if (!empty($item->price->product)) {
+                                $product_name = $item->price->product->name ?? '';
+                            }
+                        }
+
+                        $line_items[] = [
+                            'name' => $product_name,
+                            'amount' => $price_amount,
+                            'quantity' => $item->quantity ?? 1,
+                        ];
+
+                        // Catégoriser le produit par son nom
+                        $name_lower = mb_strtolower($product_name);
+                        if (strpos($name_lower, 'prépa') !== false || strpos($name_lower, 'pass droit') !== false) {
+                            $product_categories[] = 'prepa';
+                        } elseif (strpos($name_lower, 'réussite') !== false || strpos($name_lower, 'formule') !== false) {
+                            $product_categories[] = 'reussite';
+                        } elseif (strpos($name_lower, 'académie') !== false || strpos($name_lower, 'academie') !== false) {
+                            $product_categories[] = 'academie';
+                        } elseif (strpos($name_lower, 'suite ia') !== false || strpos($name_lower, 'crédit') !== false || strpos($name_lower, 'credit') !== false) {
+                            $product_categories[] = 'suite-ia';
+                        } elseif (strpos($name_lower, 'fiche') !== false || strpos($name_lower, 'manuel') !== false || strpos($name_lower, 'pack') !== false) {
+                            $product_categories[] = 'fiches';
+                        }
+                    }
+                }
+                $product_categories = array_unique($product_categories);
+            }
+        } catch (\Exception $e) {
+            // Fallback silencieux
+        }
+    }
+
+    // Déterminer si on affiche chaque bloc
+    $show_fiches    = in_array('fiches', $product_categories);
+    $show_suite_ia  = in_array('suite-ia', $product_categories);
+    $show_academie  = in_array('academie', $product_categories);
+    $show_prepa     = in_array('prepa', $product_categories);
+    $show_reussite  = in_array('reussite', $product_categories);
+
+    // Symbole monétaire
+    $currency_symbol = $currency === 'eur' ? '€' : strtoupper($currency);
+
+    ob_start();
+    ?>
+    <div class="ty-page">
+
+        <!-- HERO — Confirmation -->
+        <div class="ty-hero">
+            <div class="ty-check">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h1>Merci<?php echo $first_name ? ' ' . esc_html($first_name) : ''; ?> ! Votre commande est confirmée.</h1>
+            <p>Consultez votre boîte mail — un email avec vos accès arrive dans les prochaines minutes.</p>
+
+            <?php if (!empty($line_items)) : ?>
+            <div class="ty-recap">
+                <div class="ty-recap-title">Récap commande</div>
+                <?php foreach ($line_items as $item) : ?>
+                <div class="ty-recap-line">
+                    <span><?php echo esc_html($item['name']); ?><?php echo $item['quantity'] > 1 ? ' &times; ' . $item['quantity'] : ''; ?></span>
+                    <span><?php echo number_format($item['amount'] * $item['quantity'], 0, ',', ' ') . ' ' . $currency_symbol; ?></span>
+                </div>
+                <?php endforeach; ?>
+                <div class="ty-recap-total">
+                    <span>Total</span>
+                    <span><?php echo number_format($total, 0, ',', ' ') . ' ' . $currency_symbol; ?></span>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+
+        <!-- BLOC : Fiches / Manuel / Pack -->
+        <?php if ($show_fiches) : ?>
+        <div class="ty-block">
+
+            <div class="ty-block-title">Vos fiches arrivent par email</div>
+            <p>Un email avec vos identifiants vient de vous être envoyé.</p>
+            <ol>
+                <li><strong>Ouvrez l'email</strong> que vous venez de recevoir</li>
+                <li><strong>Créez votre mot de passe</strong> en cliquant sur le lien dans l'email</li>
+                <li><strong>Connectez-vous</strong> à <a href="https://ecole.aideauxtd.com" target="_blank">ecole.aideauxtd.com</a> pour télécharger vos fiches</li>
+            </ol>
+        </div>
+        <?php endif; ?>
+
+        <!-- BLOC : Suite IA -->
+        <?php if ($show_suite_ia) : ?>
+        <div class="ty-block">
+
+            <div class="ty-block-title">Vos crédits IA sont activés !</div>
+            <p>Vos crédits sont disponibles dès maintenant. Connectez-vous à votre espace pour commencer à utiliser les générateurs.</p>
+            <ol>
+                <li><strong>Ouvrez l'email</strong> avec vos identifiants</li>
+                <li><strong>Connectez-vous</strong> sur <a href="https://ecole.aideauxtd.com" target="_blank">ecole.aideauxtd.com</a></li>
+                <li><strong>Accédez à la Suite IA</strong> depuis votre tableau de bord</li>
+            </ol>
+        </div>
+        <?php endif; ?>
+
+        <!-- BLOC : Académie -->
+        <?php if ($show_academie) : ?>
+        <div class="ty-block">
+
+            <div class="ty-block-title">Bienvenue dans l'Académie AideauxTD !</div>
+            <p>Votre abonnement est actif. Vos identifiants arrivent par email.</p>
+            <ol>
+                <li><strong>Créez votre mot de passe</strong> — cliquez sur le lien dans l'email</li>
+                <li><strong>Connectez-vous</strong> sur <a href="https://ecole.aideauxtd.com" target="_blank">ecole.aideauxtd.com</a></li>
+                <li><strong>Commencez</strong> par le cours de votre matière principale</li>
+            </ol>
+        </div>
+        <?php endif; ?>
+
+        <!-- BLOC : Prépa PASS DROIT -->
+        <?php if ($show_prepa) : ?>
+        <div class="ty-block">
+
+            <div class="ty-block-title">Bienvenue dans la Prépa PASS DROIT !</div>
+            <p>Votre inscription est confirmée et votre Académie annuelle est activée.</p>
+            <ol>
+                <li><strong>Consultez votre email</strong> — récapitulatif et accès inclus</li>
+                <li><strong>Votre référent dédié</strong> vous contactera sous 48h pour planifier votre accompagnement</li>
+                <li><strong>Préparez vos questions</strong> — votre premier rendez-vous sera l'occasion de faire le point</li>
+            </ol>
+        </div>
+        <?php endif; ?>
+
+        <!-- BLOC : Formule Réussite -->
+        <?php if ($show_reussite) : ?>
+        <div class="ty-block">
+
+            <div class="ty-block-title">Bienvenue dans la Formule Réussite !</div>
+            <p>Votre accès complet est activé — Académie 12 mois, Pack Fiches, crédits IA, et accompagnement personnalisé.</p>
+            <ol>
+                <li><strong>Ouvrez l'email</strong> avec vos identifiants et le récap de tout ce qui est inclus</li>
+                <li><strong>Connectez-vous</strong> sur <a href="https://ecole.aideauxtd.com" target="_blank">ecole.aideauxtd.com</a> — tout est déjà activé</li>
+                <li><strong>Commencez par vos cours</strong> et téléchargez vos fiches PDF</li>
+            </ol>
+        </div>
+        <?php endif; ?>
+
+        <!-- CONTACT -->
+        <div class="ty-contact">
+            <div class="ty-contact-label">Des questions ?</div>
+            <div class="ty-contact-email">contact@aideauxtd.com</div>
+            <div class="ty-contact-sub">École de droit en ligne depuis 2018</div>
+        </div>
+
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('jurible_thank_you', 'jurible_thank_you_shortcode');
 

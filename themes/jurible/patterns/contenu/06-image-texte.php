@@ -42,7 +42,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"text-gray"} -->
-<p class="has-text-gray-color has-text-color">Avant de créer Jurible ensemble, Raphaël et Laura ont grandi côte à côte dans le sud de la France. Déjà enfants, Raphaël — l'aîné studieux — aidait sa petite sœur à faire ses devoirs.</p>
+<p class="has-text-gray-color has-text-color">Avant de créer AideauxTD ensemble, Raphaël et Laura ont grandi côte à côte dans le sud de la France. Déjà enfants, Raphaël — l'aîné studieux — aidait sa petite sœur à faire ses devoirs.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"text-gray"} -->

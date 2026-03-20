@@ -25,7 +25,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"textColor":"text-dark"} -->
-<p class="has-text-dark-color has-text-color">Jurible est né d'un constat simple : trop d'étudiants brillants échouent en droit, non pas par manque de capacités, mais par manque d'accompagnement adapté.</p>
+<p class="has-text-dark-color has-text-color">AideauxTD est né d'un constat simple : trop d'étudiants brillants échouent en droit, non pas par manque de capacités, mais par manque d'accompagnement adapté.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"text-dark"} -->

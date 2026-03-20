@@ -13,7 +13,7 @@
 <div class="wp-block-group equipe-teaser__photo-wrapper has-cta-gradient-gradient-background has-background">
 
 <!-- wp:image {"sizeSlug":"full","className":"equipe-teaser__photo is-style-default"} -->
-<figure class="wp-block-image size-full equipe-teaser__photo is-style-default"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/team/photo-des-profs-jurible.com.webp'); ?>" alt="L'équipe pédagogique Jurible"/></figure>
+<figure class="wp-block-image size-full equipe-teaser__photo is-style-default"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/team/photo-des-profs-jurible.com.webp'); ?>" alt="L'équipe pédagogique AideauxTD"/></figure>
 <!-- /wp:image -->
 
 </div>

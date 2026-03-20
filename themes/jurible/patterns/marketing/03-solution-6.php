@@ -24,7 +24,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"18px","lineHeight":"1.6"}},"textColor":"text-gray"} -->
-<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:18px;line-height:1.6">Nous avons créé l'Académie Jurible pour aider les étudiants en droit à réussir facilement. Une plateforme complète avec tout ce qu'il te faut.</p>
+<p class="has-text-align-center has-text-gray-color has-text-color" style="font-size:18px;line-height:1.6">Nous avons créé l'Académie AideauxTD pour aider les étudiants en droit à réussir facilement. Une plateforme complète avec tout ce qu'il te faut.</p>
 <!-- /wp:paragraph -->
 
 </div>

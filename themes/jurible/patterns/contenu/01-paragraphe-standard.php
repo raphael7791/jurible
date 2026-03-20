@@ -33,7 +33,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"text-dark"} -->
-<p class="has-text-dark-color has-text-color">Chez Jurible, nous avons accompagné plus de 25 000 étudiants en droit. Voici les principes fondamentaux qui reviennent systématiquement chez ceux qui réussissent :</p>
+<p class="has-text-dark-color has-text-color">Chez AideauxTD, nous avons accompagné plus de 25 000 étudiants en droit. Voici les principes fondamentaux qui reviennent systématiquement chez ceux qui réussissent :</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:list {"className":"section-paragraphe__list","textColor":"text-dark"} -->

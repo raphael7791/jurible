@@ -16,7 +16,7 @@
 <div class="wp-block-column hero-conversion__content">
 
 <!-- wp:paragraph {"className":"hero-conversion__badge"} -->
-<p class="hero-conversion__badge">🎓 L'Académie Jurible</p>
+<p class="hero-conversion__badge">🎓 L'Académie AideauxTD</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":1,"className":"hero-conversion__title","textColor":"text-dark"} -->

@@ -3,7 +3,7 @@
  * Title: Commerce 09 - Pricing Comparatif
  * Slug: jurible/commerce-09-pricing-comparatif
  * Categories: commerce
- * Description: Section comparatif des 4 produits Jurible avec grille (page Offres)
+ * Description: Section comparatif des 4 produits AideauxTD avec grille (page Offres)
  */
 ?>
 <!-- wp:group {"align":"full","className":"section-pricing-comparatif","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl","left":"0","right":"0"}}},"backgroundColor":"muted","layout":{"type":"constrained"}} -->

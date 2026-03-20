@@ -13,11 +13,11 @@
 <div class="wp-block-group section-paragraphe__card has-border-color has-border-border-color has-white-background-color has-background" style="border-width:1px;border-radius:12px;padding-top:var(--wp--preset--spacing--lg);padding-right:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--lg);padding-left:var(--wp--preset--spacing--lg)">
 
 <!-- wp:heading {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|md"}}}} -->
-<h2 class="wp-block-heading" style="margin-bottom:var(--wp--preset--spacing--md)">Comment fonctionne <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">l'Académie Jurible</mark> ?</h2>
+<h2 class="wp-block-heading" style="margin-bottom:var(--wp--preset--spacing--md)">Comment fonctionne <mark style="background:linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="has-inline-color">l'Académie AideauxTD</mark> ?</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"textColor":"text-dark"} -->
-<p class="has-text-dark-color has-text-color">L'Académie Jurible vous donne accès à l'ensemble de nos ressources pédagogiques : cours vidéo par matière, fiches de révision complètes, exercices corrigés, flashcards, QCM et outils d'intelligence artificielle pour automatiser vos fiches d'arrêt et cas pratiques.</p>
+<p class="has-text-dark-color has-text-color">L'Académie AideauxTD vous donne accès à l'ensemble de nos ressources pédagogiques : cours vidéo par matière, fiches de révision complètes, exercices corrigés, flashcards, QCM et outils d'intelligence artificielle pour automatiser vos fiches d'arrêt et cas pratiques.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"text-dark"} -->

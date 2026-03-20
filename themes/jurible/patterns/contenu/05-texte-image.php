@@ -59,7 +59,7 @@
 <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:50%">
 
 <!-- wp:image {"sizeSlug":"large","style":{"border":{"radius":"12px"}}} -->
-<figure class="wp-block-image size-large" style="border-radius:12px"><img src="/wp-content/themes/jurible/assets/images/placeholder-article-hero.jpg" alt="Aperçu de la plateforme Jurible"/></figure>
+<figure class="wp-block-image size-large" style="border-radius:12px"><img src="/wp-content/themes/jurible/assets/images/placeholder-article-hero.jpg" alt="Aperçu de la plateforme AideauxTD"/></figure>
 <!-- /wp:image -->
 
 </div>

@@ -53,7 +53,7 @@
 <!-- wp:post-author-name {"className":"hero-article__author-name"} /-->
 
 <!-- wp:paragraph {"className":"hero-article__author-role"} -->
-<p class="hero-article__author-role">Rédacteur Jurible</p>
+<p class="hero-article__author-role">Rédacteur AideauxTD</p>
 <!-- /wp:paragraph -->
 
 </div>

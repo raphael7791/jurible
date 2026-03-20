@@ -17,7 +17,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","className":"cta-final__subtitle","textColor":"white"} -->
-<p class="has-text-align-center cta-final__subtitle has-white-color has-text-color">Rejoins les 25 000+ étudiants qui ont transformé leurs résultats avec Jurible.</p>
+<p class="has-text-align-center cta-final__subtitle has-white-color has-text-color">Rejoins les 25 000+ étudiants qui ont transformé leurs résultats avec AideauxTD.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:group {"className":"cta-final__price-block","style":{"spacing":{"margin":{"top":"var:preset|spacing|md"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center","verticalAlignment":"baseline"}} -->
