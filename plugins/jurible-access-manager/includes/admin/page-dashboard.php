@@ -196,12 +196,13 @@ $per_page = 20;
 
     <!-- Section 3: Active Subscriptions -->
     <div class="jam-section">
-        <div class="jam-section__header">
-            <h2>Abonnements actifs SureCart</h2>
-        </div>
         <?php
         $subscriptions = jam_dashboard_get_sc_subscriptions( $sub_page, $per_page, $sub_filter, $sub_status );
         ?>
+        <div class="jam-section__header">
+            <h2>Abonnements actifs SureCart</h2>
+            <span class="jam-badge jam-badge--blue"><?php echo intval( $subscriptions['total'] ?? 0 ); ?> abonnements</span>
+        </div>
         <div class="jam-filters">
             <form method="get">
                 <input type="hidden" name="page" value="jam-dashboard">
@@ -486,6 +487,7 @@ function jam_dashboard_get_sc_subscriptions( $page = 1, $per_page = 20, $product
     }
 
     $total = $body['pagination']['count'] ?? count( $result['data'] );
+    $result['total']       = $total;
     $result['total_pages'] = max( 1, ceil( $total / $per_page ) );
 
     return $result;
