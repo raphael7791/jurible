@@ -439,6 +439,8 @@ function jam_dashboard_get_sc_subscriptions( $page = 1, $per_page = 20, $product
 
     if ( $status_filter ) {
         $url .= '&status[]=' . urlencode( $status_filter );
+    } else {
+        $url .= '&status[]=active&status[]=trialing';
     }
     if ( $product_filter ) {
         $url .= '&product_ids[]=' . urlencode( $product_filter );
