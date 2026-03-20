@@ -384,13 +384,47 @@ class Jaide_API {
 
         $wpdb->update( $table, $update_data, [ 'id' => $id ] );
 
-        // Notification à l'étudiant
+        // Notification email à l'étudiant
         $row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE id = %d", $id ) );
         Jaide_Notifications::send_response( $row );
+
+        // Notification in-app Fluent Community (cloche)
+        self::send_fc_notification( $row );
 
         return rest_ensure_response( [
             'success' => true,
             'message' => 'Réponse envoyée',
         ] );
+    }
+
+    // ── Notification Fluent Community (cloche) ──────────────────────────────
+
+    private static function send_fc_notification( $row ) {
+        if ( ! class_exists( '\FluentCommunity\App\Models\Notification' ) || empty( $row ) ) {
+            return;
+        }
+
+        try {
+            $type_label = $row->type === 'question' ? 'question' : 'copie';
+
+            $notification = \FluentCommunity\App\Models\Notification::create( [
+                'src_user_id'     => get_current_user_id(),
+                'src_object_type' => 'system',
+                'action'          => 'aide_perso_reply',
+                'content'         => sprintf(
+                    '<b class="fcom_nst">%s</b> Votre %s a reçu une réponse. Consultez-la dès maintenant !',
+                    esc_html( $row->matiere ),
+                    $type_label
+                ),
+                'route' => [
+                    'name'   => 'CustomPage',
+                    'params' => [ 'slug' => 'questions-corrections-de-copies' ],
+                ],
+            ] );
+
+            $notification->subscribe( [ (int) $row->user_id ] );
+        } catch ( \Exception $e ) {
+            error_log( 'Jaide FC notification error: ' . $e->getMessage() );
+        }
     }
 }
