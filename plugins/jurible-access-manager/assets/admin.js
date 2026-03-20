@@ -290,12 +290,12 @@
 
         var label = dryRun ? 'Simulation en cours...' : 'Synchronisation en cours...';
         $btn.prop('disabled', true).text(label);
-        $report.html('<div class="jam-loading"><span class="spinner"></span> Veuillez patienter (peut prendre 1-2 minutes)...</div>');
+        $report.html('<div class="jam-loading"><span class="spinner"></span> Veuillez patienter (peut prendre plusieurs minutes)...</div>');
 
         $.ajax({
             url: jamAdmin.ajaxUrl,
             type: 'POST',
-            timeout: 120000,
+            timeout: 600000,
             data: {
                 action: 'jam_run_sync',
                 nonce: jamAdmin.nonce,

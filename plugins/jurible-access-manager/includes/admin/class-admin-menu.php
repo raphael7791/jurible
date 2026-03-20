@@ -217,6 +217,8 @@ class JAM_Admin_Menu {
             wp_send_json_error( 'Permission refusée.' );
         }
 
+        set_time_limit( 600 );
+
         $dry_run = ! empty( $_POST['dry_run'] );
         $report  = JAM_Sync::run( $dry_run );
         wp_send_json_success( $report );
