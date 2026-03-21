@@ -15,7 +15,7 @@
 <p class="has-text-align-center section-steps__badge">Comment ça marche</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"textAlign":"center","level":2,"className":"section-steps__title"} -->
-<h2 class="wp-block-heading has-text-align-center section-steps__title">Rejoins l'Académie en <span class="gradient-text">4 étapes</span></h2>
+<h2 class="wp-block-heading has-text-align-center section-steps__title">Rejoignez l'Académie en <span class="gradient-text">4 étapes</span></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","className":"section-steps__subtitle","textColor":"text-muted"} -->
 <p class="has-text-align-center section-steps__subtitle has-text-muted-color has-text-color">Un processus simple pour commencer à réviser efficacement dès aujourd'hui.</p>
@@ -32,10 +32,10 @@
 <p class="step-item__circle">1</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3,"className":"step-item__title"} -->
-<h3 class="wp-block-heading step-item__title">Choisis ta formule</h3>
+<h3 class="wp-block-heading step-item__title">Choisissez votre formule</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"step-item__desc"} -->
-<p class="step-item__desc">Sélectionne la durée d'abonnement qui correspond à tes besoins.</p>
+<p class="step-item__desc">Sélectionnez la durée d'abonnement qui correspond à vos besoins.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"step-item__info"} -->
 <p class="step-item__info"><strong>6 mois</strong> = la + populaire</p>
@@ -49,7 +49,7 @@
 <p class="step-item__circle">2</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3,"className":"step-item__title"} -->
-<h3 class="wp-block-heading step-item__title">Crée ton compte</h3>
+<h3 class="wp-block-heading step-item__title">Créez votre compte</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"step-item__desc"} -->
 <p class="step-item__desc">Inscris-toi en quelques clics. Paiement 100% sécurisé par Stripe.</p>
@@ -102,10 +102,10 @@
 <!-- wp:group {"className":"step-item-vertical__content","layout":{"type":"default"}} -->
 <div class="wp-block-group step-item-vertical__content">
 <!-- wp:heading {"level":3,"className":"step-item-vertical__title"} -->
-<h3 class="wp-block-heading step-item-vertical__title">Choisis ta formule</h3>
+<h3 class="wp-block-heading step-item-vertical__title">Choisissez votre formule</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"step-item-vertical__desc"} -->
-<p class="step-item-vertical__desc">Sélectionne la durée d'abonnement qui correspond à tes besoins.</p>
+<p class="step-item-vertical__desc">Sélectionnez la durée d'abonnement qui correspond à vos besoins.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"step-item-vertical__info"} -->
 <p class="step-item-vertical__info"><strong>6 mois</strong> = la + populaire</p>
@@ -123,7 +123,7 @@
 <!-- wp:group {"className":"step-item-vertical__content","layout":{"type":"default"}} -->
 <div class="wp-block-group step-item-vertical__content">
 <!-- wp:heading {"level":3,"className":"step-item-vertical__title"} -->
-<h3 class="wp-block-heading step-item-vertical__title">Crée ton compte</h3>
+<h3 class="wp-block-heading step-item-vertical__title">Créez votre compte</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"step-item-vertical__desc"} -->
 <p class="step-item-vertical__desc">Inscris-toi en quelques clics. Paiement 100% sécurisé par Stripe.</p>

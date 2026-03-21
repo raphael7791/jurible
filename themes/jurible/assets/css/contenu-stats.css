@@ -43,13 +43,12 @@
    RESPONSIVE
    ===================================================== */
 @media (max-width: 781px) {
-    .wp-block-columns.section-stats__grid {
+    .section-stats__grid {
         flex-wrap: wrap !important;
-        justify-content: center !important;
         gap: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md) !important;
     }
 
-    .wp-block-columns.section-stats__grid > .wp-block-column {
+    .section-stats__grid > .wp-block-column {
         flex-basis: calc(50% - var(--wp--preset--spacing--sm)) !important;
         flex-grow: 0 !important;
     }

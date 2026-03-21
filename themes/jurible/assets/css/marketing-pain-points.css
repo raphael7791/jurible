@@ -47,11 +47,13 @@
 }
 
 .pain-card__title {
-	margin: 0 !important;
+	margin: 0 0 var(--wp--preset--spacing--sm) 0 !important;
+	font-family: var(--wp--preset--font-family--poppins);
 }
 
 .pain-card__description {
 	margin: 0 !important;
+	font-family: var(--wp--preset--font-family--poppins);
 	line-height: 1.5;
 }
 
@@ -61,7 +63,8 @@
 
 .pain-banner,
 .editor-styles-wrapper .pain-banner {
-	margin-top: var(--wp--preset--spacing--lg) !important;
+	margin-top: 48px !important;
+	margin-block-start: 48px !important;
 }
 
 .pain-banner__title {
@@ -109,4 +112,11 @@
 		padding-left: var(--wp--preset--spacing--md) !important;
 		padding-right: var(--wp--preset--spacing--md) !important;
 	}
+}
+
+
+/* Force spacing before banner inside constrained layout */
+.pain-section .pain-banner.wp-block-group {
+	margin-top: 48px !important;
+	margin-block-start: 48px !important;
 }

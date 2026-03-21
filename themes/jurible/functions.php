@@ -2396,3 +2396,42 @@ function jurible_thank_you_shortcode() {
 }
 add_shortcode('jurible_thank_you', 'jurible_thank_you_shortcode');
 
+
+
+# ==========================================================================
+# SURECART — Traduction filtres collections
+# ==========================================================================
+add_filter('gettext', function($translated, $text, $domain) {
+    if ($domain !== 'surecart') return $translated;
+    static $map = [
+        'Latest'              => 'Plus récents',
+        'Oldest'              => 'Plus anciens',
+        'Alphabetical, A-Z'   => 'Alphabétique, A-Z',
+        'Alphabetical, Z-A'   => 'Alphabétique, Z-A',
+        'Price, low to high'  => 'Prix croissant',
+        'Price, high to low'  => 'Prix décroissant',
+    ];
+    return $map[$text] ?? $translated;
+}, 10, 3);
+
+
+# ==========================================================================
+# SURECART — Traduction label order bumps
+# ==========================================================================
+add_action('wp_footer', function() {
+    if (!is_page()) return;
+    ?>
+    <script>
+    (function(){
+        var obs = new MutationObserver(function(mutations) {
+            document.querySelectorAll('sc-order-bumps').forEach(function(el) {
+                if (!el.getAttribute('label') || el.getAttribute('label') === 'Recommended') {
+                    el.setAttribute('label', 'Nos étudiants ont également commandé');
+                }
+            });
+        });
+        obs.observe(document.body, {childList: true, subtree: true});
+    })();
+    </script>
+    <?php
+}, 99);

@@ -4,17 +4,18 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    const flipCards = document.querySelectorAll('.flip-card');
+    var flipCards = document.querySelectorAll('.flip-card');
 
     flipCards.forEach(function(card) {
         card.addEventListener('click', function(e) {
-            // Don't flip if clicking on a CTA button that has a real link (back side)
             var link = e.target.closest('.wp-block-button__link');
-            if (link && link.getAttribute('href')) {
-                return;
+            if (link) {
+                var href = link.getAttribute('href');
+                if (href && href !== '#') {
+                    return;
+                }
+                e.preventDefault();
             }
-
-            // Toggle flipped state
             this.classList.toggle('flipped');
         });
     });

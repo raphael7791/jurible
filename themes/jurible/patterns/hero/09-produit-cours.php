@@ -101,7 +101,7 @@
 <div class="wp-block-group hero-produit__card-body">
 
 <!-- wp:paragraph {"className":"hero-produit__card-title"} -->
-<p class="hero-produit__card-title">Inclus dans l'abonnement AideAuxTD</p>
+<p class="hero-produit__card-title">Inclus dans l'abonnement Académie</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:group {"className":"hero-produit__card-features","layout":{"type":"flex","orientation":"vertical"}} -->

@@ -394,7 +394,10 @@ body.menu-open {
 }
 
 #site-header .megamenu__article-img {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
     width: 60px;
     height: 60px;
     border-radius: 6px;
@@ -540,6 +543,7 @@ body.menu-open {
 #site-header .megamenu__niveau-dot--l2 { background: var(--wp--preset--color--warning); }
 #site-header .megamenu__niveau-dot--l3 { background: var(--wp--preset--color--secondary); }
 #site-header .megamenu__niveau-dot--capa { background: var(--wp--preset--color--info); }
+#site-header .megamenu__niveau-dot--reprise { background: var(--wp--preset--color--success); }
 
 /* Par outil - Liste avec icônes */
 #site-header .megamenu__outils {
@@ -860,6 +864,7 @@ body.menu-open {
 .mobile-menu__niveau-dot--l2 { background: var(--wp--preset--color--warning); }
 .mobile-menu__niveau-dot--l3 { background: var(--wp--preset--color--secondary); }
 .mobile-menu__niveau-dot--capa { background: var(--wp--preset--color--info); }
+.mobile-menu__niveau-dot--reprise { background: var(--wp--preset--color--success); }
 
 /* Mobile Outils */
 .mobile-menu__outils {
