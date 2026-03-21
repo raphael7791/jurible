@@ -34,7 +34,7 @@
 .card-cours__image {
     position: relative;
     width: 100%;
-    height: 180px;
+    aspect-ratio: 16 / 9;
     background: #2D2D2D;
     display: flex;
     align-items: center;
@@ -138,10 +138,14 @@
     font-size: var(--wp--preset--font-size--small);
 }
 
-/* Responsive */
+/* Responsive — force les groupes flex de cards à wrapper sur mobile */
 @media (max-width: 768px) {
-    .card-cours__image {
-        height: 160px;
+    .wp-block-group:has(.card-cours) {
+        flex-wrap: wrap !important;
+    }
+
+    .wp-block-jurible-card-cours.card-cours {
+        width: 100%;
     }
 
     .card-cours__title {
