@@ -65,6 +65,8 @@ ln -s ~/Code/jurible/plugins/MON-PLUGIN ~/Local\ Sites/NOM-DU-SITE/app/public/wp
 - Pour override header/footer sur ecole : créer `themes/ecole.jurible/parts/header.html`
 - Ne jamais modifier les templates via l'éditeur WordPress (ça écrase la version fichier)
 - Toujours lancer `npm run build` après modification des blocs React
+- **TOUJOURS commiter et pusher les changements avant de déployer.** Ne jamais déployer des fichiers non versionnés sans les avoir d'abord commités. Et ne jamais commiter en masse des fichiers modifiés sans demander confirmation à l'utilisateur — ces fichiers peuvent ne pas être prêts ou ne pas être liés à la tâche en cours.
+- **Ne JAMAIS déployer le thème parent `jurible` sur ecole.jurible.com sans confirmation explicite.** Le thème parent peut avoir été modifié directement sur le serveur par un autre dev. Toujours demander avant d'écraser.
 
 ## Conventions de code
 

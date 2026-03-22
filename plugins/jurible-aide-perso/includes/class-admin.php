@@ -90,6 +90,87 @@ class Jaide_Admin {
     }
 
     public static function render_credits() {
+        // Donner / retirer l'accès aide perso
+        if ( isset( $_POST['jaide_toggle_access'] ) && check_admin_referer( 'jaide_toggle_access' ) ) {
+            $uid    = intval( $_POST['user_id'] ?? 0 );
+            $action = sanitize_text_field( $_POST['jaide_toggle_access'] );
+
+            if ( $uid ) {
+                if ( $action === 'grant' ) {
+                    update_user_meta( $uid, 'jam_aide_perso_access', '1' );
+                    // Poser les limites par défaut (5Q / 1C) si pas déjà présentes
+                    if ( ! get_user_meta( $uid, 'jam_aide_perso_questions_limit', true ) ) {
+                        update_user_meta( $uid, 'jam_aide_perso_questions_limit', 5 );
+                    }
+                    if ( ! get_user_meta( $uid, 'jam_aide_perso_copies_limit', true ) ) {
+                        update_user_meta( $uid, 'jam_aide_perso_copies_limit', 1 );
+                    }
+                    echo '<div class="notice notice-success"><p>Accès aide personnalisée activé (5 questions, 1 copie).</p></div>';
+                } elseif ( $action === 'revoke' ) {
+                    delete_user_meta( $uid, 'jam_aide_perso_access' );
+                    delete_user_meta( $uid, 'jam_aide_perso_copies_limit' );
+                    delete_user_meta( $uid, 'jam_aide_perso_questions_limit' );
+                    // Supprimer aussi les overrides individuels
+                    delete_user_meta( $uid, 'jaide_copies_limit' );
+                    delete_user_meta( $uid, 'jaide_questions_limit' );
+                    echo '<div class="notice notice-success"><p>Accès aide personnalisée retiré.</p></div>';
+                }
+            }
+        }
+
+        // Ajouter un crédit (bouton +1) — annule une conso manuelle ou augmente la limite
+        if ( isset( $_POST['jaide_add'] ) && check_admin_referer( 'jaide_add_credit' ) ) {
+            $uid  = intval( $_POST['user_id'] ?? 0 );
+            $type = sanitize_text_field( $_POST['jaide_add'] );
+
+            if ( $uid && in_array( $type, [ 'question', 'copie' ], true ) ) {
+                $manual_key    = $type === 'copie' ? 'jaide_copies_manual_used' : 'jaide_questions_manual_used';
+                $manual_used   = max( 0, (int) get_user_meta( $uid, $manual_key, true ) );
+
+                if ( $manual_used > 0 ) {
+                    // Annuler une consommation manuelle
+                    update_user_meta( $uid, $manual_key, $manual_used - 1 );
+                } else {
+                    // Augmenter la limite
+                    $limit_key     = $type === 'copie' ? 'jaide_copies_limit' : 'jaide_questions_limit';
+                    $current_limit = $type === 'copie'
+                        ? Jaide_Access::get_copies_limit( $uid )
+                        : Jaide_Access::get_questions_limit( $uid );
+                    update_user_meta( $uid, $limit_key, $current_limit + 1 );
+                }
+
+                $remaining = $type === 'copie'
+                    ? Jaide_Access::copies_remaining( $uid )
+                    : Jaide_Access::questions_remaining( $uid );
+
+                $label = $type === 'copie' ? 'copie' : 'question';
+                echo '<div class="notice notice-success"><p>1 ' . $label . ' ajoutée. Solde : ' . $remaining . ' restante(s).</p></div>';
+            }
+        }
+
+        // Retirer un crédit (bouton -1) — incrémente le compteur de consommation manuelle
+        if ( isset( $_POST['jaide_deduct'] ) && check_admin_referer( 'jaide_deduct_credit' ) ) {
+            $uid  = intval( $_POST['user_id'] ?? 0 );
+            $type = sanitize_text_field( $_POST['jaide_deduct'] );
+
+            if ( $uid && in_array( $type, [ 'question', 'copie' ], true ) ) {
+                $remaining = $type === 'copie'
+                    ? Jaide_Access::copies_remaining( $uid )
+                    : Jaide_Access::questions_remaining( $uid );
+
+                if ( $remaining > 0 ) {
+                    $manual_key = $type === 'copie' ? 'jaide_copies_manual_used' : 'jaide_questions_manual_used';
+                    $current    = max( 0, (int) get_user_meta( $uid, $manual_key, true ) );
+                    update_user_meta( $uid, $manual_key, $current + 1 );
+
+                    $label = $type === 'copie' ? 'copie' : 'question';
+                    echo '<div class="notice notice-success"><p>1 ' . $label . ' retirée. Nouveau solde : ' . max( 0, $remaining - 1 ) . ' restante(s).</p></div>';
+                } else {
+                    echo '<div class="notice notice-warning"><p>Aucun crédit restant à retirer.</p></div>';
+                }
+            }
+        }
+
         // Sauvegarder les crédits
         if ( isset( $_POST['jaide_save_credits'] ) && check_admin_referer( 'jaide_save_credits' ) ) {
             $uid = intval( $_POST['user_id'] ?? 0 );
@@ -120,16 +201,10 @@ class Jaide_Admin {
     public static function render_settings() {
         // Save settings
         if ( isset( $_POST['jaide_save_settings'] ) && check_admin_referer( 'jaide_save_settings' ) ) {
-            // Gérer les IDs produits : checkboxes ou champ texte
-            if ( ! empty( $_POST['product_id_from_checkboxes'] ) ) {
-                $product_ids = array_map( 'sanitize_text_field', $_POST['product_ids'] ?? [] );
-                $product_id_value = implode( ',', $product_ids );
-            } else {
-                $product_id_value = sanitize_text_field( $_POST['product_id'] ?? '' );
-            }
+            $existing = get_option( 'jaide_options', [] );
 
             $options = [
-                'product_id'           => $product_id_value,
+                'product_id'           => $existing['product_id'] ?? '', // Conservé pour rétrocompatibilité
                 'copies_limit'         => max( 0, intval( $_POST['copies_limit'] ?? 1 ) ),
                 'questions_limit'      => max( 0, intval( $_POST['questions_limit'] ?? 0 ) ),
                 'notify_prof_new'      => ! empty( $_POST['notify_prof_new'] ),

@@ -57,7 +57,7 @@
    ========================================================================== */
 
 .hero-archive__subtitle {
-	font-size: var(--wp--preset--font-size--body-large) !important;
+	font-size: clamp(16px, 1rem + ((1vw - 3.2px) * 0.208), 18px) !important;
 	color: var(--wp--preset--color--text-gray) !important;
 	line-height: 1.6 !important;
 	margin-bottom: var(--wp--preset--spacing--lg) !important;
@@ -202,9 +202,6 @@
 		font-size: 1.5rem !important;
 	}
 
-	.hero-archive__subtitle {
-		font-size: var(--wp--preset--font-size--medium) !important;
-	}
 
 	.hero-archive__search .wp-block-search__inside-wrapper {
 		flex-direction: column;

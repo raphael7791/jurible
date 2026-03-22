@@ -271,7 +271,7 @@
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"stretch"},"style":{"spacing":{"margin":{"top":"auto"}}}} -->
 <div class="wp-block-buttons" style="margin-top:auto">
 <!-- wp:button {"width":100,"className":"is-style-outline"} -->
-<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline"><a class="wp-block-button__link wp-element-button" href="/academie">S'abonner à l'Académie</a></div>
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline"><a class="wp-block-button__link wp-element-button" href="/academie-droit/">S'abonner à l'Académie</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->

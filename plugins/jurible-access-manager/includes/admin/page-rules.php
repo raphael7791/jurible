@@ -23,13 +23,16 @@ if ( isset( $_POST['jam_save_rule'] ) && check_admin_referer( 'jam_save_rule' ) 
     }
 
     $data = [
-        'rule_name'        => $_POST['rule_name'] ?? '',
-        'sc_product_id'    => $_POST['sc_product_id'] ?? '',
-        'fcom_course_ids'  => $_POST['fcom_course_ids'] ?? [],
-        'crm_tag_ids'      => $_POST['crm_tag_ids'] ?? [],
-        'crm_list_ids'     => $_POST['crm_list_ids'] ?? [],
-        'credit_amount'    => $_POST['credit_amount'] ?? 0,
-        'credit_price_map' => ! empty( $credit_price_map ) ? $credit_price_map : null,
+        'rule_name'           => $_POST['rule_name'] ?? '',
+        'sc_product_id'       => $_POST['sc_product_id'] ?? '',
+        'fcom_course_ids'     => $_POST['fcom_course_ids'] ?? [],
+        'crm_tag_ids'         => $_POST['crm_tag_ids'] ?? [],
+        'crm_list_ids'        => $_POST['crm_list_ids'] ?? [],
+        'credit_amount'       => $_POST['credit_amount'] ?? 0,
+        'credit_price_map'    => ! empty( $credit_price_map ) ? $credit_price_map : null,
+        'aide_perso_enabled'  => ! empty( $_POST['aide_perso_enabled'] ) ? 1 : 0,
+        'aide_perso_copies'   => $_POST['aide_perso_copies'] ?? 0,
+        'aide_perso_questions'=> $_POST['aide_perso_questions'] ?? 0,
     ];
 
     $edit_id = absint( $_POST['rule_id'] ?? 0 );
@@ -143,23 +146,29 @@ if ( $crm_active ) {
         <!-- ─── Edit / Add Form ─── -->
         <?php
         $current = $edit_rule ? (object) [
-            'id'               => $edit_rule->id,
-            'rule_name'        => $edit_rule->rule_name,
-            'sc_product_id'    => $edit_rule->sc_product_id,
-            'fcom_course_ids'  => JAM_Access_Rules::get_course_ids( $edit_rule ),
-            'crm_tag_ids'      => JAM_Access_Rules::get_crm_tag_ids( $edit_rule ),
-            'crm_list_ids'     => JAM_Access_Rules::get_crm_list_ids( $edit_rule ),
-            'credit_amount'    => $edit_rule->credit_amount ?? 0,
-            'credit_price_map' => JAM_Access_Rules::get_credit_price_map( $edit_rule ),
+            'id'                  => $edit_rule->id,
+            'rule_name'           => $edit_rule->rule_name,
+            'sc_product_id'       => $edit_rule->sc_product_id,
+            'fcom_course_ids'     => JAM_Access_Rules::get_course_ids( $edit_rule ),
+            'crm_tag_ids'         => JAM_Access_Rules::get_crm_tag_ids( $edit_rule ),
+            'crm_list_ids'        => JAM_Access_Rules::get_crm_list_ids( $edit_rule ),
+            'credit_amount'       => $edit_rule->credit_amount ?? 0,
+            'credit_price_map'    => JAM_Access_Rules::get_credit_price_map( $edit_rule ),
+            'aide_perso_enabled'  => $edit_rule->aide_perso_enabled ?? 0,
+            'aide_perso_copies'   => $edit_rule->aide_perso_copies ?? 0,
+            'aide_perso_questions'=> $edit_rule->aide_perso_questions ?? 0,
         ] : (object) [
-            'id'               => 0,
-            'rule_name'        => '',
-            'sc_product_id'    => '',
-            'fcom_course_ids'  => [],
-            'crm_tag_ids'      => [],
-            'crm_list_ids'     => [],
-            'credit_amount'    => 0,
-            'credit_price_map' => [],
+            'id'                  => 0,
+            'rule_name'           => '',
+            'sc_product_id'       => '',
+            'fcom_course_ids'     => [],
+            'crm_tag_ids'         => [],
+            'crm_list_ids'        => [],
+            'credit_amount'       => 0,
+            'credit_price_map'    => [],
+            'aide_perso_enabled'  => 0,
+            'aide_perso_copies'   => 0,
+            'aide_perso_questions'=> 0,
         ];
         ?>
         <div class="jam-section">
@@ -281,6 +290,32 @@ if ( $crm_active ) {
                         <button type="button" class="button" id="jam-add-price-row">+ Ajouter un prix</button>
                     </div>
 
+                    <div class="jam-form-row">
+                        <label>Aide personnalisée</label>
+                        <label style="display:inline-flex;align-items:center;gap:6px;margin-bottom:8px;">
+                            <input type="checkbox" name="aide_perso_enabled" id="jam-aide-perso-toggle" value="1" <?php checked( $current->aide_perso_enabled ); ?>>
+                            Activer l'aide personnalisée (questions de cours + corrections de copies)
+                        </label>
+                        <div id="jam-aide-perso-fields" style="<?php echo $current->aide_perso_enabled ? '' : 'display:none;'; ?>margin-top:8px;">
+                            <div style="display:flex;gap:16px;">
+                                <div>
+                                    <label for="aide_perso_questions" style="font-weight:normal;font-size:13px;">Questions par mois</label>
+                                    <input type="number" id="aide_perso_questions" name="aide_perso_questions" value="<?php echo esc_attr( $current->aide_perso_questions ); ?>" min="0" style="width:100px;display:block;">
+                                </div>
+                                <div>
+                                    <label for="aide_perso_copies" style="font-weight:normal;font-size:13px;">Copies par mois</label>
+                                    <input type="number" id="aide_perso_copies" name="aide_perso_copies" value="<?php echo esc_attr( $current->aide_perso_copies ); ?>" min="0" style="width:100px;display:block;">
+                                </div>
+                            </div>
+                            <p class="description" style="margin-top:6px;">Limites de crédits pour l'aide personnalisée. 0 = illimité.</p>
+                        </div>
+                        <script>
+                        document.getElementById('jam-aide-perso-toggle').addEventListener('change', function() {
+                            document.getElementById('jam-aide-perso-fields').style.display = this.checked ? '' : 'none';
+                        });
+                        </script>
+                    </div>
+
                     <?php if ( $crm_active ) : ?>
                         <div class="jam-form-row">
                             <label>Tags FluentCRM</label>
@@ -325,53 +360,71 @@ if ( $crm_active ) {
 
     <?php else : ?>
         <!-- ─── Rules List ─── -->
-        <?php $rules = JAM_Access_Rules::get_all(); ?>
+        <?php
+        $rules = JAM_Access_Rules::get_all();
+        $new_rules = [];
+        $old_rules = [];
+        foreach ( $rules as $rule ) {
+            if ( strpos( $rule->rule_name, '(' ) !== false ) {
+                $old_rules[] = $rule;
+            } else {
+                $new_rules[] = $rule;
+            }
+        }
+        $active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'new';
+        $display_rules = $active_tab === 'old' ? $old_rules : $new_rules;
+        ?>
         <div class="jam-section">
+            <div style="display:flex;gap:0;border-bottom:2px solid #E5E7EB;margin-bottom:0;">
+                <a href="<?php echo esc_url( admin_url( 'admin.php?page=jam-rules&tab=new' ) ); ?>"
+                   style="padding:10px 20px;font-weight:600;font-size:14px;text-decoration:none;border-bottom:2px solid <?php echo $active_tab === 'new' ? '#2563EB' : 'transparent'; ?>;margin-bottom:-2px;color:<?php echo $active_tab === 'new' ? '#2563EB' : '#6B7280'; ?>;">
+                    Nouveaux (<?php echo count( $new_rules ); ?>)
+                </a>
+                <a href="<?php echo esc_url( admin_url( 'admin.php?page=jam-rules&tab=old' ) ); ?>"
+                   style="padding:10px 20px;font-weight:600;font-size:14px;text-decoration:none;border-bottom:2px solid <?php echo $active_tab === 'old' ? '#2563EB' : 'transparent'; ?>;margin-bottom:-2px;color:<?php echo $active_tab === 'old' ? '#2563EB' : '#6B7280'; ?>;">
+                    Anciens (<?php echo count( $old_rules ); ?>)
+                </a>
+            </div>
             <div class="jam-section__body">
-                <?php if ( empty( $rules ) ) : ?>
+                <?php if ( empty( $display_rules ) ) : ?>
                     <div class="jam-empty">
-                        Aucune règle d'accès. <a href="<?php echo esc_url( admin_url( 'admin.php?page=jam-rules&add_rule=1' ) ); ?>">Créer la première règle</a>.
+                        Aucune règle dans cet onglet. <a href="<?php echo esc_url( admin_url( 'admin.php?page=jam-rules&add_rule=1' ) ); ?>">Créer une règle</a>.
                     </div>
                 <?php else : ?>
                     <table class="jam-table">
                         <thead>
                             <tr>
                                 <th>Nom</th>
-                                <th>Produit SureCart</th>
-                                <th>Cours associés</th>
+                                <th>Cours</th>
                                 <th>Crédits</th>
+                                <th>Aide perso</th>
+                                <th>CRM</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ( $rules as $rule ) :
+                            <?php foreach ( $display_rules as $rule ) :
                                 $course_ids   = JAM_Access_Rules::get_course_ids( $rule );
-                                $product_name = '—';
-                                foreach ( $sc_products as $p ) {
-                                    if ( $p['id'] === $rule->sc_product_id ) {
-                                        $product_name = $p['name'];
-                                        break;
-                                    }
-                                }
                                 $course_names = [];
                                 foreach ( $course_ids as $cid ) {
                                     $course_names[] = $course_name_map[ $cid ] ?? '#' . $cid;
                                 }
+                                $tag_ids  = JAM_Access_Rules::get_crm_tag_ids( $rule );
+                                $list_ids = JAM_Access_Rules::get_crm_list_ids( $rule );
                             ?>
                                 <tr>
                                     <td><strong><?php echo esc_html( $rule->rule_name ); ?></strong></td>
-                                    <td><?php echo esc_html( $product_name ); ?></td>
                                     <td>
                                         <?php if ( ! empty( $course_names ) ) : ?>
                                             <span class="jam-badge jam-badge--blue jam-rule-toggle" style="cursor:pointer;" data-rule-id="<?php echo esc_attr( $rule->id ); ?>">
                                                 <span class="jam-rule-toggle__arrow">&#9654;</span>
-                                                <?php echo count( $course_ids ); ?> cours
+                                                <?php echo count( $course_ids ); ?>
                                             </span>
                                             <div class="jam-rule-courses" id="jam-rule-courses-<?php echo esc_attr( $rule->id ); ?>" style="display:none;margin-top:6px;">
                                                 <small style="color:#646970;"><?php echo esc_html( implode( ', ', $course_names ) ); ?></small>
                                             </div>
                                         <?php else : ?>
-                                            <span class="jam-badge jam-badge--gray">0 cours</span>
+                                            <span class="jam-badge jam-badge--gray">0</span>
                                         <?php endif; ?>
                                     </td>
                                     <td>
@@ -379,13 +432,32 @@ if ( $crm_active ) {
                                         $price_map = JAM_Access_Rules::get_credit_price_map( $rule );
                                         if ( ! empty( $price_map ) ) :
                                             foreach ( $price_map as $pid => $amt ) :
-                                                $short_pid = substr( $pid, 0, 8 ) . '...';
+                                                $short_pid = substr( $pid, 0, 8 ) . '…';
                                         ?>
-                                                <span class="jam-badge jam-badge--orange" title="<?php echo esc_attr( $pid ); ?>"><?php echo intval( $amt ); ?>cr (<?php echo esc_html( $short_pid ); ?>)</span>
+                                                <span class="jam-badge jam-badge--orange" title="<?php echo esc_attr( $pid ); ?>"><?php echo intval( $amt ); ?>cr</span>
                                         <?php
                                             endforeach;
                                         elseif ( $rule->credit_amount > 0 ) : ?>
-                                            <span class="jam-badge jam-badge--orange"><?php echo intval( $rule->credit_amount ); ?> crédits</span>
+                                            <span class="jam-badge jam-badge--orange"><?php echo intval( $rule->credit_amount ); ?></span>
+                                        <?php else : ?>
+                                            —
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if ( ! empty( $rule->aide_perso_enabled ) ) : ?>
+                                            <span class="jam-badge jam-badge--blue"><?php echo intval( $rule->aide_perso_questions ); ?>Q/<?php echo intval( $rule->aide_perso_copies ); ?>C</span>
+                                        <?php else : ?>
+                                            —
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if ( ! empty( $tag_ids ) || ! empty( $list_ids ) ) : ?>
+                                            <span class="jam-badge jam-badge--gray" style="font-size:11px;"><?php
+                                                $crm_parts = [];
+                                                if ( ! empty( $tag_ids ) ) $crm_parts[] = count( $tag_ids ) . 'T';
+                                                if ( ! empty( $list_ids ) ) $crm_parts[] = count( $list_ids ) . 'L';
+                                                echo implode( ' ', $crm_parts );
+                                            ?></span>
                                         <?php else : ?>
                                             —
                                         <?php endif; ?>
@@ -394,7 +466,7 @@ if ( $crm_active ) {
                                         <a href="<?php echo esc_url( admin_url( 'admin.php?page=jam-rules&edit_rule=' . $rule->id ) ); ?>">Modifier</a>
                                         <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=jam-rules&delete_rule=' . $rule->id ), 'jam_delete_rule_' . $rule->id ) ); ?>"
                                            class="jam-delete"
-                                           onclick="return confirm('Supprimer cette règle ?');">Supprimer</a>
+                                           onclick="return confirm('Supprimer cette règle ?');">Suppr.</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

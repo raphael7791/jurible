@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Jurible Aide Personnalisée
  * Description:       Aide personnalisée pour les étudiants Formule Réussite — questions de cours et corrections de copies
- * Version:           1.0.0
+ * Version:           1.1.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Jurible
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'JAIDE_VERSION', '1.0.0' );
+define( 'JAIDE_VERSION', '1.1.0' );
 define( 'JAIDE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'JAIDE_URL', plugin_dir_url( __FILE__ ) );
 

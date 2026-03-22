@@ -22,29 +22,13 @@ $options = get_option( 'jaide_options', [] );
             <h2 class="jaide-settings-card__title">Accès</h2>
 
             <div class="jaide-form-field">
-                <label class="jaide-form-label">Produits SureCart donnant accès</label>
-                <?php
-                $sc_products  = Jaide_Access::get_sc_products();
-                $selected_ids = array_filter( array_map( 'trim', explode( ',', $options['product_id'] ?? '' ) ) );
-
-                if ( empty( $sc_products ) ) : ?>
-                    <p class="jaide-form-hint" style="color:#D97706;">SureCart non détecté ou aucun produit trouvé. Vous pouvez entrer les IDs manuellement :</p>
-                    <input type="text" name="product_id" class="jaide-form-input" value="<?php echo esc_attr( $options['product_id'] ?? '' ); ?>" placeholder="IDs séparés par des virgules" />
-                <?php else : ?>
-                    <div class="jaide-product-grid">
-                        <?php foreach ( $sc_products as $p ) :
-                            $checked = in_array( $p['id'], $selected_ids, true ) ? 'checked' : '';
-                        ?>
-                            <label class="jaide-product-checkbox">
-                                <input type="checkbox" name="product_ids[]" value="<?php echo esc_attr( $p['id'] ); ?>" <?php echo $checked; ?> />
-                                <span class="jaide-product-checkbox__name"><?php echo esc_html( $p['name'] ); ?></span>
-                                <span class="jaide-product-checkbox__id"><?php echo esc_html( $p['id'] ); ?></span>
-                            </label>
-                        <?php endforeach; ?>
-                    </div>
-                    <input type="hidden" name="product_id_from_checkboxes" value="1" />
-                <?php endif; ?>
-                <p class="jaide-form-hint">Cochez les produits qui donnent accès à l'aide personnalisée. Aucun coché = accès libre.</p>
+                <p style="padding:12px 16px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:6px;color:#1E40AF;margin:0;">
+                    <strong>L'accès est maintenant géré via Access Manager &rarr; Règles d'accès.</strong><br>
+                    Cochez « Aide personnalisée » sur les règles correspondant aux produits Formule Réussite.
+                    <?php if ( is_admin() && current_user_can( 'manage_options' ) ) : ?>
+                        <br><a href="<?php echo esc_url( admin_url( 'admin.php?page=jam-rules' ) ); ?>">Voir les règles d'accès &rarr;</a>
+                    <?php endif; ?>
+                </p>
             </div>
         </div>
 

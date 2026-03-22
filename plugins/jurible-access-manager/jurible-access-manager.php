@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Jurible Access Manager
  * Description: Gère l'accès aux cours Fluent Community Pro lors d'achats SureCart.
- * Version: 1.3.0
+ * Version: 1.4.0
  * Author: Jurible
  * Text Domain: jurible-access-manager
  * Requires PHP: 7.4
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'JAM_VERSION', '1.3.0' );
+define( 'JAM_VERSION', '1.4.0' );
 define( 'JAM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'JAM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 

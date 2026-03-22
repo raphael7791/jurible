@@ -88,7 +88,7 @@
 <!-- wp:buttons -->
 <div class="wp-block-buttons">
 <!-- wp:button {"className":"is-style-cta-gradient"} -->
-<div class="wp-block-button is-style-cta-gradient"><a class="wp-block-button__link wp-element-button" href="/academie">Découvrir l'Académie →</a></div>
+<div class="wp-block-button is-style-cta-gradient"><a class="wp-block-button__link wp-element-button" href="/academie-droit/">Découvrir l'Académie →</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->

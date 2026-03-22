@@ -44,7 +44,7 @@
    ========================================================================== */
 
 .hero-simple__title {
-	font-size: clamp(1.625rem, 1.25rem + 1.5vw, 2.25rem) !important;
+	font-size: var(--wp--preset--font-size--heading-1) !important;
 	font-weight: 800 !important;
 	line-height: 1.15 !important;
 	color: var(--wp--preset--color--text-dark) !important;
@@ -56,7 +56,7 @@
    ========================================================================== */
 
 .hero-simple__subtitle {
-	font-size: var(--wp--preset--font-size--medium) !important;
+	font-size: clamp(16px, 1rem + ((1vw - 3.2px) * 0.208), 18px) !important;
 	color: var(--wp--preset--color--text-gray) !important;
 	line-height: 1.7 !important;
 	max-width: 640px;
@@ -91,12 +91,9 @@
 	}
 
 	.hero-simple__title {
-		font-size: 1.625rem !important;
+		font-size: var(--wp--preset--font-size--heading-1) !important;
 	}
 
-	.hero-simple__subtitle {
-		font-size: var(--wp--preset--font-size--small) !important;
-	}
 }
 
 /* ==========================================================================

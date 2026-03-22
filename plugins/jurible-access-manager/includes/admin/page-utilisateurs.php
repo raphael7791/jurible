@@ -7,7 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 // ─── Filters ───
 $current_search = sanitize_text_field( $_GET['search'] ?? '' );
 $current_course = absint( $_GET['course_id'] ?? 0 );
-$sc_filter      = sanitize_text_field( $_GET['sc_filter'] ?? 'all_sc' );
 $current_page   = max( 1, absint( $_GET['paged'] ?? 1 ) );
 $per_page       = 20;
 
@@ -31,56 +30,28 @@ $user_args = [
     'order'        => 'ASC',
 ];
 
-// Search filter
+// Search filter: when searching, search ALL users (not just SureCart customers)
+// When no search, default to SureCart customers only
 if ( $current_search ) {
     $user_args['search']         = '*' . $current_search . '*';
     $user_args['search_columns'] = [ 'user_login', 'user_email', 'display_name' ];
-}
-
-// SC / course enrollment filter
-$has_su_table = $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $su_table ) ) === $su_table;
-
-if ( $sc_filter === 'sc_sans_cours' || $sc_filter === 'sc_avec_cours' ) {
-    // Always restrict to SC customers for these filters
+} else {
     $user_args['meta_key']     = 'sc_customer_ids';
     $user_args['meta_compare'] = 'EXISTS';
+}
 
-    if ( $has_su_table ) {
-        $enrolled_uids = array_map( 'intval', $wpdb->get_col(
-            "SELECT DISTINCT su.user_id FROM {$su_table} su
-             INNER JOIN {$s_table} s ON su.space_id = s.id AND s.type = 'course'"
+// Course filter: get user IDs enrolled in this course first
+$course_filter_user_ids = null;
+if ( $current_course ) {
+    $has_table = $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $su_table ) ) === $su_table;
+    if ( $has_table ) {
+        $course_filter_user_ids = $wpdb->get_col( $wpdb->prepare(
+            "SELECT user_id FROM {$su_table} WHERE space_id = %d",
+            $current_course
         ) );
-
-        if ( $sc_filter === 'sc_sans_cours' ) {
-            if ( ! empty( $enrolled_uids ) ) {
-                $user_args['exclude'] = $enrolled_uids;
-            }
-        } else {
-            $user_args['include'] = ! empty( $enrolled_uids ) ? $enrolled_uids : [ 0 ];
+        if ( empty( $course_filter_user_ids ) ) {
+            $course_filter_user_ids = [ 0 ]; // No users = show empty
         }
-    }
-} elseif ( ! $current_search ) {
-    // Default: SC customers only
-    $user_args['meta_key']     = 'sc_customer_ids';
-    $user_args['meta_compare'] = 'EXISTS';
-}
-
-// Course filter: restrict to users enrolled in a specific course
-if ( $current_course && $has_su_table ) {
-    $course_filter_user_ids = $wpdb->get_col( $wpdb->prepare(
-        "SELECT user_id FROM {$su_table} WHERE space_id = %d",
-        $current_course
-    ) );
-    if ( empty( $course_filter_user_ids ) ) {
-        $course_filter_user_ids = [ 0 ];
-    }
-    // Intersect with existing include if set, otherwise just set it
-    if ( ! empty( $user_args['include'] ) ) {
-        $user_args['include'] = array_values( array_intersect( $user_args['include'], $course_filter_user_ids ) );
-        if ( empty( $user_args['include'] ) ) {
-            $user_args['include'] = [ 0 ];
-        }
-    } else {
         $user_args['include'] = $course_filter_user_ids;
     }
 }
@@ -137,19 +108,9 @@ if ( ! empty( $users ) ) {
             </select>
             <?php endif; ?>
 
-            <select name="sc_filter">
-                <option value="all_sc" <?php selected( $sc_filter, 'all_sc' ); ?>>Clients SureCart</option>
-                <option value="sc_avec_cours" <?php selected( $sc_filter, 'sc_avec_cours' ); ?>>SC avec cours FC</option>
-                <option value="sc_sans_cours" <?php selected( $sc_filter, 'sc_sans_cours' ); ?>>SC sans cours FC</option>
-            </select>
-
-            <select id="jam-product-filter" style="display:none;">
-                <option value="">Tous les produits</option>
-            </select>
-
             <button type="submit" class="button">Filtrer</button>
 
-            <?php if ( $current_search || $current_course || $sc_filter !== 'all_sc' ) : ?>
+            <?php if ( $current_search || $current_course ) : ?>
                 <a href="<?php echo esc_url( admin_url( 'admin.php?page=jam-manual' ) ); ?>" class="button">Reinitialiser</a>
             <?php endif; ?>
         </div>
@@ -160,12 +121,7 @@ if ( ! empty( $users ) ) {
         <?php echo number_format_i18n( $total_users ); ?> utilisateur<?php echo $total_users > 1 ? 's' : ''; ?>
         <?php if ( $current_search ) : ?>
             pour « <?php echo esc_html( $current_search ); ?> »
-        <?php endif; ?>
-        <?php if ( $sc_filter === 'sc_sans_cours' ) : ?>
-            (clients SC sans cours FC)
-        <?php elseif ( $sc_filter === 'sc_avec_cours' ) : ?>
-            (clients SC avec cours FC)
-        <?php elseif ( ! $current_search && ! $current_course ) : ?>
+        <?php elseif ( ! $current_course ) : ?>
             (clients SureCart)
         <?php endif; ?>
         <?php if ( $current_course ) : ?>
@@ -191,9 +147,8 @@ if ( ! empty( $users ) ) {
                     <thead>
                         <tr>
                             <th>Utilisateur</th>
-                            <th class="jam-sortable-products" style="cursor:pointer;" title="Cliquer pour trier">Produit SC <span class="jam-sort-arrow"></span></th>
                             <th>Cours inscrits</th>
-                            <th class="jam-sortable-coherence" style="width:120px;text-align:center;cursor:pointer;" title="Cliquer pour trier">Coherence <span class="jam-sort-arrow"></span></th>
+                            <th style="width: 80px; text-align: center;">Nb cours</th>
                             <th style="width: 100px; text-align: center;">Actions</th>
                         </tr>
                     </thead>
@@ -212,9 +167,6 @@ if ( ! empty( $users ) ) {
                                     </div>
                                 </div>
                             </td>
-                            <td class="jam-user-products" data-user-id="<?php echo esc_attr( $user->ID ); ?>">
-                                <span class="spinner is-active" style="float:none;"></span>
-                            </td>
                             <td>
                                 <?php if ( empty( $enrolled ) ) : ?>
                                     <span style="color: #646970;">Aucun cours</span>
@@ -224,8 +176,12 @@ if ( ! empty( $users ) ) {
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </td>
-                            <td class="jam-user-coherence" data-user-id="<?php echo esc_attr( $user->ID ); ?>" style="text-align: center;">
-                                <span class="spinner is-active" style="float:none;"></span>
+                            <td style="text-align: center;">
+                                <?php if ( $nb_cours > 0 ) : ?>
+                                    <strong><?php echo $nb_cours; ?></strong> cours
+                                <?php else : ?>
+                                    <span style="color: #646970;">0</span>
+                                <?php endif; ?>
                             </td>
                             <td style="text-align: center;">
                                 <button type="button" class="button button-small jam-user-toggle" data-user-id="<?php echo esc_attr( $user->ID ); ?>">
@@ -234,7 +190,7 @@ if ( ! empty( $users ) ) {
                             </td>
                         </tr>
                         <tr class="jam-user-detail" data-user-id="<?php echo esc_attr( $user->ID ); ?>" style="display: none;">
-                            <td colspan="5">
+                            <td colspan="4">
                                 <div class="jam-user-detail__inner">
                                     <div class="jam-loading">
                                         <span class="spinner"></span> Chargement...
@@ -256,7 +212,6 @@ if ( ! empty( $users ) ) {
                 $params   = [];
                 if ( $current_search ) $params['search'] = $current_search;
                 if ( $current_course ) $params['course_id'] = $current_course;
-                if ( $sc_filter && $sc_filter !== 'all_sc' ) $params['sc_filter'] = $sc_filter;
 
                 for ( $i = 1; $i <= min( $total_pages, 20 ); $i++ ) :
                     $params['paged'] = $i;

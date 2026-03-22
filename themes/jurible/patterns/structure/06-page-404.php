@@ -44,7 +44,7 @@
 <div class="wp-block-group page-404__links">
 
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"14px","fontStyle":"normal","fontWeight":"500"}},"textColor":"text-muted"} -->
-<p class="has-text-muted-color has-text-color" style="font-size:14px;font-style:normal;font-weight:500"><a href="/academie">🎓 L'Académie</a></p>
+<p class="has-text-muted-color has-text-color" style="font-size:14px;font-style:normal;font-weight:500"><a href="/academie-droit/">🎓 L'Académie</a></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"14px","fontStyle":"normal","fontWeight":"500"}},"textColor":"text-muted"} -->

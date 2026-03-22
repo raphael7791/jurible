@@ -6,7 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Jaide_Access {
 
     /**
-     * Vérifie si l'utilisateur a accès à l'aide personnalisée (Formule Réussite).
+     * Vérifie si l'utilisateur a accès à l'aide personnalisée.
+     * L'accès est géré par Access Manager via user meta.
      */
     public static function user_has_access( $user_id = null ) {
         $user_id = $user_id ?: get_current_user_id();
@@ -14,144 +15,53 @@ class Jaide_Access {
             return false;
         }
 
-        $options      = get_option( 'jaide_options', [] );
-        $product_ids_raw = $options['product_id'] ?? '';
-
-        // Si pas de product ID configuré, accès libre
-        if ( empty( trim( $product_ids_raw ) ) ) {
-            return true;
-        }
-
-        // Supporter plusieurs IDs séparés par des virgules
-        $product_ids = array_filter( array_map( 'trim', explode( ',', $product_ids_raw ) ) );
-        if ( empty( $product_ids ) ) {
-            return true;
-        }
-
-        // Vérifier via SureCart : l'user a-t-il un achat actif pour l'un de ces produits ?
-        foreach ( $product_ids as $product_id ) {
-            if ( self::check_surecart_purchase( $user_id, $product_id ) ) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Vérifie un achat SureCart actif pour un produit donné.
-     */
-    private static function check_surecart_purchase( $user_id, $product_id ) {
-        // Récupérer le customer ID SureCart du user
-        $customer_ids = get_user_meta( $user_id, 'sc_customer_ids', true );
-
-        if ( empty( $customer_ids ) || ! is_array( $customer_ids ) ) {
-            return false;
-        }
-
-        // Utiliser l'API SureCart pour vérifier les achats
-        if ( ! function_exists( 'sc_api_request' ) && ! class_exists( '\SureCart\Models\Purchase' ) ) {
-            // SureCart non installé — fallback accès libre
-            return true;
-        }
-
-        try {
-            foreach ( $customer_ids as $account_id => $customer_id ) {
-                $purchases = \SureCart\Models\Purchase::where( [
-                    'customer_ids' => [ $customer_id ],
-                    'product_ids'  => [ $product_id ],
-                    'live_mode'    => true,
-                ] )->get();
-
-                if ( ! empty( $purchases ) && ! is_wp_error( $purchases ) ) {
-                    foreach ( $purchases as $purchase ) {
-                        $status = $purchase->status ?? '';
-                        if ( in_array( $status, [ 'active', 'trialing', 'paid' ], true ) ) {
-                            return true;
-                        }
-                        // Pour les achats uniques, revoked_at null = actif
-                        if ( empty( $purchase->revoked_at ) && $status !== 'revoked' ) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        } catch ( \Exception $e ) {
-            // En cas d'erreur API, log et refuser l'accès
-            error_log( 'Jaide Access check error: ' . $e->getMessage() );
-            return false;
-        }
-
-        return false;
-    }
-
-    /**
-     * Récupère la liste des produits SureCart (avec cache 15 min).
-     */
-    public static function get_sc_products() {
-        $cached = get_transient( 'jaide_sc_products' );
-        if ( $cached !== false ) {
-            return $cached;
-        }
-
-        $products = [];
-
-        if ( ! class_exists( '\SureCart\Models\Product' ) ) {
-            return $products;
-        }
-
-        try {
-            $result = \SureCart\Models\Product::where( [ 'archived' => false ] )
-                ->paginate( [ 'per_page' => 100 ] );
-
-            $items = $result->data ?? $result;
-            if ( is_array( $items ) ) {
-                foreach ( $items as $p ) {
-                    $products[] = [
-                        'id'   => $p->id ?? '',
-                        'name' => $p->name ?? '',
-                    ];
-                }
-                // Tri alphabétique
-                usort( $products, function ( $a, $b ) {
-                    return strcasecmp( $a['name'], $b['name'] );
-                } );
-            }
-        } catch ( \Exception $e ) {
-            error_log( 'Jaide: erreur récupération produits SC: ' . $e->getMessage() );
-        }
-
-        set_transient( 'jaide_sc_products', $products, 15 * MINUTE_IN_SECONDS );
-        return $products;
+        return get_user_meta( $user_id, 'jam_aide_perso_access', true ) == '1';
     }
 
     /**
      * Retourne la limite de copies pour un user.
-     * Override individuel (user meta) > limite globale (settings).
-     * Meta vide = utilise la globale. 0 = illimité.
+     * Priorité : override individuel (jaide_copies_limit) > Access Manager meta > settings globaux.
      */
     public static function get_copies_limit( $user_id = null ) {
         $user_id  = $user_id ?: get_current_user_id();
-        $override = get_user_meta( $user_id, 'jaide_copies_limit', true );
 
+        // 1. Override individuel (page admin Crédits)
+        $override = get_user_meta( $user_id, 'jaide_copies_limit', true );
         if ( $override !== '' && $override !== false ) {
             return (int) $override;
         }
 
+        // 2. Limite Access Manager
+        $jam_limit = get_user_meta( $user_id, 'jam_aide_perso_copies_limit', true );
+        if ( $jam_limit !== '' && $jam_limit !== false ) {
+            return (int) $jam_limit;
+        }
+
+        // 3. Fallback settings globaux
         $options = get_option( 'jaide_options', [] );
         return (int) ( $options['copies_limit'] ?? 1 );
     }
 
     /**
      * Retourne la limite de questions pour un user.
+     * Priorité : override individuel > Access Manager meta > settings globaux.
      */
     public static function get_questions_limit( $user_id = null ) {
         $user_id  = $user_id ?: get_current_user_id();
-        $override = get_user_meta( $user_id, 'jaide_questions_limit', true );
 
+        // 1. Override individuel (page admin Crédits)
+        $override = get_user_meta( $user_id, 'jaide_questions_limit', true );
         if ( $override !== '' && $override !== false ) {
             return (int) $override;
         }
 
+        // 2. Limite Access Manager
+        $jam_limit = get_user_meta( $user_id, 'jam_aide_perso_questions_limit', true );
+        if ( $jam_limit !== '' && $jam_limit !== false ) {
+            return (int) $jam_limit;
+        }
+
+        // 3. Fallback settings globaux
         $options = get_option( 'jaide_options', [] );
         return (int) ( $options['questions_limit'] ?? 0 );
     }
@@ -162,16 +72,17 @@ class Jaide_Access {
     public static function copies_remaining( $user_id = null ) {
         global $wpdb;
 
-        $user_id = $user_id ?: get_current_user_id();
-        $limit   = self::get_copies_limit( $user_id );
+        $user_id     = $user_id ?: get_current_user_id();
+        $limit       = self::get_copies_limit( $user_id );
 
-        $table = $wpdb->prefix . 'jurible_aide_requests';
-        $count = (int) $wpdb->get_var( $wpdb->prepare(
+        $table       = $wpdb->prefix . 'jurible_aide_requests';
+        $count       = (int) $wpdb->get_var( $wpdb->prepare(
             "SELECT COUNT(*) FROM $table WHERE user_id = %d AND type = 'copie'",
             $user_id
         ) );
+        $manual_used = max( 0, (int) get_user_meta( $user_id, 'jaide_copies_manual_used', true ) );
 
-        return max( 0, $limit - $count );
+        return max( 0, $limit - $count - $manual_used );
     }
 
     /**
@@ -180,16 +91,17 @@ class Jaide_Access {
     public static function questions_remaining( $user_id = null ) {
         global $wpdb;
 
-        $user_id = $user_id ?: get_current_user_id();
-        $limit   = self::get_questions_limit( $user_id );
+        $user_id     = $user_id ?: get_current_user_id();
+        $limit       = self::get_questions_limit( $user_id );
 
-        $table = $wpdb->prefix . 'jurible_aide_requests';
-        $count = (int) $wpdb->get_var( $wpdb->prepare(
+        $table       = $wpdb->prefix . 'jurible_aide_requests';
+        $count       = (int) $wpdb->get_var( $wpdb->prepare(
             "SELECT COUNT(*) FROM $table WHERE user_id = %d AND type = 'question'",
             $user_id
         ) );
+        $manual_used = max( 0, (int) get_user_meta( $user_id, 'jaide_questions_manual_used', true ) );
 
-        return max( 0, $limit - $count );
+        return max( 0, $limit - $count - $manual_used );
     }
 
     /**
@@ -202,12 +114,18 @@ class Jaide_Access {
         $copies_limit   = self::get_copies_limit( $user_id );
         $questions_limit = self::get_questions_limit( $user_id );
 
-        $copies_used = (int) $wpdb->get_var( $wpdb->prepare(
+        $copies_db_used = (int) $wpdb->get_var( $wpdb->prepare(
             "SELECT COUNT(*) FROM $table WHERE user_id = %d AND type = 'copie'", $user_id
         ) );
-        $questions_used = (int) $wpdb->get_var( $wpdb->prepare(
+        $questions_db_used = (int) $wpdb->get_var( $wpdb->prepare(
             "SELECT COUNT(*) FROM $table WHERE user_id = %d AND type = 'question'", $user_id
         ) );
+
+        $copies_manual    = max( 0, (int) get_user_meta( $user_id, 'jaide_copies_manual_used', true ) );
+        $questions_manual = max( 0, (int) get_user_meta( $user_id, 'jaide_questions_manual_used', true ) );
+
+        $copies_used    = $copies_db_used + $copies_manual;
+        $questions_used = $questions_db_used + $questions_manual;
 
         $options = get_option( 'jaide_options', [] );
 

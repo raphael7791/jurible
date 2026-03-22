@@ -59,23 +59,28 @@
 }
 
 .enseignant-credentials {
-	list-style: none;
+	list-style: none !important;
 	padding-left: 0 !important;
+	margin-left: 0 !important;
 }
 
 .enseignant-credentials li {
 	position: relative;
-	padding-left: var(--wp--preset--spacing--md);
-	margin-bottom: calc(var(--wp--preset--spacing--xs) / 2);
+	padding-left: 28px !important;
+	margin-bottom: 4px;
 }
 
 .enseignant-credentials li::before {
-	content: '✓';
+	content: '\2713';
 	position: absolute;
 	left: 0;
-	color: var(--wp--preset--color--success);
+	top: 0;
+	color: var(--wp--preset--color--success, #10B981);
 	font-weight: 600;
+	font-size: 14px;
+	line-height: inherit;
 }
+
 
 /* ==========================================================================
    ÉQUIPE VIDÉO - Cartes
@@ -252,3 +257,14 @@
 		height: 80px !important;
 	}
 }
+
+/* Fix: avatar ne doit pas être écrasé dans le flex */
+.enseignant-section .enseignant-avatar {
+  flex-shrink: 0;
+}
+.enseignant-section .enseignant-avatar img {
+  width: 120px !important;
+  height: 120px !important;
+  object-fit: cover;
+}
+

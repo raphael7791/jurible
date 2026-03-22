@@ -127,10 +127,11 @@ class JAM_SureCart_Hooks {
             // Find matching rules for this product
             $rules = JAM_Access_Rules::find_by_product( $product_id );
             if ( empty( $rules ) ) {
-                self::log_debug( $event_name . '_skip', [
-                    'reason'     => 'No rules for product',
+                // No rule = PDF or unconfigured product → apply catch-all FluentCRM tags
+                self::log_debug( $event_name . '_pdf_catchall', [
                     'product_id' => $product_id,
                 ] );
+                self::apply_pdf_catchall( $purchase, $event_name, $retry_count );
                 return;
             }
 
@@ -249,6 +250,48 @@ class JAM_SureCart_Hooks {
         } catch ( \Exception $e ) {
             self::log_debug( 'purchase_revoked_exception', [
                 'error' => $e->getMessage(),
+            ] );
+        }
+    }
+
+    // ─── PDF Catch-All ───────────────────────────────────────
+
+    /**
+     * Catch-all for products without rules (PDFs, etc.)
+     * Applies Tag PDF (82) + Liste générale (1) via FluentCRM.
+     */
+    private static function apply_pdf_catchall( $purchase, $event_name, $retry_count = 0 ) {
+        $wp_user = self::resolve_user( $purchase );
+        if ( ! $wp_user ) {
+            self::schedule_retry( $purchase, $event_name, $retry_count );
+            return;
+        }
+
+        $product_id = self::get_product_id( $purchase );
+
+        // Anti-doublon
+        if ( self::is_recently_processed( $wp_user->ID, $product_id, 'pdf_catchall' ) ) {
+            return;
+        }
+        self::mark_processed( $wp_user->ID, $product_id, 'pdf_catchall' );
+
+        // FluentCRM : Tag PDF (82) + Liste générale (1)
+        if ( function_exists( 'FluentCrmApi' ) ) {
+            $contact = FluentCrmApi( 'contacts' )->createOrUpdate( [
+                'email'  => $wp_user->user_email,
+                'status' => 'subscribed',
+            ] );
+
+            if ( $contact && ! is_wp_error( $contact ) ) {
+                $contact->attachTags( [ 82 ] );
+                $contact->attachLists( [ 1 ] );
+            }
+
+            self::log_debug( $event_name . '_pdf_catchall_applied', [
+                'user_email' => $wp_user->user_email,
+                'product_id' => $product_id,
+                'tag'        => 'PDF (82)',
+                'list'       => 'Liste générale (1)',
             ] );
         }
     }

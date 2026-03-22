@@ -32,7 +32,7 @@
 <!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|sm"}}}} -->
 <div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--sm)">
 <!-- wp:button {"backgroundColor":"white","textColor":"primary","style":{"border":{"radius":"8px"}}} -->
-<div class="wp-block-button"><a class="wp-block-button__link has-primary-color has-white-background-color has-text-color has-background wp-element-button" href="/academie" style="border-radius:8px">Découvrir l'Académie</a></div>
+<div class="wp-block-button"><a class="wp-block-button__link has-primary-color has-white-background-color has-text-color has-background wp-element-button" href="/academie-droit/" style="border-radius:8px">Découvrir l'Académie</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->

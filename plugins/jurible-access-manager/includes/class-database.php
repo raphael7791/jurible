@@ -28,6 +28,9 @@ class JAM_Database {
             crm_list_ids TEXT DEFAULT NULL,
             credit_amount INT UNSIGNED DEFAULT 0,
             credit_price_map TEXT DEFAULT NULL,
+            aide_perso_enabled TINYINT(1) UNSIGNED DEFAULT 0,
+            aide_perso_copies INT UNSIGNED DEFAULT 0,
+            aide_perso_questions INT UNSIGNED DEFAULT 0,
             created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             PRIMARY KEY (id),
@@ -69,6 +72,17 @@ class JAM_Database {
             $col = $wpdb->get_results( "SHOW COLUMNS FROM {$rules_table} LIKE 'credit_price_map'" );
             if ( empty( $col ) ) {
                 $wpdb->query( "ALTER TABLE {$rules_table} ADD COLUMN credit_price_map TEXT DEFAULT NULL AFTER credit_amount" );
+            }
+        }
+
+        // Migration 1.4.0: add aide_perso columns
+        if ( version_compare( $current_version, '1.4.0', '<' ) ) {
+            $rules_table = self::get_rules_table();
+            $col = $wpdb->get_results( "SHOW COLUMNS FROM {$rules_table} LIKE 'aide_perso_enabled'" );
+            if ( empty( $col ) ) {
+                $wpdb->query( "ALTER TABLE {$rules_table} ADD COLUMN aide_perso_enabled TINYINT(1) UNSIGNED DEFAULT 0 AFTER credit_price_map" );
+                $wpdb->query( "ALTER TABLE {$rules_table} ADD COLUMN aide_perso_copies INT UNSIGNED DEFAULT 0 AFTER aide_perso_enabled" );
+                $wpdb->query( "ALTER TABLE {$rules_table} ADD COLUMN aide_perso_questions INT UNSIGNED DEFAULT 0 AFTER aide_perso_copies" );
             }
         }
     }

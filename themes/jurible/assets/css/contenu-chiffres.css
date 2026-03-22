@@ -256,4 +256,13 @@
 		padding-left: 0 !important;
 		margin-top: var(--wp--preset--spacing--sm) !important;
 	}
+
+	.contenu-chiffre__card {
+		text-align: center;
+	}
+
+	.contenu-chiffre__icon {
+		margin-left: auto;
+		margin-right: auto;
+	}
 }

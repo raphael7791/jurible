@@ -208,6 +208,39 @@ class JAM_Enrollment {
             }
         }
 
+        // Handle aide personnalisée
+        if ( ! empty( $rule->aide_perso_enabled ) ) {
+            update_user_meta( $user_id, 'jam_aide_perso_access', '1' );
+
+            // MAX(existing, rule) — pour gérer un user avec plusieurs produits
+            $current_copies = (int) get_user_meta( $user_id, 'jam_aide_perso_copies_limit', true );
+            $rule_copies    = (int) $rule->aide_perso_copies;
+            if ( $rule_copies > $current_copies ) {
+                update_user_meta( $user_id, 'jam_aide_perso_copies_limit', $rule_copies );
+            }
+
+            $current_questions = (int) get_user_meta( $user_id, 'jam_aide_perso_questions_limit', true );
+            $rule_questions    = (int) $rule->aide_perso_questions;
+            if ( $rule_questions > $current_questions ) {
+                update_user_meta( $user_id, 'jam_aide_perso_questions_limit', $rule_questions );
+            }
+
+            $user = get_user_by( 'id', $user_id );
+            JAM_Access_Log::log( [
+                'user_id'        => $user_id,
+                'user_email'     => $user ? $user->user_email : '',
+                'fcom_course_id' => 0,
+                'action'         => 'aide_perso_granted',
+                'source'         => $source,
+                'sc_purchase_id' => $sc_purchase_id ?: null,
+                'details'        => wp_json_encode( [
+                    'copies_limit'    => max( $current_copies, $rule_copies ),
+                    'questions_limit' => max( $current_questions, $rule_questions ),
+                    'rule_name'       => $rule->rule_name,
+                ] ),
+            ] );
+        }
+
         // Handle credits
         $credits_to_add = self::resolve_credits( $rule, $price_id );
 
@@ -310,6 +343,97 @@ class JAM_Enrollment {
             }
         }
 
+        // Recalculate aide perso from remaining active rules for this user
+        if ( ! empty( $rule->aide_perso_enabled ) ) {
+            self::recalculate_aide_perso( $user_id, $source, $sc_purchase_id );
+        }
+
         return $report;
+    }
+
+    /**
+     * Recalculate aide perso limits from all active rules for a user.
+     * Called after revoking a rule that had aide_perso_enabled.
+     */
+    private static function recalculate_aide_perso( $user_id, $source = '', $sc_purchase_id = '' ) {
+        // Get all product IDs the user still has active purchases for
+        $customer_ids = get_user_meta( $user_id, 'sc_customer_ids', true );
+        if ( empty( $customer_ids ) || ! is_array( $customer_ids ) ) {
+            // No active purchases — remove aide perso access
+            delete_user_meta( $user_id, 'jam_aide_perso_access' );
+            delete_user_meta( $user_id, 'jam_aide_perso_copies_limit' );
+            delete_user_meta( $user_id, 'jam_aide_perso_questions_limit' );
+            return;
+        }
+
+        // Find all rules with aide_perso_enabled
+        $all_rules = JAM_Access_Rules::get_all();
+        $max_copies    = 0;
+        $max_questions = 0;
+        $has_aide      = false;
+
+        foreach ( $all_rules as $r ) {
+            if ( empty( $r->aide_perso_enabled ) ) {
+                continue;
+            }
+
+            // Check if user still has an active purchase for this product
+            // We check by looking at the user's SC purchases
+            $still_active = false;
+            if ( class_exists( '\SureCart\Models\Purchase' ) ) {
+                try {
+                    foreach ( $customer_ids as $account_id => $customer_id ) {
+                        $purchases = \SureCart\Models\Purchase::where( [
+                            'customer_ids' => [ $customer_id ],
+                            'product_ids'  => [ $r->sc_product_id ],
+                            'live_mode'    => true,
+                        ] )->get();
+
+                        if ( ! empty( $purchases ) && ! is_wp_error( $purchases ) ) {
+                            foreach ( $purchases as $purchase ) {
+                                $status = $purchase->status ?? '';
+                                if ( in_array( $status, [ 'active', 'trialing', 'paid' ], true ) ) {
+                                    $still_active = true;
+                                    break 2;
+                                }
+                                if ( empty( $purchase->revoked_at ) && $status !== 'revoked' ) {
+                                    $still_active = true;
+                                    break 2;
+                                }
+                            }
+                        }
+                    }
+                } catch ( \Exception $e ) {
+                    // Skip this rule on API error
+                }
+            }
+
+            if ( $still_active ) {
+                $has_aide = true;
+                $max_copies    = max( $max_copies, (int) $r->aide_perso_copies );
+                $max_questions = max( $max_questions, (int) $r->aide_perso_questions );
+            }
+        }
+
+        if ( $has_aide ) {
+            update_user_meta( $user_id, 'jam_aide_perso_access', '1' );
+            update_user_meta( $user_id, 'jam_aide_perso_copies_limit', $max_copies );
+            update_user_meta( $user_id, 'jam_aide_perso_questions_limit', $max_questions );
+        } else {
+            delete_user_meta( $user_id, 'jam_aide_perso_access' );
+            delete_user_meta( $user_id, 'jam_aide_perso_copies_limit' );
+            delete_user_meta( $user_id, 'jam_aide_perso_questions_limit' );
+
+            $user = get_user_by( 'id', $user_id );
+            JAM_Access_Log::log( [
+                'user_id'        => $user_id,
+                'user_email'     => $user ? $user->user_email : '',
+                'fcom_course_id' => 0,
+                'action'         => 'aide_perso_revoked',
+                'source'         => $source,
+                'sc_purchase_id' => $sc_purchase_id ?: null,
+                'details'        => wp_json_encode( [ 'reason' => 'no_active_aide_perso_rules' ] ),
+            ] );
+        }
     }
 }

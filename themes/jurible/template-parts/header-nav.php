@@ -70,6 +70,7 @@ get_template_part('template-parts/sticky-bar');
                                     <a href="/annales-corrigees/" class="megamenu__outil"><span class="megamenu__outil-icon">📝</span> Annales corrigées</a>
                                     <a href="/fiches-videos/" class="megamenu__outil"><span class="megamenu__outil-icon">🎬</span> Fiches vidéos</a>
                                     <a href="/mindmaps/" class="megamenu__outil"><span class="megamenu__outil-icon">🗺️</span> Mindmaps</a>
+                                    <a href="/outils-ia-droit/" class="megamenu__outil"><span class="megamenu__outil-icon">🤖</span> Minos IA</a>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +136,7 @@ get_template_part('template-parts/sticky-bar');
         </nav>
         <div class="site-header__actions">
             <a href="/academie-droit/" class="btn btn--primary btn--sm">S'ABONNER</a>
-            <a href="https://ecole.jurible.com" class="btn btn--outline btn--sm">SE CONNECTER</a>
+            <a href="https://ecole.aideauxtd.com" class="btn btn--outline btn--sm">SE CONNECTER</a>
             <?php echo do_blocks('<!-- wp:surecart/cart-menu-icon --><div class="wp-block-surecart-cart-menu-icon"><!-- wp:surecart/cart-icon /--></div><!-- /wp:surecart/cart-menu-icon -->'); ?>
         </div>
         <button class="site-header__burger" id="header-burger" aria-label="Ouvrir le menu" aria-expanded="false">
@@ -176,6 +177,7 @@ get_template_part('template-parts/sticky-bar');
                     <a href="/boutique/?sc_collection=fiches" class="mobile-menu__outil"><span>📄</span> Fiches de révision</a>
                     <a href="/flashcards/" class="mobile-menu__outil"><span>🎴</span> Flashcards</a>
                     <a href="/qcm/" class="mobile-menu__outil"><span>✅</span> QCM</a>
+                    <a href="/outils-ia-droit/" class="mobile-menu__outil"><span>🤖</span> Minos IA</a>
                 </div>
             </div>
         </div>
@@ -215,7 +217,7 @@ get_template_part('template-parts/sticky-bar');
         </div>
     </div>
     <div class="mobile-menu__footer">
-        <p class="mobile-menu__user">👤 Déjà membre ? <a href="https://ecole.jurible.com">Se connecter</a></p>
+        <p class="mobile-menu__user">👤 Déjà membre ? <a href="https://ecole.aideauxtd.com">Se connecter</a></p>
         <a href="/nos-offres/" class="btn btn--primary" style="width:100%">S'abonner à l'Académie</a>
     </div>
 </div>

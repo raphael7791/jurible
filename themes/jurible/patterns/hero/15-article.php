@@ -70,7 +70,7 @@
 <!-- wp:group {"className":"hero-article__cta","layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-group hero-article__cta">
 <!-- wp:paragraph -->
-<p>Envie d'aller plus loin ? <a href="/academie">Rejoindre l'Académie</a></p>
+<p>Envie d'aller plus loin ? <a href="/academie-droit/">Rejoindre l'Académie</a></p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->

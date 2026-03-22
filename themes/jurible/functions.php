@@ -409,7 +409,7 @@ function jurible_deregister_blocks_variations()
         true // Important pour que ça fonctionne dans le FSE et Gut
     );
 }
-add_action("enqueue_block_assets", "jurible_deregister_blocks_variations");
+add_action("enqueue_block_editor_assets", "jurible_deregister_blocks_variations");
 
 
 # Activer toutes les fonctionnalités de l'éditeur de blocks aux administrateurs
@@ -546,13 +546,6 @@ function jurible_deregister_blocks($allowed_block_types, $editor_context)
 add_filter("allowed_block_types_all", "jurible_deregister_blocks", 10, 2);
 
 
-# Ajouter des meta dans la balise <head> de la page
-# Dans https://capitainewp.io/formations/wordpress-full-site-editing/header-footer-full-site-editing/#utiliser-les-hooks-pour-inserer-des-balises
-function jurible_add_google_site_verification()
-{
-    echo '<meta name="google-site-verification" content="12345" />';
-}
-add_action("wp_head", "jurible_add_google_site_verification");
 
 
 # Ajouter une classe sur la balise <body>
@@ -2435,3 +2428,29 @@ add_action('wp_footer', function() {
     </script>
     <?php
 }, 99);
+# Popup guide + newsletter subscription
+function jurible_popup_guide_assets() {
+    // Ne pas charger sur les formulaires de commande SureCart
+    if ( is_singular('sc_form') || is_singular('sc_checkout') ) {
+        return;
+    }
+    // Ne pas charger sur les pages contenant un checkout SureCart
+    global $post;
+    if ( $post && ( has_shortcode( $post->post_content, 'sc_checkout' ) || strpos( $post->post_content, 'surecart/checkout' ) !== false || strpos( $post->post_content, 'surecart/form' ) !== false ) ) {
+        return;
+    }
+    wp_enqueue_style(
+        "jurible-popup-guide",
+        get_theme_file_uri("assets/css/popup-guide.css"),
+        [],
+        "1.0.1"
+    );
+    wp_enqueue_script(
+        "jurible-popup-guide",
+        get_theme_file_uri("assets/js/popup-guide.js"),
+        [],
+        "1.0.1",
+        true
+    );
+}
+add_action("wp_enqueue_scripts", "jurible_popup_guide_assets");

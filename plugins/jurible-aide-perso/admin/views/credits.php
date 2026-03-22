@@ -60,13 +60,38 @@ if ( $selected ) {
     </div>
 
     <!-- Détail crédits -->
-    <?php if ( $user && $credits ) : ?>
+    <?php if ( $user && $credits ) :
+        $has_access = get_user_meta( $user->ID, 'jam_aide_perso_access', true ) == '1';
+    ?>
         <div class="jaide-settings-card">
-            <h2 class="jaide-settings-card__title">
-                <?php echo get_avatar( $user->ID, 24 ); ?>
-                <span style="margin-left:8px;"><?php echo esc_html( $user->display_name ); ?></span>
-                <span style="font-weight:400;color:#6B7280;font-size:14px;margin-left:8px;"><?php echo esc_html( $user->user_email ); ?></span>
+            <h2 class="jaide-settings-card__title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+                <span style="display:flex;align-items:center;">
+                    <?php echo get_avatar( $user->ID, 24 ); ?>
+                    <span style="margin-left:8px;"><?php echo esc_html( $user->display_name ); ?></span>
+                    <span style="font-weight:400;color:#6B7280;font-size:14px;margin-left:8px;"><?php echo esc_html( $user->user_email ); ?></span>
+                </span>
+                <form method="post" action="" style="margin:0;">
+                    <?php wp_nonce_field( 'jaide_toggle_access' ); ?>
+                    <input type="hidden" name="user_id" value="<?php echo esc_attr( $user->ID ); ?>" />
+                    <?php if ( $has_access ) : ?>
+                        <button type="submit" name="jaide_toggle_access" value="revoke" class="button" style="background:#FEE2E2;border-color:#EF4444;color:#991B1B;font-size:12px;"
+                                onclick="return confirm('Retirer l\'accès aide perso à <?php echo esc_attr( $user->display_name ); ?> ?');">
+                            Retirer l'accès
+                        </button>
+                    <?php else : ?>
+                        <button type="submit" name="jaide_toggle_access" value="grant" class="button" style="background:#D1FAE5;border-color:#10B981;color:#065F46;font-size:12px;"
+                                onclick="return confirm('Donner l\'accès aide perso (5Q / 1C) à <?php echo esc_attr( $user->display_name ); ?> ?');">
+                            Donner l'accès
+                        </button>
+                    <?php endif; ?>
+                </form>
             </h2>
+
+            <?php if ( ! $has_access ) : ?>
+                <div style="padding:16px;background:#FEF3C7;border:1px solid #F59E0B;border-radius:6px;color:#92400E;margin-bottom:16px;">
+                    Cet utilisateur n'a <strong>pas accès</strong> à l'aide personnalisée. Cliquez « Donner l'accès » ci-dessus pour l'activer.
+                </div>
+            <?php endif; ?>
 
             <!-- Stats visuelles -->
             <div class="jaide-credits-stats">
@@ -117,36 +142,84 @@ if ( $selected ) {
                 </div>
             </div>
 
-            <!-- Formulaire ajustement -->
-            <form method="post" action="" style="margin-top:24px;">
-                <?php wp_nonce_field( 'jaide_save_credits' ); ?>
-                <input type="hidden" name="user_id" value="<?php echo esc_attr( $user->ID ); ?>" />
-
-                <h3 style="font-size:15px;margin:0 0 8px;color:#374151;">Crédits de cet étudiant</h3>
-                <p style="font-size:13px;color:#6B7280;margin:0 0 16px;">
-                    Laissez vide pour utiliser la limite globale (Paramètres : <?php echo $credits['copies_limit_global']; ?> copies, <?php echo $credits['questions_limit_global']; ?> questions).
-                    Saisissez un nombre pour remplacer la limite globale pour cet étudiant. 0 = illimité.
-                </p>
-
-                <div class="jaide-form-row">
-                    <div class="jaide-form-field">
-                        <label class="jaide-form-label">Crédits copies</label>
-                        <input type="number" name="copies_limit" class="jaide-form-input jaide-form-input--sm"
-                               value="<?php echo $credits['copies_has_override'] ? esc_attr( $credits['copies_limit'] ) : ''; ?>"
-                               placeholder="<?php echo esc_attr( $credits['copies_limit_global'] ); ?>" min="0" />
-                    </div>
-                    <div class="jaide-form-field">
-                        <label class="jaide-form-label">Crédits questions</label>
-                        <input type="number" name="questions_limit" class="jaide-form-input jaide-form-input--sm"
-                               value="<?php echo $credits['questions_has_override'] ? esc_attr( $credits['questions_limit'] ) : ''; ?>"
-                               placeholder="<?php echo esc_attr( $credits['questions_limit_global'] ); ?>" min="0" />
-                    </div>
+            <!-- Actions rapides -->
+            <div style="margin-top:24px;">
+                <h3 style="font-size:15px;margin:0 0 12px;color:#374151;">Actions rapides</h3>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                    <form method="post" action="" style="margin:0;">
+                        <?php wp_nonce_field( 'jaide_deduct_credit' ); ?>
+                        <input type="hidden" name="user_id" value="<?php echo esc_attr( $user->ID ); ?>" />
+                        <input type="hidden" name="jaide_deduct" value="question" />
+                        <button type="submit" class="button" style="background:#FEF3C7;border-color:#F59E0B;color:#92400E;"
+                                onclick="return confirm('Retirer 1 question à <?php echo esc_attr( $user->display_name ); ?> ?');"
+                                <?php echo $credits['questions_remaining'] <= 0 ? 'disabled' : ''; ?>>
+                            &minus;1 Question (reste : <?php echo $credits['questions_remaining']; ?>)
+                        </button>
+                    </form>
+                    <form method="post" action="" style="margin:0;">
+                        <?php wp_nonce_field( 'jaide_deduct_credit' ); ?>
+                        <input type="hidden" name="user_id" value="<?php echo esc_attr( $user->ID ); ?>" />
+                        <input type="hidden" name="jaide_deduct" value="copie" />
+                        <button type="submit" class="button" style="background:#FEE2E2;border-color:#EF4444;color:#991B1B;"
+                                onclick="return confirm('Retirer 1 copie à <?php echo esc_attr( $user->display_name ); ?> ?');"
+                                <?php echo $credits['copies_remaining'] <= 0 ? 'disabled' : ''; ?>>
+                            &minus;1 Copie (reste : <?php echo $credits['copies_remaining']; ?>)
+                        </button>
+                    </form>
                 </div>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">
+                    <form method="post" action="" style="margin:0;">
+                        <?php wp_nonce_field( 'jaide_add_credit' ); ?>
+                        <input type="hidden" name="user_id" value="<?php echo esc_attr( $user->ID ); ?>" />
+                        <input type="hidden" name="jaide_add" value="question" />
+                        <button type="submit" class="button" style="background:#D1FAE5;border-color:#10B981;color:#065F46;">
+                            +1 Question
+                        </button>
+                    </form>
+                    <form method="post" action="" style="margin:0;">
+                        <?php wp_nonce_field( 'jaide_add_credit' ); ?>
+                        <input type="hidden" name="user_id" value="<?php echo esc_attr( $user->ID ); ?>" />
+                        <input type="hidden" name="jaide_add" value="copie" />
+                        <button type="submit" class="button" style="background:#D1FAE5;border-color:#10B981;color:#065F46;">
+                            +1 Copie
+                        </button>
+                    </form>
+                </div>
+                <p style="font-size:12px;color:#9CA3AF;margin:8px 0 0;">Ajustez manuellement les crédits (ex : aide déjà fournie hors système ou bonus).</p>
+            </div>
 
-                <button type="submit" name="jaide_save_credits" class="button button-primary">
-                    Enregistrer
-                </button>
-            </form>
+            <!-- Formulaire ajustement avancé -->
+            <details style="margin-top:24px;">
+                <summary style="cursor:pointer;font-size:14px;color:#6B7280;font-weight:500;">Ajustement avancé (modifier les limites)</summary>
+                <form method="post" action="" style="margin-top:12px;">
+                    <?php wp_nonce_field( 'jaide_save_credits' ); ?>
+                    <input type="hidden" name="user_id" value="<?php echo esc_attr( $user->ID ); ?>" />
+
+                    <p style="font-size:13px;color:#6B7280;margin:0 0 12px;">
+                        Laissez vide pour utiliser la limite de la règle Access Manager (<?php echo $credits['copies_limit_global']; ?> copies, <?php echo $credits['questions_limit_global']; ?> questions).
+                        Saisissez un nombre pour remplacer.
+                    </p>
+
+                    <div class="jaide-form-row">
+                        <div class="jaide-form-field">
+                            <label class="jaide-form-label">Limite copies</label>
+                            <input type="number" name="copies_limit" class="jaide-form-input jaide-form-input--sm"
+                                   value="<?php echo $credits['copies_has_override'] ? esc_attr( $credits['copies_limit'] ) : ''; ?>"
+                                   placeholder="<?php echo esc_attr( $credits['copies_limit_global'] ); ?>" min="0" />
+                        </div>
+                        <div class="jaide-form-field">
+                            <label class="jaide-form-label">Limite questions</label>
+                            <input type="number" name="questions_limit" class="jaide-form-input jaide-form-input--sm"
+                                   value="<?php echo $credits['questions_has_override'] ? esc_attr( $credits['questions_limit'] ) : ''; ?>"
+                                   placeholder="<?php echo esc_attr( $credits['questions_limit_global'] ); ?>" min="0" />
+                        </div>
+                    </div>
+
+                    <button type="submit" name="jaide_save_credits" class="button button-primary">
+                        Enregistrer
+                    </button>
+                </form>
+            </details>
         </div>
     <?php endif; ?>
 </div>

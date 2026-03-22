@@ -1,6 +1,7 @@
 /**
  * Pain Points Cards CSS
  * Variantes 6 et 4 pain points
+ * Harmonisé avec solution-card (variables theme.json)
  */
 
 /* Titre gradient (commun) */
@@ -24,6 +25,10 @@
 
 .pain-card {
 	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
 	transition: transform 150ms ease, box-shadow 150ms ease;
 }
 
@@ -47,14 +52,16 @@
 }
 
 .pain-card__title {
-	margin: 0 0 var(--wp--preset--spacing--sm) 0 !important;
+	margin: 0 0 var(--wp--preset--spacing--xs) 0 !important;
 	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--heading-4) !important;
 }
 
 .pain-card__description {
 	margin: 0 !important;
 	font-family: var(--wp--preset--font-family--poppins);
-	line-height: 1.5;
+	font-size: var(--wp--preset--font-size--small) !important;
+	line-height: var(--wp--custom--line-height--body);
 }
 
 /* ==========================================================================
@@ -106,6 +113,22 @@
 	.pain-grid-6 .wp-block-column,
 	.pain-grid-4 > .wp-block-column {
 		flex-basis: 100% !important;
+	}
+
+	.pain-card {
+		padding: var(--wp--preset--spacing--sm) !important;
+	}
+
+	.pain-card__icon {
+		font-size: 36px;
+	}
+
+	.pain-card__title {
+		font-size: 1rem !important;
+	}
+
+	.pain-card__description {
+		font-size: var(--wp--preset--font-size--caption) !important;
 	}
 
 	.pain-banner {
